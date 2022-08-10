@@ -1,0 +1,12 @@
+root = true
+
+# To learn more about .editorconfig see https://aka.ms/editorconfigdocs
+###############################
+# Core EditorConfig Options   #
+###############################
+
+# All files
+[*]
+
+# Editor Guidelines 
+guidelines = 120 10px solid 30B0ED4C, 130 1px solid 30B0ED4C, 140 1px solid 30B0ED4C
