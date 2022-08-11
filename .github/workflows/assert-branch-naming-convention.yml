@@ -3,6 +3,7 @@ on: pull_request
 
 jobs:
   branch-naming-rules:
+    name: Branch naming rules
     runs-on: ubuntu-latest
     steps:
       - uses: deepakputhraya/action-branch-name@master
