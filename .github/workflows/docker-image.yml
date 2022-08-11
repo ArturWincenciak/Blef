@@ -6,10 +6,9 @@ on:
 
 jobs:
   
-  
   build:
     name: Build Docker image and push to DockerHub repository
-    environment: prodaction
+    environment: production
     runs-on: ubuntu-latest
 
     steps:
