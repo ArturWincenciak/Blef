@@ -1,7 +1,3 @@
-[![.Net 6 CI Build](https://github.com/ArturWincenciak/Blef/actions/workflows/on-pull-request.yml/badge.svg?branch=main)](https://github.com/ArturWincenciak/Blef/actions/workflows/on-pull-request.yml)
-
-[![CodeQL](https://github.com/ArturWincenciak/Blef/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/codeql-analysis.yml)
-
-[![Publish Docker Hub Image](https://github.com/ArturWincenciak/Blef/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/docker-image.yml)
+[![.Net 6 CI Build](https://github.com/ArturWincenciak/Blef/actions/workflows/on-pull-request.yml/badge.svg?branch=main)](https://github.com/ArturWincenciak/Blef/actions/workflows/on-pull-request.yml) [![CodeQL](https://github.com/ArturWincenciak/Blef/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/codeql-analysis.yml) [![Publish Docker Hub Image](https://github.com/ArturWincenciak/Blef/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/docker-image.yml)
 
 # Blef
