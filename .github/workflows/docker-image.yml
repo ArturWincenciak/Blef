@@ -1,4 +1,4 @@
-name: Blef Docker Image CI/CD
+name: Publish Docker Hub Image
 
 on:
   push:
