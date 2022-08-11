@@ -1,7 +1,5 @@
-﻿namespace Blef.Modules.Game.Infrastructure
-{
-    public class Class1
-    {
+﻿namespace Blef.Modules.Game.Infrastructure;
 
-    }
+public class Class1
+{
 }

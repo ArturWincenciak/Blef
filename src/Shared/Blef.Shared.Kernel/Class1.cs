@@ -1,7 +1,5 @@
-﻿namespace Blef.Shared.Kernel
-{
-    public class Class1
-    {
+﻿namespace Blef.Shared.Kernel;
 
-    }
+public class Class1
+{
 }

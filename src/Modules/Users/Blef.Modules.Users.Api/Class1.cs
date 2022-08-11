@@ -1,7 +1,5 @@
-﻿namespace Blef.Modules.Users.Api
-{
-    public class Class1
-    {
+﻿namespace Blef.Modules.Users.Api;
 
-    }
+public class Class1
+{
 }
