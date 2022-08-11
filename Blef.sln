@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		Dockerfile = Dockerfile
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -27,27 +28,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{08BC69D4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{46B64D83-1769-49B4-8E69-983C2504CB69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Shared.Abstractions", "src\Shared\Blef.Shared.Abstractions\Blef.Shared.Abstractions.csproj", "{E3BBB83A-8B7D-4142-B9B6-25D4EAD9FD6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Shared.Abstractions", "src\Shared\Blef.Shared.Abstractions\Blef.Shared.Abstractions.csproj", "{E3BBB83A-8B7D-4142-B9B6-25D4EAD9FD6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Shared.Kernel", "src\Shared\Blef.Shared.Kernel\Blef.Shared.Kernel.csproj", "{44D817F5-9043-405D-9DDB-91DE9A277F72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Shared.Kernel", "src\Shared\Blef.Shared.Kernel\Blef.Shared.Kernel.csproj", "{44D817F5-9043-405D-9DDB-91DE9A277F72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Shared.Infrastructure", "src\Shared\Blef.Shared.Infrastructure\Blef.Shared.Infrastructure.csproj", "{B7BD6AC8-2BF9-4543-808F-388CC3ED7229}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Shared.Infrastructure", "src\Shared\Blef.Shared.Infrastructure\Blef.Shared.Infrastructure.csproj", "{B7BD6AC8-2BF9-4543-808F-388CC3ED7229}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Modules.Game.Api", "src\Modules\Game\Blef.Modules.Game.Api\Blef.Modules.Game.Api.csproj", "{E889ACC9-0142-4707-A5D2-3EF5BFEEE870}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Modules.Game.Api", "src\Modules\Game\Blef.Modules.Game.Api\Blef.Modules.Game.Api.csproj", "{E889ACC9-0142-4707-A5D2-3EF5BFEEE870}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Modules.Game.Application", "src\Modules\Game\Blef.Modules.Game.Application\Blef.Modules.Game.Application.csproj", "{616B93DF-4CE2-45EF-B2C7-F75C198F291E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Modules.Game.Application", "src\Modules\Game\Blef.Modules.Game.Application\Blef.Modules.Game.Application.csproj", "{616B93DF-4CE2-45EF-B2C7-F75C198F291E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Modules.Game.Domain", "src\Modules\Game\Blef.Modules.Game.Domain\Blef.Modules.Game.Domain.csproj", "{22EE7F24-17F3-431D-A52B-356B392CFD6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Modules.Game.Domain", "src\Modules\Game\Blef.Modules.Game.Domain\Blef.Modules.Game.Domain.csproj", "{22EE7F24-17F3-431D-A52B-356B392CFD6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Modules.Game.Infrastructure", "src\Modules\Game\Blef.Modules.Game.Infrastructure\Blef.Modules.Game.Infrastructure.csproj", "{8999DBE9-4AC1-4DAA-9D3C-B6EA3893AD6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Modules.Game.Infrastructure", "src\Modules\Game\Blef.Modules.Game.Infrastructure\Blef.Modules.Game.Infrastructure.csproj", "{8999DBE9-4AC1-4DAA-9D3C-B6EA3893AD6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Modules.Users.Api", "src\Modules\Users\Blef.Modules.Users.Api\Blef.Modules.Users.Api.csproj", "{90A8BEB7-E399-4515-9B91-45647C42FFC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Modules.Users.Api", "src\Modules\Users\Blef.Modules.Users.Api\Blef.Modules.Users.Api.csproj", "{90A8BEB7-E399-4515-9B91-45647C42FFC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Modules.Users.Core", "src\Modules\Users\Blef.Modules.Users.Core\Blef.Modules.Users.Core.csproj", "{57F762AD-F091-4F51-9D16-E8E20077FFCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Modules.Users.Core", "src\Modules\Users\Blef.Modules.Users.Core\Blef.Modules.Users.Core.csproj", "{57F762AD-F091-4F51-9D16-E8E20077FFCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Modules.Game.Domain.Tests", "tests\Blef.Modules.Game.Domain.Tests\Blef.Modules.Game.Domain.Tests.csproj", "{B78B9F7A-9980-4397-93CE-B1C4632C30F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Modules.Game.Domain.Tests", "tests\Blef.Modules.Game.Domain.Tests\Blef.Modules.Game.Domain.Tests.csproj", "{B78B9F7A-9980-4397-93CE-B1C4632C30F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Bootstrapper.Tests", "tests\Blef.Bootstrapper.Tests\Blef.Bootstrapper.Tests.csproj", "{D59C9496-445E-4144-909B-870A3F05EE40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Bootstrapper.Tests", "tests\Blef.Bootstrapper.Tests\Blef.Bootstrapper.Tests.csproj", "{D59C9496-445E-4144-909B-870A3F05EE40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
