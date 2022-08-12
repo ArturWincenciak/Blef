@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     
     outputs:
-      imagedigest: ${{ steps.build_and_publish.outputs.digest }}
+      imagedigest: ${{ steps.setup_digest.outputs.digest_value }}
 
     steps:
     - name: Checkout code
@@ -65,6 +65,10 @@ jobs:
         
     - name: Echo image digest
       run: echo 'Digest ${{ steps.build_and_publish.outputs.digest }}'
+      
+    - name: Setup job output image digest value
+      id: setup_digest
+      run: echo "::set-output name=digest_value::${{ steps.build_and_publish.outputs.digest }}"
 
   deploy:
     runs-on: ubuntu-latest
