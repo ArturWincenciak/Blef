@@ -42,7 +42,7 @@ jobs:
         push: ${{ github.ref == 'refs/heads/main' }}
         
     - name: Build and publish image digest
-      run: echo ${{ steps.docker_build.outputs.digest }}
+      run: echo 'Digest ${{ steps.build.outputs.digest }}'
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,7 +53,7 @@ jobs:
 
     steps:
     - name: Depoly image digest
-      run: echo ${{ steps.docker_build.outputs.digest }}
+      run: echo 'Digest ${{ steps.build.outputs.digest }}'
       
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
@@ -62,4 +62,4 @@ jobs:
         app-name: 'blef'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_8f7b17ddf5a24d228eebe55cecad2b91 }}
-        images: 'index.docker.io/teovincent/blef:latest@${{ steps.docker_build.outputs.digest }}'
+        images: 'index.docker.io/teovincent/blef:latest@${{ steps.build.outputs.digest }}'
