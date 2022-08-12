@@ -4,6 +4,4 @@
 
 ## Card game
 
-### Docker image: https://hub.docker.com/repository/docker/teovincent/blef 
-
 TBD
