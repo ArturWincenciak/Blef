@@ -57,7 +57,7 @@ jobs:
 
     steps:
     - name: Echo image digest
-      run: echo 'Digest ${{ jobs.build.outputs.imagedigest }}'
+      run: echo 'Digest ${{ needs.jobs.build.outputs.imagedigest }}'
       
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
@@ -66,4 +66,4 @@ jobs:
         app-name: 'blef'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_8f7b17ddf5a24d228eebe55cecad2b91 }}
-        images: 'index.docker.io/teovincent/blef:latest@${{ jobs.build.outputs.imagedigest }}'
+        images: 'index.docker.io/teovincent/blef:latest@${{ needs.jobs.build.outputs.imagedigest }}'
