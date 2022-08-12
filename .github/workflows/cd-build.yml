@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     name: CD Build and test
     environment:
-      name: 'test'
+      name: 'integration'
     
     steps:
     - name: Checkout
