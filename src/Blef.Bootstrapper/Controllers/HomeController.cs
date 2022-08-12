@@ -16,8 +16,7 @@ public class HomeController : ControllerBase
             Specification = "/swagger/index.html",
             Repository = "https://github.com/ArturWincenciak/Blef",
             DockerHub = "https://hub.docker.com/repository/docker/teovincent/blef",
-            RequestTime = DateTime.UtcNow,
-            CiCdTesting ="__debug__v10__"
+            RequestTime = DateTime.UtcNow
         };
     }
 }
