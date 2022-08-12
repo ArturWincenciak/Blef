@@ -1,4 +1,4 @@
-name: Build, publish, deploy Docker image to Azure Web App
+name: Build and publish Docker image to Docker Hub and deploy to Azure Web App
 
 on:
   push:
