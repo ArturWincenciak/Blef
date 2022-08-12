@@ -17,6 +17,7 @@ public class HomeController : ControllerBase
             Repository = "https://github.com/ArturWincenciak/Blef",
             DockerHub = "https://hub.docker.com/repository/docker/teovincent/blef",
             RequestTime = DateTime.UtcNow,
+            CiCdTesting ="__debug__v1__"
         };
     }
 }
