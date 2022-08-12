@@ -13,7 +13,7 @@ public class HomeController : ControllerBase
         {
             Aplication = "Blef",
             Description = "Card game",
-            ApiSpecification = "/swagger/index.html",
+            Specification = "/swagger/index.html",
             Repository = "https://github.com/ArturWincenciak/Blef",
             DockerHub = "https://hub.docker.com/repository/docker/teovincent/blef",
             RequestTime = DateTime.UtcNow,
