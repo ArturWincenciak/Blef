@@ -4,5 +4,6 @@
 
 ## Card game
 - https://hub.docker.com/repository/docker/teovincent/blef
+- https://blef.azurewebsites.net/
 
 TBD
