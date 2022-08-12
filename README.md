@@ -3,7 +3,7 @@
 # Blef
 
 ## Card game
-- https://hub.docker.com/repository/docker/teovincent/blef
-- https://blef.azurewebsites.net/
+- Docker Hub image: https://hub.docker.com/repository/docker/teovincent/blef
+- Hosted App: https://blef.azurewebsites.net/
 
 TBD
