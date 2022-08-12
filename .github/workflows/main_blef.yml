@@ -56,4 +56,4 @@ jobs:
         app-name: 'blef'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_8f7b17ddf5a24d228eebe55cecad2b91 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_de769e8d6b1d466c93db4ff7f744e9a9 }}/teovincent/blef:${{ github.sha }}'
+        images: 'index.docker.io/teovincent/blef:latest'
