@@ -7,13 +7,13 @@ on:
 
 jobs:
 
-  build-and-publish:
+  build_and_publish:
     name: Build and publish Docker image to DockerHub repository
     environment: production
     runs-on: ubuntu-latest
     
     outputs:
-      image-digest: ${{ steps.setup-digest.outputs.digest_value }}
+      imagedigest: ${{ steps.setup_digest.outputs.digest_value }}
 
     steps:
     - name: Checkout code
@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.GHCR_PAT }}
 
     - name: Build image and push to Docker Hub and GitHub Container Registry
-      id: build-and-publish
+      id: build_and_publish
       uses: docker/build-push-action@v2
       with:
         context: .
@@ -46,22 +46,22 @@ jobs:
         push: ${{ github.ref == 'refs/heads/main' }}
         
     - name: Echo image digest
-      run: echo 'Digest ${{ steps.build-and-publish.outputs.digest }}'
+      run: echo 'Digest ${{ steps.build_and_publish.outputs.digest }}'
       
     - name: Setup job output image digest value
       id: setup_digest
-      run: echo "::set-output name=digest-value::${{ steps.build-and-publish.outputs.digest }}"
+      run: echo "::set-output name=digest_value::${{ steps.build_and_publish.outputs.digest }}"
 
   deploy_image:
     name: Deploy Docker image to Azure
     runs-on: ubuntu-latest
-    needs: build-and-publish
+    needs: build_and_publish
     environment:
       name: 'production'
 
     steps:
     - name: Echo image digest
-      run: echo 'Digest ${{ needs.build-and-publish.outputs.imagedigest }}'
+      run: echo 'Digest ${{ needs.build_and_publish.outputs.imagedigest }}'
       
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
@@ -70,4 +70,4 @@ jobs:
         app-name: 'blef'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_8f7b17ddf5a24d228eebe55cecad2b91 }}
-        images: 'index.docker.io/teovincent/blef:latest@${{ needs.build-and-publish.outputs.image-digest }}'
+        images: 'index.docker.io/teovincent/blef:latest@${{ needs.build_and_publish.outputs.imagedigest }}'
