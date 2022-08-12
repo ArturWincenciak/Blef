@@ -10,6 +10,9 @@ jobs:
   build_and_test:
     runs-on: ubuntu-latest
     name: CD Build and test
+    environment:
+      name: 'test'
+    
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -29,7 +32,7 @@ jobs:
       run: dotnet test Blef.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
   build_and_publish:
-    name: Build and publish Docker image to DockerHub repository
+    name: Build and publish image to DockerHub repository
     environment: production
     runs-on: ubuntu-latest
     needs: build_and_test
@@ -75,7 +78,7 @@ jobs:
       run: echo "::set-output name=digest_value::${{ steps.build_and_publish.outputs.digest }}"
 
   deploy_image:
-    name: Deploy Docker image to Azure
+    name: Deploy image to Azure job
     runs-on: ubuntu-latest
     needs: build_and_publish
     environment:
@@ -85,7 +88,7 @@ jobs:
     - name: Echo image digest
       run: echo 'Digest ${{ needs.build_and_publish.outputs.imagedigest }}'
       
-    - name: Deploy to Azure Web App
+    - name: Deploy image to Azure step
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
