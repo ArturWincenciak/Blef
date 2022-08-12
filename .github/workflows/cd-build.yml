@@ -1,4 +1,4 @@
-name: Build and publish Docker Hub Image and deploy container app to Azure Web App
+name: Build, publish, deploy Docker image to Azure Web App
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 jobs:
 
   build:
-    name: Build Docker image and push to DockerHub repository
+    name: Build and publish Docker image to DockerHub repository
     environment: production
     runs-on: ubuntu-latest
 
