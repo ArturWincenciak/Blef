@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     name: CI Build and test
     environment:
-      name: 'test'
+      name: 'development'
     
     steps:
     - name: Checkout
