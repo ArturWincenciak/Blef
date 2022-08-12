@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: deepakputhraya/action-branch-name@master
         with:
-          regex: '(feat\/[a-z]+(-[a-z]+)*)|(fix\/[a-z]+(-[a-z]+)*)*' # Regex the branch should match. This example enforces grouping
+          regex: '(feat\/[a-z\-]+)|(fix\/[a-z\-]+)*' # Regex the branch should match. This example enforces grouping
           allowed_prefixes: '' # All branches should start with the given prefix
           ignore: main # Ignore exactly matching branch names from convention
           min_length: 5 # Min length of the branch name
