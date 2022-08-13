@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Bootstrapper.Controllers;
@@ -7,9 +8,9 @@ namespace Blef.Bootstrapper.Controllers;
 public class HomeController : ControllerBase
 {
     [HttpGet]
-    public object Get()
+    public string Get()
     {
-        return new
+        return JsonSerializer.Serialize(new
         {
             Aplication = "Blef",
             Description = "Card game",
@@ -17,6 +18,6 @@ public class HomeController : ControllerBase
             Repository = "https://github.com/ArturWincenciak/Blef",
             DockerHub = "https://hub.docker.com/repository/docker/teovincent/blef",
             RequestTime = DateTime.UtcNow
-        };
+        }, new JsonSerializerOptions {WriteIndented = true});
     }
 }
