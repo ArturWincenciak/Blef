@@ -5,5 +5,6 @@
 ## Card game
 - Docker Hub image: https://hub.docker.com/repository/docker/teovincent/blef
 - Hosted App: https://blef.azurewebsites.net/
+- Specification: https://blef.azurewebsites.net/swagger/index.html
 
 TBD
