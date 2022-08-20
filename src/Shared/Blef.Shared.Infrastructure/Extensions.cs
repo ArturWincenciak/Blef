@@ -48,6 +48,11 @@ internal static class Extensions
                         {
                             new
                             {
+                                Module = "Games",
+                                Home = "/games-module"
+                            },
+                            new
+                            {
                                 Module = "Users",
                                 Home = "/users-module"
                             }
