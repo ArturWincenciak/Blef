@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Blef.Modules.Game.Domain\Blef.Modules.Game.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
