@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Modules\Game\Blef.Modules.Game.Api\Blef.Modules.Game.Api.csproj" />
+    <ProjectReference Include="..\Modules\Users\Blef.Modules.Users.Api\Blef.Modules.Users.Api.csproj" />
     <ProjectReference Include="..\Shared\Blef.Shared.Infrastructure\Blef.Shared.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Blef.Shared.Infrastructure\Blef.Shared.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
