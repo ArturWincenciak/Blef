@@ -1,9 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Game.Application")]
+[assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Games.Application")]
 
-namespace Blef.Modules.Game.Domain;
+namespace Blef.Modules.Games.Domain;
 
 internal static class Extensions
 {
