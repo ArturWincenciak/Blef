@@ -44,6 +44,14 @@ internal static class Extensions
                         Specification = "/swagger/index.html",
                         Repository = "https://github.com/ArturWincenciak/Blef",
                         DockerHub = "https://hub.docker.com/repository/docker/teovincent/blef",
+                        Modules = new object[]
+                        {
+                            new
+                            {
+                                Module = "Users",
+                                Home = "/users-module"
+                            }
+                        },
                         RequestTime = DateTime.UtcNow
                     }, new JsonSerializerOptions {WriteIndented = true})));
 
