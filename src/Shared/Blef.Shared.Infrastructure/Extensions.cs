@@ -52,7 +52,8 @@ internal static class Extensions
                 requestDelegate: async context => await context.Response.WriteAsync(
                     text: JsonSerializer.Serialize(new
                     {
-                        Description = "Blef API specification to be implemented"
+                        Description = "Blef API specification to be implemented",
+                        RequestTime = DateTime.UtcNow
                     }, new JsonSerializerOptions {WriteIndented = true})));
         });
 
