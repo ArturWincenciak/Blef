@@ -1,10 +1,10 @@
 ﻿using System.Runtime.CompilerServices;
-using Blef.Modules.Game.Domain;
+using Blef.Modules.Games.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Game.Infrastructure")]
+[assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Games.Infrastructure")]
 
-namespace Blef.Modules.Game.Application;
+namespace Blef.Modules.Games.Application;
 
 internal static class Extensions
 {

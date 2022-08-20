@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Blef.Modules.Game.Infrastructure\Blef.Modules.Game.Infrastructure.csproj" />
+    <ProjectReference Include="..\Blef.Modules.Games.Application\Blef.Modules.Games.Application.csproj" />
   </ItemGroup>
 
 </Project>

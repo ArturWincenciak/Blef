@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Blef.Modules.Game.Api.Controllers;
+namespace Blef.Modules.Games.Api.Controllers;
 
 [Route("games-module")]
 internal class HomeController : ControllerBase
