@@ -3,6 +3,8 @@ using System.Text.Json;
 using Blef.Shared.Infrastructure.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -17,7 +19,8 @@ internal static class Extensions
         services.AddControllers()
             .ConfigureApplicationPartManager(manager =>
             {
-                manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
+                var disabledModules = DetectDisabledModules(services);
+                manager.AddOnlyNotDisabledModuleParts(disabledModules);
             });
 
         return services;
@@ -71,5 +74,47 @@ internal static class Extensions
         });
 
         return app;
+    }
+
+    private static IEnumerable<string> DetectDisabledModules(IServiceCollection services)
+    {
+        using var serviceProvider = services.BuildServiceProvider();
+        var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+        var disabledModules = new List<string>();
+        foreach (var (key, value) in configuration.AsEnumerable())
+        {
+            if (false == key.Contains(":module:enabled"))
+                continue;
+
+            if (false == bool.Parse(value))
+            {
+                var splitKey = key.Split(":");
+                var moduleName = splitKey[0];
+                disabledModules.Add(moduleName);
+            }
+        }
+
+        return disabledModules;
+    }
+
+    private static ApplicationPartManager AddOnlyNotDisabledModuleParts(this ApplicationPartManager manager,
+        IEnumerable<string> disabledModules)
+    {
+        var removedParts = new List<ApplicationPart>();
+        foreach (var disabledModule in disabledModules)
+        {
+            var parts = manager.ApplicationParts
+                .Where(applicationPart => applicationPart.Name.Contains(disabledModule,
+                    StringComparison.InvariantCultureIgnoreCase));
+
+            removedParts.AddRange(parts);
+        }
+
+        foreach (var part in removedParts)
+            manager.ApplicationParts.Remove(part);
+
+        manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
+
+        return manager;
     }
 }
