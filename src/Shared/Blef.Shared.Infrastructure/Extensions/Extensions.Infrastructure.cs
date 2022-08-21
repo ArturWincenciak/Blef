@@ -1,8 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
-using System.Text.Json;
 using Blef.Shared.Infrastructure.Api;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,9 +8,9 @@ using Microsoft.Extensions.Hosting;
 
 [assembly: InternalsVisibleTo("Blef.Bootstrapper")]
 
-namespace Blef.Shared.Infrastructure;
+namespace Blef.Shared.Infrastructure.Extensions;
 
-internal static class Extensions
+internal static partial class Extensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration) =>
         services
@@ -31,41 +29,8 @@ internal static class Extensions
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
-
-            endpoints.MapGet(
-                pattern: "/",
-                requestDelegate: async context => await context.Response.WriteAsync(
-                    text: JsonSerializer.Serialize(new
-                    {
-                        Aplication = "Blef",
-                        Description = "Card game",
-                        Specification = "/swagger/index.html",
-                        Repository = "https://github.com/ArturWincenciak/Blef",
-                        DockerHub = "https://hub.docker.com/repository/docker/teovincent/blef",
-                        Modules = new object[]
-                        {
-                            new
-                            {
-                                Module = "Games",
-                                Home = "/games-module"
-                            },
-                            new
-                            {
-                                Module = "Users",
-                                Home = "/users-module"
-                            }
-                        },
-                        RequestTime = DateTime.UtcNow
-                    }, new JsonSerializerOptions {WriteIndented = true})));
-
-            endpoints.MapGet(
-                pattern: "/swagger/{index?}",
-                requestDelegate: async context => await context.Response.WriteAsync(
-                    text: JsonSerializer.Serialize(new
-                    {
-                        Description = "Blef API specification to be implemented",
-                        RequestTime = DateTime.UtcNow
-                    }, new JsonSerializerOptions {WriteIndented = true})));
+            endpoints.MapGetMainHome();
+            endpoints.MapGetSwagger();
         });
 
         return app;
