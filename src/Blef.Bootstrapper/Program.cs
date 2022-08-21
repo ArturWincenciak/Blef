@@ -1,16 +1,21 @@
-using Blef.Modules.Games.Api;
-using Blef.Modules.Users.Api;
 using Blef.Shared.Infrastructure;
+using Blef.Bootstrapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var services = builder.Services;
-services.AddInfrastructure();
-services.AddUsers();
-services.AddGames();
+var assemblies = ModuleLoader.LoadAssemblies(builder.Configuration);
+var modules = ModuleLoader.LoadModules(assemblies);
+
+builder.Services.AddInfrastructure();
+
+foreach (var module in modules)
+    module.Register(builder.Services);
 
 var app = builder.Build();
 
 app.UseInfrastructure();
+
+foreach (var module in modules)
+    module.Use(app);
 
 app.Run();
