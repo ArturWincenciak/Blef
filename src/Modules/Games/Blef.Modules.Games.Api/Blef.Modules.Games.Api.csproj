@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="games.module.Development.json" />
-    <None Remove="games.module.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="games.module.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
