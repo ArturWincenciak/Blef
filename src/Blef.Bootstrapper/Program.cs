@@ -1,21 +1,30 @@
-using Blef.Shared.Infrastructure;
 using Blef.Bootstrapper;
+using Blef.Shared.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Directory.EnumerateFiles(
+        path: builder.Environment.ContentRootPath,
+        searchPattern: "*.module.json",
+        SearchOption.AllDirectories)
+    .ToList()
+    .ForEach(config => builder.Configuration.AddJsonFile(config));
+
+Directory.EnumerateFiles(
+        path: builder.Environment.ContentRootPath,
+        searchPattern: $"*.module.{builder.Environment.EnvironmentName}.json",
+        SearchOption.AllDirectories)
+    .ToList()
+    .ForEach(config => builder.Configuration.AddJsonFile(config));
+
 var assemblies = ModuleLoader.LoadAssemblies(builder.Configuration);
-var modules = ModuleLoader.LoadModules(assemblies);
+var modules = ModuleLoader.LoadModules(assemblies).ToList();
 
 builder.Services.AddInfrastructure();
-
-foreach (var module in modules)
-    module.Register(builder.Services);
+modules.ForEach(module => module.Register(builder.Services));
 
 var app = builder.Build();
-
 app.UseInfrastructure();
-
-foreach (var module in modules)
-    module.Use(app);
+modules.ForEach(module => module.Use(app));
 
 app.Run();
