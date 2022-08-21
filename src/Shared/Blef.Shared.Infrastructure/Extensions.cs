@@ -14,17 +14,12 @@ namespace Blef.Shared.Infrastructure;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
-    {
-        services.AddControllers()
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration) =>
+        services
+            .AddControllers()
             .ConfigureApplicationPartManager(manager =>
-            {
-                var disabledModules = DetectDisabledModules(services);
-                manager.AddOnlyNotDisabledModuleParts(disabledModules);
-            });
-
-        return services;
-    }
+                manager.AddOnlyNotDisabledModuleParts(DetectDisabledModules(configuration)))
+            .Services;
 
     public static IApplicationBuilder UseInfrastructure(this WebApplication app)
     {
@@ -76,10 +71,8 @@ internal static class Extensions
         return app;
     }
 
-    private static IEnumerable<string> DetectDisabledModules(IServiceCollection services)
+    private static IEnumerable<string> DetectDisabledModules(IConfiguration configuration)
     {
-        using var serviceProvider = services.BuildServiceProvider();
-        var configuration = serviceProvider.GetRequiredService<IConfiguration>();
         var disabledModules = new List<string>();
         foreach (var (key, value) in configuration.AsEnumerable())
         {
