@@ -1,5 +1,5 @@
 using Blef.Shared.Abstractions.Modules;
-using Blef.Shared.Infrastructure;
+using Blef.Shared.Infrastructure.Extensions;
 using static System.Activator;
 using static System.IO.Directory;
 using static Blef.Bootstrapper.ModuleLoader;
