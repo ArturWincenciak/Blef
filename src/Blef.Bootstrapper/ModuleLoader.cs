@@ -1,11 +1,10 @@
 using System.Reflection;
-using Blef.Shared.Abstractions.Modules;
 
 namespace Blef.Bootstrapper;
 
 internal static class ModuleLoader
 {
-    public static IEnumerable<Assembly> LoadAssemblies(IConfiguration configuration)
+    internal static IEnumerable<Assembly> LoadAssemblies(IConfiguration configuration)
     {
         var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 
@@ -39,18 +38,5 @@ internal static class ModuleLoader
         }
 
         return loadedAssemblies;
-    }
-
-    public static IEnumerable<IModule> LoadModules(IEnumerable<Assembly> assemblies)
-    {
-        var modules = assemblies
-            .SelectMany(assembly => assembly.GetTypes())
-            .Where(type => typeof(IModule).IsAssignableFrom(type) && false == type.IsInterface)
-            .OrderBy(type => type.Name)
-            .Select(Activator.CreateInstance)
-            .Cast<IModule>()
-            .ToList();
-
-        return modules;
     }
 }
