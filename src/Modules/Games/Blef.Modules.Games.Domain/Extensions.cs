@@ -7,6 +7,6 @@ namespace Blef.Modules.Games.Domain;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddDomain(this IServiceCollection services) =>
+    internal static IServiceCollection AddDomain(this IServiceCollection services) =>
         services;
 }

@@ -5,6 +5,6 @@ namespace Blef.Modules.Users.Api;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddUsers(this IServiceCollection services) =>
+    internal static IServiceCollection AddUsers(this IServiceCollection services) =>
         services.AddCore();
 }
