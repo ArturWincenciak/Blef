@@ -1,8 +1,5 @@
-﻿using System.Runtime.CompilerServices;
-using Blef.Modules.Users.Core;
+﻿using Blef.Modules.Users.Core;
 using Microsoft.Extensions.DependencyInjection;
-
-[assembly: InternalsVisibleTo("Blef.Bootstrapper")]
 
 namespace Blef.Modules.Users.Api;
 
