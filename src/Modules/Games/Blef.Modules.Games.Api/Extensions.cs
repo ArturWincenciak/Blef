@@ -8,6 +8,6 @@ namespace Blef.Modules.Games.Api;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddGame(this IServiceCollection services) =>
+    public static IServiceCollection AddGames(this IServiceCollection services) =>
         services.AddInfrastructure();
 }
