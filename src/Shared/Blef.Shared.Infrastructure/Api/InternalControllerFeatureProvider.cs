@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace Blef.Shared.Infrastructure.Api;
 
-internal class InternalControllerFeatureProvider : ControllerFeatureProvider
+internal sealed class InternalControllerFeatureProvider : ControllerFeatureProvider
 {
     protected override bool IsController(TypeInfo typeInfo)
     {
