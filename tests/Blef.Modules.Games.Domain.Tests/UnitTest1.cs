@@ -1,4 +1,4 @@
-namespace Blef.Modules.Game.Domain.Tests;
+namespace Blef.Modules.Games.Domain.Tests;
 
 public class UnitTest1
 {
