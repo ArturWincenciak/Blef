@@ -43,6 +43,14 @@ internal static class ModuleLoader
 
     public static IEnumerable<IModule> LoadModules(IEnumerable<Assembly> assemblies)
     {
-        return Array.Empty<IModule>();
+        var modules = assemblies
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(type => typeof(IModule).IsAssignableFrom(type) && false == type.IsInterface)
+            .OrderBy(type => type.Name)
+            .Select(Activator.CreateInstance)
+            .Cast<IModule>()
+            .ToList();
+
+        return modules;
     }
 }
