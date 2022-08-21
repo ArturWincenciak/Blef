@@ -7,6 +7,6 @@ namespace Blef.Modules.Users.Core;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddCore(this IServiceCollection services) =>
+    internal static IServiceCollection AddCore(this IServiceCollection services) =>
         services;
 }
