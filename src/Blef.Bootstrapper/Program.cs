@@ -30,7 +30,7 @@ var modules = assemblies
     .Cast<IModule>()
     .ToList();
 
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddInfrastructure(builder.Configuration, modules);
 modules.ForEach(module => module.Register(builder.Services));
 
 var app = builder.Build();
