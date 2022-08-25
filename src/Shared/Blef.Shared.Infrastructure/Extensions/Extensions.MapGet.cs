@@ -23,7 +23,7 @@ internal static partial class Extensions
                 await context.Response.WriteAsync(json);
             });
 
-    private static void MapGetMainHome(this IEndpointRouteBuilder endpoints) =>
+    private static void MapMainInfo(this IEndpointRouteBuilder endpoints) =>
         endpoints.MapGet(
             pattern: "/",
             requestDelegate: async context => await context.Response.WriteAsync(

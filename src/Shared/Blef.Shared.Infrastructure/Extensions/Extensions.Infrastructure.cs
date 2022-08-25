@@ -27,7 +27,7 @@ internal static partial class Extensions
             .UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapGetMainHome();
+                endpoints.MapMainInfo();
                 endpoints.MapModuleInfo();
             })
             .UseSwagger()
