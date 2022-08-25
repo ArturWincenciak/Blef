@@ -1,12 +1,10 @@
 ﻿using System.Runtime.CompilerServices;
-using System.Xml.Serialization;
 using Blef.Shared.Abstractions.Modules;
 using Blef.Shared.Infrastructure.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Interfaces;
 using Microsoft.OpenApi.Models;
 
 [assembly: InternalsVisibleTo("Blef.Bootstrapper")]
@@ -18,10 +16,7 @@ internal static partial class Extensions
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration,
         IEnumerable<IModule> modules) =>
         services
-            .AddControllers()
-            .ConfigureApplicationPartManager(manager =>
-                manager.AddOnlyNotDisabledModuleParts(configuration.DetectDisabledModules()))
-            .Services
+            .AddControllers(configuration)
             .AddModuleInfo(modules)
             .AddSwagger();
 
@@ -45,6 +40,14 @@ internal static partial class Extensions
 
         return app;
     }
+
+    private static IServiceCollection AddControllers(this IServiceCollection services,
+        IConfiguration configuration) =>
+        services
+            .AddControllers()
+            .ConfigureApplicationPartManager(manager =>
+                manager.AddOnlyNotDisabledModuleParts(configuration.DetectDisabledModules()))
+            .Services;
 
     private static IServiceCollection AddSwagger(this IServiceCollection services) =>
         services.AddSwaggerGen(options =>
