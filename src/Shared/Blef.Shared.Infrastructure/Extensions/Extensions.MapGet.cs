@@ -9,16 +9,6 @@ namespace Blef.Shared.Infrastructure.Extensions;
 
 internal static partial class Extensions
 {
-    private static void MapGetSwagger(this IEndpointRouteBuilder endpoints) =>
-        endpoints.MapGet(
-            pattern: "/swagger/{index?}",
-            requestDelegate: async context => await context.Response.WriteAsync(
-                text: JsonSerializer.Serialize((object) new
-                {
-                    Description = "Blef API specification to be implemented",
-                    RequestTime = DateTime.UtcNow
-                }, new JsonSerializerOptions {WriteIndented = true})));
-
     private static void MapModuleInfo(this IEndpointRouteBuilder endpoints) =>
         endpoints.MapGet(
             pattern: "/modules",
