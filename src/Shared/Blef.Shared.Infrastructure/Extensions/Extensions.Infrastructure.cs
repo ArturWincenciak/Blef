@@ -36,14 +36,6 @@ internal static partial class Extensions
                     name: "Blef",
                     url: "/swagger/v1/swagger.json"));
 
-    private static IApplicationBuilder UseDevelopment(this WebApplication app)
-    {
-        if (app.Environment.IsDevelopment())
-            app.UseDeveloperExceptionPage();
-
-        return app;
-    }
-
     private static IServiceCollection AddControllers(this IServiceCollection services,
         IConfiguration configuration) =>
         services
@@ -74,4 +66,11 @@ internal static partial class Extensions
                 }
             });
         });
+
+    private static IApplicationBuilder UseDevelopment(this WebApplication app) =>
+        app.Environment.IsDevelopment() switch
+        {
+            true => app.UseDeveloperExceptionPage(),
+            _ => app
+        };
 }
