@@ -20,23 +20,26 @@ internal static partial class Extensions
             .AddModuleInfo(modules)
             .AddSwagger();
 
-    public static IApplicationBuilder UseInfrastructure(this WebApplication app)
+    public static IApplicationBuilder UseInfrastructure(this WebApplication application) =>
+        application
+            .UseDevelopment()
+            .UseRouting()
+            .UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapGetMainHome();
+                endpoints.MapModuleInfo();
+            })
+            .UseSwagger()
+            .UseSwaggerUI(c =>
+                c.SwaggerEndpoint(
+                    name: "Blef",
+                    url: "/swagger/v1/swagger.json"));
+
+    private static IApplicationBuilder UseDevelopment(this WebApplication app)
     {
         if (app.Environment.IsDevelopment())
             app.UseDeveloperExceptionPage();
-
-        app.UseRouting();
-
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllers();
-            endpoints.MapGetMainHome();
-            endpoints.MapModuleInfo();
-        });
-
-        app.UseSwagger();
-        app.UseSwaggerUI(c =>
-            c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Blef"));
 
         return app;
     }
