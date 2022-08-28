@@ -1,0 +1,63 @@
+@api = https://localhost:49153 
+@api-games-module = {{api}}/games-module
+
+### Home 
+GET {{api}}
+
+### Home modules
+GET {{api}}/modules
+
+### Home games modules
+GET {{api-games-module}}
+
+# Error handling playground
+@api-error-handling-playground = {{api-games-module}}/ErrorHandlingPlayground
+
+### POST with framework type, case 1
+POST {{api-error-handling-playground}}/framework?guidArg=bad_guid&intArg=bad_int
+Content-Type: application/json
+
+### POST with framework type, case 2
+POST {{api-error-handling-playground}}/framework?guidArg=bad_guid&intArg=100
+Content-Type: application/json
+
+### POST with framework type, case 3
+POST {{api-error-handling-playground}}/framework?intArg=100
+Content-Type: application/json
+
+### POST with framework type, case 4
+POST {{api-error-handling-playground}}/framework?guidArg=bad_guid
+Content-Type: application/json
+
+### POST with framework type, case 5
+POST {{api-error-handling-playground}}/framework?intArg=100&stringArg="that is the string arg"
+Content-Type: application/json
+
+### POST with framework type, case 6
+POST {{api-error-handling-playground}}/framework?guidArg=f8fd1628-cad1-45df-90e0-0b83f37d06a2&intArg=3&stringArg=abc
+Content-Type: application/json
+
+### POST with simple custom
+POST {{api-error-handling-playground}}/simple-custom
+Content-Type: application/json
+
+{
+    "IntegerType": 10,
+    "StringType": "string vaule",
+    "GuidType": "f8fd1628-cad1-45df-90e0-0b83f37d06a2"
+}
+
+### POST with nested custiom
+POST {{api-error-handling-playground}}/nested-custom
+Content-Type: application/json
+
+{
+    "IntegerType": 10,
+    "StringType": "string vaule",
+    "GuidType": "f8fd1628-cad1-45df-90e0-0b83f37d06a2",
+    "CustomType": {
+        "IntegerType": 100,
+        "StringType": "nested string value",
+        "GuidType": "d52b6743-e04b-4ba0-9a6f-9093fb402462"
+    } 
+}
