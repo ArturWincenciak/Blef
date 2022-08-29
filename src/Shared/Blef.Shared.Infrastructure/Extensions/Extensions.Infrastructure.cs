@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using Blef.Shared.Abstractions.Modules;
+using Blef.Shared.Infrastructure.Exceptions;
 using Blef.Shared.Infrastructure.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +19,8 @@ internal static partial class Extensions
         services
             .AddControllers(configuration)
             .AddModuleInfo(modules)
-            .AddSwagger();
+            .AddSwagger()
+            .AddErrorHandling();
 
     public static IApplicationBuilder UseInfrastructure(this WebApplication application) =>
         application
@@ -34,7 +36,8 @@ internal static partial class Extensions
             .UseSwaggerUI(c =>
                 c.SwaggerEndpoint(
                     name: "Blef",
-                    url: "/swagger/v1/swagger.json"));
+                    url: "/swagger/v1/swagger.json"))
+            .UseErrorHandling();
 
     private static IServiceCollection AddControllers(this IServiceCollection services,
         IConfiguration configuration) =>
