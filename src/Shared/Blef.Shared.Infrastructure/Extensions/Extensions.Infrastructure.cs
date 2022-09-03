@@ -24,7 +24,7 @@ internal static partial class Extensions
 
     public static IApplicationBuilder UseInfrastructure(this WebApplication application) =>
         application
-            .UseDevelopment()
+            .UseErrorHandling()
             .UseRouting()
             .UseEndpoints(endpoints =>
             {
@@ -36,8 +36,7 @@ internal static partial class Extensions
             .UseSwaggerUI(c =>
                 c.SwaggerEndpoint(
                     name: "Blef",
-                    url: "/swagger/v1/swagger.json"))
-            .UseErrorHandling();
+                    url: "/swagger/v1/swagger.json"));
 
     private static IServiceCollection AddControllers(this IServiceCollection services,
         IConfiguration configuration) =>
@@ -69,11 +68,4 @@ internal static partial class Extensions
                 }
             });
         });
-
-    private static IApplicationBuilder UseDevelopment(this WebApplication app) =>
-        app.Environment.IsDevelopment() switch
-        {
-            true => app.UseDeveloperExceptionPage(),
-            _ => app
-        };
 }
