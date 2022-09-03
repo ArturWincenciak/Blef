@@ -44,11 +44,11 @@ Content-Type: application/json
 {
     "IntegerType": 10,
     "StringType": "string vaule",
-    "GuidType": "f8fd1628-cad1-45df-90e0-0b83f37d06a2"
+    "GuidType": "f8fd1628-cad1-45df-90e0-0b83f37d06a2-xxx-error-xxx"
 }
 
 ### POST with nested custiom
-POST {{api-error-handling-playground}}/nested-custom
+POST {{api-error-handling-playground}}/cold-nested-custom
 Content-Type: application/json
 
 {
@@ -58,6 +58,14 @@ Content-Type: application/json
     "CustomType": {
         "IntegerType": 100,
         "StringType": "nested string value",
-        "GuidType": "d52b6743-e04b-4ba0-9a6f-9093fb402462"
+        "GuidType": "d52b6743-e04b-4ba0-9a6f-9093fb402462-xxx-error-xxx"
     } 
+}
+
+### POST 
+POST {{api-error-handling-playground}}/rise-app-error
+Content-Type: application/json
+
+{
+
 }

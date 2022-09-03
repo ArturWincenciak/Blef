@@ -1,10 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handlers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers;
 
 internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
 {
+    private readonly RiseAppErrorCommandHandler _handler;
+
+    public ErrorHandlingPlaygroundController(RiseAppErrorCommandHandler handler) =>
+        _handler = handler;
+
     [HttpPost("cold-framework")]
     public IActionResult PostGuid(
         [Required] Guid guidArg,
@@ -24,6 +30,13 @@ internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
     public IActionResult PostCustomType(NestedCustom custom)
     {
         return Ok(custom);
+    }
+
+    [HttpPost("rise-app-error")]
+    public IActionResult RiseAppError()
+    {
+        _handler.Handle();
+        return Ok();
     }
 }
 
