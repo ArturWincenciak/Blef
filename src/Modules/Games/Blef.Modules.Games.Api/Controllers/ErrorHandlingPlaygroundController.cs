@@ -6,10 +6,10 @@ namespace Blef.Modules.Games.Api.Controllers;
 
 internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
 {
-    private readonly RiseAppErrorCommandHandler _handler;
+    private readonly ErrorPlaygroundService _service;
 
-    public ErrorHandlingPlaygroundController(RiseAppErrorCommandHandler handler) =>
-        _handler = handler;
+    public ErrorHandlingPlaygroundController(ErrorPlaygroundService handler) =>
+        _service = handler;
 
     [HttpPost("cold-framework")]
     public IActionResult PostGuid(
@@ -35,7 +35,14 @@ internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
     [HttpPost("rise-app-error")]
     public IActionResult RiseAppError()
     {
-        _handler.Handle();
+        _service.RiseAppError();
+        return Ok();
+    }
+
+    [HttpPost("rise-internal-server-error")]
+    public IActionResult RiseInternalServerError()
+    {
+        _service.RiseInternalServerError();
         return Ok();
     }
 }

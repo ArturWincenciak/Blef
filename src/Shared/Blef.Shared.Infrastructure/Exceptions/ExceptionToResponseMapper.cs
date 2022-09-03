@@ -14,17 +14,31 @@ internal class ExceptionToResponseMapper : IExceptionToResponseMapper
         exception switch
         {
             BlefException blefException => new ExceptionResponse(
-                Response: new ErrorResponse(
-                    Errors: new Error(
-                        Code: GetErrorCode(blefException),
-                        Message: exception.Message)),
+                Response: CreateBadRequest(blefException),
                 StatusCode: HttpStatusCode.BadRequest),
             _ => new ExceptionResponse(
-                Response: new ErrorResponse(
-                    Errors: new Error(
-                        Code: "error",
-                        Message: "There was an error.")),
+                Response: CreateInternalServerError(),
                 StatusCode: HttpStatusCode.InternalServerError)
+        };
+
+    private static BlefProblemDetails CreateBadRequest(BlefException exception) =>
+        new BlefProblemDetails
+            {
+                Type = $"{DocumentationUrl}/{GetErrorCode(exception)}.md",
+                Title = exception.Title,
+                Status = (int) HttpStatusCode.BadRequest,
+                Detail = exception.Detail,
+                Instance = exception.Instance
+            }
+            .WithErrors(exception.Errors);
+
+    private static BlefProblemDetails CreateInternalServerError() =>
+        new()
+        {
+            Type = $"{DocumentationUrl}/internal-server-error.md",
+            Title = "Internal server error",
+            Status = (int) HttpStatusCode.InternalServerError,
+            Detail = "Unexpected error occurred"
         };
 
     private static string GetErrorCode(Exception exception)
@@ -40,9 +54,8 @@ internal class ExceptionToResponseMapper : IExceptionToResponseMapper
     }
 
     private static string CreateErrorCode(Type type) =>
-        type.Name.Underscore().Replace("_exception", string.Empty);
+        type.Name.Underscore().Replace("_exception", string.Empty).Dasherize();
 
-    private record Error(string Code, string Message);
-
-    private record ErrorResponse(params Error[] Errors);
+    private static string DocumentationUrl =>
+        "https://github.com/ArturWincenciak/blef/doc/problem-details";
 }

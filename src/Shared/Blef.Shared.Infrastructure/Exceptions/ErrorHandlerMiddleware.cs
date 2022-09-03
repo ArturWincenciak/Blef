@@ -25,6 +25,8 @@ internal class ErrorHandlerMiddleware : IMiddleware
     private async Task HandleErrorAsync(HttpContext context, Exception ex)
     {
         var errorResponse = _exceptionMapper.Map(ex);
+        errorResponse.Response.WithTraceId(context.TraceIdentifier);
+        errorResponse.Response.WithActivityId(context.TraceIdentifier);
         context.Response.StatusCode = (int) errorResponse.StatusCode;
         var response = errorResponse.Response;
         await context.Response.WriteAsJsonAsync(response);

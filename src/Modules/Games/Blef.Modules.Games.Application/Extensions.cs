@@ -11,6 +11,6 @@ internal static class Extensions
 {
     internal static IServiceCollection AddApplication(this IServiceCollection services) =>
         services
-            .AddScoped<RiseAppErrorCommandHandler>()
+            .AddScoped<ErrorPlaygroundService>()
             .AddDomain();
 }

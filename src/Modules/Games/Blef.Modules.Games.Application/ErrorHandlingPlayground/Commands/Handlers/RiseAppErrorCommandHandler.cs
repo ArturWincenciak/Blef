@@ -2,10 +2,15 @@
 
 namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handlers;
 
-public class RiseAppErrorCommandHandler
+public class ErrorPlaygroundService
 {
-    public void Handle()
+    public void RiseAppError()
     {
-        throw new PlaygroundBlefAppException("Error handling playground.");
+        throw new PlaygroundBlefAppException();
+    }
+
+    public void RiseInternalServerError()
+    {
+        throw new ();
     }
 }

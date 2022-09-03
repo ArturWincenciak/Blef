@@ -1,10 +1,23 @@
-﻿namespace Blef.Shared.Kernel.Exceptions;
+﻿using System.Text.Json;
 
-//todo: is that good place?
+namespace Blef.Shared.Kernel.Exceptions;
+
 public abstract class BlefException : Exception
 {
-    protected BlefException(string message)
-        : base(message)
+    public string Title { get; }
+    public string Detail { get; }
+    public string Instance { get; }
+    public IDictionary<string, string[]> Errors { get; }
+
+    protected BlefException(string title, string detail, string instance)
+        : base(JsonSerializer.Serialize(new { title, detail, instance }))
     {
+        Title = title;
+        Detail = detail;
+        Instance = instance;
+        Errors = new Dictionary<string, string[]>();
     }
+
+    public void WithError(ExceptionError error) =>
+        Errors.Add(error.Code, error.Values);
 }

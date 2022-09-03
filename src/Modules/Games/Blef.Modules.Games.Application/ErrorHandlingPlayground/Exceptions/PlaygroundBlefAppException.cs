@@ -4,8 +4,11 @@ namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Exceptions;
 
 public class PlaygroundBlefAppException : BlefException
 {
-    public PlaygroundBlefAppException(string message)
-        : base(message)
+    public PlaygroundBlefAppException()
+        : base(
+            title: "Playground error",
+            detail: "Example Blef application error",
+            instance: "/Blef")
     {
     }
 }
