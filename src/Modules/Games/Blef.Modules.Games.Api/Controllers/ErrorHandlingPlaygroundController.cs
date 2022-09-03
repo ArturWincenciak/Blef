@@ -5,7 +5,7 @@ namespace Blef.Modules.Games.Api.Controllers;
 
 internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
 {
-    [HttpPost("framework")]
+    [HttpPost("cold-framework")]
     public IActionResult PostGuid(
         [Required] Guid guidArg,
         [Required] [Range(3, 6)] int intArg,
@@ -14,13 +14,13 @@ internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
         return Ok(new { guildResult = guidArg, intResult = intArg, stringResult = stringArg });
     }
 
-    [HttpPost("simple-custom")]
+    [HttpPost("cold-simple-custom")]
     public IActionResult PostCustomType(Custom custom)
     {
         return Ok(custom);
     }
 
-    [HttpPost("nested-custom")]
+    [HttpPost("cold-nested-custom")]
     public IActionResult PostCustomType(NestedCustom custom)
     {
         return Ok(custom);
