@@ -2,10 +2,10 @@
 using Blef.Shared.Abstractions.Modules;
 using Blef.Shared.Infrastructure.Exceptions;
 using Blef.Shared.Infrastructure.Modules;
+using Blef.Shared.Infrastructure.Tracing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 [assembly: InternalsVisibleTo("Blef.Bootstrapper")]
@@ -18,12 +18,14 @@ internal static partial class Extensions
         IEnumerable<IModule> modules) =>
         services
             .AddControllers(configuration)
+            .AddTracing()
+            .AddErrorHandling()
             .AddModuleInfo(modules)
-            .AddSwagger()
-            .AddErrorHandling();
+            .AddSwagger();
 
     public static IApplicationBuilder UseInfrastructure(this WebApplication application) =>
         application
+            .UseTracing()
             .UseErrorHandling()
             .UseRouting()
             .UseEndpoints(endpoints =>
