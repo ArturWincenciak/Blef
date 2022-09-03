@@ -2,4 +2,4 @@
 
 namespace Blef.Shared.Abstractions.Exceptions;
 
-public record ExceptionResponse(object Response, HttpStatusCode StatusCode);
+public record ExceptionResponse(BlefProblemDetails Response, HttpStatusCode StatusCode);

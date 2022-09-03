@@ -62,8 +62,16 @@ Content-Type: application/json
     } 
 }
 
-### POST 
+### Rise app error 
 POST {{api-error-handling-playground}}/rise-app-error
+Content-Type: application/json
+
+{
+
+}
+
+### Rise internal server errror
+POST {{api-error-handling-playground}}/rise-internal-server-error
 Content-Type: application/json
 
 {
