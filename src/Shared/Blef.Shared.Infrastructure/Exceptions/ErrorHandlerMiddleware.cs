@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Blef.Shared.Infrastructure.Exceptions;
 
@@ -25,11 +26,20 @@ internal class ErrorHandlerMiddleware : IMiddleware
 
     private async Task HandleErrorAsync(HttpContext context, Exception ex)
     {
+        SetProblemDetailsContentType(context);
         var errorResponse = _exceptionMapper.Map(ex);
         ((ProblemDetails) errorResponse).Extensions["traceId"] = context.TraceIdentifier;
         ((ProblemDetails) errorResponse).Extensions["activityId"] = Activity.Current?.Id!;
-        context.Response.ContentType = "application/problem+json; charset=utf-8"; //todo:...
         context.Response.StatusCode = (int) ((ProblemDetails) errorResponse).Status!;
         await context.Response.WriteAsJsonAsync(errorResponse);
     }
+
+    private static void SetProblemDetailsContentType(HttpContext context) =>
+        context.Response.OnStarting(state =>
+        {
+            var httpContext = (HttpContext) state;
+            httpContext.Response.Headers.ContentType = "application/problem+json; charset=utf-8";
+            return Task.CompletedTask;
+        }, context);
+}
 }
