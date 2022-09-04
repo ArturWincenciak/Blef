@@ -1,13 +1,12 @@
 ﻿using System.Collections.Concurrent;
 using System.Net;
-using Blef.Shared.Abstractions.Exceptions;
 using Blef.Shared.Kernel.Exceptions;
 using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Shared.Infrastructure.Exceptions;
 
-internal class ExceptionToResponseMapper : IExceptionToResponseMapper
+internal class ExceptionToResponseMapper
 {
     private static readonly ConcurrentDictionary<Type, string> CodesCache = new();
 

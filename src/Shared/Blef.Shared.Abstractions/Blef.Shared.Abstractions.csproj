@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Blef.Shared.Kernel\Blef.Shared.Kernel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
 </Project>

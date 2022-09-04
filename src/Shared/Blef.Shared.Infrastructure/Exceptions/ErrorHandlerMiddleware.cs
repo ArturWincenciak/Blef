@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using Blef.Shared.Abstractions.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,9 +6,9 @@ namespace Blef.Shared.Infrastructure.Exceptions;
 
 internal class ErrorHandlerMiddleware : IMiddleware
 {
-    private readonly IExceptionToResponseMapper _exceptionMapper;
+    private readonly ExceptionToResponseMapper _exceptionMapper;
 
-    public ErrorHandlerMiddleware(IExceptionToResponseMapper exceptionMapper) =>
+    public ErrorHandlerMiddleware(ExceptionToResponseMapper exceptionMapper) =>
         _exceptionMapper = exceptionMapper;
 
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
