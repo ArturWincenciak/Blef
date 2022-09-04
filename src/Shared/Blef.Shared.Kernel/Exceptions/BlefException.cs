@@ -18,6 +18,9 @@ public abstract class BlefException : Exception
         Errors = new Dictionary<string, string[]>();
     }
 
-    public void WithError(ExceptionError error) =>
+    public BlefException WithError(ExceptionError error)
+    {
         Errors.Add(error.Code, error.Values);
+        return this;
+    }
 }

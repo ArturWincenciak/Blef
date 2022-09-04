@@ -2,5 +2,5 @@
 
 public interface IExceptionToResponseMapper
 {
-    ExceptionResponse Map(Exception ex);
+    object Map(Exception ex);
 }

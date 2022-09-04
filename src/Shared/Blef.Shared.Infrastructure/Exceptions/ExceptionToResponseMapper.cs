@@ -3,6 +3,7 @@ using System.Net;
 using Blef.Shared.Abstractions.Exceptions;
 using Blef.Shared.Kernel.Exceptions;
 using Humanizer;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Shared.Infrastructure.Exceptions;
 
@@ -10,29 +11,53 @@ internal class ExceptionToResponseMapper : IExceptionToResponseMapper
 {
     private static readonly ConcurrentDictionary<Type, string> CodesCache = new();
 
-    public ExceptionResponse Map(Exception exception) =>
+    public object Map(Exception exception) =>
         exception switch
         {
-            BlefException blefException => new ExceptionResponse(
-                Response: CreateBadRequest(blefException),
-                StatusCode: HttpStatusCode.BadRequest),
-            _ => new ExceptionResponse(
-                Response: CreateInternalServerError(),
-                StatusCode: HttpStatusCode.InternalServerError)
+            BlefException ex => CreateBadRequest(ex),
+            _ => CreateInternalServerError()
         };
 
-    private static BlefProblemDetails CreateBadRequest(BlefException exception) =>
-        new BlefProblemDetails
-            {
-                Type = $"{DocumentationUrl}/{GetErrorCode(exception)}.md",
-                Title = exception.Title,
-                Status = (int) HttpStatusCode.BadRequest,
-                Detail = exception.Detail,
-                Instance = exception.Instance
-            }
-            .WithErrors(exception.Errors);
+    private static ProblemDetails CreateBadRequest(BlefException exception) =>
+        exception.Errors.Any()
+            ? CreateValidationProblemDetails(exception)
+            : CreateProblemDetails(exception);
 
-    private static BlefProblemDetails CreateInternalServerError() =>
+    private static ProblemDetails CreateProblemDetails(BlefException exception) =>
+        new ()
+        {
+            Type = $"{DocumentationUrl}/{GetErrorCode(exception)}.md",
+            Title = exception.Title,
+            Status = (int) HttpStatusCode.BadRequest,
+            Detail = exception.Detail,
+            Instance = exception.Instance
+        };
+
+    private static ValidationProblemDetails CreateValidationProblemDetails(BlefException exception)
+    {
+        var problemDetails = new ValidationProblemDetails
+        {
+            Type = $"{DocumentationUrl}/{GetErrorCode(exception)}.md",
+            Title = exception.Title,
+            Status = (int) HttpStatusCode.BadRequest,
+            Detail = exception.Detail,
+            Instance = exception.Instance
+        };
+
+        foreach (var error in exception.Errors)
+        {
+            problemDetails.Errors.Add(error.Key, error.Value);
+        }
+
+        return problemDetails;
+    }
+
+    private static void WithTracing(ProblemDetails problemDetails)
+    {
+        problemDetails.Extensions["test1"] = "test1";
+    }
+
+    private static ProblemDetails CreateInternalServerError() =>
         new()
         {
             Type = $"{DocumentationUrl}/internal-server-error.md",
