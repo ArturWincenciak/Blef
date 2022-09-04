@@ -5,8 +5,10 @@ namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handle
 
 public class ErrorPlaygroundService
 {
-    public void RiseAppError()
-    {
+    public void RiseSimpleAppError() =>
+        throw new PlaygroundBlefAppException();
+
+    public void RiseValidationAppError() =>
         throw new PlaygroundBlefAppException()
             .WithError(new ExceptionError(
                 "prop-1", new[]
@@ -19,10 +21,7 @@ public class ErrorPlaygroundService
                 {
                     "must-be-scalar"
                 }));
-    }
 
-    public void RiseInternalServerError()
-    {
+    public void RiseInternalServerError() =>
         throw new ();
-    }
 }
