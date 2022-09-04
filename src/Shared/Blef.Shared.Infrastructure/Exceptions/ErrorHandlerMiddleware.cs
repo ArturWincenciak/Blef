@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 namespace Blef.Shared.Infrastructure.Exceptions;
 
@@ -41,5 +40,4 @@ internal class ErrorHandlerMiddleware : IMiddleware
             httpContext.Response.Headers.ContentType = "application/problem+json; charset=utf-8";
             return Task.CompletedTask;
         }, context);
-}
 }

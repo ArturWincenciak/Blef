@@ -51,11 +51,6 @@ internal class ExceptionToResponseMapper
         return problemDetails;
     }
 
-    private static void WithTracing(ProblemDetails problemDetails)
-    {
-        problemDetails.Extensions["test1"] = "test1";
-    }
-
     private static ProblemDetails CreateInternalServerError() =>
         new()
         {
