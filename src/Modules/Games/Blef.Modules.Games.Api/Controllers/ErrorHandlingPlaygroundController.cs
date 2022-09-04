@@ -32,10 +32,17 @@ internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
         return Ok(custom);
     }
 
-    [HttpPost("rise-app-error")]
-    public IActionResult RiseAppError()
+    [HttpPost("rise-simple-app-error")]
+    public IActionResult RiseSimpleAppError()
     {
-        _service.RiseAppError();
+        _service.RiseSimpleAppError();
+        return Ok();
+    }
+
+    [HttpPost("rise-validation-app-error")]
+    public IActionResult RiseValidationAppError()
+    {
+        _service.RiseValidationAppError();
         return Ok();
     }
 

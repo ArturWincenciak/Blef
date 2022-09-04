@@ -62,8 +62,16 @@ Content-Type: application/json
     } 
 }
 
-### Rise app error 
-POST {{api-error-handling-playground}}/rise-app-error
+### Rise simple app error 
+POST {{api-error-handling-playground}}/rise-simple-app-error
+Content-Type: application/json
+
+{
+
+}
+
+### Rise validation app error 
+POST {{api-error-handling-playground}}/rise-validation-app-error
 Content-Type: application/json
 
 {
