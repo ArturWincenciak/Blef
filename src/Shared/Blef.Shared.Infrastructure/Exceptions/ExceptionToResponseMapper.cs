@@ -76,5 +76,5 @@ internal class ExceptionToResponseMapper
         type.Name.Underscore().Replace("_exception", string.Empty).Dasherize();
 
     private static string DocumentationUrl =>
-        "https://github.com/ArturWincenciak/blef/doc/problem-details";
+        "https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details";
 }
