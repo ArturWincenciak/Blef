@@ -1,5 +1,8 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Blef.Shared.Abstractions.Modules;
+using Blef.Shared.Infrastructure.Commands;
 using Blef.Shared.Infrastructure.Exceptions;
 using Blef.Shared.Infrastructure.Modules;
 using Blef.Shared.Infrastructure.Tracing;
@@ -15,13 +18,14 @@ namespace Blef.Shared.Infrastructure.Extensions;
 internal static partial class Extensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration,
-        IEnumerable<IModule> modules) =>
+        IEnumerable<IModule> modules, IEnumerable<Assembly> assemblies) =>
         services
             .AddControllers(configuration)
             .AddTracing()
             .AddErrorHandling()
             .AddModuleInfo(modules)
-            .AddSwagger();
+            .AddSwagger()
+            .AddCommands(assemblies);
 
     public static IApplicationBuilder UseInfrastructure(this WebApplication application) =>
         application

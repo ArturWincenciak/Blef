@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Blef.Shared.Abstractions.Modules;
 using Blef.Shared.Infrastructure.Extensions;
 using static System.Activator;
@@ -20,7 +21,7 @@ EnumerateFiles(
     .ToList()
     .ForEach(config => builder.Configuration.AddJsonFile(config));
 
-var assemblies = LoadAssemblies(builder.Configuration);
+var assemblies = LoadAssemblies(builder.Configuration).ToArray();
 
 var modules = assemblies
     .SelectMany(assembly => assembly.GetTypes())
@@ -30,7 +31,7 @@ var modules = assemblies
     .Cast<IModule>()
     .ToList();
 
-builder.Services.AddInfrastructure(builder.Configuration, modules);
+builder.Services.AddInfrastructure(builder.Configuration, modules, assemblies);
 modules.ForEach(module => module.Register(builder.Services));
 
 var app = builder.Build();
