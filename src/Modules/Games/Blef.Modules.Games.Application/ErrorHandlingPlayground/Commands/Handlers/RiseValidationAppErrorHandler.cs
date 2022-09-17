@@ -4,7 +4,7 @@ using Blef.Shared.Kernel.Exceptions;
 
 namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handlers;
 
-public class RiseValidationAppErrorHandler : ICommandHandler<RiseValidationAppError>
+internal class RiseValidationAppErrorHandler : ICommandHandler<RiseValidationAppError>
 {
     public Task HandleAsync(RiseValidationAppError command) =>
         throw new PlaygroundBlefAppException()
