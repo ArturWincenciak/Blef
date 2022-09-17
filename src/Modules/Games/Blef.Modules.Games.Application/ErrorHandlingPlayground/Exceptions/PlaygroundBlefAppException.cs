@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Exceptions;
 
-public class PlaygroundBlefAppException : BlefException
+internal class PlaygroundBlefAppException : BlefException
 {
     public PlaygroundBlefAppException()
         : base(

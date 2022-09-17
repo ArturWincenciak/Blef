@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handlers;
 
-public class RiseInternalServerErrorHandler : ICommandHandler<RiseInternalServerError>
+internal class RiseInternalServerErrorHandler : ICommandHandler<RiseInternalServerError>
 {
     public Task HandleAsync(RiseInternalServerError command) =>
         throw new ();
