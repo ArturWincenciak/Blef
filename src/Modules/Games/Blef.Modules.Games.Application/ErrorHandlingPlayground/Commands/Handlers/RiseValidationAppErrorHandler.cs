@@ -6,7 +6,7 @@ namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handle
 
 internal sealed class RiseValidationAppErrorHandler : ICommandHandler<RiseValidationAppError>
 {
-    public Task HandleAsync(RiseValidationAppError command) =>
+    public Task Handle(RiseValidationAppError command, CancellationToken cancellation) =>
         throw new PlaygroundBlefAppException()
             .WithError(new ExceptionError(
                 "prop-1", new[]

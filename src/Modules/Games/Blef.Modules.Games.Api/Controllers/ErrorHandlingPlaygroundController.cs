@@ -28,16 +28,16 @@ internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
         Ok(custom);
 
     [HttpPost("rise-simple-app-error")]
-    public async Task<IActionResult> RiseSimpleAppError() =>
-        await Ok(() => _commandDispatcher.SendAsync(new RiseSimpleAppError()));
+    public async Task<IActionResult> RiseSimpleAppError(CancellationToken cancellation) =>
+        await Ok(() => _commandDispatcher.Dispatch(new RiseSimpleAppError(), cancellation));
 
     [HttpPost("rise-validation-app-error")]
-    public async Task<IActionResult> RiseValidationAppError() =>
-        await Ok(() => _commandDispatcher.SendAsync(new RiseValidationAppError()));
+    public async Task<IActionResult> RiseValidationAppError(CancellationToken cancellation) =>
+        await Ok(() => _commandDispatcher.Dispatch(new RiseValidationAppError(), cancellation));
 
     [HttpPost("rise-internal-server-error")]
-    public async Task<IActionResult> RiseInternalServerError() =>
-        await Ok(() => _commandDispatcher.SendAsync(new RiseInternalServerError()));
+    public async Task<IActionResult> RiseInternalServerError(CancellationToken cancellation) =>
+        await Ok(() => _commandDispatcher.Dispatch(new RiseInternalServerError(), cancellation));
 }
 
 public record Custom(

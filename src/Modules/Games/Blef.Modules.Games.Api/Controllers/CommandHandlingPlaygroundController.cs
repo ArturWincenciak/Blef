@@ -12,6 +12,6 @@ internal sealed class CommandHandlingPlaygroundController : GamesControllerBase
         _commandDispatcher = commandDispatcher;
 
     [HttpPost]
-    public async Task<IActionResult> Post(JustCommand command) =>
-        await Ok(() => _commandDispatcher.SendAsync(command));
+    public async Task<IActionResult> Post(JustCommand command, CancellationToken cancellation) =>
+        await Ok(() => _commandDispatcher.Dispatch(command, cancellation));
 }
