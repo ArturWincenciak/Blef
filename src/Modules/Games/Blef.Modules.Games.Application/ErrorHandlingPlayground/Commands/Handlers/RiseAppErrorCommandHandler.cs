@@ -3,7 +3,7 @@ using Blef.Shared.Abstractions.Commands;
 
 namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handlers;
 
-internal class RiseSimpleAppErrorHandler : ICommandHandler<RiseSimpleAppError>
+internal sealed class RiseSimpleAppErrorHandler : ICommandHandler<RiseSimpleAppError>
 {
     public Task HandleAsync(RiseSimpleAppError command) =>
         throw new PlaygroundBlefAppException();
