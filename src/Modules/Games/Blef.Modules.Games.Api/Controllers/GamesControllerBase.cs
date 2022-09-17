@@ -7,5 +7,9 @@ namespace Blef.Modules.Games.Api.Controllers;
 [Route($"{GamesModule.BasePath}/[controller]")]
 internal abstract class GamesControllerBase : ControllerBase
 {
-
+    protected async Task<IActionResult> Ok(Func<Task> funk)
+    {
+        await funk();
+        return Ok();
+    }
 }
