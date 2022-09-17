@@ -2,4 +2,4 @@
 
 namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands;
 
-public record struct RiseSimpleAppError : ICommand;
+public sealed record RiseSimpleAppError : ICommand;
