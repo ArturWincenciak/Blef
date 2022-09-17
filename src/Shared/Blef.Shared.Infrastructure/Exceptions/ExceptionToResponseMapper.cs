@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Net;
+using System.Reflection;
 using Blef.Shared.Kernel.Exceptions;
 using Humanizer;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ internal class ExceptionToResponseMapper
         exception switch
         {
             BlefException ex => CreateBadRequest(ex),
+            TargetInvocationException {InnerException: { }} wrapped => Map(wrapped.InnerException!),
             _ => CreateInternalServerError()
         };
 
