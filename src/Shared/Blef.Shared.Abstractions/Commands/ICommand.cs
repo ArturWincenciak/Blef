@@ -2,6 +2,6 @@
 
 public interface ICommand { }
 
-public interface ICommand<TResult> : ICommand
-    where TResult : ICommandResult
+public interface ICommand<TCommandResult> : ICommand
+    where TCommandResult : ICommandResult
 { }

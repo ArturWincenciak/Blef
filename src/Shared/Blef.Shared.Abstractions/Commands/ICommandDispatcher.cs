@@ -2,8 +2,10 @@
 
 public interface ICommandDispatcher
 {
-    Task SendAsync(ICommand command);
+    Task Dispatch<TCommand>(TCommand command, CancellationToken cancellation)
+        where TCommand : ICommand;
 
-    Task<TResult> SendAsync<TResult>(ICommand<TResult> command)
-        where TResult : ICommandResult;
+    Task<TCommandResult> Dispatch<TCommand, TCommandResult>(TCommand command, CancellationToken cancellation)
+        where TCommand : ICommand
+        where TCommandResult : ICommandResult;
 }

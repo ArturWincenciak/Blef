@@ -5,6 +5,6 @@ namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handle
 
 internal sealed class RiseSimpleAppErrorHandler : ICommandHandler<RiseSimpleAppError>
 {
-    public Task HandleAsync(RiseSimpleAppError command) =>
+    public Task Handle(RiseSimpleAppError command, CancellationToken cancellation) =>
         throw new PlaygroundBlefAppException();
 }

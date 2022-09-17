@@ -4,6 +4,6 @@ namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handle
 
 internal sealed class RiseInternalServerErrorHandler : ICommandHandler<RiseInternalServerError>
 {
-    public Task HandleAsync(RiseInternalServerError command) =>
+    public Task Handle(RiseInternalServerError command, CancellationToken cancellation) =>
         throw new ();
 }

@@ -4,6 +4,6 @@ namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handle
 
 internal sealed class JustCommandHandler : ICommandHandler<JustCommand>
 {
-    public Task HandleAsync(JustCommand command) =>
+    public Task Handle(JustCommand command, CancellationToken cancellation) =>
         Task.CompletedTask;
 }

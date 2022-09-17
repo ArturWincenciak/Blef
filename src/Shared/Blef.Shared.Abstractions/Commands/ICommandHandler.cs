@@ -3,12 +3,12 @@
 public interface ICommandHandler<in TCommand>
     where TCommand : ICommand
 {
-    Task HandleAsync(TCommand command);
+    Task Handle(TCommand command, CancellationToken cancellation);
 }
 
-public interface ICommandHandler<in TCommand, TResult>
+public interface ICommandHandler<in TCommand, TCommandResult>
     where TCommand : ICommand
-    where TResult : ICommandResult
+    where TCommandResult : ICommandResult
 {
-    Task<TResult> HandleAsync(TCommand command);
+    Task<TCommandResult> Handle(TCommand command, CancellationToken cancellation);
 }
