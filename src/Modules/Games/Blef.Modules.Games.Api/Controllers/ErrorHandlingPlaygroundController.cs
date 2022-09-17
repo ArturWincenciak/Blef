@@ -16,43 +16,28 @@ internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
     public IActionResult PostGuid(
         [Required] Guid guidArg,
         [Required] [Range(3, 6)] int intArg,
-        [Required] [MinLength(3)] [MaxLength(5)] string stringArg)
-    {
-        return Ok(new { guildResult = guidArg, intResult = intArg, stringResult = stringArg });
-    }
+        [Required] [MinLength(3)] [MaxLength(5)] string stringArg) =>
+        Ok(new { guildResult = guidArg, intResult = intArg, stringResult = stringArg });
 
     [HttpPost("cold-simple-custom")]
-    public IActionResult PostCustomType(Custom custom)
-    {
-        return Ok(custom);
-    }
+    public IActionResult PostCustomType(Custom custom) =>
+        Ok(custom);
 
     [HttpPost("cold-nested-custom")]
-    public IActionResult PostCustomType(NestedCustom custom)
-    {
-        return Ok(custom);
-    }
+    public IActionResult PostCustomType(NestedCustom custom) =>
+        Ok(custom);
 
     [HttpPost("rise-simple-app-error")]
-    public async Task<IActionResult> RiseSimpleAppError()
-    {
-        await _commandDispatcher.SendAsync(new RiseSimpleAppError());
-        return Ok();
-    }
+    public async Task<IActionResult> RiseSimpleAppError() =>
+        await Ok(() => _commandDispatcher.SendAsync(new RiseSimpleAppError()));
 
     [HttpPost("rise-validation-app-error")]
-    public async Task<IActionResult> RiseValidationAppError()
-    {
-        await _commandDispatcher.SendAsync(new RiseValidationAppError());
-        return Ok();
-    }
+    public async Task<IActionResult> RiseValidationAppError() =>
+        await Ok(() => _commandDispatcher.SendAsync(new RiseValidationAppError()));
 
     [HttpPost("rise-internal-server-error")]
-    public async Task<IActionResult> RiseInternalServerError()
-    {
-        await _commandDispatcher.SendAsync(new RiseInternalServerError());
-        return Ok();
-    }
+    public async Task<IActionResult> RiseInternalServerError() =>
+        await Ok(() => _commandDispatcher.SendAsync(new RiseInternalServerError()));
 }
 
 public record Custom(
