@@ -2,4 +2,4 @@
 
 namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands;
 
-public record struct RiseValidationAppError : ICommand;
+public sealed record RiseValidationAppError : ICommand;

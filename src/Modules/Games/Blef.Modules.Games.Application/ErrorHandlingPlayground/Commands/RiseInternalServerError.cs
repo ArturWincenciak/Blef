@@ -2,4 +2,4 @@
 
 namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands;
 
-public record struct RiseInternalServerError : ICommand;
+public sealed record RiseInternalServerError : ICommand;
