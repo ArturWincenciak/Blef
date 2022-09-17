@@ -1,15 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handlers;
+using Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands;
+using Blef.Shared.Abstractions.Commands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers;
 
 internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
 {
-    private readonly ErrorPlaygroundService _service;
+    private readonly ICommandDispatcher _commandDispatcher;
 
-    public ErrorHandlingPlaygroundController(ErrorPlaygroundService handler) =>
-        _service = handler;
+    public ErrorHandlingPlaygroundController(ICommandDispatcher commandDispatcher) =>
+        _commandDispatcher = commandDispatcher;
 
     [HttpPost("cold-framework")]
     public IActionResult PostGuid(
@@ -33,23 +34,23 @@ internal sealed class ErrorHandlingPlaygroundController : GamesControllerBase
     }
 
     [HttpPost("rise-simple-app-error")]
-    public IActionResult RiseSimpleAppError()
+    public async Task<IActionResult> RiseSimpleAppError()
     {
-        _service.RiseSimpleAppError();
+        await _commandDispatcher.SendAsync(new RiseSimpleAppError());
         return Ok();
     }
 
     [HttpPost("rise-validation-app-error")]
-    public IActionResult RiseValidationAppError()
+    public async Task<IActionResult> RiseValidationAppError()
     {
-        _service.RiseValidationAppError();
+        await _commandDispatcher.SendAsync(new RiseValidationAppError());
         return Ok();
     }
 
     [HttpPost("rise-internal-server-error")]
-    public IActionResult RiseInternalServerError()
+    public async Task<IActionResult> RiseInternalServerError()
     {
-        _service.RiseInternalServerError();
+        await _commandDispatcher.SendAsync(new RiseInternalServerError());
         return Ok();
     }
 }
