@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handlers;
+using Blef.Modules.Games.Application.Playground.Commands.Handlers;
 using Blef.Modules.Games.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
