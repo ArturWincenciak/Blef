@@ -20,8 +20,7 @@ internal class CommandDispatcher : ICommandDispatcher
     {
         try
         {
-            using var scope = _serviceProvider.CreateScope();
-            var handler = scope.ServiceProvider.GetRequiredService<ICommandHandler<TCommand>>();
+            var handler = _serviceProvider.GetRequiredService<ICommandHandler<TCommand>>();
             await handler.Handle(command, cancellation);
         }
         catch (Exception ex)
