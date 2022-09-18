@@ -1,8 +1,8 @@
-﻿using Blef.Modules.Games.Application.ErrorHandlingPlayground.Exceptions;
+﻿using Blef.Modules.Games.Application.Playground.Exceptions;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Kernel.Exceptions;
 
-namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands.Handlers;
+namespace Blef.Modules.Games.Application.Playground.Commands.Handlers;
 
 internal sealed class RiseValidationAppErrorHandler : ICommandHandler<RiseValidationAppError>
 {

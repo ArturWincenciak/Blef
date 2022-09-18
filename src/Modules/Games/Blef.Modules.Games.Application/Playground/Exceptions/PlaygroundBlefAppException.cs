@@ -1,6 +1,6 @@
 ﻿using Blef.Shared.Kernel.Exceptions;
 
-namespace Blef.Modules.Games.Application.ErrorHandlingPlayground.Exceptions;
+namespace Blef.Modules.Games.Application.Playground.Exceptions;
 
 internal sealed class PlaygroundBlefAppException : BlefException
 {

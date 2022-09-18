@@ -1,4 +1,4 @@
-﻿using Blef.Modules.Games.Application.ErrorHandlingPlayground.Commands;
+﻿using Blef.Modules.Games.Application.Playground.Commands;
 using Blef.Shared.Abstractions.Commands;
 using Microsoft.AspNetCore.Mvc;
 
