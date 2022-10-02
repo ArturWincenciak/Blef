@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using Blef.Shared.Abstractions.Modules;
 using Blef.Shared.Infrastructure.Commands;
 using Blef.Shared.Infrastructure.Exceptions;
 using Blef.Shared.Infrastructure.Modules;
+using Blef.Shared.Infrastructure.Queries;
 using Blef.Shared.Infrastructure.Tracing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +25,8 @@ internal static partial class Extensions
             .AddErrorHandling()
             .AddModuleInfo(modules)
             .AddSwagger()
-            .AddCommands(assemblies);
+            .AddCommands(assemblies)
+            .AddQueries(assemblies);
 
     public static IApplicationBuilder UseInfrastructure(this WebApplication application) =>
         application
