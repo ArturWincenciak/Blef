@@ -7,7 +7,7 @@ public interface ICommandHandler<in TCommand>
 }
 
 public interface ICommandHandler<in TCommand, TCommandResult>
-    where TCommand : ICommand
+    where TCommand : ICommand<TCommandResult>
     where TCommandResult : ICommandResult
 {
     Task<TCommandResult> Handle(TCommand command, CancellationToken cancellation);

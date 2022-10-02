@@ -31,7 +31,7 @@ internal class CommandDispatcher : ICommandDispatcher
     }
 
     public async Task<TCommandResult> Dispatch<TCommand, TCommandResult>(TCommand command, CancellationToken cancellation)
-        where TCommand : ICommand
+        where TCommand : ICommand<TCommandResult>
         where TCommandResult : ICommandResult
     {
         try
