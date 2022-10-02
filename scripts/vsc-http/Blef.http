@@ -86,7 +86,7 @@ Content-Type: application/json
 
 }
 
-# Error handling playground
+# CQRS playground
 @cqrs-playground = {{api-games-module}}/CqrsPlayground
 
 ### Just CQRS command
