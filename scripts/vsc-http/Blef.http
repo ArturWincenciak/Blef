@@ -85,3 +85,28 @@ Content-Type: application/json
 {
 
 }
+
+# Error handling playground
+@cqrs-playground = {{api-games-module}}/CqrsPlayground
+
+### Just CQRS command
+POST {{cqrs-playground}}/just
+Content-Type: application/json
+
+{
+    "Count": 4,
+    "Stuff": "xyz"
+}
+
+### Effect CQRS command
+POST {{cqrs-playground}}/effect
+Content-Type: application/json
+
+{
+    "Amount": 10,
+    "Flag": false
+}
+
+### Just CQRS query
+GET {{cqrs-playground}}/just?id=10
+Content-Type: application/json
