@@ -6,6 +6,6 @@ public interface ICommandDispatcher
         where TCommand : ICommand;
 
     Task<TCommandResult> Dispatch<TCommand, TCommandResult>(TCommand command, CancellationToken cancellation)
-        where TCommand : ICommand
+        where TCommand : ICommand<TCommandResult>
         where TCommandResult : ICommandResult;
 }
