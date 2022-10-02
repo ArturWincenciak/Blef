@@ -1,10 +1,6 @@
 ﻿namespace Blef.Shared.Abstractions.Queries;
 
-public interface IQuery
-{
-}
+public interface IQuery { }
 
-public interface IQuery<TResult> : IQuery
-    where TResult : IQueryResult
-{
-}
+public interface IQuery<TQueryResult> : IQuery
+    where TQueryResult : IQueryResult { }

@@ -1,8 +1,8 @@
 ﻿namespace Blef.Shared.Abstractions.Queries;
 
-public interface IQueryHandler<in TQuery, TResult>
-    where TQuery : IQuery<TResult>
-    where TResult : IQueryResult
+public interface IQueryHandler<in TQuery, TQueryResult>
+    where TQuery : IQuery<TQueryResult>
+    where TQueryResult : IQueryResult
 {
-    Task<TResult> HandleAsync(TQuery query);
+    Task<TQueryResult> Handle(TQuery query);
 }
