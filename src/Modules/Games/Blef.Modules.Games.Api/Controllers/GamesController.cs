@@ -20,4 +20,14 @@ internal sealed class GamesController : GamesControllerBase
         var game = await _commandDispatcher.Dispatch<MakeNewGame, MakeNewGame.Result>(command, cancellation);
         return Created($"{GamesModule.BasePath}/games/{game.GameId}", game);
     }
+    
+    [HttpPost("{gameId:Guid}")]
+    public ActionResult<string> JoinGame(Guid gameId, JoinGameApi command)
+    {
+        _games.JoinGame(gameId, command.playerId);
+
+        return new EmptyResult();
+    }
+
+    public record JoinGameApi(Guid playerId);
 }
