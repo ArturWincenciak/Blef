@@ -6,13 +6,9 @@ internal sealed class JoinHandler : ICommandHandler<Join>
 {
     private readonly Domain.Games _games;
 
-    public JoinHandler(Domain.Games games)
-    {
+    public JoinHandler(Domain.Games games) =>
         _games = games;
-    }
 
-    public Task Handle(Join command, CancellationToken cancellation)
-    {
-        throw new NotImplementedException();
-    }
+    public Task Handle(Join command, CancellationToken cancellation) =>
+        _games.Join(command.GameId, command.PlayerId);
 }
