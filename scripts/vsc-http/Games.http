@@ -1,0 +1,6 @@
+@api = https://localhost:49153 
+@games-module = games-module
+
+### Make a Game 
+POST {{api}}/{{games-module}}/games
+Content-Type: application/json
