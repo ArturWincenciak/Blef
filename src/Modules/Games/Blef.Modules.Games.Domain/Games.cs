@@ -10,4 +10,9 @@ internal sealed class Games
         _games.Add(newGameId);
         return newGameId;
     }
+
+    public Task Join(Guid gameId, Guid playerId)
+    {
+        throw new NotImplementedException();
+    }
 }
