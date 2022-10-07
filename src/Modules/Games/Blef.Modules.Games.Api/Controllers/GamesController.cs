@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Blef.Modules.Games.Application.Commands;
+using Blef.Shared.Abstractions.Commands;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers;
@@ -6,12 +7,18 @@ namespace Blef.Modules.Games.Api.Controllers;
 [Route(GamesModule.BasePath)]
 internal sealed class GamesController : GamesControllerBase
 {
-    private static readonly Blef.Modules.Games.Application.Games _games = new();
+    private readonly ICommandDispatcher _commandDispatcher;
+
+    public GamesController(ICommandDispatcher commandDispatcher)
+    {
+        _commandDispatcher = commandDispatcher;
+    }
 
     [HttpPost]
-    public ActionResult<string> CreateGame() =>
-        JsonSerializer.Serialize(new
-        {
-            gameId = _games.CreateGame()
-        }, new JsonSerializerOptions { WriteIndented = true });
+    public async Task<IActionResult> MakeGame(CancellationToken cancellation)
+    {
+        var command = new MakeNewGame();
+        var game = await _commandDispatcher.Dispatch<MakeNewGame, MakeNewGame.Result>(command, cancellation);
+        return Created($"/games/{game.GameId}", game);
+    }
 }
