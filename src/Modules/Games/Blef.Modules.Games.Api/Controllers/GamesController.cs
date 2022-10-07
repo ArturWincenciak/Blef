@@ -16,18 +16,17 @@ internal sealed class GamesController : GamesControllerBase
     [HttpPost]
     public async Task<IActionResult> MakeGame(CancellationToken cancellation)
     {
-        var command = new MakeNewGame();
-        var game = await _commandDispatcher.Dispatch<MakeNewGame, MakeNewGame.Result>(command, cancellation);
+        var cmd = new MakeNewGame();
+        var game = await _commandDispatcher.Dispatch<MakeNewGame, MakeNewGame.Result>(cmd, cancellation);
         return Created($"{GamesModule.BasePath}/games/{game.GameId}", game);
     }
-    
-    [HttpPost("{gameId:Guid}")]
-    public ActionResult<string> JoinGame(Guid gameId, JoinGameApi command)
+
+    public record JoinGameApi(Guid PlayerId);
+    [HttpPost("{gameId:Guid}/players")]
+    public async Task<IActionResult> JoinGame(Guid gameId, JoinGameApi command, CancellationToken cancellation)
     {
-        _games.JoinGame(gameId, command.playerId);
-
-        return new EmptyResult();
+        var cmd = new Join(gameId, command.PlayerId);
+        await _commandDispatcher.Dispatch(cmd, cancellation);
+        return Created($"{GamesModule.BasePath}/games/{gameId}/players/{command.PlayerId}", null);
     }
-
-    public record JoinGameApi(Guid playerId);
 }
