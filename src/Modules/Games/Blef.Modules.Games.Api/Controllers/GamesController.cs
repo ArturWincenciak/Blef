@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers;
 
-[Route(GamesModule.BasePath)]
 internal sealed class GamesController : GamesControllerBase
 {
     private readonly ICommandDispatcher _commandDispatcher;
@@ -19,6 +18,6 @@ internal sealed class GamesController : GamesControllerBase
     {
         var command = new MakeNewGame();
         var game = await _commandDispatcher.Dispatch<MakeNewGame, MakeNewGame.Result>(command, cancellation);
-        return Created($"/games/{game.GameId}", game);
+        return Created($"{GamesModule.BasePath}/games/{game.GameId}", game);
     }
 }
