@@ -2,17 +2,15 @@ namespace Blef.Modules.Games.Domain;
 
 internal sealed class Games
 {
-    private readonly List<Guid> _games = new();
+    private readonly Dictionary<Guid, Game> _games = new();
 
     public Guid MakeNewGame()
     {
         var newGameId = Guid.NewGuid();
-        _games.Add(newGameId);
+        _games.Add(newGameId, new());
         return newGameId;
     }
 
-    public Task Join(Guid gameId, Guid playerId)
-    {
-        throw new NotImplementedException();
-    }
+    public Game GetExistingGame(Guid gameId) =>
+        _games[gameId];
 }
