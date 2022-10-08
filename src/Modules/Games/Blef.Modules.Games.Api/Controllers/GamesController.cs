@@ -26,7 +26,6 @@ internal sealed class GamesController : GamesControllerBase
     }
 
     public record JoinGameApi(Guid PlayerId);
-
     [HttpPost("{gameId:Guid}/players")]
     public async Task<IActionResult> JoinGame(Guid gameId, JoinGameApi command, CancellationToken cancellation)
     {
@@ -42,7 +41,7 @@ internal sealed class GamesController : GamesControllerBase
         var cards = await _queryDispatcher.Dispatch<GetPlayerCards, GetPlayerCards.Result>(query, cancellation);
         return Ok(cards);
     }
-    
+
     public record BidApi(string PokerHand);
     [HttpPost("{gameId:Guid}/players/{playerId:Guid}/bids")]
     public async Task<IActionResult> JoinGame(Guid gameId, Guid playerId, BidApi command, CancellationToken cancellation)
@@ -67,5 +66,4 @@ internal sealed class GamesController : GamesControllerBase
         var looser = await _queryDispatcher.Dispatch<GetLooser, GetLooser.Result>(query, cancellation);
         return Ok(looser);
     }
-    
 }
