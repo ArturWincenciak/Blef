@@ -18,7 +18,7 @@ internal sealed class Game
 
     public void Bid(Guid playerId, string pokerHand)
     {
-        // TOOD: check if bid is better than current one
+        // TODO: check if bid is better than current one
         _players[playerId].Bid(pokerHand);
     }
 
