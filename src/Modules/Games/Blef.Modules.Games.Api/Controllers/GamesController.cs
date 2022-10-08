@@ -52,4 +52,20 @@ internal sealed class GamesController : GamesControllerBase
         return Created($"{GamesModule.BasePath}/games/{gameId}/players/{playerId}/bids", null);
     }
 
+    [HttpPost("{gameId:Guid}/players/{playerId:Guid}/checks")]
+    public async Task<IActionResult> CheckBid(Guid gameId, Guid playerId, CancellationToken cancellation)
+    {
+        var cmd = new Check(gameId, playerId);
+        await _commandDispatcher.Dispatch(cmd, cancellation);
+        return Created($"{GamesModule.BasePath}/games/{gameId}/players/{playerId}/checks", null);
+    }
+
+    [HttpGet("{gameId:Guid}/looser")]
+    public async Task<IActionResult> GetLooser(Guid gameId, CancellationToken cancellation)
+    {
+        var query = new GetLooser(gameId);
+        var looser = await _queryDispatcher.Dispatch<GetLooser, GetLooser.Result>(query, cancellation);
+        return Ok(looser);
+    }
+    
 }
