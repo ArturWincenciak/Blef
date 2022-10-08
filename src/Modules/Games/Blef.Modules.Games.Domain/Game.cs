@@ -3,7 +3,7 @@ namespace Blef.Modules.Games.Domain;
 internal sealed class Game
 {
     private readonly Dictionary<Guid, Player> _players = new();
-    private Guid? _looser;
+    private Guid _looser;
 
     public void Join(Guid playerId)
     {
@@ -30,7 +30,7 @@ internal sealed class Game
         _looser = playerId;
     }
 
-    public Guid? GetLooser()
+    public Guid GetLooser()
     {
         return _looser;
     }
