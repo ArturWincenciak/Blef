@@ -6,9 +6,9 @@ internal sealed class Games
 
     public Guid MakeNewGame()
     {
-        var newGameId = Guid.NewGuid();
-        _games.Add(newGameId, new());
-        return newGameId;
+        var game = Game.Create();
+        _games.Add(game.Id, game);
+        return game.Id;
     }
 
     public Game GetExistingGame(Guid gameId) =>
