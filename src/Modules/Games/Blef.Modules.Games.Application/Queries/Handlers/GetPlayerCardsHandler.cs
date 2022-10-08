@@ -4,9 +4,17 @@ using Blef.Shared.Abstractions.Queries;
 
 internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetPlayerCards.Result>
 {
+    private readonly Games _games;
+
+    public GetPlayerCardsHandler(Games games)
+    {
+        _games = games;
+    }
+
     public Task<GetPlayerCards.Result> Handle(GetPlayerCards query)
     {
-        var card = new Card("Ace", "Diamonds");
-        return Task.FromResult(new GetPlayerCards.Result(new[] { card }));
+        var game = _games.GetExistingGame(query.GameId);
+        Card[] cards = game.GetCards(query.PlayerId);
+        return Task.FromResult(new GetPlayerCards.Result(cards));
     }
 }
