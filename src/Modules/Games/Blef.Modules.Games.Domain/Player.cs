@@ -2,7 +2,6 @@ namespace Blef.Modules.Games.Domain;
 
 public class Player
 {
-    private bool _didPlayerInitiateCheck;
     private readonly List<string> _bids = new();
     public Card[] DealtCards { get; }
 
@@ -21,8 +20,8 @@ public class Player
         return _bids[^1];
     }
 
-    public void CheckPreviousBid()
+    public void CheckLastBid()
     {
-        _didPlayerInitiateCheck = true;
+        throw new NotImplementedException();
     }
 }
