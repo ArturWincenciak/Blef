@@ -1,4 +1,4 @@
-namespace Blef.Modules.Games.Domain;
+namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Game
 {
@@ -8,12 +8,12 @@ internal sealed class Game
     public Guid Id { get; init; }
 
     public static Game Create() =>
-        new() {Id = Guid.NewGuid()};
+        new() { Id = Guid.NewGuid() };
 
     public void Join(Guid playerId)
     {
         var card = new Card("Ace", "Diamonds");
-        _players.Add(playerId, new Player(new[] {card}));
+        _players.Add(playerId, new Player(new[] { card }));
     }
 
     public Card[] GetCards(Guid playerId)

@@ -1,4 +1,4 @@
-namespace Blef.Modules.Games.Domain;
+namespace Blef.Modules.Games.Domain.Entities;
 
 public class Player
 {

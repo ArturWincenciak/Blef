@@ -1,16 +1,15 @@
+using Blef.Modules.Games.Domain.Entities;
+using Blef.Modules.Games.Domain.Repositories;
+
 namespace Blef.Modules.Games.Domain;
 
-internal sealed class Games
+internal sealed class Games : IGamesRepository
 {
     private readonly Dictionary<Guid, Game> _games = new();
 
-    public Guid MakeNewGame()
-    {
-        var game = Game.Create();
+    public void Add(Game game) =>
         _games.Add(game.Id, game);
-        return game.Id;
-    }
 
-    public Game GetExistingGame(Guid gameId) =>
+    public Game Get(Guid gameId) =>
         _games[gameId];
 }
