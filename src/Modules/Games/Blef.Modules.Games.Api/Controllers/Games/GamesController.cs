@@ -1,12 +1,13 @@
-﻿using Blef.Modules.Games.Application.Commands;
+﻿using Blef.Modules.Games.Api.Controllers.Games.Commands;
+using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Blef.Modules.Games.Api.Controllers;
+namespace Blef.Modules.Games.Api.Controllers.Games;
 
-internal sealed class GamesController : GamesControllerBase
+internal sealed class GamesController : ModuleControllerBase
 {
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
@@ -65,6 +66,3 @@ internal sealed class GamesController : GamesControllerBase
         return Ok(looser);
     }
 }
-
-public record JoinGameApi(Guid PlayerId);
-public record BidApi(string PokerHand);
