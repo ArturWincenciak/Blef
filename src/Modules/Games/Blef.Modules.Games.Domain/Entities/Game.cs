@@ -5,7 +5,7 @@ internal sealed class Game
     private readonly Dictionary<Guid, Player> _players = new();
     private Guid _looser;
 
-    public Guid Id { get; init; }
+    public Guid Id { get; private init; }
 
     public static Game Create() =>
         new() { Id = Guid.NewGuid() };
