@@ -1,6 +1,17 @@
-@api = https://localhost:49153 
-@games-module = games-module
+@host = https://localhost:49153 
+@module = games-module
+@api = {{host}}/{{module}}
 
-### Make a Game 
-POST {{api}}/{{games-module}}/games
+### Make a game
+@gameId = {{make_game.response.body.gameId}}
+# @name make_game
+POST {{api}}/games
 Content-Type: application/json
+
+### Join game
+POST {{api}}/games/{{gameId}}/players
+Content-Type: application/json
+
+{
+    "playerId": "{{$guid}}"
+}
