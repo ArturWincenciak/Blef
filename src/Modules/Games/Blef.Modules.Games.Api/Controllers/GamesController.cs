@@ -42,4 +42,14 @@ internal sealed class GamesController : GamesControllerBase
         var cards = await _queryDispatcher.Dispatch<GetPlayerCards, GetPlayerCards.Result>(query, cancellation);
         return Ok(cards);
     }
+    
+    public record BidApi(string PokerHand);
+    [HttpPost("{gameId:Guid}/players/{playerId:Guid}/bids")]
+    public async Task<IActionResult> JoinGame(Guid gameId, Guid playerId, BidApi command, CancellationToken cancellation)
+    {
+        var cmd = new Bid(gameId, playerId, command.PokerHand);
+        await _commandDispatcher.Dispatch(cmd, cancellation);
+        return Created($"{GamesModule.BasePath}/games/{gameId}/players/{playerId}/bids", null);
+    }
+
 }
