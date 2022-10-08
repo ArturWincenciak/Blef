@@ -25,7 +25,6 @@ internal sealed class GamesController : GamesControllerBase
         return Created($"{GamesModule.BasePath}/games/{game.GameId}", game);
     }
 
-    public record JoinGameApi(Guid PlayerId);
     [HttpPost("{gameId:Guid}/players")]
     public async Task<IActionResult> JoinGame(Guid gameId, JoinGameApi command, CancellationToken cancellation)
     {
@@ -42,7 +41,6 @@ internal sealed class GamesController : GamesControllerBase
         return Ok(cards);
     }
 
-    public record BidApi(string PokerHand);
     [HttpPost("{gameId:Guid}/players/{playerId:Guid}/bids")]
     public async Task<IActionResult> JoinGame(Guid gameId, Guid playerId, BidApi command, CancellationToken cancellation)
     {
@@ -67,3 +65,6 @@ internal sealed class GamesController : GamesControllerBase
         return Ok(looser);
     }
 }
+
+public record JoinGameApi(Guid PlayerId);
+public record BidApi(string PokerHand);
