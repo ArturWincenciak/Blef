@@ -1,17 +1,18 @@
-﻿using Blef.Shared.Abstractions.Commands;
+﻿using Blef.Modules.Games.Domain.Repositories;
+using Blef.Shared.Abstractions.Commands;
 
 namespace Blef.Modules.Games.Application.Commands.Handlers;
 
 internal sealed class BidHandler : ICommandHandler<Bid>
 {
-    private readonly Domain.Games _games;
+    private readonly IGamesRepository _games;
 
-    public BidHandler(Domain.Games games) =>
+    public BidHandler(IGamesRepository games) =>
         _games = games;
 
     public Task Handle(Bid command, CancellationToken cancellation)
     {
-        var game = _games.GetExistingGame(command.GameId);
+        var game = _games.Get(command.GameId);
         game.Bid(command.PlayerId, command.PokerHand);
         return Task.CompletedTask;
     }

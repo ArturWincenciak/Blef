@@ -1,4 +1,4 @@
-using Blef.Modules.Games.Domain;
+using Blef.Modules.Games.Domain.Entities;
 using Blef.Shared.Abstractions.Queries;
 
 namespace Blef.Modules.Games.Application.Queries;
