@@ -9,9 +9,31 @@ POST {{api}}/games
 Content-Type: application/json
 
 ### Join game
+@playerLocation = {{join_game.response.headers.Location}}
+# @name join_game
 POST {{api}}/games/{{gameId}}/players
 Content-Type: application/json
 
 {
     "playerId": "{{$guid}}"
 }
+
+### Get player cards
+GET {{host}}/{{playerLocation}}/cards
+Content-Type: application/json
+
+### Bid
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "todo:some-bid"
+}
+
+### Check
+POST {{host}}/{{playerLocation}}/checks
+Content-Type: application/json
+
+### Get looser
+GET {{api}}/games/{{gameId}}/looser
+Content-Type: application/json
