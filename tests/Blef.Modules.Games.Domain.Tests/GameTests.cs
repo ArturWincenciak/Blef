@@ -35,4 +35,13 @@ public class GameTests
         _game.Bid(_playerId, King);
         Assert.Throws<Exception>(() => _game.Bid(_playerId, King));
     }
+
+    [Fact]
+    public void Should_not_join_game_after_it_was_started()
+    {
+        _game.Bid(_playerId, King);
+        
+        var nextPlayer = Guid.NewGuid();
+        Assert.Throws<Exception>(() => _game.Join(nextPlayer));
+    }
 }

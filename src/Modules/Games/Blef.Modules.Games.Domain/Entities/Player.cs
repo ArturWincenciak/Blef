@@ -3,10 +3,12 @@ namespace Blef.Modules.Games.Domain.Entities;
 public class Player
 {
     private readonly List<string> _bids = new();
+    public Guid Id { get; }
     public Card[] DealtCards { get; }
 
-    public Player(Card[] dealtCards)
+    public Player(Guid id, Card[] dealtCards)
     {
+        Id = id;
         DealtCards = dealtCards;
     }
 
