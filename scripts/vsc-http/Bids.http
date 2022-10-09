@@ -1,0 +1,35 @@
+@host = https://localhost:49153 
+@module = games-module
+@api = {{host}}/{{module}}
+
+### Make a game
+@gameId = {{make_game.response.body.gameId}}
+# @name make_game
+POST {{api}}/games
+Content-Type: application/json
+
+### Join game
+@playerLocation = {{join_game.response.headers.Location}}
+# @name join_game
+POST {{api}}/games/{{gameId}}/players
+Content-Type: application/json
+
+{
+    "playerId": "{{$guid}}"
+}
+
+### Bid Jack
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "one-of-a-kind:Jack"
+}
+
+### Bid King
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "one-of-a-kind:King"
+}
