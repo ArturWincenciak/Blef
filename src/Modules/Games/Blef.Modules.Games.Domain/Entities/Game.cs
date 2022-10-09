@@ -3,8 +3,9 @@ namespace Blef.Modules.Games.Domain.Entities;
 public sealed class Game
 {
     private readonly Dictionary<Guid, Player> _players = new();
-    private Guid _looser;
+    private Guid? _looser;
     private string? _lastBid;
+    private readonly DealtCards _dealtCards = new();
 
     public Guid Id { get; private init; }
 
@@ -13,8 +14,10 @@ public sealed class Game
 
     public void Join(Guid playerId)
     {
-        var card = new Card("Ace", "Diamonds");
-        _players.Add(playerId, new Player(new[] { card }));
+        var card = new Card(FaceCard.Ace, "Diamonds");
+        var cards = new[] { card };
+        _players.Add(playerId, new Player(cards));
+        _dealtCards.Add(cards);
     }
 
     public Card[] GetCards(Guid playerId)
@@ -29,6 +32,8 @@ public sealed class Game
             throw new Exception($"New bid '{pokerHand}' is not higher than last one '{_lastBid}'");
         }
 
+        // just to check that the bid is Valid.
+        PokerHand.Parse(pokerHand);
         _lastBid = pokerHand;
         _players[playerId].Bid(pokerHand);
     }
@@ -40,13 +45,32 @@ public sealed class Game
 
     public void Check(Guid playerId)
     {
-        var player = _players[playerId];
-        player.CheckLastBid();
-        // TODO: #66 Play with 2 players
-        _looser = playerId;
+        if (_looser != null)
+        {
+            throw new Exception("Cannot check again, game is already over");
+        }
+        
+        if (_lastBid == null)
+        {
+            throw new Exception("There is no bid to check it");
+        }
+        
+        if (_dealtCards.IsBidFulfilled(_lastBid))
+        {
+            _looser = playerId;
+        }
+        else
+        {
+            // TODO: #66 Play with 2 players
+            // _looser = previousPlayerId;
+            _looser = playerId;
+        }
+        
+        // TODO: it is only for statistics no need to call it in logic
+        // player.CheckLastBid();
     }
 
-    public Guid GetLooser()
+    public Guid? GetLooser()
     {
         return _looser;
     }

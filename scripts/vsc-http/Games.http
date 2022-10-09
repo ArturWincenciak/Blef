@@ -27,7 +27,7 @@ POST {{host}}/{{playerLocation}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "todo:some-bid"
+    "pokerHand": "one-of-a-kind:Jack"
 }
 
 ### Check
