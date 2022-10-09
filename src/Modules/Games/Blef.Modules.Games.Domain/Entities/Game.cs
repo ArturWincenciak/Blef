@@ -1,9 +1,10 @@
 namespace Blef.Modules.Games.Domain.Entities;
 
-internal sealed class Game
+public sealed class Game
 {
     private readonly Dictionary<Guid, Player> _players = new();
     private Guid _looser;
+    private string? _lastBid;
 
     public Guid Id { get; private init; }
 
@@ -23,8 +24,18 @@ internal sealed class Game
 
     public void Bid(Guid playerId, string pokerHand)
     {
-        // TODO: #67 Check if bid is better than current one
+        if (_lastBid != null && NewBidIsNotHigher(_lastBid, pokerHand))
+        {
+            throw new Exception($"New bid '{pokerHand}' is not higher than last one '{_lastBid}'");
+        }
+
+        _lastBid = pokerHand;
         _players[playerId].Bid(pokerHand);
+    }
+
+    private bool NewBidIsNotHigher(string lastBid, string newBid)
+    {
+        return Bids.Compare(lastBid, newBid) <= 0;
     }
 
     public void Check(Guid playerId)

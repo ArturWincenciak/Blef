@@ -21,4 +21,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\Games\Blef.Modules.Games.Domain\Blef.Modules.Games.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
