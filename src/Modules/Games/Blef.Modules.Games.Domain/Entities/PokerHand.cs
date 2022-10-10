@@ -18,6 +18,8 @@ public record PokerHand(FaceCard FaceCard)
     {
         return faceCard.ToLower() switch
         {
+            "nine" => FaceCard.Nine,
+            "ten" => FaceCard.Ten,
             "jack" => FaceCard.Jack,
             "queen" => FaceCard.Queen,
             "king" => FaceCard.King,
