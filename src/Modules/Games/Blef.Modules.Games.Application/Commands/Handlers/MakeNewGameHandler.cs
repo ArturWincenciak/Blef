@@ -7,13 +7,17 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 internal sealed class MakeNewGameHandler : ICommandHandler<MakeNewGame, MakeNewGame.Result>
 {
     private readonly IGamesRepository _games;
+    private readonly DeckGenerator _deckGenerator;
 
-    public MakeNewGameHandler(IGamesRepository games) =>
+    public MakeNewGameHandler(IGamesRepository games, DeckGenerator deckGenerator)
+    {
         _games = games;
+        _deckGenerator = deckGenerator;
+    }
 
     public async Task<MakeNewGame.Result> Handle(MakeNewGame command, CancellationToken cancellation)
     {
-        var game = Game.Create();
+        var game = Game.Create(_deckGenerator.GetFullDeck());
         _games.Add(game);
         var result = new MakeNewGame.Result(game.Id);
         return await Task.FromResult(result);
