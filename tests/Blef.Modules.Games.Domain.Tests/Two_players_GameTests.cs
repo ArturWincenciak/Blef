@@ -4,17 +4,21 @@ namespace Blef.Modules.Games.Domain.Tests;
 
 public class Two_players_GameTests
 {
-    // TODO: #77 update tests after: Deal cards from the Deck
-    
     private const string King = "one-of-a-kind:King";
     private const string Jack = "one-of-a-kind:Jack";
 
-    private readonly Game _game = Game.Create();
+    private readonly Game _game;
     private readonly Guid _firstPlayer = Guid.NewGuid();
     private readonly Guid _secondPlayer = Guid.NewGuid();
 
     public Two_players_GameTests()
     {
+        var deckStub = new DeckStub(new Card[]
+        {
+            new(FaceCard.King, Suit.Diamonds),
+            new(FaceCard.Ace, Suit.Diamonds),
+        });
+        _game = Game.Create(deckStub);
         _game.Join(_firstPlayer);
         _game.Join(_secondPlayer);
     }

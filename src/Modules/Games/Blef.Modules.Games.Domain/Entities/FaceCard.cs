@@ -2,7 +2,9 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 public enum FaceCard : int
 {
-    Jack = 3,
+    Nine = 1,
+    Ten,
+    Jack,
     Queen,
     King,
     Ace

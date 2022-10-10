@@ -7,11 +7,18 @@ public sealed class Game
     private string? _lastBid;
     private readonly DealtCards _dealtCards = new();
     private bool _isGameStarted;
+    private readonly IDeck _deck;
 
-    public Guid Id { get; private init; }
+    public Guid Id { get; }
 
-    public static Game Create() =>
-        new() { Id = Guid.NewGuid() };
+    private Game(Guid id, IDeck deck)
+    {
+        Id = id;
+        _deck = deck;
+    }
+
+    public static Game Create(IDeck deck) =>
+        new(Guid.NewGuid(), deck);
 
     public void Join(Guid playerId)
     {
@@ -30,9 +37,7 @@ public sealed class Game
             throw new Exception($"Player '{playerId}' already joined the game");
         }
 
-        // TODO: #77 Deal cards from the Deck, temporary simulation of dealing different cards
-        var faceCard = _players.Count == 1 ? FaceCard.Ace : FaceCard.King;
-        var card = new Card(faceCard, "Diamonds");
+        var card = _deck.DealCard();
         var cards = new[] { card };
         _players.Add(new Player(playerId, cards));
         _dealtCards.Add(cards);
