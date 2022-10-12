@@ -14,6 +14,7 @@ internal static class Extensions
     internal static IServiceCollection AddInfrastructure(this IServiceCollection services) =>
         services
             .AddSingleton<IGamesRepository, GamesRepository>()
+            .AddSingleton<ITournamentsRepository, TournamentsRepository>()
             .AddSingleton<RandomnessProvider>()
             .AddSingleton<DeckGenerator>()
             .AddApplication();
