@@ -1,0 +1,19 @@
+@host = https://localhost:49153 
+@module = games-module
+@api = {{host}}/{{module}}
+
+### Make a tournament
+@tournamentId = {{make_tournament.response.body.tournamentId}}
+# @name make_tournament
+POST {{api}}/tournaments
+Content-Type: application/json
+
+### Join tournament
+@playerLocation = {{join_tournament.response.headers.Location}}
+# @name join_tournament
+POST {{api}}/tournaments/{{tournamentId}}/players
+Content-Type: application/json
+
+{
+    "playerId": "{{$guid}}"
+}
