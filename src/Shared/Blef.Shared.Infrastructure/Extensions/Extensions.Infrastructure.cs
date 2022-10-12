@@ -33,6 +33,10 @@ internal static partial class Extensions
             .UseTracing()
             .UseErrorHandling()
             .UseRouting()
+            .UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader())
             .UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
