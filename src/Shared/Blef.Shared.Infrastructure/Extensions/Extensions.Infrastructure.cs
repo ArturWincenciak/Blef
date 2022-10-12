@@ -21,8 +21,8 @@ internal static partial class Extensions
         IEnumerable<IModule> modules, IEnumerable<Assembly> assemblies) =>
         services
             .AddControllers(configuration)
-            .AddTracing()
-            .AddErrorHandling()
+            // .AddTracing()
+            // .AddErrorHandling()
             .AddModuleInfo(modules)
             .AddSwagger()
             .AddCommands(assemblies)
@@ -30,8 +30,8 @@ internal static partial class Extensions
 
     public static IApplicationBuilder UseInfrastructure(this WebApplication application) =>
         application
-            .UseTracing()
-            .UseErrorHandling()
+            // .UseTracing()
+            // .UseErrorHandling()
             .UseRouting()
             .UseEndpoints(endpoints =>
             {
