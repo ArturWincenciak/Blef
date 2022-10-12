@@ -43,7 +43,7 @@ internal sealed class GamesController : ModuleControllerBase
     }
 
     [HttpPost("{gameId:Guid}/players/{playerId:Guid}/bids")]
-    public async Task<IActionResult> JoinGame(Guid gameId, Guid playerId, BidApi command, CancellationToken cancellation)
+    public async Task<IActionResult> Bid(Guid gameId, Guid playerId, BidApi command, CancellationToken cancellation)
     {
         var cmd = new Bid(gameId, playerId, command.PokerHand);
         await _commandDispatcher.Dispatch(cmd, cancellation);
