@@ -31,4 +31,12 @@ internal sealed class TournamentsController : ModuleControllerBase
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created($"{GamesModule.BasePath}/tournaments/{tournamentId}/players/{command.PlayerId}", null);
     }
+
+    [HttpPost("{tournamentId:Guid}/start")]
+    public async Task<IActionResult> StartTournament(Guid tournamentId, CancellationToken cancellation)
+    {
+        var cmd = new StartTournament(tournamentId);
+        await _commandDispatcher.Dispatch(cmd, cancellation);
+        return Created($"{GamesModule.BasePath}/tournaments/{tournamentId}/games/current", null);
+    }
 }

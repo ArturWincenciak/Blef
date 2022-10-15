@@ -37,4 +37,10 @@ public class Tournament
 
         _players.Add(playerId);
     }
+
+    public void Start()
+    {
+        _isTournamentStarted = true;
+        // TODO: #81 create first game for tournament
+    }
 }
