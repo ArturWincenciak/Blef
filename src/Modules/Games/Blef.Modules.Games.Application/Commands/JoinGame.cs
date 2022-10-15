@@ -2,4 +2,4 @@
 
 namespace Blef.Modules.Games.Application.Commands;
 
-public sealed record Join(Guid GameId, Guid PlayerId) : ICommand;
+public sealed record JoinGame(Guid GameId, Guid PlayerId) : ICommand;

@@ -3,14 +3,14 @@ using Blef.Shared.Abstractions.Commands;
 
 namespace Blef.Modules.Games.Application.Commands.Handlers;
 
-internal sealed class JoinHandler : ICommandHandler<Join>
+internal sealed class JoinGameHandler : ICommandHandler<JoinGame>
 {
     private readonly IGamesRepository _games;
 
-    public JoinHandler(IGamesRepository games) =>
+    public JoinGameHandler(IGamesRepository games) =>
         _games = games;
 
-    public Task Handle(Join command, CancellationToken cancellation)
+    public Task Handle(JoinGame command, CancellationToken cancellation)
     {
         var game = _games.Get(command.GameId);
         game.Join(command.PlayerId);
