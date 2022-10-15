@@ -17,3 +17,13 @@ Content-Type: application/json
 {
     "playerId": "{{$guid}}"
 }
+
+### Start tournament
+# @name start_tournament
+POST {{api}}/tournaments/{{tournamentId}}/start
+Content-Type: application/json
+
+### Get current game in tournament
+# @name start_tournament
+GET {{api}}/tournaments/{{tournamentId}}/games/current
+Content-Type: application/json
