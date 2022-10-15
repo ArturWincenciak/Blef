@@ -63,4 +63,9 @@ public class Tournament
 
         _games.Add(game);
     }
+
+    public Game GetCurrentGame()
+    {
+        return _games[^1];
+    }
 }
