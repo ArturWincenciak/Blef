@@ -6,6 +6,7 @@ public class Tournament
 {
     private readonly List<Guid> _players = new();
     private bool _isTournamentStarted;
+    private readonly List<Game> _games = new();
 
     private Tournament(Guid id)
     {
@@ -23,7 +24,7 @@ public class Tournament
         {
             throw new SimpleBlefException("Cannot join tournament that is already started");
         }
-        
+
         // TODO: check, cause probably we can handle any number. Think about upper bound like 9?
         if (_players.Count == 2)
         {
@@ -40,7 +41,26 @@ public class Tournament
 
     public void Start()
     {
+        if (_isTournamentStarted)
+        {
+            throw new SimpleBlefException("Tournament cannot be started second time");
+        }
+
         _isTournamentStarted = true;
-        // TODO: #81 create first game for tournament
+    }
+
+    public IEnumerable<Guid> GetPlayers()
+    {
+        return _players;
+    }
+
+    public void AddGame(Game game)
+    {
+        if (_isTournamentStarted == false)
+        {
+            throw new SimpleBlefException("Cannot add games for NOT started tournament");
+        }
+
+        _games.Add(game);
     }
 }
