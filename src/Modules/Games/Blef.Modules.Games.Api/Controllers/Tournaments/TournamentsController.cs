@@ -1,6 +1,8 @@
 ﻿using Blef.Modules.Games.Api.Controllers.Games.Commands;
 using Blef.Modules.Games.Application.Commands;
+using Blef.Modules.Games.Application.Queries;
 using Blef.Shared.Abstractions.Commands;
+using Blef.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers.Tournaments;
@@ -8,10 +10,12 @@ namespace Blef.Modules.Games.Api.Controllers.Tournaments;
 internal sealed class TournamentsController : ModuleControllerBase
 {
     private readonly ICommandDispatcher _commandDispatcher;
+    private readonly IQueryDispatcher _queryDispatcher;
 
-    public TournamentsController(ICommandDispatcher commandDispatcher)
+    public TournamentsController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
     {
         _commandDispatcher = commandDispatcher;
+        _queryDispatcher = queryDispatcher;
     }
 
     [HttpPost]
@@ -38,5 +42,13 @@ internal sealed class TournamentsController : ModuleControllerBase
         var cmd = new StartTournament(tournamentId);
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created($"{GamesModule.BasePath}/tournaments/{tournamentId}/games/current", null);
+    }
+
+    [HttpGet("{tournamentId:Guid}/games/current")]
+    public async Task<IActionResult> GetCurrentGame(Guid tournamentId, CancellationToken cancellation)
+    {
+        var query = new GetCurrentGame(tournamentId);
+        var gameId = await _queryDispatcher.Dispatch<GetCurrentGame, GetCurrentGame.Result>(query, cancellation);
+        return Ok(gameId);
     }
 }
