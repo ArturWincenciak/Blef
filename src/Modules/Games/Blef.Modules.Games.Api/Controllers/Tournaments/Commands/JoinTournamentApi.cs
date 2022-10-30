@@ -1,3 +1,3 @@
-﻿namespace Blef.Modules.Games.Api.Controllers.Games.Commands;
+﻿namespace Blef.Modules.Games.Api.Controllers.Tournaments.Commands;
 
 public record JoinTournamentApi(Guid PlayerId);
