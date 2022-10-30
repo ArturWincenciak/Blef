@@ -22,8 +22,8 @@ internal sealed class TournamentsController : ModuleControllerBase
     public async Task<IActionResult> MakeTournament(CancellationToken cancellation)
     {
         var cmd = new MakeNewTournament();
-        var tournament =
-            await _commandDispatcher.Dispatch<MakeNewTournament, MakeNewTournament.Result>(cmd, cancellation);
+        var tournament = await _commandDispatcher
+            .Dispatch<MakeNewTournament, MakeNewTournament.Result>(cmd, cancellation);
         return Created($"{GamesModule.BasePath}/tournaments/{tournament.TournamentId}", tournament);
     }
 

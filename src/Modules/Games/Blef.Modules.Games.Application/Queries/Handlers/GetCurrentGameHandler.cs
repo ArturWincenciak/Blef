@@ -7,10 +7,8 @@ internal sealed class GetCurrentGameHandler : IQueryHandler<GetCurrentGame, GetC
 {
     private readonly ITournamentsRepository _tournaments;
 
-    public GetCurrentGameHandler(ITournamentsRepository tournaments)
-    {
+    public GetCurrentGameHandler(ITournamentsRepository tournaments) => 
         _tournaments = tournaments;
-    }
 
     public Task<GetCurrentGame.Result> Handle(GetCurrentGame query)
     {

@@ -4,7 +4,8 @@ namespace Blef.Shared.Kernel.Exceptions;
 
 public class SimpleBlefException : BlefException
 {
-    public SimpleBlefException(string message) : base(message, message, null)
+    public SimpleBlefException(string message) 
+        : base(message, message, null)
     {
     }
 }
