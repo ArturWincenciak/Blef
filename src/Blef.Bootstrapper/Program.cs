@@ -6,8 +6,6 @@ using static Blef.Bootstrapper.ModuleLoader;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// that is test of contributing policies
-
 EnumerateFiles(
         path: builder.Environment.ContentRootPath,
         searchPattern: "*.module.json",
