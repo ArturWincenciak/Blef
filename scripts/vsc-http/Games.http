@@ -7,9 +7,9 @@
 POST {{api}}/games
 Content-Type: application/json
 
-### Join game
-@playerLocation = {{join_game.response.headers.Location}}
-# @name join_game
+### Player 1: Join game
+@playerOne = {{player_one_join_game.response.headers.Location}}
+# @name player_one_join_game
 POST {{api}}/games/{{gameId}}/players
 Content-Type: application/json
 
@@ -17,20 +17,46 @@ Content-Type: application/json
     "playerId": "{{$guid}}"
 }
 
-### Get player cards
-GET {{host}}/{{playerLocation}}/cards
+### Player 2: Join game
+@playerTwo = {{player_two_join_game.response.headers.Location}}
+# @name player_two_join_game
+POST {{api}}/games/{{gameId}}/players
 Content-Type: application/json
 
-### Bid
-POST {{host}}/{{playerLocation}}/bids
+{
+    "playerId": "{{$guid}}"
+}
+
+### Player 1: Get player cards
+GET {{host}}/{{playerOne}}/cards
+Content-Type: application/json
+
+### Player 2: Get player cards
+GET {{host}}/{{playerTwo}}/cards
+Content-Type: application/json
+
+### Player 1: Bid
+POST {{host}}/{{playerOne}}/bids
 Content-Type: application/json
 
 {
     "pokerHand": "one-of-a-kind:Jack"
 }
 
-### Check
-POST {{host}}/{{playerLocation}}/checks
+### Player 2: Bid
+POST {{host}}/{{playerTwo}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "one-of-a-kind:King"
+}
+
+### Player 1: Check
+POST {{host}}/{{playerOne}}/checks
+Content-Type: application/json
+
+### Player 2: Check
+POST {{host}}/{{playerTwo}}/checks
 Content-Type: application/json
 
 ### Get looser
