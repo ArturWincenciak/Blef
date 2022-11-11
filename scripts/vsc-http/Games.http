@@ -27,6 +27,20 @@ Content-Type: application/json
     "playerId": "{{$guid}}"
 }
 
+# Face cards translation
+# - 1 means 'nine'
+# - 2 means 'ten'
+# - 3 means 'jack'
+# - 4 means 'queen'
+# - 5 means 'king'
+# - 6 means 'ace'
+
+# Suits translation
+# - 1 means 'clubs'
+# - 2 means 'diamonds'
+# - 3 means 'hearts'
+# - 4 means 'spades'
+
 ### Player 1: Get player cards
 GET {{host}}/{{playerOne}}/cards
 Content-Type: application/json
@@ -35,12 +49,20 @@ Content-Type: application/json
 GET {{host}}/{{playerTwo}}/cards
 Content-Type: application/json
 
+# Bid poker hand options
+# - one-of-a-kind:nine
+# - one-of-a-kind:ten
+# - one-of-a-kind:jack
+# - one-of-a-kind:queen
+# - one-of-a-kind:king
+# - one-of-a-kind:ace
+
 ### Player 1: Bid
 POST {{host}}/{{playerOne}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "one-of-a-kind:Jack"
+    "pokerHand": "one-of-a-kind:nine"
 }
 
 ### Player 2: Bid
@@ -48,7 +70,7 @@ POST {{host}}/{{playerTwo}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "one-of-a-kind:King"
+    "pokerHand": "one-of-a-kind:ten"
 }
 
 ### Player 1: Check
