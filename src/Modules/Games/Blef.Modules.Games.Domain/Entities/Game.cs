@@ -1,3 +1,4 @@
+using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Shared.Kernel.Exceptions;
 
 namespace Blef.Modules.Games.Domain.Entities;
@@ -26,7 +27,7 @@ public sealed class Game
     {
         if (_isGameStarted)
         {
-            throw new SimpleBlefException("Cannot join game that is already started");
+            throw new JoinGameThatIsAlreadyStartedException(Id, playerId);
         }
         
         if (_players.Count == 2)
