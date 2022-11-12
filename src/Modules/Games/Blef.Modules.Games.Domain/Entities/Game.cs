@@ -82,7 +82,7 @@ public sealed class Game
 
         if (_lastBid == null)
         {
-            throw new Exception("There is no bid to check it");
+            throw new NoBidToCheckException(Id);
         }
 
         if (_dealtCards.IsBidFulfilled(_lastBid))
