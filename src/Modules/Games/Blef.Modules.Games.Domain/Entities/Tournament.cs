@@ -1,3 +1,4 @@
+using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Shared.Kernel.Exceptions;
 
 namespace Blef.Modules.Games.Domain.Entities;
@@ -22,7 +23,7 @@ public class Tournament
     {
         if (_isTournamentStarted)
         {
-            throw new SimpleBlefException("Cannot join tournament that is already started");
+            throw new JoinTournamentThatIsAlreadyStartedException(Id, playerId);
         }
 
         // TODO: check, cause probably we can handle any number. Think about upper bound like 9?
