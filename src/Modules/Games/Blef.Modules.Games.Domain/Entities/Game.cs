@@ -31,7 +31,7 @@ public sealed class Game
         
         if (_players.Count >= 2)
         {
-            throw new MaximumNumberOfPlayersHasBeenReachedException(Id);
+            throw new MaximumNumberOfGamePlayersHasBeenReachedException(Id);
         }
 
         if (_players.ContainsId(playerId))

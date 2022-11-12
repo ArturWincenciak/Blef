@@ -27,9 +27,9 @@ public class Tournament
         }
 
         // TODO: check, cause probably we can handle any number. Think about upper bound like 9?
-        if (_players.Count == 2)
+        if (_players.Count >= 2)
         {
-            throw new SimpleBlefException("For now only 2 players can play together in tournament");
+            throw new MaximumNumberOfTournamentPlayersHasBeenReachedException(Id);
         }
 
         if (_players.Contains(playerId))
