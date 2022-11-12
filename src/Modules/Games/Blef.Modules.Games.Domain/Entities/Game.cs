@@ -30,9 +30,9 @@ public sealed class Game
             throw new JoinGameThatIsAlreadyStartedException(Id, playerId);
         }
         
-        if (_players.Count == 2)
+        if (_players.Count >= 2)
         {
-            throw new Exception("For now only 2 players can play together");
+            throw new MaximumNumberOfPlayersHasBeenReachedException(Id);
         }
 
         if (_players.ContainsId(playerId))
