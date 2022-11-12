@@ -58,6 +58,7 @@ public sealed class Game
             throw new BidIsNotHigherThenLastOneException(Id, pokerHand, _lastBid);
         }
 
+        // TODO: decouple validation logic and parsing the poker hand (parsing contract-based)
         // just to check that the bid is Valid.
         PokerHand.Parse(pokerHand);
         
