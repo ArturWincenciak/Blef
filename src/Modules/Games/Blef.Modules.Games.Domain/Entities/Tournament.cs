@@ -26,7 +26,6 @@ public class Tournament
             throw new JoinTournamentThatIsAlreadyStartedException(Id, playerId);
         }
 
-        // TODO: check, cause probably we can handle any number. Think about upper bound like 9?
         if (_players.Count >= 2)
         {
             throw new MaximumNumberOfTournamentPlayersHasBeenReachedException(Id);
