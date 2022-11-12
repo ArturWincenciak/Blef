@@ -1,5 +1,4 @@
 using Blef.Modules.Games.Domain.Exceptions;
-using Blef.Shared.Kernel.Exceptions;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
