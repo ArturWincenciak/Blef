@@ -77,7 +77,7 @@ public sealed class Game
         if (_looser != null)
         {
             // TODO: the same validation should be added for 'Bid' command
-            throw new Exception("Cannot check again, game is already over");
+            throw new GameIsAlreadyOverException(Id);
         }
 
         if (_lastBid == null)
