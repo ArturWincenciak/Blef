@@ -16,7 +16,7 @@ public class Deck : IDeck
 
     public Card DealCard()
     {
-        if (_cards.Count <= 0)
+        if (_cards.Any() == false)
         {
             throw new InvalidOperationException("Cannot deal more cards from deck. Deck is empty");
         }
