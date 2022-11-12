@@ -33,7 +33,7 @@ public class Tournament
 
         if (_players.Contains(playerId))
         {
-            throw new SimpleBlefException($"Player '{playerId}' already joined the tournament");
+            throw new PlayerAlreadyJoinedTheTournamentException(Id, playerId);
         }
 
         _players.Add(playerId);

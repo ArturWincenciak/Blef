@@ -12,3 +12,14 @@ internal sealed class PlayerAlreadyJoinedTheGameException : BlefException
     {
     }
 }
+
+internal sealed class PlayerAlreadyJoinedTheTournamentException : BlefException
+{
+    public PlayerAlreadyJoinedTheTournamentException(Guid tournamentId, Guid playerId)
+        : base(
+            title: "Player already joined the tournament",
+            detail: $"Player '{playerId}' already joined the tournament",
+            instance: $"/tournaments/{tournamentId}")
+    {
+    }
+}
