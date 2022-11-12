@@ -1,3 +1,5 @@
+using Blef.Modules.Games.Domain.Exceptions;
+
 namespace Blef.Modules.Games.Domain.Entities;
 
 public class Players
@@ -42,7 +44,7 @@ public class Players
     {
         if (GetCurrentPlayer().Id != playerId)
         {
-            throw new Exception($"Player '{playerId}' should wait for his turn");
+            throw new ThatIsNotThisPlayerTurnNowException(playerId);
         }
         
         GetCurrentPlayer().Bid(pokerHand);
