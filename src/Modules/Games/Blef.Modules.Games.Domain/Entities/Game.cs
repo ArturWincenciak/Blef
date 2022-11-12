@@ -93,9 +93,6 @@ public sealed class Game
         {
             _looser = _players.GetPreviousPlayer().Id;
         }
-
-        // TODO: it is only for statistics no need to call it in logic
-        // player.CheckLastBid();
     }
 
     public Guid? GetLooser()
