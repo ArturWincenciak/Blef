@@ -55,7 +55,7 @@ public sealed class Game
     {
         if (_lastBid != null && NewBidIsNotHigher(_lastBid, pokerHand))
         {
-            throw new Exception($"New bid '{pokerHand}' is not higher than last one '{_lastBid}'");
+            throw new BidIsNotHigherThenLastOneException(Id, pokerHand, _lastBid);
         }
 
         // just to check that the bid is Valid.
