@@ -37,7 +37,7 @@ public sealed class Game
 
         if (_players.ContainsId(playerId))
         {
-            throw new Exception($"Player '{playerId}' already joined the game");
+            throw new PlayerAlreadyJoinedTheGameException(Id, playerId);
         }
 
         var card = _deck.DealCard();
