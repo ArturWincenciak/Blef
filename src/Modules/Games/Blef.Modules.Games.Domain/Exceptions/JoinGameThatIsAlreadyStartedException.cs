@@ -12,3 +12,14 @@ internal sealed class JoinGameThatIsAlreadyStartedException : BlefException
     {
     }
 }
+
+internal sealed class JoinTournamentThatIsAlreadyStartedException : BlefException
+{
+    public JoinTournamentThatIsAlreadyStartedException(Guid tournamentsId, Guid playerId)
+        : base(
+            title: "Cannot join tournament that is already started",
+            detail: $"Player '{playerId}' has tried to join game '{tournamentsId}' that is already started",
+            instance: $"/tournaments/{tournamentsId}")
+    {
+    }
+}
