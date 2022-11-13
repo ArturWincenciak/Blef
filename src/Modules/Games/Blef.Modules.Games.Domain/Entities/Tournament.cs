@@ -58,6 +58,8 @@ public class Tournament
     {
         if (_isTournamentStarted == false)
         {
+            // TODO: refactor needed: that exception should be neve reached, previous validation should prevent that
+            // that is not business use case domain exception (that is an internal operation exception)
             throw new SimpleBlefException("Cannot add games for NOT started tournament");
         }
 
