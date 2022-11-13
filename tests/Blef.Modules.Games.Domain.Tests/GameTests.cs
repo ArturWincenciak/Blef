@@ -1,4 +1,5 @@
 using Blef.Modules.Games.Domain.Entities;
+using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Shared.Kernel.Exceptions;
 
 namespace Blef.Modules.Games.Domain.Tests;
@@ -48,6 +49,6 @@ public class GameTests
         _game.Bid(_playerId, King);
 
         var nextPlayer = Guid.NewGuid();
-        Assert.Throws<SimpleBlefException>(() => _game.Join(nextPlayer));
+        Assert.Throws<JoinGameThatIsAlreadyStartedException>(() => _game.Join(nextPlayer));
     }
 }
