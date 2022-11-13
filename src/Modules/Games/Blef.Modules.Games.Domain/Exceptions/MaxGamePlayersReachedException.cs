@@ -2,9 +2,9 @@
 
 namespace Blef.Modules.Games.Domain.Exceptions;
 
-internal sealed class MaximumNumberOfGamePlayersHasBeenReachedException : BlefException
+internal sealed class MaxGamePlayersReachedException : BlefException
 {
-    public MaximumNumberOfGamePlayersHasBeenReachedException(Guid gameId)
+    public MaxGamePlayersReachedException(Guid gameId)
         : base(
             title: "The maximum number of game players has been reached",
             detail: "No more than 2 players can take part in the game",
@@ -13,9 +13,9 @@ internal sealed class MaximumNumberOfGamePlayersHasBeenReachedException : BlefEx
     }
 }
 
-internal sealed class MaximumNumberOfTournamentPlayersHasBeenReachedException : BlefException
+internal sealed class MaxTournamentPlayersReachedException : BlefException
 {
-    public MaximumNumberOfTournamentPlayersHasBeenReachedException(Guid tournamentId)
+    public MaxTournamentPlayersReachedException(Guid tournamentId)
         : base(
             title: "The maximum number of tournament players has been reached",
             detail: "No more than 2 players can take part in the tournament",
