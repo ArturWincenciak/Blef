@@ -43,7 +43,7 @@ public class Tournament
     {
         if (_isTournamentStarted)
         {
-            throw new SimpleBlefException("Tournament cannot be started second time");
+            throw new TournamentHasBeenAlreadyStartedException(Id);
         }
 
         _isTournamentStarted = true;
