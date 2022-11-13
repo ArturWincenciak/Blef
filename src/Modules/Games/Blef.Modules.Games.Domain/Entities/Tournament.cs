@@ -27,7 +27,7 @@ public class Tournament
 
         if (_players.Count >= 2)
         {
-            throw new MaximumNumberOfTournamentPlayersHasBeenReachedException(Id);
+            throw new MaxTournamentPlayersReachedException(Id);
         }
 
         if (_players.Contains(playerId))
