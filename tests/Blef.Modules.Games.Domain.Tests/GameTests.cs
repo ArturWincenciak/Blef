@@ -33,14 +33,14 @@ public class GameTests
     public void Should_not_accept_lower_bid()
     {
         _game.Bid(_playerId, Ace);
-        Assert.Throws<Exception>(() => _game.Bid(_playerId, King));
+        Assert.Throws<BidIsNotHigherThenLastOneException>(() => _game.Bid(_playerId, King));
     }
 
     [Fact]
     public void Should_not_accept_the_same_bid()
     {
         _game.Bid(_playerId, King);
-        Assert.Throws<Exception>(() => _game.Bid(_playerId, King));
+        Assert.Throws<BidIsNotHigherThenLastOneException>(() => _game.Bid(_playerId, King));
     }
 
     [Fact]
