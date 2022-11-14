@@ -1,3 +1,5 @@
+using Blef.Modules.Games.Domain.Entities.PokerHands;
+
 namespace Blef.Modules.Games.Domain.Entities;
 
 public class DealtCards
@@ -11,7 +13,7 @@ public class DealtCards
 
     public bool IsBidFulfilled(string lastBid)
     {
-        var pokerHand = PokerHand.Parse(lastBid);
-        return _cards.Any(x => x.FaceCard == pokerHand.FaceCard);
+        var pokerHand = PokerHandParser.Parse(lastBid);
+        return pokerHand.IsOnTable(_cards);
     }
 }

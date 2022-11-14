@@ -33,3 +33,11 @@ Content-Type: application/json
 {
     "pokerHand": "one-of-a-kind:King"
 }
+
+### Bid pair of Kings
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "pair:King"
+}
