@@ -41,3 +41,11 @@ Content-Type: application/json
 {
     "pokerHand": "pair:King"
 }
+
+### Bid two pairs of Kings and Jacks
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "two-pairs:King,Jack"
+}

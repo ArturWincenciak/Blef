@@ -13,8 +13,15 @@ public static class PokerHandParser
             "one-of-a-kind" => new HighCard(ParseFaceCard(parts[1])),
             "high-card" => new HighCard(ParseFaceCard(parts[1])),
             "pair" => new Pair(ParseFaceCard(parts[1])),
+            "two-pairs" => CreateTwoPairs(parts[1]),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
         };
+    }
+
+    private static TwoPairs CreateTwoPairs(string faceCards)
+    {
+        var faceCardParts = faceCards.Split(",");
+        return new TwoPairs(ParseFaceCard(faceCardParts[0]), ParseFaceCard(faceCardParts[1]));
     }
 
     private static FaceCard ParseFaceCard(string faceCard)

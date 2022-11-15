@@ -1,0 +1,38 @@
+﻿namespace Blef.Modules.Games.Domain.Entities.PokerHands
+{
+    public class TwoPairs : PokerHand
+    {
+        private readonly FaceCard _first;
+        private readonly FaceCard _second;
+
+        public TwoPairs(FaceCard first, FaceCard second)
+        {
+            if (first <= second)
+            {
+                throw new ArgumentException($"First pair '{first}' has to be greater than second pair '{second}'");
+            }
+
+            if (first == second)
+            {
+                throw new ArgumentException($"First pair '{first}' has to be different than second pair '{second}'");
+            }
+
+            this._first = first;
+            this._second = second;
+        }
+
+        public override bool IsOnTable(List<Card> table)
+        {
+            var firstFaceCardCount = table.Count(x => x.FaceCard == _first);
+            var secondFaceCardCount = table.Count(x => x.FaceCard == _second);
+            return firstFaceCardCount >= 2 && secondFaceCardCount >= 2;
+        }
+
+        protected override int PokerHandRank => 3;
+
+        protected override int GetInnerRank()
+        {
+            return 10 * (int)_first + (int)_second;
+        }
+    }
+}
