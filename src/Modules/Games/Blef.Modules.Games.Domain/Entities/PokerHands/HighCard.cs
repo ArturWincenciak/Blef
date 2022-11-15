@@ -9,7 +9,7 @@
             _faceCard = faceCard;
         }
 
-        public override bool IsOnTable(List<Card> table)
+        public override bool IsOnTable(IReadOnlyCollection<Card> table)
         {
             return table.Any(x => x.FaceCard == _faceCard);
         }

@@ -21,7 +21,7 @@
             this._second = second;
         }
 
-        public override bool IsOnTable(List<Card> table)
+        public override bool IsOnTable(IReadOnlyCollection<Card> table)
         {
             var firstFaceCardCount = table.Count(x => x.FaceCard == _first);
             var secondFaceCardCount = table.Count(x => x.FaceCard == _second);

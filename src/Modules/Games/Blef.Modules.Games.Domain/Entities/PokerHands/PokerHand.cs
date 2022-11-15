@@ -6,7 +6,7 @@
     /// </summary>
     public abstract class PokerHand
     {
-        public abstract bool IsOnTable(List<Card> table);
+        public abstract bool IsOnTable(IReadOnlyCollection<Card> table);
 
         public bool IsBetterThan(PokerHand otherPokerHand)
         {
