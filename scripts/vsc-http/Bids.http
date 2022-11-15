@@ -49,3 +49,19 @@ Content-Type: application/json
 {
     "pokerHand": "two-pairs:King,Jack"
 }
+
+### Bid low straight
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "low-straight"
+}
+
+### Bid high straight
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "high-straight"
+}

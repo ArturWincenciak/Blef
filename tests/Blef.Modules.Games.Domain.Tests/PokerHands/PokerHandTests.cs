@@ -19,4 +19,12 @@ public class PokerHandTests
         var twoPairs = PokerHandParser.Parse("two-pairs:ten,nine");
         Assert.True(twoPairs.IsBetterThan(pair));
     }
+
+    [Fact]
+    public void High_Straight_should_be_better_than_Low_Straight()
+    {
+        var lowStraight = PokerHandParser.Parse("low-straight");
+        var highStraight  = PokerHandParser.Parse("high-straight");
+        Assert.True(highStraight.IsBetterThan(lowStraight));
+    }
 }

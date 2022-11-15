@@ -14,6 +14,8 @@ public static class PokerHandParser
             "high-card" => new HighCard(ParseFaceCard(parts[1])),
             "pair" => new Pair(ParseFaceCard(parts[1])),
             "two-pairs" => CreateTwoPairs(parts[1]),
+            "low-straight" => new LowStraight(),
+            "high-straight" => new HighStraight(),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
         };
     }
