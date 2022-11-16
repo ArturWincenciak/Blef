@@ -4,7 +4,7 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 public class Tournament
 {
-    private readonly List<Guid> _players = new();
+    private readonly List<TournamentPlayer> _players = new();
     private bool _isTournamentStarted;
     private readonly List<Game> _games = new();
 
@@ -30,12 +30,12 @@ public class Tournament
             throw new MaxTournamentPlayersReachedException(Id);
         }
 
-        if (_players.Contains(playerId))
+        if (_players.Exists(player => player.PlayerId == playerId))
         {
             throw new PlayerAlreadyJoinedTheTournamentException(Id, playerId);
         }
 
-        _players.Add(playerId);
+        _players.Add(new TournamentPlayer(playerId));
     }
 
     public void Start()
@@ -48,7 +48,7 @@ public class Tournament
         _isTournamentStarted = true;
     }
 
-    public IEnumerable<Guid> GetPlayers()
+    public IEnumerable<TournamentPlayer> GetPlayers()
     {
         return _players;
     }
