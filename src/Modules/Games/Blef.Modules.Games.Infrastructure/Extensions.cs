@@ -17,5 +17,6 @@ internal static class Extensions
             .AddSingleton<ITournamentsRepository, TournamentsRepository>()
             .AddSingleton<RandomnessProvider>()
             .AddSingleton<DeckGenerator>()
+            .AddSingleton<Tournaments>()
             .AddApplication();
 }

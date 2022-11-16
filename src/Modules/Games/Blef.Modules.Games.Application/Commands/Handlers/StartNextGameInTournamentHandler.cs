@@ -7,42 +7,16 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 
 internal sealed class StartNextGameInTournamentHandler : ICommandHandler<StartNextGameInTournament>
 {
-    private readonly ITournamentsRepository _tournaments;
+    private readonly Tournaments _tournaments;
 
-    public StartNextGameInTournamentHandler(ITournamentsRepository tournaments, IGamesRepository games, DeckGenerator deckGenerator)
+    public StartNextGameInTournamentHandler(Tournaments tournaments)
     {
         _tournaments = tournaments;
-        _games = games;
-        _deckGenerator = deckGenerator;
     }
-
-    private readonly IGamesRepository _games;
-    private readonly DeckGenerator _deckGenerator;
 
     public Task Handle(StartNextGameInTournament command, CancellationToken cancellation)
     {
-        // check if last game is finished
-        var tournament = _tournaments.Get(command.TournamentId);
-        var currentGame = tournament.GetCurrentGame();
-        if (currentGame.GetLooser() == null)
-        {
-            throw new GameNotYetFinishedException(currentGame.Id);
-        }
-        
-        // Add more cards to Looser
-        var tournamentPlayer = tournament.GetPlayers().Single(x => x.PlayerId == currentGame.GetLooser());
-        tournamentPlayer.LooseGame();
-
-        // start next game
-        var game = Game.Create(_deckGenerator.GetFullDeck(), command.TournamentId);
-        foreach (var player in tournament.GetPlayers())
-        {
-            var cardsToDeal = player.LostGames + 1;
-            game.Join(player.PlayerId, cardsToDeal);
-        }
-
-        _games.Add(game);
-        tournament.AddGame(game);
+        _tournaments.StartNextGame(command.TournamentId);
         
         return Task.CompletedTask;
     }
