@@ -14,6 +14,17 @@ public class Deck : IDeck
         _cards = cards;
     }
 
+    public Card[] DealCards(int count)
+    {
+        List<Card> cards = new();
+        for (int i = 0; i < count; i++)
+        {
+            cards.Add(DealCard());
+        }
+
+        return cards.ToArray();
+    }
+
     public Card DealCard()
     {
         if (_cards.Any() == false)

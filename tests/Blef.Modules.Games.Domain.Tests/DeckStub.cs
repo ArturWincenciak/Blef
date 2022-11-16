@@ -18,4 +18,15 @@ public class DeckStub : IDeck
     {
         return _queue.Dequeue();
     }
+
+    public Card[] DealCards(int count)
+    {
+        List<Card> cards = new();
+        for (int i = 0; i < count; i++)
+        {
+            cards.Add(DealCard());
+        }
+
+        return cards.ToArray();
+    }
 }

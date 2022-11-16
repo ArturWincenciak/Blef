@@ -25,11 +25,16 @@ public sealed class Game
 
     public void Join(Guid playerId)
     {
+        Join(playerId, 1);
+    }
+
+    public void Join(Guid playerId, int cardsToDealCount)
+    {
         if (_isGameStarted)
         {
             throw new JoinGameThatIsAlreadyStartedException(Id, playerId);
         }
-        
+
         if (_players.Count >= 2)
         {
             throw new MaxGamePlayersReachedException(Id);
@@ -40,8 +45,7 @@ public sealed class Game
             throw new PlayerAlreadyJoinedTheGameException(Id, playerId);
         }
 
-        var card = _deck.DealCard();
-        var cards = new[] { card };
+        var cards = _deck.DealCards(cardsToDealCount);
         _players.Add(new Player(playerId, cards));
         _dealtCards.Add(cards);
     }
@@ -61,7 +65,7 @@ public sealed class Game
         // TODO: decouple validation logic and parsing the poker hand (parsing contract-based)
         // just to check that the bid is Valid.
         PokerHandParser.Parse(pokerHand);
-        
+
         _players.Bid(playerId, pokerHand);
         _isGameStarted = true;
         _lastBid = pokerHand;
@@ -96,8 +100,8 @@ public sealed class Game
         {
             _looser = _players.GetPreviousPlayer().Id;
         }
-        
-        // start new game async 
+
+        // Create event that game was finished, that event will start next game in tournament.
     }
 
     public Guid? GetLooser()
