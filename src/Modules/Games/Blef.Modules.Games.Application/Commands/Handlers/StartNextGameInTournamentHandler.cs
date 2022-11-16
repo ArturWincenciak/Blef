@@ -32,9 +32,9 @@ internal sealed class StartNextGameInTournamentHandler : ICommandHandler<StartNe
         // start next game
         // Add more cards to Looser!!!
         var game = Game.Create(_deckGenerator.GetFullDeck());
-        foreach (var playerId in tournament.GetPlayers())
+        foreach (var player in tournament.GetPlayers())
         {
-            game.Join(playerId);
+            game.Join(player.PlayerId);
         }
 
         _games.Add(game);
