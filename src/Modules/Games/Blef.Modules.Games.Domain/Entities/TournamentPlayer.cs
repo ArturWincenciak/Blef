@@ -7,7 +7,7 @@ public class TournamentPlayer
         PlayerId = playerId;
     }
 
-    public void LooseGame()
+    public void MarkLostGame()
     {
         LostGames++;
     }
