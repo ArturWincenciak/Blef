@@ -29,12 +29,16 @@ internal sealed class StartNextGameInTournamentHandler : ICommandHandler<StartNe
             throw new GameNotYetFinishedException(currentGame.Id);
         }
         
+        // Add more cards to Looser
+        var tournamentPlayer = tournament.GetPlayers().Single(x => x.PlayerId == currentGame.GetLooser());
+        tournamentPlayer.LooseGame();
+
         // start next game
-        // Add more cards to Looser!!!
         var game = Game.Create(_deckGenerator.GetFullDeck());
         foreach (var player in tournament.GetPlayers())
         {
-            game.Join(player.PlayerId);
+            var cardsToDeal = player.LostGames + 1;
+            game.Join(player.PlayerId, cardsToDeal);
         }
 
         _games.Add(game);
