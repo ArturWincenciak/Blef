@@ -11,17 +11,21 @@ public sealed class Game
     private readonly DealtCards _dealtCards = new();
     private bool _isGameStarted;
     private readonly IDeck _deck;
+    public Guid TournamentId { get; }
 
     public Guid Id { get; }
 
-    private Game(Guid id, IDeck deck)
+    private Game(Guid id, IDeck deck, Guid tournamentId)
     {
         Id = id;
         _deck = deck;
+        TournamentId = tournamentId;
     }
 
     public static Game Create(IDeck deck) =>
-        new(Guid.NewGuid(), deck);
+        Create(deck, Guid.Empty);
+    public static Game Create(IDeck deck, Guid tournamentId) =>
+        new(Guid.NewGuid(), deck, tournamentId);
 
     public void Join(Guid playerId)
     {
@@ -100,8 +104,6 @@ public sealed class Game
         {
             _looser = _players.GetPreviousPlayer().Id;
         }
-
-        // Create event that game was finished, that event will start next game in tournament.
     }
 
     public Guid? GetLooser()

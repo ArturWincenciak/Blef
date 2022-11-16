@@ -34,7 +34,7 @@ internal sealed class StartNextGameInTournamentHandler : ICommandHandler<StartNe
         tournamentPlayer.LooseGame();
 
         // start next game
-        var game = Game.Create(_deckGenerator.GetFullDeck());
+        var game = Game.Create(_deckGenerator.GetFullDeck(), command.TournamentId);
         foreach (var player in tournament.GetPlayers())
         {
             var cardsToDeal = player.LostGames + 1;
