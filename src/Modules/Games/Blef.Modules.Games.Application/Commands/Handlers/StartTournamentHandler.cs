@@ -23,7 +23,7 @@ internal sealed class StartTournamentHandler : ICommandHandler<StartTournament>
         var tournament = _tournaments.Get(command.TournamentId);
         tournament.Start();
 
-        var game = Game.Create(_deckGenerator.GetFullDeck());
+        var game = Game.Create(_deckGenerator.GetFullDeck(), command.TournamentId);
         foreach (var player in tournament.GetPlayers())
         {
             game.Join(player.PlayerId);
