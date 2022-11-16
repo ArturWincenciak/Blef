@@ -96,6 +96,8 @@ public sealed class Game
         {
             _looser = _players.GetPreviousPlayer().Id;
         }
+        
+        // start new game async 
     }
 
     public Guid? GetLooser()

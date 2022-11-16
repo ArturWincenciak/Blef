@@ -24,12 +24,12 @@ internal sealed class StartTournamentHandler : ICommandHandler<StartTournament>
         tournament.Start();
 
         var game = Game.Create(_deckGenerator.GetFullDeck());
-        _games.Add(game);
         foreach (var playerId in tournament.GetPlayers())
         {
             game.Join(playerId);
         }
 
+        _games.Add(game);
         tournament.AddGame(game);
         return Task.CompletedTask;
     }
