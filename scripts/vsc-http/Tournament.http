@@ -15,7 +15,7 @@ POST {{api}}/tournaments/{{tournamentId}}/players
 Content-Type: application/json
 
 {
-    "playerId": "{{$guid}}"
+    "playerId": "3adabc6d-d573-4b23-98bc-1c62d5bb5543"
 }
 
 ### Start tournament
@@ -24,6 +24,23 @@ POST {{api}}/tournaments/{{tournamentId}}/start
 Content-Type: application/json
 
 ### Get current game in tournament
-# @name start_tournament
+@gameId = {{get_current_game.response.body.gameId}}
+# @name get_current_game
 GET {{api}}/tournaments/{{tournamentId}}/games/current
+Content-Type: application/json
+
+### Get player cards
+GET {{host}}/games-module/games/{{gameId}}/players/3adabc6d-d573-4b23-98bc-1c62d5bb5543/cards
+Content-Type: application/json
+
+### Bid Jack
+POST {{host}}/games-module/games/{{gameId}}/players/3adabc6d-d573-4b23-98bc-1c62d5bb5543/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "one-of-a-kind:Jack"
+}
+
+### Check
+POST {{host}}/games-module/games/{{gameId}}/players/3adabc6d-d573-4b23-98bc-1c62d5bb5543/checks
 Content-Type: application/json
