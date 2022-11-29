@@ -33,3 +33,35 @@ Content-Type: application/json
 {
     "pokerHand": "one-of-a-kind:King"
 }
+
+### Bid pair of Kings
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "pair:King"
+}
+
+### Bid two pairs of Kings and Jacks
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "two-pairs:King,Jack"
+}
+
+### Bid low straight
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "low-straight"
+}
+
+### Bid high straight
+POST {{host}}/{{playerLocation}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "high-straight"
+}

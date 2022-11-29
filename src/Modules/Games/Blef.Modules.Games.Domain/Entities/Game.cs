@@ -1,3 +1,4 @@
+using Blef.Modules.Games.Domain.Entities.PokerHands;
 using Blef.Modules.Games.Domain.Exceptions;
 
 namespace Blef.Modules.Games.Domain.Entities;
@@ -59,7 +60,7 @@ public sealed class Game
 
         // TODO: decouple validation logic and parsing the poker hand (parsing contract-based)
         // just to check that the bid is Valid.
-        PokerHand.Parse(pokerHand);
+        PokerHandParser.Parse(pokerHand);
         
         _players.Bid(playerId, pokerHand);
         _isGameStarted = true;
@@ -68,7 +69,10 @@ public sealed class Game
 
     private bool NewBidIsNotHigher(string lastBid, string newBid)
     {
-        return Bids.Compare(lastBid, newBid) <= 0;
+        var lastPokerHand = PokerHandParser.Parse(lastBid);
+        var newPokerHand = PokerHandParser.Parse(newBid);
+
+        return newPokerHand.IsBetterThan(lastPokerHand) == false;
     }
 
     public void Check(Guid playerId)
