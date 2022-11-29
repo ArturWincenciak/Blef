@@ -8,7 +8,7 @@ internal sealed class MaxGamePlayersReachedException : BlefException
         : base(
             title: "The maximum number of game players has been reached",
             detail: "No more than 2 players can take part in the game",
-            instance: $"/game/{gameId}")
+            instance: $"/games/{gameId}")
     {
     }
 }

@@ -8,7 +8,7 @@ internal sealed class PlayerAlreadyJoinedTheGameException : BlefException
         : base(
             title: "Player already joined the game",
             detail: $"Player '{playerId}' already joined the game",
-            instance: $"/game/{gameId}")
+            instance: $"/games/{gameId}")
     {
     }
 }

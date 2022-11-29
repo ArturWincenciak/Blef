@@ -8,7 +8,7 @@ internal sealed class GameNotYetFinishedException : BlefException
         : base(
             title: "Game was not yet finished",
             detail: "Game must be first finished (somebody lost), before starting next game",
-            instance: $"/game/{gameId}")
+            instance: $"/games/{gameId}")
     {
     }
 }
