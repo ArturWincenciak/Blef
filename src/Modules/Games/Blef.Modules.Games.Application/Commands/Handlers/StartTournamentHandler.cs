@@ -5,12 +5,12 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 
 internal sealed class StartTournamentHandler : ICommandHandler<StartTournament>
 {
+    private readonly Tournaments _tournaments;
+
     public StartTournamentHandler(Tournaments tournaments)
     {
         _tournaments = tournaments;
     }
-
-    private readonly Tournaments _tournaments;
 
     public Task Handle(StartTournament command, CancellationToken cancellation)
     {
