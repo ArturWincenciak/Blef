@@ -16,7 +16,7 @@ internal static class Extension
             if (false == key.Contains(":module:enabled"))
                 continue;
 
-            if (false == bool.Parse(value))
+            if (false == bool.Parse(value ?? "false"))
             {
                 var splitKey = key.Split(":");
                 var moduleName = splitKey[0];
