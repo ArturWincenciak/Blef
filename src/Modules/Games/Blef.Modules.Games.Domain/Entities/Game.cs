@@ -24,19 +24,18 @@ public sealed class Game
 
     public static Game Create(IDeck deck) =>
         Create(deck, Guid.Empty);
+    
     public static Game Create(IDeck deck, Guid tournamentId) =>
         new(Guid.NewGuid(), deck, tournamentId);
 
-    public void Join(Guid playerId)
-    {
-        Join(playerId, 1);
-    }
+    public Player Join(string nick) => 
+        Join(nick, 1);
 
-    public void Join(Guid playerId, int cardsToDealCount)
+    private Player Join(string nick, int cardsToDealCount)
     {
         if (_isGameStarted)
         {
-            throw new JoinGameThatIsAlreadyStartedException(Id, playerId);
+            throw new JoinGameThatIsAlreadyStartedException(Id, nick);
         }
 
         if (_players.Count >= 2)
@@ -44,13 +43,24 @@ public sealed class Game
             throw new MaxGamePlayersReachedException(Id);
         }
 
-        if (_players.ContainsId(playerId))
+        if (_players.ContainsNick(nick))
         {
-            throw new PlayerAlreadyJoinedTheGameException(Id, playerId);
+            throw new PlayerAlreadyJoinedTheGameException(Id, nick);
         }
 
         var cards = _deck.DealCards(cardsToDealCount);
-        _players.Add(new Player(playerId, cards));
+        var player = Player.Create(nick, cards);
+        _players.Add(player);
+        _dealtCards.Add(cards);
+
+        return player;
+    }
+
+    public void Promote(TournamentPlayer tournamentPlayer, int cardsToDealCount)
+    {
+        var cards = _deck.DealCards(cardsToDealCount);
+        var player = Player.Create(tournamentPlayer, cards);
+        _players.Add(player);
         _dealtCards.Add(cards);
     }
 

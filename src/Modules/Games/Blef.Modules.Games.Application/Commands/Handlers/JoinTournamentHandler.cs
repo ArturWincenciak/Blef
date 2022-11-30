@@ -3,17 +3,17 @@ using Blef.Shared.Abstractions.Commands;
 
 namespace Blef.Modules.Games.Application.Commands.Handlers;
 
-internal sealed class JoinTournamentHandler : ICommandHandler<JoinTournament>
+internal sealed class JoinTournamentHandler : ICommandHandler<JoinTournament, JoinTournament.Result>
 {
     private readonly ITournamentsRepository _tournaments;
 
     public JoinTournamentHandler (ITournamentsRepository tournaments) =>
         _tournaments = tournaments;
 
-    public Task Handle(JoinTournament command, CancellationToken cancellation)
+    public Task<JoinTournament.Result> Handle(JoinTournament command, CancellationToken cancellation)
     {
         var tournament = _tournaments.Get(command.TournamentId);
-        tournament.Join(command.PlayerId);
-        return Task.CompletedTask;
+        var player = tournament.Join(command.Nick);
+        return Task.FromResult(new JoinTournament.Result(player.PlayerId, command.Nick));
     }
 }

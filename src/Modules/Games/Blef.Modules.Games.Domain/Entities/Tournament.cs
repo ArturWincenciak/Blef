@@ -18,11 +18,11 @@ public class Tournament
     public static Tournament Create() =>
         new(Guid.NewGuid());
 
-    public void Join(Guid playerId)
+    public TournamentPlayer Join(string nick)
     {
         if (_isTournamentStarted)
         {
-            throw new JoinTournamentThatIsAlreadyStartedException(Id, playerId);
+            throw new JoinTournamentThatIsAlreadyStartedException(Id, nick);
         }
 
         if (_players.Count >= 2)
@@ -30,12 +30,15 @@ public class Tournament
             throw new MaxTournamentPlayersReachedException(Id);
         }
 
-        if (_players.Exists(player => player.PlayerId == playerId))
+        if (_players.Exists(player => player.Nick == nick))
         {
-            throw new PlayerAlreadyJoinedTheTournamentException(Id, playerId);
+            throw new PlayerAlreadyJoinedTheTournamentException(Id, nick);
         }
 
-        _players.Add(new TournamentPlayer(playerId));
+        var player = TournamentPlayer.Create(nick);
+        _players.Add(player);
+
+        return player;
     }
 
     public void Start()
