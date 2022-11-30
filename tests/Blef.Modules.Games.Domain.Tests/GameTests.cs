@@ -10,7 +10,8 @@ public class GameTests
     private const string Ace = "one-of-a-kind:Ace";
 
     private readonly Game _game;
-    private readonly Guid _playerId = Guid.NewGuid();
+    private readonly string _playerNick = "Player Nick";
+    private readonly Guid _playerId;
 
     public GameTests()
     {
@@ -19,7 +20,8 @@ public class GameTests
             new(FaceCard.King, Suit.Diamonds),
         });
         _game = Game.Create(deckStub);
-        _game.Join(_playerId);
+        var player = _game.Join(_playerNick);
+        _playerId = player.Id;
     }
 
     [Fact]
@@ -48,7 +50,7 @@ public class GameTests
     {
         _game.Bid(_playerId, King);
 
-        var nextPlayer = Guid.NewGuid();
-        Assert.Throws<JoinGameThatIsAlreadyStartedException>(() => _game.Join(nextPlayer));
+        var nextPlayerNick = "Next Player Nick";
+        Assert.Throws<JoinGameThatIsAlreadyStartedException>(() => _game.Join(nextPlayerNick));
     }
 }

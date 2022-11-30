@@ -47,7 +47,7 @@ internal class Tournaments
         foreach (var player in tournament.GetPlayers())
         {
             var cardsToDeal = player.LostGames + 1;
-            game.Join(player.PlayerId, cardsToDeal);
+            game.Promote(player, cardsToDeal);
         }
 
         _games.Add(game);

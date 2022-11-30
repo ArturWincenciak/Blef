@@ -31,9 +31,9 @@ internal sealed class TournamentsController : ModuleControllerBase
     public async Task<IActionResult> JoinTournament(Guid tournamentId, JoinTournamentApi command,
         CancellationToken cancellation)
     {
-        var cmd = new JoinTournament(tournamentId, command.PlayerId);
-        await _commandDispatcher.Dispatch(cmd, cancellation);
-        return Created($"{GamesModule.BasePath}/tournaments/{tournamentId}/players/{command.PlayerId}", null);
+        var cmd = new JoinTournament(tournamentId, command.Nick);
+        var player = await _commandDispatcher.Dispatch<JoinTournament, JoinTournament.Result>(cmd, cancellation);
+        return Created($"{GamesModule.BasePath}/tournaments/{tournamentId}/players/{player.PlayerId}", player);
     }
 
     [HttpPost("{tournamentId:Guid}/start")]

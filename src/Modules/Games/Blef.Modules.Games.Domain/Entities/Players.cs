@@ -9,10 +9,8 @@ public class Players
 
     public int Count => _players.Count;
 
-    public bool ContainsId(Guid playerId)
-    {
-        return _players.Any(x => x.Id == playerId);
-    }
+    public bool ContainsNick(string playerNick) =>
+        _players.Any(player => player.Nick == playerNick);
 
     public void Add(Player player)
     {
