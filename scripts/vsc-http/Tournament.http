@@ -7,14 +7,24 @@
 POST {{api}}/tournaments
 Content-Type: application/json
 
-### Join tournament
-@playerLocation = {{join_tournament.response.headers.Location}}
-# @name join_tournament
+### Player 1: Join turnament
+@playerOneId = {{player_one_join_game.response.body.playerId}}
+# @name player_one_join_game
 POST {{api}}/tournaments/{{tournamentId}}/players
 Content-Type: application/json
 
 {
-    "playerId": "3adabc6d-d573-4b23-98bc-1c62d5bb5543"
+    "nick": "Player One"
+}
+
+### Player 2: Join turnament
+@playerTwoId = {{player_two_join_game.response.body.playerId}}
+# @name player_two_join_game
+POST {{api}}/tournaments/{{tournamentId}}/players
+Content-Type: application/json
+
+{
+    "nick": "Player Two"
 }
 
 ### Start tournament
@@ -28,18 +38,38 @@ Content-Type: application/json
 GET {{api}}/tournaments/{{tournamentId}}/games/current
 Content-Type: application/json
 
-### Get player cards
-GET {{host}}/games-module/games/{{gameId}}/players/3adabc6d-d573-4b23-98bc-1c62d5bb5543/cards
+### Player 1: Get player's cards
+GET {{api}}/games/{{gameId}}/players/{{playerOneId}}/cards
 Content-Type: application/json
 
-### Bid Jack
-POST {{host}}/games-module/games/{{gameId}}/players/3adabc6d-d573-4b23-98bc-1c62d5bb5543/bids
+### Player 2: Get player's cards
+GET {{api}}/games/{{gameId}}/players/{{playerTwoId}}/cards
+Content-Type: application/json
+
+### Player 1: Bid
+POST {{api}}/games/{{gameId}}/players/{{playerOneId}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "one-of-a-kind:Jack"
+    "pokerHand": "one-of-a-kind:nine"
 }
 
-### Check
-POST {{host}}/games-module/games/{{gameId}}/players/3adabc6d-d573-4b23-98bc-1c62d5bb5543/checks
+### Player 2: Bid
+POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "one-of-a-kind:ten"
+}
+
+### Player 1: Check
+POST {{api}}/games/{{gameId}}/players/{{playerOneId}}/checks
+Content-Type: application/json
+
+### Player 2: Check
+POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/checks
+Content-Type: application/json
+
+### Get looser
+GET {{api}}/games/{{gameId}}/looser
 Content-Type: application/json
