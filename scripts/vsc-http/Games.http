@@ -8,23 +8,23 @@ POST {{api}}/games
 Content-Type: application/json
 
 ### Player 1: Join game
-@playerOne = {{player_one_join_game.response.headers.Location}}
+@playerOneId = {{player_one_join_game.response.body.playerId}}
 # @name player_one_join_game
 POST {{api}}/games/{{gameId}}/players
 Content-Type: application/json
 
 {
-    "playerId": "{{$guid}}"
+    "nick": "Player One"
 }
 
 ### Player 2: Join game
-@playerTwo = {{player_two_join_game.response.headers.Location}}
+@playerTwoId = {{player_two_join_game.response.body.playerId}}
 # @name player_two_join_game
 POST {{api}}/games/{{gameId}}/players
 Content-Type: application/json
 
 {
-    "playerId": "{{$guid}}"
+    "nick": "Player Two"
 }
 
 # Face cards translation
@@ -41,12 +41,12 @@ Content-Type: application/json
 # - 3 means 'hearts'
 # - 4 means 'spades'
 
-### Player 1: Get player cards
-GET {{host}}/{{playerOne}}/cards
+### Player 1: Get player's cards
+GET {{api}}/games/{{gameId}}/players/{{playerOneId}}/cards
 Content-Type: application/json
 
-### Player 2: Get player cards
-GET {{host}}/{{playerTwo}}/cards
+### Player 2: Get player's cards
+GET {{api}}/games/{{gameId}}/players/{{playerTwoId}}/cards
 Content-Type: application/json
 
 # Bid poker hand options
@@ -58,7 +58,7 @@ Content-Type: application/json
 # - one-of-a-kind:ace
 
 ### Player 1: Bid
-POST {{host}}/{{playerOne}}/bids
+POST {{api}}/games/{{gameId}}/players/{{playerOneId}}/bids
 Content-Type: application/json
 
 {
@@ -66,7 +66,7 @@ Content-Type: application/json
 }
 
 ### Player 2: Bid
-POST {{host}}/{{playerTwo}}/bids
+POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/bids
 Content-Type: application/json
 
 {
@@ -74,11 +74,11 @@ Content-Type: application/json
 }
 
 ### Player 1: Check
-POST {{host}}/{{playerOne}}/checks
+POST {{api}}/games/{{gameId}}/players/{{playerOneId}}/checks
 Content-Type: application/json
 
 ### Player 2: Check
-POST {{host}}/{{playerTwo}}/checks
+POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/checks
 Content-Type: application/json
 
 ### Get looser
