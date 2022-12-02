@@ -12,15 +12,11 @@ public class Players
     public bool ContainsNick(string playerNick) =>
         _players.Any(player => player.Nick == playerNick);
 
-    public void Add(Player player)
-    {
+    public void Add(Player player) => 
         _players.Add(player);
-    }
 
-    public Player GetPlayer(Guid playerId)
-    {
-        return _players.First(x => x.Id == playerId);
-    }
+    public Player GetPlayer(Guid playerId) => 
+        _players.First(x => x.Id == playerId);
 
     public Player GetPreviousPlayer()
     {
@@ -33,10 +29,8 @@ public class Players
         return _players[previousPlayerIndex];
     }
 
-    public Player GetCurrentPlayer()
-    {
-        return _players[_currentPlayerIndex];
-    }
+    public Player GetCurrentPlayer() => 
+        _players[_currentPlayerIndex];
 
     public void Bid(Guid playerId, string pokerHand)
     {
