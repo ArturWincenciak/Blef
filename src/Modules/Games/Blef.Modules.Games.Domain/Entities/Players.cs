@@ -29,7 +29,7 @@ public class Players
         return _players[previousPlayerIndex];
     }
 
-    public Player GetCurrentPlayer() => 
+    private Player GetCurrentPlayer() => 
         _players[_currentPlayerIndex];
 
     public void Bid(Guid playerId, string pokerHand)
