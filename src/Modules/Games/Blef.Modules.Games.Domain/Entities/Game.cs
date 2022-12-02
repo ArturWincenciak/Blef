@@ -128,12 +128,19 @@ public sealed class Game
     }
 
     public (
+        IReadOnlyCollection<(Guid PlayerId, string Nick)> Players,
         IReadOnlyCollection<(int Order, Guid PlayerId, string Bid)> Bids, 
         Guid CheckingPlayerId, 
         Guid LooserPlayerId
         ) GetFlow()
     {
-        var (bids, checkingPlayerId) = _bidFlowHistory.GetFlow();
-        return (bids, checkingPlayerId, _looser ?? Guid.Empty);
+        var players = _players
+            .GetPlayers()
+            .Select(player => (player.Id, player.Nick))
+            .ToArray();
+        
+        var bidFlow = _bidFlowHistory.GetFlow();
+        
+        return (players, bidFlow.Bids, bidFlow.CheckingPlayerId, _looser ?? Guid.Empty);
     }
 }

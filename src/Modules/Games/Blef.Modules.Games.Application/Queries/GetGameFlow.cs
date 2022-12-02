@@ -5,9 +5,11 @@ namespace Blef.Modules.Games.Application.Queries;
 public sealed record GetGameFlow(Guid GameId) : IQuery<GetGameFlow.Result>
 {
     public sealed record Result(
-        PlayerBid[] Bids,
+        Player[] Players,
+        GameBid[] Bids,
         Guid CheckingPlayerId,
         Guid LooserPlayerId) : IQueryResult;
 
-    public sealed record PlayerBid(int Order, Guid PlayerId, string Bid);
+    public sealed record GameBid(int Order, Guid PlayerId, string Bid);
+    public sealed record Player(Guid Id, string Nick);
 }

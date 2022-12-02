@@ -16,14 +16,21 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
     {
         var game = _games.Get(query.GameId);
         var gameFlow = game.GetFlow();
+        
         var bidFlow = gameFlow.Bids
-            .Select(bid => new GetGameFlow.PlayerBid(
+            .Select(bid => new GetGameFlow.GameBid(
                 Order: bid.Order, 
                 PlayerId: bid.PlayerId, 
                 Bid: bid.Bid))
             .ToArray();
+
+        var players = gameFlow.Players
+            .Select(player => new GetGameFlow.Player(
+                Id: player.PlayerId,
+                Nick: player.Nick))
+            .ToArray();
         
-        var result = new GetGameFlow.Result(bidFlow, gameFlow.CheckingPlayerId, gameFlow.LooserPlayerId);
+        var result = new GetGameFlow.Result(players, bidFlow, gameFlow.CheckingPlayerId, gameFlow.LooserPlayerId);
         return Task.FromResult(result);
     }
 }
