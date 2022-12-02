@@ -1,5 +1,7 @@
 using Blef.Modules.Games.Domain.Entities.PokerHands;
 using Blef.Modules.Games.Domain.Exceptions;
+using Humanizer;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
@@ -128,7 +130,7 @@ public sealed class Game
     }
 
     public (
-        IReadOnlyCollection<(Guid PlayerId, string Nick)> Players,
+        IReadOnlyCollection<(Guid PlayerId, string Nick, Card[] Cards)> Players,
         IReadOnlyCollection<(int Order, Guid PlayerId, string Bid)> Bids, 
         Guid CheckingPlayerId, 
         Guid LooserPlayerId
@@ -136,7 +138,12 @@ public sealed class Game
     {
         var players = _players
             .GetPlayers()
-            .Select(player => (player.Id, player.Nick))
+            .Select(player => (
+                Id: player.Id,
+                Nick: player.Nick,
+                Cards: _looser is null 
+                    ? new Card[player.DealtCards.Length] 
+                    : player.DealtCards))
             .ToArray();
         
         var bidFlow = _bidFlowHistory.GetFlow();
