@@ -7,6 +7,10 @@
 POST {{api}}/games
 Content-Type: application/json
 
+### Get game flow
+GET {{api}}/games/{{gameId}}
+Content-Type: application/json
+
 ### Player 1: Join game
 @playerOneId = {{player_one_join_game.response.body.playerId}}
 # @name player_one_join_game

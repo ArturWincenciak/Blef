@@ -26,6 +26,14 @@ internal sealed class GamesController : ModuleControllerBase
         return Created($"{GamesModule.BasePath}/games/{game.GameId}", game);
     }
 
+    [HttpGet("{gameId:Guid}")]
+    public async Task<IActionResult> GetGameFlow(Guid gameId, CancellationToken cancellation)
+    {
+        var query = new GetGameFlow(gameId);
+        var gameFlow = await _queryDispatcher.Dispatch<GetGameFlow, GetGameFlow.Result>(query, cancellation);
+        return Ok(gameFlow);
+    }
+
     [HttpPost("{gameId:Guid}/players")]
     public async Task<IActionResult> JoinGame(Guid gameId, JoinGameApi command, CancellationToken cancellation)
     {
