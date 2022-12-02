@@ -128,7 +128,7 @@ public sealed class Game
     }
 
     public (
-        IReadOnlyCollection<(int Order, Guid PlayerId, string Bid)> BidFlow, 
+        IReadOnlyCollection<(int Order, Guid PlayerId, string Bid)> Bids, 
         Guid CheckingPlayerId, 
         Guid LooserPlayerId
         ) GetFlow()

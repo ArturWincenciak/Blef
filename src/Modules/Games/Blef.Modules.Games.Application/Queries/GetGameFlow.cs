@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Application.Queries;
 
-public sealed record GetGame(Guid GameId) : IQuery<GetGame.Result>
+public sealed record GetGameFlow(Guid GameId) : IQuery<GetGameFlow.Result>
 {
     public sealed record Result(
         PlayerBid[] Bids,
