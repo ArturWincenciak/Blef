@@ -34,12 +34,15 @@ public class Players
 
     public void Bid(Guid playerId, string pokerHand)
     {
-        if (GetCurrentPlayer().Id != playerId)
+        var currentPlayer = GetCurrentPlayer();
+        
+        if (currentPlayer.Id != playerId)
         {
             throw new ThatIsNotThisPlayerTurnNowException(playerId);
         }
         
-        GetCurrentPlayer().Bid(pokerHand);
+        currentPlayer.Bid(pokerHand);
+        
         _currentPlayerIndex++;
         if (_currentPlayerIndex >= _players.Count)
         {

@@ -9,5 +9,5 @@ public sealed record GetGame(Guid GameId) : IQuery<GetGame.Result>
         Guid CheckingPlayerId,
         Guid LooserPlayerId) : IQueryResult;
 
-    public sealed record PlayerBid(Guid PlayerId, string Bid);
+    public sealed record PlayerBid(int Order, Guid PlayerId, string Bid);
 }
