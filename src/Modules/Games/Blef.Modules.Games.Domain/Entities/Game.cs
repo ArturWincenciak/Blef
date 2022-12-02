@@ -11,8 +11,9 @@ public sealed class Game
     private readonly DealtCards _dealtCards = new();
     private bool _isGameStarted;
     private readonly IDeck _deck;
-    public Guid TournamentId { get; }
+    private readonly BidFlowHistory _bidFlowHistory;
 
+    public Guid TournamentId { get; }
     public Guid Id { get; }
 
     private Game(Guid id, IDeck deck, Guid tournamentId)
@@ -20,15 +21,16 @@ public sealed class Game
         Id = id;
         _deck = deck;
         TournamentId = tournamentId;
+        _bidFlowHistory = new();
     }
 
     public static Game Create(IDeck deck) =>
         Create(deck, Guid.Empty);
-    
+
     public static Game Create(IDeck deck, Guid tournamentId) =>
         new(Guid.NewGuid(), deck, tournamentId);
 
-    public Player Join(string nick) => 
+    public Player Join(string nick) =>
         Join(nick, 1);
 
     private Player Join(string nick, int cardsToDealCount)
@@ -83,6 +85,8 @@ public sealed class Game
         _players.Bid(playerId, pokerHand);
         _isGameStarted = true;
         _lastBid = pokerHand;
+
+        _bidFlowHistory.OnBid(playerId, pokerHand);
     }
 
     private bool NewBidIsNotHigher(string lastBid, string newBid)
@@ -114,10 +118,22 @@ public sealed class Game
         {
             _looser = _players.GetPreviousPlayer().Id;
         }
+        
+        _bidFlowHistory.OnCheck(playerId);
     }
 
     public Guid? GetLooser()
     {
         return _looser;
+    }
+
+    public (
+        IReadOnlyCollection<(int Order, Guid PlayerId, string Bid)> BidFlow, 
+        Guid CheckingPlayerId, 
+        Guid LooserPlayerId
+        ) GetFlow()
+    {
+        var (bids, checkingPlayerId) = _bidFlowHistory.GetFlow();
+        return (bids, checkingPlayerId, _looser ?? Guid.Empty);
     }
 }
