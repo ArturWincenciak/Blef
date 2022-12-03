@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Domain.Repositories;
+﻿using Blef.Modules.Games.Domain.Entities;
+using Blef.Modules.Games.Domain.Repositories;
 using Blef.Shared.Abstractions.Queries;
 
 namespace Blef.Modules.Games.Application.Queries.Handlers;
@@ -14,6 +15,13 @@ internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetP
     {
         var game = _games.Get(query.GameId);
         var cards = game.GetCards(query.PlayerId);
-        return Task.FromResult(new GetPlayerCards.Result(cards));
+        var result = new GetPlayerCards.Result(Map(cards));
+        return Task.FromResult(result);
     }
+
+    private static GetPlayerCards.Card[] Map(Card[] cards) => 
+        cards.Select(Map).ToArray();
+
+    private static GetPlayerCards.Card Map(Card card) => 
+        new (card.FaceCard.ToString(), card.Suit.ToString());
 }
