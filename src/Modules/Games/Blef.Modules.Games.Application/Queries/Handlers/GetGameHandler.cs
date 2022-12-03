@@ -17,32 +17,35 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
     {
         var game = _games.Get(query.GameId);
         var gameFlow = game.GetFlow();
-        
+
         var bidFlow = gameFlow.Bids
             .Select(bid => new GetGameFlow.GameBid(
-                Order: bid.Order, 
-                PlayerId: bid.PlayerId, 
+                Order: bid.Order,
+                PlayerId: bid.PlayerId,
                 Bid: bid.Bid))
             .ToArray();
+
+        var gameIsInProgress = gameFlow.LooserPlayerId == Guid.Empty;
 
         var players = gameFlow.Players
             .Select(player => new GetGameFlow.Player(
                 Id: player.PlayerId,
                 Nick: player.Nick,
-                Cards: Map(player.Cards))) 
+                Cards: gameIsInProgress 
+                    ? HideCards(player.Cards) 
+                    : MapCards(cards: player.Cards)))
             .ToArray();
-        
+
         var result = new GetGameFlow.Result(players, bidFlow, gameFlow.CheckingPlayerId, gameFlow.LooserPlayerId);
         return Task.FromResult(result);
     }
 
-    private GetGameFlow.Card[] Map(Card[] cards) => 
-        cards.Select(Map).ToArray();
+    private static GetGameFlow.Card[] HideCards(Card[] cards) =>
+        cards.Select(_ => new GetGameFlow.Card(FaceCard: "Hidden", Suit: "Hidden")).ToArray();
 
-    private GetGameFlow.Card Map(Card card) =>
-        card switch
-        {
-            null => new GetGameFlow.Card("Hide", "Hide"),
-            _ => new GetGameFlow.Card(card.FaceCard.ToString(), card.Suit.ToString())
-        };
+    private GetGameFlow.Card[] MapCards(Card[] cards) =>
+        cards.Select(MapCard).ToArray();
+
+    private GetGameFlow.Card MapCard(Card card) =>
+        new(card.FaceCard.ToString(), card.Suit.ToString());
 }
