@@ -84,7 +84,3 @@ Content-Type: application/json
 ### Player 2: Check
 POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/checks
 Content-Type: application/json
-
-### Get looser
-GET {{api}}/games/{{gameId}}/looser
-Content-Type: application/json

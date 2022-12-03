@@ -65,12 +65,4 @@ internal sealed class GamesController : ModuleControllerBase
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created($"{GamesModule.BasePath}/games/{gameId}/players/{playerId}/checks", null);
     }
-
-    [HttpGet("{gameId:Guid}/looser")]
-    public async Task<IActionResult> GetLooser(Guid gameId, CancellationToken cancellation)
-    {
-        var query = new GetLooser(gameId);
-        var looser = await _queryDispatcher.Dispatch<GetLooser, GetLooser.Result>(query, cancellation);
-        return Ok(looser);
-    }
 }

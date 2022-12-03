@@ -70,6 +70,6 @@ Content-Type: application/json
 POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/checks
 Content-Type: application/json
 
-### Get looser
-GET {{api}}/games/{{gameId}}/looser
+### Get game flow
+GET {{api}}/games/{{gameId}}
 Content-Type: application/json
