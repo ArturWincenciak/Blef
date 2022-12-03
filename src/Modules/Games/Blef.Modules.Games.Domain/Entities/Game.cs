@@ -1,7 +1,5 @@
 using Blef.Modules.Games.Domain.Entities.PokerHands;
 using Blef.Modules.Games.Domain.Exceptions;
-using Humanizer;
-using Microsoft.AspNetCore.Authentication;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
