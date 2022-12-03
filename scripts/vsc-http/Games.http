@@ -53,12 +53,26 @@ Content-Type: application/json
     "nick": "Player Two"
 }
 
+### Player 3: Join game
+@playerThreeId = {{player_two_join_game.response.body.playerId}}
+# @name player_three_join_game
+POST {{api}}/games/{{gameId}}/players
+Content-Type: application/json
+
+{
+    "nick": "Player Three"
+}
+
 ### Player 1: Get player's cards
 GET {{api}}/games/{{gameId}}/players/{{playerOneId}}/cards
 Content-Type: application/json
 
 ### Player 2: Get player's cards
 GET {{api}}/games/{{gameId}}/players/{{playerTwoId}}/cards
+Content-Type: application/json
+
+### Player 3: Get player's cards
+GET {{api}}/games/{{gameId}}/players/{{playerThreeId}}/cards
 Content-Type: application/json
 
 ### Player 1: Bid
@@ -77,10 +91,22 @@ Content-Type: application/json
     "pokerHand": "one-of-a-kind:ten"
 }
 
+### Player 3: Bid
+POST {{api}}/games/{{gameId}}/players/{{playerThreeId}}/bids
+Content-Type: application/json
+
+{
+    "pokerHand": "one-of-a-kind:jack"
+}
+
 ### Player 1: Check
 POST {{api}}/games/{{gameId}}/players/{{playerOneId}}/checks
 Content-Type: application/json
 
 ### Player 2: Check
 POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/checks
+Content-Type: application/json
+
+### Player 3: Check
+POST {{api}}/games/{{gameId}}/players/{{playerThreeId}}/checks
 Content-Type: application/json
