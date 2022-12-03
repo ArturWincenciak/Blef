@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-
 namespace Blef.Modules.Games.Domain.Entities;
 
 public class Player
