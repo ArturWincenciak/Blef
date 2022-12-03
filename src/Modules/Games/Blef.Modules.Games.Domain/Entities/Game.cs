@@ -141,9 +141,7 @@ public sealed class Game
             .Select(player => (
                 Id: player.Id,
                 Nick: player.Nick,
-                Cards: _looser is null 
-                    ? new Card[player.DealtCards.Length] 
-                    : player.DealtCards))
+                Cards: player.DealtCards))
             .ToArray();
         
         var bidFlow = _bidFlowHistory.GetFlow();
