@@ -1,3 +1,25 @@
+# Face cards translation
+# - 1 means 'nine'
+# - 2 means 'ten'
+# - 3 means 'jack'
+# - 4 means 'queen'
+# - 5 means 'king'
+# - 6 means 'ace'
+
+# Suits translation
+# - 1 means 'clubs'
+# - 2 means 'diamonds'
+# - 3 means 'hearts'
+# - 4 means 'spades'
+
+# Bid poker hand options
+# - one-of-a-kind:nine
+# - one-of-a-kind:ten
+# - one-of-a-kind:jack
+# - one-of-a-kind:queen
+# - one-of-a-kind:king
+# - one-of-a-kind:ace
+
 @module = games-module
 @api = {{host}}/{{module}}
 
@@ -31,20 +53,6 @@ Content-Type: application/json
     "nick": "Player Two"
 }
 
-# Face cards translation
-# - 1 means 'nine'
-# - 2 means 'ten'
-# - 3 means 'jack'
-# - 4 means 'queen'
-# - 5 means 'king'
-# - 6 means 'ace'
-
-# Suits translation
-# - 1 means 'clubs'
-# - 2 means 'diamonds'
-# - 3 means 'hearts'
-# - 4 means 'spades'
-
 ### Player 1: Get player's cards
 GET {{api}}/games/{{gameId}}/players/{{playerOneId}}/cards
 Content-Type: application/json
@@ -52,14 +60,6 @@ Content-Type: application/json
 ### Player 2: Get player's cards
 GET {{api}}/games/{{gameId}}/players/{{playerTwoId}}/cards
 Content-Type: application/json
-
-# Bid poker hand options
-# - one-of-a-kind:nine
-# - one-of-a-kind:ten
-# - one-of-a-kind:jack
-# - one-of-a-kind:queen
-# - one-of-a-kind:king
-# - one-of-a-kind:ace
 
 ### Player 1: Bid
 POST {{api}}/games/{{gameId}}/players/{{playerOneId}}/bids
