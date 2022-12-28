@@ -8,7 +8,7 @@ public class ContinuesIntegrationPlaygroundTests
         Assert.True(true);
     }
 
-    [Fact(Skip = "Skip to test CI/CD.")]
+    [Fact(Skip = "Skip to test CI/CD")]
     public void AlwaysRed()
     {
         Assert.True(false);

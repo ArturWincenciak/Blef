@@ -8,7 +8,7 @@ namespace Blef.Shared.Infrastructure.Exceptions;
 
 internal class ExceptionToResponseMapper
 {
-    private static readonly ConcurrentDictionary<Type, string> CodesCache = new();
+    private readonly ConcurrentDictionary<Type, string> _codesCache = new();
 
     public object Map(Exception exception) =>
         exception switch
@@ -17,12 +17,12 @@ internal class ExceptionToResponseMapper
             _ => CreateInternalServerError()
         };
 
-    private static ProblemDetails CreateBadRequest(BlefException exception) =>
+    private ProblemDetails CreateBadRequest(BlefException exception) =>
         exception.Errors.Any()
             ? CreateValidationProblemDetails(exception)
             : CreateProblemDetails(exception);
 
-    private static ProblemDetails CreateProblemDetails(BlefException exception) =>
+    private ProblemDetails CreateProblemDetails(BlefException exception) =>
         new ()
         {
             Type = $"{DocumentationUrl}/{GetErrorCode(exception)}.md",
@@ -32,7 +32,7 @@ internal class ExceptionToResponseMapper
             Instance = exception.Instance
         };
 
-    private static ValidationProblemDetails CreateValidationProblemDetails(BlefException exception)
+    private ValidationProblemDetails CreateValidationProblemDetails(BlefException exception)
     {
         var problemDetails = new ValidationProblemDetails
         {
@@ -60,16 +60,16 @@ internal class ExceptionToResponseMapper
             Detail = "Unexpected error occurred"
         };
 
-    private static string GetErrorCode(Exception exception)
+    private string GetErrorCode(Exception exception)
     {
         var type = exception.GetType();
 
-        if (CodesCache.TryGetValue(type, out var cachedErrorCode))
+        if (_codesCache.TryGetValue(type, out var cachedErrorCode))
             return cachedErrorCode;
 
         var errorCode = CreateErrorCode(type);
 
-        return CodesCache.GetOrAdd(type, errorCode);
+        return _codesCache.GetOrAdd(type, errorCode);
     }
 
     private static string CreateErrorCode(Type type) =>

@@ -2,7 +2,7 @@
 
 public static class CardsGenerator
 {
-    public static FaceCard[] GetAllFaceCards()
+    public static IEnumerable<FaceCard> GetAllFaceCards()
     {
         return new[]
         {
@@ -15,7 +15,7 @@ public static class CardsGenerator
         };
     }
 
-    public static Suit[] GetAllSuites()
+    public static IEnumerable<Suit> GetAllSuites()
     {
         return new[]
         {

@@ -4,14 +4,14 @@ namespace Blef.Modules.Games.Domain.Tests;
 
 public class TwoPlayersGameTests
 {
-    private const string King = "one-of-a-kind:King";
-    private const string Jack = "one-of-a-kind:Jack";
+    private const string KING = "one-of-a-kind:King";
+    private const string JACK = "one-of-a-kind:Jack";
 
     private readonly Game _game;
     private readonly Guid _firstPlayerId;
-    private readonly string _firstPlayerNick = "First Player Nick";
+    private const string FIRST_PLAYER_NICK = "First Player Nick";
     private readonly Guid _secondPlayerId;
-    private readonly string _secondPlayerNick = "Second Player Nick";
+    private const string SECOND_PLAYER_NICK = "Second Player Nick";
 
     public TwoPlayersGameTests()
     {
@@ -21,16 +21,16 @@ public class TwoPlayersGameTests
             new(FaceCard.Ace, Suit.Diamonds)
         });
         _game = Game.Create(deckStub);
-        var firstPlayer = _game.Join(_firstPlayerNick);
+        var firstPlayer = _game.Join(FIRST_PLAYER_NICK);
         _firstPlayerId = firstPlayer.Id;
-        var secondPlayer = _game.Join(_secondPlayerNick);
+        var secondPlayer = _game.Join(SECOND_PLAYER_NICK);
         _secondPlayerId = secondPlayer.Id;
     }
 
     [Fact]
     public void When_bid_was_on_the_table_then_checking_player_has_lost()
     {
-        _game.Bid(_firstPlayerId, King);
+        _game.Bid(_firstPlayerId, KING);
         _game.Check(_secondPlayerId);
         
         Assert.Equal(_secondPlayerId, _game.GetLooser());
@@ -39,7 +39,7 @@ public class TwoPlayersGameTests
     [Fact]
     public void When_bid_was_NOT_on_the_table_then_bidding_player_has_lost()
     {
-        _game.Bid(_firstPlayerId, Jack);
+        _game.Bid(_firstPlayerId, JACK);
         _game.Check(_secondPlayerId);
         
         Assert.Equal(_firstPlayerId, _game.GetLooser());

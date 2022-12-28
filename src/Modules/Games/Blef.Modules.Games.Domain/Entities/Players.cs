@@ -18,7 +18,7 @@ public class Players
     public Player GetPlayer(Guid playerId) => 
         _players.First(x => x.Id == playerId);
 
-    public IReadOnlyCollection<Player> GetPlayers() =>
+    public IEnumerable<Player> GetPlayers() =>
         _players.ToArray();
 
     public Player GetPreviousPlayer()

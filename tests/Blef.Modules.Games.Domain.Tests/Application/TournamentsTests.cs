@@ -10,7 +10,7 @@ public class TournamentsTests
     private readonly ITournamentsRepository _tournamentsRepository = new InMemoryTournamentsRepository();
     private readonly IGamesRepository _gamesRepository = new InMemoryGamesRepository();
 
-    private readonly string _playerNick = "Player Nick";
+    private const string PLAYER_NICK = "Player Nick";
 
     public TournamentsTests()
     {
@@ -21,7 +21,7 @@ public class TournamentsTests
     {
         var tournament = Tournament.Create();
         _tournamentsRepository.Add(tournament);
-        var player = tournament.Join(_playerNick);
+        var player = tournament.Join(PLAYER_NICK);
         _sut.Start(tournament.Id);
 
         return (tournament, player);
@@ -38,7 +38,7 @@ public class TournamentsTests
         Assert.Equal(2, tournament.GetCurrentGame().GetCards(player.PlayerId).Length);
     }
 
-    private void FinishCurrentGame(Tournament tournament, TournamentPlayer player)
+    private static void FinishCurrentGame(Tournament tournament, TournamentPlayer player)
     {
         var currentGame = tournament.GetCurrentGame();
         currentGame.Bid(player.PlayerId, "two-pairs:jack,ten");
