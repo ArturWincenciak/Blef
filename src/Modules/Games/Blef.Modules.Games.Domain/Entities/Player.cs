@@ -14,8 +14,8 @@ public class Player
     }
 
     public static Player Create(string nick, Card[] dealtCards) =>
-        new (Guid.NewGuid(), nick, dealtCards);
+        new(Guid.NewGuid(), nick, dealtCards);
 
     public static Player Create(TournamentPlayer player, Card[] dealtCards) =>
-        new (player.PlayerId, player.Nick, dealtCards);
+        new(player.PlayerId, player.Nick, dealtCards);
 }

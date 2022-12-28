@@ -7,7 +7,7 @@ internal sealed class JoinTournamentHandler : ICommandHandler<JoinTournament, Jo
 {
     private readonly ITournamentsRepository _tournaments;
 
-    public JoinTournamentHandler (ITournamentsRepository tournaments) =>
+    public JoinTournamentHandler(ITournamentsRepository tournaments) =>
         _tournaments = tournaments;
 
     public Task<JoinTournament.Result> Handle(JoinTournament command, CancellationToken cancellation)

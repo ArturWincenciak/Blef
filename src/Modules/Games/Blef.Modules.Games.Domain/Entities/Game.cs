@@ -110,10 +110,10 @@ public sealed class Game
             throw new NoBidToCheckException(Id);
         }
 
-        _looser = _dealtCards.IsBidFulfilled(_lastBid) 
-            ? playerId 
+        _looser = _dealtCards.IsBidFulfilled(_lastBid)
+            ? playerId
             : _players.GetPreviousPlayer().Id;
-        
+
         _bidFlowHistory.OnCheck(playerId);
     }
 
@@ -124,8 +124,8 @@ public sealed class Game
 
     public (
         IReadOnlyCollection<(Guid PlayerId, string Nick, Card[] Cards)> Players,
-        IReadOnlyCollection<(int Order, Guid PlayerId, string Bid)> Bids, 
-        Guid CheckingPlayerId, 
+        IReadOnlyCollection<(int Order, Guid PlayerId, string Bid)> Bids,
+        Guid CheckingPlayerId,
         Guid LooserPlayerId
         ) GetFlow()
     {
@@ -136,9 +136,9 @@ public sealed class Game
                 player.Nick,
                 player.DealtCards))
             .ToArray();
-        
+
         var bidFlow = _bidFlowHistory.GetFlow();
-        
+
         return (players, bidFlow.Bids, bidFlow.CheckingPlayerId, _looser ?? Guid.Empty);
     }
 }

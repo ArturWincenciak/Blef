@@ -12,10 +12,10 @@ public class Players
     public bool ContainsNick(string playerNick) =>
         _players.Any(player => player.Nick == playerNick);
 
-    public void Add(Player player) => 
+    public void Add(Player player) =>
         _players.Add(player);
 
-    public Player GetPlayer(Guid playerId) => 
+    public Player GetPlayer(Guid playerId) =>
         _players.First(x => x.Id == playerId);
 
     public IEnumerable<Player> GetPlayers() =>
@@ -28,22 +28,22 @@ public class Players
         {
             previousPlayerIndex = _players.Count - 1;
         }
-        
+
         return _players[previousPlayerIndex];
     }
 
-    private Player GetCurrentPlayer() => 
+    private Player GetCurrentPlayer() =>
         _players[_currentPlayerIndex];
 
     public void Bid(Guid playerId, string pokerHand)
     {
         var currentPlayer = GetCurrentPlayer();
-        
+
         if (currentPlayer.Id != playerId)
         {
             throw new ThatIsNotThisPlayerTurnNowException(playerId);
         }
-        
+
         _currentPlayerIndex++;
         if (_currentPlayerIndex >= _players.Count)
         {

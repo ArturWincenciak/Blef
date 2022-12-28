@@ -12,7 +12,6 @@ internal sealed class MaxGamePlayersReachedException : BlefException
     {
     }
 }
-
 internal sealed class MaxTournamentPlayersReachedException : BlefException
 {
     public MaxTournamentPlayersReachedException(Guid tournamentId)

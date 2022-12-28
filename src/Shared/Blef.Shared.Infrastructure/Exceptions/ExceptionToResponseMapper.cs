@@ -23,7 +23,7 @@ internal class ExceptionToResponseMapper
             : CreateProblemDetails(exception);
 
     private ProblemDetails CreateProblemDetails(BlefException exception) =>
-        new ()
+        new()
         {
             Type = $"{DocumentationUrl}/{GetErrorCode(exception)}.md",
             Title = exception.Title,

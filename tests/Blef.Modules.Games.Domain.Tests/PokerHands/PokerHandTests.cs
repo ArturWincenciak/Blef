@@ -24,7 +24,7 @@ public class PokerHandTests
     public void High_Straight_should_be_better_than_Low_Straight()
     {
         var lowStraight = PokerHandParser.Parse("low-straight");
-        var highStraight  = PokerHandParser.Parse("high-straight");
+        var highStraight = PokerHandParser.Parse("high-straight");
         Assert.True(highStraight.IsBetterThan(lowStraight));
     }
 }

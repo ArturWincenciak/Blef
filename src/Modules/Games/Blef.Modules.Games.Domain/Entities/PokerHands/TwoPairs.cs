@@ -32,6 +32,6 @@ public class TwoPairs : PokerHand
 
     protected override int GetInnerRank()
     {
-        return 10 * (int)_first + (int)_second;
+        return 10 * (int) _first + (int) _second;
     }
 }

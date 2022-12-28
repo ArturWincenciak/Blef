@@ -7,7 +7,7 @@ internal sealed class StartNextGameInTournamentHandler : ICommandHandler<StartNe
 {
     private readonly Tournaments _tournaments;
 
-    public StartNextGameInTournamentHandler(Tournaments tournaments) => 
+    public StartNextGameInTournamentHandler(Tournaments tournaments) =>
         _tournaments = tournaments;
 
     public Task Handle(StartNextGameInTournament command, CancellationToken cancellation)

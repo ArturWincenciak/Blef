@@ -31,8 +31,8 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
             .Select(player => new GetGameFlow.Player(
                 Id: player.PlayerId,
                 Nick: player.Nick,
-                Cards: gameIsInProgress 
-                    ? HideCards(player.Cards) 
+                Cards: gameIsInProgress
+                    ? HideCards(player.Cards)
                     : MapCards(cards: player.Cards)))
             .ToArray();
 

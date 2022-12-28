@@ -6,7 +6,7 @@ public static class PokerHandParser
     {
         var parts = bid.Split(":");
         var pokerHandType = parts[0];
-        
+
         // TODO: implement more Poker Hands
         return pokerHandType.ToLower() switch
         {

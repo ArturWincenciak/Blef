@@ -12,4 +12,3 @@ internal static class Extensions
     internal static IServiceCollection AddDomain(this IServiceCollection services) =>
         services;
 }
-
