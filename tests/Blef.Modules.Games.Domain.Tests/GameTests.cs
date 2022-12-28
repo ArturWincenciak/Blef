@@ -16,7 +16,7 @@ public class GameTests
     {
         var deckStub = new DeckStub(new Card[]
         {
-            new(FaceCard.King, Suit.Diamonds),
+            new(FaceCard.King, Suit.Diamonds)
         });
         _game = Game.Create(deckStub);
         var player = _game.Join(_playerNick);
