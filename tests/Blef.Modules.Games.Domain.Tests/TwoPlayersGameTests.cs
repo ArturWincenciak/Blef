@@ -18,7 +18,7 @@ public class TwoPlayersGameTests
         var deckStub = new DeckStub(new Card[]
         {
             new(FaceCard.King, Suit.Diamonds),
-            new(FaceCard.Ace, Suit.Diamonds),
+            new(FaceCard.Ace, Suit.Diamonds)
         });
         _game = Game.Create(deckStub);
         var firstPlayer = _game.Join(_firstPlayerNick);

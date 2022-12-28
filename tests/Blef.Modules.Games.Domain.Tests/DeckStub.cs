@@ -22,7 +22,7 @@ public class DeckStub : IDeck
     public Card[] DealCards(int count)
     {
         List<Card> cards = new();
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
             cards.Add(DealCard());
         }

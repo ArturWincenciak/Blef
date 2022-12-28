@@ -12,7 +12,7 @@ public class DeckGenerator
 
     public Deck GetFullDeck()
     {
-        IReadOnlyCollection<Card> readOnlyCollection = _cards.Value;
+        var readOnlyCollection = _cards.Value;
 
         var fullDeck = new Deck(_randomnessProvider, readOnlyCollection.ToList());
 
