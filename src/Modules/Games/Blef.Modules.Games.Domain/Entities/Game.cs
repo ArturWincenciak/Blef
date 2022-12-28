@@ -110,14 +110,9 @@ public sealed class Game
             throw new NoBidToCheckException(Id);
         }
 
-        if (_dealtCards.IsBidFulfilled(_lastBid))
-        {
-            _looser = playerId;
-        }
-        else
-        {
-            _looser = _players.GetPreviousPlayer().Id;
-        }
+        _looser = _dealtCards.IsBidFulfilled(_lastBid) 
+            ? playerId 
+            : _players.GetPreviousPlayer().Id;
         
         _bidFlowHistory.OnCheck(playerId);
     }
