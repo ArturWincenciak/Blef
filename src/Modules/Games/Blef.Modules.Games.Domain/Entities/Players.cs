@@ -44,8 +44,6 @@ public class Players
             throw new ThatIsNotThisPlayerTurnNowException(playerId);
         }
         
-        currentPlayer.Bid(pokerHand);
-        
         _currentPlayerIndex++;
         if (_currentPlayerIndex >= _players.Count)
         {

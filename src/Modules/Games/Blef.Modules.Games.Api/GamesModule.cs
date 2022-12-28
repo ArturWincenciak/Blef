@@ -7,9 +7,9 @@ namespace Blef.Modules.Games.Api;
 
 internal class GamesModule : IModule
 {
-    public const string BasePath = "games-module";
+    public const string BASE_PATH = "games-module";
     public string Name => "Games";
-    public string Path => BasePath;
+    public string Path => BASE_PATH;
 
     public void Register(IServiceCollection services) =>
         services.AddInfrastructure();

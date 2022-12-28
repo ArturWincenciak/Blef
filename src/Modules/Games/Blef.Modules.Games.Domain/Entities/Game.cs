@@ -132,9 +132,9 @@ public sealed class Game
         var players = _players
             .GetPlayers()
             .Select(player => (
-                Id: player.Id,
-                Nick: player.Nick,
-                Cards: player.DealtCards))
+                player.Id,
+                player.Nick,
+                player.DealtCards))
             .ToArray();
         
         var bidFlow = _bidFlowHistory.GetFlow();
