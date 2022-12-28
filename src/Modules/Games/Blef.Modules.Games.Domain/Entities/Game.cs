@@ -89,7 +89,7 @@ public sealed class Game
         _bidFlowHistory.OnBid(playerId, pokerHand);
     }
 
-    private bool NewBidIsNotHigher(string lastBid, string newBid)
+    private static bool NewBidIsNotHigher(string lastBid, string newBid)
     {
         var lastPokerHand = PokerHandParser.Parse(lastBid);
         var newPokerHand = PokerHandParser.Parse(newBid);

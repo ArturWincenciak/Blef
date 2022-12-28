@@ -40,12 +40,12 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
         return Task.FromResult(result);
     }
 
-    private static GetGameFlow.Card[] HideCards(Card[] cards) =>
+    private static GetGameFlow.Card[] HideCards(IEnumerable<Card> cards) =>
         cards.Select(_ => new GetGameFlow.Card(FaceCard: "Hidden", Suit: "Hidden")).ToArray();
 
-    private GetGameFlow.Card[] MapCards(Card[] cards) =>
+    private static GetGameFlow.Card[] MapCards(IEnumerable<Card> cards) =>
         cards.Select(MapCard).ToArray();
 
-    private GetGameFlow.Card MapCard(Card card) =>
+    private static GetGameFlow.Card MapCard(Card card) =>
         new(card.FaceCard.ToString(), card.Suit.ToString());
 }

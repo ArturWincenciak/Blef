@@ -19,7 +19,7 @@ internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetP
         return Task.FromResult(result);
     }
 
-    private static GetPlayerCards.Card[] Map(Card[] cards) => 
+    private static GetPlayerCards.Card[] Map(IEnumerable<Card> cards) => 
         cards.Select(Map).ToArray();
 
     private static GetPlayerCards.Card Map(Card card) => 
