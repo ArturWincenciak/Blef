@@ -4,7 +4,7 @@ public class TournamentPlayer
 {
     public Guid PlayerId { get; }
     public string Nick { get; }
-    public int LostGames { get; private set; } = 0;
+    public int LostGames { get; private set; }
 
     public static TournamentPlayer Create(string nick) => 
         new (Guid.NewGuid(), nick);

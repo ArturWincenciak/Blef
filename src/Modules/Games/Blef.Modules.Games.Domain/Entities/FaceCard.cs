@@ -1,6 +1,6 @@
 namespace Blef.Modules.Games.Domain.Entities;
 
-public enum FaceCard : int
+public enum FaceCard
 {
     Nine = 1,
     Ten,

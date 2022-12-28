@@ -10,7 +10,7 @@ internal sealed class GetCurrentGameHandler : IQueryHandler<GetCurrentGame, GetC
     public GetCurrentGameHandler(ITournamentsRepository tournaments) => 
         _tournaments = tournaments;
 
-    public Task<GetCurrentGame.Result> Handle(GetCurrentGame query)
+    public Task<GetCurrentGame.Result> Handle(GetCurrentGame query, CancellationToken cancellation)
     {
         var tournament = _tournaments.Get(query.TournamentId);
         var game = tournament.GetCurrentGame();
