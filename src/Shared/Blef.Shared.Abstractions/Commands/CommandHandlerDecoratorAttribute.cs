@@ -1,4 +1,6 @@
 ﻿namespace Blef.Shared.Abstractions.Commands;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class CommandHandlerDecoratorAttribute : Attribute { }
+public class CommandHandlerDecoratorAttribute : Attribute
+{
+}

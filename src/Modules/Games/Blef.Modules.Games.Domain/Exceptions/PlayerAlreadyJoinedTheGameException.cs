@@ -12,7 +12,6 @@ internal sealed class PlayerAlreadyJoinedTheGameException : BlefException
     {
     }
 }
-
 internal sealed class PlayerAlreadyJoinedTheTournamentException : BlefException
 {
     public PlayerAlreadyJoinedTheTournamentException(Guid tournamentId, string nick)

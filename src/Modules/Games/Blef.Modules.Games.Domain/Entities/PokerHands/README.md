@@ -11,5 +11,5 @@ który jest implementowany dla każdego układu. Dla niektórych układów funkc
 7. FullHouse - full
 8. Flush - kolor
 9. FourOfKind - kareta
-10. LowStraightFlush -  mały poker
+10. LowStraightFlush - mały poker
 11. HighStraightFlush - duży poker

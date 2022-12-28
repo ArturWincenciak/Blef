@@ -14,5 +14,7 @@ internal class UsersModule : IModule
     public void Register(IServiceCollection services) =>
         services.AddCore();
 
-    public void Use(IApplicationBuilder app) { }
+    public void Use(IApplicationBuilder app)
+    {
+    }
 }

@@ -5,4 +5,6 @@ namespace Blef.Modules.Games.Api.Controllers;
 [ApiController]
 [Consumes("application/json")]
 [Route($"{GamesModule.BASE_PATH}/[controller]")]
-internal abstract class ModuleControllerBase : ControllerBase { }
+internal abstract class ModuleControllerBase : ControllerBase
+{
+}

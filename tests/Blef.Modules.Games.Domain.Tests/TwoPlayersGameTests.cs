@@ -32,7 +32,7 @@ public class TwoPlayersGameTests
     {
         _game.Bid(_firstPlayerId, KING);
         _game.Check(_secondPlayerId);
-        
+
         Assert.Equal(_secondPlayerId, _game.GetLooser());
     }
 
@@ -41,7 +41,7 @@ public class TwoPlayersGameTests
     {
         _game.Bid(_firstPlayerId, JACK);
         _game.Check(_secondPlayerId);
-        
+
         Assert.Equal(_firstPlayerId, _game.GetLooser());
     }
 }

@@ -10,7 +10,7 @@ public abstract class BlefException : Exception
     public IDictionary<string, string[]> Errors { get; }
 
     protected BlefException(string title, string detail, string instance)
-        : base(JsonSerializer.Serialize(new { title, detail, instance }))
+        : base(JsonSerializer.Serialize(new {title, detail, instance}))
     {
         Title = title;
         Detail = detail;

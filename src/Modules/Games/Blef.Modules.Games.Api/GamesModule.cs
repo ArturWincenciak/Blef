@@ -14,5 +14,7 @@ internal class GamesModule : IModule
     public void Register(IServiceCollection services) =>
         services.AddInfrastructure();
 
-    public void Use(IApplicationBuilder app) { }
+    public void Use(IApplicationBuilder app)
+    {
+    }
 }

@@ -1,21 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>d0942da7-86bb-4d4b-80e3-a0ab3340e8f4</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>d0942da7-86bb-4d4b-80e3-a0ab3340e8f4</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Modules\Games\Blef.Modules.Games.Api\Blef.Modules.Games.Api.csproj" />
-    <ProjectReference Include="..\Modules\Users\Blef.Modules.Users.Api\Blef.Modules.Users.Api.csproj" />
-    <ProjectReference Include="..\Shared\Blef.Shared.Infrastructure\Blef.Shared.Infrastructure.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Modules\Games\Blef.Modules.Games.Api\Blef.Modules.Games.Api.csproj"/>
+        <ProjectReference Include="..\Modules\Users\Blef.Modules.Users.Api\Blef.Modules.Users.Api.csproj"/>
+        <ProjectReference Include="..\Shared\Blef.Shared.Infrastructure\Blef.Shared.Infrastructure.csproj"/>
+    </ItemGroup>
 
 </Project>

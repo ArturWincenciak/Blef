@@ -18,6 +18,6 @@ public class Pair : PokerHand
 
     protected override int GetInnerRank()
     {
-        return (int)_faceCard;
+        return (int) _faceCard;
     }
 }
