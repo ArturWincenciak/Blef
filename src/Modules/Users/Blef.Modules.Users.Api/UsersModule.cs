@@ -7,9 +7,9 @@ namespace Blef.Modules.Users.Api;
 
 internal class UsersModule : IModule
 {
-    public const string BasePath = "users-module";
+    public const string BASE_PATH = "users-module";
     public string Name => "Users";
-    public string Path => BasePath;
+    public string Path => BASE_PATH;
 
     public void Register(IServiceCollection services) =>
         services.AddCore();

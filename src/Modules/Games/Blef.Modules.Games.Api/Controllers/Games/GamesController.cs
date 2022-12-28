@@ -23,7 +23,7 @@ internal sealed class GamesController : ModuleControllerBase
     {
         var cmd = new MakeNewGame();
         var game = await _commandDispatcher.Dispatch<MakeNewGame, MakeNewGame.Result>(cmd, cancellation);
-        return Created($"{GamesModule.BasePath}/games/{game.GameId}", game);
+        return Created($"{GamesModule.BASE_PATH}/games/{game.GameId}", game);
     }
 
     [HttpGet("{gameId:Guid}")]
@@ -39,7 +39,7 @@ internal sealed class GamesController : ModuleControllerBase
     {
         var cmd = new JoinGame(gameId, command.Nick);
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
-        return Created($"{GamesModule.BasePath}/games/{gameId}/players/{player.PlayerId}", player);
+        return Created($"{GamesModule.BASE_PATH}/games/{gameId}/players/{player.PlayerId}", player);
     }
 
     [HttpGet("{gameId:Guid}/players/{playerId:Guid}/cards")]
@@ -55,7 +55,7 @@ internal sealed class GamesController : ModuleControllerBase
     {
         var cmd = new Bid(gameId, playerId, command.PokerHand);
         await _commandDispatcher.Dispatch(cmd, cancellation);
-        return Created($"{GamesModule.BasePath}/games/{gameId}/players/{playerId}/bids", null);
+        return Created($"{GamesModule.BASE_PATH}/games/{gameId}/players/{playerId}/bids", null);
     }
 
     [HttpPost("{gameId:Guid}/players/{playerId:Guid}/checks")]
@@ -63,6 +63,6 @@ internal sealed class GamesController : ModuleControllerBase
     {
         var cmd = new Check(gameId, playerId);
         await _commandDispatcher.Dispatch(cmd, cancellation);
-        return Created($"{GamesModule.BasePath}/games/{gameId}/players/{playerId}/checks", null);
+        return Created($"{GamesModule.BASE_PATH}/games/{gameId}/players/{playerId}/checks", null);
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Users.Api.Controllers;
 
-[Route(UsersModule.BasePath)]
+[Route(UsersModule.BASE_PATH)]
 internal sealed class HomeController : ControllerBase
 {
     [HttpGet]
