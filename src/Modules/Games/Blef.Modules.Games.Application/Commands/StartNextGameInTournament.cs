@@ -2,7 +2,4 @@
 
 namespace Blef.Modules.Games.Application.Commands;
 
-public sealed record StartNextGameInTournament(Guid TournamentId) : ICommand
-{
-    public sealed record Result : ICommandResult;
-}
+public sealed record StartNextGameInTournament(Guid TournamentId) : ICommand;

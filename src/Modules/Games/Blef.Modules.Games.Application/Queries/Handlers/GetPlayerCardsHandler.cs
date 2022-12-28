@@ -11,7 +11,7 @@ internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetP
     public GetPlayerCardsHandler(IGamesRepository games) =>
         _games = games;
 
-    public Task<GetPlayerCards.Result> Handle(GetPlayerCards query)
+    public Task<GetPlayerCards.Result> Handle(GetPlayerCards query, CancellationToken cancellation)
     {
         var game = _games.Get(query.GameId);
         var cards = game.GetCards(query.PlayerId);

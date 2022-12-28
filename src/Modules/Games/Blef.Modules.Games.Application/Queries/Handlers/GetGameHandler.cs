@@ -13,7 +13,7 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
         _games = games;
     }
 
-    public Task<GetGameFlow.Result> Handle(GetGameFlow query)
+    public Task<GetGameFlow.Result> Handle(GetGameFlow query, CancellationToken cancellation)
     {
         var game = _games.Get(query.GameId);
         var gameFlow = game.GetFlow();

@@ -5,7 +5,7 @@ namespace Blef.Modules.Games.Domain.Entities;
 public class Players
 {
     private readonly List<Player> _players = new();
-    private int _currentPlayerIndex = 0;
+    private int _currentPlayerIndex;
 
     public int Count => _players.Count;
 

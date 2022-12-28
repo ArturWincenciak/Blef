@@ -24,14 +24,4 @@ public class Player
     {
         _bids.Add(pokerHand);
     }
-
-    public string GetLastBid()
-    {
-        return _bids[^1];
-    }
-
-    public void CheckLastBid()
-    {
-        throw new NotImplementedException();
-    }
 }

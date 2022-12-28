@@ -22,7 +22,7 @@ internal class QueryDispatcher : IQueryDispatcher
         try
         {
             var handler = _serviceProvider.GetRequiredService<IQueryHandler<TQuery, TQueryResult>>();
-            return await handler.Handle(query);
+            return await handler.Handle(query, cancellation);
         }
         catch (Exception ex)
         {
