@@ -20,7 +20,7 @@ internal sealed class InternalControllerFeatureProvider : ControllerFeatureProvi
         if (typeInfo.IsDefined(typeof(NonControllerAttribute)))
             return false;
 
-        if (false == typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) &&
+        if (false == typeInfo.Name.EndsWith(value: "Controller", StringComparison.OrdinalIgnoreCase) &&
             false == typeInfo.IsDefined(typeof(ControllerAttribute)))
             return false;
 

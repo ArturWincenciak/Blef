@@ -5,13 +5,13 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 public sealed class Game
 {
-    private readonly Players _players = new();
-    private Guid? _looser;
-    private string? _lastBid;
+    private readonly BidFlowHistory _bidFlowHistory = new();
     private readonly DealtCards _dealtCards = new();
-    private bool _isGameStarted;
     private readonly IDeck _deck;
-    private readonly BidFlowHistory _bidFlowHistory;
+    private readonly Players _players = new();
+    private bool _isGameStarted;
+    private string? _lastBid;
+    private Guid? _looser;
 
     public Guid TournamentId { get; }
     public Guid Id { get; }
@@ -21,7 +21,6 @@ public sealed class Game
         Id = id;
         _deck = deck;
         TournamentId = tournamentId;
-        _bidFlowHistory = new();
     }
 
     public static Game Create(IDeck deck) =>
@@ -32,25 +31,6 @@ public sealed class Game
 
     public Player Join(string nick) =>
         Join(nick, 1);
-
-    private Player Join(string nick, int cardsToDealCount)
-    {
-        if (_isGameStarted)
-            throw new JoinGameThatIsAlreadyStartedException(Id, nick);
-
-        if (_players.Count >= 2)
-            throw new MaxGamePlayersReachedException(Id);
-
-        if (_players.ContainsNick(nick))
-            throw new PlayerAlreadyJoinedTheGameException(Id, nick);
-
-        var cards = _deck.DealCards(cardsToDealCount);
-        var player = Player.Create(nick, cards);
-        _players.Add(player);
-        _dealtCards.Add(cards);
-
-        return player;
-    }
 
     public void Promote(TournamentPlayer tournamentPlayer, int cardsToDealCount)
     {
@@ -79,12 +59,23 @@ public sealed class Game
         _bidFlowHistory.OnBid(playerId, pokerHand);
     }
 
-    private static bool NewBidIsNotHigher(string lastBid, string newBid)
+    private Player Join(string nick, int cardsToDealCount)
     {
-        var lastPokerHand = PokerHandParser.Parse(lastBid);
-        var newPokerHand = PokerHandParser.Parse(newBid);
+        if (_isGameStarted)
+            throw new JoinGameThatIsAlreadyStartedException(Id, nick);
 
-        return newPokerHand.IsBetterThan(lastPokerHand) == false;
+        if (_players.Count >= 2)
+            throw new MaxGamePlayersReachedException(Id);
+
+        if (_players.ContainsNick(nick))
+            throw new PlayerAlreadyJoinedTheGameException(Id, nick);
+
+        var cards = _deck.DealCards(cardsToDealCount);
+        var player = Player.Create(nick, cards);
+        _players.Add(player);
+        _dealtCards.Add(cards);
+
+        return player;
     }
 
     public void Check(Guid playerId)
@@ -124,5 +115,13 @@ public sealed class Game
         var bidFlow = _bidFlowHistory.GetFlow();
 
         return (players, bidFlow.Bids, bidFlow.CheckingPlayerId, _looser ?? Guid.Empty);
+    }
+
+    private static bool NewBidIsNotHigher(string lastBid, string newBid)
+    {
+        var lastPokerHand = PokerHandParser.Parse(lastBid);
+        var newPokerHand = PokerHandParser.Parse(newBid);
+
+        return newPokerHand.IsBetterThan(lastPokerHand) == false;
     }
 }

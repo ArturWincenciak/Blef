@@ -2,8 +2,8 @@
 
 public class DeckGenerator
 {
-    private readonly RandomnessProvider _randomnessProvider;
     private readonly Lazy<IReadOnlyCollection<Card>> _cards = new(GetStartingDeck);
+    private readonly RandomnessProvider _randomnessProvider;
 
     public DeckGenerator(RandomnessProvider randomnessProvider) =>
         _randomnessProvider = randomnessProvider;
@@ -16,9 +16,9 @@ public class DeckGenerator
     }
 
     /// <summary>
-    /// This list is readonly so it can be reused by all Decks (<see cref="Deck"/>).
-    /// <see cref="Card"/> is immutable and it is enough to have only one instance
-    /// of each Card in the whole system.
+    ///     This list is readonly so it can be reused by all Decks (<see cref="Deck" />).
+    ///     <see cref="Card" /> is immutable and it is enough to have only one instance
+    ///     of each Card in the whole system.
     /// </summary>
     private static IReadOnlyCollection<Card> GetStartingDeck()
     {

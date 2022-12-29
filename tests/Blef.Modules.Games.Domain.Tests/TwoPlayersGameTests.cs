@@ -6,12 +6,12 @@ public class TwoPlayersGameTests
 {
     private const string KING = "one-of-a-kind:King";
     private const string JACK = "one-of-a-kind:Jack";
+    private const string FIRST_PLAYER_NICK = "First Player Nick";
+    private const string SECOND_PLAYER_NICK = "Second Player Nick";
+    private readonly Guid _firstPlayerId;
 
     private readonly Game _game;
-    private readonly Guid _firstPlayerId;
-    private const string FIRST_PLAYER_NICK = "First Player Nick";
     private readonly Guid _secondPlayerId;
-    private const string SECOND_PLAYER_NICK = "Second Player Nick";
 
     public TwoPlayersGameTests()
     {

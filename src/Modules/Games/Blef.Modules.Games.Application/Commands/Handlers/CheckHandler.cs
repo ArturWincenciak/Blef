@@ -5,8 +5,8 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 
 internal sealed class CheckHandler : ICommandHandler<Check>
 {
-    private readonly IGamesRepository _games;
     private readonly ICommandDispatcher _commandDispatcher;
+    private readonly IGamesRepository _games;
 
     public CheckHandler(IGamesRepository games, ICommandDispatcher commandDispatcher)
     {

@@ -34,7 +34,7 @@ internal class ErrorHandlerMiddleware : IMiddleware
     }
 
     private static void SetProblemDetailsContentType(HttpContext context) =>
-        context.Response.OnStarting(state =>
+        context.Response.OnStarting(callback: state =>
         {
             var httpContext = (HttpContext) state;
             httpContext.Response.Headers.ContentType = "application/problem+json; charset=utf-8";
