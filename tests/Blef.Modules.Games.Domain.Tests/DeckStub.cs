@@ -9,23 +9,17 @@ public class DeckStub : IDeck
     public DeckStub(IEnumerable<Card> cards)
     {
         foreach (var card in cards)
-        {
             _queue.Enqueue(card);
-        }
     }
 
-    public Card DealCard()
-    {
-        return _queue.Dequeue();
-    }
+    public Card DealCard() => 
+        _queue.Dequeue();
 
     public Card[] DealCards(int count)
     {
         List<Card> cards = new();
         for (var i = 0; i < count; i++)
-        {
             cards.Add(DealCard());
-        }
 
         return cards.ToArray();
     }

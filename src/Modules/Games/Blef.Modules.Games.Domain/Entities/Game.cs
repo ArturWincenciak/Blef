@@ -36,19 +36,13 @@ public sealed class Game
     private Player Join(string nick, int cardsToDealCount)
     {
         if (_isGameStarted)
-        {
             throw new JoinGameThatIsAlreadyStartedException(Id, nick);
-        }
 
         if (_players.Count >= 2)
-        {
             throw new MaxGamePlayersReachedException(Id);
-        }
 
         if (_players.ContainsNick(nick))
-        {
             throw new PlayerAlreadyJoinedTheGameException(Id, nick);
-        }
 
         var cards = _deck.DealCards(cardsToDealCount);
         var player = Player.Create(nick, cards);
@@ -66,17 +60,13 @@ public sealed class Game
         _dealtCards.Add(cards);
     }
 
-    public Card[] GetCards(Guid playerId)
-    {
-        return _players.GetPlayer(playerId).DealtCards;
-    }
+    public Card[] GetCards(Guid playerId) => 
+        _players.GetPlayer(playerId).DealtCards;
 
     public void Bid(Guid playerId, string pokerHand)
     {
         if (_lastBid != null && NewBidIsNotHigher(_lastBid, pokerHand))
-        {
             throw new BidIsNotHigherThenLastOneException(Id, pokerHand, _lastBid);
-        }
 
         // TODO: decouple validation logic and parsing the poker hand (parsing contract-based)
         // just to check that the bid is Valid.
@@ -99,16 +89,12 @@ public sealed class Game
 
     public void Check(Guid playerId)
     {
+        // TODO: the same validation should be added for 'Bid' command
         if (_looser != null)
-        {
-            // TODO: the same validation should be added for 'Bid' command
             throw new GameIsAlreadyOverException(Id);
-        }
 
         if (_lastBid == null)
-        {
             throw new NoBidToCheckException(Id);
-        }
 
         _looser = _dealtCards.IsBidFulfilled(_lastBid)
             ? playerId
@@ -117,10 +103,8 @@ public sealed class Game
         _bidFlowHistory.OnCheck(playerId);
     }
 
-    public Guid? GetLooser()
-    {
-        return _looser;
-    }
+    public Guid? GetLooser() => 
+        _looser;
 
     public (
         IReadOnlyCollection<(Guid PlayerId, string Nick, Card[] Cards)> Players,

@@ -2,9 +2,8 @@
 
 public static class CardsGenerator
 {
-    public static IEnumerable<FaceCard> GetAllFaceCards()
-    {
-        return new[]
+    public static IEnumerable<FaceCard> GetAllFaceCards() =>
+        new[]
         {
             FaceCard.Nine,
             FaceCard.Ten,
@@ -13,16 +12,13 @@ public static class CardsGenerator
             FaceCard.King,
             FaceCard.Ace
         };
-    }
 
-    public static IEnumerable<Suit> GetAllSuites()
-    {
-        return new[]
+    public static IEnumerable<Suit> GetAllSuites() =>
+        new[]
         {
             Suit.Clubs,
             Suit.Diamonds,
             Suit.Hearts,
             Suit.Spades
         };
-    }
 }
