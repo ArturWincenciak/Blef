@@ -10,3 +10,27 @@ root = true
 
 # Editor Guidelines 
 guidelines = 120 10px solid 30B0ED4C, 130 1px solid 30B0ED4C, 140 1px solid 30B0ED4C
+
+# Microsoft .NET properties
+csharp_new_line_before_members_in_object_initializers = false
+csharp_preferred_modifier_order = private, public, async, internal, file, new, protected, override, virtual, sealed, abstract, readonly, extern, unsafe, volatile, static, required:suggestion
+
+# ReSharper properties
+resharper_arguments_anonymous_function = named
+resharper_arguments_skip_single = true
+resharper_arguments_string_literal = named
+resharper_blank_lines_around_type = 1
+resharper_braces_redundant = false
+resharper_constructor_or_destructor_body = expression_body
+resharper_csharp_max_line_length = 120
+resharper_csharp_wrap_ternary_expr_style = chop_always
+resharper_indent_nested_foreach_stmt = true
+resharper_instance_members_qualify_declared_in = 
+resharper_method_or_operator_body = expression_body
+resharper_parentheses_redundancy_style = remove
+resharper_place_expr_method_on_single_line = false
+resharper_place_expr_property_on_single_line = true
+resharper_place_simple_initializer_on_single_line = false
+resharper_wrap_array_initializer_style = chop_always
+resharper_wrap_chained_binary_expressions = chop_if_long
+resharper_wrap_object_and_collection_initializer_style = chop_always
