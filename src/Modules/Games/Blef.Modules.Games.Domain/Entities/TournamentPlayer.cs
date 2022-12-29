@@ -15,6 +15,6 @@ public class TournamentPlayer
         Nick = nick;
     }
 
-    public void MarkLostGame() => 
+    public void MarkLostGame() =>
         LostGames++;
 }

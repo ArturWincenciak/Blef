@@ -8,7 +8,7 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
 {
     private readonly IGamesRepository _games;
 
-    public GetGameHandler(IGamesRepository games) => 
+    public GetGameHandler(IGamesRepository games) =>
         _games = games;
 
     public Task<GetGameFlow.Result> Handle(GetGameFlow query, CancellationToken cancellation)

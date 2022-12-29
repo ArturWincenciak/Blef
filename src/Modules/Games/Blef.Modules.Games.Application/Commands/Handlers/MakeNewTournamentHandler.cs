@@ -8,7 +8,7 @@ internal sealed class MakeNewTournamentHandler : ICommandHandler<MakeNewTourname
 {
     private readonly ITournamentsRepository _tournaments;
 
-    public MakeNewTournamentHandler(ITournamentsRepository tournaments) => 
+    public MakeNewTournamentHandler(ITournamentsRepository tournaments) =>
         _tournaments = tournaments;
 
     public async Task<MakeNewTournament.Result> Handle(MakeNewTournament command, CancellationToken cancellation)

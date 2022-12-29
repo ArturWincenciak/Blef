@@ -8,7 +8,7 @@ public class Tournament
     private bool _isTournamentStarted;
     private readonly List<Game> _games = new();
 
-    private Tournament(Guid id) => 
+    private Tournament(Guid id) =>
         Id = id;
 
     public Guid Id { get; }
@@ -41,7 +41,7 @@ public class Tournament
         _isTournamentStarted = true;
     }
 
-    public IEnumerable<TournamentPlayer> GetPlayers() => 
+    public IEnumerable<TournamentPlayer> GetPlayers() =>
         _players;
 
     public void AddGame(Game game)
@@ -52,6 +52,6 @@ public class Tournament
         _games.Add(game);
     }
 
-    public Game GetCurrentGame() => 
+    public Game GetCurrentGame() =>
         _games[^1];
 }

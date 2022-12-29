@@ -60,7 +60,7 @@ public sealed class Game
         _dealtCards.Add(cards);
     }
 
-    public Card[] GetCards(Guid playerId) => 
+    public Card[] GetCards(Guid playerId) =>
         _players.GetPlayer(playerId).DealtCards;
 
     public void Bid(Guid playerId, string pokerHand)
@@ -103,7 +103,7 @@ public sealed class Game
         _bidFlowHistory.OnCheck(playerId);
     }
 
-    public Guid? GetLooser() => 
+    public Guid? GetLooser() =>
         _looser;
 
     public (
