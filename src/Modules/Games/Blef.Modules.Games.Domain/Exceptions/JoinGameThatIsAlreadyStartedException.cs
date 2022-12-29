@@ -12,6 +12,7 @@ internal sealed class JoinGameThatIsAlreadyStartedException : BlefException
     {
     }
 }
+
 internal sealed class JoinTournamentThatIsAlreadyStartedException : BlefException
 {
     public JoinTournamentThatIsAlreadyStartedException(Guid tournamentsId, string nick)

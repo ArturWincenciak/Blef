@@ -8,10 +8,8 @@ public class Tournament
     private bool _isTournamentStarted;
     private readonly List<Game> _games = new();
 
-    private Tournament(Guid id)
-    {
+    private Tournament(Guid id) => 
         Id = id;
-    }
 
     public Guid Id { get; }
 
@@ -21,19 +19,13 @@ public class Tournament
     public TournamentPlayer Join(string nick)
     {
         if (_isTournamentStarted)
-        {
             throw new JoinTournamentThatIsAlreadyStartedException(Id, nick);
-        }
 
         if (_players.Count >= 2)
-        {
             throw new MaxTournamentPlayersReachedException(Id);
-        }
 
         if (_players.Exists(player => player.Nick == nick))
-        {
             throw new PlayerAlreadyJoinedTheTournamentException(Id, nick);
-        }
 
         var player = TournamentPlayer.Create(nick);
         _players.Add(player);
@@ -44,30 +36,22 @@ public class Tournament
     public void Start()
     {
         if (_isTournamentStarted)
-        {
             throw new TournamentHasBeenAlreadyStartedException(Id);
-        }
 
         _isTournamentStarted = true;
     }
 
-    public IEnumerable<TournamentPlayer> GetPlayers()
-    {
-        return _players;
-    }
+    public IEnumerable<TournamentPlayer> GetPlayers() => 
+        _players;
 
     public void AddGame(Game game)
     {
         if (_isTournamentStarted == false)
-        {
             throw new InvalidOperationException("Cannot add games for not started tournament");
-        }
 
         _games.Add(game);
     }
 
-    public Game GetCurrentGame()
-    {
-        return _games[^1];
-    }
+    public Game GetCurrentGame() => 
+        _games[^1];
 }

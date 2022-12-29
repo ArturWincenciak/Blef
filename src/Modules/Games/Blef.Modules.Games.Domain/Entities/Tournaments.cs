@@ -20,7 +20,6 @@ internal class Tournaments
     {
         var tournament = _tournaments.Get(tournamentId);
         tournament.Start();
-
         StartNextGame(tournament);
     }
 
@@ -29,9 +28,7 @@ internal class Tournaments
         var tournament = _tournaments.Get(tournamentId);
         var currentGame = tournament.GetCurrentGame();
         EnsureCurrentGameIsFinished(currentGame);
-
         MarkLostPlayer(tournament, currentGame);
-
         StartNextGame(tournament);
     }
 
@@ -57,8 +54,6 @@ internal class Tournaments
     private static void EnsureCurrentGameIsFinished(Game currentGame)
     {
         if (currentGame.GetLooser() == null)
-        {
             throw new GameNotYetFinishedException(currentGame.Id);
-        }
     }
 }

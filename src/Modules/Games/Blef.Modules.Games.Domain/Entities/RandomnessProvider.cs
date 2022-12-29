@@ -9,8 +9,6 @@ public class RandomnessProvider
 {
     private readonly Random _random = new();
 
-    public int GetInt(int exclusiveMaxValue)
-    {
-        return _random.Next(0, exclusiveMaxValue);
-    }
+    public int GetInt(int exclusiveMaxValue) => 
+        _random.Next(0, exclusiveMaxValue);
 }

@@ -9,30 +9,20 @@ internal sealed class InternalControllerFeatureProvider : ControllerFeatureProvi
     protected override bool IsController(TypeInfo typeInfo)
     {
         if (false == typeInfo.IsClass)
-        {
             return false;
-        }
 
         if (typeInfo.IsAbstract)
-        {
             return false;
-        }
 
         if (typeInfo.ContainsGenericParameters)
-        {
             return false;
-        }
 
         if (typeInfo.IsDefined(typeof(NonControllerAttribute)))
-        {
             return false;
-        }
 
-        if (false == typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
-            && false == typeInfo.IsDefined(typeof(ControllerAttribute)))
-        {
+        if (false == typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) &&
+            false == typeInfo.IsDefined(typeof(ControllerAttribute)))
             return false;
-        }
 
         return true;
     }

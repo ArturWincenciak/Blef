@@ -17,10 +17,9 @@ public class Deck : IDeck
     public Card[] DealCards(int count)
     {
         List<Card> cards = new();
+        
         for (var i = 0; i < count; i++)
-        {
             cards.Add(DealCard());
-        }
 
         return cards.ToArray();
     }
@@ -28,9 +27,7 @@ public class Deck : IDeck
     public Card DealCard()
     {
         if (_cards.Any() == false)
-        {
             throw new InvalidOperationException("Cannot deal more cards from deck. Deck is empty");
-        }
 
         var randomPosition = _randomnessProvider.GetInt(_cards.Count);
 

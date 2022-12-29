@@ -25,9 +25,7 @@ public class Players
     {
         var previousPlayerIndex = _currentPlayerIndex - 1;
         if (previousPlayerIndex < 0)
-        {
             previousPlayerIndex = _players.Count - 1;
-        }
 
         return _players[previousPlayerIndex];
     }
@@ -40,14 +38,10 @@ public class Players
         var currentPlayer = GetCurrentPlayer();
 
         if (currentPlayer.Id != playerId)
-        {
             throw new ThatIsNotThisPlayerTurnNowException(playerId);
-        }
 
         _currentPlayerIndex++;
         if (_currentPlayerIndex >= _players.Count)
-        {
             _currentPlayerIndex = 0;
-        }
     }
 }

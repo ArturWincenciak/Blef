@@ -12,10 +12,8 @@ public class TournamentsTests
 
     private const string PLAYER_NICK = "Player Nick";
 
-    public TournamentsTests()
-    {
+    public TournamentsTests() => 
         _sut = new Tournaments(_tournamentsRepository, _gamesRepository, new DeckGenerator(new RandomnessProvider()));
-    }
 
     private (Tournament Tournament, TournamentPlayer Player) SetupStartedTournament()
     {
