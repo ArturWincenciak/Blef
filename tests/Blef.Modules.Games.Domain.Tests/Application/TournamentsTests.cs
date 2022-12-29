@@ -12,7 +12,8 @@ public class TournamentsTests
     private readonly ITournamentsRepository _tournamentsRepository = new InMemoryTournamentsRepository();
 
     public TournamentsTests() =>
-        _sut = new Tournaments(_tournamentsRepository, _gamesRepository, new DeckGenerator(new RandomnessProvider()));
+        _sut = new Tournaments(_tournamentsRepository, _gamesRepository,
+            deckGenerator: new DeckGenerator(new RandomnessProvider()));
 
     private (Tournament Tournament, TournamentPlayer Player) SetupStartedTournament()
     {
@@ -32,7 +33,7 @@ public class TournamentsTests
 
         _sut.StartNextGame(tournament.Id);
 
-        Assert.Equal(2, tournament.GetCurrentGame().GetCards(player.PlayerId).Length);
+        Assert.Equal(expected: 2, tournament.GetCurrentGame().GetCards(player.PlayerId).Length);
     }
 
     private static void FinishCurrentGame(Tournament tournament, TournamentPlayer player)

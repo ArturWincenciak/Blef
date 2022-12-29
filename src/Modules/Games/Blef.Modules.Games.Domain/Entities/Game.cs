@@ -27,10 +27,10 @@ public sealed class Game
         Create(deck, Guid.Empty);
 
     public static Game Create(IDeck deck, Guid tournamentId) =>
-        new(Guid.NewGuid(), deck, tournamentId);
+        new(id: Guid.NewGuid(), deck, tournamentId);
 
     public Player Join(string nick) =>
-        Join(nick, 1);
+        Join(nick, cardsToDealCount: 1);
 
     public void Promote(TournamentPlayer tournamentPlayer, int cardsToDealCount)
     {

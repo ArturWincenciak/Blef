@@ -18,17 +18,17 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
 
         var bidFlow = gameFlow.Bids
             .Select(bid => new GetGameFlow.GameBid(
-                Order: bid.Order,
-                PlayerId: bid.PlayerId,
-                Bid: bid.Bid))
+                bid.Order,
+                bid.PlayerId,
+                bid.Bid))
             .ToArray();
 
         var gameIsInProgress = gameFlow.LooserPlayerId == Guid.Empty;
 
         var players = gameFlow.Players
             .Select(player => new GetGameFlow.Player(
-                Id: player.PlayerId,
-                Nick: player.Nick,
+                player.PlayerId,
+                player.Nick,
                 Cards: gameIsInProgress
                     ? HideCards(player.Cards)
                     : MapCards(cards: player.Cards)))
@@ -45,5 +45,5 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
         cards.Select(MapCard).ToArray();
 
     private static GetGameFlow.Card MapCard(Card card) =>
-        new(card.FaceCard.ToString(), card.Suit.ToString());
+        new(FaceCard: card.FaceCard.ToString(), Suit: card.Suit.ToString());
 }

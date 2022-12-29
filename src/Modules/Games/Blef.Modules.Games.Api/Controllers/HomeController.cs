@@ -8,9 +8,9 @@ internal sealed class HomeController : ControllerBase
 {
     [HttpGet]
     public ActionResult<string> Get() =>
-        JsonSerializer.Serialize(new
+        JsonSerializer.Serialize(value: new
         {
             Module = "Games module API",
             RequestTime = DateTime.UtcNow
-        }, new JsonSerializerOptions {WriteIndented = true});
+        }, options: new JsonSerializerOptions {WriteIndented = true});
 }

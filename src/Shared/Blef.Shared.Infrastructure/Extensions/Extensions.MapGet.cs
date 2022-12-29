@@ -15,11 +15,11 @@ internal static partial class Extensions
             requestDelegate: async context =>
             {
                 var infoProvider = context.RequestServices.GetRequiredService<ModuleInfoCollection>();
-                var json = JsonSerializer.Serialize(new
+                var json = JsonSerializer.Serialize(value: new
                 {
                     infoProvider.Modules,
                     RequestTime = DateTime.UtcNow
-                }, new JsonSerializerOptions {WriteIndented = true});
+                }, options: new JsonSerializerOptions {WriteIndented = true});
                 await context.Response.WriteAsync(json);
             });
 
@@ -27,7 +27,7 @@ internal static partial class Extensions
         endpoints.MapGet(
             pattern: "/",
             requestDelegate: async context => await context.Response.WriteAsync(
-                text: JsonSerializer.Serialize((object) new
+                text: JsonSerializer.Serialize(value: (object) new
                 {
                     Aplication = "Blef",
                     Description = "Card game",
@@ -36,5 +36,5 @@ internal static partial class Extensions
                     Repository = "https://github.com/ArturWincenciak/Blef",
                     DockerHub = "https://hub.docker.com/repository/docker/teovincent/blef",
                     RequestTime = DateTime.UtcNow
-                }, new JsonSerializerOptions {WriteIndented = true})));
+                }, options: new JsonSerializerOptions {WriteIndented = true})));
 }

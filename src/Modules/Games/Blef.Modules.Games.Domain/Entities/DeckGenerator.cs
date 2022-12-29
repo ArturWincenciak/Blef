@@ -11,7 +11,7 @@ public class DeckGenerator
     public Deck GetFullDeck()
     {
         var readOnlyCollection = _cards.Value;
-        var fullDeck = new Deck(_randomnessProvider, readOnlyCollection.ToList());
+        var fullDeck = new Deck(_randomnessProvider, cards: readOnlyCollection.ToList());
         return fullDeck;
     }
 
@@ -25,8 +25,10 @@ public class DeckGenerator
         var cards = new List<Card>(24);
 
         foreach (var faceCard in CardsGenerator.GetAllFaceCards())
+        {
             foreach (var suit in CardsGenerator.GetAllSuites())
                 cards.Add(new Card(faceCard, suit));
+        }
 
         return cards.AsReadOnly();
     }

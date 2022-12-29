@@ -24,7 +24,7 @@ internal sealed class TournamentsController : ModuleControllerBase
         var cmd = new MakeNewTournament();
         var tournament = await _commandDispatcher
             .Dispatch<MakeNewTournament, MakeNewTournament.Result>(cmd, cancellation);
-        return Created($"{GamesModule.BASE_PATH}/tournaments/{tournament.TournamentId}", tournament);
+        return Created(uri: $"{GamesModule.BASE_PATH}/tournaments/{tournament.TournamentId}", tournament);
     }
 
     [HttpPost("{tournamentId:Guid}/players")]
@@ -33,7 +33,7 @@ internal sealed class TournamentsController : ModuleControllerBase
     {
         var cmd = new JoinTournament(tournamentId, command.Nick);
         var player = await _commandDispatcher.Dispatch<JoinTournament, JoinTournament.Result>(cmd, cancellation);
-        return Created($"{GamesModule.BASE_PATH}/tournaments/{tournamentId}/players/{player.PlayerId}", player);
+        return Created(uri: $"{GamesModule.BASE_PATH}/tournaments/{tournamentId}/players/{player.PlayerId}", player);
     }
 
     [HttpPost("{tournamentId:Guid}/start")]
@@ -41,7 +41,7 @@ internal sealed class TournamentsController : ModuleControllerBase
     {
         var cmd = new StartTournament(tournamentId);
         await _commandDispatcher.Dispatch(cmd, cancellation);
-        return Created($"{GamesModule.BASE_PATH}/tournaments/{tournamentId}/games/current", null);
+        return Created(uri: $"{GamesModule.BASE_PATH}/tournaments/{tournamentId}/games/current", value: null);
     }
 
     [HttpGet("{tournamentId:Guid}/games/current")]
