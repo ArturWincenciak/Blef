@@ -6,7 +6,7 @@ public class DealtCards
 {
     private readonly List<Card> _cards = new();
 
-    public void Add(IEnumerable<Card> cards) => 
+    public void Add(IEnumerable<Card> cards) =>
         _cards.AddRange(cards);
 
     public bool IsBidFulfilled(string lastBid)

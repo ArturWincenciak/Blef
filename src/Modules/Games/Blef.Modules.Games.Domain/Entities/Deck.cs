@@ -17,7 +17,7 @@ public class Deck : IDeck
     public Card[] DealCards(int count)
     {
         List<Card> cards = new();
-        
+
         for (var i = 0; i < count; i++)
             cards.Add(DealCard());
 

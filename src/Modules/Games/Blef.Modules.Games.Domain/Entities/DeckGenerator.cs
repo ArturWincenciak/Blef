@@ -5,7 +5,7 @@ public class DeckGenerator
     private readonly RandomnessProvider _randomnessProvider;
     private readonly Lazy<IReadOnlyCollection<Card>> _cards = new(GetStartingDeck);
 
-    public DeckGenerator(RandomnessProvider randomnessProvider) => 
+    public DeckGenerator(RandomnessProvider randomnessProvider) =>
         _randomnessProvider = randomnessProvider;
 
     public Deck GetFullDeck()

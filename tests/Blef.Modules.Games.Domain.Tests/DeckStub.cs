@@ -12,7 +12,7 @@ public class DeckStub : IDeck
             _queue.Enqueue(card);
     }
 
-    public Card DealCard() => 
+    public Card DealCard() =>
         _queue.Dequeue();
 
     public Card[] DealCards(int count)
