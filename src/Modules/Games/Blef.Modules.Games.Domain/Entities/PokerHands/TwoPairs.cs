@@ -5,6 +5,8 @@ public class TwoPairs : PokerHand
     private readonly FaceCard _first;
     private readonly FaceCard _second;
 
+    protected override int PokerHandRank => 3;
+
     public TwoPairs(FaceCard first, FaceCard second)
     {
         if (first <= second)
@@ -16,8 +18,6 @@ public class TwoPairs : PokerHand
         _first = first;
         _second = second;
     }
-
-    protected override int PokerHandRank => 3;
 
     public override bool IsOnTable(IReadOnlyCollection<Card> table)
     {
