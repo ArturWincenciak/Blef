@@ -8,10 +8,10 @@ public class Tournament
     private readonly List<TournamentPlayer> _players = new();
     private bool _isTournamentStarted;
 
+    public Guid Id { get; }
+
     private Tournament(Guid id) =>
         Id = id;
-
-    public Guid Id { get; }
 
     public static Tournament Create() =>
         new(Guid.NewGuid());
