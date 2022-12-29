@@ -25,7 +25,7 @@ internal class CommandDispatcher : ICommandDispatcher
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{@Command}", command);
+            _logger.LogError(ex, message: "{@Command}", command);
             throw;
         }
     }
@@ -43,7 +43,7 @@ internal class CommandDispatcher : ICommandDispatcher
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{@Command}", command);
+            _logger.LogError(ex, message: "{@Command}", command);
             throw;
         }
     }

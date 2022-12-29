@@ -4,9 +4,9 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 public class Tournament
 {
+    private readonly List<Game> _games = new();
     private readonly List<TournamentPlayer> _players = new();
     private bool _isTournamentStarted;
-    private readonly List<Game> _games = new();
 
     private Tournament(Guid id) =>
         Id = id;

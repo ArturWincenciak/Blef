@@ -26,7 +26,7 @@ internal class QueryDispatcher : IQueryDispatcher
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{@Query}", query);
+            _logger.LogError(ex, message: "{@Query}", query);
             throw;
         }
     }

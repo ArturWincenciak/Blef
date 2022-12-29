@@ -7,9 +7,9 @@ public class GameTests
 {
     private const string KING = "one-of-a-kind:King";
     private const string ACE = "one-of-a-kind:Ace";
+    private const string PLAYER_NICK = "Player Nick";
 
     private readonly Game _game;
-    private const string PLAYER_NICK = "Player Nick";
     private readonly Guid _playerId;
 
     public GameTests()

@@ -5,9 +5,9 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal class Tournaments
 {
-    private readonly ITournamentsRepository _tournaments;
-    private readonly IGamesRepository _games;
     private readonly DeckGenerator _deckGenerator;
+    private readonly IGamesRepository _games;
+    private readonly ITournamentsRepository _tournaments;
 
     public Tournaments(ITournamentsRepository tournaments, IGamesRepository games, DeckGenerator deckGenerator)
     {

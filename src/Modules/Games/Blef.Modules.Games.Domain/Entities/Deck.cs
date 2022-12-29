@@ -1,12 +1,9 @@
 ﻿namespace Blef.Modules.Games.Domain.Entities;
 
-using System;
-using System.Collections.Generic;
-
 public class Deck : IDeck
 {
-    private readonly RandomnessProvider _randomnessProvider;
     private readonly List<Card> _cards;
+    private readonly RandomnessProvider _randomnessProvider;
 
     public Deck(RandomnessProvider randomnessProvider, List<Card> cards)
     {
@@ -30,11 +27,8 @@ public class Deck : IDeck
             throw new InvalidOperationException("Cannot deal more cards from deck. Deck is empty");
 
         var randomPosition = _randomnessProvider.GetInt(_cards.Count);
-
         var card = _cards[randomPosition];
-
         _cards.RemoveAt(randomPosition);
-
         return card;
     }
 }

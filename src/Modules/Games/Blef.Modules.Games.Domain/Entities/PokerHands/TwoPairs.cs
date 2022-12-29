@@ -8,18 +8,16 @@ public class TwoPairs : PokerHand
     public TwoPairs(FaceCard first, FaceCard second)
     {
         if (first <= second)
-        {
             throw new ArgumentException($"First pair '{first}' has to be greater than second pair '{second}'");
-        }
 
         if (first == second)
-        {
             throw new ArgumentException($"First pair '{first}' has to be different than second pair '{second}'");
-        }
 
         _first = first;
         _second = second;
     }
+
+    protected override int PokerHandRank => 3;
 
     public override bool IsOnTable(IReadOnlyCollection<Card> table)
     {
@@ -28,10 +26,6 @@ public class TwoPairs : PokerHand
         return firstFaceCardCount >= 2 && secondFaceCardCount >= 2;
     }
 
-    protected override int PokerHandRank => 3;
-
-    protected override int GetInnerRank()
-    {
-        return 10 * (int) _first + (int) _second;
-    }
+    protected override int GetInnerRank() =>
+        10 * (int) _first + (int) _second;
 }

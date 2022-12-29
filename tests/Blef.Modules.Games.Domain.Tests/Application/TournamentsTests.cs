@@ -6,11 +6,10 @@ namespace Blef.Modules.Games.Domain.Tests.Application;
 
 public class TournamentsTests
 {
+    private const string PLAYER_NICK = "Player Nick";
+    private readonly IGamesRepository _gamesRepository = new InMemoryGamesRepository();
     private readonly Tournaments _sut;
     private readonly ITournamentsRepository _tournamentsRepository = new InMemoryTournamentsRepository();
-    private readonly IGamesRepository _gamesRepository = new InMemoryGamesRepository();
-
-    private const string PLAYER_NICK = "Player Nick";
 
     public TournamentsTests() =>
         _sut = new Tournaments(_tournamentsRepository, _gamesRepository, new DeckGenerator(new RandomnessProvider()));
@@ -39,7 +38,7 @@ public class TournamentsTests
     private static void FinishCurrentGame(Tournament tournament, TournamentPlayer player)
     {
         var currentGame = tournament.GetCurrentGame();
-        currentGame.Bid(player.PlayerId, "two-pairs:jack,ten");
+        currentGame.Bid(player.PlayerId, pokerHand: "two-pairs:jack,ten");
         currentGame.Check(player.PlayerId);
 
         Assert.NotNull(currentGame.GetLooser());

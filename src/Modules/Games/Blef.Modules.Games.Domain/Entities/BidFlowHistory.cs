@@ -2,8 +2,8 @@
 
 public class BidFlowHistory
 {
-    private int _bidNumber;
     private readonly List<(int Order, Guid PlayerId, string Bid)> _flow = new();
+    private int _bidNumber;
     private Guid _checkingPlayerId;
 
     public void OnBid(Guid playerId, string bid) =>

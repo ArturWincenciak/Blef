@@ -6,8 +6,8 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 
 internal sealed class MakeNewGameHandler : ICommandHandler<MakeNewGame, MakeNewGame.Result>
 {
-    private readonly IGamesRepository _games;
     private readonly DeckGenerator _deckGenerator;
+    private readonly IGamesRepository _games;
 
     public MakeNewGameHandler(IGamesRepository games, DeckGenerator deckGenerator)
     {

@@ -14,7 +14,7 @@ internal static class ModuleLoader
             .ToList();
 
         var baseDir = AppDomain.CurrentDomain.BaseDirectory;
-        var baseDirDllFiles = Directory.GetFiles(baseDir, "*.dll");
+        var baseDirDllFiles = Directory.GetFiles(baseDir, searchPattern: "*.dll");
 
         var notYetLoadedDllFiles = baseDirDllFiles
             .Where(file => false == loadedAssembliesFiles.Contains(file, StringComparer.InvariantCultureIgnoreCase));

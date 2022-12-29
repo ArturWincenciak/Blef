@@ -10,6 +10,9 @@ internal class ExceptionToResponseMapper
 {
     private readonly ConcurrentDictionary<Type, string> _codesCache = new();
 
+    private static string DocumentationUrl =>
+        "https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details";
+
     public object Map(Exception exception) =>
         exception switch
         {
@@ -73,8 +76,5 @@ internal class ExceptionToResponseMapper
     }
 
     private static string CreateErrorCode(Type type) =>
-        type.Name.Underscore().Replace("_exception", string.Empty).Dasherize();
-
-    private static string DocumentationUrl =>
-        "https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details";
+        type.Name.Underscore().Replace(oldValue: "_exception", string.Empty).Dasherize();
 }
