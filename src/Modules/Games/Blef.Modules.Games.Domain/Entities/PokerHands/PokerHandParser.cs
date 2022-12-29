@@ -23,12 +23,11 @@ public static class PokerHandParser
     private static TwoPairs CreateTwoPairs(string faceCards)
     {
         var faceCardParts = faceCards.Split(",");
-        return new TwoPairs(ParseFaceCard(faceCardParts[0]), ParseFaceCard(faceCardParts[1]));
+        return new TwoPairs(first: ParseFaceCard(faceCardParts[0]), second: ParseFaceCard(faceCardParts[1]));
     }
 
-    private static FaceCard ParseFaceCard(string faceCard)
-    {
-        return faceCard.ToLower() switch
+    private static FaceCard ParseFaceCard(string faceCard) =>
+        faceCard.ToLower() switch
         {
             "nine" => FaceCard.Nine,
             "ten" => FaceCard.Ten,
@@ -38,5 +37,4 @@ public static class PokerHandParser
             "ace" => FaceCard.Ace,
             _ => throw new Exception($"Unknown value of FaceCard: '{faceCard}'")
         };
-    }
 }

@@ -2,4 +2,5 @@
 
 [AttributeUsage(AttributeTargets.Class)]
 public class CommandHandlerDecoratorAttribute : Attribute
-{}
+{
+}

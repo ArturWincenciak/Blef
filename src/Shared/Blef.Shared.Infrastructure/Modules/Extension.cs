@@ -50,5 +50,5 @@ internal static class Extension
 
     internal static IServiceCollection AddModuleInfo(this IServiceCollection services, IEnumerable<IModule> modules) =>
         services.AddSingleton(new ModuleInfoCollection(
-            modules.Select(module => new ModuleInfo(module.Name, $"/{module.Path}"))));
+            modules.Select(module => new ModuleInfo(module.Name, Path: $"/{module.Path}"))));
 }

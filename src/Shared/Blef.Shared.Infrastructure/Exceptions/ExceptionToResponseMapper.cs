@@ -67,7 +67,7 @@ internal class ExceptionToResponseMapper
     {
         var type = exception.GetType();
 
-        if (_codesCache.TryGetValue(type, out var cachedErrorCode))
+        if (_codesCache.TryGetValue(type, value: out var cachedErrorCode))
             return cachedErrorCode;
 
         var errorCode = CreateErrorCode(type);

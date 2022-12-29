@@ -40,7 +40,7 @@ internal class Tournaments
 
     private void StartNextGame(Tournament tournament)
     {
-        var game = Game.Create(_deckGenerator.GetFullDeck(), tournament.Id);
+        var game = Game.Create(deck: _deckGenerator.GetFullDeck(), tournament.Id);
         foreach (var player in tournament.GetPlayers())
         {
             var cardsToDeal = player.LostGames + 1;

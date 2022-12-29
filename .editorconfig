@@ -17,6 +17,7 @@ csharp_preferred_modifier_order = private, public, async, internal, file, new, p
 
 # ReSharper properties
 resharper_arguments_anonymous_function = named
+resharper_arguments_other = named
 resharper_arguments_skip_single = true
 resharper_arguments_string_literal = named
 resharper_blank_lines_around_type = 1

@@ -33,7 +33,7 @@ public class TwoPlayersGameTests
         _game.Bid(_firstPlayerId, KING);
         _game.Check(_secondPlayerId);
 
-        Assert.Equal(_secondPlayerId, _game.GetLooser());
+        Assert.Equal(_secondPlayerId, actual: _game.GetLooser());
     }
 
     [Fact]
@@ -42,6 +42,6 @@ public class TwoPlayersGameTests
         _game.Bid(_firstPlayerId, JACK);
         _game.Check(_secondPlayerId);
 
-        Assert.Equal(_firstPlayerId, _game.GetLooser());
+        Assert.Equal(_firstPlayerId, actual: _game.GetLooser());
     }
 }

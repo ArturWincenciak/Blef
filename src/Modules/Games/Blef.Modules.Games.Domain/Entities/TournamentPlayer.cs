@@ -13,7 +13,7 @@ public class TournamentPlayer
     }
 
     public static TournamentPlayer Create(string nick) =>
-        new(Guid.NewGuid(), nick);
+        new(playerId: Guid.NewGuid(), nick);
 
     public void MarkLostGame() =>
         LostGames++;

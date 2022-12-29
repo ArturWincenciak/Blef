@@ -7,14 +7,14 @@ using static Blef.Bootstrapper.ModuleLoader;
 var builder = WebApplication.CreateBuilder(args);
 
 EnumerateFiles(
-        path: builder.Environment.ContentRootPath,
+        builder.Environment.ContentRootPath,
         searchPattern: "*.module.json",
         SearchOption.AllDirectories)
     .ToList()
     .ForEach(config => builder.Configuration.AddJsonFile(config));
 
 EnumerateFiles(
-        path: builder.Environment.ContentRootPath,
+        builder.Environment.ContentRootPath,
         searchPattern: $"*.module.{builder.Environment.EnvironmentName}.json",
         SearchOption.AllDirectories)
     .ToList()
