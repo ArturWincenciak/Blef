@@ -9,6 +9,10 @@ namespace Blef.Modules.Games.Api.Controllers.Tournaments;
 
 internal sealed class TournamentsController : ModuleControllerBase
 {
+    private const string TOURNAMENT_ID = "{tournamentId:Guid}";
+    private const string PLAYERS = "players";
+    private const string GAMES_CURRENT = "games/current";
+    
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
 
@@ -24,31 +28,34 @@ internal sealed class TournamentsController : ModuleControllerBase
         var cmd = new MakeNewTournament();
         var tournament = await _commandDispatcher
             .Dispatch<MakeNewTournament, MakeNewTournament.Result>(cmd, cancellation);
-        return Created(uri: $"{GamesModule.BASE_PATH}/tournaments/{tournament.TournamentId}", tournament);
+        return Created(uri: $"{TournamentUri(tournament.TournamentId)}", tournament);
     }
 
-    [HttpPost("{tournamentId:Guid}/players")]
+    [HttpPost($"{TOURNAMENT_ID}/{PLAYERS}")]
     public async Task<IActionResult> JoinTournament(Guid tournamentId, JoinTournamentApi command,
         CancellationToken cancellation)
     {
         var cmd = new JoinTournament(tournamentId, command.Nick);
         var player = await _commandDispatcher.Dispatch<JoinTournament, JoinTournament.Result>(cmd, cancellation);
-        return Created(uri: $"{GamesModule.BASE_PATH}/tournaments/{tournamentId}/players/{player.PlayerId}", player);
+        return Created(uri: $"{TournamentUri(tournamentId)}/{PLAYERS}/{player.PlayerId}", player);
     }
 
-    [HttpPost("{tournamentId:Guid}/start")]
+    [HttpPost($"{TOURNAMENT_ID}/start")]
     public async Task<IActionResult> StartTournament(Guid tournamentId, CancellationToken cancellation)
     {
         var cmd = new StartTournament(tournamentId);
         await _commandDispatcher.Dispatch(cmd, cancellation);
-        return Created(uri: $"{GamesModule.BASE_PATH}/tournaments/{tournamentId}/games/current", value: null);
+        return Created(uri: $"{TournamentUri(tournamentId)}/{GAMES_CURRENT}", value: null);
     }
 
-    [HttpGet("{tournamentId:Guid}/games/current")]
+    [HttpGet($"{TOURNAMENT_ID}/{GAMES_CURRENT}")]
     public async Task<IActionResult> GetCurrentGame(Guid tournamentId, CancellationToken cancellation)
     {
         var query = new GetCurrentGame(tournamentId);
         var gameId = await _queryDispatcher.Dispatch<GetCurrentGame, GetCurrentGame.Result>(query, cancellation);
         return Ok(gameId);
     }
+
+    private static string TournamentUri(Guid tournamentId) =>
+        $"{GamesModule.BASE_PATH}/tournaments/{tournamentId}";
 }
