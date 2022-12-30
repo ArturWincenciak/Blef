@@ -33,7 +33,7 @@ public class Players
     private Player GetCurrentPlayer() =>
         _players[_currentPlayerIndex];
 
-    public void Bid(Guid playerId, string pokerHand)
+    public void Bid(Guid playerId)
     {
         var currentPlayer = GetCurrentPlayer();
 
