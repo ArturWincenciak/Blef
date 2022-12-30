@@ -23,6 +23,6 @@ jobs:
       with:
         solutionPath: ./Blef.sln
         failOnIssue: 1
-        minimumSeverity: notice
+        minimumSeverity: warning
         solutionWideAnalysis: false
         
