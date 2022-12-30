@@ -8,7 +8,7 @@ namespace Blef.Modules.Users.Core;
 
 internal static class Extensions
 {
-    [SuppressMessage("ReSharper", "UnusedParameter.Global")]
+    [SuppressMessage(category: "ReSharper", checkId: "UnusedParameter.Global")]
     internal static void AddCore(this IServiceCollection services)
     {
         // register domain's services and e.t.c here
