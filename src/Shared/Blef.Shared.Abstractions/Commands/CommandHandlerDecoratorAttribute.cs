@@ -2,7 +2,7 @@
 
 namespace Blef.Shared.Abstractions.Commands;
 
-[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+[SuppressMessage(category: "ReSharper", checkId: "ClassNeverInstantiated.Global")]
 [AttributeUsage(AttributeTargets.Class)]
 public class CommandHandlerDecoratorAttribute : Attribute
 {

@@ -6,6 +6,6 @@ public interface IQueryHandler<in TQuery, TQueryResult>
     where TQuery : IQuery<TQueryResult>
     where TQueryResult : IQueryResult
 {
-    [SuppressMessage("ReSharper", "UnusedParameter.Global")]
+    [SuppressMessage(category: "ReSharper", checkId: "UnusedParameter.Global")]
     Task<TQueryResult> Handle(TQuery query, CancellationToken cancellation);
 }

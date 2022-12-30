@@ -6,7 +6,7 @@ public interface IQuery
 {
 }
 
-[SuppressMessage("ReSharper", "UnusedTypeParameter")]
+[SuppressMessage(category: "ReSharper", checkId: "UnusedTypeParameter")]
 public interface IQuery<TQueryResult> : IQuery
     where TQueryResult : IQueryResult
 {
