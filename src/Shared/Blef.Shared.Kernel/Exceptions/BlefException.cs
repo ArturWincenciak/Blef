@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 
 namespace Blef.Shared.Kernel.Exceptions;
 
@@ -18,6 +19,7 @@ public abstract class BlefException : Exception
         Errors = new Dictionary<string, string[]>();
     }
 
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public BlefException WithError(ExceptionError error)
     {
         Errors.Add(error.Code, error.Values);
