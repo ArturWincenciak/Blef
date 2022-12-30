@@ -1,10 +1,12 @@
-﻿namespace Blef.Shared.Abstractions.Commands;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Blef.Shared.Abstractions.Commands;
 
 public interface ICommand
 {
 }
 
-// ReSharper disable once UnusedTypeParameter
+[SuppressMessage("ReSharper", "UnusedTypeParameter")]
 public interface ICommand<TCommandResult> : ICommand
     where TCommandResult : ICommandResult
 {
