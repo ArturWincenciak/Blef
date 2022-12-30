@@ -16,7 +16,7 @@ internal sealed class GamesController : ModuleControllerBase
     private const string CARDS = "cards";
     private const string BIDS = "bids";
     private const string CHECKS = "checks";
-    
+
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
 
@@ -73,11 +73,10 @@ internal sealed class GamesController : ModuleControllerBase
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, playerId)}/checks", value: null);
     }
-    
-    private static string PlayerUri(Guid gameId, Guid playerId) => 
+
+    private static string PlayerUri(Guid gameId, Guid playerId) =>
         $"{GameUri(gameId)}/{PLAYERS}/{playerId}";
 
     private static string GameUri(Guid gameId) =>
         $"{GamesModule.BASE_PATH}/{GAMES}/{gameId}";
-
 }
