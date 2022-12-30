@@ -1,10 +1,12 @@
 ﻿using Blef.Modules.Games.Infrastructure;
 using Blef.Shared.Abstractions.Modules;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Blef.Modules.Games.Api;
 
+[UsedImplicitly]
 internal class GamesModule : IModule
 {
     public const string BASE_PATH = "games-module";
