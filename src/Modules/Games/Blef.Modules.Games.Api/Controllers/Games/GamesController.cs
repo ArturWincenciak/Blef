@@ -9,6 +9,14 @@ namespace Blef.Modules.Games.Api.Controllers.Games;
 
 internal sealed class GamesController : ModuleControllerBase
 {
+    private const string GAME_ID = "{gameId:Guid}";
+    private const string PLAYER_ID = "{playerId:Guid}";
+    private const string GAMES = "games";
+    private const string PLAYERS = "players";
+    private const string CARDS = "cards";
+    private const string BIDS = "bids";
+    private const string CHECKS = "checks";
+    
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
 
@@ -23,10 +31,10 @@ internal sealed class GamesController : ModuleControllerBase
     {
         var cmd = new MakeNewGame();
         var game = await _commandDispatcher.Dispatch<MakeNewGame, MakeNewGame.Result>(cmd, cancellation);
-        return Created(uri: $"{GamesModule.BASE_PATH}/games/{game.GameId}", game);
+        return Created(uri: $"{GameUri(game.GameId)}", game);
     }
 
-    [HttpGet("{gameId:Guid}")]
+    [HttpGet(GAME_ID)]
     public async Task<IActionResult> GetGameFlow(Guid gameId, CancellationToken cancellation)
     {
         var query = new GetGameFlow(gameId);
@@ -34,15 +42,15 @@ internal sealed class GamesController : ModuleControllerBase
         return Ok(gameFlow);
     }
 
-    [HttpPost("{gameId:Guid}/players")]
+    [HttpPost($"{GAME_ID}/{PLAYERS}")]
     public async Task<IActionResult> JoinGame(Guid gameId, JoinGameApi command, CancellationToken cancellation)
     {
         var cmd = new JoinGame(gameId, command.Nick);
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
-        return Created(uri: $"{GamesModule.BASE_PATH}/games/{gameId}/players/{player.PlayerId}", player);
+        return Created(uri: $"{PlayerUri(gameId, player.PlayerId)}", player);
     }
 
-    [HttpGet("{gameId:Guid}/players/{playerId:Guid}/cards")]
+    [HttpGet($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{CARDS}")]
     public async Task<IActionResult> GetCards(Guid gameId, Guid playerId, CancellationToken cancellation)
     {
         var query = new GetPlayerCards(gameId, playerId);
@@ -50,19 +58,26 @@ internal sealed class GamesController : ModuleControllerBase
         return Ok(cards);
     }
 
-    [HttpPost("{gameId:Guid}/players/{playerId:Guid}/bids")]
+    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{BIDS}")]
     public async Task<IActionResult> Bid(Guid gameId, Guid playerId, BidApi command, CancellationToken cancellation)
     {
         var cmd = new Bid(gameId, playerId, command.PokerHand);
         await _commandDispatcher.Dispatch(cmd, cancellation);
-        return Created(uri: $"{GamesModule.BASE_PATH}/games/{gameId}/players/{playerId}/bids", value: null);
+        return Created(uri: $"{PlayerUri(gameId, playerId)}/{BIDS}", value: null);
     }
 
-    [HttpPost("{gameId:Guid}/players/{playerId:Guid}/checks")]
+    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{CHECKS}")]
     public async Task<IActionResult> CheckBid(Guid gameId, Guid playerId, CancellationToken cancellation)
     {
         var cmd = new Check(gameId, playerId);
         await _commandDispatcher.Dispatch(cmd, cancellation);
-        return Created(uri: $"{GamesModule.BASE_PATH}/games/{gameId}/players/{playerId}/checks", value: null);
+        return Created(uri: $"{PlayerUri(gameId, playerId)}/checks", value: null);
     }
+    
+    private static string PlayerUri(Guid gameId, Guid playerId) => 
+        $"{GameUri(gameId)}/{PLAYERS}/{playerId}";
+
+    private static string GameUri(Guid gameId) =>
+        $"{GamesModule.BASE_PATH}/{GAMES}/{gameId}";
+
 }
