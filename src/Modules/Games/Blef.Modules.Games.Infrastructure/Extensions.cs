@@ -1,6 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 using Blef.Modules.Games.Application;
-using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.Repositories;
 using Blef.Modules.Games.Infrastructure.Repositories.InMemory;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,12 +10,9 @@ namespace Blef.Modules.Games.Infrastructure;
 
 internal static class Extensions
 {
-    internal static IServiceCollection AddInfrastructure(this IServiceCollection services) =>
+    internal static void AddInfrastructure(this IServiceCollection services) =>
         services
             .AddSingleton<IGamesRepository, GamesRepository>()
             .AddSingleton<ITournamentsRepository, TournamentsRepository>()
-            .AddSingleton<RandomnessProvider>()
-            .AddSingleton<DeckGenerator>()
-            .AddSingleton<Tournaments>()
             .AddApplication();
 }

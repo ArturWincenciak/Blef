@@ -8,6 +8,6 @@ namespace Blef.Modules.Games.Application;
 
 internal static class Extensions
 {
-    internal static IServiceCollection AddApplication(this IServiceCollection services) =>
+    internal static void AddApplication(this IServiceCollection services) =>
         services.AddDomain();
 }

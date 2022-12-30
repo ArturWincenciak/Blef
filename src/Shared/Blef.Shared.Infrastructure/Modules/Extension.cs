@@ -27,7 +27,7 @@ internal static class Extension
         return disabledModules;
     }
 
-    internal static ApplicationPartManager AddOnlyNotDisabledModuleParts(this ApplicationPartManager manager,
+    internal static void AddOnlyNotDisabledModuleParts(this ApplicationPartManager manager,
         IEnumerable<string> disabledModules)
     {
         var removedParts = new List<ApplicationPart>();
@@ -44,8 +44,6 @@ internal static class Extension
             manager.ApplicationParts.Remove(part);
 
         manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
-
-        return manager;
     }
 
     internal static IServiceCollection AddModuleInfo(this IServiceCollection services, IEnumerable<IModule> modules) =>
