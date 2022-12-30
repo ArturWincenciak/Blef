@@ -52,7 +52,7 @@ public sealed class Game
         // just to check that the bid is Valid.
         PokerHandParser.Parse(pokerHand);
 
-        _players.Bid(playerId, pokerHand);
+        _players.Bid(playerId);
         _isGameStarted = true;
         _lastBid = pokerHand;
 

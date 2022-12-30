@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Blef.Shared.Abstractions.Modules;
@@ -6,7 +7,11 @@ namespace Blef.Shared.Abstractions.Modules;
 public interface IModule
 {
     string Name { get; }
+    
     string Path { get; }
+    
     void Register(IServiceCollection services);
+    
+    [SuppressMessage("ReSharper", "UnusedParameter.Global")]
     void Use(IApplicationBuilder app);
 }

@@ -1,4 +1,6 @@
-﻿namespace Blef.Shared.Abstractions.Commands;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Blef.Shared.Abstractions.Commands;
 
 public interface ICommandHandler<in TCommand>
     where TCommand : ICommand
@@ -10,5 +12,6 @@ public interface ICommandHandler<in TCommand, TCommandResult>
     where TCommand : ICommand<TCommandResult>
     where TCommandResult : ICommandResult
 {
+    [SuppressMessage("ReSharper", "UnusedParameter.Global")]
     Task<TCommandResult> Handle(TCommand command, CancellationToken cancellation);
 }
