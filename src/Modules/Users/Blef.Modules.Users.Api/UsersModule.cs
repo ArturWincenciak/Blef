@@ -1,10 +1,12 @@
 ﻿using Blef.Modules.Users.Core;
 using Blef.Shared.Abstractions.Modules;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Blef.Modules.Users.Api;
 
+[UsedImplicitly]
 internal class UsersModule : IModule
 {
     public const string BASE_PATH = "users-module";
