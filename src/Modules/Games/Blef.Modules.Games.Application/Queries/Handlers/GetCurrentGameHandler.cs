@@ -1,8 +1,10 @@
 ﻿using Blef.Modules.Games.Domain.Repositories;
 using Blef.Shared.Abstractions.Queries;
+using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Application.Queries.Handlers;
 
+[UsedImplicitly]
 internal sealed class GetCurrentGameHandler : IQueryHandler<GetCurrentGame, GetCurrentGame.Result>
 {
     private readonly ITournamentsRepository _tournaments;
