@@ -1,11 +1,13 @@
 ﻿using System.Reflection;
 using Blef.Shared.Abstractions.Queries;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Blef.Shared.Infrastructure.Queries;
 
 internal static class Extensions
 {
+    [UsedImplicitly]
     public static IServiceCollection AddQueries(this IServiceCollection services, IEnumerable<Assembly> assemblies) =>
         services
             .AddScoped<IQueryDispatcher, QueryDispatcher>()
