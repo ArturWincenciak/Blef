@@ -12,7 +12,7 @@ internal sealed class TournamentsController : ModuleControllerBase
     private const string TOURNAMENT_ID = "{tournamentId:Guid}";
     private const string PLAYERS = "players";
     private const string GAMES_CURRENT = "games/current";
-    
+
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
 
