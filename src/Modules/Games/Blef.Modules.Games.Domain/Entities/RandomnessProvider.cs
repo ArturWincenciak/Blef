@@ -5,7 +5,7 @@ namespace Blef.Modules.Games.Domain.Entities;
 ///     every time. It is possible that 'new Random' that are close in code
 ///     and time will give the same random values.
 /// </summary>
-public class RandomnessProvider
+internal class RandomnessProvider
 {
     private readonly Random _random = new();
 

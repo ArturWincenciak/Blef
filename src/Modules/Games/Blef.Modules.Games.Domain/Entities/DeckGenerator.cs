@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Domain.Entities;
 
-public class DeckGenerator
+internal class DeckGenerator
 {
     private readonly Lazy<IReadOnlyCollection<Card>> _cards = new(GetStartingDeck);
     private readonly RandomnessProvider _randomnessProvider;
