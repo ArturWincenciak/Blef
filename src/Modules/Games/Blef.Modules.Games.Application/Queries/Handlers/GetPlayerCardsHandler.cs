@@ -1,9 +1,11 @@
 ﻿using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.Repositories;
 using Blef.Shared.Abstractions.Queries;
+using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Application.Queries.Handlers;
 
+[UsedImplicitly]
 internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetPlayerCards.Result>
 {
     private readonly IGamesRepository _games;
