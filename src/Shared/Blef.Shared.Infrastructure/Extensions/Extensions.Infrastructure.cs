@@ -18,7 +18,7 @@ namespace Blef.Shared.Infrastructure.Extensions;
 internal static partial class Extensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration,
-        IEnumerable<IModule> modules, IEnumerable<Assembly> assemblies) =>
+        IEnumerable<IModule> modules, Assembly[] assemblies) =>
         services
             .AddControllers(configuration)
             .AddTracing()
