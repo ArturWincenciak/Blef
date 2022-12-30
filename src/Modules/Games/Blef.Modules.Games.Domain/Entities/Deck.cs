@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Domain.Entities;
 
-public class Deck : IDeck
+internal class Deck : IDeck
 {
     private readonly List<Card> _cards;
     private readonly RandomnessProvider _randomnessProvider;
