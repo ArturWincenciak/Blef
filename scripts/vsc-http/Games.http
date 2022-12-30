@@ -54,7 +54,7 @@ Content-Type: application/json
 }
 
 ### Player 3: Join game
-@playerThreeId = {{player_two_join_game.response.body.playerId}}
+@playerThreeId = {{player_three_join_game.response.body.playerId}}
 # @name player_three_join_game
 POST {{api}}/games/{{gameId}}/players
 Content-Type: application/json
