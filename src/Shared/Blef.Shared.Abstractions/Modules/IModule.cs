@@ -12,6 +12,6 @@ public interface IModule
 
     void Register(IServiceCollection services);
 
-    [SuppressMessage(category: "ReSharper", checkId: "UnusedParameter.Global")]
+    //[SuppressMessage(category: "ReSharper", checkId: "UnusedParameter.Global")]
     void Use(IApplicationBuilder app);
 }
