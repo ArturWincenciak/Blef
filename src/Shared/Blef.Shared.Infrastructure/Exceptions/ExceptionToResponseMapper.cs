@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Net;
+using System.Reflection;
 using Blef.Shared.Kernel.Exceptions;
 using Humanizer;
 using Microsoft.AspNetCore.Mvc;
@@ -75,6 +76,6 @@ internal class ExceptionToResponseMapper
         return _codesCache.GetOrAdd(type, errorCode);
     }
 
-    private static string CreateErrorCode(Type type) =>
+    private static string CreateErrorCode(MemberInfo type) =>
         type.Name.Underscore().Replace(oldValue: "_exception", string.Empty).Dasherize();
 }
