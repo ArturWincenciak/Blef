@@ -12,9 +12,6 @@ public class DeckStub : IDeck
             _queue.Enqueue(card);
     }
 
-    public Card DealCard() =>
-        _queue.Dequeue();
-
     public Card[] DealCards(int count)
     {
         List<Card> cards = new();
@@ -23,4 +20,7 @@ public class DeckStub : IDeck
 
         return cards.ToArray();
     }
+
+    private Card DealCard() =>
+        _queue.Dequeue();
 }
