@@ -49,7 +49,7 @@ public class GameTests
     {
         _game.Bid(_playerId, KING);
 
-        var nextPlayerNick = "Next Player Nick";
+        const string nextPlayerNick = "Next Player Nick";
         Assert.Throws<JoinGameThatIsAlreadyStartedException>(() => _game.Join(nextPlayerNick));
     }
 }
