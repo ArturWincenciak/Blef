@@ -12,6 +12,6 @@ public interface ICommandHandler<in TCommand, TCommandResult>
     where TCommand : ICommand<TCommandResult>
     where TCommandResult : ICommandResult
 {
-    [SuppressMessage("ReSharper", "UnusedParameter.Global")]
+    [SuppressMessage(category: "ReSharper", checkId: "UnusedParameter.Global")]
     Task<TCommandResult> Handle(TCommand command, CancellationToken cancellation);
 }

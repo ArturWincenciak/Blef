@@ -6,7 +6,7 @@ public interface ICommand
 {
 }
 
-[SuppressMessage("ReSharper", "UnusedTypeParameter")]
+[SuppressMessage(category: "ReSharper", checkId: "UnusedTypeParameter")]
 public interface ICommand<TCommandResult> : ICommand
     where TCommandResult : ICommandResult
 {
