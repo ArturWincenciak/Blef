@@ -1,12 +1,13 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers;
 
-[Route(GamesModule.BASE_PATH)]
-internal sealed class HomeController : ControllerBase
+internal sealed class HomeController : ModuleControllerBase
 {
     [HttpGet]
+    [SuppressMessage(category: "Performance", checkId: "CA1822:Mark members as static")]
     public ActionResult<string> Get() =>
         JsonSerializer.Serialize(value: new
         {
