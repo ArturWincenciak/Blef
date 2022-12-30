@@ -21,7 +21,7 @@ public class Deck : IDeck
         return cards.ToArray();
     }
 
-    public Card DealCard()
+    private Card DealCard()
     {
         if (_cards.Any() == false)
             throw new InvalidOperationException("Cannot deal more cards from deck. Deck is empty");
