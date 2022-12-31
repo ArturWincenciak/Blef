@@ -1,7 +1,7 @@
 {
-    "users": {
-        "module": {
-            "enabled": false
-        }
+  "users": {
+    "module": {
+      "enabled": false
     }
+  }
 }

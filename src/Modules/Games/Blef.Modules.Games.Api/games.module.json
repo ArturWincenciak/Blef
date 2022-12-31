@@ -1,8 +1,8 @@
 {
-    "games": {
-        "module": {
-            "name": "Games",
-            "enabled": true
-        }
+  "games": {
+    "module": {
+      "name": "Games",
+      "enabled": true
     }
+  }
 }
