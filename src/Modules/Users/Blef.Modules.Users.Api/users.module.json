@@ -1,8 +1,8 @@
 {
-    "users": {
-        "module": {
-            "name": "Users",
-            "enabled": true
-        }
+  "users": {
+    "module": {
+      "name": "Users",
+      "enabled": true
     }
+  }
 }

@@ -1,22 +1,22 @@
 {
-    "$schema": "https://json.schemastore.org/launchsettings.json",
-    "profiles": {
-        "Blef.Bootstrapper": {
-            "commandName": "Project",
-            "launchBrowser": true,
-            "launchUrl": "swagger",
-            "environmentVariables": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "applicationUrl": "https://localhost:49153",
-            "dotnetRunMessages": true
-        },
-        "Docker": {
-            "commandName": "Docker",
-            "launchBrowser": true,
-            "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger/index.html",
-            "publishAllPorts": true,
-            "useSSL": true
-        }
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "Blef.Bootstrapper": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:49153",
+      "dotnetRunMessages": true
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger/index.html",
+      "publishAllPorts": true,
+      "useSSL": true
     }
+  }
 }
