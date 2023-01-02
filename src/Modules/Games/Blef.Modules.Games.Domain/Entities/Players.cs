@@ -18,10 +18,8 @@ public class Players
     public Player GetPlayer(Guid playerId) =>
         _players.First(x => x.Id == playerId);
 
-    public IEnumerable<Player> GetPlayers()
-    {
-        return _players.ToArray();
-    }
+    public IEnumerable<Player> GetPlayers() =>
+        _players.ToArray();
 
     public Player GetPreviousPlayer()
     {
