@@ -69,9 +69,6 @@ fi
 echo "--- --- ---"
 echo ""
 
-echo "DEBUG EXIT 1"
-exit 1
-
 echo ""
 echo "--- --- ---"
 echo "Let's get started, keep calm and wait, it may take few moments"
@@ -94,7 +91,7 @@ then
     exit $SUCCESS
 fi
 
-if [ $FAIL_ON_REFORMAT_NEEDED == "yes" ]
+if [ $FAIL_ON_REFORMAT_NEEDED = "yes" ]
 then
     echo ""
     echo "--- --- ---"
@@ -104,7 +101,7 @@ then
     exit $EXIT_WITH_FAST_FAIL
 fi
 
-if [ $AUTO_COMMIT == "no" ]
+if [ $AUTO_COMMIT = "no" ]
 then
     echo ""
     echo "--- --- ---"
