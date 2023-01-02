@@ -24,7 +24,7 @@ jobs:
       
     - name: Cleanup code
       id: clean_code
-      run: sh ./scripts/git/github-action-cleanupcode.sh -f no -a yes
+      run: sh ./scripts/cleanup-code/github-action-cleanupcode.sh -f no -a yes
       
   inspection_job:
     runs-on: ubuntu-latest
