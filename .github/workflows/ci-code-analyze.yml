@@ -21,16 +21,10 @@ jobs:
 
     - name: Restore Dependencies
       run: dotnet restore Blef.sln
-    
-    - name: Restore Dotnet Tools
-      run: dotnet tool restore
-      
-    - name: Intall JetBrains Tool
-      run: dotnet tool update --global JetBrains.ReSharper.GlobalTools
       
     - name: Cleanup code
       id: clean_code
-      run: sh ./scripts/git/github-action-cleanupcode.sh
+      run: sh ./scripts/git/github-action-cleanupcode.sh -f yes -a no
       
   inspection_job:
     runs-on: ubuntu-latest
