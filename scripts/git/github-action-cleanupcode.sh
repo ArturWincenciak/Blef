@@ -65,7 +65,7 @@ git commit -m "GitHub Action: re-format code by JetBrains CleanupCode tool"
 
 echo ""
 echo "--- --- ---"
-echo "Commit created"
+echo "Commit has been created"
 echo "--- --- ---"
 echo ""
 
@@ -78,3 +78,11 @@ echo "--- --- ---"
 echo ""
 
 git push
+
+echo ""
+echo "--- --- ---"
+echo "Commit has been pushed"
+echo "--- --- ---"
+echo ""
+
+git status
