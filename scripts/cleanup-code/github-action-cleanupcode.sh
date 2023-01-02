@@ -24,35 +24,35 @@ do
     case "${flag}" in
         f) FAIL_ON_REFORMAT_NEEDED=${OPTARG};;
         a) AUTO_COMMIT=${OPTARG};;
-		*) echo ""
-		   echo "--- --- ---"
-		   echo "Invalid argument's flag is not handled"
-		   echo "--- --- ---"
-		   echo ""
-		   exit $INVALID_ARGUMENT_ERROR ;;
+        *) echo ""
+           echo "--- --- ---"
+           echo "Invalid argument's flag is not handled"
+           echo "--- --- ---"
+           echo ""
+           exit $INVALID_ARGUMENT_ERROR ;;
     esac
 done
 
 if [ $FAIL_ON_REFORMAT_NEEDED != "yes" ] && [ $FAIL_ON_REFORMAT_NEEDED != "no" ]
 then
-	echo ""
+    echo ""
     echo "--- --- ---"
     echo "INVALID ARGUMENT OF '-f' equals '$FAIL_ON_REFORMAT_NEEDED'"
-	echo "Set 'yes' or 'no' or omit to use default equals 'no'"
+    echo "Set 'yes' or 'no' or omit to use default equals 'no'"
     echo "--- --- ---"
     echo ""
-	exit $INVALID_ARGUMENT_ERROR
+    exit $INVALID_ARGUMENT_ERROR
 fi
 
 if [ $AUTO_COMMIT != "yes" ] && [ $AUTO_COMMIT != "no" ]
 then
-	echo ""
+    echo ""
     echo "--- --- ---"
     echo "INVALID ARGUMENT OF '-a' equals '$AUTO_COMMIT'"
-	echo "Set 'yes' or 'no' or omit to use default equals 'no'"
+    echo "Set 'yes' or 'no' or omit to use default equals 'no'"
     echo "--- --- ---"
     echo ""
-	exit $INVALID_ARGUMENT_ERROR
+    exit $INVALID_ARGUMENT_ERROR
 fi
 
 echo ""
@@ -62,9 +62,9 @@ echo "- fail on re-format needed: '$FAIL_ON_REFORMAT_NEEDED'"
 echo "- auto commit re-formated code: '$AUTO_COMMIT'"
 if [ $FAIL_ON_REFORMAT_NEEDED = "yes" ] && [ $AUTO_COMMIT = "yes" ]
 then
-	echo "NOTICE: you have set that the execution will fast fail on re-format needed"
-	echo "NOTICE: auto commit will not be executed because the execution will terminate with fail when re-format is needed"
-	echo "NOTICE: if you want to auto commit execute call the script with '-f no -a yes' arguments"
+    echo "NOTICE: you have set that the execution will fast fail on re-format needed"
+    echo "NOTICE: auto commit will not be executed because the execution will terminate with fail when re-format is needed"
+    echo "NOTICE: if you want to auto commit execute call the script with '-f no -a yes' arguments"
 fi
 echo "--- --- ---"
 echo ""
@@ -79,7 +79,7 @@ dotnet tool restore
 dotnet tool update --global JetBrains.ReSharper.GlobalTools
 jb cleanupcode Blef.sln --profile="Blef: Full Cleanup" --disable-settings-layers=SolutionPersonal --verbosity=WARN
 
-REFORMATED_FILES=`git diff --name-only`
+REFORMATED_FILES=$(git diff --name-only)
 
 if [ -z "$REFORMATED_FILES" ]
 then
