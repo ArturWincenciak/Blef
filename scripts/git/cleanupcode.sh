@@ -24,6 +24,12 @@ do
     case "${flag}" in
         f) FAIL_ON_REFORMAT_NEEDED=${OPTARG};;
         a) AUTO_COMMIT=${OPTARG};;
+		*) echo ""
+		   echo "--- --- ---"
+		   echo "Invalid argument's flag is not handled"
+		   echo "--- --- ---"
+		   echo ""
+		   exit $INVALID_ARGUMENT_ERROR ;;
     esac
 done
 
