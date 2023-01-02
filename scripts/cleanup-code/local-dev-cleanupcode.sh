@@ -16,31 +16,31 @@ echo "- auto commit re-formated code (-a): '$AUTO_COMMIT'"
 echo "--- --- ---"
 echo ""
 
-while getopts f: flag
+while getopts a: flag
 do
     case "${flag}" in
         a) AUTO_COMMIT=${OPTARG};;
-		*) echo ""
-		   echo "--- --- ---"
-		   echo "Invalid argument's flag is not handled"
-		   echo "--- --- ---"
-		   echo ""
-		   exit $INVALID_ARGUMENT_ERROR ;;
+        *) echo ""
+           echo "--- --- ---"
+           echo "Invalid argument's flag is not handled"
+           echo "--- --- ---"
+           echo ""
+           exit $INVALID_ARGUMENT_ERROR ;;
     esac
 done
 
 if [ $AUTO_COMMIT != "yes" ] && [ $AUTO_COMMIT != "no" ]
 then
-	echo ""
+    echo ""
     echo "--- --- ---"
     echo "INVALID ARGUMENT OF '-a' equals '$AUTO_COMMIT'"
-	echo "Set 'yes' or 'no' or omit to use default equals 'no'"
+    echo "Set 'yes' or 'no' or omit to use default equals 'no'"
     echo "--- --- ---"
     echo ""
-	exit $INVALID_ARGUMENT_ERROR
+    exit $INVALID_ARGUMENT_ERROR
 fi
 
-UNSTAGED_CHANGES=`git diff --name-only`
+UNSTAGED_CHANGES=$(git diff --name-only)
 if [ -z "$UNSTAGED_CHANGES" ]
 then
     echo ""
@@ -60,7 +60,7 @@ else
     exit $YOU_NEED_NO_CHANGES_BEFORE_RUN_CLEANUP_ERROR
 fi
 
-STAGED_UNCOMMITTED=`git diff --staged --name-only`
+STAGED_UNCOMMITTED=$(git diff --staged --name-only)
 if [ -z "$STAGED_UNCOMMITTED" ]
 then
     echo ""
@@ -88,7 +88,7 @@ echo ""
 
 jb cleanupcode Blef.sln --profile="Blef: Full Cleanup" --disable-settings-layers=SolutionPersonal --verbosity=WARN
 
-REFORMATED_FILES=`git diff --name-only`
+REFORMATED_FILES=$(git diff --name-only)
 
 if [ -z "$REFORMATED_FILES" ]
 then
