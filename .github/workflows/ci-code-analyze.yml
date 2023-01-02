@@ -3,9 +3,10 @@ name: Cleanup and Inspect Code
 on: [push]
 
 jobs:
-  cleanup:
+  cleanup_job:
     runs-on: ubuntu-latest
     name: ReSharper CLI CleanupCode
+    
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -31,9 +32,11 @@ jobs:
       id: clean_code
       run: sh ./scripts/git/github-action-cleanupcode.sh
       
-  inspection:
+  inspection_job:
     runs-on: ubuntu-latest
     name: ReSharper CLI InspectCode
+    needs: cleanup_job
+    
     steps:
     - name: Checkout
       uses: actions/checkout@v3
