@@ -9,13 +9,25 @@ echo ""
 
 jb cleanupcode Blef.sln --profile="Blef: Full Cleanup" --disable-settings-layers=SolutionPersonal --verbosity=WARN
 
+REFORMATED_FILES=`git diff --name-only`
+
+if [ -z "$REFORMATED_FILES" ]
+then
+    echo ""
+    echo "--- --- ---"
+    echo "No files re-formated"
+    echo "--- --- ---"
+    echo ""
+    exit 0
+fi
+
 echo ""
 echo "--- --- ---"
-echo "Git Status"
+echo "There are re-formated files to be committed"
 echo "--- --- ---"
 echo ""
 
-git status
+git diff --name-only
 
 echo ""
 echo "--- --- ---"
@@ -24,3 +36,45 @@ echo "--- --- ---"
 echo ""
 
 git diff
+
+echo ""
+echo "--- --- ---"
+echo "Add all changes to stage"
+echo "--- --- ---"
+echo ""
+
+git add .
+
+echo ""
+echo "--- --- ---"
+echo "Staged files to be committed"
+echo "--- --- ---"
+echo ""
+
+git diff --staged --name-only
+
+echo ""
+echo "--- --- ---"
+echo "Creating commit"
+echo "--- --- ---"
+echo ""
+
+git config --global user.email "github@action.com"
+git config --global user.name "Cleanup Code GitHub Action"
+git commit -m "GitHub Action: re-format code by JetBrains CleanupCode tool"
+
+echo ""
+echo "--- --- ---"
+echo "Commit created"
+echo "--- --- ---"
+echo ""
+
+git status
+
+echo ""
+echo "--- --- ---"
+echo "Push the commit"
+echo "--- --- ---"
+echo ""
+
+git push
