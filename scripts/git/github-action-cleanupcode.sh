@@ -60,7 +60,7 @@ echo "--- --- ---"
 echo "Your setup:"
 echo "- fail on re-format needed: '$FAIL_ON_REFORMAT_NEEDED'"
 echo "- auto commit re-formated code: '$AUTO_COMMIT'"
-if [ $FAIL_ON_REFORMAT_NEEDED == "yes" ] && [ $AUTO_COMMIT == "yes" ]
+if [ $FAIL_ON_REFORMAT_NEEDED = "yes" ] && [ $AUTO_COMMIT = "yes" ]
 then
 	echo "NOTICE: you have set that the execution will fast fail on re-format needed"
 	echo "NOTICE: auto commit will not be executed because the execution will terminate with fail when re-format is needed"
@@ -68,6 +68,9 @@ then
 fi
 echo "--- --- ---"
 echo ""
+
+echo "DEBUG EXIT 1"
+exit 1
 
 echo ""
 echo "--- --- ---"
