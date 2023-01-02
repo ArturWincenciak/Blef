@@ -58,8 +58,8 @@ fi
 echo ""
 echo "--- --- ---"
 echo "Your setup:"
-echo "- fail on re-format needed: $FAIL_ON_REFORMAT_NEEDED"
-echo "- auto commit re-formated code: $AUTO_COMMIT"
+echo "- fail on re-format needed: '$FAIL_ON_REFORMAT_NEEDED'"
+echo "- auto commit re-formated code: '$AUTO_COMMIT'"
 if [ $FAIL_ON_REFORMAT_NEEDED == "yes" ] && [ $AUTO_COMMIT == "yes" ]; then
 	echo "NOTICE: you have set that the execution will fast fail on re-format needed"
 	echo "NOTICE: auto commit will not be executed because the execution will terminate with fail when re-format is needed"
@@ -97,7 +97,7 @@ then
     echo "Exit with re-formated code needed fail status"
     echo "--- --- ---"
     echo ""
-    exit $FAIL_ON_REFORMAT_NEEDED
+    exit $EXIT_WITH_FAST_FAIL
 fi
 
 if [ $AUTO_COMMIT == "no" ]
@@ -112,7 +112,7 @@ fi
 
 echo ""
 echo "--- --- ---"
-echo "There are re-formated files to be committed"
+echo "There is re-formated code to be committed"
 echo "--- --- ---"
 echo ""
 

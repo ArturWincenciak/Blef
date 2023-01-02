@@ -135,7 +135,7 @@ then
     echo "Exit with re-formated code needed fail status"
     echo "--- --- ---"
     echo ""
-    exit $FAIL_ON_REFORMAT_NEEDED
+    exit $EXIT_WITH_FAST_FAIL
 fi
 
 if [ $AUTO_COMMIT == "no" ]
