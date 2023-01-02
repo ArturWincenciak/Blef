@@ -126,7 +126,7 @@ if [ $FAIL_ON_REFORMAT_NEEDED == "yes" ]
 then
     echo ""
     echo "--- --- ---"
-    echo "Exit with re-formated needed fail status"
+    echo "Exit with re-formated code needed fail status"
     echo "--- --- ---"
     echo ""
     exit $FAIL_ON_REFORMAT_NEEDED
@@ -136,7 +136,7 @@ if [ $AUTO_COMMIT == "no" ]
 then
     echo ""
     echo "--- --- ---"
-    echo "There are re-formated files but thay will not be auto commited (as you set up)"
+    echo "There is re-formated code but it will not be auto commited"
     echo "--- --- ---"
     echo ""
     exit $SUCCESS
