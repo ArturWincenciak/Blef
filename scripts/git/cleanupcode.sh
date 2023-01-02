@@ -6,6 +6,12 @@ echo "Alright Cleanup Code Command-Line Tool"
 echo "--- --- ---"
 echo ""
 
+echo ""
+echo "--- --- ---"
+echo "Fast fail: $1"
+echo "Auto commit: $2"
+echo "--- --- ---"
+echo ""
 
 UNSTAGED_CHANGES=`git diff --name-only`
 if [ -z "$UNSTAGED_CHANGES" ]
