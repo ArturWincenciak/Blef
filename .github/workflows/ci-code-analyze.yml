@@ -6,11 +6,11 @@ jobs:
   cleanup_job:
     runs-on: ubuntu-latest
     name: CLI CleanupCode
-    
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-      
+
     - name: Setup Git Line Endings
       run: git config --global core.autocrlf true
 
@@ -21,16 +21,16 @@ jobs:
 
     - name: Restore Dependencies
       run: dotnet restore Blef.sln
-      
+
     - name: Cleanup code
       id: clean_code
       run: sh ./scripts/cleanup-code/github-action-cleanupcode.sh -f no -a yes
-      
+
   inspection_job:
     runs-on: ubuntu-latest
     name: CLI InspectCode
     needs: cleanup_job
-    
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
 
     - name: Restore Dependencies
       run: dotnet restore Blef.sln
-      
+
     - name: Inspect code
       uses: muno92/resharper_inspectcode@1.6.5
       with:
