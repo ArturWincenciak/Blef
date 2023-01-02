@@ -60,7 +60,7 @@ echo "--- --- ---"
 echo ""
 
 git config --global user.email "github@action.com"
-git config --global user.name "Cleanup Code GitHub Action"
+git config --global user.name "CleanupCode GitHub Action"
 git commit -m "GitHub Action: re-format code by JetBrains CleanupCode tool"
 
 echo ""
