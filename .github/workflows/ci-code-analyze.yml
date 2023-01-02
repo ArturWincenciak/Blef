@@ -5,7 +5,7 @@ on: [push]
 jobs:
   cleanup_job:
     runs-on: ubuntu-latest
-    name: ReSharper CLI CleanupCode
+    name: CLI CleanupCode
     
     steps:
     - name: Checkout
@@ -34,7 +34,7 @@ jobs:
       
   inspection_job:
     runs-on: ubuntu-latest
-    name: ReSharper CLI InspectCode
+    name: CLI InspectCode
     needs: cleanup_job
     
     steps:
