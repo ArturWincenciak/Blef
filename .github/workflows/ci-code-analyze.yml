@@ -11,9 +11,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Setup Git Line Endings
-      run: git config --global core.autocrlf true
-
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
