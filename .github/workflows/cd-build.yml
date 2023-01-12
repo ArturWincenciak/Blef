@@ -1,4 +1,4 @@
-name: Publish: Docker Hub, Azure
+name: Publish Docker Hub, Azure
 
 on:
   push:
