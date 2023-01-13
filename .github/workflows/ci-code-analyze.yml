@@ -22,7 +22,7 @@ jobs:
                     dotnet-version: 6.0.x
 
             -   name: Restore Dependencies
-                run: dotnet restore ReSharperCleanupCodeDemo.sln
+                run: dotnet restore Blef.sln
 
             -   name: Cleanup Code
                 id: cleanup
