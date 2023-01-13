@@ -1,49 +1,57 @@
-name: Cleanup and Inspect Code
+name: Clean Up and Inspect Code
 
 on: [push]
 
 jobs:
-  cleanup_job:
-    runs-on: ubuntu-latest
-    name: CLI CleanupCode
+    cleanup:
+        runs-on: ubuntu-latest
+        name: Cleanup Code
+        
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v3
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+            -   name: Setup .NET
+                uses: actions/setup-dotnet@v3
+                with:
+                    dotnet-version: 6.0.x
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
+            -   name: Restore Dependencies
+                run: dotnet restore ReSharperCleanupCodeDemo.sln
 
-    - name: Restore Dependencies
-      run: dotnet restore Blef.sln
+            -   name: Cleanup Code
+                id: cleanup
+                uses: ArturWincenciak/ReSharper_CleanupCode@v2.0
+                with:
+                    solution: './Blef.sln'
+                    fail_on_reformat_needed: 'no'
+                    auto_commit: 'yes'
+                    jb_cleanup_code_arg: '--verbosity=INFO --profile=Almost Full Cleanup --exclude=**UnitTests/**.*'
+                    commit_message: 'Cleanup code by ReSharper CLI CleanupCode GitHub Action'
+                    commit_creator_email: 'cleanupcode@github.action'
+                    commit_creator_name: 'CleanupCode Action'
 
-    - name: Cleanup code
-      id: clean_code
-      run: sh ./scripts/cleanup-code/github-action-cleanupcode.sh -f no -a yes
+    inspection:
+        runs-on: ubuntu-latest
+        name: CLI InspectCode
+        needs: cleanup
 
-  inspection_job:
-    runs-on: ubuntu-latest
-    name: CLI InspectCode
-    needs: cleanup_job
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v3
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+        - name: Setup .NET
+          uses: actions/setup-dotnet@v3
+          with:
+            dotnet-version: 6.0.x
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
+        - name: Restore Dependencies
+          run: dotnet restore Blef.sln
 
-    - name: Restore Dependencies
-      run: dotnet restore Blef.sln
-
-    - name: Inspect code
-      uses: muno92/resharper_inspectcode@1.6.6
-      with:
-        solutionPath: ./Blef.sln
-        failOnIssue: 1
-        minimumSeverity: notice
-        solutionWideAnalysis: true
+        - name: Inspect code
+          uses: muno92/resharper_inspectcode@1.6.6
+          with:
+            solutionPath: ./Blef.sln
+            failOnIssue: 1
+            minimumSeverity: notice
+            solutionWideAnalysis: true
