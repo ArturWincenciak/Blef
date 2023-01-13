@@ -1,6 +1,11 @@
 name: .Net 6 CI Build
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
 
 jobs:
   build:
