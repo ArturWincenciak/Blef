@@ -1,6 +1,11 @@
 name: Clean Up and Inspect Code
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
 
 jobs:
     cleanup:
