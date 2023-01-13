@@ -12,7 +12,7 @@ jobs:
     name: CD Build and test
     environment:
       name: 'integration'
-    
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -36,7 +36,7 @@ jobs:
     environment: production
     runs-on: ubuntu-latest
     needs: build_and_test
-    
+
     outputs:
       imagedigest: ${{ steps.setup_digest.outputs.digest_value }}
 
@@ -52,7 +52,7 @@ jobs:
       with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
+
     - name: Login to Github Packages
       uses: docker/login-action@v2
       with:
@@ -69,10 +69,10 @@ jobs:
             teovincent/blef:latest
             ghcr.io/arturwincenciak/blef:latest
         push: ${{ github.ref == 'refs/heads/main' }}
-        
+
     - name: Echo image digest
       run: echo 'Digest ${{ steps.build_and_publish.outputs.digest }}'
-      
+
     - name: Setup job output image digest value
       id: setup_digest
       run: echo "::set-output name=digest_value::${{ steps.build_and_publish.outputs.digest }}"
@@ -87,7 +87,7 @@ jobs:
     steps:
     - name: Echo image digest
       run: echo 'Digest ${{ needs.build_and_publish.outputs.imagedigest }}'
-      
+
     - name: Deploy Docker image to Azure
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
