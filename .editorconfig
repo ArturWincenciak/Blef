@@ -8,7 +8,7 @@ root = true
 # All files
 [*]
 
-# Editor Guidelines 
+# Editor Guidelines
 guidelines = 120 10px solid 30B0ED4C, 130 1px solid 30B0ED4C, 140 1px solid 30B0ED4C
 
 # Microsoft .NET properties
