@@ -19,9 +19,7 @@ public class Tournament
     public TournamentPlayer Join(string nick)
     {
         if (_isTournamentStarted)
-        {
             throw new JoinTournamentThatIsAlreadyStartedException(Id, nick);
-        }
 
         if (_players.Count >= 2)
             throw new MaxTournamentPlayersReachedException(Id);
