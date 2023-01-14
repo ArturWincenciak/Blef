@@ -8,7 +8,7 @@ internal sealed class InternalControllerFeatureProvider : ControllerFeatureProvi
 {
     protected override bool IsController(TypeInfo typeInfo)
     {
-        if (false == typeInfo.IsClass)
+        if (typeInfo.IsClass == false)
             return false;
 
         if (typeInfo.IsAbstract)

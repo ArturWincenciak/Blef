@@ -9,7 +9,7 @@ internal static class ModuleLoader
         var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 
         var loadedAssembliesFiles = loadedAssemblies
-            .Where(x => false == x.IsDynamic)
+            .Where(x => x.IsDynamic == false)
             .Select(x => x.Location)
             .ToList();
 
@@ -17,7 +17,7 @@ internal static class ModuleLoader
         var baseDirDllFiles = Directory.GetFiles(baseDir, searchPattern: "*.dll");
 
         var notYetLoadedDllFiles = baseDirDllFiles
-            .Where(file => false == loadedAssembliesFiles.Contains(file, StringComparer.InvariantCultureIgnoreCase));
+            .Where(file => loadedAssembliesFiles.Contains(file, StringComparer.InvariantCultureIgnoreCase) == false);
 
         const string modulePartPrefix = "Blef.Modules.";
         var modulePartDllFiles = notYetLoadedDllFiles

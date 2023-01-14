@@ -13,10 +13,10 @@ internal static class Extension
         var disabledModules = new List<string>();
         foreach (var (key, value) in configuration.AsEnumerable())
         {
-            if (false == key.Contains(":module:enabled"))
+            if (key.Contains(":module:enabled") == false)
                 continue;
 
-            if (false == bool.Parse(value ?? "false"))
+            if (bool.Parse(value ?? "false") == false)
             {
                 var splitKey = key.Split(":");
                 var moduleName = splitKey[0];
