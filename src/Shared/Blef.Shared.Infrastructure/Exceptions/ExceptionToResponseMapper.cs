@@ -48,9 +48,7 @@ internal class ExceptionToResponseMapper
         };
 
         foreach (var error in exception.Errors)
-        {
             problemDetails.Errors.Add(error.Key, error.Value);
-        }
 
         return problemDetails;
     }
