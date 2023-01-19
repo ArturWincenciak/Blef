@@ -16,4 +16,8 @@ TBD
 
 ## How to run for the first time
 
-- Web Application will run HTTPS without certificate. To fix it run `dotnet dev-certs https --trust` as described in https://www.hanselman.com/blog/developing-locally-with-aspnet-core-under-https-ssl-and-selfsigned-certs
+```cmd
+$ dotnet run --project ./src/Blef.Bootstrapper/Blef.Bootstrapper.csproj
+```
+
+> **_NOTE:_** Web Application will run HTTPS without certificate. To fix it run `dotnet dev-certs https --trust` as described in https://www.hanselman.com/blog/developing-locally-with-aspnet-core-under-https-ssl-and-selfsigned-certs
