@@ -1,6 +1,6 @@
 [![Clean Up and Inspect Code](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-code-analyze.yml/badge.svg?branch=main)](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-code-analyze.yml)
-[![CodeFactor](https://www.codefactor.io/repository/github/arturwincenciak/blef/badge)](https://www.codefactor.io/repository/github/arturwincenciak/blef)
 [![CodeQL](https://github.com/ArturWincenciak/Blef/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/codeql-analysis.yml)
+[![CodeFactor](https://www.codefactor.io/repository/github/arturwincenciak/blef/badge)](https://www.codefactor.io/repository/github/arturwincenciak/blef)
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=ArturWincenciak_Blef)
 
