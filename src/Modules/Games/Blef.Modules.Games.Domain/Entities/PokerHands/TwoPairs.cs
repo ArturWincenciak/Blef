@@ -12,9 +12,6 @@ public class TwoPairs : PokerHand
         if (first <= second)
             throw new ArgumentException($"First pair '{first}' has to be greater than second pair '{second}'");
 
-        if (first == second)
-            throw new ArgumentException($"First pair '{first}' has to be different than second pair '{second}'");
-
         _first = first;
         _second = second;
     }
