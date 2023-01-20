@@ -12,12 +12,24 @@
 - Hosted App: https://blef.azurewebsites.net/
 - Specification: https://blef.azurewebsites.net/swagger/index.html
 
-TBD
-
 ## How to run for the first time
 
 ```cmd
 $ dotnet run --project ./src/Blef.Bootstrapper/Blef.Bootstrapper.csproj
 ```
+_then open your web browser to https://localhost:49153/swagger_
 
 > **_NOTE:_** Web Application will run HTTPS without certificate. To fix it run `dotnet dev-certs https --trust` as described in https://www.hanselman.com/blog/developing-locally-with-aspnet-core-under-https-ssl-and-selfsigned-certs
+
+#### Using `Dockerfile`
+```cmd
+$ docker build -t blef-dev .
+$ docker run -dp 3000:80 blef-dev
+```
+_then open your web browser to http://localhost:3000/swagger_
+
+#### Using Docker Hub
+```cmd
+$ docker run -dp 5000:80 teovincent/blef:latest
+```
+_then open your web browser to http://localhost:5000/swagger_
