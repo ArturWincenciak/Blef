@@ -24,6 +24,7 @@ internal static partial class Extensions
             .AddControllers(configuration)
             .AddTracing()
             .AddErrorHandling()
+            .AddDevelopmentCors()
             .AddModuleInfo(modules)
             .AddSwagger()
             .AddCommands(assemblies)
@@ -31,17 +32,11 @@ internal static partial class Extensions
 
     public static void UseInfrastructure(this WebApplication application) =>
         application
+            .ForDevelopment(app =>
+                app.UseDevelopmentCors())
             .UseTracing()
             .UseErrorHandling()
             .UseRouting()
-            .UseCors(builder =>
-            {
-                if (application.Environment.IsDevelopment())
-                    builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
-            })
             .UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
