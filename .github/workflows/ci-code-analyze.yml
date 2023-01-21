@@ -1,11 +1,6 @@
 name: CleanUp, Inspect, Analyze, UnitTest
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [ opened, synchronize, reopened ]
+on: [ push ]
 
 jobs:
     r-sharp-cleanup:
