@@ -37,12 +37,10 @@ internal static partial class Extensions
             .UseCors(builder =>
             {
                 if (application.Environment.IsDevelopment())
-                {
                     builder
                         .AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader();
-                }
             })
             .UseEndpoints(endpoints =>
             {
