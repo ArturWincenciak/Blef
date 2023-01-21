@@ -9,6 +9,7 @@ using Blef.Shared.Infrastructure.Tracing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 [assembly: InternalsVisibleTo("Blef.Bootstrapper")]
@@ -33,10 +34,16 @@ internal static partial class Extensions
             .UseTracing()
             .UseErrorHandling()
             .UseRouting()
-            .UseCors(builder => builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader())
+            .UseCors(builder =>
+            {
+                if (application.Environment.IsDevelopment())
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                }
+            })
             .UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
