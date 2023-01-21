@@ -6,6 +6,8 @@ namespace Blef.Shared.Infrastructure.Exceptions;
 
 internal static class Extensions
 {
+    private const string DEV_CORS_POLICY_NAME = nameof(DEV_CORS_POLICY_NAME);
+
     public static IServiceCollection AddTracing(this IServiceCollection services) =>
         services
             .AddScoped<ErrorHandlerMiddleware>()
@@ -13,7 +15,7 @@ internal static class Extensions
 
     public static IServiceCollection AddDevelopmentCors(this IServiceCollection services) =>
         services.AddCors(options =>
-            options.AddPolicy(name: "development", configurePolicy: builder =>
+            options.AddPolicy(DEV_CORS_POLICY_NAME, configurePolicy: builder =>
                 builder
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
@@ -27,7 +29,7 @@ internal static class Extensions
             : @this;
 
     public static IApplicationBuilder UseDevelopmentCors(this IApplicationBuilder app) =>
-        app.UseCors("development");
+        app.UseCors(DEV_CORS_POLICY_NAME);
 
     public static IApplicationBuilder UseErrorHandling(this IApplicationBuilder app) =>
         app.UseMiddleware<ErrorHandlerMiddleware>();
