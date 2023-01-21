@@ -12,7 +12,7 @@ echo ""
 echo "--- --- ---"
 echo "Alright Cleanup Code Command-Line Tool"
 echo "Default settings:"
-echo "- auto commit re-formated code (-a): '$AUTO_COMMIT'"
+echo "- auto commit re-formatted code (-a): '$AUTO_COMMIT'"
 echo "--- --- ---"
 echo ""
 
@@ -29,7 +29,7 @@ do
     esac
 done
 
-if [ $AUTO_COMMIT != "yes" ] && [ $AUTO_COMMIT != "no" ]
+if [ "$AUTO_COMMIT" != "yes" ] && [ "$AUTO_COMMIT" != "no" ]
 then
     echo ""
     echo "--- --- ---"
@@ -88,23 +88,23 @@ echo ""
 
 jb cleanupcode Blef.sln --profile="Blef: Full Cleanup" --disable-settings-layers=SolutionPersonal --verbosity=WARN
 
-REFORMATED_FILES=$(git diff --name-only)
+REFORMATTED_FILES=$(git diff --name-only)
 
-if [ -z "$REFORMATED_FILES" ]
+if [ -z "$REFORMATTED_FILES" ]
 then
     echo ""
     echo "--- --- ---"
-    echo "No files re-formated, everything is clean, congratulation!"
+    echo "No files re-formatted, everything is clean, congratulation!"
     echo "--- --- ---"
     echo ""
     exit $SUCCESS
 fi
 
-if [ $AUTO_COMMIT = "no" ]
+if [ "$AUTO_COMMIT" = "no" ]
 then
     echo ""
     echo "--- --- ---"
-    echo "There is re-formated code but it will not be auto commited"
+    echo "There is re-formatted code but it will not be auto committed"
     echo "--- --- ---"
     echo ""
     exit $SUCCESS
@@ -112,15 +112,15 @@ fi
 
 echo ""
 echo "--- --- ---"
-echo "There are re-formated files to be committed"
+echo "There are re-formatted files to be committed"
 echo "--- --- ---"
 echo ""
 
 git diff --name-only
 
-for FILE in "${REFORMATED_FILES[@]}"
+for FILE in "${REFORMATTED_FILES[@]}"
 do
-    git add $FILE
+    git add ${FILE}
 done
 
 echo ""
@@ -149,7 +149,7 @@ git status
 
 echo ""
 echo "--- --- ---"
-echo "All re-formated code has been commited with success"
+echo "All re-formatted code has been committed with success"
 echo "--- --- ---"
 echo ""
 exit $SUCCESS
