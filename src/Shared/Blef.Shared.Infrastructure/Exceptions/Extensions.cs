@@ -13,7 +13,7 @@ internal static class Extensions
 
     public static IServiceCollection AddDevelopmentCors(this IServiceCollection services) =>
         services.AddCors(options =>
-            options.AddPolicy(name: "development", builder =>
+            options.AddPolicy(name: "development", configurePolicy: builder =>
                 builder
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
