@@ -1,6 +1,4 @@
-﻿using System.Buffers;
-
-namespace Blef.Modules.Games.Domain.Entities;
+﻿namespace Blef.Modules.Games.Domain.Entities;
 
 public class BidFlowHistory
 {
