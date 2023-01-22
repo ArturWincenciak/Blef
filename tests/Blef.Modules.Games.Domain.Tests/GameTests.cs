@@ -26,8 +26,15 @@ public class GameTests
     [Fact]
     public void Should_accept_higher_bid()
     {
-        _game.Bid(_playerId, KING);
-        _game.Bid(_playerId, ACE);
+        // act
+        var exception = Record.Exception(() =>
+        {
+            _game.Bid(_playerId, KING);
+            _game.Bid(_playerId, ACE);
+        });
+
+        // assert
+        Assert.Null(exception);
     }
 
     [Fact]
