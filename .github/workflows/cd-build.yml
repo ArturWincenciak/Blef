@@ -1,4 +1,4 @@
-name: Publish DockerHub with deploy into Azure
+name: v2.0 Deploy DockerHub, Azure
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: JB Inspect Code
+name: v2.0 Inspect Code
 
 on:
   push:

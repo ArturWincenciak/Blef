@@ -1,4 +1,4 @@
-name: Solar Cloud Analyze
+name: v2.0 SolarCloud Analyze
 
 on:
   push:
