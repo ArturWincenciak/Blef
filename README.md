@@ -1,4 +1,7 @@
-[![Clean Up and Inspect Code](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-code-analyze.yml/badge.svg?branch=main)](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-code-analyze.yml)
+[![v2.0 CleanUp Code](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-cleanup-code.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-cleanup-code.yml)
+[![v2.0 Inspect Code](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-inspect-code.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-inspect-code.yml)
+[![v2.0 SolarCloud Analyze](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-solar-cloud-analyzy.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-solar-cloud-analyzy.yml)
+[![v2.0 Unit Tests](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-unit-tests.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-unit-tests.yml)
 [![CodeQL](https://github.com/ArturWincenciak/Blef/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/codeql-analysis.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/arturwincenciak/blef/badge)](https://www.codefactor.io/repository/github/arturwincenciak/blef)
 
