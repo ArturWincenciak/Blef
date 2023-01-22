@@ -1,0 +1,35 @@
+name: JB Inspect Code
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  r-sharp-inspection:
+    name:  R# Inspect Code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore Dependencies
+        run: dotnet restore Blef.sln
+
+      - name: Inspect code
+        uses: muno92/resharper_inspectcode@1.6.7
+        with:
+          solutionPath: ./Blef.sln
+          failOnIssue: 1
+          minimumSeverity: notice
+          solutionWideAnalysis: true
