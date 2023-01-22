@@ -4,6 +4,6 @@ namespace Blef.Modules.Games.Domain.Repositories;
 
 internal interface ITournamentsRepository
 {
-    void Add(Tournament game);
-    Tournament Get(Guid gameId);
+    void Add(Tournament tournament);
+    Tournament Get(Guid tournamentId);
 }
