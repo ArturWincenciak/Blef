@@ -1,8 +1,11 @@
+using System.Runtime.CompilerServices;
 using Blef.Shared.Abstractions.Modules;
 using Blef.Shared.Infrastructure.Extensions;
 using static System.Activator;
 using static System.IO.Directory;
 using static Blef.Bootstrapper.ModuleLoader;
+
+[assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Games.Api.Tests")]
 
 var builder = WebApplication.CreateBuilder(args);
 
