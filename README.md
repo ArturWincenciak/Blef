@@ -3,7 +3,6 @@
 [![v2.1 SonarCloud Analyze](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-sonar-cloud-analyzy.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-sonar-cloud-analyzy.yml)
 [![v2.0 Unit Tests](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-unit-tests.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/ci-unit-tests.yml)
 [![CodeQL](https://github.com/ArturWincenciak/Blef/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/ArturWincenciak/Blef/actions/workflows/codeql-analysis.yml)
-
 [![CodeFactor](https://www.codefactor.io/repository/github/arturwincenciak/blef/badge)](https://www.codefactor.io/repository/github/arturwincenciak/blef)
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=ArturWincenciak_Blef)
