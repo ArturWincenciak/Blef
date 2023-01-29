@@ -7,30 +7,36 @@ public class GameTests
 {
     private const string KING = "one-of-a-kind:King";
     private const string ACE = "one-of-a-kind:Ace";
-    private const string PLAYER_NICK = "Player Nick";
+    private const string FIRST_PLAYER_NICK = "First Player Nick";
+    private const string SECOND_PLAYER_NICK = "Second Player Nick";
 
     private readonly Game _game;
-    private readonly Guid _playerId;
+    private readonly Guid _firstPlayerId;
+    private readonly Guid _secondPlayerId;
 
     public GameTests()
     {
         var deckStub = new DeckStub(new Card[]
         {
-            new(FaceCard.King, Suit.Diamonds)
+            new(FaceCard.King, Suit.Diamonds),
+            new(FaceCard.Ace, Suit.Diamonds)
         });
+
         _game = Game.Create(deckStub);
-        var player = _game.Join(PLAYER_NICK);
-        _playerId = player.Id;
+        var firstPlayer = _game.Join(FIRST_PLAYER_NICK);
+        _firstPlayerId = firstPlayer.Id;
+        var secondPlayer = _game.Join(SECOND_PLAYER_NICK);
+        _secondPlayerId = secondPlayer.Id;
     }
 
     [Fact]
-    public void Should_accept_higher_bid()
+    public void Should_Accept_Higher_Bid()
     {
         // act
         var exception = Record.Exception(() =>
         {
-            _game.Bid(_playerId, KING);
-            _game.Bid(_playerId, ACE);
+            _game.Bid(_firstPlayerId, KING);
+            _game.Bid(_secondPlayerId, ACE);
         });
 
         // assert
@@ -38,25 +44,44 @@ public class GameTests
     }
 
     [Fact]
-    public void Should_not_accept_lower_bid()
+    public void Should_Not_Accept_Lower_Bid()
     {
-        _game.Bid(_playerId, ACE);
-        Assert.Throws<BidIsNotHigherThenLastOneException>(() => _game.Bid(_playerId, KING));
+        // arrange
+        _game.Bid(_firstPlayerId, ACE);
+
+        // assert
+        Assert.Throws<BidIsNotHigherThenLastOneException>(() =>
+        {
+            // act
+            _game.Bid(_firstPlayerId, KING);
+        });
     }
 
     [Fact]
-    public void Should_not_accept_the_same_bid()
+    public void Should_Not_Accept_The_Same_Bid()
     {
-        _game.Bid(_playerId, KING);
-        Assert.Throws<BidIsNotHigherThenLastOneException>(() => _game.Bid(_playerId, KING));
+        // arrange
+        _game.Bid(_firstPlayerId, KING);
+
+        // assert
+        Assert.Throws<BidIsNotHigherThenLastOneException>(() =>
+        {
+            // act
+            _game.Bid(_firstPlayerId, KING);
+        });
     }
 
     [Fact]
-    public void Should_not_join_game_after_it_was_started()
+    public void Should_Not_Join_Game_After_It_Was_Started()
     {
-        _game.Bid(_playerId, KING);
+        // arrange
+        _game.Bid(_firstPlayerId, KING);
 
-        const string nextPlayerNick = "Next Player Nick";
-        Assert.Throws<JoinGameThatIsAlreadyStartedException>(() => _game.Join(nextPlayerNick));
+        // assert
+        Assert.Throws<JoinGameThatIsAlreadyStartedException>(() =>
+        {
+            // act
+            _game.Join("Next Player Nick");
+        });
     }
 }
