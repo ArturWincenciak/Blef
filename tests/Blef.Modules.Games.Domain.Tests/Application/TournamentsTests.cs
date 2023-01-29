@@ -6,7 +6,6 @@ namespace Blef.Modules.Games.Domain.Tests.Application;
 
 public class TournamentsTests
 {
-    private const string PLAYER_NICK = "Player Nick";
     private readonly IGamesRepository _gamesRepository = new InMemoryGamesRepository();
     private readonly Tournaments _sut;
     private readonly ITournamentsRepository _tournamentsRepository = new InMemoryTournamentsRepository();
@@ -15,32 +14,38 @@ public class TournamentsTests
         _sut = new Tournaments(_tournamentsRepository, _gamesRepository,
             deckGenerator: new DeckGenerator(new RandomnessProvider()));
 
-    private (Tournament Tournament, TournamentPlayer Player) SetupStartedTournament()
+    [Fact]
+    public void Should_Get_One_More_Card_After_Loosing_Game()
+    {
+        // arrange
+        var (tournament, players) = SetupStartedTournament();
+        FinishCurrentGame(tournament, players[0]);
+
+        // act
+        _sut.StartNextGame(tournament.Id);
+
+        // assert
+        Assert.Equal(expected: 2, tournament.GetCurrentGame().GetCards(players[0].PlayerId).Length);
+    }
+
+    private (Tournament Tournament, TournamentPlayer[] Players) SetupStartedTournament()
     {
         var tournament = Tournament.Create();
         _tournamentsRepository.Add(tournament);
-        var player = tournament.Join(PLAYER_NICK);
+
+        var firstPlayer = tournament.Join("First Player Nick");
+        var secondPlayer = tournament.Join("Second Player Nick");
+
         _sut.Start(tournament.Id);
 
-        return (tournament, player);
-    }
-
-    [Fact]
-    public void Should_get_one_more_card_after_loosing_game()
-    {
-        var (tournament, player) = SetupStartedTournament();
-        FinishCurrentGame(tournament, player);
-
-        _sut.StartNextGame(tournament.Id);
-
-        Assert.Equal(expected: 2, tournament.GetCurrentGame().GetCards(player.PlayerId).Length);
+        return (tournament, new[] {firstPlayer, secondPlayer});
     }
 
     private static void FinishCurrentGame(Tournament tournament, TournamentPlayer player)
     {
         var currentGame = tournament.GetCurrentGame();
         currentGame.Bid(player.PlayerId, pokerHand: "two-pairs:jack,ten");
-        currentGame.Check(player.PlayerId);
+        currentGame.Check(player.PlayerId); //todo:aw: imho here is bug, cannot bid and check by the same player
 
         Assert.NotNull(currentGame.GetLooser());
     }
