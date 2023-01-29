@@ -45,6 +45,9 @@ public sealed class Game
 
     public void Bid(Guid playerId, string pokerHand)
     {
+        if (_players.Count < 2)
+            throw new MinimumGamePlayersNotReachedException(Id);
+
         if (_lastBid != null && NewBidIsNotHigher(_lastBid, pokerHand))
             throw new BidIsNotHigherThenLastOneException(Id, pokerHand, _lastBid);
 
