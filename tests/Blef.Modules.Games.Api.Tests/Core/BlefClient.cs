@@ -1,4 +1,6 @@
-﻿namespace Blef.Modules.Games.Api.Tests.Core;
+﻿using Blef.Modules.Games.Application.Queries;
+
+namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal sealed class BlefClient
 {
@@ -25,10 +27,10 @@ internal sealed class BlefClient
         SetPlayerId(whichPlayer, player);
     }
 
-    public async Task GetCards(WhichPlayer whichPlayer)
+    public async Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.GetCards(_gameId, playerId);
+        return await _httpClient.GetCards(_gameId, playerId);
     }
 
     public async Task Bid(WhichPlayer whichPlayer, string bid)
