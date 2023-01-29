@@ -65,10 +65,23 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<GetGameFlow.Result>())!;
     }
 
-    async internal static Task Check(this HttpClient client, Guid gameId, Guid playerId)
+    async internal static Task CheckWithSuccess(this HttpClient client, Guid gameId, Guid playerId)
     {
         var response = await client.PostAsync(requestUri: $"{PlayerUri(gameId, playerId)}/checks", content: null);
         response.EnsureSuccessStatusCode();
+    }
+
+    async internal static Task<ProblemDetails> CheckWithRuleViolation(this HttpClient client,
+        Guid gameId, Guid playerId)
+    {
+        var response = await client.PostAsync(requestUri: $"{PlayerUri(gameId, playerId)}/checks", content: null);
+        if (response.StatusCode != HttpStatusCode.BadRequest)
+            throw new AssertActualExpectedException(
+                expected: HttpStatusCode.BadRequest,
+                actual: response.StatusCode,
+                userMessage: "Expected that this call to be rejected but it unexpectedly succeeded");
+
+        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
     }
 
     private static string GamesUri =>

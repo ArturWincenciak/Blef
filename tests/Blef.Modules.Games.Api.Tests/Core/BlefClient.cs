@@ -53,10 +53,16 @@ internal sealed class BlefClient
         return await _httpClient.BidWithRuleViolation(_gameId, playerId, bid);
     }
 
-    async internal Task Check(WhichPlayer whichPlayer)
+    async internal Task CheckWithSuccess(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.Check(_gameId, playerId);
+        await _httpClient.CheckWithSuccess(_gameId, playerId);
+    }
+
+    async internal Task<ProblemDetails> CheckWithRuleViolation(WhichPlayer whichPlayer)
+    {
+        var playerId = GetPlayerId(whichPlayer);
+        return await _httpClient.CheckWithRuleViolation(_gameId, playerId);
     }
 
     private Guid GetPlayerId(WhichPlayer whichPlayer) =>
