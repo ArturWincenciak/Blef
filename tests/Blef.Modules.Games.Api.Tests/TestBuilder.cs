@@ -3,7 +3,7 @@
 internal sealed class TestBuilder
 {
     private readonly List<Func<Task>> _actions = new();
-    private  HttpClient _client;
+    private HttpClient _client = null!;
 
     private Guid _gameId;
     private Guid _knuthPlayerId;
