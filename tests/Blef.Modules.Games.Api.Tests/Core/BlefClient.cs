@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Queries;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -40,10 +41,16 @@ internal sealed class BlefClient
         return await _httpClient.GetCards(_gameId, playerId);
     }
 
-    async internal Task Bid(WhichPlayer whichPlayer, string bid)
+    async internal Task BidWithSuccess(WhichPlayer whichPlayer, string bid)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.Bid(_gameId, playerId, bid);
+        await _httpClient.BidWithSuccess(_gameId, playerId, bid);
+    }
+
+    async internal Task<ProblemDetails> BidWithRuleViolation(WhichPlayer whichPlayer, string bid)
+    {
+        var playerId = GetPlayerId(whichPlayer);
+        return await _httpClient.BidWithRuleViolation(_gameId, playerId, bid);
     }
 
     async internal Task Check(WhichPlayer whichPlayer)

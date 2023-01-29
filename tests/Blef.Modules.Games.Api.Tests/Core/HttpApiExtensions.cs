@@ -1,5 +1,8 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net;
+using System.Net.Http.Json;
 using Blef.Modules.Games.Application.Queries;
+using Microsoft.AspNetCore.Mvc;
+using Xunit.Sdk;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -32,13 +35,28 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<GetPlayerCards.Result>())!;
     }
 
-    async internal static Task Bid(this HttpClient client, Guid gameId, Guid playerId, string bid)
+    async internal static Task BidWithSuccess(this HttpClient client, Guid gameId, Guid playerId, string bid)
     {
-        var response = await client.PostAsJsonAsync(
-            requestUri: $"{PlayerUri(gameId, playerId)}/bids",
-            value: new {PokerHand = bid});
+        var response = await Bid(client, gameId, playerId, bid);
         response.EnsureSuccessStatusCode();
     }
+
+    async internal static Task<ProblemDetails> BidWithRuleViolation(this HttpClient client, Guid gameId, Guid playerId, string bid)
+    {
+        var response = await Bid(client, gameId, playerId, bid);
+        if (response.StatusCode != HttpStatusCode.BadRequest)
+            throw new AssertActualExpectedException(
+                expected: HttpStatusCode.BadRequest,
+                actual: response.StatusCode,
+                userMessage: "Expected that this call to be rejected but it unexpectedly succeeded");
+
+        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
+    }
+
+    private async static Task<HttpResponseMessage> Bid(HttpClient client, Guid gameId, Guid playerId, string bid) =>
+        await client.PostAsJsonAsync(
+            requestUri: $"{PlayerUri(gameId, playerId)}/bids",
+            value: new {PokerHand = bid});
 
     async internal static Task<GetGameFlow.Result> GetGameFlow(this HttpClient client, Guid gameId)
     {
