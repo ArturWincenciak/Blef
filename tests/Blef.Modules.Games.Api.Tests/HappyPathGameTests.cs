@@ -1,6 +1,6 @@
 namespace Blef.Modules.Games.Api.Tests;
 
-public class GamesTests
+public class HappyPathGameTests
 {
     [Fact]
     public async Task PlayGame()
