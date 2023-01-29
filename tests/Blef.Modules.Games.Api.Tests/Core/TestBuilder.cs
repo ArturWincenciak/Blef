@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Queries;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -51,9 +52,13 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder Bid(WhichPlayer whichPlayer, string bid)
+    internal TestBuilder Bid(WhichPlayer whichPlayer, string bid, Action<ProblemDetails>? with = null)
     {
-        _actions.Add(() => _gameClient.Bid(whichPlayer, bid));
+        if (with is not null)
+            _actions.Add(async () => with(await _gameClient.BidWithRuleViolation(whichPlayer, bid)));
+        else
+            _actions.Add(() => _gameClient.BidWithSuccess(whichPlayer, bid));
+
         return this;
     }
 
