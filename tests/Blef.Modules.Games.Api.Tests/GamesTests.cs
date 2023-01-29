@@ -1,26 +1,23 @@
-using Microsoft.Extensions.Primitives;
-
 namespace Blef.Modules.Games.Api.Tests;
 
 public class GamesTests
 {
-    private const string GAMES = "games-module/games";
-
     [Fact]
     public async Task PlayGame()
     {
         var exception = await Record.ExceptionAsync(async () =>
         {
             await new TestBuilder()
-                .WithNewGame()
-                .WithJoinPlayer(TestBuilder.WhichPlayer.Knuth)
-                .WithJoinPlayer(TestBuilder.WhichPlayer.Graham)
-                .WithGetPlayerCard(TestBuilder.WhichPlayer.Knuth)
-                .WithGetPlayerCard(TestBuilder.WhichPlayer.Graham)
-                .WithBid(TestBuilder.WhichPlayer.Knuth, "one-of-a-kind:nine")
-                .WithBid(TestBuilder.WhichPlayer.Graham, "one-of-a-kind:ten")
-                .WithCheck(TestBuilder.WhichPlayer.Knuth)
-                .WithGetGameFlow()
+                .NewGame()
+                .JoinPlayer(WhichPlayer.Knuth)
+                .GetCards(WhichPlayer.Knuth)
+                .JoinPlayer(WhichPlayer.Graham)
+                .GetCards(WhichPlayer.Knuth)
+                .GetCards(WhichPlayer.Graham)
+                .Bid(WhichPlayer.Knuth, "one-of-a-kind:nine")
+                .Bid(WhichPlayer.Graham, "one-of-a-kind:ten")
+                .Check(WhichPlayer.Knuth)
+                .GetGameFlow()
                 .Build();
         });
 
