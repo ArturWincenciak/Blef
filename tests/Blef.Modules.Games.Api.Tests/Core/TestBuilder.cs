@@ -62,9 +62,13 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder Check(WhichPlayer whichPlayer)
+    internal TestBuilder Check(WhichPlayer whichPlayer, Action<ProblemDetails>? with = null)
     {
-        _actions.Add(() => _gameClient.Check(whichPlayer));
+        if (with is not null)
+            _actions.Add(async () => with(await _gameClient.CheckWithRuleViolation(whichPlayer)));
+        else
+            _actions.Add(() => _gameClient.CheckWithSuccess(whichPlayer));
+
         return this;
     }
 }
