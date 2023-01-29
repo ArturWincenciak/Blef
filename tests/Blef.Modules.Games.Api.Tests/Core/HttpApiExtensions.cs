@@ -1,6 +1,9 @@
 ﻿using System.Net.Http.Json;
+using Blef.Modules.Games.Application.Queries;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
+
+
 
 internal static class HttpApiExtensions
 {
@@ -22,10 +25,11 @@ internal static class HttpApiExtensions
         return player!.PlayerId;
     }
 
-    async internal static Task GetCards(this HttpClient client, Guid gameId, Guid playerId)
+    async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client, Guid gameId, Guid playerId)
     {
         var response = await client.GetAsync(requestUri: $"{PlayerUri(gameId, playerId)}/cards");
         response.EnsureSuccessStatusCode();
+        return (await response.Content.ReadFromJsonAsync<GetPlayerCards.Result>())!;
     }
 
     async internal static Task Bid(this HttpClient client, Guid gameId, Guid playerId, string bid)

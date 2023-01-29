@@ -1,4 +1,6 @@
-﻿namespace Blef.Modules.Games.Api.Tests.Core;
+﻿using Blef.Modules.Games.Application.Queries;
+
+namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal sealed class TestBuilder
 {
@@ -34,9 +36,13 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder GetCards(WhichPlayer whichPlayer)
+    internal TestBuilder GetCards(WhichPlayer whichPlayer, Action<GetPlayerCards.Result>? with = null)
     {
-        _actions.Add(() => _gameClient.GetCards(whichPlayer));
+        _actions.Add(async () =>
+        {
+            var cards = await _gameClient.GetCards(whichPlayer);
+            with?.Invoke(cards);
+        });
         return this;
     }
 
