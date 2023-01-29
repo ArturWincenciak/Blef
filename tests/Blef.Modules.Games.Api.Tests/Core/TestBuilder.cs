@@ -24,9 +24,14 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder GetGameFlow()
+    internal TestBuilder GetGameFlow(Action<GetGameFlow.Result, BlefClient.State>? with = null)
     {
-        _actions.Add(() => _gameClient.GetGameFlow());
+        _actions.Add(async () =>
+        {
+            var gameFlow = await _gameClient.GetGameFlow();
+            var gameClientState = _gameClient.GetState();
+            with?.Invoke(gameFlow, gameClientState);
+        });
         return this;
     }
 
