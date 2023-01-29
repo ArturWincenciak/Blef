@@ -7,39 +7,46 @@ internal sealed class BlefClient
     private readonly HttpClient _httpClient;
 
     private Guid _gameId;
+
     private Guid _knuthPlayerId;
+
     private Guid _grahamPlayerId;
+
     private Guid _riemannPlayerId;
+
     private Guid _conwayPlayerId;
 
-    public BlefClient(HttpClient httpClient) =>
+    internal BlefClient(HttpClient httpClient) =>
         _httpClient = httpClient;
 
-    public async Task NewGame() =>
+    internal State GetState() =>
+        new (_gameId, _knuthPlayerId, _grahamPlayerId, _riemannPlayerId, _conwayPlayerId);
+
+    async internal Task NewGame() =>
         _gameId = await _httpClient.MakeNewGame();
 
-    public async Task GetGameFlow() =>
+    async internal Task<GetGameFlow.Result> GetGameFlow() =>
         await _httpClient.GetGameFlow(_gameId);
 
-    public async Task JoinPlayer(WhichPlayer whichPlayer)
+    async internal Task JoinPlayer(WhichPlayer whichPlayer)
     {
         var player = await _httpClient.JoinPlayer(_gameId, nick: whichPlayer.ToString());
         SetPlayerId(whichPlayer, player);
     }
 
-    public async Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer)
+    async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
         return await _httpClient.GetCards(_gameId, playerId);
     }
 
-    public async Task Bid(WhichPlayer whichPlayer, string bid)
+    async internal Task Bid(WhichPlayer whichPlayer, string bid)
     {
         var playerId = GetPlayerId(whichPlayer);
         await _httpClient.Bid(_gameId, playerId, bid);
     }
 
-    public async Task Check(WhichPlayer whichPlayer)
+    async internal Task Check(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
         await _httpClient.Check(_gameId, playerId);
@@ -68,4 +75,11 @@ internal sealed class BlefClient
         else
             throw new ArgumentOutOfRangeException(nameof(whichPlayer));
     }
+
+    internal record State(
+        Guid GameId,
+        Guid KnuthPlayerId,
+        Guid GrahamPlayerId,
+        Guid RiemannPlayerId,
+        Guid ConwayPlayerId);
 }

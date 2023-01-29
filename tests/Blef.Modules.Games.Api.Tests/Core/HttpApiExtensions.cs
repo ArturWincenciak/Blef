@@ -40,10 +40,11 @@ internal static class HttpApiExtensions
         response.EnsureSuccessStatusCode();
     }
 
-    async internal static Task GetGameFlow(this HttpClient client, Guid gameId)
+    async internal static Task<GetGameFlow.Result> GetGameFlow(this HttpClient client, Guid gameId)
     {
         var response = await client.GetAsync($"{GamesUri}/{gameId}");
         response.EnsureSuccessStatusCode();
+        return (await response.Content.ReadFromJsonAsync<GetGameFlow.Result>())!;
     }
 
     async internal static Task Check(this HttpClient client, Guid gameId, Guid playerId)
