@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace Blef.Modules.Games.Api.Tests;
+namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal class BlefApplicationFactory : WebApplicationFactory<Program>
 {
