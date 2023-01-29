@@ -1,4 +1,4 @@
-﻿namespace Blef.Modules.Games.Api.Tests;
+﻿namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal sealed class BlefClient
 {

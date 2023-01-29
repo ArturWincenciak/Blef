@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 
-namespace Blef.Modules.Games.Api.Tests;
+namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal static class HttpApiExtensions
 {
