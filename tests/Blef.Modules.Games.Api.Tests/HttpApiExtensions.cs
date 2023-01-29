@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Api.Tests;
 
-internal static class ApiExtensions
+internal static class HttpApiExtensions
 {
     async internal static Task<Guid> MakeNewGame(this HttpClient client)
     {
@@ -22,7 +22,7 @@ internal static class ApiExtensions
         return player!.PlayerId;
     }
 
-    async internal static Task GetPlayerCards(this HttpClient client, Guid gameId, Guid playerId)
+    async internal static Task GetCards(this HttpClient client, Guid gameId, Guid playerId)
     {
         var response = await client.GetAsync(requestUri: $"{PlayerUri(gameId, playerId)}/cards");
         response.EnsureSuccessStatusCode();
