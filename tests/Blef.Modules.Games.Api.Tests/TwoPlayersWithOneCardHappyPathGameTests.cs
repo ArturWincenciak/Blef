@@ -1,13 +1,12 @@
-using System.Runtime.InteropServices;
-using Blef.Modules.Games.Api.Tests.Core;
+﻿using Blef.Modules.Games.Api.Tests.Core;
 using Blef.Modules.Games.Application.Queries;
 
 namespace Blef.Modules.Games.Api.Tests;
 
-public class HappyPathGameTests
+public class TwoPlayersWithOneCardHappyPathGameTests
 {
     [Fact]
-    public async Task TwoPlayersWithOneCardPlayGame()
+    public async Task OneBidEachAndCheck()
     {
         await new TestBuilder()
             .NewGame()
