@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Api.Tests.Core;
 
-public static class Bid
+public static class PokerHand
 {
     public static class OneOfAKind
     {
