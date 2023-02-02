@@ -5,6 +5,8 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 public sealed class Game
 {
+    private const int MAX_NUMBER_OF_PLAYERS = 4;
+    private const int MIN_NUMBER_OF_PLAYERS = 2;
     private readonly BidFlowHistory _bidFlowHistory = new();
     private readonly DealtCards _dealtCards = new();
     private readonly IDeck _deck;
@@ -45,7 +47,7 @@ public sealed class Game
 
     public void Bid(Guid playerId, string pokerHand)
     {
-        if (_players.Count < 2)
+        if (_players.Count < MIN_NUMBER_OF_PLAYERS)
             throw new MinimumGamePlayersNotReachedException(Id);
 
         if (_lastBid != null && NewBidIsNotHigher(_lastBid, pokerHand))
@@ -67,7 +69,7 @@ public sealed class Game
         if (_isGameStarted)
             throw new JoinGameThatIsAlreadyStartedException(Id, nick);
 
-        if (_players.Count >= 2)
+        if (_players.Count >= MAX_NUMBER_OF_PLAYERS)
             throw new MaxGamePlayersReachedException(Id);
 
         if (_players.ContainsNick(nick))
