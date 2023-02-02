@@ -10,7 +10,7 @@ public class TwoPlayersWithOneCardGameRulesViolationTests
         await new TestBuilder()
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
-            .Bid(WhichPlayer.Knuth, "one-of-a-kind:nine",
+            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine,
                 with: problemDetails =>
                 {
                     Assert.Equal(
@@ -28,8 +28,8 @@ public class TwoPlayersWithOneCardGameRulesViolationTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Knuth, "one-of-a-kind:nine")
-            .Bid(WhichPlayer.Knuth, "one-of-a-kind:ten",
+            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine)
+            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Ten,
                 with: problemDetails =>
                 {
                     Assert.Equal(
@@ -47,7 +47,7 @@ public class TwoPlayersWithOneCardGameRulesViolationTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Knuth, "one-of-a-kind:nine")
+            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine)
             .Check(WhichPlayer.Knuth,
                 with: problemDetails =>
                 {
@@ -115,7 +115,6 @@ public class TwoPlayersWithOneCardGameRulesViolationTests
                     Assert.Contains(
                         expectedSubstring: "game-is-already-over",
                         actualString: problemDetails.Type);
-
                 })
             .Build();
 }
