@@ -75,10 +75,6 @@ public sealed class Game
         if (_lastBid != null && NewBidIsNotHigher(_lastBid, pokerHand))
             throw new BidIsNotHigherThenLastOneException(Id, pokerHand, _lastBid);
 
-        // TODO: decouple validation logic and parsing the poker hand (parsing contract-based)
-        // just to check that the bid is Valid.
-        PokerHandParser.Parse(pokerHand);
-
         _players.Bid(playerId);
         _isGameStarted = true;
         _lastBid = pokerHand;
