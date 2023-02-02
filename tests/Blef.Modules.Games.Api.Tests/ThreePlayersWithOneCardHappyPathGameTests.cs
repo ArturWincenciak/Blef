@@ -11,9 +11,9 @@ public class ThreePlayersWithOneCardHappyPathGameTests
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
             .JoinPlayer(WhichPlayer.Conway)
-            .Bid(WhichPlayer.Knuth, bid: PokerHand.OneOfAKind.Nine)
-            .Bid(WhichPlayer.Graham, bid: PokerHand.OneOfAKind.Ten)
-            .Bid(WhichPlayer.Graham, bid: PokerHand.OneOfAKind.Jack)
+            .Bid(WhichPlayer.Knuth, bid: PokerHand.HighCard.Nine)
+            .Bid(WhichPlayer.Graham, bid: PokerHand.HighCard.Ten)
+            .Bid(WhichPlayer.Graham, bid: PokerHand.HighCard.Jack)
             .Check(WhichPlayer.Knuth)
             .GetGameFlow()
             .Build();

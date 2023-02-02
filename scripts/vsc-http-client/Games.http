@@ -13,12 +13,12 @@
 # - 4 means 'spades'
 
 # Bid poker hand options
-# - one-of-a-kind:nine
-# - one-of-a-kind:ten
-# - one-of-a-kind:jack
-# - one-of-a-kind:queen
-# - one-of-a-kind:king
-# - one-of-a-kind:ace
+# - high-card:nine
+# - high-card:ten
+# - high-card:jack
+# - high-card:queen
+# - high-card:king
+# - high-card:ace
 
 @module = games-module
 @api = {{host}}/{{module}}
@@ -80,7 +80,7 @@ POST {{api}}/games/{{gameId}}/players/{{playerOneId}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "one-of-a-kind:nine"
+    "pokerHand": "high-card:nine"
 }
 
 ### Player 2: Bid
@@ -88,7 +88,7 @@ POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "one-of-a-kind:ten"
+    "pokerHand": "high-card:ten"
 }
 
 ### Player 3: Bid
@@ -96,7 +96,7 @@ POST {{api}}/games/{{gameId}}/players/{{playerThreeId}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "one-of-a-kind:jack"
+    "pokerHand": "high-card:jack"
 }
 
 ### Player 1: Check

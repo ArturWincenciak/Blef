@@ -10,7 +10,6 @@ public static class PokerHandParser
         // TODO: implement more Poker Hands
         return pokerHandType.ToLower() switch
         {
-            "one-of-a-kind" => new HighCard(ParseFaceCard(parts[1])),
             "high-card" => new HighCard(ParseFaceCard(parts[1])),
             "pair" => new Pair(ParseFaceCard(parts[1])),
             "two-pairs" => CreateTwoPairs(parts[1]),
@@ -18,12 +17,6 @@ public static class PokerHandParser
             "high-straight" => new HighStraight(),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
         };
-    }
-
-    private static TwoPairs CreateTwoPairs(string faceCards)
-    {
-        var faceCardParts = faceCards.Split(",");
-        return new TwoPairs(first: ParseFaceCard(faceCardParts[0]), second: ParseFaceCard(faceCardParts[1]));
     }
 
     private static FaceCard ParseFaceCard(string faceCard) =>
@@ -37,4 +30,10 @@ public static class PokerHandParser
             "ace" => FaceCard.Ace,
             _ => throw new Exception($"Unknown value of FaceCard: '{faceCard}'")
         };
+
+    private static TwoPairs CreateTwoPairs(string faceCards)
+    {
+        var faceCardParts = faceCards.Split(",");
+        return new TwoPairs(first: ParseFaceCard(faceCardParts[0]), second: ParseFaceCard(faceCardParts[1]));
+    }
 }

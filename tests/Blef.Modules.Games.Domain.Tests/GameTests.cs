@@ -5,8 +5,8 @@ namespace Blef.Modules.Games.Domain.Tests;
 
 public class GameTests
 {
-    private const string KING = "one-of-a-kind:King";
-    private const string ACE = "one-of-a-kind:Ace";
+    private const string KING = "high-card:King";
+    private const string ACE = "high-card:Ace";
     private const string FIRST_PLAYER_NICK = "First Player Nick";
     private const string SECOND_PLAYER_NICK = "Second Player Nick";
 
