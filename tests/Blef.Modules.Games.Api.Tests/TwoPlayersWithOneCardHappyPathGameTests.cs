@@ -15,8 +15,8 @@ public class TwoPlayersWithOneCardHappyPathGameTests
             .JoinPlayer(WhichPlayer.Graham)
             .GetCards(WhichPlayer.Knuth, with: AssertThatPlayerShouldHaveOneCard)
             .GetCards(WhichPlayer.Graham, with: AssertThatPlayerShouldHaveOneCard)
-            .Bid(WhichPlayer.Knuth, bid: "one-of-a-kind:nine")
-            .Bid(WhichPlayer.Graham, bid: "one-of-a-kind:ten")
+            .Bid(WhichPlayer.Knuth, bid: Bid.OneOfAKind.Nine)
+            .Bid(WhichPlayer.Graham, bid: Bid.OneOfAKind.Ten)
             .Check(WhichPlayer.Knuth)
             .GetGameFlow(with: AssertGameState)
             .Build();

@@ -13,7 +13,7 @@ public class ThreePlayersWithOneCardGameRulesViolationTests
                 .NewGame()
                 .JoinPlayer(WhichPlayer.Knuth)
                 .JoinPlayer(WhichPlayer.Graham)
-                .Bid(WhichPlayer.Knuth, "one-of-a-kind:nine")
+                .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine)
                 .JoinPlayer(WhichPlayer.Conway)
                 .Build();
         });

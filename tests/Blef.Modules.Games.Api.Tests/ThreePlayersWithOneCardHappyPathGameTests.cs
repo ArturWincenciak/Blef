@@ -11,9 +11,9 @@ public class ThreePlayersWithOneCardHappyPathGameTests
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
             .JoinPlayer(WhichPlayer.Conway)
-            .Bid(WhichPlayer.Knuth, bid: "one-of-a-kind:nine")
-            .Bid(WhichPlayer.Graham, bid: "one-of-a-kind:ten")
-            .Bid(WhichPlayer.Graham, bid: "one-of-a-kind:jack")
+            .Bid(WhichPlayer.Knuth, bid: Bid.OneOfAKind.Nine)
+            .Bid(WhichPlayer.Graham, bid: Bid.OneOfAKind.Ten)
+            .Bid(WhichPlayer.Graham, bid: Bid.OneOfAKind.Jack)
             .Check(WhichPlayer.Knuth)
             .GetGameFlow()
             .Build();
