@@ -45,6 +45,25 @@ public sealed class Game
     public Card[] GetCards(Guid playerId) =>
         _players.GetPlayer(playerId).DealtCards;
 
+    private Player Join(string nick, int cardsToDealCount)
+    {
+        if (_isGameStarted)
+            throw new JoinGameThatIsAlreadyStartedException(Id, nick);
+
+        if (_players.Count >= MAX_NUMBER_OF_PLAYERS)
+            throw new MaxGamePlayersReachedException(Id);
+
+        if (_players.ContainsNick(nick))
+            throw new PlayerAlreadyJoinedTheGameException(Id, nick);
+
+        var cards = _deck.DealCards(cardsToDealCount);
+        var player = Player.Create(nick, cards);
+        _players.Add(player);
+        _dealtCards.Add(cards);
+
+        return player;
+    }
+
     public void Bid(Guid playerId, string pokerHand)
     {
         if (_players.Count < MIN_NUMBER_OF_PLAYERS)
@@ -65,25 +84,6 @@ public sealed class Game
         _lastBid = pokerHand;
 
         _bidFlowHistory.OnBid(playerId, pokerHand);
-    }
-
-    private Player Join(string nick, int cardsToDealCount)
-    {
-        if (_isGameStarted)
-            throw new JoinGameThatIsAlreadyStartedException(Id, nick);
-
-        if (_players.Count >= MAX_NUMBER_OF_PLAYERS)
-            throw new MaxGamePlayersReachedException(Id);
-
-        if (_players.ContainsNick(nick))
-            throw new PlayerAlreadyJoinedTheGameException(Id, nick);
-
-        var cards = _deck.DealCards(cardsToDealCount);
-        var player = Player.Create(nick, cards);
-        _players.Add(player);
-        _dealtCards.Add(cards);
-
-        return player;
     }
 
     public void Check(Guid playerId)
