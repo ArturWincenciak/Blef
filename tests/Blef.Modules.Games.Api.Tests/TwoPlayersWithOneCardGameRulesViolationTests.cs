@@ -10,7 +10,7 @@ public class TwoPlayersWithOneCardGameRulesViolationTests
         await new TestBuilder()
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
-            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine,
+            .Bid(WhichPlayer.Knuth, PokerHand.OneOfAKind.Nine,
                 with: problemDetails =>
                 {
                     Assert.Equal(
@@ -28,8 +28,8 @@ public class TwoPlayersWithOneCardGameRulesViolationTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine)
-            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Ten,
+            .Bid(WhichPlayer.Knuth, PokerHand.OneOfAKind.Nine)
+            .Bid(WhichPlayer.Knuth, PokerHand.OneOfAKind.Ten,
                 with: problemDetails =>
                 {
                     Assert.Equal(
@@ -47,7 +47,7 @@ public class TwoPlayersWithOneCardGameRulesViolationTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine)
+            .Bid(WhichPlayer.Knuth, PokerHand.OneOfAKind.Nine)
             .Check(WhichPlayer.Knuth,
                 with: problemDetails =>
                 {
@@ -84,7 +84,7 @@ public class TwoPlayersWithOneCardGameRulesViolationTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine)
+            .Bid(WhichPlayer.Knuth, PokerHand.OneOfAKind.Nine)
             .Check(WhichPlayer.Graham)
             .Check(WhichPlayer.Graham,
                 with: problemDetails =>
@@ -104,9 +104,9 @@ public class TwoPlayersWithOneCardGameRulesViolationTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine)
+            .Bid(WhichPlayer.Knuth, PokerHand.OneOfAKind.Nine)
             .Check(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Graham, Bid.OneOfAKind.Nine,
+            .Bid(WhichPlayer.Graham, PokerHand.OneOfAKind.Nine,
                 with: problemDetails =>
                 {
                     Assert.Equal(
