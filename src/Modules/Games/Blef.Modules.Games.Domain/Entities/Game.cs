@@ -50,6 +50,9 @@ public sealed class Game
         if (_players.Count < MIN_NUMBER_OF_PLAYERS)
             throw new MinimumGamePlayersNotReachedException(Id);
 
+        if (_looser != null)
+            throw new GameIsAlreadyOverException(Id);
+
         if (_lastBid != null && NewBidIsNotHigher(_lastBid, pokerHand))
             throw new BidIsNotHigherThenLastOneException(Id, pokerHand, _lastBid);
 
@@ -85,7 +88,6 @@ public sealed class Game
 
     public void Check(Guid playerId)
     {
-        // TODO: the same validation should be added for 'Bid' command
         if (_looser != null)
             throw new GameIsAlreadyOverException(Id);
 

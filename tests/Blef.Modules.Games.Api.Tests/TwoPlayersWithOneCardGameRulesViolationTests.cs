@@ -77,4 +77,45 @@ public class TwoPlayersWithOneCardGameRulesViolationTests
                         actualString: problemDetails.Type);
                 })
             .Build();
+
+    [Fact]
+    public async Task CannotCheckOnceAgainWhenGameIsAlreadyOver() =>
+        await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Knuth)
+            .JoinPlayer(WhichPlayer.Graham)
+            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine)
+            .Check(WhichPlayer.Graham)
+            .Check(WhichPlayer.Graham,
+                with: problemDetails =>
+                {
+                    Assert.Equal(
+                        expected: (int) HttpStatusCode.BadRequest,
+                        actual: problemDetails.Status);
+                    Assert.Contains(
+                        expectedSubstring: "game-is-already-over",
+                        actualString: problemDetails.Type);
+                })
+            .Build();
+
+    [Fact]
+    public async Task CannotBidWhenGameIsAlreadyOver() =>
+        await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Knuth)
+            .JoinPlayer(WhichPlayer.Graham)
+            .Bid(WhichPlayer.Knuth, Bid.OneOfAKind.Nine)
+            .Check(WhichPlayer.Graham)
+            .Bid(WhichPlayer.Graham, Bid.OneOfAKind.Nine,
+                with: problemDetails =>
+                {
+                    Assert.Equal(
+                        expected: (int) HttpStatusCode.BadRequest,
+                        actual: problemDetails.Status);
+                    Assert.Contains(
+                        expectedSubstring: "game-is-already-over",
+                        actualString: problemDetails.Type);
+
+                })
+            .Build();
 }
