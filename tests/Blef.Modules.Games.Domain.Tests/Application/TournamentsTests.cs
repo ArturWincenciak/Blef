@@ -45,7 +45,7 @@ public class TournamentsTests
     {
         var currentGame = tournament.GetCurrentGame();
         currentGame.Bid(player.PlayerId, pokerHand: "two-pairs:jack,ten");
-        currentGame.Check(player.PlayerId); //todo:aw: imho here is bug, cannot bid and check by the same player
+        currentGame.Check(player.PlayerId); //bug: cannot bid and check by the same player
 
         Assert.NotNull(currentGame.GetLooser());
     }
