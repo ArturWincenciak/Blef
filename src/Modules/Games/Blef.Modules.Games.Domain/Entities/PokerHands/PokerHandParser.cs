@@ -7,7 +7,7 @@ public static class PokerHandParser
         var parts = bid.Split(":");
         var pokerHandType = parts[0];
 
-        // TODO: implement more Poker Hands
+        //todo: implement more Poker Hands
         return pokerHandType.ToLower() switch
         {
             "high-card" => new HighCard(ParseFaceCard(parts[1])),
@@ -16,6 +16,7 @@ public static class PokerHandParser
             "low-straight" => new LowStraight(),
             "high-straight" => new HighStraight(),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
+            //todo: validate, domain exception, test
         };
     }
 
