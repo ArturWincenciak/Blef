@@ -23,7 +23,7 @@ POST {{host}}/{{playerLocation}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "one-of-a-kind:Jack"
+    "pokerHand": "high-card:Jack"
 }
 
 ### Bid King
@@ -31,7 +31,7 @@ POST {{host}}/{{playerLocation}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "one-of-a-kind:King"
+    "pokerHand": "high-card:King"
 }
 
 ### Bid pair of Kings

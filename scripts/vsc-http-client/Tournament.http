@@ -51,7 +51,7 @@ POST {{api}}/games/{{gameId}}/players/{{playerOneId}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "one-of-a-kind:nine"
+    "pokerHand": "high-card:nine"
 }
 
 ### Player 2: Bid
@@ -59,7 +59,7 @@ POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/bids
 Content-Type: application/json
 
 {
-    "pokerHand": "one-of-a-kind:ten"
+    "pokerHand": "high-card:ten"
 }
 
 ### Player 1: Check

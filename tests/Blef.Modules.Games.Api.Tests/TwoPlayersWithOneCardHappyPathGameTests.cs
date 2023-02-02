@@ -15,8 +15,8 @@ public class TwoPlayersWithOneCardHappyPathGameTests
             .JoinPlayer(WhichPlayer.Graham)
             .GetCards(WhichPlayer.Knuth, with: AssertThatPlayerShouldHaveOneCard)
             .GetCards(WhichPlayer.Graham, with: AssertThatPlayerShouldHaveOneCard)
-            .Bid(WhichPlayer.Knuth, bid: PokerHand.OneOfAKind.Nine)
-            .Bid(WhichPlayer.Graham, bid: PokerHand.OneOfAKind.Ten)
+            .Bid(WhichPlayer.Knuth, bid: PokerHand.HighCard.Nine)
+            .Bid(WhichPlayer.Graham, bid: PokerHand.HighCard.Ten)
             .Check(WhichPlayer.Knuth)
             .GetGameFlow(with: AssertGameState)
             .Build();
@@ -47,11 +47,11 @@ public class TwoPlayersWithOneCardHappyPathGameTests
 
             var firstBid = result.Bids.Single(bid => bid.Order == 1);
             Assert.Equal(expected: knuth.Id, firstBid.PlayerId);
-            Assert.Equal(expected: "one-of-a-kind:nine", firstBid.Bid);
+            Assert.Equal(expected: PokerHand.HighCard.Nine, firstBid.Bid);
 
             var secondBid = result.Bids.Single(bid => bid.Order == 2);
             Assert.Equal(expected: graham.Id, secondBid.PlayerId);
-            Assert.Equal(expected: "one-of-a-kind:ten", secondBid.Bid);
+            Assert.Equal(expected: PokerHand.HighCard.Ten, secondBid.Bid);
 
             Assert.Equal(game.KnuthPlayerId, result.CheckingPlayerId);
             Assert.True(result.LooserPlayerId == knuth.Id || result.LooserPlayerId == graham.Id);

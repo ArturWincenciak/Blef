@@ -2,10 +2,10 @@
 
 public static class PokerHand
 {
-    public static class OneOfAKind
+    public static class HighCard
     {
-        public static string Nine = "one-of-a-kind:nine";
-        public static string Ten = "one-of-a-kind:ten";
-        public static string Jack = "one-of-a-kind:jack";
+        public readonly static string Nine = "high-card:nine";
+        public readonly static string Ten = "high-card:ten";
+        public readonly static string Jack = "high-card:jack";
     }
 }
