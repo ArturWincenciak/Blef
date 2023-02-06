@@ -39,7 +39,7 @@ jobs:
 
     - name: Build image and push to Docker Hub and GitHub Container Registry
       id: build_and_publish
-      uses: docker/build-push-action@v3
+      uses: docker/build-push-action@v4
       with:
         context: .
         tags: |
