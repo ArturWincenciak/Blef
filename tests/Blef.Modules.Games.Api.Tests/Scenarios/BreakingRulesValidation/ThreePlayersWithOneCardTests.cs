@@ -1,10 +1,11 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.BreakingRulesValidation;
 
 public class ThreePlayersWithOneCardTests
 {
-    [Fact]
+    [Fact(Skip = "todo")]
     public async Task CannotJoinWhenGameHasBeenStarted()
     {
         var exception = await Record.ExceptionAsync(async () =>

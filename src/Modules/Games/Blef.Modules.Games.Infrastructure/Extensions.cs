@@ -13,6 +13,5 @@ internal static class Extensions
     internal static void AddInfrastructure(this IServiceCollection services) =>
         services
             .AddSingleton<IGamesRepository, GamesRepository>()
-            .AddSingleton<ITournamentsRepository, TournamentsRepository>()
             .AddApplication();
 }
