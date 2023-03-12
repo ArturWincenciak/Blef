@@ -12,6 +12,5 @@ internal static class Extensions
 {
     internal static void AddDomain(this IServiceCollection services) =>
         services
-            .AddSingleton<RandomnessProvider>()
-            .AddSingleton<DeckGenerator>();
+            .AddSingleton<RandomnessProvider>();
 }

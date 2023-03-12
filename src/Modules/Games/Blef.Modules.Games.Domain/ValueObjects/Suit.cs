@@ -2,7 +2,8 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 public enum Suit
 {
-    Clubs = 1,
+    None,
+    Clubs,
     Diamonds,
     Hearts,
     Spades
