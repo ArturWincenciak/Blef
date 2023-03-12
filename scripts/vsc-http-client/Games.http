@@ -34,49 +34,52 @@ GET {{api}}/games/{{gameId}}
 Content-Type: application/json
 
 ### Player 1: Join game
-@playerOneId = {{player_one_join_game.response.body.playerId}}
-# @name player_one_join_game
+@playerKnuthNick = Knuth
+@playerKnuthId = {{player_knuth_join_game.response.body.playerId}}
+# @name player_knuth_join_game
 POST {{api}}/games/{{gameId}}/players
 Content-Type: application/json
 
 {
-    "nick": "Player One"
+    "nick": "{{playerKnuthNick}}"
 }
 
 ### Player 2: Join game
-@playerTwoId = {{player_two_join_game.response.body.playerId}}
-# @name player_two_join_game
+@playerGrahamNick = Graham
+@playerGrahamId = {{player_graham_join_game.response.body.playerId}}
+# @name player_graham_join_game
 POST {{api}}/games/{{gameId}}/players
 Content-Type: application/json
 
 {
-    "nick": "Player Two"
+    "nick": "{{playerGrahamNick}}"
 }
 
 ### Player 3: Join game
-@playerThreeId = {{player_three_join_game.response.body.playerId}}
-# @name player_three_join_game
+@playerRiemannNick = Riemann
+@playerRiemannId = {{player_riemann_join_game.response.body.playerId}}
+# @name player_riemann_join_game
 POST {{api}}/games/{{gameId}}/players
 Content-Type: application/json
 
 {
-    "nick": "Player Three"
+    "nick": "{{playerRiemannNick}}"
 }
 
 ### Player 1: Get player's cards
-GET {{api}}/games/{{gameId}}/players/{{playerOneId}}/cards
+GET {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/cards
 Content-Type: application/json
 
 ### Player 2: Get player's cards
-GET {{api}}/games/{{gameId}}/players/{{playerTwoId}}/cards
+GET {{api}}/games/{{gameId}}/players/{{playerGrahamId}}/cards
 Content-Type: application/json
 
 ### Player 3: Get player's cards
-GET {{api}}/games/{{gameId}}/players/{{playerThreeId}}/cards
+GET {{api}}/games/{{gameId}}/players/{{playerRiemannId}}/cards
 Content-Type: application/json
 
 ### Player 1: Bid
-POST {{api}}/games/{{gameId}}/players/{{playerOneId}}/bids
+POST {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/bids
 Content-Type: application/json
 
 {
@@ -84,7 +87,7 @@ Content-Type: application/json
 }
 
 ### Player 2: Bid
-POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/bids
+POST {{api}}/games/{{gameId}}/players/{{playerGrahamId}}/bids
 Content-Type: application/json
 
 {
@@ -92,7 +95,7 @@ Content-Type: application/json
 }
 
 ### Player 3: Bid
-POST {{api}}/games/{{gameId}}/players/{{playerThreeId}}/bids
+POST {{api}}/games/{{gameId}}/players/{{playerRiemannId}}/bids
 Content-Type: application/json
 
 {
@@ -100,13 +103,13 @@ Content-Type: application/json
 }
 
 ### Player 1: Check
-POST {{api}}/games/{{gameId}}/players/{{playerOneId}}/checks
+POST {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/checks
 Content-Type: application/json
 
 ### Player 2: Check
-POST {{api}}/games/{{gameId}}/players/{{playerTwoId}}/checks
+POST {{api}}/games/{{gameId}}/players/{{playerGrahamId}}/checks
 Content-Type: application/json
 
 ### Player 3: Check
-POST {{api}}/games/{{gameId}}/players/{{playerThreeId}}/checks
+POST {{api}}/games/{{gameId}}/players/{{playerRiemannId}}/checks
 Content-Type: application/json
