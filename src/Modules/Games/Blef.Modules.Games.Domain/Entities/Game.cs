@@ -119,4 +119,14 @@ public sealed class Game
 
         return newPokerHand.IsBetterThan(lastPokerHand) == false;
     }
+
+    public Deal NewDeal()
+    {
+        return new Deal();
+    }
+}
+
+public sealed class Deal
+{
+    public int Id { get; }
 }

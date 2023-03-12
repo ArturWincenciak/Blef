@@ -12,6 +12,7 @@ internal sealed class GamesController : ModuleControllerBase
     private const string GAME_ID = "{gameId:Guid}";
     private const string PLAYER_ID = "{playerId:Guid}";
     private const string GAMES = "games";
+    private const string DEALS = "deals";
     private const string PLAYERS = "players";
     private const string CARDS = "cards";
     private const string BIDS = "bids";
@@ -27,10 +28,10 @@ internal sealed class GamesController : ModuleControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> MakeGame(CancellationToken cancellation)
+    public async Task<IActionResult> NewGame(CancellationToken cancellation)
     {
-        var cmd = new MakeNewGame();
-        var game = await _commandDispatcher.Dispatch<MakeNewGame, MakeNewGame.Result>(cmd, cancellation);
+        var cmd = new NewGame();
+        var game = await _commandDispatcher.Dispatch<NewGame, NewGame.Result>(cmd, cancellation);
         return Created(uri: $"{GameUri(game.GameId)}", game);
     }
 
@@ -48,6 +49,14 @@ internal sealed class GamesController : ModuleControllerBase
         var cmd = new JoinGame(gameId, command.Nick);
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, player.PlayerId)}", player);
+    }
+
+    [HttpPost($"{GAME_ID}/{DEALS}")]
+    public async Task<IActionResult> NewDeal(Guid gameId, CancellationToken cancellation)
+    {
+        var cmd = new NewDeal(gameId);
+        var deal = await _commandDispatcher.Dispatch<NewDeal, NewDeal.Result>(cmd, cancellation);
+        return Created(uri: $"{GameUri(gameId)}/{DEALS}/{deal.DealId}", deal);
     }
 
     [HttpGet($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{CARDS}")]
