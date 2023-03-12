@@ -1,12 +1,12 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core;
 using Blef.Modules.Games.Application.Queries;
 
-namespace Blef.Modules.Games.Api.Tests;
+namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 
-public class TwoPlayersWithOneCardHappyPathGameTests
+public class TwoPlayersWithOneCardTests
 {
     [Fact]
-    public async Task OneBidEachAndCheck()
+    public async Task OneBidByEachAndCheck()
     {
         await new TestBuilder()
             .NewGame()

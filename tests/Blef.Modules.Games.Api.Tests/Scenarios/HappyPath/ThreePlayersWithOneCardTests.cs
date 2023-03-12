@@ -1,11 +1,11 @@
 using Blef.Modules.Games.Api.Tests.Core;
 
-namespace Blef.Modules.Games.Api.Tests;
+namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 
-public class ThreePlayersWithOneCardHappyPathGameTests
+public class ThreePlayersWithOneCardTests
 {
     [Fact]
-    public async Task OneBidEachAndCheck() =>
+    public async Task OneBidByEachAndCheck() =>
         await new TestBuilder()
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)

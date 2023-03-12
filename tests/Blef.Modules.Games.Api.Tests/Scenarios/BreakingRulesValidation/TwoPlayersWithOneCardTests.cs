@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using Blef.Modules.Games.Api.Tests.Core;
 
-namespace Blef.Modules.Games.Api.Tests;
+namespace Blef.Modules.Games.Api.Tests.Scenarios.BreakingRulesValidation;
 
-public class TwoPlayersWithOneCardGameRulesViolationTests
+public class TwoPlayersWithOneCardTests
 {
     [Fact]
     public async Task CannotPlayWithYourself() =>
