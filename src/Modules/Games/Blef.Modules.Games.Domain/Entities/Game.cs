@@ -15,21 +15,16 @@ public sealed class Game
     private string? _lastBid;
     private Guid? _looser;
 
-    public Guid TournamentId { get; }
     public Guid Id { get; }
 
-    private Game(Guid id, IDeck deck, Guid tournamentId)
+    private Game(Guid id, IDeck deck)
     {
         Id = id;
         _deck = deck;
-        TournamentId = tournamentId;
     }
 
     public static Game Create(IDeck deck) =>
-        Create(deck, Guid.Empty);
-
-    public static Game Create(IDeck deck, Guid tournamentId) =>
-        new(id: Guid.NewGuid(), deck, tournamentId);
+        new(id: Guid.NewGuid(), deck);
 
     public Player Join(string nick) =>
         Join(nick, cardsToDealCount: 1);
@@ -124,9 +119,4 @@ public sealed class Game
     {
         return new Deal();
     }
-}
-
-public sealed class Deal
-{
-    public int Id { get; }
 }
