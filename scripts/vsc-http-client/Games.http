@@ -66,6 +66,10 @@ Content-Type: application/json
     "nick": "{{playerRiemannNick}}"
 }
 
+### New deal (shuffling and dealing)
+POST {{api}}/games/{{gameId}}/deals
+Content-Type: application/json
+
 ### Player 1: Get player's cards
 GET {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/cards
 Content-Type: application/json

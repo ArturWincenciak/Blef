@@ -6,22 +6,22 @@ using JetBrains.Annotations;
 namespace Blef.Modules.Games.Application.Commands.Handlers;
 
 [UsedImplicitly]
-internal sealed class MakeNewGameHandler : ICommandHandler<MakeNewGame, MakeNewGame.Result>
+internal sealed class NewGameHandler : ICommandHandler<NewGame, NewGame.Result>
 {
     private readonly DeckGenerator _deckGenerator;
     private readonly IGamesRepository _games;
 
-    public MakeNewGameHandler(IGamesRepository games, DeckGenerator deckGenerator)
+    public NewGameHandler(IGamesRepository games, DeckGenerator deckGenerator)
     {
         _games = games;
         _deckGenerator = deckGenerator;
     }
 
-    public async Task<MakeNewGame.Result> Handle(MakeNewGame command, CancellationToken cancellation)
+    public async Task<NewGame.Result> Handle(NewGame command, CancellationToken cancellation)
     {
         var game = Game.Create(_deckGenerator.GetFullDeck());
         _games.Add(game);
-        var result = new MakeNewGame.Result(game.Id);
+        var result = new NewGame.Result(game.Id);
         return await Task.FromResult(result);
     }
 }
