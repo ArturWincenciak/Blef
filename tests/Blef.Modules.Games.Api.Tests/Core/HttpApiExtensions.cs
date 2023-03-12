@@ -6,10 +6,11 @@ using Xunit.Sdk;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
-
-
 internal static class HttpApiExtensions
 {
+    private static string GamesUri =>
+        "games-module/games";
+
     async internal static Task<Guid> MakeNewGame(this HttpClient client)
     {
         var response = await client.PostAsync(GamesUri, content: null);
@@ -41,13 +42,14 @@ internal static class HttpApiExtensions
         response.EnsureSuccessStatusCode();
     }
 
-    async internal static Task<ProblemDetails> BidWithRuleViolation(this HttpClient client, Guid gameId, Guid playerId, string bid)
+    async internal static Task<ProblemDetails> BidWithRuleViolation(this HttpClient client, Guid gameId, Guid playerId,
+        string bid)
     {
         var response = await Bid(client, gameId, playerId, bid);
         if (response.StatusCode != HttpStatusCode.BadRequest)
             throw new AssertActualExpectedException(
-                expected: HttpStatusCode.BadRequest,
-                actual: response.StatusCode,
+                HttpStatusCode.BadRequest,
+                response.StatusCode,
                 userMessage: "Expected that this call to be rejected but it unexpectedly succeeded");
 
         return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
@@ -77,15 +79,12 @@ internal static class HttpApiExtensions
         var response = await client.PostAsync(requestUri: $"{PlayerUri(gameId, playerId)}/checks", content: null);
         if (response.StatusCode != HttpStatusCode.BadRequest)
             throw new AssertActualExpectedException(
-                expected: HttpStatusCode.BadRequest,
-                actual: response.StatusCode,
+                HttpStatusCode.BadRequest,
+                response.StatusCode,
                 userMessage: "Expected that this call to be rejected but it unexpectedly succeeded");
 
         return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
     }
-
-    private static string GamesUri =>
-        "games-module/games";
 
     private static string PlayersUri(Guid gameId) =>
         $"{GamesUri}/{gameId}/players";
@@ -94,5 +93,6 @@ internal static class HttpApiExtensions
         $"{GamesUri}/{gameId}/players/{playerId}";
 
     private record Game(Guid GameId);
+
     private record Player(Guid PlayerId);
 }

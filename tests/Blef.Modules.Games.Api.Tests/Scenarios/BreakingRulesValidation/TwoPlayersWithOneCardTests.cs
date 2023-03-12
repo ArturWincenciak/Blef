@@ -15,10 +15,10 @@ public class TwoPlayersWithOneCardTests
                 {
                     Assert.Equal(
                         expected: (int) HttpStatusCode.BadRequest,
-                        actual: problemDetails.Status);
+                        problemDetails.Status);
                     Assert.Contains(
                         expectedSubstring: "minimum-game-players-not-reached",
-                        actualString: problemDetails.Type);
+                        problemDetails.Type);
                 })
             .Build();
 
@@ -34,10 +34,10 @@ public class TwoPlayersWithOneCardTests
                 {
                     Assert.Equal(
                         expected: (int) HttpStatusCode.BadRequest,
-                        actual: problemDetails.Status);
+                        problemDetails.Status);
                     Assert.Contains(
                         expectedSubstring: "that-is-not-this-player-turn-now",
-                        actualString: problemDetails.Type);
+                        problemDetails.Type);
                 })
             .Build();
 
@@ -53,10 +53,10 @@ public class TwoPlayersWithOneCardTests
                 {
                     Assert.Equal(
                         expected: (int) HttpStatusCode.BadRequest,
-                        actual: problemDetails.Status);
+                        problemDetails.Status);
                     Assert.Contains(
                         expectedSubstring: "that-is-not-this-player-turn-now",
-                        actualString: problemDetails.Type);
+                        problemDetails.Type);
                 })
             .Build();
 
@@ -71,10 +71,10 @@ public class TwoPlayersWithOneCardTests
                 {
                     Assert.Equal(
                         expected: (int) HttpStatusCode.BadRequest,
-                        actual: problemDetails.Status);
+                        problemDetails.Status);
                     Assert.Contains(
                         expectedSubstring: "no-bid-to-check",
-                        actualString: problemDetails.Type);
+                        problemDetails.Type);
                 })
             .Build();
 
@@ -91,10 +91,10 @@ public class TwoPlayersWithOneCardTests
                 {
                     Assert.Equal(
                         expected: (int) HttpStatusCode.BadRequest,
-                        actual: problemDetails.Status);
+                        problemDetails.Status);
                     Assert.Contains(
                         expectedSubstring: "game-is-already-over",
-                        actualString: problemDetails.Type);
+                        problemDetails.Type);
                 })
             .Build();
 
@@ -111,10 +111,10 @@ public class TwoPlayersWithOneCardTests
                 {
                     Assert.Equal(
                         expected: (int) HttpStatusCode.BadRequest,
-                        actual: problemDetails.Status);
+                        problemDetails.Status);
                     Assert.Contains(
                         expectedSubstring: "game-is-already-over",
-                        actualString: problemDetails.Type);
+                        problemDetails.Type);
                 })
             .Build();
 }

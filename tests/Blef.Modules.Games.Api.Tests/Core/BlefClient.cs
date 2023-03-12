@@ -7,21 +7,21 @@ internal sealed class BlefClient
 {
     private readonly HttpClient _httpClient;
 
-    private Guid _gameId;
+    private Guid _conwayPlayerId;
 
-    private Guid _knuthPlayerId;
+    private Guid _gameId;
 
     private Guid _grahamPlayerId;
 
-    private Guid _riemannPlayerId;
+    private Guid _knuthPlayerId;
 
-    private Guid _conwayPlayerId;
+    private Guid _riemannPlayerId;
 
     internal BlefClient(HttpClient httpClient) =>
         _httpClient = httpClient;
 
     internal State GetState() =>
-        new (_gameId, _knuthPlayerId, _grahamPlayerId, _riemannPlayerId, _conwayPlayerId);
+        new(_gameId, _knuthPlayerId, _grahamPlayerId, _riemannPlayerId, _conwayPlayerId);
 
     async internal Task NewGame() =>
         _gameId = await _httpClient.MakeNewGame();

@@ -11,12 +11,12 @@ public class TwoPlayersWithOneCardTests
         await new TestBuilder()
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
-            .GetCards(WhichPlayer.Knuth, with: AssertThatPlayerShouldHaveOneCard)
+            .GetCards(WhichPlayer.Knuth, AssertThatPlayerShouldHaveOneCard)
             .JoinPlayer(WhichPlayer.Graham)
-            .GetCards(WhichPlayer.Knuth, with: AssertThatPlayerShouldHaveOneCard)
-            .GetCards(WhichPlayer.Graham, with: AssertThatPlayerShouldHaveOneCard)
-            .Bid(WhichPlayer.Knuth, bid: PokerHand.HighCard.Nine)
-            .Bid(WhichPlayer.Graham, bid: PokerHand.HighCard.Ten)
+            .GetCards(WhichPlayer.Knuth, AssertThatPlayerShouldHaveOneCard)
+            .GetCards(WhichPlayer.Graham, AssertThatPlayerShouldHaveOneCard)
+            .Bid(WhichPlayer.Knuth, PokerHand.HighCard.Nine)
+            .Bid(WhichPlayer.Graham, PokerHand.HighCard.Ten)
             .Check(WhichPlayer.Knuth)
             .GetGameFlow(with: AssertGameState)
             .Build();
@@ -36,22 +36,22 @@ public class TwoPlayersWithOneCardTests
             Assert.True(result.LooserPlayerId != Guid.Empty);
 
             var knuth = result.Players[0];
-            Assert.Equal(expected: game.KnuthPlayerId, knuth.Id);
+            Assert.Equal(game.KnuthPlayerId, knuth.Id);
             Assert.Equal(expected: WhichPlayer.Knuth.ToString(), knuth.Nick);
             Assert.Single(knuth.Cards);
 
             var graham = result.Players[1];
-            Assert.Equal(expected: game.GrahamPlayerId, graham.Id);
+            Assert.Equal(game.GrahamPlayerId, graham.Id);
             Assert.Equal(expected: WhichPlayer.Graham.ToString(), graham.Nick);
             Assert.Single(graham.Cards);
 
             var firstBid = result.Bids.Single(bid => bid.Order == 1);
-            Assert.Equal(expected: knuth.Id, firstBid.PlayerId);
-            Assert.Equal(expected: PokerHand.HighCard.Nine, firstBid.Bid);
+            Assert.Equal(knuth.Id, firstBid.PlayerId);
+            Assert.Equal(PokerHand.HighCard.Nine, firstBid.Bid);
 
             var secondBid = result.Bids.Single(bid => bid.Order == 2);
-            Assert.Equal(expected: graham.Id, secondBid.PlayerId);
-            Assert.Equal(expected: PokerHand.HighCard.Ten, secondBid.Bid);
+            Assert.Equal(graham.Id, secondBid.PlayerId);
+            Assert.Equal(PokerHand.HighCard.Ten, secondBid.Bid);
 
             Assert.Equal(game.KnuthPlayerId, result.CheckingPlayerId);
             Assert.True(result.LooserPlayerId == knuth.Id || result.LooserPlayerId == graham.Id);
