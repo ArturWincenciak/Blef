@@ -14,8 +14,10 @@ internal sealed class CheckHandler : ICommandHandler<Check>
 
     public Task Handle(Check command, CancellationToken cancellation)
     {
-        var game = _games.Get(command.GameId);
-        game.Check(command.PlayerId);
+        // todo
+        // var game = _games.Get(command.GameId);
+        // var deal = game.GetDeal(command.DealId);
+        // game.Check(command.PlayerId);
         return Task.CompletedTask;
     }
 }

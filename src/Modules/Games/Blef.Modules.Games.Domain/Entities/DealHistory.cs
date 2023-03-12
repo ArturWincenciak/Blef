@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Domain.Entities;
 
-public class BidFlowHistory
+public class DealHistory
 {
     private readonly List<(int Order, Guid PlayerId, string Bid)> _flow = new();
     private int _bidNumber;

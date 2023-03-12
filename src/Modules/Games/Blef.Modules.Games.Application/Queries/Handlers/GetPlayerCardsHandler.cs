@@ -15,10 +15,12 @@ internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetP
 
     public Task<GetPlayerCards.Result> Handle(GetPlayerCards query, CancellationToken cancellation)
     {
-        var game = _games.Get(query.GameId);
-        var cards = game.GetCards(query.PlayerId);
-        var result = new GetPlayerCards.Result(Map(cards));
-        return Task.FromResult(result);
+        // var game = _games.Get(query.GameId);
+        // var deal = game.GetDeal(query.DealId);
+        // var cards = deal.GetCards(query.PlayerId);
+        // var result = new GetPlayerCards.Result(Map(cards));
+        // return Task.FromResult(result);
+        return null;
     }
 
     private static GetPlayerCards.Card[] Map(IEnumerable<Card> cards) =>

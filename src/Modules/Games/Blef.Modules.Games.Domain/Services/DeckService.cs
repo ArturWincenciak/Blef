@@ -1,11 +1,11 @@
 ﻿namespace Blef.Modules.Games.Domain.Entities;
 
-internal class Deck : IDeck
+internal class DeckService : IDeckService
 {
     private readonly List<Card> _cards;
     private readonly RandomnessProvider _randomnessProvider;
 
-    public Deck(RandomnessProvider randomnessProvider, List<Card> cards)
+    public DeckService(RandomnessProvider randomnessProvider, List<Card> cards)
     {
         _randomnessProvider = randomnessProvider;
         _cards = cards;

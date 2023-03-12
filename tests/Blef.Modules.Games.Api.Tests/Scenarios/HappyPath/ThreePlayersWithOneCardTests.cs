@@ -4,7 +4,7 @@ namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 
 public class ThreePlayersWithOneCardTests
 {
-    [Fact(Skip = "todo")]
+    [Fact]
     public async Task OneBidByEachAndCheck() =>
         await new TestBuilder()
             .NewGame()

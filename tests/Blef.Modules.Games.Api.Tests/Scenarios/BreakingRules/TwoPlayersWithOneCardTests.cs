@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Blef.Modules.Games.Api.Tests.Core;
 
-namespace Blef.Modules.Games.Api.Tests.Scenarios.BreakingRulesValidation;
+namespace Blef.Modules.Games.Api.Tests.Scenarios.BreakingRules;
 
 public class TwoPlayersWithOneCardTests
 {
@@ -41,7 +41,7 @@ public class TwoPlayersWithOneCardTests
                 })
             .Build();
 
-    [Fact(Skip = "todo")]
+    [Fact]
     public async Task CannotBidAndCheckInTheSameRound() =>
         await new TestBuilder()
             .NewGame()
