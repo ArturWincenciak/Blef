@@ -34,14 +34,6 @@ public sealed class Game
     public Player Join(string nick) =>
         Join(nick, cardsToDealCount: 1);
 
-    public void Promote(TournamentPlayer tournamentPlayer, int cardsToDealCount)
-    {
-        var cards = _deck.DealCards(cardsToDealCount);
-        var player = Player.Create(tournamentPlayer, cards);
-        _players.Add(player);
-        _dealtCards.Add(cards);
-    }
-
     public Card[] GetCards(Guid playerId) =>
         _players.GetPlayer(playerId).DealtCards;
 
