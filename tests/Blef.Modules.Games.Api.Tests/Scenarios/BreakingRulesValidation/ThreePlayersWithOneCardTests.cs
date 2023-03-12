@@ -1,5 +1,4 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.BreakingRulesValidation;
 
