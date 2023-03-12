@@ -9,8 +9,8 @@ public class GameTests
     private const string ACE = "high-card:Ace";
     private const string FIRST_PLAYER_NICK = "First Player Nick";
     private const string SECOND_PLAYER_NICK = "Second Player Nick";
-    private readonly Guid _firstPlayerId;
 
+    private readonly Guid _firstPlayerId;
     private readonly Game _game;
     private readonly Guid _secondPlayerId;
 
