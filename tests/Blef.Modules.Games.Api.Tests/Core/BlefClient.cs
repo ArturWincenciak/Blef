@@ -8,15 +8,12 @@ internal sealed class BlefClient
 {
     private readonly HttpClient _httpClient;
 
-    private Guid _conwayPlayerId;
-
     private GameId _gameId;
 
-    private Guid _grahamPlayerId;
-
-    private Guid _knuthPlayerId;
-
-    private Guid _riemannPlayerId;
+    private PlayerId _conwayPlayerId;
+    private PlayerId _grahamPlayerId;
+    private PlayerId _knuthPlayerId;
+    private PlayerId _riemannPlayerId;
 
     internal BlefClient(HttpClient httpClient) =>
         _httpClient = httpClient;
@@ -33,7 +30,7 @@ internal sealed class BlefClient
     async internal Task JoinPlayer(WhichPlayer whichPlayer)
     {
         var player = await _httpClient.JoinPlayer(_gameId, nick: whichPlayer.ToString());
-        SetPlayerId(whichPlayer, player);
+        SetPlayerId(whichPlayer, new (player));
     }
 
     async internal Task Deal(WhichPlayer whichPlayer)
@@ -72,7 +69,7 @@ internal sealed class BlefClient
         return await _httpClient.CheckWithRuleViolation(_gameId, playerId);
     }
 
-    private Guid GetPlayerId(WhichPlayer whichPlayer) =>
+    private PlayerId GetPlayerId(WhichPlayer whichPlayer) =>
         whichPlayer switch
         {
             WhichPlayer.Knuth => _knuthPlayerId,
@@ -82,7 +79,7 @@ internal sealed class BlefClient
             _ => throw new ArgumentOutOfRangeException(nameof(whichPlayer))
         };
 
-    private void SetPlayerId(WhichPlayer whichPlayer, Guid playerId)
+    private void SetPlayerId(WhichPlayer whichPlayer, PlayerId playerId)
     {
         if (whichPlayer == WhichPlayer.Knuth)
             _knuthPlayerId = playerId;
@@ -98,8 +95,8 @@ internal sealed class BlefClient
 
     internal record State(
         GameId GameId,
-        Guid KnuthPlayerId,
-        Guid GrahamPlayerId,
-        Guid RiemannPlayerId,
-        Guid ConwayPlayerId);
+        PlayerId KnuthPlayerId,
+        PlayerId GrahamPlayerId,
+        PlayerId RiemannPlayerId,
+        PlayerId ConwayPlayerId);
 }

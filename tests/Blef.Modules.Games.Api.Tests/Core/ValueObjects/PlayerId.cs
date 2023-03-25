@@ -1,13 +1,13 @@
 ﻿namespace Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 
-internal class GameId
+internal class PlayerId
 {
     internal Guid Id { get; }
 
-    public GameId(Guid id)
+    public PlayerId(Guid id)
     {
         if (id == Guid.Empty) // todo: better exception
-            throw new Exception("Invalid game ID");
+            throw new Exception("Invalid player ID");
 
         Id = id;
     }
