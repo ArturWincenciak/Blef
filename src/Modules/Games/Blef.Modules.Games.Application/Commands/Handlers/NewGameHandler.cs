@@ -17,7 +17,7 @@ internal sealed class NewGameHandler : ICommandHandler<NewGame, NewGame.Result>
     {
         var game = Game.Create();
         _games.Add(game);
-        var result = new NewGame.Result(game.Id);
+        var result = new NewGame.Result(game.Id.Id);
         return await Task.FromResult(result);
     }
 }
