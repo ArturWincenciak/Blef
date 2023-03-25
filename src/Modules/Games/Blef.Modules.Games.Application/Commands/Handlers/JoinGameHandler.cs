@@ -16,7 +16,7 @@ internal sealed class JoinGameHandler : ICommandHandler<JoinGame, JoinGame.Resul
     {
         var game = _games.Get(command.GameId);
         var player = game.Join(command.Nick);
-        var result = new JoinGame.Result(player.Id, player.Nick);
+        var result = new JoinGame.Result(player.Id.Id, player.Nick);
         return Task.FromResult(result);
     }
 }

@@ -31,7 +31,7 @@ public sealed class Game
         if (_players.Exists(player => player.Nick == nick))
             throw new PlayerAlreadyJoinedTheGameException(Id, nick);
 
-        var player = new GamePlayer();
+        var player = GamePlayer.Create(nick);
         _players.Add(player);
 
         return player;
