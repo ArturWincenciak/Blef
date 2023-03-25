@@ -61,15 +61,17 @@ internal sealed class GamesController : ModuleControllerBase
     }
 
     [HttpGet($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{CARDS}")]
-    public async Task<IActionResult> GetCards(Guid gameId, Guid playerId, int dealNumber, CancellationToken cancellation)
+    public async Task<IActionResult> GetCards(Guid gameId, Guid playerId, int dealNumber,
+        CancellationToken cancellation)
     {
-        var query = new GetPlayerCards(gameId, playerId);
+        var query = new GetPlayerCards(new(gameId), new (dealNumber), new (playerId));
         var cards = await _queryDispatcher.Dispatch<GetPlayerCards, GetPlayerCards.Result>(query, cancellation);
         return Ok(cards);
     }
 
     [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{BIDS}")]
-    public async Task<IActionResult> Bid(Guid gameId, Guid playerId, int dealNumber, BidApi command, CancellationToken cancellation)
+    public async Task<IActionResult> Bid(Guid gameId, Guid playerId, int dealNumber, BidApi command,
+        CancellationToken cancellation)
     {
         var cmd = new Bid(new (gameId), new (playerId), command.PokerHand);
         await _commandDispatcher.Dispatch(cmd, cancellation);
@@ -77,7 +79,8 @@ internal sealed class GamesController : ModuleControllerBase
     }
 
     [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{CHECKS}")]
-    public async Task<IActionResult> CheckBid(Guid gameId, Guid playerId, int dealNumber, CancellationToken cancellation)
+    public async Task<IActionResult> CheckBid(Guid gameId, Guid playerId, int dealNumber,
+        CancellationToken cancellation)
     {
         var cmd = new Check(new (gameId), new (playerId));
         await _commandDispatcher.Dispatch(cmd, cancellation);

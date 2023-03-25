@@ -5,14 +5,29 @@ namespace Blef.Modules.Games.Domain.Entities;
 public sealed class Deal
 {
     public DealId Id { get; }
-    public List<DealPlayer> _players;
+    private readonly IEnumerable<DealPlayer> _players = new List<DealPlayer>();
 
-    private Deal(DealId id, List<DealPlayer> players)
+    private Deal(DealId id, IEnumerable<DealPlayer> players)
     {
         Id = id;
         _players = players;
     }
 
     public static Deal Create(DealId id, IEnumerable<PlayerId> players) =>
-        new Deal(id, players.Select(p => new DealPlayer()).ToList());
+        new(id, players.Select(p => new DealPlayer(
+                new(p.Id),
+                DealCards())));
+
+    public IEnumerable<Card> GetCards(PlayerId playerId)
+    {
+        var player = _players.Single(p => p.Id.Equals(playerId));
+        return player.GetCards();
+    }
+
+    private static IEnumerable<Card> DealCards()
+    {
+        // todo: add number of cards parameter based on previous game
+        // todo: randomise cards
+        return new[] {new Card(FaceCard.Ace, Suit.Clubs)};
+    }
 }

@@ -44,9 +44,10 @@ public sealed class Game
         // todo: check if game is not over
         // todo: if it is the first deal get all players joined game
         // todo: if it is next deal get only players that not loosed
+        // todo: parametrize players in new deal based on last deal (number of cards)
 
         var number = _deals.Count + 1;
-        var dealId = new DealId(Id, number);
+        var dealId = new DealId(Id, new (number));
         var players = _players.Select(p => p.Id);
         var deal = Deal.Create(dealId, players);
         _deals.Add(deal);
@@ -55,4 +56,14 @@ public sealed class Game
 
     private bool IsGameStarted() =>
         _deals.Count > 0;
+
+    public IEnumerable<Card> GetCards(PlayerId playerId, DealNumber dealNumber)
+    {
+        // todo: check if user exists
+        // todo: check if deal number exits
+
+        var deal = _deals.Single(d => d.Id.Number.Equals(dealNumber));
+        var cards = deal.GetCards(playerId);
+        return cards;
+    }
 }

@@ -12,11 +12,10 @@ internal sealed class JoinGameHandler : ICommandHandler<JoinGame, JoinGame.Resul
     public JoinGameHandler(IGamesRepository games) =>
         _games = games;
 
-    public Task<JoinGame.Result> Handle(JoinGame command, CancellationToken cancellation)
+    public async Task<JoinGame.Result> Handle(JoinGame command, CancellationToken cancellation)
     {
         var game = _games.Get(command.GameId);
         var player = game.Join(command.Nick);
-        var result = new JoinGame.Result(player.Id.Id, player.Nick);
-        return Task.FromResult(result);
+        return new JoinGame.Result(player.Id.Id, player.Nick);
     }
 }
