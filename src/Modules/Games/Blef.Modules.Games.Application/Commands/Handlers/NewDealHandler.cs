@@ -14,11 +14,6 @@ internal sealed class NewDealHandler : ICommandHandler<NewDeal, NewDeal.Result>
 
     public async Task<NewDeal.Result> Handle(NewDeal command, CancellationToken cancellation)
     {
-        // todo:
-        // var game = _games.Get(command.GameId);
-        // var deal = game.NewDeal();
-        // var result = new NewDeal.Result(deal.Id);
-        // return await Task.FromResult(result);
-        return null;
+        throw new NotImplementedException();
     }
 }

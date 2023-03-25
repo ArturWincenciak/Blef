@@ -14,10 +14,6 @@ internal sealed class BidHandler : ICommandHandler<Bid>
 
     public Task Handle(Bid command, CancellationToken cancellation)
     {
-        // todo:
-        // var game = _games.Get(command.GameId);
-        // var deal = game.GetDeal(command.DealId);
-        // deal.Bid(command.PlayerId, command.PokerHand);
-        return Task.CompletedTask;
+        throw new NotImplementedException();
     }
 }
