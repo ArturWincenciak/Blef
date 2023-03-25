@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Application.Queries;
+﻿using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
+using Blef.Modules.Games.Application.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
@@ -9,7 +10,7 @@ internal sealed class BlefClient
 
     private Guid _conwayPlayerId;
 
-    private Guid _gameId;
+    private GameId _gameId;
 
     private Guid _grahamPlayerId;
 
@@ -96,7 +97,7 @@ internal sealed class BlefClient
     }
 
     internal record State(
-        Guid GameId,
+        GameId GameId,
         Guid KnuthPlayerId,
         Guid GrahamPlayerId,
         Guid RiemannPlayerId,

@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core;
+using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.BreakingRules;
 

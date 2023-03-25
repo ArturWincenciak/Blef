@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core;
+using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 using Blef.Modules.Games.Application.Queries;
 using Blef.Modules.Games.Domain.Entities;
 
