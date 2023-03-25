@@ -8,44 +8,51 @@ namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal static class HttpApiExtensions
 {
-    private static string GamesUri =>
-        "games-module/games";
-
     async internal static Task<Guid> MakeNewGame(this HttpClient client)
     {
         var response = await client.PostAsync(GamesUri, content: null);
         response.EnsureSuccessStatusCode();
-        var game = await response.Content.ReadFromJsonAsync<Game>();
+        var game = await response.Content.ReadFromJsonAsync<Dto.Game>();
         return game!.GameId;
     }
 
     async internal static Task<Guid> JoinPlayer(this HttpClient client, Guid gameId, string nick)
     {
         var response = await client.PostAsJsonAsync(
-            requestUri: $"{PlayersUri(gameId)}",
+            requestUri: $"{GamePlayersUri(gameId)}",
             value: new {Nick = nick});
         response.EnsureSuccessStatusCode();
-        var player = await response.Content.ReadFromJsonAsync<Player>();
+        var player = await response.Content.ReadFromJsonAsync<Dto.Player>();
         return player!.PlayerId;
     }
 
-    async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client, Guid gameId, Guid playerId)
+    async internal static Task Deal(this HttpClient client, Guid gameId, Guid playerId)
     {
-        var response = await client.GetAsync(requestUri: $"{PlayerUri(gameId, playerId)}/cards");
+        var response = await client.PostAsync(
+            requestUri: $"{DealsUri(gameId)}/players/{playerId}",
+            content: null);
+        response.EnsureSuccessStatusCode();
+        //todo: use deal result content
+    }
+
+    async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client, Guid gameId, int deal, Guid playerId)
+    {
+        var response = await client.GetAsync(
+            requestUri: $"{DealPlayerUri(gameId, deal, playerId)}/cards");
         response.EnsureSuccessStatusCode();
         return (await response.Content.ReadFromJsonAsync<GetPlayerCards.Result>())!;
     }
 
-    async internal static Task BidWithSuccess(this HttpClient client, Guid gameId, Guid playerId, string bid)
+    async internal static Task BidWithSuccess(this HttpClient client, Guid gameId, int deal, Guid playerId, string bid)
     {
-        var response = await Bid(client, gameId, playerId, bid);
+        var response = await Bid(client, gameId, deal, playerId, bid);
         response.EnsureSuccessStatusCode();
     }
 
-    async internal static Task<ProblemDetails> BidWithRuleViolation(this HttpClient client, Guid gameId, Guid playerId,
-        string bid)
+    async internal static Task<ProblemDetails> BidWithRuleViolation(this HttpClient client,
+        Guid gameId, int deal, Guid playerId, string bid)
     {
-        var response = await Bid(client, gameId, playerId, bid);
+        var response = await Bid(client, gameId, deal, playerId, bid);
         if (response.StatusCode != HttpStatusCode.BadRequest)
             throw new AssertActualExpectedException(
                 HttpStatusCode.BadRequest,
@@ -55,9 +62,9 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
     }
 
-    private async static Task<HttpResponseMessage> Bid(HttpClient client, Guid gameId, Guid playerId, string bid) =>
+    private async static Task<HttpResponseMessage> Bid(HttpClient client, Guid gameId, int deal, Guid playerId, string bid) =>
         await client.PostAsJsonAsync(
-            requestUri: $"{PlayerUri(gameId, playerId)}/bids",
+            requestUri: $"{DealPlayerUri(gameId, deal, playerId)}/bids",
             value: new {PokerHand = bid});
 
     async internal static Task<GetGameFlow.Result> GetGameFlow(this HttpClient client, Guid gameId)
@@ -69,14 +76,14 @@ internal static class HttpApiExtensions
 
     async internal static Task CheckWithSuccess(this HttpClient client, Guid gameId, Guid playerId)
     {
-        var response = await client.PostAsync(requestUri: $"{PlayerUri(gameId, playerId)}/checks", content: null);
+        var response = await client.PostAsync(requestUri: $"{GamePlayerUri(gameId, playerId)}/checks", content: null);
         response.EnsureSuccessStatusCode();
     }
 
     async internal static Task<ProblemDetails> CheckWithRuleViolation(this HttpClient client,
         Guid gameId, Guid playerId)
     {
-        var response = await client.PostAsync(requestUri: $"{PlayerUri(gameId, playerId)}/checks", content: null);
+        var response = await client.PostAsync(requestUri: $"{GamePlayerUri(gameId, playerId)}/checks", content: null);
         if (response.StatusCode != HttpStatusCode.BadRequest)
             throw new AssertActualExpectedException(
                 HttpStatusCode.BadRequest,
@@ -86,13 +93,33 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
     }
 
-    private static string PlayersUri(Guid gameId) =>
-        $"{GamesUri}/{gameId}/players";
+    private static string GamesUri =>
+        "games-module/games";
 
-    private static string PlayerUri(Guid gameId, Guid playerId) =>
-        $"{GamesUri}/{gameId}/players/{playerId}";
+    private static string GameUri(Guid gameId) =>
+        $"{GamesUri}/{gameId}";
 
-    private record Game(Guid GameId);
+    private static string GamePlayersUri(Guid gameId) =>
+        $"{GameUri(gameId)}/players";
 
-    private record Player(Guid PlayerId);
+    private static string GamePlayerUri(Guid gameId, Guid playerId) =>
+        $"{GamePlayersUri(gameId)}/{playerId}";
+
+    private static string DealsUri(Guid gameId) =>
+        $"{GameUri(gameId)}/deals";
+
+    private static string DealUri(Guid gameId, int deal) =>
+        $"{DealsUri(gameId)}/{deal}";
+
+    private static string DealPlayerUri(Guid gameId, int deal, Guid playerId) =>
+        $"{DealUri(gameId, deal)}/players/{playerId}";
+
+    private static class Dto
+    {
+        internal record Game(Guid GameId);
+
+        internal record Deal(Guid GameId, int DealId);
+
+        internal record Player(Guid PlayerId);
+    }
 }

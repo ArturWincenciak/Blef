@@ -42,22 +42,28 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder GetCards(WhichPlayer whichPlayer, Action<GetPlayerCards.Result>? with = null)
+    internal TestBuilder Deal(WhichPlayer whichPlayer)
+    {
+        _actions.Add(() => _gameClient.Deal(whichPlayer));
+        return this;
+    }
+
+    internal TestBuilder GetCards(WhichPlayer whichPlayer, int deal, Action<GetPlayerCards.Result>? with = null)
     {
         _actions.Add(async () =>
         {
-            var cards = await _gameClient.GetCards(whichPlayer);
+            var cards = await _gameClient.GetCards(whichPlayer, deal);
             with?.Invoke(cards);
         });
         return this;
     }
 
-    internal TestBuilder Bid(WhichPlayer whichPlayer, string bid, Action<ProblemDetails>? with = null)
+    internal TestBuilder Bid(WhichPlayer whichPlayer, int deal, string bid, Action<ProblemDetails>? with = null)
     {
         if (with is not null)
-            _actions.Add(async () => with(await _gameClient.BidWithRuleViolation(whichPlayer, bid)));
+            _actions.Add(async () => with(await _gameClient.BidWithRuleViolation(whichPlayer, deal, bid)));
         else
-            _actions.Add(() => _gameClient.BidWithSuccess(whichPlayer, bid));
+            _actions.Add(() => _gameClient.BidWithSuccess(whichPlayer, deal, bid));
 
         return this;
     }

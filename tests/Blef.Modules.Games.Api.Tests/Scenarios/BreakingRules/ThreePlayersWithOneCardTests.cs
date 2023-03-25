@@ -13,7 +13,7 @@ public class ThreePlayersWithOneCardTests
                 .NewGame()
                 .JoinPlayer(WhichPlayer.Knuth)
                 .JoinPlayer(WhichPlayer.Graham)
-                .Bid(WhichPlayer.Knuth, PokerHand.HighCard.Nine)
+                .Bid(WhichPlayer.Knuth, deal: 1, PokerHand.HighCard.Nine)
                 .JoinPlayer(WhichPlayer.Conway) //todo: here should be reject
                 .Build();
         });

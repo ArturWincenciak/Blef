@@ -1,5 +1,6 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core;
 using Blef.Modules.Games.Application.Queries;
+using Blef.Modules.Games.Domain.Entities;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 
@@ -11,12 +12,12 @@ public class TwoPlayersWithOneCardTests
         await new TestBuilder()
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
-            .GetCards(WhichPlayer.Knuth, AssertThatPlayerShouldHaveOneCard)
             .JoinPlayer(WhichPlayer.Graham)
-            .GetCards(WhichPlayer.Knuth, AssertThatPlayerShouldHaveOneCard)
-            .GetCards(WhichPlayer.Graham, AssertThatPlayerShouldHaveOneCard)
-            .Bid(WhichPlayer.Knuth, PokerHand.HighCard.Nine)
-            .Bid(WhichPlayer.Graham, PokerHand.HighCard.Ten)
+            .Deal(WhichPlayer.Knuth)
+            .GetCards(WhichPlayer.Knuth, deal: 1, AssertThatPlayerShouldHaveOneCard)
+            .GetCards(WhichPlayer.Graham, deal: 1, AssertThatPlayerShouldHaveOneCard)
+            .Bid(WhichPlayer.Knuth, deal: 1, PokerHand.HighCard.Nine)
+            .Bid(WhichPlayer.Graham, deal: 1, PokerHand.HighCard.Ten)
             .Check(WhichPlayer.Knuth)
             .GetGameFlow(with: AssertGameState)
             .Build();
