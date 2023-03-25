@@ -73,6 +73,12 @@ public sealed class Game
         deal.Bid(playerId, pokerHand);
     }
 
+    public void Check(DealNumber dealNumber, PlayerId playerId)
+    {
+        var deal = GetDeal(dealNumber);
+        deal.Check(playerId);
+    }
+
     private Deal GetDeal(DealNumber dealNumber) =>
         _deals.Single(d => d.Id.Number.Equals(dealNumber));
 }
