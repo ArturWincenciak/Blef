@@ -1,4 +1,4 @@
-﻿namespace Blef.Modules.Games.Domain.Entities.PokerHands;
+﻿namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 /// <summary>
 ///     Ranks should be assigned according to
