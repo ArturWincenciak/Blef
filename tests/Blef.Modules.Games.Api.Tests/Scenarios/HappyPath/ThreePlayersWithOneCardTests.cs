@@ -12,7 +12,7 @@ public class ThreePlayersWithOneCardTests
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
             .JoinPlayer(WhichPlayer.Conway)
-            .Deal(WhichPlayer.Knuth)
+            .NewDeal(WhichPlayer.Knuth)
             .Bid(WhichPlayer.Knuth, deal: new (1), PokerHand.HighCard.Nine)
             .Bid(WhichPlayer.Graham, deal: new(1), PokerHand.HighCard.Ten)
             .Bid(WhichPlayer.Graham, deal: new(1), PokerHand.HighCard.Jack)

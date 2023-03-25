@@ -22,7 +22,7 @@ internal sealed class BlefClient
         new(_gameId, _knuthPlayerId, _grahamPlayerId, _riemannPlayerId, _conwayPlayerId);
 
     async internal Task NewGame() =>
-        _gameId = await _httpClient.MakeNewGame();
+        _gameId = await _httpClient.NewGame();
 
     async internal Task<GetGameFlow.Result> GetGameFlow() =>
         await _httpClient.GetGameFlow(_gameId);
@@ -36,7 +36,7 @@ internal sealed class BlefClient
     async internal Task Deal(WhichPlayer whichPlayer)
     {
         //todo: return localization in header with deal number in path
-        await _httpClient.Deal(_gameId, GetPlayerId(whichPlayer));
+        await _httpClient.NewDeal(_gameId, GetPlayerId(whichPlayer));
     }
 
     async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, Deal deal)
