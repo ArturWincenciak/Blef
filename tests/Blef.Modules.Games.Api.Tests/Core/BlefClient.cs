@@ -35,22 +35,28 @@ internal sealed class BlefClient
         SetPlayerId(whichPlayer, player);
     }
 
-    async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer)
+    async internal Task Deal(WhichPlayer whichPlayer)
     {
-        var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.GetCards(_gameId, playerId);
+        //todo: return localization in header with deal number in path
+        await _httpClient.Deal(_gameId, GetPlayerId(whichPlayer));
     }
 
-    async internal Task BidWithSuccess(WhichPlayer whichPlayer, string bid)
+    async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, int deal)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.BidWithSuccess(_gameId, playerId, bid);
+        return await _httpClient.GetCards(_gameId, deal, playerId);
     }
 
-    async internal Task<ProblemDetails> BidWithRuleViolation(WhichPlayer whichPlayer, string bid)
+    async internal Task BidWithSuccess(WhichPlayer whichPlayer, int deal, string bid)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidWithRuleViolation(_gameId, playerId, bid);
+        await _httpClient.BidWithSuccess(_gameId, deal, playerId, bid);
+    }
+
+    async internal Task<ProblemDetails> BidWithRuleViolation(WhichPlayer whichPlayer, int deal, string bid)
+    {
+        var playerId = GetPlayerId(whichPlayer);
+        return await _httpClient.BidWithRuleViolation(_gameId, deal, playerId, bid);
     }
 
     async internal Task CheckWithSuccess(WhichPlayer whichPlayer)
