@@ -11,7 +11,7 @@ public class TwoPlayersWithOneCardTests
         await new TestBuilder()
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
-            .Bid(WhichPlayer.Knuth, deal: 1, PokerHand.HighCard.Nine,
+            .Bid(WhichPlayer.Knuth, deal: new(1), PokerHand.HighCard.Nine,
                 with: problemDetails =>
                 {
                     Assert.Equal(
@@ -29,8 +29,8 @@ public class TwoPlayersWithOneCardTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Knuth, deal: 1, PokerHand.HighCard.Nine)
-            .Bid(WhichPlayer.Knuth, deal: 1, PokerHand.HighCard.Ten,
+            .Bid(WhichPlayer.Knuth, deal: new(1), PokerHand.HighCard.Nine)
+            .Bid(WhichPlayer.Knuth, deal: new(1), PokerHand.HighCard.Ten,
                 with: problemDetails =>
                 {
                     Assert.Equal(
@@ -48,8 +48,8 @@ public class TwoPlayersWithOneCardTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Knuth, deal: 1, PokerHand.HighCard.Nine)
-            .Check(WhichPlayer.Knuth,
+            .Bid(WhichPlayer.Knuth, deal: new(1), PokerHand.HighCard.Nine)
+            .Check(WhichPlayer.Knuth, deal: new(1),
                 with: problemDetails =>
                 {
                     Assert.Equal(
@@ -67,7 +67,7 @@ public class TwoPlayersWithOneCardTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Check(WhichPlayer.Knuth,
+            .Check(WhichPlayer.Knuth, deal: new(1),
                 with: problemDetails =>
                 {
                     Assert.Equal(
@@ -85,9 +85,9 @@ public class TwoPlayersWithOneCardTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Knuth, deal: 1, PokerHand.HighCard.Nine)
-            .Check(WhichPlayer.Graham)
-            .Check(WhichPlayer.Graham,
+            .Bid(WhichPlayer.Knuth, deal: new(1), PokerHand.HighCard.Nine)
+            .Check(WhichPlayer.Graham, deal: new(1))
+            .Check(WhichPlayer.Graham, deal: new(1),
                 with: problemDetails =>
                 {
                     Assert.Equal(
@@ -105,9 +105,9 @@ public class TwoPlayersWithOneCardTests
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Knuth, deal: 1, PokerHand.HighCard.Nine)
-            .Check(WhichPlayer.Graham)
-            .Bid(WhichPlayer.Graham, deal: 1, PokerHand.HighCard.Nine,
+            .Bid(WhichPlayer.Knuth, deal: new(1), PokerHand.HighCard.Nine)
+            .Check(WhichPlayer.Graham, deal: new(1))
+            .Bid(WhichPlayer.Graham, deal: new(1), PokerHand.HighCard.Nine,
                 with: problemDetails =>
                 {
                     Assert.Equal(

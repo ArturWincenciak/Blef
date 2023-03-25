@@ -15,11 +15,11 @@ public class TwoPlayersWithOneCardTests
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
             .Deal(WhichPlayer.Knuth)
-            .GetCards(WhichPlayer.Knuth, deal: 1, AssertThatPlayerShouldHaveOneCard)
-            .GetCards(WhichPlayer.Graham, deal: 1, AssertThatPlayerShouldHaveOneCard)
-            .Bid(WhichPlayer.Knuth, deal: 1, PokerHand.HighCard.Nine)
-            .Bid(WhichPlayer.Graham, deal: 1, PokerHand.HighCard.Ten)
-            .Check(WhichPlayer.Knuth)
+            .GetCards(WhichPlayer.Knuth, deal: new(1), AssertThatPlayerShouldHaveOneCard)
+            .GetCards(WhichPlayer.Graham, deal: new (1), AssertThatPlayerShouldHaveOneCard)
+            .Bid(WhichPlayer.Knuth, deal: new (1), PokerHand.HighCard.Nine)
+            .Bid(WhichPlayer.Graham, deal: new (1), PokerHand.HighCard.Ten)
+            .Check(WhichPlayer.Knuth, deal: new (1))
             .GetGameFlow(with: AssertGameState)
             .Build();
 
@@ -38,12 +38,12 @@ public class TwoPlayersWithOneCardTests
             Assert.True(result.LooserPlayerId != Guid.Empty);
 
             var knuth = result.Players[0];
-            Assert.Equal(game.KnuthPlayerId, knuth.Id);
+            Assert.Equal(game.KnuthPlayerId.Id, knuth.Id);
             Assert.Equal(expected: WhichPlayer.Knuth.ToString(), knuth.Nick);
             Assert.Single(knuth.Cards);
 
             var graham = result.Players[1];
-            Assert.Equal(game.GrahamPlayerId, graham.Id);
+            Assert.Equal(game.GrahamPlayerId.Id, graham.Id);
             Assert.Equal(expected: WhichPlayer.Graham.ToString(), graham.Nick);
             Assert.Single(graham.Cards);
 
@@ -55,7 +55,7 @@ public class TwoPlayersWithOneCardTests
             Assert.Equal(graham.Id, secondBid.PlayerId);
             Assert.Equal(PokerHand.HighCard.Ten, secondBid.Bid);
 
-            Assert.Equal(game.KnuthPlayerId, result.CheckingPlayerId);
+            Assert.Equal(game.KnuthPlayerId.Id, result.CheckingPlayerId);
             Assert.True(result.LooserPlayerId == knuth.Id || result.LooserPlayerId == graham.Id);
         }
     }
