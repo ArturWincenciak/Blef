@@ -14,14 +14,17 @@ public sealed class Deal
     }
 
     public static Deal Create(DealId id, IEnumerable<PlayerId> players) =>
-        new(id, players.Select(p => new DealPlayer(
-                new(p.Id),
-                DealCards())));
+        new(id, players.Select(p => new DealPlayer( new(p.Id), DealCards())));
 
     public IEnumerable<Card> GetCards(PlayerId playerId)
     {
         var player = _players.Single(p => p.Id.Equals(playerId));
         return player.GetCards();
+    }
+
+    public void Bid(PlayerId playerId, string pokerHand)
+    {
+        // todo: ...
     }
 
     private static IEnumerable<Card> DealCards()

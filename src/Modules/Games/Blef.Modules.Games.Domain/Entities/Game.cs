@@ -62,8 +62,17 @@ public sealed class Game
         // todo: check if user exists
         // todo: check if deal number exits
 
-        var deal = _deals.Single(d => d.Id.Number.Equals(dealNumber));
+        var deal = GetDeal(dealNumber);
         var cards = deal.GetCards(playerId);
         return cards;
     }
+
+    public void Bid(DealNumber dealNumber, PlayerId playerId, string pokerHand)
+    {
+        var deal = GetDeal(dealNumber);
+        deal.Bid(playerId, pokerHand);
+    }
+
+    private Deal GetDeal(DealNumber dealNumber) =>
+        _deals.Single(d => d.Id.Number.Equals(dealNumber));
 }

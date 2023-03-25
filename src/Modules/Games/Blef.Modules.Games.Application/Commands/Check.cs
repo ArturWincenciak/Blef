@@ -3,4 +3,4 @@ using Blef.Shared.Abstractions.Commands;
 
 namespace Blef.Modules.Games.Application.Commands;
 
-public sealed record Check(GameId GameId, PlayerId PlayerId) : ICommand;
+public sealed record Check(GameId GameId, DealNumber DealNumber, PlayerId PlayerId) : ICommand;

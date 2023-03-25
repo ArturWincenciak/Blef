@@ -17,8 +17,9 @@ public class TwoPlayersWithOneCardTests
             .GetCards(WhichPlayer.Knuth, deal: new(1))
             .GetCards(WhichPlayer.Graham, deal: new (1))
             .GetCards(WhichPlayer.Conway, deal: new (1))
-            // .Bid(WhichPlayer.Knuth, deal: new (1), PokerHand.HighCard.Nine)
-            // .Bid(WhichPlayer.Graham, deal: new (1), PokerHand.HighCard.Ten)
+            .Bid(WhichPlayer.Knuth, deal: new (1), PokerHand.HighCard.Nine)
+            .Bid(WhichPlayer.Graham, deal: new (1), PokerHand.HighCard.Ten)
+            .Bid(WhichPlayer.Conway, deal: new (1), PokerHand.HighCard.Jack)
             // .Check(WhichPlayer.Knuth, deal: new (1))
             // .GetGameFlow()
             .Build();
