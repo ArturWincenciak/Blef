@@ -1,4 +1,4 @@
-﻿namespace Blef.Modules.Games.Api.Tests.Core;
+﻿namespace Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 
 internal enum WhichPlayer
 {
