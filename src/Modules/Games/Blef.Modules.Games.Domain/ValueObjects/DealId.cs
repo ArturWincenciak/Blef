@@ -2,15 +2,12 @@
 
 public sealed class DealId
 {
-    public DealId(GameId gameId, int number)
+    public DealId(GameId gameId, DealNumber number)
     {
-        if (number < 1)
-            throw new ArgumentException("Deal number cannot be less than one");
-
         GameId = gameId;
         Number = number;
     }
 
     public GameId GameId { get; }
-    public int Number { get; }
+    public DealNumber Number { get; }
 }

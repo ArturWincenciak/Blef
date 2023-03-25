@@ -16,7 +16,7 @@ internal sealed class NewDealHandler : ICommandHandler<NewDeal, NewDeal.Result>
     {
         var game = _games.Get(command.GameId);
         var deal = game.NewDeal();
-        var result = new NewDeal.Result(deal.Number);
+        var result = new NewDeal.Result(deal.Number.Number);
         return await Task.FromResult(result);
     }
 }
