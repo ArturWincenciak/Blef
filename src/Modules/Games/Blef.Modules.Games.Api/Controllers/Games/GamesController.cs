@@ -64,7 +64,7 @@ internal sealed class GamesController : ModuleControllerBase
     public async Task<IActionResult> GetCards(Guid gameId, Guid playerId, int dealNumber,
         CancellationToken cancellation)
     {
-        var query = new GetPlayerCards(new(gameId), new (dealNumber), new (playerId));
+        var query = new GetPlayerCards(new(gameId), new (playerId), new (dealNumber));
         var cards = await _queryDispatcher.Dispatch<GetPlayerCards, GetPlayerCards.Result>(query, cancellation);
         return Ok(cards);
     }
@@ -73,7 +73,7 @@ internal sealed class GamesController : ModuleControllerBase
     public async Task<IActionResult> Bid(Guid gameId, Guid playerId, int dealNumber, BidApi command,
         CancellationToken cancellation)
     {
-        var cmd = new Bid(new (gameId), new (dealNumber), new (playerId), command.PokerHand);
+        var cmd = new Bid(new (gameId), new (playerId), new (dealNumber), command.PokerHand);
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, playerId)}/{BIDS}", value: null);
     }
@@ -82,7 +82,7 @@ internal sealed class GamesController : ModuleControllerBase
     public async Task<IActionResult> CheckBid(Guid gameId, Guid playerId, int dealNumber,
         CancellationToken cancellation)
     {
-        var cmd = new Check(new (gameId), new (dealNumber), new (playerId));
+        var cmd = new Check(new (gameId), new (playerId), new (dealNumber));
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, playerId)}/checks", value: null);
     }

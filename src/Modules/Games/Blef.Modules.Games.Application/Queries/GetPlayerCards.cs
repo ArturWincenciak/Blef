@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Application.Queries;
 
-public sealed record GetPlayerCards(GameId GameId, DealNumber DealNumber, PlayerId PlayerId)
+public sealed record GetPlayerCards(GameId GameId, PlayerId PlayerId, DealNumber DealNumber)
     : IQuery<GetPlayerCards.Result>
 {
     [UsedImplicitly]
