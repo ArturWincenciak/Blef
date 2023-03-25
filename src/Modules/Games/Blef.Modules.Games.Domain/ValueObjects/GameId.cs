@@ -11,4 +11,7 @@ public sealed class GameId
     }
 
     public Guid Id { get; }
+
+    public override string ToString() =>
+        Id.ToString();
 }

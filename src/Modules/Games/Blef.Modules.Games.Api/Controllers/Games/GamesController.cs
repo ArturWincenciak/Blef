@@ -46,7 +46,7 @@ internal sealed class GamesController : ModuleControllerBase
     [HttpPost($"{GAME_ID}/{PLAYERS}")]
     public async Task<IActionResult> JoinGame(Guid gameId, JoinGameApi command, CancellationToken cancellation)
     {
-        var cmd = new JoinGame(gameId, command.Nick);
+        var cmd = new JoinGame(new(gameId), command.Nick);
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, player.PlayerId)}", player);
     }
@@ -54,9 +54,9 @@ internal sealed class GamesController : ModuleControllerBase
     [HttpPost($"{GAME_ID}/{DEALS}")]
     public async Task<IActionResult> NewDeal(Guid gameId, CancellationToken cancellation)
     {
-        var cmd = new NewDeal(gameId);
+        var cmd = new NewDeal(new (gameId));
         var deal = await _commandDispatcher.Dispatch<NewDeal, NewDeal.Result>(cmd, cancellation);
-        return Created(uri: $"{GameUri(gameId)}/{DEALS}/{deal.DealId}", deal);
+        return Created(uri: $"{GameUri(gameId)}/{DEALS}/{deal.Number}", deal);
     }
 
     [HttpGet($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{CARDS}")]
@@ -70,7 +70,7 @@ internal sealed class GamesController : ModuleControllerBase
     [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{BIDS}")]
     public async Task<IActionResult> Bid(Guid gameId, Guid playerId, BidApi command, CancellationToken cancellation)
     {
-        var cmd = new Bid(gameId, playerId, command.PokerHand);
+        var cmd = new Bid(new (gameId), new (playerId), command.PokerHand);
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, playerId)}/{BIDS}", value: null);
     }
@@ -78,7 +78,7 @@ internal sealed class GamesController : ModuleControllerBase
     [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{CHECKS}")]
     public async Task<IActionResult> CheckBid(Guid gameId, Guid playerId, CancellationToken cancellation)
     {
-        var cmd = new Check(gameId, playerId);
+        var cmd = new Check(new (gameId), new (playerId));
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, playerId)}/checks", value: null);
     }

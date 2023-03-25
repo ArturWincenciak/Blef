@@ -1,5 +1,6 @@
-﻿using Blef.Shared.Abstractions.Commands;
+﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Shared.Abstractions.Commands;
 
 namespace Blef.Modules.Games.Application.Commands;
 
-public sealed record Bid(Guid GameId, Guid PlayerId, string PokerHand) : ICommand;
+public sealed record Bid(GameId GameId, PlayerId PlayerId, string PokerHand) : ICommand;
