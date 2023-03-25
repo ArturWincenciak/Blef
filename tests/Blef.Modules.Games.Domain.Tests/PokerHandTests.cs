@@ -1,4 +1,4 @@
-using Blef.Modules.Games.Domain.Entities.PokerHands;
+using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 namespace Blef.Modules.Games.Domain.Tests.PokerHands;
 

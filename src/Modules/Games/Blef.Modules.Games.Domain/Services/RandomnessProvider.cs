@@ -1,4 +1,4 @@
-namespace Blef.Modules.Games.Domain.Entities;
+namespace Blef.Modules.Games.Domain.Services;
 
 /// <summary>
 ///     This class is used, cause we don't want to create Random class

@@ -1,4 +1,4 @@
-namespace Blef.Modules.Games.Domain.Entities;
+namespace Blef.Modules.Games.Domain.ValueObjects;
 
 public enum Suit
 {
