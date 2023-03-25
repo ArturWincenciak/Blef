@@ -12,10 +12,10 @@ public class ThreePlayersWithOneCardTests
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
             .JoinPlayer(WhichPlayer.Conway)
-            .Bid(WhichPlayer.Knuth, deal: 1, PokerHand.HighCard.Nine)
-            .Bid(WhichPlayer.Graham, deal: 1, PokerHand.HighCard.Ten)
-            .Bid(WhichPlayer.Graham, deal: 1, PokerHand.HighCard.Jack)
-            .Check(WhichPlayer.Knuth)
+            .Bid(WhichPlayer.Knuth, deal: new (1), PokerHand.HighCard.Nine)
+            .Bid(WhichPlayer.Graham, deal: new(1), PokerHand.HighCard.Ten)
+            .Bid(WhichPlayer.Graham, deal: new(1), PokerHand.HighCard.Jack)
+            .Check(WhichPlayer.Knuth, new(1))
             .GetGameFlow()
             .Build();
 }

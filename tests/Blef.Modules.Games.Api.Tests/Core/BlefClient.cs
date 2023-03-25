@@ -39,34 +39,34 @@ internal sealed class BlefClient
         await _httpClient.Deal(_gameId, GetPlayerId(whichPlayer));
     }
 
-    async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, int deal)
+    async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, Deal deal)
     {
         var playerId = GetPlayerId(whichPlayer);
         return await _httpClient.GetCards(_gameId, deal, playerId);
     }
 
-    async internal Task BidWithSuccess(WhichPlayer whichPlayer, int deal, string bid)
+    async internal Task BidWithSuccess(WhichPlayer whichPlayer, Deal deal, string bid)
     {
         var playerId = GetPlayerId(whichPlayer);
         await _httpClient.BidWithSuccess(_gameId, deal, playerId, bid);
     }
 
-    async internal Task<ProblemDetails> BidWithRuleViolation(WhichPlayer whichPlayer, int deal, string bid)
+    async internal Task<ProblemDetails> BidWithRuleViolation(WhichPlayer whichPlayer, Deal deal, string bid)
     {
         var playerId = GetPlayerId(whichPlayer);
         return await _httpClient.BidWithRuleViolation(_gameId, deal, playerId, bid);
     }
 
-    async internal Task CheckWithSuccess(WhichPlayer whichPlayer)
+    async internal Task CheckWithSuccess(WhichPlayer whichPlayer, Deal deal)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.CheckWithSuccess(_gameId, playerId);
+        await _httpClient.CheckWithSuccess(_gameId, deal, playerId);
     }
 
-    async internal Task<ProblemDetails> CheckWithRuleViolation(WhichPlayer whichPlayer)
+    async internal Task<ProblemDetails> CheckWithRuleViolation(WhichPlayer whichPlayer, Deal deal)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.CheckWithRuleViolation(_gameId, playerId);
+        return await _httpClient.CheckWithRuleViolation(_gameId, deal, playerId);
     }
 
     private PlayerId GetPlayerId(WhichPlayer whichPlayer) =>
