@@ -27,6 +27,11 @@ public sealed class Deal
         // todo: ...
     }
 
+    public void Check(PlayerId playerId)
+    {
+        // todo: ...
+    }
+
     private static IEnumerable<Card> DealCards()
     {
         // todo: add number of cards parameter based on previous game
