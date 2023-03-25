@@ -66,7 +66,7 @@ internal static class HttpApiExtensions
 
     private async static Task<HttpResponseMessage> Bid(HttpClient client, GameId gameId, Deal deal, PlayerId playerId, string bid) =>
         await client.PostAsJsonAsync(
-            requestUri: $"{GamesUri}/{gameId}/players/{playerId.Id}/deals/{deal.Number}/bids",
+            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/bids",
             value: new {PokerHand = bid});
 
     async internal static Task<GetGameFlow.Result> GetGameFlow(this HttpClient client, GameId gameId)
@@ -79,7 +79,7 @@ internal static class HttpApiExtensions
     async internal static Task CheckWithSuccess(this HttpClient client, GameId gameId, Deal deal, PlayerId playerId)
     {
         var response = await client.PostAsync(
-            requestUri: $"{GamesUri}/{gameId}/players/{playerId.Id}/deals/{deal.Number}/checks", content: null);
+            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/checks", content: null);
         response.EnsureSuccessStatusCode();
     }
 
@@ -87,7 +87,7 @@ internal static class HttpApiExtensions
         GameId gameId, Deal deal, PlayerId playerId)
     {
         var response = await client.PostAsync(
-            requestUri: $"{GamesUri}/{gameId}/players/{playerId.Id}/deals/{deal.Number}/checks", content: null);
+            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/checks", content: null);
         if (response.StatusCode != HttpStatusCode.BadRequest)
             throw new AssertActualExpectedException(
                 HttpStatusCode.BadRequest,
