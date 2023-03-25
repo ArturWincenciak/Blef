@@ -43,7 +43,7 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder Deal(WhichPlayer whichPlayer)
+    internal TestBuilder NewDeal(WhichPlayer whichPlayer)
     {
         _actions.Add(() => _gameClient.Deal(whichPlayer));
         return this;

@@ -11,6 +11,7 @@ internal sealed class GamesController : ModuleControllerBase
 {
     private const string GAME_ID = "{gameId:Guid}";
     private const string PLAYER_ID = "{playerId:Guid}";
+    private const string DEAL_NUMBER = "{dealNumber:int}";
     private const string GAMES = "games";
     private const string DEALS = "deals";
     private const string PLAYERS = "players";
@@ -51,7 +52,7 @@ internal sealed class GamesController : ModuleControllerBase
         return Created(uri: $"{PlayerUri(gameId, player.PlayerId)}", player);
     }
 
-    [HttpPost($"{GAME_ID}/{DEALS}")]
+    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}")]
     public async Task<IActionResult> NewDeal(Guid gameId, CancellationToken cancellation)
     {
         var cmd = new NewDeal(new (gameId));
@@ -59,24 +60,24 @@ internal sealed class GamesController : ModuleControllerBase
         return Created(uri: $"{GameUri(gameId)}/{DEALS}/{deal.Number}", deal);
     }
 
-    [HttpGet($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{CARDS}")]
-    public async Task<IActionResult> GetCards(Guid gameId, Guid playerId, CancellationToken cancellation)
+    [HttpGet($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{CARDS}")]
+    public async Task<IActionResult> GetCards(Guid gameId, Guid playerId, int dealNumber, CancellationToken cancellation)
     {
         var query = new GetPlayerCards(gameId, playerId);
         var cards = await _queryDispatcher.Dispatch<GetPlayerCards, GetPlayerCards.Result>(query, cancellation);
         return Ok(cards);
     }
 
-    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{BIDS}")]
-    public async Task<IActionResult> Bid(Guid gameId, Guid playerId, BidApi command, CancellationToken cancellation)
+    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{BIDS}")]
+    public async Task<IActionResult> Bid(Guid gameId, Guid playerId, int dealNumber, BidApi command, CancellationToken cancellation)
     {
         var cmd = new Bid(new (gameId), new (playerId), command.PokerHand);
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, playerId)}/{BIDS}", value: null);
     }
 
-    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{CHECKS}")]
-    public async Task<IActionResult> CheckBid(Guid gameId, Guid playerId, CancellationToken cancellation)
+    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{CHECKS}")]
+    public async Task<IActionResult> CheckBid(Guid gameId, Guid playerId, int dealNumber, CancellationToken cancellation)
     {
         var cmd = new Check(new (gameId), new (playerId));
         await _commandDispatcher.Dispatch(cmd, cancellation);

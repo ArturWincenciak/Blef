@@ -10,7 +10,7 @@ namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal static class HttpApiExtensions
 {
-    async internal static Task<GameId> MakeNewGame(this HttpClient client)
+    async internal static Task<GameId> NewGame(this HttpClient client)
     {
         var response = await client.PostAsync(GamesUri, content: null);
         response.EnsureSuccessStatusCode();
@@ -21,17 +21,17 @@ internal static class HttpApiExtensions
     async internal static Task<PlayerId> JoinPlayer(this HttpClient client, GameId gameId, string nick)
     {
         var response = await client.PostAsJsonAsync(
-            requestUri: $"{GamePlayersUri(gameId)}",
+            requestUri: $"{GamesUri}/{gameId.Id}/players",
             value: new {Nick = nick});
         response.EnsureSuccessStatusCode();
         var player = await response.Content.ReadFromJsonAsync<Dto.Player>();
         return new (player!.PlayerId);
     }
 
-    async internal static Task Deal(this HttpClient client, GameId gameId, PlayerId playerId)
+    async internal static Task NewDeal(this HttpClient client, GameId gameId, PlayerId playerId)
     {
         var response = await client.PostAsync(
-            requestUri: $"{DealsUri(gameId)}/players/{playerId}",
+            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals",
             content: null);
         response.EnsureSuccessStatusCode();
         //todo: use deal result content
@@ -40,7 +40,7 @@ internal static class HttpApiExtensions
     async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client, GameId gameId, Deal deal, PlayerId playerId)
     {
         var response = await client.GetAsync(
-            requestUri: $"{DealPlayerUri(gameId, deal, playerId)}/cards");
+            requestUri: $"{GamesUri}/{gameId}/players/{playerId.Id}/deals/{deal.Number}/cards");
         response.EnsureSuccessStatusCode();
         return (await response.Content.ReadFromJsonAsync<GetPlayerCards.Result>())!;
     }
@@ -66,7 +66,7 @@ internal static class HttpApiExtensions
 
     private async static Task<HttpResponseMessage> Bid(HttpClient client, GameId gameId, Deal deal, PlayerId playerId, string bid) =>
         await client.PostAsJsonAsync(
-            requestUri: $"{DealPlayerUri(gameId, deal, playerId)}/bids",
+            requestUri: $"{GamesUri}/{gameId}/players/{playerId.Id}/deals/{deal.Number}/bids",
             value: new {PokerHand = bid});
 
     async internal static Task<GetGameFlow.Result> GetGameFlow(this HttpClient client, GameId gameId)
@@ -78,14 +78,16 @@ internal static class HttpApiExtensions
 
     async internal static Task CheckWithSuccess(this HttpClient client, GameId gameId, Deal deal, PlayerId playerId)
     {
-        var response = await client.PostAsync(requestUri: $"{DealPlayerUri(gameId, deal, playerId)}/checks", content: null);
+        var response = await client.PostAsync(
+            requestUri: $"{GamesUri}/{gameId}/players/{playerId.Id}/deals/{deal.Number}/checks", content: null);
         response.EnsureSuccessStatusCode();
     }
 
     async internal static Task<ProblemDetails> CheckWithRuleViolation(this HttpClient client,
         GameId gameId, Deal deal, PlayerId playerId)
     {
-        var response = await client.PostAsync(requestUri: $"{DealPlayerUri(gameId, deal, playerId)}/checks", content: null);
+        var response = await client.PostAsync(
+            requestUri: $"{GamesUri}/{gameId}/players/{playerId.Id}/deals/{deal.Number}/checks", content: null);
         if (response.StatusCode != HttpStatusCode.BadRequest)
             throw new AssertActualExpectedException(
                 HttpStatusCode.BadRequest,
@@ -97,21 +99,6 @@ internal static class HttpApiExtensions
 
     private static string GamesUri =>
         "games-module/games";
-
-    private static string GameUri(GameId gameId) =>
-        $"{GamesUri}/{gameId.Id}";
-
-    private static string GamePlayersUri(GameId gameId) =>
-        $"{GameUri(gameId)}/players";
-
-    private static string DealsUri(GameId gameId) =>
-        $"{GameUri(gameId)}/deals";
-
-    private static string DealUri(GameId gameId, Deal deal) =>
-        $"{DealsUri(gameId)}/{deal.Number}";
-
-    private static string DealPlayerUri(GameId gameId, Deal deal, PlayerId playerId) =>
-        $"{DealUri(gameId, deal)}/players/{playerId.Id}";
 
     private static class Dto
     {

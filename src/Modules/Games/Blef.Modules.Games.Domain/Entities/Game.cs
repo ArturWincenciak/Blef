@@ -21,8 +21,7 @@ public sealed class Game
 
     public GamePlayer Join(string nick)
     {
-        bool isGameStarted = _deals.Count > 0;
-        if (isGameStarted)
+        if (IsGameStarted())
             throw new JoinGameThatIsAlreadyStartedException(Id, nick);
 
         if (_players.Count >= MAX_NUMBER_OF_PLAYERS)
@@ -36,4 +35,24 @@ public sealed class Game
 
         return player;
     }
+
+    public DealId NewDeal()
+    {
+        // todo: check if there is not in progress deal
+        // todo: check if is that player turn to deal
+        // todo: check if in game is at least two players if it is first deal in the game
+        // todo: check if game is not over
+        // todo: if it is the first deal get all players joined game
+        // todo: if it is next deal get only players that not loosed
+
+        var number = _deals.Count + 1;
+        var dealId = new DealId(Id, number);
+        var players = _players.Select(p => p.Id);
+        var deal = Deal.Create(dealId, players);
+        _deals.Add(deal);
+        return dealId;
+    }
+
+    private bool IsGameStarted() =>
+        _deals.Count > 0;
 }
