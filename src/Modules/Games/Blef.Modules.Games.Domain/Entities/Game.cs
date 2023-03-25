@@ -1,10 +1,11 @@
 using Blef.Modules.Games.Domain.Exceptions;
+using Blef.Modules.Games.Domain.ValueObjects;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
 public sealed class Game
 {
-    public Guid Id { get; }
+    public GameId Id { get; }
 
     private const int MAX_NUMBER_OF_PLAYERS = 4;
     private const int MIN_NUMBER_OF_PLAYERS = 2;
@@ -12,11 +13,11 @@ public sealed class Game
     private readonly List<GamePlayer> _players = new();
     private readonly List<Deal> _deals = new();
 
-    private Game(Guid id) =>
+    private Game(GameId id) =>
         Id = id;
 
     public static Game Create() =>
-        new(id: Guid.NewGuid());
+        new(id: new(Guid.NewGuid()));
 
     public GamePlayer Join(string nick)
     {
