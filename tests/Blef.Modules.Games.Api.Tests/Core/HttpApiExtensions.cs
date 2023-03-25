@@ -2,7 +2,6 @@
 using System.Net.Http.Json;
 using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 using Blef.Modules.Games.Application.Queries;
-using Blef.Modules.Games.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Xunit.Sdk;
 using Deal = Blef.Modules.Games.Api.Tests.Core.ValueObjects.Deal;
@@ -19,14 +18,14 @@ internal static class HttpApiExtensions
         return new (game!.GameId);
     }
 
-    async internal static Task<Guid> JoinPlayer(this HttpClient client, GameId gameId, string nick)
+    async internal static Task<PlayerId> JoinPlayer(this HttpClient client, GameId gameId, string nick)
     {
         var response = await client.PostAsJsonAsync(
             requestUri: $"{GamePlayersUri(gameId)}",
             value: new {Nick = nick});
         response.EnsureSuccessStatusCode();
         var player = await response.Content.ReadFromJsonAsync<Dto.Player>();
-        return player!.PlayerId;
+        return new (player!.PlayerId);
     }
 
     async internal static Task Deal(this HttpClient client, GameId gameId, PlayerId playerId)
@@ -117,9 +116,6 @@ internal static class HttpApiExtensions
     private static class Dto
     {
         internal record Game(Guid GameId);
-
-        internal record Deal(Guid GameId, int DealId);
-
         internal record Player(Guid PlayerId);
     }
 }
