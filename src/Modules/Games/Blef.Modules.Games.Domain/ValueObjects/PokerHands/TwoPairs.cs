@@ -4,6 +4,7 @@ namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 internal class TwoPairs : PokerHand
 {
+    public const string Type = "two-pairs";
     private readonly FaceCard _first;
     private readonly FaceCard _second;
 
@@ -27,4 +28,7 @@ internal class TwoPairs : PokerHand
 
     protected override int GetInnerRank() =>
         (10 * (int) _first) + (int) _second;
+
+    public override string Serialize() =>
+        $"{Type}:{_first.ToString().ToLower()},{_second.ToString().ToLower()}";
 }
