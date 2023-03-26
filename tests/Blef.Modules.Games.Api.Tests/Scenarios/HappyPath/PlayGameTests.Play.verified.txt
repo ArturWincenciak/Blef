@@ -78,24 +78,33 @@
     Result: {
       Players: [
         {
-          PlayerId: Guid_5,
+          PlayerId: Guid_2,
           Cards: [
             {
-              FaceCard: face card,
-              Suit: suit
+              FaceCard: Ace,
+              Suit: Clubs
+            }
+          ]
+        },
+        {
+          PlayerId: Guid_3,
+          Cards: [
+            {
+              FaceCard: Ace,
+              Suit: Clubs
+            }
+          ]
+        },
+        {
+          PlayerId: Guid_4,
+          Cards: [
+            {
+              FaceCard: Ace,
+              Suit: Clubs
             }
           ]
         }
-      ],
-      Bids: [
-        {
-          Order: 1,
-          PlayerId: Guid_6,
-          Bid: bid
-        }
-      ],
-      CheckingPlayerId: Guid_7,
-      LooserPlayerId: Guid_8
+      ]
     }
   },
   {
@@ -223,24 +232,33 @@
     Result: {
       Players: [
         {
-          PlayerId: Guid_9,
+          PlayerId: Guid_2,
           Cards: [
             {
-              FaceCard: face card,
-              Suit: suit
+              FaceCard: Ace,
+              Suit: Clubs
+            }
+          ]
+        },
+        {
+          PlayerId: Guid_3,
+          Cards: [
+            {
+              FaceCard: Ace,
+              Suit: Clubs
+            }
+          ]
+        },
+        {
+          PlayerId: Guid_4,
+          Cards: [
+            {
+              FaceCard: Ace,
+              Suit: Clubs
             }
           ]
         }
-      ],
-      Bids: [
-        {
-          Order: 1,
-          PlayerId: Guid_10,
-          Bid: bid
-        }
-      ],
-      CheckingPlayerId: Guid_11,
-      LooserPlayerId: Guid_12
+      ]
     }
   },
   {

@@ -3,6 +3,7 @@ using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
+using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
@@ -70,10 +71,10 @@ internal sealed class Game
         return cards;
     }
 
-    public void Bid(DealNumber dealNumber, PlayerId playerId, string pokerHand)
+    public void Bid(DealNumber dealNumber, PlayerId playerId, PokerHand bid)
     {
         var deal = GetDeal(dealNumber);
-        deal.Bid(playerId, pokerHand);
+        deal.Bid(playerId, bid);
     }
 
     public void Check(DealNumber dealNumber, PlayerId playerId)
@@ -85,11 +86,10 @@ internal sealed class Game
     private Deal GetDeal(DealNumber dealNumber) =>
         _deals.Single(d => d.Id.Number.Equals(dealNumber));
 
-    public object GetDealFlow(DealNumber queryDealNumber)
+    public DealFlowResult GetDealFlow(DealNumber dealNumber)
     {
-        // todo: ...
-
-        return null;
+        var deal = GetDeal(dealNumber);
+        return deal.GetDealFlow();
     }
 
     public GameFlowResult GetGameFlow()
