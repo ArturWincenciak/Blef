@@ -41,7 +41,7 @@ internal sealed class BlefClient
 
     async internal Task<JoinGame.Result> JoinPlayer(WhichPlayer whichPlayer)
     {
-        var player = await _httpClient.JoinPlayer(_gameId, nick: whichPlayer.ToString());
+        var player = await _httpClient.JoinPlayer(_gameId, nick: new (whichPlayer.ToString()));
         SetPlayerId(whichPlayer, new(player.PlayerId));
         return player;
     }

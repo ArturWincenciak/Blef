@@ -7,7 +7,7 @@ public sealed record PlayerId
     public PlayerId(Guid id)
     {
         if (id == Guid.Empty)
-            throw new AggregateException("Game player ID cannot be empty");
+            throw new ArgumentException("Game player ID cannot be empty");
 
         Id = id;
     }

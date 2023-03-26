@@ -6,11 +6,11 @@ namespace Blef.Modules.Games.Domain.Exceptions;
 
 internal sealed class PlayerAlreadyJoinedTheGameException : BlefException
 {
-    public PlayerAlreadyJoinedTheGameException(GameId gameId, string nick)
+    public PlayerAlreadyJoinedTheGameException(GameId gameId, PlayerNick nick)
         : base(
             title: "Player already joined the game",
-            detail: $"Player '{nick}' already joined the game",
-            instance: $"/games/{gameId}")
+            detail: $"Player '{nick.Nick}' already joined the game",
+            instance: $"/games/{gameId.Id}")
     {
     }
 }
