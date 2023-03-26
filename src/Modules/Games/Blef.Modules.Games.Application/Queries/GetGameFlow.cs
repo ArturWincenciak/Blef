@@ -9,7 +9,7 @@ public sealed record GetGameFlow(GameId GameId) : IQuery<GetGameFlow.Result>
 {
     [UsedImplicitly]
     public sealed record Result(
-        Player[] Players) : IQueryResult;
+        IEnumerable<Player> Players) : IQueryResult;
 
     [UsedImplicitly]
     public sealed record Player(Guid PlayerId, string Nick);

@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
+using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
 
@@ -14,17 +15,11 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
 
     public async Task<GetGameFlow.Result> Handle(GetGameFlow query, CancellationToken cancellation)
     {
-        // todo: ...
-
         var game = _games.Get(query.GameId);
         var gameFlow = game.GetGameFlow();
-
-        return new GetGameFlow.Result(
-            new GetGameFlow.Player[]
-            {
-                new GetGameFlow.Player(
-                    PlayerId: Guid.NewGuid(),
-                    Nick: "Nick")
-            });
+        return Map(gameFlow);
     }
+
+    private GetGameFlow.Result Map(GameFlowResult gameFlow) =>
+        new (gameFlow.Players.Select(p => new GetGameFlow.Player(p.PlayerId.Id, p.Nick)));
 }
