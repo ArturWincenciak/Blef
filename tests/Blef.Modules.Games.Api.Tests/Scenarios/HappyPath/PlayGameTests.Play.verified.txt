@@ -104,7 +104,9 @@
             }
           ]
         }
-      ]
+      ],
+      CheckingPlayerId: Guid_5,
+      LooserPlayerId: Guid_6
     }
   },
   {
@@ -258,7 +260,26 @@
             }
           ]
         }
-      ]
+      ],
+      Bids: [
+        {
+          Order: 1,
+          PlayerId: Guid_2,
+          PokerHand: high-card:nine
+        },
+        {
+          Order: 2,
+          PlayerId: Guid_3,
+          PokerHand: high-card:ten
+        },
+        {
+          Order: 3,
+          PlayerId: Guid_4,
+          PokerHand: high-card:jack
+        }
+      ],
+      CheckingPlayerId: Guid_7,
+      LooserPlayerId: Guid_8
     }
   },
   {
