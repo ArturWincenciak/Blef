@@ -1,4 +1,4 @@
-﻿namespace Blef.Modules.Games.Domain.ValueObjects;
+﻿namespace Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 public sealed class GameId
 {

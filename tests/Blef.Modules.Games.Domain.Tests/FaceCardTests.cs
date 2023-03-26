@@ -1,5 +1,6 @@
 using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Cards;
 
 namespace Blef.Modules.Games.Domain.Tests;
 

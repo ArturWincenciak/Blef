@@ -1,8 +1,9 @@
 ﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
-public sealed class GamePlayer
+internal sealed class GamePlayer
 {
     public PlayerId Id { get; }
     public string Nick { get; }

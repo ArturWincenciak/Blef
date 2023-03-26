@@ -1,6 +1,7 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 using Blef.Modules.Games.Application.Queries;
 using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Microsoft.AspNetCore.Mvc;
 using GameId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.GameId;
 using PlayerId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.PlayerId;

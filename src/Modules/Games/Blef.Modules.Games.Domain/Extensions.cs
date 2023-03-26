@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 

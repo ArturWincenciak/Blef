@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using Blef.Modules.Games.Application;
-using Blef.Modules.Games.Domain.Repositories;
+using Blef.Modules.Games.Application.Repositories;
 using Blef.Modules.Games.Infrastructure.Repositories.InMemory;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
 
@@ -12,4 +13,6 @@ public sealed record GetGameFlow(GameId GameId) : IQuery<GetGameFlow.Result>
 
     [UsedImplicitly]
     public sealed record Player(Guid Id, string Nick, Card[] Cards);
+
+    public sealed record Card(string FaceCard, string Suit);
 }
