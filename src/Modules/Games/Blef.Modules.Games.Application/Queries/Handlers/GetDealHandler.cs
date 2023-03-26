@@ -30,7 +30,7 @@ internal sealed class GetDealHandler : IQueryHandler<GetDealFlow, GetDealFlow.Re
             Bids: dealFlow.Bids.Select(b => new GetDealFlow.DealBid(
                 Order: b.Order,
                 PlayerId: b.PlayerId.Id,
-                PokerHand: b.PokerHand.Serialize())),
-            CheckingPlayerId: Guid.Empty,
-            LooserPlayerId: Guid.Empty);
+                PokerHand: b.PokerHand.Serialize())), //todo: not in verify test result
+            CheckingPlayerId: Guid.NewGuid(), //todo: not in verify test result
+            LooserPlayerId: Guid.NewGuid()); //todo: not in verify test result
 }

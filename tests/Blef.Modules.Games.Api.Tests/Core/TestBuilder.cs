@@ -95,7 +95,7 @@ internal sealed class TestBuilder
     {
         _actions.Add(async () =>
         {
-             _gameClient.Bid(whichPlayer, deal, bid);
+             await _gameClient.Bid(whichPlayer, deal, bid);
              _testResult.Record(nameof(Bid), new { whichPlayer, deal, bid }, Success);
         });
 
@@ -106,7 +106,7 @@ internal sealed class TestBuilder
     {
         _actions.Add(async () =>
         {
-            _gameClient.Check(whichPlayer, deal);
+            await _gameClient.Check(whichPlayer, deal);
             _testResult.Record(nameof(Check), new { whichPlayer, deal }, Success);
         });
 

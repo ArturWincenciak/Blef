@@ -9,7 +9,7 @@ public class PlayGameTests
     [Fact]
     public Task Play()
     {
-         var result = new TestBuilder()
+         var results = new TestBuilder()
             .NewGame()
             .GetGameFlow()
             .JoinPlayer(WhichPlayer.Knuth)
@@ -30,6 +30,6 @@ public class PlayGameTests
             .GetGameFlow()
             .Build();
 
-         return Verify(result);
+         return Verify(results);
     }
 }
