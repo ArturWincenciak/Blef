@@ -17,6 +17,6 @@ public class ThreePlayersWithOneCardTests
             .Bid(WhichPlayer.Graham, deal: new(1), PokerHand.HighCard.Ten)
             .Bid(WhichPlayer.Graham, deal: new(1), PokerHand.HighCard.Jack)
             .Check(WhichPlayer.Knuth, deal: new(1))
-            .GetGameFlow()
+            .GetDealFlow(deal: new (1))
             .Build();
 }
