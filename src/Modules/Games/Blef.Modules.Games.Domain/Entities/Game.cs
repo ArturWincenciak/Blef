@@ -1,6 +1,7 @@
 using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
+using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Entities;
@@ -91,8 +92,11 @@ internal sealed class Game
         return null;
     }
 
-    public object GetGameFlow()
+    public GameFlowResult GetGameFlow()
     {
-        return null;
+        var players = _players
+            .Select(p => new GameFlowResult.Player(p.Id, p.Nick));
+
+        return new GameFlowResult(players);
     }
 }

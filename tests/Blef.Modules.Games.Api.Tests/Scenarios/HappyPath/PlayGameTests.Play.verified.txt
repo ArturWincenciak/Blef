@@ -11,21 +11,14 @@
     No: 2,
     Action: GetGameFlow,
     Argument: NoArgument,
-    Result: {
-      Players: [
-        {
-          PlayerId: Guid_2,
-          Nick: Nick
-        }
-      ]
-    }
+    Result: {}
   },
   {
     No: 3,
     Action: JoinPlayer,
     Argument: Knuth,
     Result: {
-      PlayerId: Guid_3,
+      PlayerId: Guid_2,
       Nick: Knuth
     }
   },
@@ -34,7 +27,7 @@
     Action: JoinPlayer,
     Argument: Graham,
     Result: {
-      PlayerId: Guid_4,
+      PlayerId: Guid_3,
       Nick: Graham
     }
   },
@@ -43,7 +36,7 @@
     Action: JoinPlayer,
     Argument: Conway,
     Result: {
-      PlayerId: Guid_5,
+      PlayerId: Guid_4,
       Nick: Conway
     }
   },
@@ -54,8 +47,16 @@
     Result: {
       Players: [
         {
-          PlayerId: Guid_6,
-          Nick: Nick
+          PlayerId: Guid_2,
+          Nick: Knuth
+        },
+        {
+          PlayerId: Guid_3,
+          Nick: Graham
+        },
+        {
+          PlayerId: Guid_4,
+          Nick: Conway
         }
       ]
     }
@@ -77,7 +78,7 @@
     Result: {
       Players: [
         {
-          PlayerId: Guid_7,
+          PlayerId: Guid_5,
           Cards: [
             {
               FaceCard: face card,
@@ -89,12 +90,12 @@
       Bids: [
         {
           Order: 1,
-          PlayerId: Guid_8,
+          PlayerId: Guid_6,
           Bid: bid
         }
       ],
-      CheckingPlayerId: Guid_9,
-      LooserPlayerId: Guid_10
+      CheckingPlayerId: Guid_7,
+      LooserPlayerId: Guid_8
     }
   },
   {
@@ -104,8 +105,16 @@
     Result: {
       Players: [
         {
-          PlayerId: Guid_11,
-          Nick: Nick
+          PlayerId: Guid_2,
+          Nick: Knuth
+        },
+        {
+          PlayerId: Guid_3,
+          Nick: Graham
+        },
+        {
+          PlayerId: Guid_4,
+          Nick: Conway
         }
       ]
     }
@@ -214,7 +223,7 @@
     Result: {
       Players: [
         {
-          PlayerId: Guid_12,
+          PlayerId: Guid_9,
           Cards: [
             {
               FaceCard: face card,
@@ -226,12 +235,12 @@
       Bids: [
         {
           Order: 1,
-          PlayerId: Guid_13,
+          PlayerId: Guid_10,
           Bid: bid
         }
       ],
-      CheckingPlayerId: Guid_14,
-      LooserPlayerId: Guid_15
+      CheckingPlayerId: Guid_11,
+      LooserPlayerId: Guid_12
     }
   },
   {
@@ -241,8 +250,16 @@
     Result: {
       Players: [
         {
-          PlayerId: Guid_16,
-          Nick: Nick
+          PlayerId: Guid_2,
+          Nick: Knuth
+        },
+        {
+          PlayerId: Guid_3,
+          Nick: Graham
+        },
+        {
+          PlayerId: Guid_4,
+          Nick: Conway
         }
       ]
     }
