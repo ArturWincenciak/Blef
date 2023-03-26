@@ -81,4 +81,11 @@ public sealed class Game
 
     private Deal GetDeal(DealNumber dealNumber) =>
         _deals.Single(d => d.Id.Number.Equals(dealNumber));
+
+    public object GetDealFlow(DealNumber queryDealNumber)
+    {
+        // todo: ...
+
+        return null;
+    }
 }

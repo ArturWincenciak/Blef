@@ -1,5 +1,6 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 using Blef.Modules.Games.Application.Queries;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
@@ -26,11 +27,11 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder GetGameFlow(Action<GetGameFlow.Result, BlefClient.State>? with = null)
+    internal TestBuilder GetDealFlow(DealNumber deal, Action<GetDealFlow.Result, BlefClient.State>? with = null)
     {
         _actions.Add(async () =>
         {
-            var gameFlow = await _gameClient.GetGameFlow();
+            var gameFlow = await _gameClient.GetDealFlow(deal);
             var gameClientState = _gameClient.GetState();
             with?.Invoke(gameFlow, gameClientState);
         });

@@ -1,6 +1,9 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 using Blef.Modules.Games.Application.Queries;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
+using GameId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.GameId;
+using PlayerId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.PlayerId;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -24,8 +27,8 @@ internal sealed class BlefClient
     async internal Task NewGame() =>
         _gameId = await _httpClient.NewGame();
 
-    async internal Task<GetGameFlow.Result> GetGameFlow() =>
-        await _httpClient.GetGameFlow(_gameId);
+    async internal Task<GetDealFlow.Result> GetDealFlow(DealNumber dealNumber) =>
+        await _httpClient.GetDealFlow(_gameId, dealNumber);
 
     async internal Task JoinPlayer(WhichPlayer whichPlayer)
     {

@@ -1,10 +1,12 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 using Blef.Modules.Games.Application.Queries;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 using Xunit.Sdk;
 using Deal = Blef.Modules.Games.Api.Tests.Core.ValueObjects.Deal;
+using GameId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.GameId;
+using PlayerId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.PlayerId;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -69,11 +71,11 @@ internal static class HttpApiExtensions
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/bids",
             value: new {PokerHand = bid});
 
-    async internal static Task<GetGameFlow.Result> GetGameFlow(this HttpClient client, GameId gameId)
+    async internal static Task<GetDealFlow.Result> GetDealFlow(this HttpClient client, GameId gameId, DealNumber dealNumber)
     {
-        var response = await client.GetAsync($"{GamesUri}/{gameId}");
+        var response = await client.GetAsync($"{GamesUri}/{gameId.Id}/deals/{dealNumber.Number}");
         response.EnsureSuccessStatusCode();
-        return (await response.Content.ReadFromJsonAsync<GetGameFlow.Result>())!;
+        return (await response.Content.ReadFromJsonAsync<GetDealFlow.Result>())!;
     }
 
     async internal static Task CheckWithSuccess(this HttpClient client, GameId gameId, Deal deal, PlayerId playerId)
