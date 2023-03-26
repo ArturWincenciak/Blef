@@ -14,8 +14,17 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
 
     public async Task<GetGameFlow.Result> Handle(GetGameFlow query, CancellationToken cancellation)
     {
+        // todo: ...
+
         var game = _games.Get(query.GameId);
         var gameFlow = game.GetGameFlow();
-        return null;
+
+        return new GetGameFlow.Result(
+            new GetGameFlow.Player[]
+            {
+                new GetGameFlow.Player(
+                    PlayerId: Guid.NewGuid(),
+                    Nick: "Nick")
+            });
     }
 }

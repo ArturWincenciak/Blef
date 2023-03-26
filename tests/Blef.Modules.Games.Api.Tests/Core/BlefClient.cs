@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
+using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
@@ -25,8 +26,12 @@ internal sealed class BlefClient
     internal State GetState() =>
         new(_gameId, _knuthPlayerId, _grahamPlayerId, _riemannPlayerId, _conwayPlayerId);
 
-    async internal Task NewGame() =>
-        _gameId = await _httpClient.NewGame();
+    async internal Task<NewGame.Result> NewGame()
+    {
+        var game = await _httpClient.NewGame();
+        _gameId = new (game.GameId);
+        return game;
+    }
 
     async internal Task<GetGameFlow.Result> GetGameFlow() =>
         await _httpClient.GetGameFlow(_gameId);
@@ -34,17 +39,15 @@ internal sealed class BlefClient
     async internal Task<GetDealFlow.Result> GetDealFlow(DealNumber dealNumber) =>
         await _httpClient.GetDealFlow(_gameId, dealNumber);
 
-    async internal Task JoinPlayer(WhichPlayer whichPlayer)
+    async internal Task<JoinGame.Result> JoinPlayer(WhichPlayer whichPlayer)
     {
         var player = await _httpClient.JoinPlayer(_gameId, nick: whichPlayer.ToString());
-        SetPlayerId(whichPlayer, player);
+        SetPlayerId(whichPlayer, new(player.PlayerId));
+        return player;
     }
 
-    async internal Task Deal(WhichPlayer whichPlayer)
-    {
-        //todo: return localization in header with deal number in path
+    async internal Task<NewDeal.Result> Deal(WhichPlayer whichPlayer) =>
         await _httpClient.NewDeal(_gameId, GetPlayerId(whichPlayer));
-    }
 
     async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, Deal deal)
     {
@@ -52,7 +55,7 @@ internal sealed class BlefClient
         return await _httpClient.GetCards(_gameId, deal, playerId);
     }
 
-    async internal Task BidWithSuccess(WhichPlayer whichPlayer, Deal deal, string bid)
+    async internal Task Bid(WhichPlayer whichPlayer, Deal deal, string bid)
     {
         var playerId = GetPlayerId(whichPlayer);
         await _httpClient.BidWithSuccess(_gameId, deal, playerId, bid);
@@ -60,11 +63,12 @@ internal sealed class BlefClient
 
     async internal Task<ProblemDetails> BidWithRuleViolation(WhichPlayer whichPlayer, Deal deal, string bid)
     {
+        // todo: use in test cases
         var playerId = GetPlayerId(whichPlayer);
         return await _httpClient.BidWithRuleViolation(_gameId, deal, playerId, bid);
     }
 
-    async internal Task CheckWithSuccess(WhichPlayer whichPlayer, Deal deal)
+    async internal Task Check(WhichPlayer whichPlayer, Deal deal)
     {
         var playerId = GetPlayerId(whichPlayer);
         await _httpClient.CheckWithSuccess(_gameId, deal, playerId);
@@ -72,6 +76,7 @@ internal sealed class BlefClient
 
     async internal Task<ProblemDetails> CheckWithRuleViolation(WhichPlayer whichPlayer, Deal deal)
     {
+        // todo: use in test cases
         var playerId = GetPlayerId(whichPlayer);
         return await _httpClient.CheckWithRuleViolation(_gameId, deal, playerId);
     }
