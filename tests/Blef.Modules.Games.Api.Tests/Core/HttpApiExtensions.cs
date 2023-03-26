@@ -71,6 +71,13 @@ internal static class HttpApiExtensions
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/bids",
             value: new {PokerHand = bid});
 
+    async internal static Task<GetGameFlow.Result> GetGameFlow(this HttpClient client, GameId gameId)
+    {
+        var response = await client.GetAsync($"{GamesUri}/{gameId.Id}");
+        response.EnsureSuccessStatusCode();
+        return (await response.Content.ReadFromJsonAsync<GetGameFlow.Result>())!;
+    }
+
     async internal static Task<GetDealFlow.Result> GetDealFlow(this HttpClient client, GameId gameId, DealNumber dealNumber)
     {
         var response = await client.GetAsync($"{GamesUri}/{gameId.Id}/deals/{dealNumber.Number}");

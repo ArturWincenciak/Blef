@@ -11,6 +11,7 @@ public class TwoPlayersWithOneCardTests
         await new TestBuilder()
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
+            .GetGameFlow()
             .JoinPlayer(WhichPlayer.Graham)
             .JoinPlayer(WhichPlayer.Conway)
             .NewDeal(WhichPlayer.Knuth)
