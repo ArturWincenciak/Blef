@@ -1,8 +1,5 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects.Ids;
+﻿using Blef.Modules.Games.Domain.Entities;
 
 namespace Blef.Modules.Games.Domain.ValueObjects.Dto;
 
-internal record GameFlowResult(IEnumerable<GameFlowResult.Player> Players)
-{
-    internal record Player(PlayerId PlayerId, string Nick);
-}
+internal record GameFlowResult(IEnumerable<GamePlayer> Players);

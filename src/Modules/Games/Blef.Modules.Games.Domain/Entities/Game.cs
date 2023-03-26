@@ -1,5 +1,4 @@
 using Blef.Modules.Games.Domain.Exceptions;
-using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
@@ -18,12 +17,12 @@ internal sealed class Game
     private readonly List<Deal> _deals = new();
 
     private Game(GameId id) =>
-        Id = id;
+        Id = id ?? throw new ArgumentNullException(nameof(id));
 
     public static Game Create() =>
         new(id: new(Guid.NewGuid()));
 
-    public GamePlayer Join(string nick)
+    public GamePlayer Join(PlayerNick nick)
     {
         if (IsGameStarted())
             throw new JoinGameThatIsAlreadyStartedException(Id, nick);
@@ -92,11 +91,6 @@ internal sealed class Game
         return deal.GetDealFlow();
     }
 
-    public GameFlowResult GetGameFlow()
-    {
-        var players = _players
-            .Select(p => new GameFlowResult.Player(p.Id, p.Nick));
-
-        return new GameFlowResult(players);
-    }
+    public GameFlowResult GetGameFlow() =>
+        new GameFlowResult(_players);
 }

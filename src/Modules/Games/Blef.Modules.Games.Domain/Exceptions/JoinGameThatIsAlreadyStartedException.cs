@@ -6,11 +6,11 @@ namespace Blef.Modules.Games.Domain.Exceptions;
 
 internal sealed class JoinGameThatIsAlreadyStartedException : BlefException
 {
-    public JoinGameThatIsAlreadyStartedException(GameId gameId, string playerNick)
+    public JoinGameThatIsAlreadyStartedException(GameId gameId, PlayerNick playerNick)
         : base(
             title: "Cannot join game that is already started",
-            detail: $"Player '{playerNick}' has tried to join game '{gameId}' that is already started",
-            instance: $"/games/{gameId}")
+            detail: $"Player '{playerNick.Nick}' has tried to join game '{gameId.Id}' that is already started",
+            instance: $"/games/{gameId.Id}")
     {
     }
 }

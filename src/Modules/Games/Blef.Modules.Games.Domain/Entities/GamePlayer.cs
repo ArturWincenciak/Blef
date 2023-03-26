@@ -6,14 +6,14 @@ namespace Blef.Modules.Games.Domain.Entities;
 internal sealed class GamePlayer
 {
     public PlayerId Id { get; }
-    public string Nick { get; }
+    public PlayerNick Nick { get; }
 
-    private GamePlayer(PlayerId id, string nick)
+    private GamePlayer(PlayerId id, PlayerNick nick)
     {
-        Id = id;
-        Nick = nick;
+        Id = id ?? throw new ArgumentNullException(nameof(id));
+        Nick = nick ?? throw new ArgumentNullException(nameof(nick));
     }
 
-    public static GamePlayer Create(string nick) =>
+    public static GamePlayer Create(PlayerNick nick) =>
         new (new(Guid.NewGuid()), nick);
 }
