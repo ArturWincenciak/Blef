@@ -1,7 +1,9 @@
 ﻿namespace Blef.Modules.Games.Domain.ValueObjects.Ids;
 
-public sealed class GameId
+public sealed record GameId
 {
+    public Guid Id { get; }
+
     public GameId(Guid id)
     {
         if (id == Guid.Empty)
@@ -9,9 +11,4 @@ public sealed class GameId
 
         Id = id;
     }
-
-    public Guid Id { get; }
-
-    public override string ToString() =>
-        Id.ToString();
 }
