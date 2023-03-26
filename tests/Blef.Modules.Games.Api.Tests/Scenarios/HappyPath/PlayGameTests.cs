@@ -3,7 +3,7 @@ using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 
-public class TwoPlayersWithOneCardTests
+public class PlayGameTests
 {
     [Fact]
     public async Task OneBidByEachAndCheck()
