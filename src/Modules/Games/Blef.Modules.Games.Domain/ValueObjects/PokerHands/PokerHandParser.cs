@@ -12,11 +12,11 @@ internal static class PokerHandParser
         //todo: implement more Poker Hands
         return pokerHandType.ToLower() switch
         {
-            "high-card" => new HighCard(ParseFaceCard(parts[1])),
-            "pair" => new Pair(ParseFaceCard(parts[1])),
-            "two-pairs" => CreateTwoPairs(parts[1]),
-            "low-straight" => new LowStraight(),
-            "high-straight" => new HighStraight(),
+            HighCard.Type => new HighCard(ParseFaceCard(parts[1])),
+            Pair.Type => new Pair(ParseFaceCard(parts[1])),
+            TwoPairs.Type => CreateTwoPairs(parts[1]),
+            LowStraight.Type => new LowStraight(),
+            HighStraight.Type => new HighStraight(),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
             //todo: validate, domain exception, test
         };

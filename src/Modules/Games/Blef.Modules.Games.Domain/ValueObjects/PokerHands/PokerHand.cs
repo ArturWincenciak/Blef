@@ -26,4 +26,6 @@ internal abstract class PokerHand
     }
 
     protected abstract int GetInnerRank();
+
+    public abstract string Serialize();
 }

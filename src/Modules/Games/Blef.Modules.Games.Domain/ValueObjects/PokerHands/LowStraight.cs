@@ -4,6 +4,7 @@ namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 internal class LowStraight : PokerHand
 {
+    public const string Type = "low-straight";
     protected override int PokerHandRank => 4;
 
     public override bool IsOnTable(IReadOnlyCollection<Card> table) =>
@@ -15,4 +16,7 @@ internal class LowStraight : PokerHand
 
     protected override int GetInnerRank() =>
         0; // It is not important for this kind of PokerHand
+
+    public override string Serialize() =>
+        Type;
 }

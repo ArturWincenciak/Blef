@@ -4,6 +4,7 @@ namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 internal class HighCard : PokerHand
 {
+    public const string Type = "high-card";
     private readonly FaceCard _faceCard;
 
     protected override int PokerHandRank => 1;
@@ -16,4 +17,7 @@ internal class HighCard : PokerHand
 
     protected override int GetInnerRank() =>
         (int) _faceCard;
+
+    public override string Serialize() =>
+        $"{Type}:{_faceCard.ToString().ToLower()}";
 }

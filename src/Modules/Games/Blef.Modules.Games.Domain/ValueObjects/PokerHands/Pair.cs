@@ -4,6 +4,7 @@ namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 internal class Pair : PokerHand
 {
+    public const string Type = "pair";
     private readonly FaceCard _faceCard;
 
     protected override int PokerHandRank => 2;
@@ -16,4 +17,7 @@ internal class Pair : PokerHand
 
     protected override int GetInnerRank() =>
         (int) _faceCard;
+
+    public override string Serialize() =>
+        $"{Type}:{_faceCard.ToString().ToLower()}";
 }
