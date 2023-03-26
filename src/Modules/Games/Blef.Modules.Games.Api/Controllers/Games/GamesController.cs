@@ -36,12 +36,20 @@ internal sealed class GamesController : ModuleControllerBase
         return Created(uri: $"{GameUri(game.GameId)}", game);
     }
 
+    [HttpGet($"{GAME_ID}")]
+    public async Task<IActionResult> GetDealFlow(Guid gameId, CancellationToken cancellation)
+    {
+        var query = new GetGameFlow(new (gameId));
+        var gameFlow = await _queryDispatcher.Dispatch<GetGameFlow, GetGameFlow.Result>(query, cancellation);
+        return Ok(gameFlow);
+    }
+
     [HttpGet($"{GAME_ID}/{DEALS}/{DEAL_NUMBER}")]
     public async Task<IActionResult> GetDealFlow(Guid gameId, int dealNumber, CancellationToken cancellation)
     {
         var query = new GetDealFlow(new (gameId), new (dealNumber));
-        var gameFlow = await _queryDispatcher.Dispatch<GetDealFlow, GetDealFlow.Result>(query, cancellation);
-        return Ok(gameFlow);
+        var dealFlow = await _queryDispatcher.Dispatch<GetDealFlow, GetDealFlow.Result>(query, cancellation);
+        return Ok(dealFlow);
     }
 
     [HttpPost($"{GAME_ID}/{PLAYERS}")]

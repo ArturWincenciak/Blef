@@ -88,4 +88,9 @@ public sealed class Game
 
         return null;
     }
+
+    public object GetGameFlow()
+    {
+        return null;
+    }
 }

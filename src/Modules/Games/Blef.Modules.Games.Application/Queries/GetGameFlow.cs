@@ -1,0 +1,15 @@
+﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Shared.Abstractions.Queries;
+using JetBrains.Annotations;
+
+namespace Blef.Modules.Games.Application.Queries;
+
+public sealed record GetGameFlow(GameId GameId) : IQuery<GetGameFlow.Result>
+{
+    [UsedImplicitly]
+    public sealed record Result(
+        Player[] Players) : IQueryResult;
+
+    [UsedImplicitly]
+    public sealed record Player(Guid Id, string Nick, Card[] Cards);
+}

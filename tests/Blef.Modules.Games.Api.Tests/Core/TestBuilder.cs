@@ -27,13 +27,22 @@ internal sealed class TestBuilder
         return this;
     }
 
+    public TestBuilder GetGameFlow()
+    {
+        _actions.Add(async () =>
+        {
+            var gameFlow = await _gameClient.GetGameFlow();
+        });
+        return this;
+    }
+
     internal TestBuilder GetDealFlow(DealNumber deal, Action<GetDealFlow.Result, BlefClient.State>? with = null)
     {
         _actions.Add(async () =>
         {
-            var gameFlow = await _gameClient.GetDealFlow(deal);
+            var dealFlow = await _gameClient.GetDealFlow(deal);
             var gameClientState = _gameClient.GetState();
-            with?.Invoke(gameFlow, gameClientState);
+            with?.Invoke(dealFlow, gameClientState);
         });
         return this;
     }
