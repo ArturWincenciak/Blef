@@ -1,6 +1,8 @@
+using Blef.Modules.Games.Domain.ValueObjects.Cards;
+
 namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
-public static class PokerHandParser
+internal static class PokerHandParser
 {
     public static PokerHand Parse(string bid)
     {

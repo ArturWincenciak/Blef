@@ -1,4 +1,4 @@
-﻿using Blef.Modules.Games.Domain.Repositories;
+﻿using Blef.Modules.Games.Application.Repositories;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Shared.Abstractions.Commands;
 using JetBrains.Annotations;

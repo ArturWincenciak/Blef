@@ -1,6 +1,7 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 using Blef.Modules.Games.Application.Queries;
 using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Tests.Core;

@@ -1,8 +1,10 @@
 ﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Cards;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
-public sealed class DealPlayer
+internal sealed class DealPlayer
 {
     private readonly IEnumerable<Card> _cards;
 

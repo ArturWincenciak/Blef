@@ -1,6 +1,8 @@
-﻿namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
+﻿using Blef.Modules.Games.Domain.ValueObjects.Cards;
 
-public class LowStraight : PokerHand
+namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
+
+internal class LowStraight : PokerHand
 {
     protected override int PokerHandRank => 4;
 

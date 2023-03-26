@@ -1,9 +1,11 @@
 using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Cards;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
-public sealed class Game
+internal sealed class Game
 {
     public GameId Id { get; }
 

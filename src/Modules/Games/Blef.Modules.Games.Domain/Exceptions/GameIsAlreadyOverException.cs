@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Shared.Kernel.Exceptions;
 
 namespace Blef.Modules.Games.Domain.Exceptions;

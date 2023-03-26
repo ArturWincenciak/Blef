@@ -1,6 +1,8 @@
-﻿namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
+﻿using Blef.Modules.Games.Domain.ValueObjects.Cards;
 
-public class TwoPairs : PokerHand
+namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
+
+internal class TwoPairs : PokerHand
 {
     private readonly FaceCard _first;
     private readonly FaceCard _second;

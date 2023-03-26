@@ -1,8 +1,9 @@
 ﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Cards;
 
 namespace Blef.Modules.Games.Domain.Services;
 
-public interface IDeckService
+internal interface IDeckService
 {
     Card[] DealCards(int count);
 }

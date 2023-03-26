@@ -1,10 +1,12 @@
-﻿namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
+﻿using Blef.Modules.Games.Domain.ValueObjects.Cards;
+
+namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 /// <summary>
 ///     Ranks should be assigned according to
 ///     <see href="https://pl.wikipedia.org/wiki/Blef_(gra)" />
 /// </summary>
-public abstract class PokerHand
+internal abstract class PokerHand
 {
     protected abstract int PokerHandRank { get; }
 

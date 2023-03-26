@@ -1,7 +1,8 @@
 ﻿using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
-namespace Blef.Modules.Games.Domain.Repositories;
+namespace Blef.Modules.Games.Application.Repositories;
 
 internal interface IGamesRepository
 {
