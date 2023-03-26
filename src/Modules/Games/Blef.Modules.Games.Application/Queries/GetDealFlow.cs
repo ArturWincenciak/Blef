@@ -9,16 +9,16 @@ public sealed record GetDealFlow(GameId GameId, DealNumber DealNumber) : IQuery<
 {
     [UsedImplicitly]
     public sealed record Result(
-        Player[] Players,
-        DealBid[] Bids,
+        IEnumerable<Player> Players,
+        IEnumerable<DealBid> Bids,
         Guid CheckingPlayerId,
         Guid LooserPlayerId) : IQueryResult;
 
     [UsedImplicitly]
-    public sealed record DealBid(int Order, Guid PlayerId, string Bid);
+    public sealed record DealBid(int Order, Guid PlayerId, string PokerHand);
 
     [UsedImplicitly]
-    public sealed record Player(Guid PlayerId, Card[] Cards);
+    public sealed record Player(Guid PlayerId, IEnumerable<Card> Cards);
 
     [UsedImplicitly]
     public sealed record Card(string FaceCard, string Suit);

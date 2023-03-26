@@ -1,18 +1,21 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
+﻿using Blef.Modules.Games.Domain.ValueObjects.Cards;
+using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
+using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Deal
 {
     public DealId Id { get; }
-    private readonly IEnumerable<DealPlayer> _players = new List<DealPlayer>();
+    private readonly IEnumerable<DealPlayer> _players;
+    private readonly BidHistory _bidHistory;
 
     private Deal(DealId id, IEnumerable<DealPlayer> players)
     {
         Id = id;
         _players = players;
+        _bidHistory = new();
     }
 
     public static Deal Create(DealId id, IEnumerable<PlayerId> players) =>
@@ -24,9 +27,10 @@ internal sealed class Deal
         return player.GetCards();
     }
 
-    public void Bid(PlayerId playerId, string pokerHand)
+    public void Bid(PlayerId playerId, PokerHand bid)
     {
-        // todo: ...
+        // todo ...
+        _bidHistory.OnBid(playerId, bid);
     }
 
     public void Check(PlayerId playerId)
@@ -34,10 +38,23 @@ internal sealed class Deal
         // todo: ...
     }
 
+    public DealFlowResult GetDealFlow()
+    {
+        var bids = _bidHistory.GetFlow();
+
+        PlayerId checkingPlayerId = null;
+        PlayerId looserPlayerId = null;
+
+        return new DealFlowResult(_players, bids, checkingPlayerId, looserPlayerId);
+    }
+
     private static IEnumerable<Card> DealCards()
     {
         // todo: add number of cards parameter based on previous game
         // todo: randomise cards
-        return new[] {new Card(FaceCard.Ace, Suit.Clubs)};
+        return new[]
+        {
+            new Card(FaceCard.Ace, Suit.Clubs)
+        };
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
-using Blef.Modules.Games.Domain.Entities;
-using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
+using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
 
@@ -17,40 +15,22 @@ internal sealed class GetDealHandler : IQueryHandler<GetDealFlow, GetDealFlow.Re
 
     public async Task<GetDealFlow.Result> Handle(GetDealFlow query, CancellationToken cancellation)
     {
-        // todo: ...
         var game = _games.Get(query.GameId);
         var dealFlow = game.GetDealFlow(query.DealNumber);
-
-        // temp stub
-        return new GetDealFlow.Result(
-            Players: new []
-            {
-                new GetDealFlow.Player(
-                    PlayerId: Guid.NewGuid(),
-                    Cards: new []
-                    {
-                        new GetDealFlow.Card(
-                            FaceCard: "face card",
-                            Suit: "suit")
-                    })
-            },
-            Bids: new []
-            {
-                new GetDealFlow.DealBid(
-                    Order: 1,
-                    PlayerId: Guid.NewGuid(),
-                    Bid: "bid")
-            },
-            CheckingPlayerId: Guid.NewGuid(),
-            LooserPlayerId: Guid.NewGuid());
+        return Map(dealFlow);
     }
 
-    private static GetDealFlow.Card[] HideCards(IEnumerable<Card> cards) =>
-        cards.Select(_ => new GetDealFlow.Card(FaceCard: "Hidden", Suit: "Hidden")).ToArray();
-
-    private static GetDealFlow.Card[] MapCards(IEnumerable<Card> cards) =>
-        cards.Select(MapCard).ToArray();
-
-    private static GetDealFlow.Card MapCard(Card card) =>
-        new(FaceCard: card.FaceCard.ToString(), Suit: card.Suit.ToString());
+    private GetDealFlow.Result Map(DealFlowResult dealFlow) =>
+        new GetDealFlow.Result(
+            Players: dealFlow.Players.Select(p => new GetDealFlow.Player(
+                PlayerId: p.Id.Id,
+                Cards: p.GetCards().Select(c => new GetDealFlow.Card(
+                    FaceCard: c.FaceCard.ToString(),
+                    Suit: c.Suit.ToString())))),
+            Bids: dealFlow.Bids.Select(b => new GetDealFlow.DealBid(
+                Order: b.Order,
+                PlayerId: b.PlayerId.Id,
+                PokerHand: b.PokerHand.ToString())),
+            CheckingPlayerId: Guid.Empty,
+            LooserPlayerId: Guid.Empty);
 }
