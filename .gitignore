@@ -254,3 +254,7 @@ src/ElevenQ.Server.code-workspace
 .DS_Store
 
 TODO.md
+
+# Verify Tests
+*.received.*
+*.received/
