@@ -12,5 +12,5 @@ public sealed record GetGameFlow(GameId GameId) : IQuery<GetGameFlow.Result>
         Player[] Players) : IQueryResult;
 
     [UsedImplicitly]
-    public sealed record Player(Guid Id, string Nick);
+    public sealed record Player(Guid PlayerId, string Nick);
 }

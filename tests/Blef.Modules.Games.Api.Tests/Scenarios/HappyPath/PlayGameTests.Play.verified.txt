@@ -1,0 +1,250 @@
+﻿[
+  {
+    No: 1,
+    Action: NewGame,
+    Argument: NoArgument,
+    Result: {
+      GameId: Guid_1
+    }
+  },
+  {
+    No: 2,
+    Action: GetGameFlow,
+    Argument: NoArgument,
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_2,
+          Nick: Nick
+        }
+      ]
+    }
+  },
+  {
+    No: 3,
+    Action: JoinPlayer,
+    Argument: Knuth,
+    Result: {
+      PlayerId: Guid_3,
+      Nick: Knuth
+    }
+  },
+  {
+    No: 4,
+    Action: JoinPlayer,
+    Argument: Graham,
+    Result: {
+      PlayerId: Guid_4,
+      Nick: Graham
+    }
+  },
+  {
+    No: 5,
+    Action: JoinPlayer,
+    Argument: Conway,
+    Result: {
+      PlayerId: Guid_5,
+      Nick: Conway
+    }
+  },
+  {
+    No: 6,
+    Action: GetGameFlow,
+    Argument: NoArgument,
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_6,
+          Nick: Nick
+        }
+      ]
+    }
+  },
+  {
+    No: 7,
+    Action: NewDeal,
+    Argument: Knuth,
+    Result: {
+      Number: 1
+    }
+  },
+  {
+    No: 8,
+    Action: GetDealFlow,
+    Argument: {
+      Number: 1
+    },
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_7,
+          Cards: [
+            {
+              FaceCard: face card,
+              Suit: suit
+            }
+          ]
+        }
+      ],
+      Bids: [
+        {
+          Order: 1,
+          PlayerId: Guid_8,
+          Bid: bid
+        }
+      ],
+      CheckingPlayerId: Guid_9,
+      LooserPlayerId: Guid_10
+    }
+  },
+  {
+    No: 9,
+    Action: GetGameFlow,
+    Argument: NoArgument,
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_11,
+          Nick: Nick
+        }
+      ]
+    }
+  },
+  {
+    No: 10,
+    Action: GetCards,
+    Argument: {
+      whichPlayer: Knuth,
+      deal: {}
+    },
+    Result: {
+      Cards: [
+        {
+          FaceCard: Ace,
+          Suit: Clubs
+        }
+      ]
+    }
+  },
+  {
+    No: 11,
+    Action: GetCards,
+    Argument: {
+      whichPlayer: Graham,
+      deal: {}
+    },
+    Result: {
+      Cards: [
+        {
+          FaceCard: Ace,
+          Suit: Clubs
+        }
+      ]
+    }
+  },
+  {
+    No: 12,
+    Action: GetCards,
+    Argument: {
+      whichPlayer: Conway,
+      deal: {}
+    },
+    Result: {
+      Cards: [
+        {
+          FaceCard: Ace,
+          Suit: Clubs
+        }
+      ]
+    }
+  },
+  {
+    No: 13,
+    Action: Bid,
+    Argument: {
+      whichPlayer: Knuth,
+      deal: {},
+      bid: high-card:nine
+    },
+    Result: {
+      Status: OK
+    }
+  },
+  {
+    No: 14,
+    Action: Bid,
+    Argument: {
+      whichPlayer: Graham,
+      deal: {},
+      bid: high-card:ten
+    },
+    Result: {
+      Status: OK
+    }
+  },
+  {
+    No: 15,
+    Action: Bid,
+    Argument: {
+      whichPlayer: Conway,
+      deal: {},
+      bid: high-card:jack
+    },
+    Result: {
+      Status: OK
+    }
+  },
+  {
+    No: 16,
+    Action: Check,
+    Argument: {
+      whichPlayer: Knuth,
+      deal: {}
+    },
+    Result: {
+      Status: OK
+    }
+  },
+  {
+    No: 17,
+    Action: GetDealFlow,
+    Argument: {
+      Number: 1
+    },
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_12,
+          Cards: [
+            {
+              FaceCard: face card,
+              Suit: suit
+            }
+          ]
+        }
+      ],
+      Bids: [
+        {
+          Order: 1,
+          PlayerId: Guid_13,
+          Bid: bid
+        }
+      ],
+      CheckingPlayerId: Guid_14,
+      LooserPlayerId: Guid_15
+    }
+  },
+  {
+    No: 18,
+    Action: GetGameFlow,
+    Argument: NoArgument,
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_16,
+          Nick: Nick
+        }
+      ]
+    }
+  }
+]

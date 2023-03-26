@@ -26,8 +26,7 @@ internal sealed class GetDealHandler : IQueryHandler<GetDealFlow, GetDealFlow.Re
             Players: new []
             {
                 new GetDealFlow.Player(
-                    Id: Guid.Empty,
-                    Nick: "Nick",
+                    PlayerId: Guid.NewGuid(),
                     Cards: new []
                     {
                         new GetDealFlow.Card(
@@ -35,15 +34,15 @@ internal sealed class GetDealHandler : IQueryHandler<GetDealFlow, GetDealFlow.Re
                             Suit: "suit")
                     })
             },
-            new []
+            Bids: new []
             {
                 new GetDealFlow.DealBid(
                     Order: 1,
-                    PlayerId: Guid.Empty,
+                    PlayerId: Guid.NewGuid(),
                     Bid: "bid")
             },
-            CheckingPlayerId: Guid.Empty,
-            LooserPlayerId: Guid.Empty);
+            CheckingPlayerId: Guid.NewGuid(),
+            LooserPlayerId: Guid.NewGuid());
     }
 
     private static GetDealFlow.Card[] HideCards(IEnumerable<Card> cards) =>

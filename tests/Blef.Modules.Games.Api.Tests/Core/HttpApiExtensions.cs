@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
-using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Microsoft.AspNetCore.Mvc;
 using Xunit.Sdk;
@@ -13,31 +13,29 @@ namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal static class HttpApiExtensions
 {
-    async internal static Task<GameId> NewGame(this HttpClient client)
+    async internal static Task<NewGame.Result> NewGame(this HttpClient client)
     {
         var response = await client.PostAsync(GamesUri, content: null);
         response.EnsureSuccessStatusCode();
-        var game = await response.Content.ReadFromJsonAsync<Dto.Game>();
-        return new (game!.GameId);
+        return (await response.Content.ReadFromJsonAsync<NewGame.Result>())!;
     }
 
-    async internal static Task<PlayerId> JoinPlayer(this HttpClient client, GameId gameId, string nick)
+    async internal static Task<JoinGame.Result> JoinPlayer(this HttpClient client, GameId gameId, string nick)
     {
         var response = await client.PostAsJsonAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players",
             value: new {Nick = nick});
         response.EnsureSuccessStatusCode();
-        var player = await response.Content.ReadFromJsonAsync<Dto.Player>();
-        return new (player!.PlayerId);
+        return (await response.Content.ReadFromJsonAsync<JoinGame.Result>())!;
     }
 
-    async internal static Task NewDeal(this HttpClient client, GameId gameId, PlayerId playerId)
+    async internal static Task<NewDeal.Result> NewDeal(this HttpClient client, GameId gameId, PlayerId playerId)
     {
         var response = await client.PostAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals",
             content: null);
         response.EnsureSuccessStatusCode();
-        //todo: use deal result content
+        return (await response.Content.ReadFromJsonAsync<NewDeal.Result>())!;
     }
 
     async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client, GameId gameId, Deal deal, PlayerId playerId)
@@ -109,10 +107,4 @@ internal static class HttpApiExtensions
 
     private static string GamesUri =>
         "games-module/games";
-
-    private static class Dto
-    {
-        internal record Game(Guid GameId);
-        internal record Player(Guid PlayerId);
-    }
 }
