@@ -2,6 +2,7 @@
 using System.Net.Http.Json;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Microsoft.AspNetCore.Mvc;
 using Xunit.Sdk;

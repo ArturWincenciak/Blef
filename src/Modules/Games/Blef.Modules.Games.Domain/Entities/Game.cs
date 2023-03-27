@@ -1,4 +1,5 @@
 using Blef.Modules.Games.Domain.Exceptions;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
@@ -51,8 +52,10 @@ internal sealed class Game
 
         var number = _deals.Count + 1;
         var dealId = new DealId(Id, new (number));
-        var players = _players.Select(p => p.Id);
-        var deal = Deal.Create(dealId, players);
+        var newDealPlayers = _players
+            .Where(p => p.IsInTheGame)
+            .Select(p => new NewDealPlayer(p.PlayerId, p.CardsAmount));
+        var deal = Deal.Create(dealId, newDealPlayers);
         _deals.Add(deal);
         return dealId;
     }
@@ -79,11 +82,13 @@ internal sealed class Game
     public void Check(DealNumber dealNumber, PlayerId playerId)
     {
         var deal = GetDeal(dealNumber);
-        deal.Check(playerId);
+        var lastDealLooser = deal.Check(playerId);
+        var gamePlayer = _players.Single(p => p.PlayerId.Equals(lastDealLooser.PlayerId));
+        gamePlayer.OnLostLastDeal();
     }
 
     private Deal GetDeal(DealNumber dealNumber) =>
-        _deals.Single(d => d.Id.Number.Equals(dealNumber));
+        _deals.Single(d => d.DealId.Number.Equals(dealNumber));
 
     public DealFlowResult GetDealFlow(DealNumber dealNumber)
     {

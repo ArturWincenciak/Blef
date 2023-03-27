@@ -1,4 +1,4 @@
-﻿namespace Blef.Modules.Games.Domain.ValueObjects.Ids;
+﻿namespace Blef.Modules.Games.Domain.ValueObjects;
 
 public sealed record PlayerNick
 {

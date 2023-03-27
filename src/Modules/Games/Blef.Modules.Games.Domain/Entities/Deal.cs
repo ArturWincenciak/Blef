@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects.Cards;
+﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
@@ -7,19 +8,19 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Deal
 {
-    public DealId Id { get; }
+    public DealId DealId { get; }
     private readonly IEnumerable<DealPlayer> _players;
     private readonly BidHistory _bidHistory;
 
-    private Deal(DealId id, IEnumerable<DealPlayer> players)
+    private Deal(DealId dealId, IEnumerable<DealPlayer> players)
     {
-        Id = id;
+        DealId = dealId;
         _players = players;
         _bidHistory = new();
     }
 
-    public static Deal Create(DealId id, IEnumerable<PlayerId> players) =>
-        new(id, players.Select(p => new DealPlayer( new(p.Id), DealCards())));
+    public static Deal Create(DealId dealId, IEnumerable<NewDealPlayer> players) =>
+        new(dealId, CreatePlayers(players));
 
     public IEnumerable<Card> GetCards(PlayerId playerId)
     {
@@ -33,9 +34,10 @@ internal sealed class Deal
         _bidHistory.OnBid(playerId, bid);
     }
 
-    public void Check(PlayerId playerId)
+    public LooserPlayer Check(PlayerId playerId)
     {
         // todo: ...
+        return new(playerId);
     }
 
     public DealFlowResult GetDealFlow()
@@ -48,7 +50,13 @@ internal sealed class Deal
         return new DealFlowResult(_players, bids, checkingPlayerId, looserPlayerId);
     }
 
-    private static IEnumerable<Card> DealCards()
+    private static IEnumerable<DealPlayer> CreatePlayers(IEnumerable<NewDealPlayer> players) =>
+        players.Select(CreatePlayer);
+
+    private static DealPlayer CreatePlayer(NewDealPlayer p) =>
+        new(p.PlayerId, DealCards(p.CardsAmount));
+
+    private static IEnumerable<Card> DealCards(CardsAmount cardsAmount)
     {
         // todo: add number of cards parameter based on previous game
         // todo: randomise cards
