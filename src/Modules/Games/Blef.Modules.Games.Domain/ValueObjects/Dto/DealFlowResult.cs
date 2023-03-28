@@ -7,5 +7,5 @@ namespace Blef.Modules.Games.Domain.ValueObjects.Dto;
 internal record DealFlowResult(
     IEnumerable<DealPlayer> Players,
     IEnumerable<BidHistory.BidItem> Bids,
-    PlayerId CheckingPlayerId,
-    PlayerId LooserPlayerId);
+    CheckingPlayer CheckingPlayerId,
+    LooserPlayer LooserPlayerId);

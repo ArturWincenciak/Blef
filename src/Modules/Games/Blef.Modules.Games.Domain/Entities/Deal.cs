@@ -11,12 +11,16 @@ internal sealed class Deal
     public DealId DealId { get; }
     private readonly IEnumerable<DealPlayer> _players;
     private readonly BidHistory _bidHistory;
+    private LooserPlayer _looserPlayer;
+    private CheckingPlayer _checkingPlayer;
 
     private Deal(DealId dealId, IEnumerable<DealPlayer> players)
     {
         DealId = dealId;
         _players = players;
         _bidHistory = new();
+        _looserPlayer = new();
+        _checkingPlayer = new();
     }
 
     public static Deal Create(DealId dealId, IEnumerable<NewDealPlayer> players) =>
@@ -37,17 +41,15 @@ internal sealed class Deal
     public LooserPlayer Check(PlayerId playerId)
     {
         // todo: ...
-        return new(playerId);
+        _checkingPlayer = new(playerId.Id);
+        _looserPlayer = new (playerId.Id);
+        return _looserPlayer;
     }
 
     public DealFlowResult GetDealFlow()
     {
         var bids = _bidHistory.GetFlow();
-
-        PlayerId checkingPlayerId = null;
-        PlayerId looserPlayerId = null;
-
-        return new DealFlowResult(_players, bids, checkingPlayerId, looserPlayerId);
+        return new DealFlowResult(_players, bids, _checkingPlayer, _looserPlayer);
     }
 
     private static IEnumerable<DealPlayer> CreatePlayers(IEnumerable<NewDealPlayer> players) =>
