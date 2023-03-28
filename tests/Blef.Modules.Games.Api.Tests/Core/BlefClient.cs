@@ -1,9 +1,8 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
-using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Microsoft.AspNetCore.Mvc;
+using DealNumber = Blef.Modules.Games.Api.Tests.Core.ValueObjects.DealNumber;
 using GameId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.GameId;
 using PlayerId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.PlayerId;
 
@@ -49,32 +48,32 @@ internal sealed class BlefClient
     async internal Task<NewDeal.Result> Deal(WhichPlayer whichPlayer) =>
         await _httpClient.NewDeal(_gameId, GetPlayerId(whichPlayer));
 
-    async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, Deal deal)
+    async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, DealNumber deal)
     {
         var playerId = GetPlayerId(whichPlayer);
         return await _httpClient.GetCards(_gameId, deal, playerId);
     }
 
-    async internal Task Bid(WhichPlayer whichPlayer, Deal deal, string bid)
+    async internal Task Bid(WhichPlayer whichPlayer, DealNumber deal, string bid)
     {
         var playerId = GetPlayerId(whichPlayer);
         await _httpClient.BidWithSuccess(_gameId, deal, playerId, bid);
     }
 
-    async internal Task<ProblemDetails> BidWithRuleViolation(WhichPlayer whichPlayer, Deal deal, string bid)
+    async internal Task<ProblemDetails> BidWithRuleViolation(WhichPlayer whichPlayer, DealNumber deal, string bid)
     {
         // todo: use in test cases
         var playerId = GetPlayerId(whichPlayer);
         return await _httpClient.BidWithRuleViolation(_gameId, deal, playerId, bid);
     }
 
-    async internal Task Check(WhichPlayer whichPlayer, Deal deal)
+    async internal Task Check(WhichPlayer whichPlayer, DealNumber deal)
     {
         var playerId = GetPlayerId(whichPlayer);
         await _httpClient.CheckWithSuccess(_gameId, deal, playerId);
     }
 
-    async internal Task<ProblemDetails> CheckWithRuleViolation(WhichPlayer whichPlayer, Deal deal)
+    async internal Task<ProblemDetails> CheckWithRuleViolation(WhichPlayer whichPlayer, DealNumber deal)
     {
         // todo: use in test cases
         var playerId = GetPlayerId(whichPlayer);

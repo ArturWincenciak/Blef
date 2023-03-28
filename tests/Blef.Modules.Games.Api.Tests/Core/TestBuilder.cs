@@ -1,5 +1,5 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
+using DealNumber = Blef.Modules.Games.Api.Tests.Core.ValueObjects.DealNumber;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -80,7 +80,7 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder GetCards(WhichPlayer whichPlayer, Deal deal)
+    internal TestBuilder GetCards(WhichPlayer whichPlayer, DealNumber deal)
     {
         _actions.Add(async () =>
         {
@@ -91,7 +91,7 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder Bid(WhichPlayer whichPlayer, Deal deal, string bid)
+    internal TestBuilder Bid(WhichPlayer whichPlayer, DealNumber deal, string bid)
     {
         _actions.Add(async () =>
         {
@@ -102,7 +102,7 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder Check(WhichPlayer whichPlayer, Deal deal)
+    internal TestBuilder Check(WhichPlayer whichPlayer, DealNumber deal)
     {
         _actions.Add(async () =>
         {

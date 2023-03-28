@@ -133,7 +133,9 @@
     Action: GetCards,
     Argument: {
       whichPlayer: Knuth,
-      deal: {}
+      deal: {
+        Number: 1
+      }
     },
     Result: {
       Cards: [
@@ -149,7 +151,9 @@
     Action: GetCards,
     Argument: {
       whichPlayer: Graham,
-      deal: {}
+      deal: {
+        Number: 1
+      }
     },
     Result: {
       Cards: [
@@ -165,7 +169,9 @@
     Action: GetCards,
     Argument: {
       whichPlayer: Conway,
-      deal: {}
+      deal: {
+        Number: 1
+      }
     },
     Result: {
       Cards: [
@@ -181,7 +187,9 @@
     Action: Bid,
     Argument: {
       whichPlayer: Knuth,
-      deal: {},
+      deal: {
+        Number: 1
+      },
       bid: high-card:nine
     },
     Result: {
@@ -193,7 +201,9 @@
     Action: Bid,
     Argument: {
       whichPlayer: Graham,
-      deal: {},
+      deal: {
+        Number: 1
+      },
       bid: high-card:ten
     },
     Result: {
@@ -205,7 +215,9 @@
     Action: Bid,
     Argument: {
       whichPlayer: Conway,
-      deal: {},
+      deal: {
+        Number: 1
+      },
       bid: high-card:jack
     },
     Result: {
@@ -217,7 +229,9 @@
     Action: Check,
     Argument: {
       whichPlayer: Knuth,
-      deal: {}
+      deal: {
+        Number: 1
+      }
     },
     Result: {
       Status: OK
