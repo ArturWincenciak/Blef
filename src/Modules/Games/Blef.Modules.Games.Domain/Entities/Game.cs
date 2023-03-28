@@ -83,7 +83,7 @@ internal sealed class Game
     {
         var deal = GetDeal(dealNumber);
         var lastDealLooser = deal.Check(playerId);
-        var gamePlayer = _players.Single(p => p.PlayerId.Equals(lastDealLooser.PlayerId));
+        var gamePlayer = _players.Single(p => p.PlayerId.Id.Equals(lastDealLooser.PlayerId));
         gamePlayer.OnLostLastDeal();
     }
 

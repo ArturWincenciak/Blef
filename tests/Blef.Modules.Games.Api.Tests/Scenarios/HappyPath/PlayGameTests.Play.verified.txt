@@ -104,9 +104,7 @@
             }
           ]
         }
-      ],
-      CheckingPlayerId: Guid_5,
-      LooserPlayerId: Guid_6
+      ]
     }
   },
   {
@@ -278,8 +276,8 @@
           PokerHand: high-card:jack
         }
       ],
-      CheckingPlayerId: Guid_7,
-      LooserPlayerId: Guid_8
+      CheckingPlayerId: Guid_2,
+      LooserPlayerId: Guid_2
     }
   },
   {
