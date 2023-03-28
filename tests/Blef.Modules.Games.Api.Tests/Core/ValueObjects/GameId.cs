@@ -1,8 +1,8 @@
 ﻿namespace Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 
-internal class GameId
+internal sealed record GameId
 {
-    internal Guid Id { get; }
+    public Guid Id { get; }
 
     public GameId(Guid id)
     {
