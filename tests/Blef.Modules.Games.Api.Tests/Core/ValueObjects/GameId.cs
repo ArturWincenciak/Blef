@@ -6,8 +6,8 @@ internal sealed record GameId
 
     public GameId(Guid id)
     {
-        if (id == Guid.Empty) // todo: better exception
-            throw new Exception("Invalid game ID");
+        if (id == Guid.Empty) // todo: exception
+            throw new Exception("TBD");
 
         Id = id;
     }

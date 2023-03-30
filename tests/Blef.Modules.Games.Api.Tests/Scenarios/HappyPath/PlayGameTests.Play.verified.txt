@@ -81,8 +81,8 @@
           PlayerId: Guid_2,
           Cards: [
             {
-              FaceCard: Ace,
-              Suit: Clubs
+              FaceCard: Queen,
+              Suit: Diamonds
             }
           ]
         },
@@ -91,7 +91,7 @@
           Cards: [
             {
               FaceCard: Ace,
-              Suit: Clubs
+              Suit: Diamonds
             }
           ]
         },
@@ -99,8 +99,8 @@
           PlayerId: Guid_4,
           Cards: [
             {
-              FaceCard: Ace,
-              Suit: Clubs
+              FaceCard: Nine,
+              Suit: Hearts
             }
           ]
         }
@@ -140,8 +140,8 @@
     Result: {
       Cards: [
         {
-          FaceCard: Ace,
-          Suit: Clubs
+          FaceCard: Jack,
+          Suit: Spades
         }
       ]
     }
@@ -158,8 +158,8 @@
     Result: {
       Cards: [
         {
-          FaceCard: Ace,
-          Suit: Clubs
+          FaceCard: Ten,
+          Suit: Spades
         }
       ]
     }
@@ -176,8 +176,8 @@
     Result: {
       Cards: [
         {
-          FaceCard: Ace,
-          Suit: Clubs
+          FaceCard: Queen,
+          Suit: Hearts
         }
       ]
     }
@@ -249,8 +249,12 @@
           PlayerId: Guid_2,
           Cards: [
             {
-              FaceCard: Ace,
-              Suit: Clubs
+              FaceCard: Nine,
+              Suit: Spades
+            },
+            {
+              FaceCard: King,
+              Suit: Hearts
             }
           ]
         },
@@ -258,8 +262,8 @@
           PlayerId: Guid_3,
           Cards: [
             {
-              FaceCard: Ace,
-              Suit: Clubs
+              FaceCard: King,
+              Suit: Hearts
             }
           ]
         },
@@ -267,8 +271,8 @@
           PlayerId: Guid_4,
           Cards: [
             {
-              FaceCard: Ace,
-              Suit: Clubs
+              FaceCard: Nine,
+              Suit: Diamonds
             }
           ]
         }

@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,5 +13,6 @@ internal static class Extensions
 {
     internal static void AddDomain(this IServiceCollection services) =>
         services
-            .AddSingleton<RandomnessProvider>();
+            .AddScoped<Croupier>()
+            .AddScoped<IDeckFactory, ShuffledDeckFactory>();
 }

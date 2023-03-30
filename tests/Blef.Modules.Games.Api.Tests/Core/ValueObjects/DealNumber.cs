@@ -6,8 +6,8 @@ internal sealed record DealNumber
 
     public DealNumber(int number)
     {
-        if (number < 1) // todo: better exception
-            throw new Exception("Invalid deal number");
+        if (number < 1) // todo: exception
+            throw new Exception("TBD");
 
         Number = number;
     }

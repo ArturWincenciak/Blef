@@ -2,4 +2,4 @@
 
 namespace Blef.Modules.Games.Domain.ValueObjects;
 
-internal sealed record NewDealPlayer(PlayerId PlayerId, CardsAmount CardsAmount);
+internal sealed record NextDealPlayer(PlayerId PlayerId, CardsAmount CardsAmount);
