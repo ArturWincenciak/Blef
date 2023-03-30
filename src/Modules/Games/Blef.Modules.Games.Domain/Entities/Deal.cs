@@ -8,13 +8,13 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Deal
 {
-    public DealId DealId { get; }
-    private readonly IEnumerable<DealPlayer> _players;
     private readonly BidHistory _bidHistory;
+    private readonly IEnumerable<DealPlayer> _players;
 
     private PokerHand _bid;
-    private LooserPlayer _looserPlayer;
     private CheckingPlayer _checkingPlayer;
+    private LooserPlayer _looserPlayer;
+    public DealId DealId { get; }
 
     public Deal(DealId dealId, IEnumerable<DealPlayer> players)
     {
@@ -22,9 +22,9 @@ internal sealed class Deal
         // todo: validate if here are not more then four players
         DealId = dealId;
         _players = players;
-        _bidHistory = new();
-        _looserPlayer = new();
-        _checkingPlayer = new();
+        _bidHistory = new BidHistory();
+        _looserPlayer = new LooserPlayer();
+        _checkingPlayer = new CheckingPlayer();
     }
 
     public IEnumerable<Card> GetCards(PlayerId playerId)
@@ -43,8 +43,8 @@ internal sealed class Deal
     public LooserPlayer Check(PlayerId playerId)
     {
         // todo: check if last bid exists in all player hands
-        _checkingPlayer = new(playerId.Id);
-        _looserPlayer = new (playerId.Id);
+        _checkingPlayer = new CheckingPlayer(playerId.Id);
+        _looserPlayer = new LooserPlayer(playerId.Id);
         return _looserPlayer;
     }
 

@@ -9,7 +9,7 @@ public class PlayGameTests
     [Fact]
     public Task Play()
     {
-         var results = new TestBuilder()
+        var results = new TestBuilder()
             .NewGame()
             .GetGameFlow()
             .JoinPlayer(WhichPlayer.Knuth)
@@ -17,19 +17,19 @@ public class PlayGameTests
             .JoinPlayer(WhichPlayer.Conway)
             .GetGameFlow()
             .NewDeal(WhichPlayer.Knuth)
-            .GetDealFlow(new (1))
+            .GetDealFlow(new DealNumber(1))
             .GetGameFlow()
-            .GetCards(WhichPlayer.Knuth, deal: new(1))
-            .GetCards(WhichPlayer.Graham, deal: new(1))
-            .GetCards(WhichPlayer.Conway, deal: new(1))
-            .Bid(WhichPlayer.Knuth, deal: new(1), PokerHand.HighCard.Nine)
-            .Bid(WhichPlayer.Graham, deal: new(1), PokerHand.HighCard.Ten)
-            .Bid(WhichPlayer.Conway, deal: new(1), PokerHand.HighCard.Jack)
-            .Check(WhichPlayer.Knuth, deal: new(1))
-            .GetDealFlow(deal: new(1))
+            .GetCards(WhichPlayer.Knuth, deal: new DealNumber(1))
+            .GetCards(WhichPlayer.Graham, deal: new DealNumber(1))
+            .GetCards(WhichPlayer.Conway, deal: new DealNumber(1))
+            .Bid(WhichPlayer.Knuth, deal: new DealNumber(1), PokerHand.HighCard.Nine)
+            .Bid(WhichPlayer.Graham, deal: new DealNumber(1), PokerHand.HighCard.Ten)
+            .Bid(WhichPlayer.Conway, deal: new DealNumber(1), PokerHand.HighCard.Jack)
+            .Check(WhichPlayer.Knuth, deal: new DealNumber(1))
+            .GetDealFlow(deal: new DealNumber(1))
             .GetGameFlow()
             .Build();
 
-         return Verify(results);
+        return Verify(results);
     }
 }

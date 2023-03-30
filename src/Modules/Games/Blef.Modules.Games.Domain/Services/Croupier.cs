@@ -16,6 +16,6 @@ internal sealed class Croupier
                 return new DealPlayer(player.PlayerId, cards);
             });
 
-        return new(dealId, players);
+        return new Deal(dealId, players);
     }
 }

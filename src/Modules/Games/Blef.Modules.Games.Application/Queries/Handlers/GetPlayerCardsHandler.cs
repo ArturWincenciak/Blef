@@ -1,5 +1,4 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
-using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;

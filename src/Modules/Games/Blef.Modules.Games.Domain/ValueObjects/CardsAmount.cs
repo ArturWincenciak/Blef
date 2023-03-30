@@ -5,24 +5,26 @@ internal sealed class CardsAmount
     private const int INITIAL_CARDS_AMOUNT = 1;
     public const int MAX_CARDS_AMOUNT = 5;
 
-    public int Value { get; private set; }
+    public int Amount { get; private set; }
 
-    public CardsAmount(int value = INITIAL_CARDS_AMOUNT)
+    public static CardsAmount Initial => new(amount: 1);
+
+    public CardsAmount(int amount)
     {
-        if (value < INITIAL_CARDS_AMOUNT) // todo: exception
+        if (amount < INITIAL_CARDS_AMOUNT) // todo: exception
             throw new Exception("TBD");
 
-        if (Value > MAX_CARDS_AMOUNT) // todo: exception
+        if (Amount > MAX_CARDS_AMOUNT) // todo: exception
             throw new Exception("TBD");
 
-        Value = value;
+        Amount = amount;
     }
 
     public void AddOneCard()
     {
-        if (Value == MAX_CARDS_AMOUNT) // todo: exception
+        if (Amount == MAX_CARDS_AMOUNT) // todo: exception
             throw new Exception("TBD");
 
-        Value++;
+        Amount++;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Shared.Abstractions.Commands;
 using JetBrains.Annotations;
 
@@ -15,7 +16,7 @@ internal sealed class JoinGameHandler : ICommandHandler<JoinGame, JoinGame.Resul
     public async Task<JoinGame.Result> Handle(JoinGame command, CancellationToken cancellation)
     {
         var game = _games.Get(command.GameId);
-        var player = game.Join(new (command.Nick));
+        var player = game.Join(new PlayerNick(command.Nick));
         return new JoinGame.Result(player.PlayerId.Id, player.Nick.Nick);
     }
 }
