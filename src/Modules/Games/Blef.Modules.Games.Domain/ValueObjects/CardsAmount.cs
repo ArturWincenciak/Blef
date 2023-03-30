@@ -9,7 +9,7 @@ internal sealed class CardsAmount
 
     public static CardsAmount Initial => new(amount: 1);
 
-    public CardsAmount(int amount)
+    private CardsAmount(int amount)
     {
         if (amount < INITIAL_CARDS_AMOUNT) // todo: exception
             throw new Exception("TBD");
