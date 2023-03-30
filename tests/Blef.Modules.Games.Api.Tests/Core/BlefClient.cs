@@ -1,10 +1,8 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
-using DealNumber = Blef.Modules.Games.Api.Tests.Core.ValueObjects.DealNumber;
-using GameId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.GameId;
-using PlayerId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.PlayerId;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -12,9 +10,9 @@ internal sealed class BlefClient
 {
     private readonly HttpClient _httpClient;
 
-    private GameId _gameId;
-
     private PlayerId _conwayPlayerId;
+
+    private GameId _gameId;
     private PlayerId _grahamPlayerId;
     private PlayerId _knuthPlayerId;
     private PlayerId _riemannPlayerId;
@@ -28,7 +26,7 @@ internal sealed class BlefClient
     async internal Task<NewGame.Result> NewGame()
     {
         var game = await _httpClient.NewGame();
-        _gameId = new (game.GameId);
+        _gameId = new GameId(game.GameId);
         return game;
     }
 
@@ -40,13 +38,13 @@ internal sealed class BlefClient
 
     async internal Task<JoinGame.Result> JoinPlayer(WhichPlayer whichPlayer)
     {
-        var player = await _httpClient.JoinPlayer(_gameId, nick: new (whichPlayer.ToString()));
-        SetPlayerId(whichPlayer, new(player.PlayerId));
+        var player = await _httpClient.JoinPlayer(_gameId, nick: new PlayerNick(whichPlayer.ToString()));
+        SetPlayerId(whichPlayer, playerId: new PlayerId(player.PlayerId));
         return player;
     }
 
     async internal Task<NewDeal.Result> Deal(WhichPlayer whichPlayer) =>
-        await _httpClient.NewDeal(_gameId, GetPlayerId(whichPlayer));
+        await _httpClient.NewDeal(_gameId, playerId: GetPlayerId(whichPlayer));
 
     async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, DealNumber deal)
     {

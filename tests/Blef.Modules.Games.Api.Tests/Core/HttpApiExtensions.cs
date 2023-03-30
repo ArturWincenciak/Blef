@@ -1,18 +1,19 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 using Xunit.Sdk;
-using DealNumber = Blef.Modules.Games.Api.Tests.Core.ValueObjects.DealNumber;
-using GameId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.GameId;
-using PlayerId = Blef.Modules.Games.Api.Tests.Core.ValueObjects.PlayerId;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal static class HttpApiExtensions
 {
+    private static string GamesUri =>
+        "games-module/games";
+
     async internal static Task<NewGame.Result> NewGame(this HttpClient client)
     {
         var response = await client.PostAsync(GamesUri, content: null);
@@ -24,7 +25,10 @@ internal static class HttpApiExtensions
     {
         var response = await client.PostAsJsonAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players",
-            value: new {Nick = nick.Nick});
+            value: new
+            {
+                nick.Nick
+            });
         response.EnsureSuccessStatusCode();
         return (await response.Content.ReadFromJsonAsync<JoinGame.Result>())!;
     }
@@ -38,7 +42,8 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<NewDeal.Result>())!;
     }
 
-    async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client, GameId gameId, DealNumber deal, PlayerId playerId)
+    async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client, GameId gameId, DealNumber deal,
+        PlayerId playerId)
     {
         var response = await client.GetAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/cards");
@@ -46,7 +51,8 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<GetPlayerCards.Result>())!;
     }
 
-    async internal static Task BidWithSuccess(this HttpClient client, GameId gameId, DealNumber deal, PlayerId playerId, string bid)
+    async internal static Task BidWithSuccess(this HttpClient client, GameId gameId, DealNumber deal, PlayerId playerId,
+        string bid)
     {
         var response = await Bid(client, gameId, deal, playerId, bid);
         response.EnsureSuccessStatusCode();
@@ -65,7 +71,8 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
     }
 
-    private async static Task<HttpResponseMessage> Bid(HttpClient client, GameId gameId, DealNumber deal, PlayerId playerId, string bid) =>
+    private async static Task<HttpResponseMessage> Bid(HttpClient client, GameId gameId, DealNumber deal,
+        PlayerId playerId, string bid) =>
         await client.PostAsJsonAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/bids",
             value: new {PokerHand = bid});
@@ -77,14 +84,16 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<GetGameFlow.Result>())!;
     }
 
-    async internal static Task<GetDealFlow.Result> GetDealFlow(this HttpClient client, GameId gameId, DealNumber dealNumber)
+    async internal static Task<GetDealFlow.Result> GetDealFlow(this HttpClient client, GameId gameId,
+        DealNumber dealNumber)
     {
         var response = await client.GetAsync($"{GamesUri}/{gameId.Id}/deals/{dealNumber.Number}");
         response.EnsureSuccessStatusCode();
         return (await response.Content.ReadFromJsonAsync<GetDealFlow.Result>())!;
     }
 
-    async internal static Task CheckWithSuccess(this HttpClient client, GameId gameId, DealNumber deal, PlayerId playerId)
+    async internal static Task CheckWithSuccess(this HttpClient client, GameId gameId, DealNumber deal,
+        PlayerId playerId)
     {
         var response = await client.PostAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/checks", content: null);
@@ -104,7 +113,4 @@ internal static class HttpApiExtensions
 
         return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
     }
-
-    private static string GamesUri =>
-        "games-module/games";
 }

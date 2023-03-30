@@ -5,12 +5,11 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class GamePlayer
 {
+    private bool _isOutOfTheGame;
     public PlayerId PlayerId { get; }
     public PlayerNick Nick { get; }
     public CardsAmount CardsAmount { get; }
     public bool IsInTheGame => !_isOutOfTheGame;
-
-    private bool _isOutOfTheGame;
 
     private GamePlayer(PlayerId playerId, PlayerNick nick, CardsAmount cardsAmount)
     {
@@ -21,14 +20,14 @@ internal sealed class GamePlayer
     }
 
     public static GamePlayer Create(PlayerNick nick) =>
-        new (new(Guid.NewGuid()), nick, new CardsAmount());
+        new(playerId: new PlayerId(Guid.NewGuid()), nick, CardsAmount.Initial);
 
     public void OnLostLastDeal()
     {
         if (_isOutOfTheGame) // todo: exception
             throw new Exception("TBD");
 
-        if (CardsAmount.Value < CardsAmount.MAX_CARDS_AMOUNT)
+        if (CardsAmount.Amount < CardsAmount.MAX_CARDS_AMOUNT)
             CardsAmount.AddOneCard();
         else
             _isOutOfTheGame = true;

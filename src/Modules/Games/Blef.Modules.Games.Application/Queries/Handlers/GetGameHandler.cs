@@ -21,5 +21,5 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
     }
 
     private GetGameFlow.Result Map(GameFlowResult gameFlow) =>
-        new (gameFlow.Players.Select(p => new GetGameFlow.Player(p.PlayerId.Id, p.Nick.Nick)));
+        new(gameFlow.Players.Select(p => new GetGameFlow.Player(p.PlayerId.Id, p.Nick.Nick)));
 }

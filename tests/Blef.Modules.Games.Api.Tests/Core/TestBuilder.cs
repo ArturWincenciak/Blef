@@ -1,16 +1,14 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
-using DealNumber = Blef.Modules.Games.Api.Tests.Core.ValueObjects.DealNumber;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal sealed class TestBuilder
 {
-    private readonly TestRecorder _testResult = new();
-    private readonly List<Func<Task>> _actions = new();
-    private BlefClient _gameClient = null!;
-
     private static string NoArgument = nameof(NoArgument);
-    private static TestRecorder.EmptyCommandResult Success = new ("OK");
+    private readonly static TestRecorder.EmptyCommandResult Success = new("OK");
+    private readonly List<Func<Task>> _actions = new();
+    private readonly TestRecorder _testResult = new();
+    private BlefClient _gameClient = null!;
 
     async internal Task<IEnumerable<TestRecorder.TestResult>> Build()
     {
@@ -30,7 +28,7 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var game = await _gameClient.NewGame();
-            _testResult.Record(nameof(NewGame), NoArgument, game);
+            _testResult.Record(action: nameof(NewGame), NoArgument, game);
         });
 
         return this;
@@ -41,7 +39,7 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var gameFlow = await _gameClient.GetGameFlow();
-            _testResult.Record(nameof(GetGameFlow), NoArgument, gameFlow);
+            _testResult.Record(action: nameof(GetGameFlow), NoArgument, gameFlow);
         });
 
         return this;
@@ -52,7 +50,7 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var dealFlow = await _gameClient.GetDealFlow(deal);
-            _testResult.Record(nameof(GetDealFlow), deal, dealFlow);
+            _testResult.Record(action: nameof(GetDealFlow), deal, dealFlow);
         });
 
         return this;
@@ -63,7 +61,7 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var player = await _gameClient.JoinPlayer(whichPlayer);
-            _testResult.Record(nameof(JoinPlayer), whichPlayer, player);
+            _testResult.Record(action: nameof(JoinPlayer), whichPlayer, player);
         });
 
         return this;
@@ -74,7 +72,7 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var deal = await _gameClient.Deal(whichPlayer);
-            _testResult.Record(nameof(NewDeal), whichPlayer, deal);
+            _testResult.Record(action: nameof(NewDeal), whichPlayer, deal);
         });
 
         return this;
@@ -85,7 +83,7 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var cards = await _gameClient.GetCards(whichPlayer, deal);
-            _testResult.Record(nameof(GetCards), new { whichPlayer, deal }, cards);
+            _testResult.Record(action: nameof(GetCards), argument: new {whichPlayer, deal}, cards);
         });
 
         return this;
@@ -95,8 +93,8 @@ internal sealed class TestBuilder
     {
         _actions.Add(async () =>
         {
-             await _gameClient.Bid(whichPlayer, deal, bid);
-             _testResult.Record(nameof(Bid), new { whichPlayer, deal, bid }, Success);
+            await _gameClient.Bid(whichPlayer, deal, bid);
+            _testResult.Record(action: nameof(Bid), argument: new {whichPlayer, deal, bid}, Success);
         });
 
         return this;
@@ -107,7 +105,7 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             await _gameClient.Check(whichPlayer, deal);
-            _testResult.Record(nameof(Check), new { whichPlayer, deal }, Success);
+            _testResult.Record(action: nameof(Check), argument: new {whichPlayer, deal}, Success);
         });
 
         return this;

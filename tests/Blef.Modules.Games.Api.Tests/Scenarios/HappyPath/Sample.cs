@@ -30,7 +30,7 @@ public static class ClassBeingTested
         };
 }
 
-public record Person()
+public record Person
 {
     public string Idx { get; set; }
     public string Idy { get; set; }

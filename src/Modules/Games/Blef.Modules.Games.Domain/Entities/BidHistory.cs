@@ -5,11 +5,11 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal class BidHistory
 {
-    private int _bidNumber;
     private readonly List<BidItem> _flow = new();
+    private int _bidNumber;
 
     public void OnBid(PlayerId playerId, PokerHand pokerHand) =>
-        _flow.Add(new (++_bidNumber, playerId, pokerHand));
+        _flow.Add(new BidItem(++_bidNumber, playerId, pokerHand));
 
     public IEnumerable<BidItem> GetFlow() =>
         _flow;

@@ -8,9 +8,9 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 [UsedImplicitly]
 internal sealed class NewDealHandler : ICommandHandler<NewDeal, NewDeal.Result>
 {
-    private readonly IGamesRepository _games;
-    private readonly IDeckFactory _deckFactory;
     private readonly Croupier _croupier;
+    private readonly IDeckFactory _deckFactory;
+    private readonly IGamesRepository _games;
 
     public NewDealHandler(IGamesRepository games, Croupier croupier, IDeckFactory deckFactory)
     {

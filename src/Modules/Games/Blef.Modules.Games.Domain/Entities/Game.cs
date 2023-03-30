@@ -10,19 +10,18 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Game
 {
-    public GameId Id { get; }
-
     private const int MAX_NUMBER_OF_PLAYERS = 4;
     private const int MIN_NUMBER_OF_PLAYERS = 2;
+    private readonly List<Deal> _deals = new();
 
     private readonly List<GamePlayer> _players = new();
-    private readonly List<Deal> _deals = new();
+    public GameId Id { get; }
 
     private Game(GameId id) =>
         Id = id ?? throw new ArgumentNullException(nameof(id));
 
     public static Game Create() =>
-        new(id: new(Guid.NewGuid()));
+        new(id: new GameId(Guid.NewGuid()));
 
     public GamePlayer Join(PlayerNick nick)
     {
@@ -52,7 +51,7 @@ internal sealed class Game
         // todo: parametrize players in new deal based on last deal (number of cards)
 
         var nextDealNumber = _deals.Count + 1;
-        var dealId = new DealId(Id, new (nextDealNumber));
+        var dealId = new DealId(Id, Number: new DealNumber(nextDealNumber));
         var nextDealPlayers = _players
             .Where(p => p.IsInTheGame)
             .Select(p => new NextDealPlayer(p.PlayerId, p.CardsAmount));
@@ -98,5 +97,5 @@ internal sealed class Game
     }
 
     public GameFlowResult GetGameFlow() =>
-        new GameFlowResult(_players);
+        new(_players);
 }
