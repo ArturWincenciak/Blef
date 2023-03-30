@@ -11,20 +11,21 @@ internal sealed class Deal
     public DealId DealId { get; }
     private readonly IEnumerable<DealPlayer> _players;
     private readonly BidHistory _bidHistory;
+
+    private PokerHand _bid;
     private LooserPlayer _looserPlayer;
     private CheckingPlayer _checkingPlayer;
 
-    private Deal(DealId dealId, IEnumerable<DealPlayer> players)
+    public Deal(DealId dealId, IEnumerable<DealPlayer> players)
     {
+        // todo: validate if here are at least two players
+        // todo: validate if here are not more then four players
         DealId = dealId;
         _players = players;
         _bidHistory = new();
         _looserPlayer = new();
         _checkingPlayer = new();
     }
-
-    public static Deal Create(DealId dealId, IEnumerable<NewDealPlayer> players) =>
-        new(dealId, CreatePlayers(players));
 
     public IEnumerable<Card> GetCards(PlayerId playerId)
     {
@@ -34,13 +35,14 @@ internal sealed class Deal
 
     public void Bid(PlayerId playerId, PokerHand bid)
     {
-        // todo ...
+        // todo: check if new bid is higher then last bid
+        _bid = bid;
         _bidHistory.OnBid(playerId, bid);
     }
 
     public LooserPlayer Check(PlayerId playerId)
     {
-        // todo: ...
+        // todo: check if last bid exists in all player hands
         _checkingPlayer = new(playerId.Id);
         _looserPlayer = new (playerId.Id);
         return _looserPlayer;
@@ -50,21 +52,5 @@ internal sealed class Deal
     {
         var bids = _bidHistory.GetFlow();
         return new DealFlowResult(_players, bids, _checkingPlayer, _looserPlayer);
-    }
-
-    private static IEnumerable<DealPlayer> CreatePlayers(IEnumerable<NewDealPlayer> players) =>
-        players.Select(CreatePlayer);
-
-    private static DealPlayer CreatePlayer(NewDealPlayer p) =>
-        new(p.PlayerId, DealCards(p.CardsAmount));
-
-    private static IEnumerable<Card> DealCards(CardsAmount cardsAmount)
-    {
-        // todo: add number of cards parameter based on previous game
-        // todo: randomise cards
-        return new[]
-        {
-            new Card(FaceCard.Ace, Suit.Clubs)
-        };
     }
 }

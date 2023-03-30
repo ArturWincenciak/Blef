@@ -15,4 +15,4 @@ internal sealed class GameIsAlreadyOverException : BlefException
     }
 }
 
-//todo: create deal is already over exception
+// todo: create deal is already over exception

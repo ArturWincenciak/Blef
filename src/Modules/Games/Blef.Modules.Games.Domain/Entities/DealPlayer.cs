@@ -12,6 +12,10 @@ internal sealed class DealPlayer
 
     public DealPlayer(PlayerId id, IEnumerable<Card> cards)
     {
+        // todo: validate if all cards are unique
+        // todo: validate if player has at least one card
+        // todo: validate if player has no more five cards
+
         Id = id;
         _cards = cards;
     }

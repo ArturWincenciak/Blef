@@ -8,29 +8,29 @@ internal sealed class GamePlayer
     public PlayerId PlayerId { get; }
     public PlayerNick Nick { get; }
     public CardsAmount CardsAmount { get; }
-    public bool IsOutOfTheGame { get; private set; }
-    public bool IsInTheGame => !IsOutOfTheGame;
+    public bool IsInTheGame => !_isOutOfTheGame;
 
+    private bool _isOutOfTheGame;
 
-    private GamePlayer(PlayerId playerId, PlayerNick nick, CardsAmount cardsAmount, bool isOutOfTheGame)
+    private GamePlayer(PlayerId playerId, PlayerNick nick, CardsAmount cardsAmount)
     {
         PlayerId = playerId ?? throw new ArgumentNullException(nameof(playerId));
         Nick = nick ?? throw new ArgumentNullException(nameof(nick));
         CardsAmount = cardsAmount;
-        IsOutOfTheGame = isOutOfTheGame;
+        _isOutOfTheGame = false;
     }
 
     public static GamePlayer Create(PlayerNick nick) =>
-        new (new(Guid.NewGuid()), nick, new CardsAmount(), isOutOfTheGame: false);
+        new (new(Guid.NewGuid()), nick, new CardsAmount());
 
     public void OnLostLastDeal()
     {
-        if (IsOutOfTheGame)
-            throw new Exception("TODO: Define exception");
+        if (_isOutOfTheGame) // todo: exception
+            throw new Exception("TBD");
 
         if (CardsAmount.Value < CardsAmount.MAX_CARDS_AMOUNT)
             CardsAmount.AddOneCard();
         else
-            IsOutOfTheGame = true;
+            _isOutOfTheGame = true;
     }
 }
