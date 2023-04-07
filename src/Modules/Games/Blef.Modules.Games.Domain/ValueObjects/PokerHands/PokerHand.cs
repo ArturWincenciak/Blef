@@ -10,7 +10,7 @@ internal abstract class PokerHand
 {
     protected abstract int PokerHandRank { get; }
 
-    public abstract bool IsOnTable(IReadOnlyCollection<Card> table);
+    public abstract bool IsOnTable(Table table);
 
     public bool IsBetterThan(PokerHand otherPokerHand) =>
         CompareWith(otherPokerHand) > 0;

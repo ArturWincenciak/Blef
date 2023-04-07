@@ -61,13 +61,12 @@ internal sealed class Game
         return dealId;
     }
 
-    public IEnumerable<Card> GetCards(PlayerId playerId, DealNumber dealNumber)
+    public Hand GetHand(PlayerId playerId, DealNumber dealNumber)
     {
         // todo: check if user exists
         // todo: check if deal number exits
         var deal = GetDeal(dealNumber);
-        var cards = deal.GetCards(playerId);
-        return cards;
+        return deal.GetHand(playerId);
     }
 
     public void Bid(DealNumber dealNumber, Bid newBid)

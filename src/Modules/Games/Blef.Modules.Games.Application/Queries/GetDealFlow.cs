@@ -17,7 +17,7 @@ public sealed record GetDealFlow(GameId GameId, DealNumber DealNumber) : IQuery<
     public sealed record DealBid(int Order, Guid PlayerId, string PokerHand);
 
     [UsedImplicitly]
-    public sealed record Player(Guid PlayerId, IEnumerable<Card> Cards);
+    public sealed record Player(Guid PlayerId, IEnumerable<Card> Hand);
 
     [UsedImplicitly]
     public sealed record Card(string FaceCard, string Suit);

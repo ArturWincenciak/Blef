@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
@@ -16,13 +17,13 @@ internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetP
     public async Task<GetPlayerCards.Result> Handle(GetPlayerCards query, CancellationToken cancellation)
     {
         var game = _games.Get(query.GameId);
-        var cards = game.GetCards(query.PlayerId, query.DealNumber);
+        var cards = game.GetHand(query.PlayerId, query.DealNumber);
         var result = Map(cards);
         return new GetPlayerCards.Result(result);
     }
 
-    private static GetPlayerCards.Card[] Map(IEnumerable<Card> cards) =>
-        cards.Select(Map).ToArray();
+    private static GetPlayerCards.Card[] Map(Hand hand) =>
+        hand.Cards.Select(Map).ToArray();
 
     private static GetPlayerCards.Card Map(Card card) =>
         new(FaceCard: card.FaceCard.ToString(), Suit: card.Suit.ToString());

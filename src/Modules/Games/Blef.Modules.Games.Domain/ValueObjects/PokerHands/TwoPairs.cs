@@ -19,10 +19,10 @@ internal class TwoPairs : PokerHand
         _second = second;
     }
 
-    public override bool IsOnTable(IReadOnlyCollection<Card> table)
+    public override bool IsOnTable(Table table)
     {
-        var firstFaceCardCount = table.Count(x => x.FaceCard == _first);
-        var secondFaceCardCount = table.Count(x => x.FaceCard == _second);
+        var firstFaceCardCount = table.Cards.Count(x => x.FaceCard == _first);
+        var secondFaceCardCount = table.Cards.Count(x => x.FaceCard == _second);
         return firstFaceCardCount >= 2 && secondFaceCardCount >= 2;
     }
 
