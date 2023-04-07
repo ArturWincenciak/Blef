@@ -61,9 +61,6 @@ internal sealed class Game
         return dealId;
     }
 
-    private bool IsGameStarted() =>
-        _deals.Count > 0;
-
     public IEnumerable<Card> GetCards(PlayerId playerId, DealNumber dealNumber)
     {
         // todo: check if user exists
@@ -87,9 +84,6 @@ internal sealed class Game
         gamePlayer.OnLostLastDeal();
     }
 
-    private Deal GetDeal(DealNumber dealNumber) =>
-        _deals.Single(d => d.DealId.Number.Equals(dealNumber));
-
     public DealFlowResult GetDealFlow(DealNumber dealNumber)
     {
         var deal = GetDeal(dealNumber);
@@ -98,4 +92,10 @@ internal sealed class Game
 
     public GameFlowResult GetGameFlow() =>
         new(_players);
+
+    private bool IsGameStarted() =>
+        _deals.Count > 0;
+
+    private Deal GetDeal(DealNumber dealNumber) =>
+        _deals.Single(d => d.DealId.Number.Equals(dealNumber));
 }
