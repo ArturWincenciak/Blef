@@ -70,10 +70,10 @@ internal sealed class Game
         return cards;
     }
 
-    public void Bid(DealNumber dealNumber, PlayerId playerId, PokerHand bid)
+    public void Bid(DealNumber dealNumber, Bid newBid)
     {
         var deal = GetDeal(dealNumber);
-        deal.Bid(playerId, bid);
+        deal.Bid(newBid);
     }
 
     public void Check(DealNumber dealNumber, PlayerId playerId)

@@ -29,8 +29,8 @@ internal sealed class GetDealHandler : IQueryHandler<GetDealFlow, GetDealFlow.Re
                     Suit: c.Suit.ToString())))),
             Bids: dealFlow.Bids.Select(b => new GetDealFlow.DealBid(
                 b.Order,
-                b.PlayerId.Id,
-                PokerHand: b.PokerHand.Serialize())),
+                b.Bid.Player.Id,
+                PokerHand: b.Bid.PokerHand.Serialize())),
             dealFlow.CheckingPlayerId.PlayerId,
             dealFlow.LooserPlayerId.PlayerId);
 }
