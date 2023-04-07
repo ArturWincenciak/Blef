@@ -23,8 +23,8 @@ internal sealed class GetDealHandler : IQueryHandler<GetDealFlow, GetDealFlow.Re
     private GetDealFlow.Result Map(DealFlowResult dealFlow) =>
         new(
             Players: dealFlow.Players.Select(dealPlayer => new GetDealFlow.Player(
-                dealPlayer.Id.Id,
-                Cards: dealPlayer.GetCards().Select(c => new GetDealFlow.Card(
+                dealPlayer.PlayerId.Id,
+                Cards: dealPlayer.Cards.Select(c => new GetDealFlow.Card(
                     FaceCard: c.FaceCard.ToString(),
                     Suit: c.Suit.ToString())))),
             Bids: dealFlow.Bids.Select(b => new GetDealFlow.DealBid(
