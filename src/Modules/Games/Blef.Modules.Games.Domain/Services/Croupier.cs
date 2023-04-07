@@ -6,14 +6,10 @@ namespace Blef.Modules.Games.Domain.Services;
 
 internal sealed class Croupier
 {
-    private readonly DealFactory _dealFactory;
     private readonly IDeckFactory _deckFactory;
 
-    public Croupier(DealFactory dealFactory, IDeckFactory deckFactory)
-    {
-        _dealFactory = dealFactory ?? throw new ArgumentNullException(nameof(dealFactory));
+    public Croupier(IDeckFactory deckFactory) =>
         _deckFactory = deckFactory ?? throw new ArgumentNullException(nameof(deckFactory));
-    }
 
     public Deal Deal(DealId dealId, IEnumerable<NextDealPlayer> nextDealPlayers)
     {
@@ -25,6 +21,6 @@ internal sealed class Croupier
                 return new DealPlayer(player.PlayerId, hand);
             });
 
-        return _dealFactory.Create(dealId, players);
+        return new (dealId, players);
     }
 }

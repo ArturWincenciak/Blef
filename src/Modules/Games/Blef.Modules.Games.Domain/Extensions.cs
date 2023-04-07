@@ -12,9 +12,7 @@ internal static class Extensions
 {
     internal static void AddDomain(this IServiceCollection services) =>
         services
-            .AddSingleton<Referee>()
             .AddSingleton<Croupier>()
             .AddSingleton<GameFactory>()
-            .AddSingleton<DealFactory>()
             .AddSingleton<IDeckFactory, ShuffledDeckFactory>();
 }
