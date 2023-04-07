@@ -1,5 +1,5 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core;
-using Blef.Modules.Games.Api.Tests.Core.ValueObjects;
+using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 
