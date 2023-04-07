@@ -15,4 +15,7 @@ internal sealed class Table
 
         _hands = hands ?? throw new ArgumentNullException(nameof(hands));
     }
+
+    public bool HasFaceCard(FaceCard faceCard) =>
+        Cards.Any(card => card.FaceCard == faceCard);
 }
