@@ -18,7 +18,7 @@ internal sealed class BidHandler : ICommandHandler<Bid>
     {
         var game = _games.Get(command.GameId);
         var pokerHand = Parse(command.PokerHand);
-        game.Bid(command.DealNumber, command.PlayerId, pokerHand);
+        game.Bid(command.DealNumber, new (pokerHand, command.PlayerId));
         return Task.CompletedTask;
     }
 

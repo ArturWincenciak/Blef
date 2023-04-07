@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects;
+﻿using Blef.Modules.Games.Domain.Services;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
@@ -8,20 +9,23 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Deal
 {
+    private readonly Referee _referee;
+
     private readonly BidHistory _bidHistory;
     private readonly IEnumerable<DealPlayer> _players;
 
-    private PokerHand _bid;
+    private Bid _lastBid;
     private CheckingPlayer _checkingPlayer;
     private LooserPlayer _looserPlayer;
     public DealId DealId { get; }
 
-    public Deal(DealId dealId, IEnumerable<DealPlayer> players)
+    public Deal(DealId dealId, IEnumerable<DealPlayer> players, Referee referee)
     {
         // todo: validate if here are at least two players
         // todo: validate if here are not more then four players
         DealId = dealId;
         _players = players;
+        _referee = referee;
         _bidHistory = new BidHistory();
         _looserPlayer = new LooserPlayer();
         _checkingPlayer = new CheckingPlayer();
@@ -33,18 +37,28 @@ internal sealed class Deal
         return player.GetCards();
     }
 
-    public void Bid(PlayerId playerId, PokerHand bid)
+    public void Bid(Bid newBid)
     {
-        // todo: check if new bid is higher then last bid
-        _bid = bid;
-        _bidHistory.OnBid(playerId, bid);
+        var higherBid = _referee.GetHigherBid(newBid.PokerHand, _lastBid.PokerHand);
+        var isNewBidHigher = newBid.Equals(higherBid);
+        if(isNewBidHigher == false)
+            throw new Exception("TBD"); // todo: exception
+
+        _lastBid = newBid;
+        _bidHistory.OnBid(newBid);
     }
 
-    public LooserPlayer Check(PlayerId playerId)
+    public LooserPlayer Check(PlayerId checkingPlayerId)
     {
-        // todo: check if last bid exists in all player hands
-        _checkingPlayer = new CheckingPlayer(playerId.Id);
-        _looserPlayer = new LooserPlayer(playerId.Id);
+        _checkingPlayer = new CheckingPlayer(checkingPlayerId.Id);
+
+        var allPlayersCards = _players.SelectMany(player => player.GetCards());
+        var lastBidIsInTheHandsOfPlayers = _referee.ContainsPokerHand(allPlayersCards, _lastBid.PokerHand);
+        if (lastBidIsInTheHandsOfPlayers)
+            _looserPlayer = new LooserPlayer(checkingPlayerId.Id);
+        else
+            _looserPlayer = new LooserPlayer(_lastBid.Player.Id);
+
         return _looserPlayer;
     }
 

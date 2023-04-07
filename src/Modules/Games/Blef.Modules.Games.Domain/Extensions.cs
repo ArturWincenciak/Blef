@@ -12,6 +12,7 @@ internal static class Extensions
 {
     internal static void AddDomain(this IServiceCollection services) =>
         services
+            .AddScoped<Referee>()
             .AddScoped<Croupier>()
             .AddScoped<IDeckFactory, ShuffledDeckFactory>();
 }
