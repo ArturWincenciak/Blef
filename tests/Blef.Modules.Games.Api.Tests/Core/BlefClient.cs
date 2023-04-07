@@ -20,9 +20,6 @@ internal sealed class BlefClient
     internal BlefClient(HttpClient httpClient) =>
         _httpClient = httpClient;
 
-    internal State GetState() =>
-        new(_gameId, _knuthPlayerId, _grahamPlayerId, _riemannPlayerId, _conwayPlayerId);
-
     async internal Task<NewGame.Result> NewGame()
     {
         var game = await _httpClient.NewGame();
@@ -58,24 +55,10 @@ internal sealed class BlefClient
         await _httpClient.BidWithSuccess(_gameId, deal, playerId, bid);
     }
 
-    async internal Task<ProblemDetails> BidWithRuleViolation(WhichPlayer whichPlayer, DealNumber deal, string bid)
-    {
-        // todo: use in test cases
-        var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidWithRuleViolation(_gameId, deal, playerId, bid);
-    }
-
     async internal Task Check(WhichPlayer whichPlayer, DealNumber deal)
     {
         var playerId = GetPlayerId(whichPlayer);
         await _httpClient.CheckWithSuccess(_gameId, deal, playerId);
-    }
-
-    async internal Task<ProblemDetails> CheckWithRuleViolation(WhichPlayer whichPlayer, DealNumber deal)
-    {
-        // todo: use in test cases
-        var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.CheckWithRuleViolation(_gameId, deal, playerId);
     }
 
     private PlayerId GetPlayerId(WhichPlayer whichPlayer) =>
@@ -101,11 +84,4 @@ internal sealed class BlefClient
         else
             throw new ArgumentOutOfRangeException(nameof(whichPlayer));
     }
-
-    internal record State(
-        GameId GameId,
-        PlayerId KnuthPlayerId,
-        PlayerId GrahamPlayerId,
-        PlayerId RiemannPlayerId,
-        PlayerId ConwayPlayerId);
 }
