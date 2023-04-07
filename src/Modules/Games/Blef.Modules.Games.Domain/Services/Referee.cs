@@ -11,7 +11,7 @@ internal sealed class Referee
         throw new NotImplementedException();
     }
 
-    public bool ContainsPokerHand(IEnumerable<Card> cards, PokerHand pokerHand)
+    public bool ContainsPokerHand(Table table, PokerHand pokerHand)
     {
         // todo: ...
         throw new NotImplementedException();

@@ -27,12 +27,11 @@ internal class Deck
         _cards = cards.ToList();
     }
 
-    public IEnumerable<Card> Deal(CardsAmount cardsAmount)
+    public Hand Deal(CardsAmount cardsAmount)
     {
-        // todo: get last card and remove the card form the deck
         // todo: validate if there are any cards left to be dealt
-        var dealtCards = _cards.Take(cardsAmount.Amount);
+        var hand = _cards.Take(cardsAmount.Amount);
         _cards.RemoveRange(index: 0, cardsAmount.Amount);
-        return dealtCards;
+        return new(hand);
     }
 }

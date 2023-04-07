@@ -6,15 +6,11 @@ namespace Blef.Modules.Games.Domain.ValueObjects;
 internal sealed class DealPlayer
 {
     public PlayerId PlayerId { get; }
-    public IEnumerable<Card> Cards { get; }
+    public Hand Hand { get; }
 
-    public DealPlayer(PlayerId playerId, IEnumerable<Card> cards)
+    public DealPlayer(PlayerId playerId, Hand cards)
     {
-        // todo: validate if all cards are unique
-        // todo: validate if player has at least one card
-        // todo: validate if player has no more five cards
-
         PlayerId = playerId ?? throw new ArgumentNullException(nameof(playerId));
-        Cards = cards ?? throw new ArgumentNullException(nameof(cards));
+        Hand = cards ?? throw new ArgumentNullException(nameof(cards));
     }
 }

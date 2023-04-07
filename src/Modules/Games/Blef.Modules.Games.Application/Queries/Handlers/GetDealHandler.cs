@@ -24,7 +24,7 @@ internal sealed class GetDealHandler : IQueryHandler<GetDealFlow, GetDealFlow.Re
         new(
             Players: dealFlow.Players.Select(dealPlayer => new GetDealFlow.Player(
                 dealPlayer.PlayerId.Id,
-                Cards: dealPlayer.Cards.Select(c => new GetDealFlow.Card(
+                Hand: dealPlayer.Hand.Cards.Select(c => new GetDealFlow.Card(
                     FaceCard: c.FaceCard.ToString(),
                     Suit: c.Suit.ToString())))),
             Bids: dealFlow.Bids.Select(b => new GetDealFlow.DealBid(

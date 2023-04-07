@@ -23,6 +23,7 @@ internal sealed class Deal
     {
         // todo: validate if here are at least two players
         // todo: validate if here are not more then four players
+
         DealId = dealId ?? throw new ArgumentNullException(nameof(dealId));
         _players = players ?? throw new ArgumentNullException(nameof(players));
         _referee = referee ?? throw new ArgumentNullException(nameof(referee));
@@ -31,10 +32,10 @@ internal sealed class Deal
         _checkingPlayer = new CheckingPlayer();
     }
 
-    public IEnumerable<Card> GetCards(PlayerId playerId)
+    public Hand GetHand(PlayerId playerId)
     {
         var player = _players.Single(p => p.PlayerId.Equals(playerId));
-        return player.Cards;
+        return player.Hand;
     }
 
     public void Bid(Bid newBid)
@@ -52,8 +53,8 @@ internal sealed class Deal
     {
         _checkingPlayer = new CheckingPlayer(checkingPlayerId.Id);
 
-        var allPlayersCards = _players.SelectMany(player => player.Cards);
-        var lastBidIsInTheHandsOfPlayers = _referee.ContainsPokerHand(allPlayersCards, _lastBid.PokerHand);
+        var allPlayersHands = _players.Select(player => player.Hand);
+        var lastBidIsInTheHandsOfPlayers = _referee.ContainsPokerHand(new (allPlayersHands), _lastBid.PokerHand);
         if (lastBidIsInTheHandsOfPlayers)
             _looserPlayer = new LooserPlayer(checkingPlayerId.Id);
         else

@@ -7,7 +7,7 @@ internal class LowStraight : PokerHand
     public const string Type = "low-straight";
     protected override int PokerHandRank => 4;
 
-    public override bool IsOnTable(IReadOnlyCollection<Card> table) =>
+    public override bool IsOnTable(Table table) =>
         table.HasFaceCard(FaceCard.Nine) &&
         table.HasFaceCard(FaceCard.Ten) &&
         table.HasFaceCard(FaceCard.Jack) &&
