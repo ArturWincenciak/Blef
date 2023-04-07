@@ -7,7 +7,7 @@ namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 public class PlayGameTests
 {
     [Fact]
-    public Task Play()
+    public Task ThreePlayersPlayTheGameTest()
     {
         var results = new TestBuilder()
             .NewGame()
