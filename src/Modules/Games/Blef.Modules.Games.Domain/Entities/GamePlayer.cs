@@ -15,7 +15,7 @@ internal sealed class GamePlayer
     {
         PlayerId = playerId ?? throw new ArgumentNullException(nameof(playerId));
         Nick = nick ?? throw new ArgumentNullException(nameof(nick));
-        CardsAmount = cardsAmount;
+        CardsAmount = cardsAmount ?? throw new ArgumentNullException(nameof(cardsAmount));
         _isOutOfTheGame = false;
     }
 

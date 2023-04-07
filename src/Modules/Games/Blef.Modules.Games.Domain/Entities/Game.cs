@@ -4,24 +4,25 @@ using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
-using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Game
 {
+    private readonly Croupier _croupier;
+
     private const int MAX_NUMBER_OF_PLAYERS = 4;
     private const int MIN_NUMBER_OF_PLAYERS = 2;
-    private readonly List<Deal> _deals = new();
 
+    private readonly List<Deal> _deals = new();
     private readonly List<GamePlayer> _players = new();
     public GameId Id { get; }
 
-    private Game(GameId id) =>
+    public Game(GameId id, Croupier croupier)
+    {
         Id = id ?? throw new ArgumentNullException(nameof(id));
-
-    public static Game Create() =>
-        new(id: new GameId(Guid.NewGuid()));
+        _croupier = croupier ?? throw new ArgumentNullException(nameof(croupier));
+    }
 
     public GamePlayer Join(PlayerNick nick)
     {
@@ -40,7 +41,7 @@ internal sealed class Game
         return player;
     }
 
-    public DealId NewDeal(IDeckFactory deckFactory, Croupier croupier)
+    public DealId NewDeal()
     {
         // todo: check if there is not in progress deal
         // todo: check if is that player turn to deal
@@ -55,8 +56,7 @@ internal sealed class Game
         var nextDealPlayers = _players
             .Where(p => p.IsInTheGame)
             .Select(p => new NextDealPlayer(p.PlayerId, p.CardsAmount));
-        var deck = deckFactory.Create();
-        var deal = croupier.Deal(dealId, nextDealPlayers, deck);
+        var deal = _croupier.Deal(dealId, nextDealPlayers);
         _deals.Add(deal);
         return dealId;
     }
