@@ -7,6 +7,10 @@ internal sealed class LowStraight : PokerHand
     public const string Type = "low-straight";
     protected override int PokerHandRank => 4;
 
+    private LowStraight() { }
+
+    public static LowStraight Create() => new();
+
     public override bool IsOnTable(Table table) =>
         table.Contains(FaceCard.Nine) &&
         table.Contains(FaceCard.Ten) &&
