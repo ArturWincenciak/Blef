@@ -9,20 +9,18 @@ internal sealed class Pair : PokerHand
 
     protected override int PokerHandRank => 2;
 
-    public Pair(FaceCard faceCard)
-    {
-        if (faceCard is FaceCard.None) // todo: exception
-            throw new ArgumentException("TBD");
-
+    private Pair(FaceCard faceCard) =>
         _faceCard = faceCard;
-    }
 
     public override bool IsOnTable(Table table) =>
         table.Count(_faceCard) >= 2;
 
     protected override int GetInnerRank() =>
-        (int) _faceCard;
+        _faceCard.GetRank();
 
     public override string Serialize() =>
         $"{Type}:{_faceCard.ToString().ToLower()}";
+
+    public static PokerHand Deserialize(string faceCard) =>
+        new Pair(FaceCard.Create(faceCard));
 }

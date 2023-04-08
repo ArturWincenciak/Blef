@@ -9,20 +9,18 @@ internal class HighCard : PokerHand
 
     protected override int PokerHandRank => 1;
 
-    public HighCard(FaceCard faceCard)
-    {
-        if (faceCard is FaceCard.None) // todo: exception
-            throw new ArgumentException("TOB");
-
+    private HighCard(FaceCard faceCard) =>
         _faceCard = faceCard;
-    }
 
     public override bool IsOnTable(Table table) =>
         table.Contains(_faceCard);
 
     protected override int GetInnerRank() =>
-        (int) _faceCard;
+        _faceCard.GetRank();
 
     public override string Serialize() =>
         $"{Type}:{_faceCard.ToString().ToLower()}";
+
+    public static PokerHand Deserialize(string faceCard) =>
+        new HighCard(FaceCard.Create(faceCard));
 }

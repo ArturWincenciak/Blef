@@ -10,14 +10,8 @@ internal sealed class TwoPairs : PokerHand
 
     protected override int PokerHandRank => 3;
 
-    public TwoPairs(FaceCard first, FaceCard second)
+    private TwoPairs(FaceCard first, FaceCard second)
     {
-        if (first is FaceCard.None) // todo: exception
-            throw new ArgumentException("TOB");
-
-        if (second is FaceCard.None) // todo: exception
-            throw new ArgumentException("TBD");
-
         if (first == second) // todo: exception
             throw new ArgumentException("TBD");
 
@@ -34,8 +28,14 @@ internal sealed class TwoPairs : PokerHand
     }
 
     protected override int GetInnerRank() =>
-        (10 * (int) _higher) + (int) _lower;
+        (10 * _higher.GetRank()) + _lower.GetRank();
 
     public override string Serialize() =>
         $"{Type}:{_higher.ToString().ToLower()},{_lower.ToString().ToLower()}";
+
+    public static PokerHand Deserialize(string pokerHand)
+    {
+        var faceCardParts = pokerHand.Split(",");
+        return new TwoPairs(first: FaceCard.Create(faceCardParts[0]), FaceCard.Create(faceCardParts[0]));
+    }
 }
