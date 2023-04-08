@@ -9,8 +9,13 @@ internal class HighCard : PokerHand
 
     protected override int PokerHandRank => 1;
 
-    public HighCard(FaceCard faceCard) =>
+    public HighCard(FaceCard faceCard)
+    {
+        if (faceCard is FaceCard.None) // todo: exception
+            throw new ArgumentException("TOB");
+
         _faceCard = faceCard;
+    }
 
     public override bool IsOnTable(Table table) =>
         table.Contains(_faceCard);
