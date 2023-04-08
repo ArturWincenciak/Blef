@@ -9,8 +9,13 @@ internal sealed class Pair : PokerHand
 
     protected override int PokerHandRank => 2;
 
-    public Pair(FaceCard faceCard) =>
+    public Pair(FaceCard faceCard)
+    {
+        if (faceCard is FaceCard.None) // todo: exception
+            throw new ArgumentException("TBD");
+
         _faceCard = faceCard;
+    }
 
     public override bool IsOnTable(Table table) =>
         table.Count(_faceCard) >= 2;
