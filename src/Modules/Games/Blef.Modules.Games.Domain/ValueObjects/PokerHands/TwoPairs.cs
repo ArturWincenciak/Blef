@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
-internal class TwoPairs : PokerHand
+internal sealed class TwoPairs : PokerHand
 {
     public const string Type = "two-pairs";
     private readonly FaceCard _first;

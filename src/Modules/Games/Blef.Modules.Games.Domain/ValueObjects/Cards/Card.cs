@@ -1,6 +1,6 @@
 namespace Blef.Modules.Games.Domain.ValueObjects.Cards;
 
-internal record Card
+internal sealed record Card
 {
     public FaceCard FaceCard { get; }
     public Suit Suit { get; }

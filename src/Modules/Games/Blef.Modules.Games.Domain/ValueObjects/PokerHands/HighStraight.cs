@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
-internal class HighStraight : PokerHand
+internal sealed class HighStraight : PokerHand
 {
     public const string Type = "high-straight";
     protected override int PokerHandRank => 5;

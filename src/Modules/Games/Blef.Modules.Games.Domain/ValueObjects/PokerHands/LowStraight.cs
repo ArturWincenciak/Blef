@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
-internal class LowStraight : PokerHand
+internal sealed class LowStraight : PokerHand
 {
     public const string Type = "low-straight";
     protected override int PokerHandRank => 4;

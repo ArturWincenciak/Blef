@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Domain.ValueObjects.Cards;
 
-internal class Deck
+internal sealed class Deck
 {
     public const int NUMBER_OF_CARDS = 24;
 
