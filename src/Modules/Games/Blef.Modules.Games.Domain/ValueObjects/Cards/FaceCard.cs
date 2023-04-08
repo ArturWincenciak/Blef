@@ -22,7 +22,6 @@ internal sealed class FaceCard
     public static FaceCard Create(string faceCard) =>
         new(Parse(faceCard));
 
-
     public int GetRank() =>
         (int) _faceCard;
 
@@ -37,6 +36,9 @@ internal sealed class FaceCard
 
     public static bool operator <(FaceCard first, FaceCard second) =>
         !(first > second);
+
+    public override string ToString() =>
+        _faceCard.ToString();
 
     private static Type Parse(string faceCard) =>
         faceCard.ToLower() switch
