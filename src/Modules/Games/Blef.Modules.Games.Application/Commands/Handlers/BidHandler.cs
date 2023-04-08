@@ -32,8 +32,8 @@ internal sealed class BidHandler : ICommandHandler<Bid>
             HighCard.Type => HighCard.Deserialize(parts[1]),
             Pair.Type => Pair.Deserialize(parts[1]),
             TwoPairs.Type => TwoPairs.Deserialize(parts[1]),
-            LowStraight.Type => new LowStraight(),
-            HighStraight.Type => new HighStraight(),
+            LowStraight.Type => LowStraight.Create(),
+            HighStraight.Type => HighStraight.Create(),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
             // todo: validate, domain exception, test
         };
