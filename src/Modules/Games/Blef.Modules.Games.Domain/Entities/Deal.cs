@@ -17,7 +17,7 @@ internal sealed class Deal
 
     public DealId DealId { get; }
 
-    public Deal(DealId dealId, DealPlayer[] players)
+    public Deal(DealId dealId, IEnumerable<DealPlayer> players)
     {
         // todo: validate if here are at least two players
         // todo: validate if here are not more then four players

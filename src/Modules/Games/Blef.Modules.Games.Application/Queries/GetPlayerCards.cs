@@ -8,7 +8,7 @@ public sealed record GetPlayerCards(GameId GameId, PlayerId PlayerId, DealNumber
     : IQuery<GetPlayerCards.Result>
 {
     [UsedImplicitly]
-    public sealed record Result(Card[] Cards) : IQueryResult;
+    public sealed record Result(IEnumerable<Card> Cards) : IQueryResult;
 
     [UsedImplicitly]
     public sealed record Card(string FaceCard, string Suit);

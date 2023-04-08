@@ -22,8 +22,8 @@ internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetP
         return new GetPlayerCards.Result(result);
     }
 
-    private static GetPlayerCards.Card[] Map(Hand hand) =>
-        hand.Cards.Select(Map).ToArray();
+    private static IEnumerable<GetPlayerCards.Card> Map(Hand hand) =>
+        hand.Cards.Select(Map);
 
     private static GetPlayerCards.Card Map(Card card) =>
         new(FaceCard: card.FaceCard.ToString(), Suit: card.Suit.ToString());

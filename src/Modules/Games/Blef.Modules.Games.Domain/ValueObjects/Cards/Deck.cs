@@ -6,12 +6,12 @@ internal class Deck
 
     private readonly List<Card> _cards;
 
-    public Deck(Card[] cards)
+    public Deck(IEnumerable<Card> cards)
     {
         if (cards is null)
             throw new ArgumentNullException(nameof(cards));
 
-        if (cards.Length != NUMBER_OF_CARDS) // todo: exception
+        if (cards.Count() != NUMBER_OF_CARDS) // todo: exception
             throw new Exception("TBD");
 
         var isUnique = cards.Distinct().Count() == cards.Count();
