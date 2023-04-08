@@ -8,11 +8,11 @@ internal sealed class HighStraight : PokerHand
     protected override int PokerHandRank => 5;
 
     public override bool IsOnTable(Table table) =>
-        table.HasFaceCard(FaceCard.Ten) &&
-        table.HasFaceCard(FaceCard.Jack) &&
-        table.HasFaceCard(FaceCard.Queen) &&
-        table.HasFaceCard(FaceCard.King) &&
-        table.HasFaceCard(FaceCard.Ace);
+        table.Contains(FaceCard.Ten) &&
+        table.Contains(FaceCard.Jack) &&
+        table.Contains(FaceCard.Queen) &&
+        table.Contains(FaceCard.King) &&
+        table.Contains(FaceCard.Ace);
 
     protected override int GetInnerRank() =>
         0; // It is not important for this kind of PokerHand
