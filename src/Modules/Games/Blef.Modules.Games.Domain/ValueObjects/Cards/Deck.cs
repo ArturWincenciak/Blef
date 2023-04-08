@@ -14,6 +14,7 @@ internal sealed class Deck
         if (cards.Count() != NUMBER_OF_CARDS) // todo: exception
             throw new Exception("TBD");
 
+        // todo: does `Distinct` use `==` operator or `equal` method?
         var isUnique = cards.Distinct().Count() == cards.Count();
         if (!isUnique) // todo: exception
             throw new Exception("TBD");
