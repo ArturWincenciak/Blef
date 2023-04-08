@@ -4,7 +4,7 @@ internal sealed class Hand
 {
     public IEnumerable<Card> Cards { get; }
 
-    public Hand(Card[] cards)
+    public Hand(IEnumerable<Card> cards)
     {
         // todo: validate if all cards are unique
         // todo: validate if here is at least one card

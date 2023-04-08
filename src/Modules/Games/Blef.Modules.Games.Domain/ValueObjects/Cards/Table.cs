@@ -7,7 +7,7 @@ internal sealed class Table
     public IEnumerable<Card> Cards =>
         _hands.SelectMany(hand => hand.Cards);
 
-    public Table(Hand[] hands)
+    public Table(IEnumerable<Hand> hands)
     {
         // todo: check if all cards are unique in all hands
         // todo: check if there at least two hands (min players)
