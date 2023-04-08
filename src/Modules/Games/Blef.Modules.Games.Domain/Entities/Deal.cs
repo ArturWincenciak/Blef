@@ -17,7 +17,7 @@ internal sealed class Deal
 
     public DealId DealId { get; }
 
-    public Deal(DealId dealId, IEnumerable<DealPlayer> players)
+    public Deal(DealId dealId, DealPlayer[] players)
     {
         // todo: validate if here are at least two players
         // todo: validate if here are not more then four players
@@ -52,7 +52,9 @@ internal sealed class Deal
 
         _checkingPlayer = new CheckingPlayer(checkingPlayerId.Id);
 
-        var allPlayersHands = _players.Select(player => player.Hand);
+        var allPlayersHands = _players
+            .Select(player => player.Hand)
+            .ToArray();
         var table = new Table(allPlayersHands);
 
         if (_lastBid.PokerHand.IsOnTable(table))

@@ -11,7 +11,7 @@ internal sealed class Croupier
     public Croupier(IDeckFactory deckFactory) =>
         _deckFactory = deckFactory ?? throw new ArgumentNullException(nameof(deckFactory));
 
-    public Deal Deal(DealId dealId, IEnumerable<NextDealPlayer> nextDealPlayers)
+    public Deal Deal(DealId dealId, NextDealPlayer[] nextDealPlayers)
     {
         var deck = _deckFactory.Create();
         var players = nextDealPlayers
@@ -19,7 +19,8 @@ internal sealed class Croupier
             {
                 var hand = deck.Deal(player.CardsAmount);
                 return new DealPlayer(player.PlayerId, hand);
-            });
+            })
+            .ToArray();
 
         return new (dealId, players);
     }

@@ -6,12 +6,12 @@ internal class Deck
 
     private readonly List<Card> _cards;
 
-    public Deck(IEnumerable<Card> cards)
+    public Deck(Card[] cards)
     {
         if (cards is null)
             throw new ArgumentNullException(nameof(cards));
 
-        if (cards.Count() != NUMBER_OF_CARDS) // todo: exception
+        if (cards.Length != NUMBER_OF_CARDS) // todo: exception
             throw new Exception("TBD");
 
         var isUnique = cards.Distinct().Count() == cards.Count();
@@ -30,7 +30,7 @@ internal class Deck
     public Hand Deal(CardsAmount cardsAmount)
     {
         // todo: validate if there are any cards left to be dealt
-        var hand = _cards.Take(cardsAmount.Amount);
+        var hand = _cards.Take(cardsAmount.Amount).ToArray();
         _cards.RemoveRange(index: 0, cardsAmount.Amount);
         return new(hand);
     }
