@@ -27,7 +27,7 @@ internal sealed class ShuffledDeckFactory : IDeckFactory
     {
         var orderedCards = OrderedCards();
         var shuffledCards = ShuffledCards(orderedCards);
-        return new Deck(shuffledCards);
+        return new Deck(shuffledCards.ToArray());
     }
 
     private static List<Card> OrderedCards()

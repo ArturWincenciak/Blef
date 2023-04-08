@@ -82,7 +82,7 @@
           Hand: [
             {
               FaceCard: Ace,
-              Suit: Clubs
+              Suit: Diamonds
             }
           ]
         },
@@ -90,8 +90,8 @@
           PlayerId: Guid_3,
           Hand: [
             {
-              FaceCard: Nine,
-              Suit: Diamonds
+              FaceCard: Ace,
+              Suit: Spades
             }
           ]
         },
@@ -100,7 +100,7 @@
           Hand: [
             {
               FaceCard: Ten,
-              Suit: Diamonds
+              Suit: Clubs
             }
           ]
         }
@@ -140,8 +140,8 @@
     Result: {
       Cards: [
         {
-          FaceCard: King,
-          Suit: Hearts
+          FaceCard: Ace,
+          Suit: Diamonds
         }
       ]
     }
@@ -158,7 +158,7 @@
     Result: {
       Cards: [
         {
-          FaceCard: Ten,
+          FaceCard: Ace,
           Suit: Spades
         }
       ]
@@ -176,8 +176,8 @@
     Result: {
       Cards: [
         {
-          FaceCard: Jack,
-          Suit: Diamonds
+          FaceCard: Ten,
+          Suit: Clubs
         }
       ]
     }
@@ -249,10 +249,6 @@
           PlayerId: Guid_2,
           Hand: [
             {
-              FaceCard: King,
-              Suit: Spades
-            },
-            {
               FaceCard: Ace,
               Suit: Diamonds
             }
@@ -262,17 +258,8 @@
           PlayerId: Guid_3,
           Hand: [
             {
-              FaceCard: Queen,
-              Suit: Clubs
-            }
-          ]
-        },
-        {
-          PlayerId: Guid_4,
-          Hand: [
-            {
               FaceCard: Ace,
-              Suit: Diamonds
+              Suit: Spades
             }
           ]
         },
@@ -280,8 +267,8 @@
           PlayerId: Guid_4,
           Hand: [
             {
-              FaceCard: Queen,
-              Suit: Spades
+              FaceCard: Ten,
+              Suit: Clubs
             }
           ]
         }
@@ -304,11 +291,82 @@
         }
       ],
       CheckingPlayerId: Guid_2,
-      LooserPlayerId: Guid_2
+      LooserPlayerId: Guid_4
     }
   },
   {
     No: 18,
+    Action: GetGameFlow,
+    Argument: NoArgument,
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_2,
+          Nick: Knuth
+        },
+        {
+          PlayerId: Guid_3,
+          Nick: Graham
+        },
+        {
+          PlayerId: Guid_4,
+          Nick: Conway
+        }
+      ]
+    }
+  },
+  {
+    No: 19,
+    Action: NewDeal,
+    Argument: Graham,
+    Result: {
+      Number: 2
+    }
+  },
+  {
+    No: 20,
+    Action: GetDealFlow,
+    Argument: {
+      Number: 2
+    },
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_2,
+          Hand: [
+            {
+              FaceCard: Ace,
+              Suit: Diamonds
+            }
+          ]
+        },
+        {
+          PlayerId: Guid_3,
+          Hand: [
+            {
+              FaceCard: Ace,
+              Suit: Spades
+            }
+          ]
+        },
+        {
+          PlayerId: Guid_4,
+          Hand: [
+            {
+              FaceCard: Ten,
+              Suit: Clubs
+            },
+            {
+              FaceCard: Jack,
+              Suit: Spades
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    No: 21,
     Action: GetGameFlow,
     Argument: NoArgument,
     Result: {

@@ -55,7 +55,8 @@ internal sealed class Game
         var dealId = new DealId(Id, Number: new DealNumber(nextDealNumber));
         var nextDealPlayers = _players
             .Where(p => p.IsInTheGame)
-            .Select(p => new NextDealPlayer(p.PlayerId, p.CardsAmount));
+            .Select(p => new NextDealPlayer(p.PlayerId, p.CardsAmount))
+            .ToArray();
         var deal = _croupier.Deal(dealId, nextDealPlayers);
         _deals.Add(deal);
         return dealId;

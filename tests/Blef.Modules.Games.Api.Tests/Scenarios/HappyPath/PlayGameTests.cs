@@ -28,6 +28,9 @@ public class PlayGameTests
             .Check(WhichPlayer.Knuth, deal: new DealNumber(1))
             .GetDealFlow(deal: new DealNumber(1))
             .GetGameFlow()
+            .NewDeal(WhichPlayer.Graham)
+            .GetDealFlow(new DealNumber(2))
+            .GetGameFlow()
             .Build();
 
         return Verify(results);
