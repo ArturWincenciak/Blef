@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 [assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Games.Application")]
 [assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Games.Infrastructure")]
 [assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Games.Domain.Tests")]
+[assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Games.Api.Tests")]
 
 namespace Blef.Modules.Games.Domain;
 
