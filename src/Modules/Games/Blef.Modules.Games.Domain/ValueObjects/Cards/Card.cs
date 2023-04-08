@@ -7,9 +7,6 @@ internal sealed record Card
 
     public Card(FaceCard faceCard, Suit suit)
     {
-        if (faceCard == FaceCard.None) // todo: exception
-            throw new Exception("TBD");
-
         if (suit == Suit.None) // todo: exception
             throw new Exception("TBD");
 

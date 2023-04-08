@@ -30,9 +30,9 @@ internal sealed class BidHandler : ICommandHandler<Bid>
         // todo: implement more Poker Hands
         return pokerHandType.ToLower() switch
         {
-            HighCard.Type => new HighCard(ParseFaceCard(parts[1])),
-            Pair.Type => new Pair(ParseFaceCard(parts[1])),
-            TwoPairs.Type => CreateTwoPairs(parts[1]),
+            HighCard.Type => HighCard.Deserialize(parts[1]),
+            Pair.Type => Pair.Deserialize(parts[1]),
+            TwoPairs.Type => TwoPairs.Deserialize(parts[1]),
             LowStraight.Type => new LowStraight(),
             HighStraight.Type => new HighStraight(),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
@@ -40,21 +40,7 @@ internal sealed class BidHandler : ICommandHandler<Bid>
         };
     }
 
-    private static FaceCard ParseFaceCard(string faceCard) =>
-        faceCard.ToLower() switch
-        {
-            "nine" => FaceCard.Nine,
-            "ten" => FaceCard.Ten,
-            "jack" => FaceCard.Jack,
-            "queen" => FaceCard.Queen,
-            "king" => FaceCard.King,
-            "ace" => FaceCard.Ace,
-            _ => throw new Exception($"Unknown value of FaceCard: '{faceCard}'")
-        };
 
-    private static TwoPairs CreateTwoPairs(string faceCards)
-    {
-        var faceCardParts = faceCards.Split(",");
-        return new TwoPairs(first: ParseFaceCard(faceCardParts[0]), second: ParseFaceCard(faceCardParts[1]));
-    }
+
+
 }

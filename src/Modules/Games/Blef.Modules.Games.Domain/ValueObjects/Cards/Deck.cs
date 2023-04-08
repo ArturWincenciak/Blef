@@ -18,12 +18,6 @@ internal sealed class Deck
         if (!isUnique) // todo: exception
             throw new Exception("TBD");
 
-        foreach (var card in cards)
-        {
-            if (card.FaceCard == FaceCard.None || card.Suit == Suit.None)
-                throw new Exception("TBD"); // todo: exception
-        }
-
         _cards = cards.ToList();
     }
 
