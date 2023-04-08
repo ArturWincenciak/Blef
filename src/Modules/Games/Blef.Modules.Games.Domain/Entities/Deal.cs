@@ -37,8 +37,9 @@ internal sealed class Deal
 
     public void Bid(Bid newBid)
     {
-        if(newBid.PokerHand.IsBetterThan(_lastBid.PokerHand) == false)
-            throw new Exception("TBD"); // todo: exception
+        if(IsItFirstMoveInDeal == false)
+            if(newBid.PokerHand.IsBetterThan(_lastBid.PokerHand) == false)
+                throw new Exception("TBD"); // todo: exception
 
         _lastBid = newBid;
         _bidHistory.OnBid(newBid);
@@ -46,6 +47,9 @@ internal sealed class Deal
 
     public LooserPlayer Check(PlayerId checkingPlayerId)
     {
+        if (IsItFirstMoveInDeal) // todo: exception
+            throw new Exception("TBD: First must be bid");
+
         _checkingPlayer = new CheckingPlayer(checkingPlayerId.Id);
 
         var allPlayersHands = _players.Select(player => player.Hand);
@@ -64,4 +68,7 @@ internal sealed class Deal
         var bids = _bidHistory.GetFlow();
         return new DealFlowResult(_players, bids, _checkingPlayer, _looserPlayer);
     }
+
+    private bool IsItFirstMoveInDeal =>
+        _lastBid is null;
 }
