@@ -21,8 +21,8 @@ internal sealed class TwoPairs : PokerHand
 
     public override bool IsOnTable(Table table)
     {
-        var firstFaceCardCount = table.Cards.Count(x => x.FaceCard == _first);
-        var secondFaceCardCount = table.Cards.Count(x => x.FaceCard == _second);
+        var firstFaceCardCount = table.Count(_first);
+        var secondFaceCardCount = table.Count(_second);
         return firstFaceCardCount >= 2 && secondFaceCardCount >= 2;
     }
 

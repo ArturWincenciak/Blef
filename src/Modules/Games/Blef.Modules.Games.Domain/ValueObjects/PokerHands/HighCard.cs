@@ -13,7 +13,7 @@ internal class HighCard : PokerHand
         _faceCard = faceCard;
 
     public override bool IsOnTable(Table table) =>
-        table.Cards.Any(x => x.FaceCard == _faceCard);
+        table.Contains(_faceCard);
 
     protected override int GetInnerRank() =>
         (int) _faceCard;
