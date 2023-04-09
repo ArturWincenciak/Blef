@@ -36,6 +36,6 @@ internal sealed class TwoPairs : PokerHand
     public static PokerHand Deserialize(string pokerHand)
     {
         var faceCardParts = pokerHand.Split(",");
-        return new TwoPairs(first: FaceCard.Create(faceCardParts[0]), FaceCard.Create(faceCardParts[0]));
+        return new TwoPairs(first: FaceCard.Create(faceCardParts[0]), FaceCard.Create(faceCardParts[1]));
     }
 }
