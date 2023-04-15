@@ -270,12 +270,12 @@ public class IsPokerHandOnTableTests
             new(hands);
 
         private static PokerHand GivenHighCard(FaceCard faceCard) =>
-            HighCard.Deserialize(faceCard.ToString());
+            HighCard.Create(faceCard.ToString());
 
         private static PokerHand GivenPair(FaceCard faceCard) =>
-            Pair.Deserialize(faceCard.ToString());
+            Pair.Create(faceCard.ToString());
 
         private static PokerHand GivenTwoPairs(FaceCard firstFaceCard, FaceCard secondFaceCard) =>
-            TwoPairs.Deserialize($"{firstFaceCard},{secondFaceCard}");
+            TwoPairs.Create($"{firstFaceCard},{secondFaceCard}");
     }
 }

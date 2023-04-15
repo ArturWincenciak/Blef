@@ -21,6 +21,6 @@ internal sealed class Pair : PokerHand
     public override string Serialize() =>
         $"{Type}:{_faceCard.ToString().ToLower()}";
 
-    public static PokerHand Deserialize(string faceCard) =>
+    public static PokerHand Create(string faceCard) =>
         new Pair(FaceCard.Create(faceCard));
 }

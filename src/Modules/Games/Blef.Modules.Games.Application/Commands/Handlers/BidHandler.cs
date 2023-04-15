@@ -29,9 +29,9 @@ internal sealed class BidHandler : ICommandHandler<Bid>
         // todo: implement more Poker Hands
         return pokerHandType.ToLower() switch
         {
-            HighCard.Type => HighCard.Deserialize(parts[1]),
-            Pair.Type => Pair.Deserialize(parts[1]),
-            TwoPairs.Type => TwoPairs.Deserialize(parts[1]),
+            HighCard.Type => HighCard.Create(parts[1]),
+            Pair.Type => Pair.Create(parts[1]),
+            TwoPairs.Type => TwoPairs.Create(parts[1]),
             LowStraight.Type => LowStraight.Create(),
             HighStraight.Type => HighStraight.Create(),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")

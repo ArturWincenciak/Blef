@@ -19,8 +19,8 @@ public class ComparingPokerHandsTests
         void IsBetterThen(FaceCard higher, FaceCard lower)
         {
             // arrange
-            var higherHighCard = HighCard.Deserialize(higher.ToString());
-            var lowerHighCard = HighCard.Deserialize(lower.ToString());
+            var higherHighCard = HighCard.Create(higher.ToString());
+            var lowerHighCard = HighCard.Create(lower.ToString());
 
             // act
             var actual = higherHighCard.IsBetterThan(lowerHighCard);
@@ -44,8 +44,8 @@ public class ComparingPokerHandsTests
         void IsBetterThen(FaceCard higher, FaceCard lower)
         {
             // arrange
-            var higherPair = Pair.Deserialize(higher.ToString());
-            var lowerPair = Pair.Deserialize(lower.ToString());
+            var higherPair = Pair.Create(higher.ToString());
+            var lowerPair = Pair.Create(lower.ToString());
 
             // act
             var actual = higherPair.IsBetterThan(lowerPair);
@@ -97,8 +97,8 @@ public class ComparingPokerHandsTests
         void IsBetterThen((FaceCard First, FaceCard Second) higher, (FaceCard First, FaceCard Second) lower)
         {
             // arrange
-            var higherTwoPairs = TwoPairs.Deserialize($"{higher.First},{higher.Second}");
-            var lowerTwoPairs = TwoPairs.Deserialize($"{lower.First},{lower.Second}");
+            var higherTwoPairs = TwoPairs.Create($"{higher.First},{higher.Second}");
+            var lowerTwoPairs = TwoPairs.Create($"{lower.First},{lower.Second}");
 
             // act
             var actual = higherTwoPairs.IsBetterThan(lowerTwoPairs);
@@ -112,8 +112,8 @@ public class ComparingPokerHandsTests
     public void PairIsBetterThenHighCardTests()
     {
         // arrange
-        var pair = Pair.Deserialize(FaceCard.Nine.ToString());
-        var highCard = HighCard.Deserialize(FaceCard.Ace.ToString());
+        var pair = Pair.Create(FaceCard.Nine.ToString());
+        var highCard = HighCard.Create(FaceCard.Ace.ToString());
 
         // act
         var actual = pair.IsBetterThan(highCard);
