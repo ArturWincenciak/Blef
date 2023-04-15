@@ -1,6 +1,4 @@
-﻿using Blef.Modules.Games.Domain.Services;
-using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
+﻿using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 namespace Blef.Modules.Games.Domain.Tests;
@@ -20,9 +18,15 @@ public class ComparingPokerHandsTests
 
         void IsBetterThen(FaceCard higher, FaceCard lower)
         {
+            // arrange
             var higherHighCard = HighCard.Deserialize(higher.ToString());
             var lowerHighCard = HighCard.Deserialize(lower.ToString());
-            Assert.True(higherHighCard.IsBetterThan(lowerHighCard));
+
+            // act
+            var actual = higherHighCard.IsBetterThan(lowerHighCard);
+
+            // assert
+            Assert.True(actual);
         }
     }
 
@@ -39,9 +43,15 @@ public class ComparingPokerHandsTests
 
         void IsBetterThen(FaceCard higher, FaceCard lower)
         {
+            // arrange
             var higherPair = Pair.Deserialize(higher.ToString());
             var lowerPair = Pair.Deserialize(lower.ToString());
-            Assert.True(higherPair.IsBetterThan(lowerPair));
+
+            // act
+            var actual = higherPair.IsBetterThan(lowerPair);
+
+            // assert
+            Assert.True(actual);
         }
     }
 
@@ -86,10 +96,78 @@ public class ComparingPokerHandsTests
 
         void IsBetterThen((FaceCard First, FaceCard Second) higher, (FaceCard First, FaceCard Second) lower)
         {
+            // arrange
             var higherTwoPairs = TwoPairs.Deserialize($"{higher.First},{higher.Second}");
             var lowerTwoPairs = TwoPairs.Deserialize($"{lower.First},{lower.Second}");
-            Assert.True(higherTwoPairs.IsBetterThan(lowerTwoPairs));
+
+            // act
+            var actual = higherTwoPairs.IsBetterThan(lowerTwoPairs);
+
+            // assert
+            Assert.True(actual);
         }
+    }
+
+    [Fact]
+    public void PairIsBetterThenHighCardTests()
+    {
+        // arrange
+        var pair = Pair.Deserialize(FaceCard.Nine.ToString());
+        var highCard = HighCard.Deserialize(FaceCard.Ace.ToString());
+
+        // act
+        var actual = pair.IsBetterThan(highCard);
+
+        // assert
+        Assert.True(actual);
+    }
+
+    [Fact]
+    public void TwoPairsIsBetterThenHighCardTests()
+    {
+
+    }
+
+    [Fact]
+    public void TwoPairsIsBetterThenPairTests()
+    {
+
+    }
+
+    [Fact]
+    public void LowStraightIsBetterThenHighCardTests()
+    {
+
+    }
+
+    [Fact]
+    public void LowStraightIsBetterThenPairTests()
+    {
+
+    }
+
+    [Fact]
+    public void LowStraightIsBetterThenTwoPairsTests()
+    {
+
+    }
+
+    [Fact]
+    public void HighStraightIsBetterThenHighCardTests()
+    {
+
+    }
+
+    [Fact]
+    public void HighStraightIsBetterThenPairTests()
+    {
+
+    }
+
+    [Fact]
+    public void HighStraightIsBetterThenTwoPairsTests()
+    {
+
     }
 
     [Fact]
