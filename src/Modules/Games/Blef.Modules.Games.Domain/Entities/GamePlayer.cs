@@ -27,7 +27,7 @@ internal sealed class GamePlayer
         if (_isOutOfTheGame) // todo: exception
             throw new Exception("TBD");
 
-        if (CardsAmount.Amount < CardsAmount.MAX_CARDS_AMOUNT)
+        if (CardsAmount < CardsAmount.Max)
             CardsAmount.AddOneCard();
         else
             _isOutOfTheGame = true;
