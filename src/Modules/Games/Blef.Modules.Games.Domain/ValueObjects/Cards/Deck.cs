@@ -25,8 +25,8 @@ internal sealed class Deck
     public Hand Deal(CardsAmount cardsAmount)
     {
         // todo: validate if there are any cards left to be dealt
-        var hand = _cards.Take(cardsAmount.Amount).ToArray();
-        _cards.RemoveRange(index: 0, cardsAmount.Amount);
+        var hand = _cards.Take(cardsAmount).ToArray();
+        _cards.RemoveRange(index: 0, cardsAmount);
         return new(hand);
     }
 }
