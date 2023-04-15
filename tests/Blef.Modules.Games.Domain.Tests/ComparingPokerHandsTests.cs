@@ -3,7 +3,7 @@ using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 namespace Blef.Modules.Games.Domain.Tests;
 
-public class ComparingSamePokerHandsTests
+public class ComparingPokerHandsTests
 {
     [Fact]
     public void HighCardIsBetterThenOtherHighCardTests()
