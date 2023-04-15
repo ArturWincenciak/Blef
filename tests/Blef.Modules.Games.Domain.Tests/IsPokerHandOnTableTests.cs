@@ -101,6 +101,17 @@ public class IsPokerHandOnTableTests
                     }),
                     GivenPair(FaceCard.Ace)
                 },
+                new object[]
+                {
+                    GivenTable(new Hand[]
+                    {
+                        new(new[] {new Card(FaceCard.Ace, Suit.Diamonds)}),
+                        new(new[] {new Card(FaceCard.Ace, Suit.Spades)}),
+                        new(new[] {new Card(FaceCard.Ace, Suit.Hearts)}),
+                        new(new[] {new Card(FaceCard.Ace, Suit.Clubs)}),
+                    }),
+                    GivenPair(FaceCard.Ace)
+                },
             };
 
         private static IEnumerable<object[]> TwoPairsTestCases =>
@@ -142,6 +153,19 @@ public class IsPokerHandOnTableTests
                         new(new[] {new Card(FaceCard.Queen, Suit.Hearts)}),
                     }),
                     GivenTwoPairs(FaceCard.Jack, FaceCard.Queen)
+                },
+                new object[]
+                {
+                    GivenTable(new Hand[]
+                    {
+                        new(new[] {new Card(FaceCard.King, Suit.Diamonds)}),
+                        new(new[] {new Card(FaceCard.King, Suit.Spades)}),
+                        new(new[] {new Card(FaceCard.King, Suit.Clubs)}),
+                        new(new[] {new Card(FaceCard.King, Suit.Hearts)}),
+                        new(new[] {new Card(FaceCard.Ten, Suit.Spades)}),
+                        new(new[] {new Card(FaceCard.Ten, Suit.Hearts)}),
+                    }),
+                    GivenTwoPairs(FaceCard.King, FaceCard.Ten)
                 },
             };
 
