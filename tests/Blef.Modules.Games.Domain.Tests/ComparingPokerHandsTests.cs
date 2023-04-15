@@ -125,56 +125,126 @@ public class ComparingPokerHandsTests
     [Fact]
     public void TwoPairsIsBetterThenHighCardTests()
     {
+        // arrange
+        var twoPairs = TwoPairs.Create($"{FaceCard.Nine},{FaceCard.Ten}");
+        var highCard = HighCard.Create(FaceCard.Ace.ToString());
 
+        // act
+        var actual = twoPairs.IsBetterThan(highCard);
+
+        // assert
+        Assert.True(actual);
     }
 
     [Fact]
     public void TwoPairsIsBetterThenPairTests()
     {
+        // arrange
+        var twoPairs = TwoPairs.Create($"{FaceCard.Nine},{FaceCard.Ten}");
+        var pair = Pair.Create(FaceCard.Ace.ToString());
 
+        // act
+        var actual = twoPairs.IsBetterThan(pair);
+
+        // assert
+        Assert.True(actual);
     }
 
     [Fact]
     public void LowStraightIsBetterThenHighCardTests()
     {
+        // arrange
+        var lowStraight = LowStraight.Create();
+        var highCard = HighCard.Create(FaceCard.Ace.ToString());
 
+        // act
+        var actual = lowStraight.IsBetterThan(highCard);
+
+        // assert
+        Assert.True(actual);
     }
 
     [Fact]
     public void LowStraightIsBetterThenPairTests()
     {
+        // arrange
+        var lowStraight = LowStraight.Create();
+        var pair = Pair.Create(FaceCard.Ace.ToString());
 
+        // act
+        var actual = lowStraight.IsBetterThan(pair);
+
+        // assert
+        Assert.True(actual);
     }
 
     [Fact]
     public void LowStraightIsBetterThenTwoPairsTests()
     {
+        // arrange
+        var lowStraight = LowStraight.Create();
+        var twoPairs = TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}");
 
+        // act
+        var actual = lowStraight.IsBetterThan(twoPairs);
+
+        // assert
+        Assert.True(actual);
     }
 
     [Fact]
     public void HighStraightIsBetterThenHighCardTests()
     {
+        // arrange
+        var highStraight = HighStraight.Create();
+        var highCard = HighCard.Create(FaceCard.Ace.ToString());
 
+        // act
+        var actual = highStraight.IsBetterThan(highCard);
+
+        // assert
+        Assert.True(actual);
     }
 
     [Fact]
     public void HighStraightIsBetterThenPairTests()
     {
+        // arrange
+        var highStraight = HighStraight.Create();
+        var pair = Pair.Create(FaceCard.Ace.ToString());
 
+        // act
+        var actual = highStraight.IsBetterThan(pair);
+
+        // assert
+        Assert.True(actual);
     }
 
     [Fact]
     public void HighStraightIsBetterThenTwoPairsTests()
     {
+        // arrange
+        var highStraight = HighStraight.Create();
+        var twoPairs = TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}");
 
+        // act
+        var actual = highStraight.IsBetterThan(twoPairs);
+
+        // assert
+        Assert.True(actual);
     }
 
     [Fact]
     public void HighStraightIsBetterThenLowStraightTests()
     {
+        // arrange
         var highStraight = HighStraight.Create();
         var lowStraight = LowStraight.Create();
-        Assert.True(highStraight.IsBetterThan(lowStraight));
+
+        // act
+        var actual = highStraight.IsBetterThan(lowStraight);
+
+        // assert
+        Assert.True(actual);
     }
 }
