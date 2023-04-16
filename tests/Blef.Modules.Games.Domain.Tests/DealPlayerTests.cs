@@ -11,10 +11,17 @@ public class DealPlayerTests
     {
         var exception = Record.Exception(() =>
         {
+            // arrange
             var guid = Guid.Parse("9D51E124-53F0-49A5-B1F8-F010AFB6F110");
             var playerId = new PlayerId(guid);
             var hand = new Hand(new[] {new Card(FaceCard.Ace, Suit.Clubs)});
-            return new DealPlayer(playerId, hand);
+
+            // act
+            var actual = new DealPlayer(playerId, hand);
+
+            // assert
+            Assert.Equal(expected: playerId, actual: actual.PlayerId);
+            Assert.Equal(expected: hand, actual: actual.Hand);
         });
         Assert.Null(exception);
     }
