@@ -7,18 +7,14 @@ public class GameIdTests
     [Fact]
     public void CreateGameIdTest()
     {
-        var exception = Record.Exception(() =>
-        {
-            // arrange
-            var guid = Guid.Parse("68FE550A-707A-4864-9EE7-5580FF626A0D");
+        // arrange
+        var guid = Guid.Parse("68FE550A-707A-4864-9EE7-5580FF626A0D");
 
-            // act
-            var actual = new GameId(guid);
+        // act
+        var actual = new GameId(guid);
 
-            // assert
-            Assert.Equal(expected: guid, actual: actual.Id);
-        });
-        Assert.Null(exception);
+        // assert
+        Assert.Equal(guid, actual.Id);
     }
 
     [Fact]

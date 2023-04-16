@@ -7,18 +7,14 @@ public class PlayerNickTests
     [Fact]
     public void CreatePlayerNickTest()
     {
-        var exception = Record.Exception(() =>
-        {
-            // arrange
-            var nick = "Kent";
+        // arrange
+        var nick = "Kent";
 
-            // act
-            var playerNick = new PlayerNick(nick);
+        // act
+        var playerNick = new PlayerNick(nick);
 
-            // assert
-            Assert.Equal(expected: nick, playerNick.Nick);
-        });
-        Assert.Null(exception);
+        // assert
+        Assert.Equal(nick, playerNick.Nick);
     }
 
     [Fact]

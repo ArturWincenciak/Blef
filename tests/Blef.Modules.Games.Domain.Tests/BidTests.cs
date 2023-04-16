@@ -1,5 +1,4 @@
 ﻿using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
@@ -10,26 +9,22 @@ public class BidTests
     [Fact]
     public void CreateBidTest()
     {
-        var exception = Record.Exception(() =>
-        {
-            // arrange
-            var pokerHand = HighStraight.Create();
-            var guid = Guid.Parse("C184A4D4-596C-4FBA-B41E-75C24AAF28CD");
-            var playerId = new PlayerId(guid);
+        // arrange
+        var pokerHand = HighStraight.Create();
+        var guid = Guid.Parse("C184A4D4-596C-4FBA-B41E-75C24AAF28CD");
+        var playerId = new PlayerId(guid);
 
-            // act
-            var actual = new Bid(pokerHand, playerId);
+        // act
+        var actual = new Bid(pokerHand, playerId);
 
-            // assert
-            Assert.Equal(expected: pokerHand, actual: actual.PokerHand);
-            Assert.Equal(expected: playerId, actual: actual.Player);
-        });
-        Assert.Null(exception);
+        // assert
+        Assert.Equal(pokerHand, actual.PokerHand);
+        Assert.Equal(playerId, actual.Player);
     }
 
     [Fact]
     public void CannotCreateWithNullArgumentsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Bid(null, null));
+        Assert.Throws<ArgumentNullException>(() => new Bid(PokerHand: null, Player: null));
 
     [Fact]
     public void CannotCreateWithNullPokerHandArgumentTest() =>
@@ -37,7 +32,7 @@ public class BidTests
         {
             var guid = Guid.Parse("C184A4D4-596C-4FBA-B41E-75C24AAF28CD");
             var playerId = new PlayerId(guid);
-            return new Bid(null, playerId);
+            return new Bid(PokerHand: null, playerId);
         });
 
     [Fact]
@@ -45,6 +40,6 @@ public class BidTests
         Assert.Throws<ArgumentNullException>(() =>
         {
             var pokerHand = HighStraight.Create();
-            return new Bid(pokerHand, null);
+            return new Bid(pokerHand, Player: null);
         });
 }

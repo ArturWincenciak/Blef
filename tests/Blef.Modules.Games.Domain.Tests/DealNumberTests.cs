@@ -7,18 +7,14 @@ public class DealNumberTests
     [Fact]
     public void CrateDealNumberTest()
     {
-        var exception = Record.Exception(() =>
-        {
-            // arrange
-            var number = 1;
+        // arrange
+        var number = 1;
 
-            // act
-            var dealNumber = new DealNumber(number);
+        // act
+        var dealNumber = new DealNumber(number);
 
-            // assert
-            Assert.Equal(expected: number, actual: dealNumber.Number);
-        });
-        Assert.Null(exception);
+        // assert
+        Assert.Equal(number, dealNumber.Number);
     }
 
     [Fact]

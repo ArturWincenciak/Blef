@@ -7,18 +7,14 @@ public class PlayerIdTests
     [Fact]
     public void CreatePlayerIdTest()
     {
-        var exception = Record.Exception(() =>
-        {
-            // arrange
-            var guid = Guid.Parse("ED470554-C946-40D7-880C-D46BF99A88F7");
+        // arrange
+        var guid = Guid.Parse("ED470554-C946-40D7-880C-D46BF99A88F7");
 
-            // act
-            var actual = new PlayerId(guid);
+        // act
+        var actual = new PlayerId(guid);
 
-            // assert
-            Assert.Equal(expected: guid, actual.Id);
-        });
-        Assert.Null(exception);
+        // assert
+        Assert.Equal(guid, actual.Id);
     }
 
     [Fact]
