@@ -20,7 +20,7 @@ public class PlayerIdTests
     public void TwoInstancesWithTheSameGuidAreEqualsTest()
     {
         // arrange
-        var guid = Guid.NewGuid();
+        var guid = Guid.Parse("FF98A20E-069B-4D46-94B9-63FD5C625D3C");
         var first = new PlayerId(guid);
         var second = new PlayerId(guid);
 
@@ -35,8 +35,8 @@ public class PlayerIdTests
     public void TwoInstancesWithDifferentGuidAreNotEqualTest()
     {
         // arrange
-        var first = new PlayerId(Guid.NewGuid());
-        var second = new PlayerId(Guid.NewGuid());
+        var first = new PlayerId(Guid.Parse("5CCD73E7-F355-4BD6-A8D4-6538285BD5DE"));
+        var second = new PlayerId(Guid.Parse("B954F622-9FB2-41B9-9F37-7A3D019DB15D"));
 
         // act
         var actual = first != second;
