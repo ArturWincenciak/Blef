@@ -19,7 +19,7 @@ public class BidTests
 
         // assert
         Assert.Equal(pokerHand, actual.PokerHand);
-        Assert.Equal(playerId, actual.Player);
+        Assert.True(new PlayerId(guid) == actual.Player);
     }
 
     [Fact]

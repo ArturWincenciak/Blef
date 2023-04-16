@@ -17,8 +17,8 @@ public class NextDealPlayerTests
         var actual = new NextDealPlayer(playerId, cardsAmount);
 
         // assert
-        Assert.Equal(playerId, actual.PlayerId);
-        Assert.Equal(cardsAmount, actual.CardsAmount);
+        Assert.True(new PlayerId(guid) == actual.PlayerId);
+        Assert.True(CardsAmount.Initial == actual.CardsAmount);
     }
 
     [Fact]

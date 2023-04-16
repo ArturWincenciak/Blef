@@ -11,10 +11,10 @@ public class PlayerNickTests
         var nick = "Kent";
 
         // act
-        var playerNick = new PlayerNick(nick);
+        var actual = new PlayerNick(nick);
 
         // assert
-        Assert.Equal(nick, playerNick.Nick);
+        Assert.Equal("Kent", actual.Nick);
     }
 
     [Fact]

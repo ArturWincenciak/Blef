@@ -15,6 +15,7 @@ public class CheckingPlayerTests
 
         // assert
         Assert.Equal(guid, actual.PlayerId);
+        Assert.True(new CheckingPlayer(guid) == actual);
     }
 
     [Fact]
@@ -28,5 +29,6 @@ public class CheckingPlayerTests
 
         // assert
         Assert.Equal(emptyGuid, actual.PlayerId);
+        Assert.True(new CheckingPlayer(emptyGuid) == actual);
     }
 }

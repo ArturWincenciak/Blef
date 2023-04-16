@@ -1,4 +1,6 @@
-﻿namespace Blef.Modules.Games.Domain.ValueObjects;
+﻿using System.Runtime.CompilerServices;
+
+namespace Blef.Modules.Games.Domain.ValueObjects;
 
 internal sealed class CardsAmount
 {
@@ -34,6 +36,12 @@ internal sealed class CardsAmount
 
     public static bool operator > (CardsAmount @this, CardsAmount other) =>
         @this._amount > other._amount;
+
+    public static bool operator == (CardsAmount @this, CardsAmount other) =>
+        @this._amount == other._amount;
+
+    public static bool operator != (CardsAmount @this, CardsAmount other) =>
+        @this._amount != other._amount;
 
     public static implicit operator int(CardsAmount @this) =>
         @this._amount;

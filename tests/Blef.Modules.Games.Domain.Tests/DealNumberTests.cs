@@ -11,10 +11,11 @@ public class DealNumberTests
         var number = 1;
 
         // act
-        var dealNumber = new DealNumber(number);
+        var actual = new DealNumber(number);
 
         // assert
-        Assert.Equal(number, dealNumber.Number);
+        Assert.Equal(number, actual.Number);
+        Assert.True(new DealNumber(number) == actual);
     }
 
     [Fact]

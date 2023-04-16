@@ -15,6 +15,7 @@ public class LooserPlayerTests
 
         // assert
         Assert.Equal(guid, actual.PlayerId);
+        Assert.True(new LooserPlayer(guid) == actual);
     }
 
     [Fact]
@@ -28,5 +29,6 @@ public class LooserPlayerTests
 
         // assert
         Assert.Equal(emptyGuid, actual.PlayerId);
+        Assert.True(new LooserPlayer(emptyGuid) == actual);
     }
 }
