@@ -16,7 +16,7 @@ internal sealed class GetDealHandler : IQueryHandler<GetDealFlow, GetDealFlow.Re
     public async Task<GetDealFlow.Result> Handle(GetDealFlow query, CancellationToken cancellation)
     {
         var game = _games.Get(query.GameId);
-        var dealFlow = game.GetDealFlow(query.DealNumber);
+        var dealFlow = game.GetDealFlow(new (query.GameId, query.DealNumber));
         return Map(dealFlow);
     }
 
