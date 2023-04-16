@@ -7,7 +7,8 @@ public class PlayerIdTests
     [Fact]
     public void CreatePlayerIdTest()
     {
-        var exception = Record.Exception(() => new PlayerId(Guid.NewGuid()));
+        var guid = Guid.Parse("ED470554-C946-40D7-880C-D46BF99A88F7");
+        var exception = Record.Exception(() => new PlayerId(guid));
         Assert.Null(exception);
     }
 

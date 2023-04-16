@@ -9,7 +9,8 @@ public class NextDealPlayerTests
     public void CreateNextDealPlayerTest()
     {
         // arrange
-        var playerId = new PlayerId(Guid.NewGuid());
+        var guid = Guid.Parse("0EA48031-AE45-4033-AFCC-8C56D8D66F65");
+        var playerId = new PlayerId(guid);
         var cardsAmount = CardsAmount.Initial;
 
         // act
@@ -35,7 +36,8 @@ public class NextDealPlayerTests
     public void CannotCreateWithNullCardAmountArgumentTest() =>
         Assert.Throws<ArgumentNullException>(() =>
         {
-            var playerId = new PlayerId(Guid.NewGuid());
+            var guid = Guid.Parse("D1954AA3-45C1-4F90-8638-41A491521FF1");
+            var playerId = new PlayerId(guid);
             return new NextDealPlayer(playerId, null);
         });
 }
