@@ -8,13 +8,20 @@ public class NextDealPlayerTests
     [Fact]
     public void CreateNextDealPlayerTest()
     {
-        // arrange
-        var guid = Guid.Parse("0EA48031-AE45-4033-AFCC-8C56D8D66F65");
-        var playerId = new PlayerId(guid);
-        var cardsAmount = CardsAmount.Initial;
+        var exception = Record.Exception(() =>
+        {
+            // arrange
+            var guid = Guid.Parse("0EA48031-AE45-4033-AFCC-8C56D8D66F65");
+            var playerId = new PlayerId(guid);
+            var cardsAmount = CardsAmount.Initial;
 
-        // act
-        var exception = Record.Exception(() => new NextDealPlayer(playerId, cardsAmount));
+            // act
+            var actual = new NextDealPlayer(playerId, cardsAmount);
+
+            // assert
+            Assert.Equal(expected: playerId, actual: actual.PlayerId);
+            Assert.Equal(expected: cardsAmount, actual: actual.CardsAmount);
+        });
 
         // assert
         Assert.Null(exception);

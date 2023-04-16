@@ -12,10 +12,17 @@ public class BidTests
     {
         var exception = Record.Exception(() =>
         {
+            // arrange
             var pokerHand = HighStraight.Create();
             var guid = Guid.Parse("C184A4D4-596C-4FBA-B41E-75C24AAF28CD");
             var playerId = new PlayerId(guid);
-            return new Bid(pokerHand, playerId);
+
+            // act
+            var actual = new Bid(pokerHand, playerId);
+
+            // assert
+            Assert.Equal(expected: pokerHand, actual: actual.PokerHand);
+            Assert.Equal(expected: playerId, actual: actual.Player);
         });
         Assert.Null(exception);
     }

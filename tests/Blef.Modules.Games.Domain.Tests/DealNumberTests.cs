@@ -9,8 +9,14 @@ public class DealNumberTests
     {
         var exception = Record.Exception(() =>
         {
-            var dealNumber = new DealNumber(1);
-            Assert.Equal(expected: 1, actual: dealNumber.Number);
+            // arrange
+            var number = 1;
+
+            // act
+            var dealNumber = new DealNumber(number);
+
+            // assert
+            Assert.Equal(expected: number, actual: dealNumber.Number);
         });
         Assert.Null(exception);
     }
