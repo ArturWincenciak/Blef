@@ -1,5 +1,6 @@
 ﻿namespace Blef.Modules.Games.Domain.ValueObjects.Ids;
 
+// todo: make internal (here and others similar)
 public sealed record DealNumber(int Number)
 {
     public int Number { get; } = Number < 1

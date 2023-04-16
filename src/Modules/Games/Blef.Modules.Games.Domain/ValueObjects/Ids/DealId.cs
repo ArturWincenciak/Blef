@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Domain.ValueObjects.Ids;
 
-public sealed record DealId(GameId GameId, DealNumber Number)
+internal sealed record DealId(GameId GameId, DealNumber Number)
 {
     public GameId GameId { get; } =
         GameId ?? throw new ArgumentNullException(nameof(GameId));
