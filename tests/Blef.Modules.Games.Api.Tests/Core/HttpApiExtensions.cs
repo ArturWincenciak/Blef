@@ -25,10 +25,7 @@ internal static class HttpApiExtensions
     {
         var response = await client.PostAsJsonAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players",
-            value: new
-            {
-                nick.Nick
-            });
+            value: new { nick.Nick });
         response.EnsureSuccessStatusCode();
         return (await response.Content.ReadFromJsonAsync<JoinGame.Result>())!;
     }

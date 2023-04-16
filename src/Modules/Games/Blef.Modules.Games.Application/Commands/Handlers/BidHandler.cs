@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 using Blef.Shared.Abstractions.Commands;
 using JetBrains.Annotations;
@@ -17,7 +18,7 @@ internal sealed class BidHandler : ICommandHandler<Bid>
     {
         var game = _games.Get(command.GameId);
         var pokerHand = Parse(command.PokerHand);
-        game.Bid(command.DealNumber, new (pokerHand, command.PlayerId));
+        game.Bid(new (command.GameId, command.DealNumber), new (pokerHand, command.PlayerId));
         return Task.CompletedTask;
     }
 

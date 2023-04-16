@@ -62,31 +62,31 @@ internal sealed class Game
         return dealId;
     }
 
-    public Hand GetHand(PlayerId playerId, DealNumber dealNumber)
+    public Hand GetHand(PlayerId playerId, DealId dealId)
     {
         // todo: check if user exists
         // todo: check if deal number exits
-        var deal = GetDeal(dealNumber);
+        var deal = GetDeal(dealId);
         return deal.GetHand(playerId);
     }
 
-    public void Bid(DealNumber dealNumber, Bid newBid)
+    public void Bid(DealId dealId, Bid newBid)
     {
-        var deal = GetDeal(dealNumber);
+        var deal = GetDeal(dealId);
         deal.Bid(newBid);
     }
 
-    public void Check(DealNumber dealNumber, PlayerId playerId)
+    public void Check(DealId dealId, PlayerId playerId)
     {
-        var deal = GetDeal(dealNumber);
+        var deal = GetDeal(dealId);
         var lastDealLooser = deal.Check(playerId);
         var gamePlayer = _players.Single(p => p.PlayerId.Id.Equals(lastDealLooser.PlayerId));
         gamePlayer.OnLostLastDeal();
     }
 
-    public DealFlowResult GetDealFlow(DealNumber dealNumber)
+    public DealFlowResult GetDealFlow(DealId dealId)
     {
-        var deal = GetDeal(dealNumber);
+        var deal = GetDeal(dealId);
         return deal.GetDealFlow();
     }
 
@@ -96,6 +96,6 @@ internal sealed class Game
     private bool IsGameStarted() =>
         _deals.Count > 0;
 
-    private Deal GetDeal(DealNumber dealNumber) =>
-        _deals.Single(d => d.DealId.Number.Equals(dealNumber));
+    private Deal GetDeal(DealId dealId) =>
+        _deals.Single(d => d.DealId == dealId);
 }

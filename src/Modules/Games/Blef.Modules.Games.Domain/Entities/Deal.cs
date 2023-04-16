@@ -31,7 +31,7 @@ internal sealed class Deal
 
     public Hand GetHand(PlayerId playerId)
     {
-        var player = _players.Single(p => p.PlayerId.Equals(playerId));
+        var player = _players.Single(p => p.PlayerId == playerId);
         return player.Hand;
     }
 
