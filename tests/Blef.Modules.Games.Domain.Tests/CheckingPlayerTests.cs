@@ -7,34 +7,26 @@ public class CheckingPlayerTests
     [Fact]
     public void CreateCheckingPlayerTest()
     {
-        var exception = Record.Exception(() =>
-        {
-            // arrange
-            var guid = Guid.Parse("F51D3D3C-BF45-4FE8-AA41-D07BF43D9A14");
+        // arrange
+        var guid = Guid.Parse("F51D3D3C-BF45-4FE8-AA41-D07BF43D9A14");
 
-            // act
-            var actual = new CheckingPlayer(guid);
+        // act
+        var actual = new CheckingPlayer(guid);
 
-            // assert
-            Assert.Equal(expected: guid, actual: actual.PlayerId);
-        });
-        Assert.Null(exception);
+        // assert
+        Assert.Equal(guid, actual.PlayerId);
     }
 
     [Fact]
     public void CanCreateCheckingPlayerWithEmptyGuidTest()
     {
-        var exception = Record.Exception(() =>
-        {
-            // arrange
-            var emptyGuid = Guid.Empty;
+        // arrange
+        var emptyGuid = Guid.Empty;
 
-            // act
-            var actual = new CheckingPlayer(emptyGuid);
+        // act
+        var actual = new CheckingPlayer(emptyGuid);
 
-            // assert
-            Assert.Equal(expected: emptyGuid, actual: actual.PlayerId);
-        });
-        Assert.Null(exception);
+        // assert
+        Assert.Equal(emptyGuid, actual.PlayerId);
     }
 }
