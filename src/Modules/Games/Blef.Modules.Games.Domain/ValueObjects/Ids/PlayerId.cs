@@ -1,14 +1,8 @@
 ﻿namespace Blef.Modules.Games.Domain.ValueObjects.Ids;
 
-public sealed record PlayerId
+public sealed record PlayerId(Guid Id)
 {
-    public Guid Id { get; }
-
-    public PlayerId(Guid id)
-    {
-        if (id == Guid.Empty)
-            throw new ArgumentException("Game player ID cannot be empty");
-
-        Id = id;
-    }
+    public Guid Id { get; } = Id == Guid.Empty
+        ? throw new ArgumentException("Player ID cannot be empty")
+        : Id;
 }

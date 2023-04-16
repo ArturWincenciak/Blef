@@ -3,14 +3,8 @@ using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.ValueObjects;
 
-internal sealed class DealPlayer
+internal sealed record DealPlayer(PlayerId PlayerId, Hand Hand)
 {
-    public PlayerId PlayerId { get; }
-    public Hand Hand { get; }
-
-    public DealPlayer(PlayerId playerId, Hand cards)
-    {
-        PlayerId = playerId ?? throw new ArgumentNullException(nameof(playerId));
-        Hand = cards ?? throw new ArgumentNullException(nameof(cards));
-    }
+    public PlayerId PlayerId { get; } = PlayerId ?? throw new ArgumentNullException(nameof(PlayerId));
+    public Hand Hand { get; } = Hand ?? throw new ArgumentNullException(nameof(Hand));
 }
