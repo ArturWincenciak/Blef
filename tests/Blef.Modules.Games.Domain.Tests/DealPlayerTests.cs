@@ -18,7 +18,7 @@ public class DealPlayerTests
         var actual = new DealPlayer(playerId, hand);
 
         // assert
-        Assert.Equal(playerId, actual.PlayerId);
+        Assert.True(new PlayerId(guid) == actual.PlayerId);
         Assert.Equal(hand, actual.Hand);
     }
 
