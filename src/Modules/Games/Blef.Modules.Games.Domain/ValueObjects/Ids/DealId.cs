@@ -2,9 +2,9 @@
 
 public sealed record DealId(GameId GameId, DealNumber Number)
 {
-    public GameId GameId { get; init; } =
+    public GameId GameId { get; } =
         GameId ?? throw new ArgumentNullException(nameof(GameId));
 
-    public DealNumber Number { get; init; } =
+    public DealNumber Number { get; } =
         Number ?? throw new ArgumentNullException(nameof(Number));
 }
