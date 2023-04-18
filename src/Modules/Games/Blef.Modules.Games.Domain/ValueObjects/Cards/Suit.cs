@@ -18,6 +18,15 @@ internal sealed class Suit
         _suit = suit;
     }
 
+    private bool Equals(Suit other) =>
+        _suit == other._suit;
+
+    public override bool Equals(object? obj) =>
+        ReferenceEquals(this, obj) || obj is Suit other && Equals(other);
+
+    public override int GetHashCode() =>
+        (int) _suit;
+
     public override string ToString() =>
         _suit.ToString();
 

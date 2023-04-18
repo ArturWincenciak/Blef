@@ -22,7 +22,7 @@ internal sealed class Table
             throw new ArgumentException("There cannot be more than four players' hands dealt on the table");
 
         if (AreAllCardsUnique(hands) == false)
-            throw new AggregateException("No card duplicates are allowed in the players' hands dealt on the table");
+            throw new ArgumentException("No card duplicates are allowed in the players' hands dealt on the table");
 
         _hands = hands;
     }
