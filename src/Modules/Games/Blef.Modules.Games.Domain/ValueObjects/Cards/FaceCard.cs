@@ -37,6 +37,15 @@ internal sealed class FaceCard
     public static bool operator <(FaceCard first, FaceCard second) =>
         !(first > second);
 
+    private bool Equals(FaceCard other) =>
+        _faceCard == other._faceCard;
+
+    public override bool Equals(object? obj) =>
+        ReferenceEquals(this, obj) || obj is FaceCard other && Equals(other);
+
+    public override int GetHashCode() =>
+        (int) _faceCard;
+
     public override string ToString() =>
         _faceCard.ToString();
 

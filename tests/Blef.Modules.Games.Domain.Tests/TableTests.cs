@@ -107,4 +107,51 @@ public class TableTests
         Assert.True(actual.Contains(FaceCard.Jack));
         Assert.True(actual.Contains(FaceCard.Ten));
     }
+
+    [Fact]
+    public void CannotCreateTableWithNullHandsTest() =>
+        Assert.Throws<ArgumentNullException>(() => new Table(null));
+
+    [Fact]
+    public void CannotCreateTableWithNotUniqueCardsTest() =>
+        Assert.Throws<ArgumentException>(() =>
+        {
+            var hands = new[]
+            {
+                new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)}),
+                new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)}),
+            };
+            new Table(hands);
+        });
+
+    [Fact]
+    public void CannotCreateTableWithLessThenTwoPlayersHandsTest() =>
+        Assert.Throws<ArgumentException>(() =>
+        {
+            var onlyOneHand = new Hand[]
+            {
+                new(new Card[]
+                {
+                    new(FaceCard.Ace, Suit.Clubs),
+                    new(FaceCard.King, Suit.Clubs),
+                    new(FaceCard.Queen, Suit.Clubs)
+                })
+            };
+            new Table(onlyOneHand);
+        });
+
+    [Fact]
+    public void CannotCreateTableWithMoreThenFourPlayersHandsTest() =>
+        Assert.Throws<ArgumentException>(() =>
+        {
+            var fiveHands = new Hand[]
+            {
+                new(new Card[] {new(FaceCard.Ace, Suit.Clubs)}),
+                new(new Card[] {new(FaceCard.King, Suit.Diamonds)}),
+                new(new Card[] {new(FaceCard.Queen, Suit.Hearts)}),
+                new(new Card[] {new(FaceCard.Jack, Suit.Spades)}),
+                new(new Card[] {new(FaceCard.Ten, Suit.Spades)})
+            };
+            new Table(fiveHands);
+        });
 }
