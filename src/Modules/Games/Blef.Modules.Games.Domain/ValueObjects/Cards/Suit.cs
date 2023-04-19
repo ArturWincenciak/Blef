@@ -12,8 +12,8 @@ internal sealed class Suit
 
     private Suit(Type suit)
     {
-        if (suit is Type.None) // todo: exception
-            throw new ArgumentException("TBD");
+        if (suit is Type.None)
+            throw new ArgumentException($"{Type.None} type is not allowed");
 
         _suit = suit;
     }
