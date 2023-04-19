@@ -13,8 +13,8 @@ internal sealed class FaceCard
 
     private FaceCard(Type faceCard)
     {
-        if (faceCard is Type.None) // todo: exception
-            throw new ArgumentException("TBD");
+        if (faceCard is Type.None)
+            throw new ArgumentException($"{Type.None} type is not allowed");
 
         _faceCard = faceCard;
     }
