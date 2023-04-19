@@ -2,14 +2,27 @@
 
 internal sealed class Hand
 {
+    private const int MAX_CARD_AMOUNT = 5;
+
     public IEnumerable<Card> Cards { get; }
 
     public Hand(IEnumerable<Card> cards)
     {
-        // todo: validate if all cards are unique
-        // todo: validate if here is at least one card
-        // todo: validate if here is no more five cards
+        if (cards is null)
+            throw new ArgumentNullException(nameof(cards));
+
+        if (cards.Any() == false)
+            throw new ArgumentException("Hand without at least one card is not valid");
+
+        if(cards.Count() > MAX_CARD_AMOUNT)
+            throw new ArgumentException("Hand with more then five cards is not valid");
+
+        if (AreAllCardsUnique(cards) == false)
+            throw new ArgumentException("No card duplicates are allowed in the players' hands");
 
         Cards = cards ?? throw new ArgumentNullException(nameof(cards));
     }
+
+    private static bool AreAllCardsUnique(IEnumerable<Card> cards) =>
+        cards.Distinct().Count() == cards.Count();
 }
