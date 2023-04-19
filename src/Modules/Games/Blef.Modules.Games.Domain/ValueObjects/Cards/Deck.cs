@@ -11,22 +11,25 @@ internal sealed class Deck
         if (cards is null)
             throw new ArgumentNullException(nameof(cards));
 
-        if (cards.Count() != NUMBER_OF_CARDS) // todo: exception
-            throw new Exception("TBD");
+        if (cards.Count() != NUMBER_OF_CARDS)
+            throw new ArgumentException($"The deck of cards must have exactly {NUMBER_OF_CARDS} cards");
 
-        // todo: does `Distinct` use `==` operator or `equal` method?
-        var isUnique = cards.Distinct().Count() == cards.Count();
-        if (!isUnique) // todo: exception
-            throw new Exception("TBD");
+        if (AreAllCardsUnique(cards) == false)
+            throw new ArgumentException("No card duplicates are allowed in the deck of cards");
 
         _cards = cards.ToList();
     }
 
     public Hand Deal(CardsAmount cardsAmount)
     {
-        // todo: validate if there are any cards left to be dealt
+        if (_cards.Count < cardsAmount)
+            throw new InvalidOperationException("There are not enough cards in the deck to deal");
+
         var hand = _cards.Take(cardsAmount).ToArray();
         _cards.RemoveRange(index: 0, cardsAmount);
         return new(hand);
     }
+
+    private static bool AreAllCardsUnique(IEnumerable<Card> cards) =>
+        cards.Distinct().Count() == cards.Count();
 }
