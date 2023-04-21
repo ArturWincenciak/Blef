@@ -22,10 +22,10 @@ internal sealed class GamePlayer
     public static GamePlayer Create(PlayerNick nick) =>
         new(playerId: new PlayerId(Guid.NewGuid()), nick, CardsAmount.Initial);
 
-    public void OnLostLastDeal()
+    public void LostLastDeal()
     {
-        if (_isOutOfTheGame) // todo: exception
-            throw new Exception("TBD");
+        if (_isOutOfTheGame)
+            throw new InvalidOperationException("Player already is out of the game");
 
         if (CardsAmount < CardsAmount.Max)
             CardsAmount = CardsAmount.AddOneCard();

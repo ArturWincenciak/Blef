@@ -78,7 +78,7 @@ internal sealed class Game
         var deal = GetDeal(dealId);
         var lastDealLooser = deal.Check(playerId);
         var gamePlayer = _players.Single(p => p.PlayerId.Id.Equals(lastDealLooser.PlayerId));
-        gamePlayer.OnLostLastDeal();
+        gamePlayer.LostLastDeal();
     }
 
     public DealFlowResult GetDealFlow(DealId dealId)
