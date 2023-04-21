@@ -1,13 +1,11 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Blef.Modules.Games.Domain.ValueObjects;
+﻿namespace Blef.Modules.Games.Domain.ValueObjects;
 
 internal sealed class CardsAmount
 {
     private const int INITIAL_CARDS_AMOUNT = 1;
     private const int MAX_CARDS_AMOUNT = 5;
 
-    private int _amount;
+    private readonly int _amount;
 
     public static CardsAmount Initial => new(INITIAL_CARDS_AMOUNT);
     public static CardsAmount Max => new (MAX_CARDS_AMOUNT);
@@ -23,12 +21,12 @@ internal sealed class CardsAmount
         _amount = amount;
     }
 
-    public void AddOneCard()
+    public CardsAmount AddOneCard()
     {
         if (_amount == MAX_CARDS_AMOUNT)
             throw new InvalidOperationException("Amount cannot be greater then five");
 
-        _amount++;
+        return new CardsAmount(_amount + 1);
     }
 
     public static bool operator < (CardsAmount @this, CardsAmount other) =>

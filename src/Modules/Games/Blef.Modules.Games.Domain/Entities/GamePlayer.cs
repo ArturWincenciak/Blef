@@ -8,7 +8,7 @@ internal sealed class GamePlayer
     private bool _isOutOfTheGame;
     public PlayerId PlayerId { get; }
     public PlayerNick Nick { get; }
-    public CardsAmount CardsAmount { get; }
+    public CardsAmount CardsAmount { get; private set; }
     public bool IsInTheGame => !_isOutOfTheGame;
 
     private GamePlayer(PlayerId playerId, PlayerNick nick, CardsAmount cardsAmount)
@@ -28,7 +28,7 @@ internal sealed class GamePlayer
             throw new Exception("TBD");
 
         if (CardsAmount < CardsAmount.Max)
-            CardsAmount.AddOneCard();
+            CardsAmount = CardsAmount.AddOneCard();
         else
             _isOutOfTheGame = true;
     }
