@@ -11,10 +11,10 @@ internal sealed class Croupier
     public Croupier(IDeckFactory deckFactory) =>
         _deckFactory = deckFactory ?? throw new ArgumentNullException(nameof(deckFactory));
 
-    public Deal Deal(DealId dealId, IEnumerable<NextDealPlayer> nextDealPlayers)
+    public Deal Deal(DealId dealId, NextDealPlayerSet nextDealPlayerSet)
     {
         var deck = _deckFactory.Create();
-        var players = nextDealPlayers
+        var players = nextDealPlayerSet.Players
             .Select(player =>
             {
                 var hand = deck.Deal(player.CardsAmount);

@@ -30,11 +30,11 @@ public class CroupierTests
             new DealId(
                 new GameId(gameId),
                 new DealNumber(1)),
-            new NextDealPlayer[]
+            new(new NextDealPlayer[]
             {
                 new(new PlayerId(playerId_1), CardsAmount.Initial),
                 new(new PlayerId(playerId_2), CardsAmount.Initial),
-            });
+            }));
         var hand_1 = deal.GetHand(new PlayerId(playerId_1));
         var hand_2 = deal.GetHand(new PlayerId(playerId_2));
 
@@ -60,12 +60,12 @@ public class CroupierTests
             new DealId(
                 new GameId(gameId),
                 new DealNumber(1)),
-            new NextDealPlayer[]
+            new(new NextDealPlayer[]
             {
                 new (new PlayerId(playerId_1), CardsAmount.Initial),
                 new (new PlayerId(playerId_2), CardsAmount.Max),
                 new (new PlayerId(playerId_3), CardsAmount.Initial.AddOneCard().AddOneCard())
-            });
+            }));
         var hand_1 = deal.GetHand(new PlayerId(playerId_1));
         var hand_2 = deal.GetHand(new PlayerId(playerId_2));
         var hand_3 = deal.GetHand(new PlayerId(playerId_3));
@@ -94,13 +94,13 @@ public class CroupierTests
             new DealId(
                 new GameId(gameId),
                 new DealNumber(1)),
-            new NextDealPlayer[]
+            new(new NextDealPlayer[]
             {
                 new(new PlayerId(playerId_1), CardsAmount.Max),
                 new(new PlayerId(playerId_2), CardsAmount.Max),
                 new(new PlayerId(playerId_3), CardsAmount.Max),
                 new(new PlayerId(playerId_4), CardsAmount.Max),
-            });
+            }));
         var hand_1 = deal.GetHand(new PlayerId(playerId_1));
         var hand_2 = deal.GetHand(new PlayerId(playerId_2));
         var hand_3 = deal.GetHand(new PlayerId(playerId_3));
