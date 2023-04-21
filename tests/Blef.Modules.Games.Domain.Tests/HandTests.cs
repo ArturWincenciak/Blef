@@ -28,11 +28,11 @@ public class HandTests
 
     [Fact]
     public void CannotCreateHandWithoutAnyCardTest() =>
-        Assert.Throws<ArgumentException>(() => new Hand(Array.Empty<Card>()));
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Hand(Array.Empty<Card>()));
 
     [Fact]
     public void CannotCreateHandWithMoreThanFiveCardsTest() =>
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
             new Hand(new Card[]
             {
                 new(FaceCard.Ace, Suit.Clubs),
