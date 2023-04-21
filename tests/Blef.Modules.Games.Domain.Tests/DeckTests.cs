@@ -11,7 +11,7 @@ public class DeckTests
 
     [Fact]
     public void DeckCannotBeCreateWithLessThenTwentyFourCardsTest() =>
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             var onlyOneCard = new Card[] {new(FaceCard.Ace, Suit.Clubs)};
             return new Deck(onlyOneCard);
@@ -19,7 +19,7 @@ public class DeckTests
 
     [Fact]
     public void DeckCannotBeCreateWithMoreThenTwentyFourCardsTest() =>
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             var twentyFiveCards = CreateManyTheSameCards(25);
             return new Deck(twentyFiveCards);
@@ -27,7 +27,7 @@ public class DeckTests
 
     [Fact]
     public void DeckCannotBeCreateWithNoUniqueCardsTest() =>
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             var twentyFourCards = CreateManyTheSameCards(24);
             return new Deck(twentyFourCards);

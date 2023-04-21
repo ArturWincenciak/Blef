@@ -126,7 +126,7 @@ public class TableTests
 
     [Fact]
     public void CannotCreateTableWithLessThenTwoPlayersHandsTest() =>
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             var onlyOneHand = new Hand[]
             {
@@ -142,7 +142,7 @@ public class TableTests
 
     [Fact]
     public void CannotCreateTableWithMoreThenFourPlayersHandsTest() =>
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
         {
             var fiveHands = new Hand[]
             {
