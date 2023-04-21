@@ -57,11 +57,10 @@ public class DeckTests
     {
         // arrange
         var deck = new Deck(AllCards());
-        var cardAmount = CardsAmount.Initial;
-        cardAmount.AddOneCard();
+        var twoCards = CardsAmount.Initial.AddOneCard();
 
         // act
-        var actual = deck.Deal(cardAmount);
+        var actual = deck.Deal(twoCards);
         var expected = new Hand(TakeCards(from: 1, amount: 2));
 
         // assert
@@ -88,13 +87,11 @@ public class DeckTests
     {
         // arrange
         var deck = new Deck(AllCards());
-        var cardsAmount = CardsAmount.Initial;
-        cardsAmount.AddOneCard();
-        cardsAmount.AddOneCard();
+        var threeCards = CardsAmount.Initial.AddOneCard().AddOneCard();
 
         // act
         var _ = deck.Deal(CardsAmount.Initial);
-        var actual = deck.Deal(cardsAmount);
+        var actual = deck.Deal(threeCards);
         var expected = new Hand(TakeCards(from: 2, amount: 3));
 
         // assert
@@ -161,9 +158,7 @@ public class DeckTests
     {
         // arrange
         var deck = new Deck(AllCards());
-        var cardsAmount = CardsAmount.Initial;
-        cardsAmount.AddOneCard();
-        cardsAmount.AddOneCard();
+        var threeCards = CardsAmount.Initial.AddOneCard().AddOneCard();
 
         // act
         deck.Deal(CardsAmount.Max);
@@ -171,7 +166,7 @@ public class DeckTests
         deck.Deal(CardsAmount.Max);
         deck.Deal(CardsAmount.Max);
         deck.Deal(CardsAmount.Initial);
-        var actual = deck.Deal(cardsAmount);
+        var actual = deck.Deal(threeCards);
         var expected = new Hand(TakeCards(from: 22, amount: 3));
 
         // assert

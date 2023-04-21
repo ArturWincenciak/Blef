@@ -17,31 +17,26 @@ public class CardsAmountTests
     [Fact]
     public void CanAddSeveralCardsTest()
     {
-        // arrange
-        var cardAmount = CardsAmount.Initial;
-
         // act
-        cardAmount.AddOneCard();
-        cardAmount.AddOneCard();
-        cardAmount.AddOneCard();
+        var cardAmount = CardsAmount
+            .Initial
+            .AddOneCard()
+            .AddOneCard()
+            .AddOneCard();
 
         // assert
         Assert.Equal(expected: 4, actual: (int) cardAmount);
     }
 
     [Fact]
-    public void CannotExceedFiveCardsTest()
-    {
-        // arrange
-        var cardAmount = CardsAmount.Initial;
-        cardAmount.AddOneCard();
-        cardAmount.AddOneCard();
-        cardAmount.AddOneCard();
-        cardAmount.AddOneCard();
-
-        // act, assert
-        Assert.Throws<InvalidOperationException>(() => cardAmount.AddOneCard());
-    }
+    public void CannotExceedFiveCardsTest() =>
+        Assert.Throws<InvalidOperationException>(() => CardsAmount
+            .Initial
+            .AddOneCard()
+            .AddOneCard()
+            .AddOneCard()
+            .AddOneCard()
+            .AddOneCard());
 
     [Fact]
     public void InitialCardAmountIsLowerThenMaxCardAmountTest()
@@ -57,13 +52,14 @@ public class CardsAmountTests
     public void FourIsLowerThenMaxTest()
     {
         // arrange
-        var cardAmount = CardsAmount.Initial;
-        cardAmount.AddOneCard();
-        cardAmount.AddOneCard();
-        cardAmount.AddOneCard();
+        var cardsAmount = CardsAmount
+            .Initial
+            .AddOneCard()
+            .AddOneCard()
+            .AddOneCard();
 
         // act
-        var actual = cardAmount < CardsAmount.Max;
+        var actual = cardsAmount < CardsAmount.Max;
 
         // assert
         Assert.True(actual);
@@ -73,11 +69,11 @@ public class CardsAmountTests
     public void FiveIsNotLowerThenMaxTest()
     {
         // arrange
-        var cardAmount = CardsAmount.Initial;
-        cardAmount.AddOneCard();
-        cardAmount.AddOneCard();
-        cardAmount.AddOneCard();
-        cardAmount.AddOneCard();
+        var cardAmount = CardsAmount.Initial
+            .AddOneCard()
+            .AddOneCard()
+            .AddOneCard()
+            .AddOneCard();
 
         // act
         var actual = cardAmount < CardsAmount.Max;
