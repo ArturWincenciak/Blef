@@ -21,6 +21,7 @@ internal sealed class Deal
     {
         // todo: validate if here are at least two players
         // todo: validate if here are not more then four players
+        // todo: validate if all players are unique
 
         DealId = dealId ?? throw new ArgumentNullException(nameof(dealId));
         _players = players ?? throw new ArgumentNullException(nameof(players));
