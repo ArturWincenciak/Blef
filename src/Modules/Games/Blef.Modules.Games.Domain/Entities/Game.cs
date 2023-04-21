@@ -52,14 +52,11 @@ internal sealed class Game
         // todo: parametrize players in new deal based on last deal (number of cards)
 
         var nextDealNumber = _deals.Count + 1;
-        var dealId = new DealId(Id, Number: new DealNumber(nextDealNumber));
-        var nextDealPlayers = _players
-            .Where(p => p.IsInTheGame)
-            .Select(p => new NextDealPlayer(p.PlayerId, p.CardsAmount))
-            .ToArray();
-        var deal = _croupier.Deal(dealId, new NextDealPlayerSet(nextDealPlayers));
+        var nextDealId = new DealId(Id, Number: new DealNumber(nextDealNumber));
+        var nextDealPlayers = CreateNextDealPlayers();
+        var deal = _croupier.Deal(nextDealId, nextDealPlayers);
         _deals.Add(deal);
-        return dealId;
+        return nextDealId;
     }
 
     public Hand GetHand(PlayerId playerId, DealId dealId)
@@ -98,4 +95,10 @@ internal sealed class Game
 
     private Deal GetDeal(DealId dealId) =>
         _deals.Single(d => d.DealId == dealId);
+
+    private NextDealPlayerSet CreateNextDealPlayers() =>
+        new (_players
+            .Where(p => p.IsInTheGame)
+            .Select(p => new NextDealPlayer(p.PlayerId, p.CardsAmount))
+            .ToArray());
 }
