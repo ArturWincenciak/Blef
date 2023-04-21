@@ -226,12 +226,13 @@ public class DeckTests
 
     private static Card[] AllCards() =>
         TwentyFourUniqueCards
-            .Select(card => card)
+            .Select(card => new Card(card.FaceCard, card.Suit))
             .ToArray();
 
     private static Card[] TakeCards(int from, int amount) =>
         TwentyFourUniqueCards
             .Take(new Range(from - 1, (from - 1) + amount))
+            .Select(card => new Card(card.FaceCard, card.Suit))
             .ToArray();
 
     private static Card[] TwentyFourUniqueCards =>
