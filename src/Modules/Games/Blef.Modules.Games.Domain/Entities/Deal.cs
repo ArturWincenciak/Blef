@@ -50,6 +50,8 @@ internal sealed class Deal
 
     public void Bid(Bid newBid)
     {
+        // todo: check if that is the player turn
+
         if(IsItFirstMoveInDeal == false)
             if(newBid.PokerHand.IsBetterThan(_lastBid.PokerHand) == false)
                 throw new BidIsNotHigherThenLastOneException(DealId, newBid, _lastBid);
@@ -60,6 +62,8 @@ internal sealed class Deal
 
     public LooserPlayer Check(PlayerId checkingPlayerId)
     {
+        // todo: check if that is the player turn
+
         if (IsItFirstMoveInDeal)
             throw new NoBidToCheckException(DealId);
 
