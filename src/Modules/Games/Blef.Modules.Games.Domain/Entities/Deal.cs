@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects;
+﻿using Blef.Modules.Games.Domain.Exceptions;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
@@ -7,6 +8,9 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Deal
 {
+    private const int MAX_NUMBER_OF_PLAYERS = 4;
+    private const int MIN_NUMBER_OF_PLAYERS = 2;
+
     private readonly BidHistory _bidHistory;
 
     private readonly IEnumerable<DealPlayer> _players;
@@ -19,12 +23,20 @@ internal sealed class Deal
 
     public Deal(DealId dealId, IEnumerable<DealPlayer> players)
     {
-        // todo: validate if here are at least two players
-        // todo: validate if here are not more then four players
-        // todo: validate if all players are unique
+        if (players is null)
+            throw new ArgumentNullException(nameof(players));
+
+        if (players.Count() < MIN_NUMBER_OF_PLAYERS)
+            throw new ArgumentOutOfRangeException("Deal should have at least two players");
+
+        if (players.Count() > MAX_NUMBER_OF_PLAYERS)
+            throw new ArgumentOutOfRangeException("Deal cannot have more than four players");
+
+        if (AreAllPlayersUnique(players) == false)
+            throw new ArgumentException("No player duplicates are allowed");
 
         DealId = dealId ?? throw new ArgumentNullException(nameof(dealId));
-        _players = players ?? throw new ArgumentNullException(nameof(players));
+        _players = players;
         _bidHistory = new BidHistory();
         _looserPlayer = new LooserPlayer();
         _checkingPlayer = new CheckingPlayer();
@@ -40,7 +52,7 @@ internal sealed class Deal
     {
         if(IsItFirstMoveInDeal == false)
             if(newBid.PokerHand.IsBetterThan(_lastBid.PokerHand) == false)
-                throw new Exception("TBD"); // todo: exception
+                throw new BidIsNotHigherThenLastOneException(DealId, newBid, _lastBid);
 
         _lastBid = newBid;
         _bidHistory.OnBid(newBid);
@@ -48,8 +60,8 @@ internal sealed class Deal
 
     public LooserPlayer Check(PlayerId checkingPlayerId)
     {
-        if (IsItFirstMoveInDeal) // todo: exception
-            throw new Exception("TBD: First must be bid");
+        if (IsItFirstMoveInDeal)
+            throw new NoBidToCheckException(DealId);
 
         _checkingPlayer = new CheckingPlayer(checkingPlayerId.Id);
 
@@ -74,4 +86,10 @@ internal sealed class Deal
 
     private bool IsItFirstMoveInDeal =>
         _lastBid is null;
+
+    private bool AreAllPlayersUnique(IEnumerable<DealPlayer> players) =>
+        players
+            .Select(player => player.PlayerId)
+            .Distinct()
+            .Count() == players.Count();
 }
