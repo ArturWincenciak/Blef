@@ -1,0 +1,265 @@
+﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Cards;
+
+namespace Blef.Modules.Games.Domain.Tests;
+
+public class DeckTests
+{
+    [Fact]
+    public void CannotCreateWithNullArgumentTest() =>
+        Assert.Throws<ArgumentNullException>(() => new Deck(null));
+
+    [Fact]
+    public void DeckCannotBeCreateWithLessThenTwentyFourCardsTest() =>
+        Assert.Throws<ArgumentException>(() =>
+        {
+            var onlyOneCard = new Card[] {new(FaceCard.Ace, Suit.Clubs)};
+            return new Deck(onlyOneCard);
+        });
+
+    [Fact]
+    public void DeckCannotBeCreateWithMoreThenTwentyFourCardsTest() =>
+        Assert.Throws<ArgumentException>(() =>
+        {
+            var twentyFiveCards = CreateManyTheSameCards(25);
+            return new Deck(twentyFiveCards);
+        });
+
+    [Fact]
+    public void DeckCannotBeCreateWithNoUniqueCardsTest() =>
+        Assert.Throws<ArgumentException>(() =>
+        {
+            var twentyFourCards = CreateManyTheSameCards(24);
+            return new Deck(twentyFourCards);
+        });
+
+    [Fact]
+    public void CreateDeckTest() =>
+        Assert.Null(Record.Exception(() =>
+            new Deck(TwentyFourUniqueCards)));
+
+    [Fact]
+    public void When_DealOneCard_Then_HandContainsTheFirstOneCard()
+    {
+        // arrange
+        var deck = new Deck(AllCards());
+
+        // act
+        var actual = deck.Deal(CardsAmount.Initial);
+        var expected = new Hand(TakeCards(from: 1, amount: 1));
+
+        // assert
+        AssertTheSame(expected, actual);
+    }
+
+    [Fact]
+    public void When_DealTwoCards_Then_HandContainsTheFirstTwoCards()
+    {
+        // arrange
+        var deck = new Deck(AllCards());
+        var cardAmount = CardsAmount.Initial;
+        cardAmount.AddOneCard();
+
+        // act
+        var actual = deck.Deal(cardAmount);
+        var expected = new Hand(TakeCards(from: 1, amount: 2));
+
+        // assert
+        AssertTheSame(expected, actual);
+    }
+
+    [Fact]
+    public void When_DealOneCardTwoTimes_Then_HandContainsTheSingleSecondCard()
+    {
+        // arrange
+        var deck = new Deck(AllCards());
+
+        // act
+        var _ = deck.Deal(CardsAmount.Initial);
+        var actual = deck.Deal(CardsAmount.Initial);
+        var expected = new Hand(TakeCards(from: 2, amount: 1));
+
+        // assert
+        AssertTheSame(expected, actual);
+    }
+
+    [Fact]
+    public void When_DealOneCardAndThreeCards_Then_HandContainsTheThreeCards()
+    {
+        // arrange
+        var deck = new Deck(AllCards());
+        var cardsAmount = CardsAmount.Initial;
+        cardsAmount.AddOneCard();
+        cardsAmount.AddOneCard();
+
+        // act
+        var _ = deck.Deal(CardsAmount.Initial);
+        var actual = deck.Deal(cardsAmount);
+        var expected = new Hand(TakeCards(from: 2, amount: 3));
+
+        // assert
+        AssertTheSame(expected, actual);
+    }
+
+    [Fact]
+    public void When_DealOneCardAndFiveCards_Then_HandContainsTheFiveCards()
+    {
+        // arrange
+        var deck = new Deck(AllCards());
+
+        // act
+        deck.Deal(CardsAmount.Initial);
+        var actual = deck.Deal(CardsAmount.Max);
+        var expected = new Hand(TakeCards(from: 2, amount: 5));
+
+        // assert
+        AssertTheSame(expected, actual);
+    }
+
+    [Fact]
+    public void When_DealOneCardThreeTimesAndFiveCardsAndOneCardAndAgainFiveCards_Then_HandContainsTheFiveCards()
+    {
+        // arrange
+        var deck = new Deck(AllCards());
+
+        // act
+        deck.Deal(CardsAmount.Initial);
+        deck.Deal(CardsAmount.Initial);
+        deck.Deal(CardsAmount.Initial);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Initial);
+        var actual = deck.Deal(CardsAmount.Max);
+        var expected = new Hand(TakeCards(from: 10, amount: 5));
+
+        // assert
+        AssertTheSame(expected, actual);
+    }
+
+    [Fact]
+    public void When_DealFiveCardsFourTimesAndOneCardFourTimes_Then_HandContainsTheLastOneCard()
+    {
+        // arrange
+        var deck = new Deck(AllCards());
+
+        // act
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Initial);
+        deck.Deal(CardsAmount.Initial);
+        deck.Deal(CardsAmount.Initial);
+        var actual = deck.Deal(CardsAmount.Initial);
+        var expected = new Hand(TakeCards(from: 24, amount: 1));
+
+        // assert
+        AssertTheSame(expected, actual);
+    }
+
+    [Fact]
+    public void When_DealFiveCardsFourTimesAndOneAndTreeCards_Then_HandContainsTheLastThreeCards()
+    {
+        // arrange
+        var deck = new Deck(AllCards());
+        var cardsAmount = CardsAmount.Initial;
+        cardsAmount.AddOneCard();
+        cardsAmount.AddOneCard();
+
+        // act
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Initial);
+        var actual = deck.Deal(cardsAmount);
+        var expected = new Hand(TakeCards(from: 22, amount: 3));
+
+        // assert
+        AssertTheSame(expected, actual);
+    }
+
+    [Fact]
+    public void When_DealFiveCardsFiveTimes_MeansTooManyCards_Then_ThrowInvalidOperationException() =>
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            // arrange
+            var deck = new Deck(AllCards());
+
+            // act
+            deck.Deal(CardsAmount.Max);
+            deck.Deal(CardsAmount.Max);
+            deck.Deal(CardsAmount.Max);
+            deck.Deal(CardsAmount.Max);
+            deck.Deal(CardsAmount.Max);
+        });
+
+    [Fact]
+    public void When_DealFiveCardsFourTimesAndOneCardFiveTimes_MeansTooManyCards_Then_ThrowInvalidOperationException() =>
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            // arrange
+            var deck = new Deck(AllCards());
+
+            // act
+            deck.Deal(CardsAmount.Max);
+            deck.Deal(CardsAmount.Max);
+            deck.Deal(CardsAmount.Max);
+            deck.Deal(CardsAmount.Max);
+            deck.Deal(CardsAmount.Initial);
+            deck.Deal(CardsAmount.Initial);
+            deck.Deal(CardsAmount.Initial);
+            deck.Deal(CardsAmount.Initial);
+            deck.Deal(CardsAmount.Initial);
+        });
+
+    private static void AssertTheSame(Hand expected, Hand actual)
+    {
+        Assert.True(expected.Cards != actual.Cards);
+        Assert.Equal(expected.Cards, actual.Cards);
+    }
+
+    private static Card[] CreateManyTheSameCards(int amount) =>
+        Enumerable
+            .Range(0, amount)
+            .Select(_ => new Card(FaceCard.Ace, Suit.Clubs))
+            .ToArray();
+
+    private static Card[] AllCards() =>
+        TwentyFourUniqueCards
+            .Select(card => card)
+            .ToArray();
+
+    private static Card[] TakeCards(int from, int amount) =>
+        TwentyFourUniqueCards
+            .Take(new Range(from - 1, (from - 1) + amount))
+            .ToArray();
+
+    private static Card[] TwentyFourUniqueCards =>
+        new[]
+        {
+            new Card(FaceCard.Ace, Suit.Diamonds),
+            new Card(FaceCard.Ace, Suit.Spades),
+            new Card(FaceCard.Ten, Suit.Clubs),
+            new Card(FaceCard.Jack, Suit.Spades),
+            new Card(FaceCard.Queen, Suit.Diamonds),
+            new Card(FaceCard.King, Suit.Hearts),
+            new Card(FaceCard.King, Suit.Clubs),
+            new Card(FaceCard.Ace, Suit.Clubs),
+            new Card(FaceCard.Queen, Suit.Clubs),
+            new Card(FaceCard.Jack, Suit.Diamonds),
+            new Card(FaceCard.Ten, Suit.Diamonds),
+            new Card(FaceCard.King, Suit.Diamonds),
+            new Card(FaceCard.Nine, Suit.Clubs),
+            new Card(FaceCard.King, Suit.Spades),
+            new Card(FaceCard.Queen, Suit.Spades),
+            new Card(FaceCard.Jack, Suit.Clubs),
+            new Card(FaceCard.Nine, Suit.Spades),
+            new Card(FaceCard.Ace, Suit.Hearts),
+            new Card(FaceCard.Ten, Suit.Spades),
+            new Card(FaceCard.Ten, Suit.Hearts),
+            new Card(FaceCard.Nine, Suit.Hearts),
+            new Card(FaceCard.Nine, Suit.Diamonds),
+            new Card(FaceCard.Jack, Suit.Hearts),
+            new Card(FaceCard.Queen, Suit.Hearts)
+        };
+}
