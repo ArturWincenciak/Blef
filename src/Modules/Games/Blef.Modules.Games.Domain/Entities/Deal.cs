@@ -8,9 +8,6 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Deal
 {
-    private const int MAX_NUMBER_OF_PLAYERS = 4;
-    private const int MIN_NUMBER_OF_PLAYERS = 2;
-
     private readonly BidHistory _bidHistory;
 
     private readonly IEnumerable<DealPlayer> _players;

@@ -1,0 +1,1 @@
+﻿global using static Blef.Modules.Games.Domain.Rules;
