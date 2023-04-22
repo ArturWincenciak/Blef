@@ -50,11 +50,11 @@ internal sealed class Deal
 
     public void Bid(Bid newBid)
     {
-        if(CheckIfThatIsThePlayerMove(newBid.Player) == false)
+        if (CheckIfThatIsThePlayerMove(newBid.Player) == false)
             throw new ThatIsNotThisPlayerTurnNowException(newBid.Player);
 
-        if(BetHasBeenMade)
-            if(newBid.PokerHand.IsBetterThan(_lastBid.PokerHand) == false)
+        if (BetHasBeenMade)
+            if (newBid.PokerHand.IsBetterThan(_lastBid.PokerHand) == false)
                 throw new BidIsNotHigherThenLastOneException(DealId, newBid, _lastBid);
 
         _lastBid = newBid;
@@ -98,26 +98,28 @@ internal sealed class Deal
         players
             .Select(player => player.PlayerId)
             .Distinct()
-            .Count() == players.Count();
+            .Count() ==
+        players.Count();
 
     private bool CheckIfThatIsThePlayerMove(PlayerId playerId)
     {
         var isThatFirstMoveInDeal = _previousMovingPlayer is null;
         if (isThatFirstMoveInDeal)
         {
-            var firstPlayerInSequence = _players.Single(player => player.MoveOrder == 1);
+            var firstPlayerInSequence = _players.Single(player => player.MoveOrder == Order.First);
             return firstPlayerInSequence.PlayerId == playerId;
         }
 
-        var lastPlayerInSequenceExecutedPreviousMove = _previousMovingPlayer.MoveOrder == _players.Count();
+        var lastPlayerOrder = Order.Create(_players.Count());
+        var lastPlayerInSequenceExecutedPreviousMove = _previousMovingPlayer.MoveOrder == lastPlayerOrder;
         if (lastPlayerInSequenceExecutedPreviousMove)
         {
-            var firstPlayerInSequence = _players.Single(player => player.MoveOrder == 1);
+            var firstPlayerInSequence = _players.Single(player => player.MoveOrder == Order.First);
             return firstPlayerInSequence.PlayerId == playerId;
         }
 
-        var nextSequenceNumber = _previousMovingPlayer.MoveOrder + 1;
-        var nextPlayerInSequence = _players.Single(player => player.MoveOrder == nextSequenceNumber);
+        var nextPlayerOrder = _previousMovingPlayer.MoveOrder.Next;
+        var nextPlayerInSequence = _players.Single(player => player.MoveOrder == nextPlayerOrder);
         return nextPlayerInSequence.PlayerId == playerId;
     }
 }
