@@ -15,7 +15,9 @@ internal sealed class Deal
 
     private readonly IEnumerable<DealPlayer> _players;
 
+    private DealPlayer _previousMovingPlayer;
     private Bid _lastBid;
+
     private CheckingPlayer _checkingPlayer;
     private LooserPlayer _looserPlayer;
 
@@ -40,6 +42,7 @@ internal sealed class Deal
         _bidHistory = new BidHistory();
         _looserPlayer = new LooserPlayer();
         _checkingPlayer = new CheckingPlayer();
+        _previousMovingPlayer = null;
     }
 
     public Hand GetHand(PlayerId playerId)
@@ -50,21 +53,24 @@ internal sealed class Deal
 
     public void Bid(Bid newBid)
     {
-        // todo: check if that is the player turn
+        if(CheckIfThatIsThePlayerMove(newBid.Player) == false)
+            throw new ThatIsNotThisPlayerTurnNowException(newBid.Player);
 
-        if(IsItFirstMoveInDeal == false)
+        if(BetHasBeenMade)
             if(newBid.PokerHand.IsBetterThan(_lastBid.PokerHand) == false)
                 throw new BidIsNotHigherThenLastOneException(DealId, newBid, _lastBid);
 
         _lastBid = newBid;
+        _previousMovingPlayer = _players.Single(player => player.PlayerId == newBid.Player);
         _bidHistory.OnBid(newBid);
     }
 
     public LooserPlayer Check(PlayerId checkingPlayerId)
     {
-        // todo: check if that is the player turn
+        if (CheckIfThatIsThePlayerMove(checkingPlayerId) == false)
+            throw new ThatIsNotThisPlayerTurnNowException(checkingPlayerId);
 
-        if (IsItFirstMoveInDeal)
+        if (BetHasBeenMade == false)
             throw new NoBidToCheckException(DealId);
 
         _checkingPlayer = new CheckingPlayer(checkingPlayerId.Id);
@@ -88,12 +94,33 @@ internal sealed class Deal
         return new DealFlowResult(_players, bids, _checkingPlayer, _looserPlayer);
     }
 
-    private bool IsItFirstMoveInDeal =>
-        _lastBid is null;
+    private bool BetHasBeenMade =>
+        _lastBid is not null;
 
     private bool AreAllPlayersUnique(IEnumerable<DealPlayer> players) =>
         players
             .Select(player => player.PlayerId)
             .Distinct()
             .Count() == players.Count();
+
+    private bool CheckIfThatIsThePlayerMove(PlayerId playerId)
+    {
+        var isThatFirstMoveInDeal = _previousMovingPlayer is null;
+        if (isThatFirstMoveInDeal)
+        {
+            var firstPlayerInSequence = _players.Single(player => player.MoveOrder == 1);
+            return firstPlayerInSequence.PlayerId == playerId;
+        }
+
+        var lastPlayerInSequenceExecutedPreviousMove = _previousMovingPlayer.MoveOrder == _players.Count();
+        if (lastPlayerInSequenceExecutedPreviousMove)
+        {
+            var firstPlayerInSequence = _players.Single(player => player.MoveOrder == 1);
+            return firstPlayerInSequence.PlayerId == playerId;
+        }
+
+        var nextSequenceNumber = _previousMovingPlayer.MoveOrder + 1;
+        var nextPlayerInSequence = _players.Single(player => player.MoveOrder == nextSequenceNumber);
+        return nextPlayerInSequence.PlayerId == playerId;
+    }
 }

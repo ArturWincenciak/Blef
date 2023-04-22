@@ -12,7 +12,7 @@ public class GamePlayerTests
         var playerNick = new PlayerNick("Graham");
 
         // act
-        var actual = GamePlayer.Create(playerNick);
+        var actual = GamePlayer.Create(playerNick, 1);
 
         // assert
         Assert.Equal(new PlayerNick("Graham"), actual.Nick);
@@ -26,7 +26,7 @@ public class GamePlayerTests
     {
         // arrange
         var playerNick = new PlayerNick("Graham");
-        var gamePlayer = GamePlayer.Create(playerNick);
+        var gamePlayer = GamePlayer.Create(playerNick, 1);
 
         // act
         gamePlayer.LostLastDeal();
@@ -42,7 +42,7 @@ public class GamePlayerTests
     {
         // arrange
         var playerNick = new PlayerNick("Graham");
-        var gamePlayer = GamePlayer.Create(playerNick);
+        var gamePlayer = GamePlayer.Create(playerNick, 1);
 
         // act
         gamePlayer.LostLastDeal();
@@ -66,7 +66,7 @@ public class GamePlayerTests
     {
         // arrange
         var playerNick = new PlayerNick("Graham");
-        var gamePlayer = GamePlayer.Create(playerNick);
+        var gamePlayer = GamePlayer.Create(playerNick, 1);
 
         // act
         gamePlayer.LostLastDeal();
@@ -92,7 +92,7 @@ public class GamePlayerTests
         {
             // arrange
             var playerNick = new PlayerNick("Graham");
-            var gamePlayer = GamePlayer.Create(playerNick);
+            var gamePlayer = GamePlayer.Create(playerNick, 1);
 
             // act
             gamePlayer.LostLastDeal();
