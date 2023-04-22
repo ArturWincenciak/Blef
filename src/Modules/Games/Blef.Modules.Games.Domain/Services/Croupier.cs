@@ -18,7 +18,7 @@ internal sealed class Croupier
             .Select(player =>
             {
                 var hand = deck.Deal(player.CardsAmount);
-                return new DealPlayer(player.PlayerId, hand, player.Order);
+                return new DealPlayer(player.PlayerId, hand, Order.Create(player.Order));
             })
             .ToArray();
 
