@@ -21,8 +21,8 @@ public class DealTests
         var playerHand_2 = new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)});
         var players = new DealPlayer[]
         {
-            new(new(playerGuid_1), playerHand_1),
-            new(new(playerGuid_2), playerHand_2)
+            new(new(playerGuid_1), playerHand_1, 1),
+            new(new(playerGuid_2), playerHand_2, 2)
         };
 
         // act
