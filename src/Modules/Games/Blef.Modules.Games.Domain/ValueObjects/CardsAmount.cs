@@ -13,10 +13,10 @@ internal sealed class CardsAmount
     private CardsAmount(int amount)
     {
         if (amount < INITIAL_CARDS_AMOUNT)
-            throw new ArgumentOutOfRangeException("Amount cannot be less then one");
+            throw new ArgumentOutOfRangeException(nameof(amount), "Amount cannot be less then one");
 
         if (_amount > MAX_CARDS_AMOUNT)
-            throw new ArgumentOutOfRangeException("Amount cannot be greater then five");
+            throw new ArgumentOutOfRangeException(nameof(amount), "Amount cannot be greater then five");
 
         _amount = amount;
     }
