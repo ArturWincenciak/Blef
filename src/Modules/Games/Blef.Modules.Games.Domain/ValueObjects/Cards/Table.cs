@@ -2,9 +2,6 @@
 
 internal sealed class Table
 {
-    private const int MAX_NUMBER_OF_PLAYERS = 4;
-    private const int MIN_NUMBER_OF_PLAYERS = 2;
-
     private readonly IEnumerable<Hand> _hands;
 
     private IEnumerable<Card> Cards =>

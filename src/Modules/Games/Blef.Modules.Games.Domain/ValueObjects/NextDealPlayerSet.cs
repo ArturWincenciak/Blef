@@ -2,9 +2,6 @@
 
 internal sealed class NextDealPlayerSet
 {
-    private const int MAX_NUMBER_OF_PLAYERS = 4;
-    private const int MIN_NUMBER_OF_PLAYERS = 2;
-
     public IEnumerable<NextDealPlayer> Players { get; }
 
     public NextDealPlayerSet(IEnumerable<NextDealPlayer> players)

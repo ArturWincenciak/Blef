@@ -11,9 +11,6 @@ internal sealed class Game
 {
     private readonly Croupier _croupier;
 
-    private const int MAX_NUMBER_OF_PLAYERS = 4;
-    private const int MIN_NUMBER_OF_PLAYERS = 2;
-
     private readonly List<Deal> _deals = new();
     private readonly List<GamePlayer> _players = new();
     private readonly GamePlayer _lastStartingPlayer = null;
