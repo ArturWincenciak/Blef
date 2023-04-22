@@ -16,6 +16,8 @@ internal sealed class Game
 
     private readonly List<Deal> _deals = new();
     private readonly List<GamePlayer> _players = new();
+    private readonly GamePlayer _lastStartingPlayer = null;
+
     public GameId Id { get; }
 
     public Game(GameId id, Croupier croupier)
@@ -35,7 +37,8 @@ internal sealed class Game
         if (_players.Exists(player => player.Nick == nick))
             throw new PlayerAlreadyJoinedTheGameException(Id, nick);
 
-        var player = GamePlayer.Create(nick);
+        var joiningSequence = _players.Count + 1;
+        var player = GamePlayer.Create(nick, joiningSequence);
         _players.Add(player);
 
         return player;
@@ -98,7 +101,52 @@ internal sealed class Game
 
     private NextDealPlayerSet CreateNextDealPlayers() =>
         new (_players
-            .Where(p => p.IsInTheGame)
-            .Select(p => new NextDealPlayer(p.PlayerId, p.CardsAmount))
+            .Where(player => player.IsInTheGame)
+            .Select(player => new NextDealPlayer(player.PlayerId, player.CardsAmount, player.JoiningSequence))
             .ToArray());
+
+    private int CalculateNextDealOrder(GamePlayer player)
+    {
+        if (_lastStartingPlayer is null)
+            return player.JoiningSequence;
+
+        return player.JoiningSequence;
+
+        /* todo:
+        var playerJoiningNumber = player.JoiningSequence;
+        var playerCount = _players.Count;
+        var lastStartingNumber = _lastStartingPlayer.JoiningSequence;
+
+        // first deal, last: null
+        // p1 -> j = 1, order = 1
+        // p2 -> j = 2, order = 2
+        // p3 -> j = 3, order = 3
+        // p4 -> j = 4, order = 4
+
+        // second deal, last: p1
+        // p1 -> j = 1, order = 4
+        // p2 -> j = 2, order = 1
+        // p3 -> j = 3, order = 2
+        // p4 -> j = 4, order = 3
+
+        // third deal, last: p2
+        // p1 -> j = 1, order = 3
+        // p2 -> j = 2, order = 4
+        // p3 -> j = 3, order = 1
+        // p4 -> j = 4, order = 2
+
+        // fourth deal, last: p3
+        // p1 -> j = 1, order = 2
+        // p2 -> j = 2, order = 3
+        // p3 -> j = 3, order = 4
+        // p4 -> j = 4, order = 1
+
+        // fifth deal, last: p4
+        // p1 -> j = 1, order = 1
+        // p2 -> j = 2, order = 2
+        // p3 -> j = 3, order = 3
+        // p4 -> j = 4, order = 4
+
+        */
+    }
 }
