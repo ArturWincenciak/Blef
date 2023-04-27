@@ -2,7 +2,7 @@
 
 internal sealed record Order
 {
-    public int Sequence { get; init; }
+    public int Sequence { get; }
 
     public static Order First => new(1);
     public static Order Create(int sequence) => new(sequence);
@@ -16,5 +16,7 @@ internal sealed record Order
 
         if (sequence > MAX_NUMBER_OF_PLAYERS) // todo: exception
             throw new ArgumentOutOfRangeException(nameof(sequence), "TBD");
+
+        Sequence = sequence;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
+using static Blef.Modules.Games.Domain.Tests.PokerHandFactory;
 
 namespace Blef.Modules.Games.Domain.Tests;
 
@@ -541,13 +542,6 @@ public class IsPokerHandOnTableTests
         private static Table GivenTable(Hand[] hands) =>
             new(hands);
 
-        private static PokerHand GivenHighCard(FaceCard faceCard) =>
-            HighCard.Create(faceCard.ToString());
 
-        private static PokerHand GivenPair(FaceCard faceCard) =>
-            Pair.Create(faceCard.ToString());
-
-        private static PokerHand GivenTwoPairs(FaceCard firstFaceCard, FaceCard secondFaceCard) =>
-            TwoPairs.Create($"{firstFaceCard},{secondFaceCard}");
     }
 }
