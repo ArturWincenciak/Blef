@@ -5,7 +5,7 @@ using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Tests;
 
-public class DealTests
+public class CreateDealTests
 {
     [Fact]
     public void CreateDealTest()
