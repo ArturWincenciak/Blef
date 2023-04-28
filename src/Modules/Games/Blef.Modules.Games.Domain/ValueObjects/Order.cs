@@ -2,21 +2,23 @@
 
 internal sealed record Order
 {
-    public int Sequence { get; }
+    private readonly int _sequence;
 
     public static Order First => new(1);
     public static Order Create(int sequence) => new(sequence);
 
-    public Order Next => new(Sequence + 1);
+    public Order Next => new(_sequence + 1);
 
     private Order(int sequence)
     {
-        if (sequence < 1) // todo: exception
-            throw new ArgumentOutOfRangeException(nameof(sequence), "TBD");
+        if (sequence < 1)
+            throw new ArgumentOutOfRangeException(nameof(sequence),
+                "Sequence cannot be less then one");
 
-        if (sequence > MAX_NUMBER_OF_PLAYERS) // todo: exception
-            throw new ArgumentOutOfRangeException(nameof(sequence), "TBD");
+        if (sequence > MAX_NUMBER_OF_PLAYERS)
+            throw new ArgumentOutOfRangeException(nameof(sequence),
+                "Sequence cannot be greater then max number of players equals four");
 
-        Sequence = sequence;
+        _sequence = sequence;
     }
 }
