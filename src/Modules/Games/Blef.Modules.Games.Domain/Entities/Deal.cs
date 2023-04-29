@@ -8,7 +8,7 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Deal
 {
-    private readonly IEnumerable<DealPlayer> _players;
+    private readonly DealPlayersSet _playersSet;
     private Bid _lastBid;
     private CheckingPlayer _checkingPlayer;
     private LooserPlayer _looserPlayer;
@@ -17,22 +17,10 @@ internal sealed class Deal
 
     public DealId DealId { get; }
 
-    public Deal(DealId dealId, IEnumerable<DealPlayer> players, MoveSequence moveSequence)
+    public Deal(DealId dealId, DealPlayersSet playersSet, MoveSequence moveSequence)
     {
-        if (players is null)
-            throw new ArgumentNullException(nameof(players));
-
-        if (players.Count() < MIN_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(nameof(players), "Deal should have at least two players");
-
-        if (players.Count() > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(nameof(players), "Deal cannot have more than four players");
-
-        if (AreAllPlayersUnique(players) == false)
-            throw new ArgumentException("No player duplicates are allowed");
-
         DealId = dealId ?? throw new ArgumentNullException(nameof(dealId));
-        _players = players;
+        _playersSet = playersSet;
         _bidHistory = new BidHistory();
         _looserPlayer = new LooserPlayer();
         _checkingPlayer = new CheckingPlayer();
@@ -41,7 +29,7 @@ internal sealed class Deal
 
     public Hand GetHand(PlayerId playerId)
     {
-        var player = _players.Single(p => p.PlayerId == playerId);
+        var player = _playersSet.Players.Single(p => p.PlayerId == playerId);
         return player.Hand;
     }
 
@@ -69,7 +57,7 @@ internal sealed class Deal
 
         _checkingPlayer = new CheckingPlayer(checkingPlayerId.Id);
 
-        var allPlayersHands = _players
+        var allPlayersHands = _playersSet.Players
             .Select(player => player.Hand)
             .ToArray();
         var table = new Table(allPlayersHands);
@@ -85,17 +73,9 @@ internal sealed class Deal
     public DealFlowResult GetDealFlow()
     {
         var bids = _bidHistory.GetFlow();
-        return new DealFlowResult(_players, bids, _checkingPlayer, _looserPlayer);
+        return new DealFlowResult(_playersSet.Players, bids, _checkingPlayer, _looserPlayer);
     }
 
     private bool BetHasBeenMade =>
         _lastBid is not null;
-
-    private bool AreAllPlayersUnique(IEnumerable<DealPlayer> players) =>
-        players
-            .Select(player => player.PlayerId)
-            .Distinct()
-            .Count() ==
-        players.Count();
-
 }

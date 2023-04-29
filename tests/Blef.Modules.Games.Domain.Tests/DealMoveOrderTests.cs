@@ -262,7 +262,7 @@ public class DealMoveOrderTests
             new Move(_player_1.PlayerId, Order.Create(1)),
             new Move(_player_2.PlayerId, Order.Create(2))
         });
-        _deal = new Deal(dealId, players, moveSequence);
+        _deal = new Deal(dealId, new(players), moveSequence);
     }
 
     private void GivenDealWithFourPlayers()
@@ -291,7 +291,7 @@ public class DealMoveOrderTests
             new Move(_player_3.PlayerId, Order.Create(3)),
             new Move(_player_4.PlayerId, Order.Create(4))
         });
-        _deal = new Deal(dealId, players, moveSequence);
+        _deal = new Deal(dealId, new(players), moveSequence);
     }
 
     private void WithHighCardBid(DealPlayer byPlayer, FaceCard faceCard)
