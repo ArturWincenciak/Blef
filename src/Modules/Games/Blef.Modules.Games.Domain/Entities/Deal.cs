@@ -8,19 +8,16 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Deal
 {
-    private readonly BidHistory _bidHistory;
-
     private readonly IEnumerable<DealPlayer> _players;
-
-    private DealPlayer _previousMovingPlayer;
     private Bid _lastBid;
-
     private CheckingPlayer _checkingPlayer;
     private LooserPlayer _looserPlayer;
+    private readonly BidHistory _bidHistory;
+    private readonly MoveOrderPolicy _moveOrderPolicy;
 
     public DealId DealId { get; }
 
-    public Deal(DealId dealId, IEnumerable<DealPlayer> players)
+    public Deal(DealId dealId, IEnumerable<DealPlayer> players, MoveSequence moveSequence)
     {
         if (players is null)
             throw new ArgumentNullException(nameof(players));
@@ -39,7 +36,7 @@ internal sealed class Deal
         _bidHistory = new BidHistory();
         _looserPlayer = new LooserPlayer();
         _checkingPlayer = new CheckingPlayer();
-        _previousMovingPlayer = null;
+        _moveOrderPolicy = new(moveSequence);
     }
 
     public Hand GetHand(PlayerId playerId)
@@ -50,7 +47,7 @@ internal sealed class Deal
 
     public void Bid(Bid newBid)
     {
-        if (CheckIfThatIsThePlayerMove(newBid.Player) == false)
+        if (_moveOrderPolicy.CheckIfThatIsThePlayerMove(newBid.Player) == false)
             throw new ThatIsNotThisPlayerTurnNowException(newBid.Player);
 
         if (BetHasBeenMade)
@@ -58,13 +55,13 @@ internal sealed class Deal
                 throw new BidIsNotHigherThenLastOneException(DealId, newBid, _lastBid);
 
         _lastBid = newBid;
-        _previousMovingPlayer = _players.Single(player => player.PlayerId == newBid.Player);
+        _moveOrderPolicy.OnPlayerMoved(newBid.Player);
         _bidHistory.OnBid(newBid);
     }
 
     public LooserPlayer Check(PlayerId checkingPlayerId)
     {
-        if (CheckIfThatIsThePlayerMove(checkingPlayerId) == false)
+        if (_moveOrderPolicy.CheckIfThatIsThePlayerMove(checkingPlayerId) == false)
             throw new ThatIsNotThisPlayerTurnNowException(checkingPlayerId);
 
         if (BetHasBeenMade == false)
@@ -101,25 +98,4 @@ internal sealed class Deal
             .Count() ==
         players.Count();
 
-    private bool CheckIfThatIsThePlayerMove(PlayerId playerId)
-    {
-        var isThatFirstMoveInDeal = _previousMovingPlayer is null;
-        if (isThatFirstMoveInDeal)
-        {
-            var firstPlayerInSequence = _players.Single(player => player.MoveOrder == Order.First);
-            return firstPlayerInSequence.PlayerId == playerId;
-        }
-
-        var lastPlayerOrder = Order.Create(_players.Count());
-        var lastPlayerInSequenceExecutedPreviousMove = _previousMovingPlayer.MoveOrder == lastPlayerOrder;
-        if (lastPlayerInSequenceExecutedPreviousMove)
-        {
-            var firstPlayerInSequence = _players.Single(player => player.MoveOrder == Order.First);
-            return firstPlayerInSequence.PlayerId == playerId;
-        }
-
-        var nextPlayerOrder = _previousMovingPlayer.MoveOrder.Next;
-        var nextPlayerInSequence = _players.Single(player => player.MoveOrder == nextPlayerOrder);
-        return nextPlayerInSequence.PlayerId == playerId;
-    }
 }

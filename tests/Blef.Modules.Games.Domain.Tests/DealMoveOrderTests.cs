@@ -254,10 +254,15 @@ public class DealMoveOrderTests
         var playerGuid_2 = Guid.Parse("97994058-A958-46F6-B2EF-C6C4DFF14694");
         var playerHand_1 = new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)});
         var playerHand_2 = new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)});
-        _player_1 = new DealPlayer(new(playerGuid_1), playerHand_1, Order.Create(1));
-        _player_2 = new DealPlayer(new(playerGuid_2), playerHand_2, Order.Create(2));
+        _player_1 = new DealPlayer(new(playerGuid_1), playerHand_1);
+        _player_2 = new DealPlayer(new(playerGuid_2), playerHand_2);
         var players = new[] {_player_1, _player_2};
-        _deal = new Deal(dealId, players);
+        var moveSequence = new MoveSequence(new []
+        {
+            new Move(_player_1.PlayerId, Order.Create(1)),
+            new Move(_player_2.PlayerId, Order.Create(2))
+        });
+        _deal = new Deal(dealId, players, moveSequence);
     }
 
     private void GivenDealWithFourPlayers()
@@ -274,12 +279,19 @@ public class DealMoveOrderTests
         var playerHand_2 = new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)});
         var playerHand_3 = new Hand(new Card[] {new(FaceCard.Queen, Suit.Spades)});
         var playerHand_4 = new Hand(new Card[] {new(FaceCard.Jack, Suit.Hearts)});
-        _player_1 = new DealPlayer(new(playerGuid_1), playerHand_1, Order.Create(1));
-        _player_2 = new DealPlayer(new(playerGuid_2), playerHand_2, Order.Create(2));
-        _player_3 = new DealPlayer(new(playerGuid_3), playerHand_3, Order.Create(3));
-        _player_4 = new DealPlayer(new(playerGuid_4), playerHand_4, Order.Create(4));
+        _player_1 = new DealPlayer(new(playerGuid_1), playerHand_1);
+        _player_2 = new DealPlayer(new(playerGuid_2), playerHand_2);
+        _player_3 = new DealPlayer(new(playerGuid_3), playerHand_3);
+        _player_4 = new DealPlayer(new(playerGuid_4), playerHand_4);
         var players = new[] {_player_1, _player_2, _player_3, _player_4};
-        _deal = new Deal(dealId, players);
+        var moveSequence = new MoveSequence(new []
+        {
+            new Move(_player_1.PlayerId, Order.Create(1)),
+            new Move(_player_2.PlayerId, Order.Create(2)),
+            new Move(_player_3.PlayerId, Order.Create(3)),
+            new Move(_player_4.PlayerId, Order.Create(4))
+        });
+        _deal = new Deal(dealId, players, moveSequence);
     }
 
     private void WithHighCardBid(DealPlayer byPlayer, FaceCard faceCard)

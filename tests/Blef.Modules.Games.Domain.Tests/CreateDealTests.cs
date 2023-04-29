@@ -21,12 +21,17 @@ public class CreateDealTests
         var playerHand_2 = new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)});
         var players = new DealPlayer[]
         {
-            new(new(playerGuid_1), playerHand_1, Order.Create(1)),
-            new(new(playerGuid_2), playerHand_2, Order.Create(2))
+            new(new(playerGuid_1), playerHand_1),
+            new(new(playerGuid_2), playerHand_2)
         };
+        var moveSequence = new MoveSequence(new []
+        {
+            new Move(new PlayerId(playerGuid_1), Order.Create(1)),
+            new Move(new PlayerId(playerGuid_2), Order.Create(2)),
+        });
 
         // act
-        var actual = new Deal(dealId, players);
+        var actual = new Deal(dealId, players, moveSequence);
 
         // assert
         Assert.Equal(new DealId(new GameId(gameGuid), new DealNumber(1)), actual.DealId);
