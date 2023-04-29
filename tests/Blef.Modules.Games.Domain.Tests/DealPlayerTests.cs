@@ -15,7 +15,7 @@ public class DealPlayerTests
         var hand = new Hand(new[] {new Card(FaceCard.Ace, Suit.Clubs)});
 
         // act
-        var actual = new DealPlayer(playerId, hand, Order.Create(1));
+        var actual = new DealPlayer(playerId, hand);
 
         // assert
         Assert.True(new PlayerId(guid) == actual.PlayerId);
@@ -24,7 +24,7 @@ public class DealPlayerTests
 
     [Fact]
     public void CannotCreateWithNullArgumentsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new DealPlayer(PlayerId: null, Hand: null, Order.Create(1)));
+        Assert.Throws<ArgumentNullException>(() => new DealPlayer(PlayerId: null, Hand: null));
 
     [Fact]
     public void CannotCreateWithNullHandArgumentTest() =>
@@ -32,7 +32,7 @@ public class DealPlayerTests
         {
             var guid = Guid.Parse("BED79350-F2E8-4C5B-8B5C-E62C9B01E9D2");
             var playerId = new PlayerId(guid);
-            return new DealPlayer(playerId, Hand: null, Order.Create(1));
+            return new DealPlayer(playerId, Hand: null);
         });
 
     [Fact]
@@ -40,6 +40,6 @@ public class DealPlayerTests
         Assert.Throws<ArgumentNullException>(() =>
         {
             var hand = new Hand(new[] {new Card(FaceCard.Ace, Suit.Clubs)});
-            return new DealPlayer(PlayerId: null, hand, Order.Create(1));
+            return new DealPlayer(PlayerId: null, hand);
         });
 }
