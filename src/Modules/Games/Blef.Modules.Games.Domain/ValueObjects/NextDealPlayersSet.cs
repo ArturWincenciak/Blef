@@ -1,10 +1,10 @@
 ﻿namespace Blef.Modules.Games.Domain.ValueObjects;
 
-internal sealed class NextDealPlayerSet
+internal sealed class NextDealPlayersSet
 {
     public IEnumerable<NextDealPlayer> Players { get; }
 
-    public NextDealPlayerSet(IEnumerable<NextDealPlayer> players)
+    public NextDealPlayersSet(IEnumerable<NextDealPlayer> players)
     {
         if (players is null)
             throw new ArgumentNullException(nameof(players));
@@ -20,7 +20,6 @@ internal sealed class NextDealPlayerSet
 
         Players = players;
     }
-
 
     private static bool AreAllPlayersUnique(IEnumerable<NextDealPlayer> NextDealPlayers) =>
         NextDealPlayers
