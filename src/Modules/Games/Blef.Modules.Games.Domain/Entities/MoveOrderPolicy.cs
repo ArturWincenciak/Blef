@@ -3,10 +3,6 @@ using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
-internal sealed record Move(PlayerId Player, Order Order);
-
-internal sealed record MoveSequence(IEnumerable<Move> Moves);
-
 internal sealed class MoveOrderPolicy
 {
     private Move _previousMove;
