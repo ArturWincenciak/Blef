@@ -18,7 +18,7 @@ public class NextDealPlayerSetTests
         };
 
         // act
-        var actual = new NextDealPlayerSet(players);
+        var actual = new NextDealPlayersSet(players);
 
         // assert
         var player_1 = actual.Players.Single(player => player.PlayerId == new PlayerId(playerId_1));
@@ -30,7 +30,7 @@ public class NextDealPlayerSetTests
     [Fact]
     public void CanCreateMaximalNextDealPlayerSetTest() =>
         Assert.Null(Record.Exception(() =>
-            new NextDealPlayerSet(new NextDealPlayer[]
+            new NextDealPlayersSet(new NextDealPlayer[]
             {
                 new(new(Guid.Parse("2EC70C1E-D3F9-459A-9FED-CD584A09FACA")), CardsAmount.Initial, 1),
                 new(new(Guid.Parse("C23BC139-451E-4A69-AEF1-DA1A71D5423F")), CardsAmount.Initial, 2),
@@ -40,12 +40,12 @@ public class NextDealPlayerSetTests
 
     [Fact]
     public void CannotCreateWithNullArgumentTest() =>
-        Assert.Throws<ArgumentNullException>(() => new NextDealPlayerSet(null));
+        Assert.Throws<ArgumentNullException>(() => new NextDealPlayersSet(null));
 
     [Fact]
     public void CannotCreateWithLessThenTwoPlayersTest() =>
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            new NextDealPlayerSet(new NextDealPlayer[]
+            new NextDealPlayersSet(new NextDealPlayer[]
             {
                 new(new(Guid.Parse("658ABA3B-2B5F-4ABF-8E9C-9E802D1D81E0")), CardsAmount.Initial, 1)
             }));
@@ -53,7 +53,7 @@ public class NextDealPlayerSetTests
     [Fact]
     public void CannotCreateWithMoreThenFourPlayersTest() =>
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            new NextDealPlayerSet(new NextDealPlayer[]
+            new NextDealPlayersSet(new NextDealPlayer[]
             {
                 new(new(Guid.Parse("D607A9B5-5E58-47FF-9A6E-2747DED5568E")), CardsAmount.Initial, 1),
                 new(new(Guid.Parse("D05BE384-DA01-4337-9AEC-B126005B782B")), CardsAmount.Initial, 2),
@@ -67,7 +67,7 @@ public class NextDealPlayerSetTests
         Assert.Throws<ArgumentException>(() =>
         {
             var playerId = Guid.Parse("A15451BF-6BE2-4F26-A5DB-AC50FDAF1F77");
-            return new NextDealPlayerSet(new NextDealPlayer[]
+            return new NextDealPlayersSet(new NextDealPlayer[]
             {
                 new(new(playerId), CardsAmount.Initial, 1),
                 new(new(playerId), CardsAmount.Initial, 2),
