@@ -20,18 +20,15 @@ internal sealed class Deal
     public Deal(DealId dealId, DealPlayersSet playersSet, MoveSequence moveSequence)
     {
         DealId = dealId ?? throw new ArgumentNullException(nameof(dealId));
-        _playersSet = playersSet;
-        _bidHistory = new BidHistory();
-        _looserPlayer = new LooserPlayer();
-        _checkingPlayer = new CheckingPlayer();
+        _playersSet = playersSet ?? throw new ArgumentNullException(nameof(playersSet));
+        _bidHistory = new();
+        _looserPlayer = new();
+        _checkingPlayer = new();
         _moveOrderPolicy = new(moveSequence);
     }
 
-    public Hand GetHand(PlayerId playerId)
-    {
-        var player = _playersSet.Players.Single(p => p.PlayerId == playerId);
-        return player.Hand;
-    }
+    public Hand GetHand(PlayerId playerId) =>
+        _playersSet.GetHand(playerId);
 
     public void Bid(Bid newBid)
     {
