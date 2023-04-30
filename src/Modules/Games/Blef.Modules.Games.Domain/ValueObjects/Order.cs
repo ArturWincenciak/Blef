@@ -1,5 +1,6 @@
 ﻿namespace Blef.Modules.Games.Domain.ValueObjects;
 
+// todo: test
 internal sealed record Order
 {
     private readonly int _sequence;
