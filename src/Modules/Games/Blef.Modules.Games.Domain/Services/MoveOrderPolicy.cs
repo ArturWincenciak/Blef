@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects;
+﻿using Blef.Modules.Games.Domain.Exceptions;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Services;
@@ -11,10 +12,15 @@ internal sealed class MoveOrderPolicy
     public MoveOrderPolicy(MoveSequence sequence) =>
         _sequence = sequence;
 
-    public void Move(PlayerId movingPlayer) =>
-        _previousMove = _sequence.Moves.Single(move => move.Player == movingPlayer);
+    public void Move(PlayerId movingPlayer)
+    {
+        if (CheckIfThatIsThePlayerMove(movingPlayer) == false)
+            throw new ThatIsNotThisPlayerTurnNowException(movingPlayer);
 
-    public bool CheckIfThatIsThePlayerMove(PlayerId movingPlayer)
+        _previousMove = _sequence.Moves.Single(move => move.Player == movingPlayer);
+    }
+
+    private bool CheckIfThatIsThePlayerMove(PlayerId movingPlayer)
     {
         var isThatFirstMove = _previousMove is null;
         if (isThatFirstMove)

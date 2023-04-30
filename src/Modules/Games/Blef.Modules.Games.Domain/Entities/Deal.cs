@@ -36,22 +36,19 @@ internal sealed class Deal
 
     public void Bid(Bid newBid)
     {
-        if (_moveOrderPolicy.CheckIfThatIsThePlayerMove(newBid.Player) == false)
-            throw new ThatIsNotThisPlayerTurnNowException(newBid.Player);
+        _moveOrderPolicy.Move(newBid.Player);
 
         if (BetHasBeenMade)
             if (newBid.PokerHand.IsBetterThan(_lastBid.PokerHand) == false)
                 throw new BidIsNotHigherThenLastOneException(DealId, newBid, _lastBid);
 
         _lastBid = newBid;
-        _moveOrderPolicy.Move(newBid.Player);
         _bidHistory.OnBid(newBid);
     }
 
     public LooserPlayer Check(PlayerId checkingPlayerId)
     {
-        if (_moveOrderPolicy.CheckIfThatIsThePlayerMove(checkingPlayerId) == false)
-            throw new ThatIsNotThisPlayerTurnNowException(checkingPlayerId);
+        _moveOrderPolicy.Move(checkingPlayerId);
 
         if (BetHasBeenMade == false)
             throw new NoBidToCheckException(DealId);
