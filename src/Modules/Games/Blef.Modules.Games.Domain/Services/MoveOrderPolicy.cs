@@ -11,7 +11,7 @@ internal sealed class MoveOrderPolicy
     public MoveOrderPolicy(MoveSequence sequence) =>
         _sequence = sequence;
 
-    public void OnPlayerMoved(PlayerId movingPlayer) =>
+    public void Move(PlayerId movingPlayer) =>
         _previousMove = _sequence.Moves.Single(move => move.Player == movingPlayer);
 
     public bool CheckIfThatIsThePlayerMove(PlayerId movingPlayer)
