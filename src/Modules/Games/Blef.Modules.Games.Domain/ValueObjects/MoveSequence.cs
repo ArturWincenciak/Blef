@@ -1,6 +1,5 @@
 ﻿namespace Blef.Modules.Games.Domain.ValueObjects;
 
-// todo: test
 internal sealed class MoveSequence
 {
     public IEnumerable<Move> Moves { get; }
@@ -32,10 +31,16 @@ internal sealed class MoveSequence
 
     private static bool CheckIfMovesAreInOrder(IEnumerable<Move> moves)
     {
-        var orderedMoves = moves.OrderBy(move => move.Order).ToArray();
-        for (var i = 0; i < orderedMoves.Length; i++)
-            if (orderedMoves[i].Order != Order.Create(i + 1)) // todo: test for FOUR players
+        var orderedMoves = moves.OrderBy(move => move.Order);
+        var expectedOrder = Order.First;
+        foreach (var move in orderedMoves)
+        {
+            if (move.Order != expectedOrder)
                 return false;
+
+            if(expectedOrder != Order.Create(MAX_NUMBER_OF_PLAYERS))
+                expectedOrder = expectedOrder.Next;
+        }
 
         return true;
     }
