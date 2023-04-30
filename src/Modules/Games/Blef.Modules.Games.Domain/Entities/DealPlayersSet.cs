@@ -6,6 +6,7 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class DealPlayersSet
 {
+    // todo: make private, think how to implement game history with details
     public IEnumerable<DealPlayer> Players { get; }
 
     public DealPlayersSet(IEnumerable<DealPlayer> players)
