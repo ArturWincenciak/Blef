@@ -31,6 +31,7 @@ internal sealed class DealPlayersSet
     public Hand GetHand(PlayerId playerId) =>
         Players.Single(p => p.PlayerId == playerId).Hand;
 
+    // todo: rename that method
     private bool AreAllPlayersUnique(IEnumerable<DealPlayer> players) =>
         players
             .Select(player => player.PlayerId)
