@@ -44,7 +44,7 @@ internal sealed class Deal
                 throw new BidIsNotHigherThenLastOneException(DealId, newBid, _lastBid);
 
         _lastBid = newBid;
-        _moveOrderPolicy.OnPlayerMoved(newBid.Player);
+        _moveOrderPolicy.Move(newBid.Player);
         _bidHistory.OnBid(newBid);
     }
 
