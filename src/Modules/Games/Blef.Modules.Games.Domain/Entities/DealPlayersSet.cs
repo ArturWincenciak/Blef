@@ -1,4 +1,6 @@
 ﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Cards;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
@@ -22,6 +24,11 @@ internal sealed class DealPlayersSet
 
         Players = players;
     }
+
+    public Table Table => new (Players.Select(player => player.Hand));
+
+    public Hand GetHand(PlayerId playerId) =>
+        Players.Single(p => p.PlayerId == playerId).Hand;
 
     private bool AreAllPlayersUnique(IEnumerable<DealPlayer> players) =>
         players
