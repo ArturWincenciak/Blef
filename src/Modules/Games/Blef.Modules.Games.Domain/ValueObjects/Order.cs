@@ -1,6 +1,8 @@
-﻿namespace Blef.Modules.Games.Domain.ValueObjects;
+﻿using Microsoft.AspNetCore.Components;
 
-internal sealed record Order
+namespace Blef.Modules.Games.Domain.ValueObjects;
+
+internal sealed record Order : IComparable<Order>
 {
     private readonly int _sequence;
 
@@ -21,4 +23,7 @@ internal sealed record Order
 
         _sequence = sequence;
     }
+
+    public int CompareTo(Order other) =>
+        _sequence.CompareTo(other._sequence);
 }
