@@ -17,14 +17,17 @@ internal sealed class Deal
 
     public DealId DealId { get; }
 
-    public Deal(DealId dealId, DealPlayersSet playersSet, MoveSequence moveSequence)
+    public Deal(DealId dealId, DealSet dealSet)
     {
+        if (dealSet is null)
+            throw new ArgumentNullException(nameof(dealSet));
+
         DealId = dealId ?? throw new ArgumentNullException(nameof(dealId));
-        _playersSet = playersSet ?? throw new ArgumentNullException(nameof(playersSet));
+        _playersSet = dealSet.PlayersSet;
         _bidHistory = new();
         _looserPlayer = new();
         _checkingPlayer = new();
-        _moveOrderPolicy = new(moveSequence);
+        _moveOrderPolicy = new(dealSet.MoveSequence);
     }
 
     public Hand GetHand(PlayerId playerId) =>
