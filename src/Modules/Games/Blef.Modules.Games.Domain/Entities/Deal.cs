@@ -57,12 +57,7 @@ internal sealed class Deal
 
         _checkingPlayer = new CheckingPlayer(checkingPlayerId.Id);
 
-        var allPlayersHands = _playersSet.Players
-            .Select(player => player.Hand)
-            .ToArray();
-        var table = new Table(allPlayersHands);
-
-        if (_lastBid.PokerHand.IsOnTable(table))
+        if (_lastBid.PokerHand.IsOnTable(_playersSet.Table))
             _looserPlayer = new LooserPlayer(checkingPlayerId.Id);
         else
             _looserPlayer = new LooserPlayer(_lastBid.Player.Id);
