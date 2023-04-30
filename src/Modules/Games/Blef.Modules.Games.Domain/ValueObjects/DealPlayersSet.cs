@@ -1,8 +1,7 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
+﻿using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
-namespace Blef.Modules.Games.Domain.Entities;
+namespace Blef.Modules.Games.Domain.ValueObjects;
 
 internal sealed class DealPlayersSet
 {
