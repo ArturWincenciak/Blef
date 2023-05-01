@@ -24,6 +24,6 @@ internal sealed class DealSet
     private static bool NotAllPlayersPresent(DealPlayersSet playersSet, MoveSequence moveSequence) =>
         playersSet.Players
             .Select(player => player.PlayerId)
-            .Except(moveSequence.Moves.Select(move => move.Player))
+            .Except(moveSequence.Players)
             .Any();
 }
