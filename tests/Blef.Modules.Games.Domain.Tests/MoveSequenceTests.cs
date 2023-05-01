@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Tests;
 
@@ -114,4 +115,110 @@ public class MoveSequenceTests
                 new(new(Guid.Parse("0092C215-939A-4FC8-9A27-F284410A4A52")), Order.Create(4))
             });
         });
+
+    [Fact]
+    public void GetPlayersTest()
+    {
+        // arrange
+        var playerId1 = new PlayerId(Guid.Parse("9BD2D1FD-8890-41F6-A53D-1E38470C38C0"));
+        var playerId2 = new PlayerId(Guid.Parse("529968FC-FD7E-4607-882F-D3B81F01F022"));
+        var playerId3 = new PlayerId(Guid.Parse("9B2D498B-509F-4BB3-BE16-1DEED38B59C8"));
+        var moveSequence = new MoveSequence(new Move[]
+        {
+            new(playerId1, Order.Create(1)),
+            new(playerId2, Order.Create(2)),
+            new(playerId3, Order.Create(3))
+        });
+
+        // act
+        var actual = moveSequence.Players;
+
+        // assert
+        Assert.Equal(new [] { playerId1, playerId2, playerId3 }, actual);
+    }
+
+    [Fact]
+    public void GetFirstMoveTest()
+    {
+        // arrange
+        var moveSequence = new MoveSequence(new Move[]
+        {
+            new(new(Guid.Parse("D2EC0A5F-743A-4E78-9493-E8663BBA57ED")), Order.Create(1)),
+            new(new(Guid.Parse("E6006748-478C-49F2-A68E-F4EBEC0C88DA")), Order.Create(2)),
+            new(new(Guid.Parse("9F0153CC-25EA-4513-987C-C5C28D1C5DBB")), Order.Create(3))
+        });
+
+        // act
+        var actual = moveSequence.FirstMove;
+        var expected = new Move(new(Guid.Parse("D2EC0A5F-743A-4E78-9493-E8663BBA57ED")), Order.Create(1));
+
+        // assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void GetLastMoveTest()
+    {
+        // arrange
+        var moveSequence = new MoveSequence(new Move[]
+        {
+            new(new(Guid.Parse("B681BFD3-89DD-469F-B261-5AB63642517E")), Order.Create(1)),
+            new(new(Guid.Parse("A88EDE1A-1D5A-43B9-ACD5-2364A0D3D2CC")), Order.Create(2)),
+            new(new(Guid.Parse("3A26957A-5B27-4CAE-8549-90898742E52A")), Order.Create(3))
+        });
+
+        // act
+        var actual = moveSequence.LastMove;
+        var expected = new Move(new(Guid.Parse("3A26957A-5B27-4CAE-8549-90898742E52A")), Order.Create(3));
+
+        // assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void GetMoveForPlayerTest()
+    {
+        // arrange
+        var move1 = new Move(new PlayerId(Guid.Parse("5E6DB9BD-BA5C-41FF-ADD9-8558215E0169")), Order.Create(1));
+        var move2 = new Move(new PlayerId(Guid.Parse("A1B0A79D-CBAB-49A8-B563-01E8FED14BF9")), Order.Create(2));
+        var move3 = new Move(new PlayerId(Guid.Parse("85F49851-884B-4DEF-A0C9-C142618BA87A")), Order.Create(3));
+        var move4 = new Move(new PlayerId(Guid.Parse("BDBC0022-2F36-4542-B769-B06C58BFDB82")), Order.Create(4));
+        var moveSequence = new MoveSequence(new [] { move1, move2, move3, move4 });
+
+        // act
+        var actual1 = moveSequence.GetMove(move1.Player);
+        var actual2 = moveSequence.GetMove(move2.Player);
+        var actual3 = moveSequence.GetMove(move3.Player);
+        var actual4 = moveSequence.GetMove(move4.Player);
+
+        // assert
+        Assert.Equal(move1, actual1);
+        Assert.Equal(move2, actual2);
+        Assert.Equal(move3, actual3);
+        Assert.Equal(move4, actual4);
+    }
+
+
+    [Fact]
+    public void GetMoveForOrderTest()
+    {
+        // arrange
+        var move1 = new Move(new PlayerId(Guid.Parse("CD2542C9-80E9-4F08-A320-E9965B563473")), Order.Create(1));
+        var move2 = new Move(new PlayerId(Guid.Parse("7DB0A93B-1501-4009-AECF-8883DC7FD99B")), Order.Create(2));
+        var move3 = new Move(new PlayerId(Guid.Parse("41692A9F-4785-4B1A-8552-0FE2AC6E6CC8")), Order.Create(3));
+        var move4 = new Move(new PlayerId(Guid.Parse("1B568718-EC5D-4388-9D34-52A09B6AD045")), Order.Create(4));
+        var moveSequence = new MoveSequence(new [] { move1, move2, move3, move4 });
+
+        // act
+        var actual1 = moveSequence.GetMove(move1.Order);
+        var actual2 = moveSequence.GetMove(move2.Order);
+        var actual3 = moveSequence.GetMove(move3.Order);
+        var actual4 = moveSequence.GetMove(move4.Order);
+
+        // assert
+        Assert.Equal(move1, actual1);
+        Assert.Equal(move2, actual2);
+        Assert.Equal(move3, actual3);
+        Assert.Equal(move4, actual4);
+    }
 }
