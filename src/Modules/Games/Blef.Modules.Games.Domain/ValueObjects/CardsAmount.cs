@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Domain.ValueObjects;
 
-internal sealed class CardsAmount
+internal sealed record CardsAmount
 {
     private const int INITIAL_CARDS_AMOUNT = 1;
     private const int MAX_CARDS_AMOUNT = 5;
@@ -34,12 +34,6 @@ internal sealed class CardsAmount
 
     public static bool operator > (CardsAmount @this, CardsAmount other) =>
         @this._amount > other._amount;
-
-    public static bool operator == (CardsAmount @this, CardsAmount other) =>
-        @this._amount == other._amount;
-
-    public static bool operator != (CardsAmount @this, CardsAmount other) =>
-        @this._amount != other._amount;
 
     public static implicit operator int(CardsAmount @this) =>
         @this._amount;
