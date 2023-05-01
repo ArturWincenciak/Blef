@@ -4,14 +4,13 @@ using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Services;
 
-// todo: test
 internal sealed class MoveOrderPolicy
 {
     private Move _previousMove;
     private readonly MoveSequence _sequence;
 
     public MoveOrderPolicy(MoveSequence sequence) =>
-        _sequence = sequence;
+        _sequence = sequence ?? throw new ArgumentNullException(nameof(sequence));
 
     public void Move(PlayerId movingPlayer)
     {
