@@ -19,10 +19,10 @@ internal sealed class MoveSequence
             throw new ArgumentOutOfRangeException(nameof(moves),
                 "Move sequence cannot contain more than four players");
 
-        if (moves.Select(move => move.Player).Distinct().Count() != moves.Count())
+        if (AreAllPlayersUnique(moves) == false)
             throw new ArgumentException("No player duplicates are allowed");
 
-        if (moves.Select(move => move.Player).Distinct().Count() != moves.Count())
+        if (AreAllMoveUnique(moves) == false)
             throw new ArgumentException("No move duplicates are allowed");
 
         if (CheckIfMovesAreInOrder(moves) == false)
@@ -32,7 +32,9 @@ internal sealed class MoveSequence
     }
 
     public IEnumerable<PlayerId> Players => _moves.Select(move => move.Player);
+
     public Move FirstMove => _moves.Single(move => move.Order == Order.First);
+
     public Move LastMove => _moves.Single(move => move.Order == Order.Create(_moves.Count()));
 
     public Move GetMove(PlayerId movingPlayer) =>
@@ -40,6 +42,12 @@ internal sealed class MoveSequence
 
     public Move GetMove(Order order) =>
         _moves.Single(move => move.Order == order);
+
+    private static bool AreAllMoveUnique(IEnumerable<Move> moves) =>
+        moves.Select(move => move.Player).Distinct().Count() == moves.Count();
+
+    private static bool AreAllPlayersUnique(IEnumerable<Move> moves) =>
+        moves.Select(move => move.Player).Distinct().Count() == moves.Count();
 
     private static bool CheckIfMovesAreInOrder(IEnumerable<Move> moves)
     {
