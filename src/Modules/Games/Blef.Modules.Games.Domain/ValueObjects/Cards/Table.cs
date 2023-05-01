@@ -4,9 +4,6 @@ internal sealed class Table
 {
     private readonly IEnumerable<Hand> _hands;
 
-    private IEnumerable<Card> Cards =>
-        _hands.SelectMany(hand => hand.Cards);
-
     public Table(IEnumerable<Hand> hands)
     {
         if(hands is null)
@@ -29,6 +26,9 @@ internal sealed class Table
 
     public int Count(FaceCard faceCard) =>
         Cards.Count(card => card.FaceCard == faceCard);
+
+    private IEnumerable<Card> Cards =>
+        _hands.SelectMany(hand => hand.Cards);
 
     private bool AreAllCardsUnique(IEnumerable<Hand> hands)
     {
