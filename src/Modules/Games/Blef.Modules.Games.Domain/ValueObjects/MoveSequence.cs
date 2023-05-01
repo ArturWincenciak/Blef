@@ -1,8 +1,10 @@
-﻿namespace Blef.Modules.Games.Domain.ValueObjects;
+﻿using Blef.Modules.Games.Domain.ValueObjects.Ids;
+
+namespace Blef.Modules.Games.Domain.ValueObjects;
 
 internal sealed class MoveSequence
 {
-    public IEnumerable<Move> Moves { get; }
+    private readonly IEnumerable<Move> _moves;
 
     public MoveSequence(IEnumerable<Move> moves)
     {
@@ -26,8 +28,18 @@ internal sealed class MoveSequence
         if (CheckIfMovesAreInOrder(moves) == false)
             throw new ArgumentException("Moves are not in order");
 
-        Moves = moves;
+        _moves = moves;
     }
+
+    public IEnumerable<PlayerId> Players => _moves.Select(move => move.Player);
+    public Move FirstMove => _moves.Single(move => move.Order == Order.First);
+    public Move LastMove => _moves.Single(move => move.Order == Order.Create(_moves.Count()));
+
+    public Move GetMove(PlayerId movingPlayer) =>
+        _moves.Single(move => move.Player == movingPlayer);
+
+    public Move GetMove(Order order) =>
+        _moves.Single(move => move.Order == order);
 
     private static bool CheckIfMovesAreInOrder(IEnumerable<Move> moves)
     {

@@ -18,7 +18,7 @@ internal sealed class MoveOrderPolicy
         if (CheckIfThatIsThePlayerMove(movingPlayer) == false)
             throw new ThatIsNotThisPlayerTurnNowException(movingPlayer);
 
-        _previousMove = _sequence.Moves.Single(move => move.Player == movingPlayer);
+        _previousMove = _sequence.GetMove(movingPlayer);
     }
 
     private bool CheckIfThatIsThePlayerMove(PlayerId movingPlayer)
@@ -26,20 +26,23 @@ internal sealed class MoveOrderPolicy
         var isThatFirstMove = _previousMove is null;
         if (isThatFirstMove)
         {
-            var firstPlayerInSequence = _sequence.Moves.Single(player => player.Order == Order.First);
-            return firstPlayerInSequence.Player == movingPlayer;
+            var firstMoveInSequence = _sequence.FirstMove;
+            return IsPlayerInSequence(movingPlayer, firstMoveInSequence);
         }
 
-        var lastInSequence = Order.Create(_sequence.Moves.Count());
-        var isPreviousMoveLastInSequence = _previousMove.Order == lastInSequence;
-        if (isPreviousMoveLastInSequence)
+        var lastMoveInSequence = _sequence.LastMove;
+        var previousMoveWasLastInSequence = _previousMove.Order == lastMoveInSequence.Order;
+        if (previousMoveWasLastInSequence)
         {
-            var firstPlayerInSequence = _sequence.Moves.Single(player => player.Order == Order.First);
-            return firstPlayerInSequence.Player == movingPlayer;
+            var firstMoveInSequence = _sequence.FirstMove;
+            return IsPlayerInSequence(movingPlayer, firstMoveInSequence);
         }
 
-        var nextMove = _previousMove.Order.Next;
-        var nextMoveInSequence = _sequence.Moves.Single(player => player.Order == nextMove);
-        return nextMoveInSequence.Player == movingPlayer;
+        var nextOrder = _previousMove.Order.Next;
+        var nextMoveInSequence = _sequence.GetMove(nextOrder);
+        return IsPlayerInSequence(movingPlayer, nextMoveInSequence);
     }
+
+    private static bool IsPlayerInSequence(PlayerId player, Move moveInSequence) =>
+        moveInSequence.Player == player;
 }
