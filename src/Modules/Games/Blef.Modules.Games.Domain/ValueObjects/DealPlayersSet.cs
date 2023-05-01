@@ -3,7 +3,6 @@ using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.ValueObjects;
 
-// todo: test
 internal sealed class DealPlayersSet
 {
     // todo: make private, think how to implement game history with details
@@ -23,19 +22,21 @@ internal sealed class DealPlayersSet
         if (AreAllPlayersUnique(players) == false)
             throw new ArgumentException("No player duplicates are allowed");
 
+        var allDealtCards = players.SelectMany(player => player.Hand.Cards);
+        if (AreAllCardsUnique(allDealtCards) == false)
+            throw new ArgumentException("No card duplicates are allowed in the players' hands");
+
         Players = players;
     }
 
-    public Table Table => new (Players.Select(player => player.Hand));
+    public Table Table => new(Players.Select(player => player.Hand));
 
     public Hand GetHand(PlayerId playerId) =>
         Players.Single(p => p.PlayerId == playerId).Hand;
 
-    // todo: rename that method
-    private bool AreAllPlayersUnique(IEnumerable<DealPlayer> players) =>
-        players
-            .Select(player => player.PlayerId)
-            .Distinct()
-            .Count() ==
-        players.Count();
+    private static bool AreAllPlayersUnique(IEnumerable<DealPlayer> players) =>
+        players.Select(player => player.PlayerId).Distinct().Count() == players.Count();
+
+    private static bool AreAllCardsUnique(IEnumerable<Card> cards) =>
+        cards.Distinct().Count() == cards.Count();
 }
