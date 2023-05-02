@@ -41,30 +41,15 @@ internal sealed class Game
         return player;
     }
 
-    public DealId NewDeal()
+    public DealId StartFirstDeal()
     {
-        // todo: check if there is not in progress deal
-        // todo: check if is that player turn to deal
-        // todo: check if in game is at least two players if it is first deal in the game
-        // todo: check if game is not over
-        // todo: if it is the first deal get all players joined game
-        // todo: if it is next deal get only players that not loosed
-        // todo: parametrize players in new deal based on last deal (number of cards)
+        if (IsGameStarted())
+            throw new GameAlreadyStartedException();
 
-        var nextDealNumber = _deals.Count + 1;
-        var nextDealId = new DealId(Id, Number: new DealNumber(nextDealNumber));
-        var nextDealPlayers = CreateNextDealPlayers();
-        var deal = _croupier.Deal(nextDealId, nextDealPlayers);
-        _deals.Add(deal);
-        return nextDealId;
-    }
+        if (_players.Count < MIN_NUMBER_OF_PLAYERS)
+            throw new NotEnoughPlayersException();
 
-    public Hand GetHand(PlayerId playerId, DealId dealId)
-    {
-        // todo: check if user exists
-        // todo: check if deal number exits
-        var deal = GetDeal(dealId);
-        return deal.GetHand(playerId);
+        return NewDeal();
     }
 
     public void Bid(DealId dealId, Bid newBid)
@@ -79,6 +64,17 @@ internal sealed class Game
         var lastDealLooser = deal.Check(playerId);
         var gamePlayer = _players.Single(p => p.PlayerId.Id.Equals(lastDealLooser.PlayerId));
         gamePlayer.LostLastDeal();
+
+        // todo: check if game is over
+        NewDeal();
+    }
+
+    public Hand GetHand(PlayerId playerId, DealId dealId)
+    {
+        // todo: check if user exists
+        // todo: check if deal number exits
+        var deal = GetDeal(dealId);
+        return deal.GetHand(playerId);
     }
 
     public DealFlowResult GetDealFlow(DealId dealId)
@@ -89,6 +85,16 @@ internal sealed class Game
 
     public GameFlowResult GetGameFlow() =>
         new(_players);
+
+    private DealId NewDeal()
+    {
+        var nextDealNumber = _deals.Count + 1;
+        var nextDealId = new DealId(Id, Number: new DealNumber(nextDealNumber));
+        var nextDealPlayers = CreateNextDealPlayers();
+        var deal = _croupier.Deal(nextDealId, nextDealPlayers);
+        _deals.Add(deal);
+        return nextDealId;
+    }
 
     private bool IsGameStarted() =>
         _deals.Count > 0;

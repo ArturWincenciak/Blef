@@ -42,6 +42,14 @@
   },
   {
     No: 6,
+    Action: NewDeal,
+    Argument: NoArgument,
+    Result: {
+      Number: 1
+    }
+  },
+  {
+    No: 7,
     Action: GetGameFlow,
     Argument: NoArgument,
     Result: {
@@ -59,14 +67,6 @@
           Nick: Conway
         }
       ]
-    }
-  },
-  {
-    No: 7,
-    Action: NewDeal,
-    Argument: Knuth,
-    Result: {
-      Number: 1
     }
   },
   {
@@ -109,27 +109,6 @@
   },
   {
     No: 9,
-    Action: GetGameFlow,
-    Argument: NoArgument,
-    Result: {
-      Players: [
-        {
-          PlayerId: Guid_2,
-          Nick: Knuth
-        },
-        {
-          PlayerId: Guid_3,
-          Nick: Graham
-        },
-        {
-          PlayerId: Guid_4,
-          Nick: Conway
-        }
-      ]
-    }
-  },
-  {
-    No: 10,
     Action: GetCards,
     Argument: {
       whichPlayer: Knuth,
@@ -147,7 +126,7 @@
     }
   },
   {
-    No: 11,
+    No: 10,
     Action: GetCards,
     Argument: {
       whichPlayer: Graham,
@@ -165,7 +144,7 @@
     }
   },
   {
-    No: 12,
+    No: 11,
     Action: GetCards,
     Argument: {
       whichPlayer: Conway,
@@ -183,7 +162,7 @@
     }
   },
   {
-    No: 13,
+    No: 12,
     Action: Bid,
     Argument: {
       whichPlayer: Knuth,
@@ -197,7 +176,7 @@
     }
   },
   {
-    No: 14,
+    No: 13,
     Action: Bid,
     Argument: {
       whichPlayer: Graham,
@@ -211,7 +190,7 @@
     }
   },
   {
-    No: 15,
+    No: 14,
     Action: Bid,
     Argument: {
       whichPlayer: Conway,
@@ -225,7 +204,7 @@
     }
   },
   {
-    No: 16,
+    No: 15,
     Action: Check,
     Argument: {
       whichPlayer: Knuth,
@@ -235,6 +214,27 @@
     },
     Result: {
       Status: OK
+    }
+  },
+  {
+    No: 16,
+    Action: GetGameFlow,
+    Argument: NoArgument,
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_2,
+          Nick: Knuth
+        },
+        {
+          PlayerId: Guid_3,
+          Nick: Graham
+        },
+        {
+          PlayerId: Guid_4,
+          Nick: Conway
+        }
+      ]
     }
   },
   {
@@ -296,35 +296,6 @@
   },
   {
     No: 18,
-    Action: GetGameFlow,
-    Argument: NoArgument,
-    Result: {
-      Players: [
-        {
-          PlayerId: Guid_2,
-          Nick: Knuth
-        },
-        {
-          PlayerId: Guid_3,
-          Nick: Graham
-        },
-        {
-          PlayerId: Guid_4,
-          Nick: Conway
-        }
-      ]
-    }
-  },
-  {
-    No: 19,
-    Action: NewDeal,
-    Argument: Graham,
-    Result: {
-      Number: 2
-    }
-  },
-  {
-    No: 20,
     Action: GetDealFlow,
     Argument: {
       Number: 2
@@ -361,27 +332,6 @@
               Suit: Spades
             }
           ]
-        }
-      ]
-    }
-  },
-  {
-    No: 21,
-    Action: GetGameFlow,
-    Argument: NoArgument,
-    Result: {
-      Players: [
-        {
-          PlayerId: Guid_2,
-          Nick: Knuth
-        },
-        {
-          PlayerId: Guid_3,
-          Nick: Graham
-        },
-        {
-          PlayerId: Guid_4,
-          Nick: Conway
         }
       ]
     }
