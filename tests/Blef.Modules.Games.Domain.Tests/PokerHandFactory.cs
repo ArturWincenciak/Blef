@@ -13,4 +13,10 @@ internal static class PokerHandFactory
 
     public static PokerHand GivenTwoPairs(FaceCard firstFaceCard, FaceCard secondFaceCard) =>
         TwoPairs.Create($"{firstFaceCard},{secondFaceCard}");
+
+    public static PokerHand GivenLowStraight() =>
+        LowStraight.Create();
+
+    public static PokerHand GivenHighStraight() =>
+        HighStraight.Create();
 }
