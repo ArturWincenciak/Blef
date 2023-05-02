@@ -5,7 +5,6 @@ namespace Blef.Modules.Games.Domain.ValueObjects;
 
 internal sealed class DealPlayersSet
 {
-    // todo: make private, think how to implement game history with details
     public IEnumerable<DealPlayer> Players { get; }
 
     public DealPlayersSet(IEnumerable<DealPlayer> players)
