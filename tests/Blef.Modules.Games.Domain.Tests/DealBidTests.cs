@@ -54,7 +54,7 @@ public class DealBidTests
     }
 
     [Fact]
-    public void xxx()
+    public void MultipleRightBidsTest()
     {
         // arrange
         var (deal, player1, player2, player3, player4) = GivenDealWithFourPlayers();
@@ -75,7 +75,11 @@ public class DealBidTests
             WithPairBid(deal, player2, FaceCard.Queen);
             WithPairBid(deal, player3, FaceCard.King);
             WithPairBid(deal, player4, FaceCard.Ace);
-
+            WithTwoPairsBid(deal, player1, FaceCard.Nine, FaceCard.Ten);
+            WithTwoPairsBid(deal, player2, FaceCard.Jack, FaceCard.Queen);
+            WithTwoPairsBid(deal, player3, FaceCard.King, FaceCard.Ace);
+            WithLowStraight(deal, player4);
+            WithHighStraight(deal, player1);
         });
 
         // assert
