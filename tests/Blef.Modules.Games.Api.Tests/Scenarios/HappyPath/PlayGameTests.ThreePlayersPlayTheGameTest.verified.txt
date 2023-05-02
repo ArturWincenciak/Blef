@@ -66,6 +66,11 @@
           PlayerId: Guid_4,
           Nick: Conway
         }
+      ],
+      Deals: [
+        {
+          Number: 1
+        }
       ]
     }
   },
@@ -233,6 +238,14 @@
         {
           PlayerId: Guid_4,
           Nick: Conway
+        }
+      ],
+      Deals: [
+        {
+          Number: 1
+        },
+        {
+          Number: 2
         }
       ]
     }

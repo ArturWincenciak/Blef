@@ -1,5 +1,7 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
+using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.ValueObjects.Dto;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
 
@@ -21,5 +23,11 @@ internal sealed class GetGameHandler : IQueryHandler<GetGameFlow, GetGameFlow.Re
     }
 
     private GetGameFlow.Result Map(GameFlowResult gameFlow) =>
-        new(gameFlow.Players.Select(p => new GetGameFlow.Player(p.PlayerId.Id, p.Nick.Nick)));
+        new(gameFlow.Players.Select(Map), gameFlow.Deals.Select(Map));
+
+    private static GetGameFlow.Player Map(GamePlayer player) =>
+        new(player.PlayerId.Id, player.Nick.Nick);
+
+    private static GetGameFlow.DealNumber Map(DealId deal) =>
+        new(deal.Number.Number);
 }
