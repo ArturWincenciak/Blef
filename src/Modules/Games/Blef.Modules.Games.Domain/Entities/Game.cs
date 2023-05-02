@@ -1,3 +1,4 @@
+using Blef.Modules.Games.Domain.Events;
 using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Modules.Games.Domain.Services;
 using Blef.Modules.Games.Domain.ValueObjects;
@@ -23,7 +24,7 @@ internal sealed class Game
         _croupier = croupier ?? throw new ArgumentNullException(nameof(croupier));
     }
 
-    public GamePlayer Join(PlayerNick nick)
+    public GamePlayerJoined Join(PlayerNick nick)
     {
         if (IsGameStarted())
             throw new JoinGameThatIsAlreadyStartedException(Id, nick);
@@ -38,7 +39,7 @@ internal sealed class Game
         var player = GamePlayer.Create(nick, joiningSequence);
         _players.Add(player);
 
-        return player;
+        return new(player.PlayerId, player.Nick);
     }
 
     public DealId StartFirstDeal()
