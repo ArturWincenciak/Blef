@@ -5,6 +5,6 @@ public interface IDomainEvent
 }
 
 public interface IDomainEvent<TEvent> : IDomainEvent
-    where TEvent : notnull
+    where TEvent : IDomainEvent<TEvent>
 {
 }
