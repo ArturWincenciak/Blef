@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Domain.Services;
+﻿using Blef.Modules.Games.Domain.Entities;
+using Blef.Modules.Games.Domain.Services;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
@@ -26,15 +27,15 @@ public class CroupierTests
         var playerId_2 = Guid.Parse("6619A981-6DB6-4806-AEDD-A01911273CA6");
 
         // act
-        var deal = croupier.Deal(
-            new DealId(
-                new GameId(gameId),
-                new DealNumber(1)),
+        var (playersSet, moveSequence) = croupier.Deal(
             new(new NextDealPlayer[]
             {
                 new(new PlayerId(playerId_1), CardsAmount.Initial, 1),
                 new(new PlayerId(playerId_2), CardsAmount.Initial, 2),
             }));
+        var deal = new Deal(
+            new DealId(new GameId(gameId), new DealNumber(1)),
+            new(playersSet, moveSequence));
         var hand_1 = deal.GetHand(new PlayerId(playerId_1));
         var hand_2 = deal.GetHand(new PlayerId(playerId_2));
 
@@ -56,16 +57,16 @@ public class CroupierTests
         var playerId_3 = Guid.Parse("E0B517EE-F725-4A0C-B326-6FD42CE97E33");
 
         // act
-        var deal = croupier.Deal(
-            new DealId(
-                new GameId(gameId),
-                new DealNumber(1)),
+        var (playersSet, moveSequence) = croupier.Deal(
             new(new NextDealPlayer[]
             {
-                new (new PlayerId(playerId_1), CardsAmount.Initial, 1),
-                new (new PlayerId(playerId_2), CardsAmount.Max, 2),
-                new (new PlayerId(playerId_3), CardsAmount.Initial.AddOneCard().AddOneCard(), 3)
+                new(new PlayerId(playerId_1), CardsAmount.Initial, 1),
+                new(new PlayerId(playerId_2), CardsAmount.Max, 2),
+                new(new PlayerId(playerId_3), CardsAmount.Initial.AddOneCard().AddOneCard(), 3)
             }));
+        var deal = new Deal(
+            new DealId(new GameId(gameId), new DealNumber(1)),
+            new(playersSet, moveSequence));
         var hand_1 = deal.GetHand(new PlayerId(playerId_1));
         var hand_2 = deal.GetHand(new PlayerId(playerId_2));
         var hand_3 = deal.GetHand(new PlayerId(playerId_3));
@@ -90,10 +91,7 @@ public class CroupierTests
         var playerId_4 = Guid.Parse("392D2B74-5B97-461E-B20C-70807E2D7778");
 
         // act
-        var deal = croupier.Deal(
-            new DealId(
-                new GameId(gameId),
-                new DealNumber(1)),
+        var (playersSet, moveSequence) = croupier.Deal(
             new(new NextDealPlayer[]
             {
                 new(new PlayerId(playerId_1), CardsAmount.Max, 1),
@@ -101,6 +99,9 @@ public class CroupierTests
                 new(new PlayerId(playerId_3), CardsAmount.Max, 3),
                 new(new PlayerId(playerId_4), CardsAmount.Max, 4),
             }));
+        var deal = new Deal(
+            new DealId(new GameId(gameId), new DealNumber(1)),
+            new(playersSet, moveSequence));
         var hand_1 = deal.GetHand(new PlayerId(playerId_1));
         var hand_2 = deal.GetHand(new PlayerId(playerId_2));
         var hand_3 = deal.GetHand(new PlayerId(playerId_3));

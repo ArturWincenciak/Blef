@@ -2,4 +2,17 @@
 
 namespace Blef.Modules.Games.Domain.Events;
 
-internal sealed record DealStarted(Guid GameId, int DealNumber) : IDomainEvent<DealStarted>;
+internal sealed record DealStarted(
+    Guid GameId,
+    int DealNumber,
+    IEnumerable<DealStarted.Player> Players) : IDomainEvent<DealStarted>
+{
+    internal sealed record Player(
+        Guid PlayerId,
+        IEnumerable<Player.Card> Hand)
+    {
+        internal sealed record Card(
+            string FaceCard,
+            string Suit);
+    }
+}

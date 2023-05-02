@@ -12,7 +12,7 @@ internal sealed partial class Gameplay
     public void JoinPlayer(Guid playerId, string nick) =>
         Players.Add(new(playerId, nick));
 
-    public void StartNewDeal(int dealNumber) =>
+    public void StartNewDeal(int dealNumber, List<Deal.DealPlayer> dealPlayers) =>
         Deals.Add(dealNumber,
             new(dealNumber, new(), new(), Guid.Empty, Guid.Empty));
 
