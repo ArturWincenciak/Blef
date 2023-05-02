@@ -85,7 +85,7 @@ internal sealed class Game
     }
 
     public GameFlowResult GetGameFlow() =>
-        new(_players);
+        new(_players, _deals.Select(deal => deal.DealId));
 
     private DealId NewDeal()
     {
