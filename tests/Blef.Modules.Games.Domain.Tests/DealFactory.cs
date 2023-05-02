@@ -34,7 +34,15 @@ internal static class DealFactory
 
     public static (
         Deal Deal,
-        DealPlayer First, DealPlayer Second, DealPlayer Third, DealPlayer Fourth) GivenDealWithFourPlayers()
+        DealPlayer First,
+        DealPlayer Second,
+        DealPlayer Third,
+        DealPlayer Fourth)
+        GivenDealWithFourPlayers(
+            Hand withFirstPlayerHand,
+            Hand withSecondPlayerHand,
+            Hand withThirdPlayerHand,
+            Hand withFourthPlayerHand)
     {
         var dealNumber = new DealNumber(1);
         var gameGuid = Guid.Parse("F0C56541-DFDE-45B5-9A6F-FBD8CBE127D1");
@@ -44,14 +52,10 @@ internal static class DealFactory
         var playerGuid_2 = Guid.Parse("DBE9B64F-0EC9-4A4F-A357-A482A09F3567");
         var playerGuid_3 = Guid.Parse("D4C01AE4-C790-41EB-BF9E-DA2CC05D7A61");
         var playerGuid_4 = Guid.Parse("59EB6325-6D26-477A-BA2F-BE0C1EF43521");
-        var playerHand_1 = new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)});
-        var playerHand_2 = new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)});
-        var playerHand_3 = new Hand(new Card[] {new(FaceCard.Queen, Suit.Diamonds)});
-        var playerHand_4 = new Hand(new Card[] {new(FaceCard.Jack, Suit.Diamonds)});
-        var player_1 = new DealPlayer(new(playerGuid_1), playerHand_1);
-        var player_2 = new DealPlayer(new(playerGuid_2), playerHand_2);
-        var player_3 = new DealPlayer(new(playerGuid_3), playerHand_3);
-        var player_4 = new DealPlayer(new(playerGuid_4), playerHand_4);
+        var player_1 = new DealPlayer(new(playerGuid_1), withFirstPlayerHand);
+        var player_2 = new DealPlayer(new(playerGuid_2), withSecondPlayerHand);
+        var player_3 = new DealPlayer(new(playerGuid_3), withThirdPlayerHand);
+        var player_4 = new DealPlayer(new(playerGuid_4), withFourthPlayerHand);
         var players = new[] {player_1, player_2, player_3, player_4};
         var moveSequence = new MoveSequence(new[]
         {
@@ -63,5 +67,20 @@ internal static class DealFactory
         var deal = new Deal(dealId, new(new(players), moveSequence));
 
         return (deal, player_1, player_2, player_3, player_4);
+    }
+
+    public static (
+        Deal Deal,
+        DealPlayer First,
+        DealPlayer Second,
+        DealPlayer Third,
+        DealPlayer Fourth)
+        GivenDealWithFourPlayers()
+    {
+        return GivenDealWithFourPlayers(
+            new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)}),
+            new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)}),
+            new Hand(new Card[] {new(FaceCard.Queen, Suit.Diamonds)}),
+            new Hand(new Card[] {new(FaceCard.Jack, Suit.Diamonds)}));
     }
 }
