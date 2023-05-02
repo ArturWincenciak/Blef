@@ -7,8 +7,7 @@ namespace Blef.Modules.Games.Application.Queries;
 public sealed record GetGameFlow(GameId GameId) : IQuery<GetGameFlow.Result>
 {
     [UsedImplicitly]
-    public sealed record Result(
-        IEnumerable<Player> Players) : IQueryResult;
+    public sealed record Result(IEnumerable<Player> Players) : IQueryResult;
 
     [UsedImplicitly]
     public sealed record Player(Guid PlayerId, string Nick);
