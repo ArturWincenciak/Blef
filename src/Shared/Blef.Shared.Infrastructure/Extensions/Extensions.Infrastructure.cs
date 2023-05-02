@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using Blef.Shared.Abstractions.Modules;
 using Blef.Shared.Infrastructure.Commands;
+using Blef.Shared.Infrastructure.Events;
 using Blef.Shared.Infrastructure.Exceptions;
 using Blef.Shared.Infrastructure.Modules;
 using Blef.Shared.Infrastructure.Queries;
@@ -27,7 +28,8 @@ internal static partial class Extensions
             .AddModuleInfo(modules)
             .AddSwagger()
             .AddCommands(assemblies)
-            .AddQueries(assemblies);
+            .AddQueries(assemblies)
+            .AddDomainEvents(assemblies);
 
     public static void UseInfrastructure(this WebApplication application) =>
         application
