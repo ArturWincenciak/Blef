@@ -2,7 +2,6 @@
 using Blef.Modules.Games.Domain.Services;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
-using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Entities;
@@ -11,9 +10,8 @@ internal sealed class Deal
 {
     private readonly DealPlayersSet _playersSet;
     private Bid _lastBid;
-    private CheckingPlayer _checkingPlayer;
+    private CheckingPlayer _checkingPlayer; // todo: ...
     private LooserPlayer _looserPlayer;
-    private readonly BidHistory _bidHistory;
     private readonly MoveOrderPolicy _moveOrderPolicy;
 
     public DealId DealId { get; }
@@ -25,7 +23,6 @@ internal sealed class Deal
 
         DealId = dealId ?? throw new ArgumentNullException(nameof(dealId));
         _playersSet = dealSet.PlayersSet;
-        _bidHistory = new();
         _looserPlayer = new();
         _checkingPlayer = new();
         _moveOrderPolicy = new(dealSet.MoveSequence);
@@ -43,7 +40,6 @@ internal sealed class Deal
                 throw new BidIsNotHigherThenLastOneException(DealId, newBid, _lastBid);
 
         _lastBid = newBid;
-        _bidHistory.OnBid(newBid);
     }
 
     public LooserPlayer Check(PlayerId checkingPlayerId)
@@ -60,12 +56,6 @@ internal sealed class Deal
             : new LooserPlayer(_lastBid.Player.Id);
 
         return _looserPlayer;
-    }
-
-    public DealFlowResult GetDealFlow()
-    {
-        var bids = _bidHistory.GetFlow();
-        return new DealFlowResult(_playersSet.Players, bids, _checkingPlayer, _looserPlayer);
     }
 
     private bool BetHasBeenMade =>

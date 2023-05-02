@@ -3,7 +3,6 @@ using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Modules.Games.Domain.Services;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
-using Blef.Modules.Games.Domain.ValueObjects.Dto;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Shared.Abstractions.Events;
 
@@ -90,15 +89,6 @@ internal sealed class Game
         var deal = GetDeal(dealId);
         return deal.GetHand(playerId);
     }
-
-    public DealFlowResult GetDealFlow(DealId dealId)
-    {
-        var deal = GetDeal(dealId);
-        return deal.GetDealFlow();
-    }
-
-    public GameFlowResult GetGameFlow() =>
-        new(_players, _deals.Select(deal => deal.DealId));
 
     private DealId NewDeal()
     {
