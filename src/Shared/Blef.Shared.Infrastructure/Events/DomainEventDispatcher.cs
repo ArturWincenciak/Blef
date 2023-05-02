@@ -29,4 +29,11 @@ internal class DomainEventDispatcher : IDomainEventDispatcher
             throw;
         }
     }
+
+    public async Task Dispatch<TEvent>(IEnumerable<TEvent> events, CancellationToken cancellation)
+        where TEvent : IDomainEvent
+    {
+        foreach (var domainEvent in events)
+            await Dispatch(domainEvent, cancellation);
+    }
 }
