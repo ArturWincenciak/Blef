@@ -2,6 +2,7 @@
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 using Blef.Shared.Abstractions.Commands;
+using Blef.Shared.Abstractions.Events;
 using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Application.Commands.Handlers;
@@ -10,16 +11,20 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 internal sealed class BidHandler : ICommandHandler<Bid>
 {
     private readonly IGamesRepository _games;
+    private readonly IDomainEventDispatcher _eventDispatcher;
 
-    public BidHandler(IGamesRepository games) =>
+    public BidHandler(IGamesRepository games, IDomainEventDispatcher eventDispatcher)
+    {
         _games = games;
+        _eventDispatcher = eventDispatcher;
+    }
 
-    public Task Handle(Bid command, CancellationToken cancellation)
+    public async Task Handle(Bid command, CancellationToken cancellation)
     {
         var game = _games.Get(command.GameId);
         var pokerHand = Parse(command.PokerHand);
-        game.Bid(new (command.GameId, command.DealNumber), new (pokerHand, command.PlayerId));
-        return Task.CompletedTask;
+        var bidPlaced = game.Bid(new (command.GameId, command.DealNumber), new (pokerHand, command.PlayerId));
+        await _eventDispatcher.Dispatch(bidPlaced, cancellation);
     }
 
     private static PokerHand Parse(string bid)

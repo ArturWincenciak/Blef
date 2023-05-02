@@ -1,5 +1,6 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
 using Blef.Modules.Games.Domain.Entities;
+using Blef.Modules.Games.Domain.Repositories;
 using Blef.Modules.Games.Domain.Services;
 using Blef.Shared.Abstractions.Commands;
 using JetBrains.Annotations;
@@ -11,18 +12,22 @@ internal sealed class NewGameHandler : ICommandHandler<NewGame, NewGame.Result>
 {
     private readonly GameFactory _gameFactory;
     private readonly IGamesRepository _games;
+    private readonly IGameplaysRepository _gameplays;
 
-    public NewGameHandler(IGamesRepository games, GameFactory gameFactory)
+    public NewGameHandler(IGamesRepository games, GameFactory gameFactory, IGameplaysRepository gameplays)
     {
         _games = games;
         _gameFactory = gameFactory;
+        _gameplays = gameplays;
     }
 
     public async Task<NewGame.Result> Handle(NewGame command, CancellationToken cancellation)
     {
         var game = _gameFactory.Create();
         _games.Add(game);
-        var result = new NewGame.Result(game.Id.Id);
-        return await Task.FromResult(result);
+        _gameplays.Add(new Gameplay(game.GameId.Id));
+        return new NewGame.Result(game.GameId.Id);
+
+        // todo: return in header next possible actions
     }
 }

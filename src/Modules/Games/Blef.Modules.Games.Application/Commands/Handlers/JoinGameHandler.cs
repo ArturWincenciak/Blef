@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
+using Blef.Modules.Games.Domain.Events;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Abstractions.Events;
@@ -21,8 +22,10 @@ internal sealed class JoinGameHandler : ICommandHandler<JoinGame, JoinGame.Resul
     public async Task<JoinGame.Result> Handle(JoinGame command, CancellationToken cancellation)
     {
         var game = _games.Get(command.GameId);
-        var gamePlayerJoined = game.Join(new PlayerNick(command.Nick));
+        var gamePlayerJoined = game.Join(new PlayerNick(command.Nick)) as GamePlayerJoined;
         await _domainEventDispatcher.Dispatch(gamePlayerJoined, cancellation);
-        return new JoinGame.Result(gamePlayerJoined.PlayerId.Id, gamePlayerJoined.Nick.Nick);
+        return new JoinGame.Result(gamePlayerJoined.PlayerId, gamePlayerJoined.Nick);
+
+        // todo: return in header next possible actions
     }
 }
