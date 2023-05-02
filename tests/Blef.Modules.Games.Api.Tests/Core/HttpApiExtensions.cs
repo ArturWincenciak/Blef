@@ -14,6 +14,9 @@ internal static class HttpApiExtensions
     private static string GamesUri =>
         "games-module/games";
 
+    private static string GameplaysUri =>
+        "games-module/gameplays";
+
     async internal static Task<NewGame.Result> NewGame(this HttpClient client)
     {
         var response = await client.PostAsync(GamesUri, content: null);
@@ -30,10 +33,10 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<JoinGame.Result>())!;
     }
 
-    async internal static Task<NewDeal.Result> NewDeal(this HttpClient client, GameId gameId, PlayerId playerId)
+    async internal static Task<NewDeal.Result> NewDeal(this HttpClient client, GameId gameId)
     {
         var response = await client.PostAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals",
+            requestUri: $"{GamesUri}/{gameId.Id}/deals",
             content: null);
         response.EnsureSuccessStatusCode();
         return (await response.Content.ReadFromJsonAsync<NewDeal.Result>())!;
@@ -76,7 +79,7 @@ internal static class HttpApiExtensions
 
     async internal static Task<GetGameFlow.Result> GetGameFlow(this HttpClient client, GameId gameId)
     {
-        var response = await client.GetAsync($"{GamesUri}/{gameId.Id}");
+        var response = await client.GetAsync($"{GameplaysUri}/{gameId.Id}");
         response.EnsureSuccessStatusCode();
         return (await response.Content.ReadFromJsonAsync<GetGameFlow.Result>())!;
     }
@@ -84,7 +87,7 @@ internal static class HttpApiExtensions
     async internal static Task<GetDealFlow.Result> GetDealFlow(this HttpClient client, GameId gameId,
         DealNumber dealNumber)
     {
-        var response = await client.GetAsync($"{GamesUri}/{gameId.Id}/deals/{dealNumber.Number}");
+        var response = await client.GetAsync($"{GameplaysUri}/{gameId.Id}/deals/{dealNumber.Number}");
         response.EnsureSuccessStatusCode();
         return (await response.Content.ReadFromJsonAsync<GetDealFlow.Result>())!;
     }

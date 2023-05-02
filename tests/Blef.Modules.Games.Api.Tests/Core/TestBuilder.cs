@@ -67,12 +67,12 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder NewDeal(WhichPlayer whichPlayer)
+    internal TestBuilder NewDeal()
     {
         _actions.Add(async () =>
         {
-            var deal = await _gameClient.Deal(whichPlayer);
-            _testResult.Record(action: nameof(NewDeal), whichPlayer, deal);
+            var deal = await _gameClient.NewDeal();
+            _testResult.Record(action: nameof(NewDeal), NoArgument, deal);
         });
 
         return this;

@@ -15,10 +15,9 @@ public class PlayGameTests
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
             .JoinPlayer(WhichPlayer.Conway)
+            .NewDeal()
             .GetGameFlow()
-            .NewDeal(WhichPlayer.Knuth)
             .GetDealFlow(new DealNumber(1))
-            .GetGameFlow()
             .GetCards(WhichPlayer.Knuth, deal: new DealNumber(1))
             .GetCards(WhichPlayer.Graham, deal: new DealNumber(1))
             .GetCards(WhichPlayer.Conway, deal: new DealNumber(1))
@@ -26,11 +25,9 @@ public class PlayGameTests
             .Bid(WhichPlayer.Graham, deal: new DealNumber(1), PokerHand.HighCard.Ten)
             .Bid(WhichPlayer.Conway, deal: new DealNumber(1), PokerHand.HighCard.Jack)
             .Check(WhichPlayer.Knuth, deal: new DealNumber(1))
+            .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(1))
-            .GetGameFlow()
-            .NewDeal(WhichPlayer.Graham)
             .GetDealFlow(new DealNumber(2))
-            .GetGameFlow()
             .Build();
 
         return Verify(results);

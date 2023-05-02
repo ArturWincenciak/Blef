@@ -10,12 +10,12 @@ namespace Blef.Modules.Games.Api.Controllers.Games;
 
 internal sealed class GamesController : ModuleControllerBase
 {
-    private const string GAME_ID = "{gameId:Guid}";
-    private const string PLAYER_ID = "{playerId:Guid}";
-    private const string DEAL_NUMBER = "{dealNumber:int}";
     private const string GAMES = "games";
+    private const string GAME_ID = "{gameId:Guid}";
     private const string DEALS = "deals";
+    private const string DEAL_NUMBER = "{dealNumber:int}";
     private const string PLAYERS = "players";
+    private const string PLAYER_ID = "{playerId:Guid}";
     private const string CARDS = "cards";
     private const string BIDS = "bids";
     private const string CHECKS = "checks";
@@ -37,20 +37,12 @@ internal sealed class GamesController : ModuleControllerBase
         return Created(uri: $"{GameUri(game.GameId)}", game);
     }
 
-    [HttpGet($"{GAME_ID}")]
-    public async Task<IActionResult> GetDealFlow(Guid gameId, CancellationToken cancellation)
+    [HttpPost($"{GAME_ID}/{DEALS}")]
+    public async Task<IActionResult> NewDeal(Guid gameId, CancellationToken cancellation)
     {
-        var query = new GetGameFlow(new GameId(gameId));
-        var gameFlow = await _queryDispatcher.Dispatch<GetGameFlow, GetGameFlow.Result>(query, cancellation);
-        return Ok(gameFlow);
-    }
-
-    [HttpGet($"{GAME_ID}/{DEALS}/{DEAL_NUMBER}")]
-    public async Task<IActionResult> GetDealFlow(Guid gameId, int dealNumber, CancellationToken cancellation)
-    {
-        var query = new GetDealFlow(GameId: new GameId(gameId), DealNumber: new DealNumber(dealNumber));
-        var dealFlow = await _queryDispatcher.Dispatch<GetDealFlow, GetDealFlow.Result>(query, cancellation);
-        return Ok(dealFlow);
+        var cmd = new NewDeal(new GameId(gameId));
+        var deal = await _commandDispatcher.Dispatch<NewDeal, NewDeal.Result>(cmd, cancellation);
+        return Created(uri: $"{GameUri(gameId)}/{DEALS}/{deal.Number}", deal);
     }
 
     [HttpPost($"{GAME_ID}/{PLAYERS}")]
@@ -59,14 +51,6 @@ internal sealed class GamesController : ModuleControllerBase
         var cmd = new JoinGame(GameId: new GameId(gameId), command.Nick);
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, player.PlayerId)}", player);
-    }
-
-    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}")]
-    public async Task<IActionResult> NewDeal(Guid gameId, CancellationToken cancellation)
-    {
-        var cmd = new NewDeal(new GameId(gameId));
-        var deal = await _commandDispatcher.Dispatch<NewDeal, NewDeal.Result>(cmd, cancellation);
-        return Created(uri: $"{GameUri(gameId)}/{DEALS}/{deal.Number}", deal);
     }
 
     [HttpGet($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{CARDS}")]
@@ -90,7 +74,7 @@ internal sealed class GamesController : ModuleControllerBase
     }
 
     [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{CHECKS}")]
-    public async Task<IActionResult> CheckBid(Guid gameId, Guid playerId, int dealNumber,
+    public async Task<IActionResult> Check(Guid gameId, Guid playerId, int dealNumber,
         CancellationToken cancellation)
     {
         var cmd = new Check(GameId: new GameId(gameId), PlayerId: new PlayerId(playerId),
