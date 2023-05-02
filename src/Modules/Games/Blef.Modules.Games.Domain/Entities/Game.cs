@@ -50,8 +50,8 @@ internal sealed class Game
         if (_players.Count < MIN_NUMBER_OF_PLAYERS)
             throw new NotEnoughPlayersException();
 
-        var deal = NewDeal();
-        return new DealStarted(GameId.Id, deal.Number.Number);
+        var newDealStarted = NewDeal();
+        return newDealStarted;
     }
 
     public IDomainEvent Bid(DealId dealId, Bid newBid)
@@ -70,12 +70,12 @@ internal sealed class Game
 
         // todo: check if game is over
 
-        var nextDeal = NewDeal();
+        var nextDealStarted = NewDeal();
 
-        var events = new IDomainEvent[]
+        var events = new []
         {
             new CheckPlaced(dealId.GameId.Id, dealId.Number.Number, checkingPlayerId.Id, lastDealLooser.PlayerId),
-            new DealStarted(nextDeal.GameId.Id, nextDeal.Number.Number)
+            nextDealStarted
         };
 
         return events;
@@ -90,15 +90,17 @@ internal sealed class Game
         return deal.GetHand(playerId);
     }
 
-    private DealId NewDeal()
+    private IDomainEvent NewDeal()
     {
         var nextDealNumber = _deals.Count + 1;
         var nextDealId = new DealId(GameId, Number: new DealNumber(nextDealNumber));
         var nextDealPlayers = CreateNextDealPlayers();
-        var deal = _croupier.Deal(nextDealId, nextDealPlayers);
+        var (dealPlayers, moveSequence) = _croupier.Deal(nextDealPlayers);
 
-        _deals.Add(deal);
-        return nextDealId;
+        _deals.Add(new(nextDealId, new(dealPlayers, moveSequence)));
+
+        var advancingPlayers = Map(dealPlayers);
+        return new DealStarted(GameId.Id, nextDealId.Number.Number, advancingPlayers);
     }
 
     private bool IsGameStarted() =>
@@ -156,5 +158,13 @@ internal sealed class Game
         // p4 -> j = 4, order = 4
 
         */
+    }
+
+    private static IEnumerable<DealStarted.Player> Map(DealPlayersSet dealPlayers)
+    {
+        var advancingPlayers = dealPlayers.Players.Select(player =>
+            new DealStarted.Player(player.PlayerId.Id, player.Hand.Cards.Select(card =>
+                new DealStarted.Player.Card(card.FaceCard.ToString(), card.Suit.ToString()))));
+        return advancingPlayers;
     }
 }
