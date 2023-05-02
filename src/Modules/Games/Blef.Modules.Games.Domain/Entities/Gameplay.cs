@@ -13,8 +13,7 @@ internal sealed partial class Gameplay
         Players.Add(new(playerId, nick));
 
     public void StartNewDeal(int dealNumber, List<Deal.DealPlayer> dealPlayers) =>
-        Deals.Add(dealNumber,
-            new(dealNumber, new(), new(), Guid.Empty, Guid.Empty));
+        Deals.Add(dealNumber, new(dealNumber, dealPlayers, new(), Guid.Empty, Guid.Empty));
 
     public void Bid(int dealNumber, Guid playerId, string pokerHand)
     {
