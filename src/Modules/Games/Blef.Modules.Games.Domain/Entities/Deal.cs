@@ -10,7 +10,6 @@ internal sealed class Deal
 {
     private readonly DealPlayersSet _playersSet;
     private Bid _lastBid;
-    private CheckingPlayer _checkingPlayer; // todo: ...
     private LooserPlayer _looserPlayer;
     private readonly MoveOrderPolicy _moveOrderPolicy;
 
@@ -24,7 +23,6 @@ internal sealed class Deal
         DealId = dealId ?? throw new ArgumentNullException(nameof(dealId));
         _playersSet = dealSet.PlayersSet;
         _looserPlayer = new();
-        _checkingPlayer = new();
         _moveOrderPolicy = new(dealSet.MoveSequence);
     }
 
@@ -48,8 +46,6 @@ internal sealed class Deal
 
         if (BetHasBeenMade == false)
             throw new NoBidToCheckException(DealId);
-
-        _checkingPlayer = new CheckingPlayer(checkingPlayerId.Id);
 
         _looserPlayer = _lastBid.PokerHand.IsOnTable(_playersSet.Table)
             ? new LooserPlayer(checkingPlayerId.Id)
