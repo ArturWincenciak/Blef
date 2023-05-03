@@ -1,7 +1,7 @@
 ﻿using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
-namespace Blef.Modules.Games.Domain.Tests;
+namespace Blef.Modules.Games.Domain.Tests.Extensions;
 
 internal static class PokerHandFactory
 {

@@ -1,9 +1,9 @@
 ﻿using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
-using static Blef.Modules.Games.Domain.Tests.PokerHandFactory;
+using static Blef.Modules.Games.Domain.Tests.Extensions.PokerHandFactory;
 
-namespace Blef.Modules.Games.Domain.Tests;
+namespace Blef.Modules.Games.Domain.Tests.Extensions;
 
 internal static class BidMaker
 {
