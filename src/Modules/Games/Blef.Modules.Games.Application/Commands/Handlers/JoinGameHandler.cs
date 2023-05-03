@@ -22,7 +22,8 @@ internal sealed class JoinGameHandler : ICommandHandler<JoinGame, JoinGame.Resul
     public async Task<JoinGame.Result> Handle(JoinGame command, CancellationToken cancellation)
     {
         var game = _games.Get(command.GameId);
-        var gamePlayerJoined = game.Join(new PlayerNick(command.Nick)) as GamePlayerJoined;
+        // todo: validate and throw EmptyPlayerNickException with return 400 if nick is empty
+        var gamePlayerJoined = game.Join(new PlayerNick(command.Nick));
         await _domainEventDispatcher.Dispatch(gamePlayerJoined, cancellation);
         return new JoinGame.Result(gamePlayerJoined.PlayerId, gamePlayerJoined.Nick);
 
