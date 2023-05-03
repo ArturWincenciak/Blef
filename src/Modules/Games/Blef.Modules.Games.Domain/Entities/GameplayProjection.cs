@@ -10,13 +10,13 @@ internal sealed partial class GameplayProjection
     public GameplayProjection(Guid id) =>
         Id = id;
 
-    public void JoinPlayer(Guid playerId, string nick) =>
+    public void OnPlayerJoined(Guid playerId, string nick) =>
         _players.Add(new(playerId, nick));
 
-    public void NewDeal(int dealNumber, List<DealPlayer> dealPlayers) =>
+    public void OnDealStarted(int dealNumber, List<DealPlayer> dealPlayers) =>
         _deals.Add(dealNumber, new(dealNumber, dealPlayers, new()));
 
-    public void PlaceBid(int dealNumber, Guid playerId, string pokerHand)
+    public void OnBidPlaced(int dealNumber, Guid playerId, string pokerHand)
     {
         var deal = _deals[dealNumber];
         var bidNumber = deal.Bids.Count + 1;
@@ -24,7 +24,7 @@ internal sealed partial class GameplayProjection
         deal.Bids.Add(bid);
     }
 
-    public void Check(int dealNumber, Guid checkingPlayerId, Guid looserPlayerId)
+    public void OnCheckPlaced(int dealNumber, Guid checkingPlayerId, Guid looserPlayerId)
     {
         var deal = _deals[dealNumber];
         _deals[dealNumber] = deal with {
