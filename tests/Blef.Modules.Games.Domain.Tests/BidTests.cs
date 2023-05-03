@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects;
+﻿using Blef.Modules.Games.Domain.Events;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 

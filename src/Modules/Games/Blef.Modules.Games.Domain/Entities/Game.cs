@@ -24,7 +24,7 @@ internal sealed class Game
         _croupier = croupier ?? throw new ArgumentNullException(nameof(croupier));
     }
 
-    public IDomainEvent Join(PlayerNick nick)
+    public GamePlayerJoined Join(PlayerNick nick)
     {
         if (IsGameStarted())
             throw new JoinGameThatIsAlreadyStartedException(GameId, nick);
