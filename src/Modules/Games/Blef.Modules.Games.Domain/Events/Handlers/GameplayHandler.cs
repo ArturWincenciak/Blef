@@ -18,26 +18,26 @@ internal sealed class GameplayHandler :
     public async Task Handle(GamePlayerJoined @event, CancellationToken cancellation)
     {
         var gameplay = _gameplaysRepository.Get(@event.GameId);
-        gameplay.JoinPlayer(@event.PlayerId, @event.Nick);
+        gameplay.OnPlayerJoined(@event.PlayerId, @event.Nick);
     }
 
     public async Task Handle(DealStarted @event, CancellationToken cancellation)
     {
         var gameplay = _gameplaysRepository.Get(@event.GameId);
         var dealPlayers = Map(@event.Players);
-        gameplay.NewDeal(@event.DealNumber, dealPlayers);
+        gameplay.OnDealStarted(@event.DealNumber, dealPlayers);
     }
 
     public async Task Handle(BidPlaced @event, CancellationToken cancellation)
     {
         var gameplay = _gameplaysRepository.Get(@event.GameId);
-        gameplay.PlaceBid(@event.DealNumber, @event.PlayerId, @event.PokerHand);
+        gameplay.OnBidPlaced(@event.DealNumber, @event.PlayerId, @event.PokerHand);
     }
 
     public async Task Handle(CheckPlaced @event, CancellationToken cancellation)
     {
         var gameplay = _gameplaysRepository.Get(@event.GameId);
-        gameplay.Check(@event.DealNumber, @event.CheckingPlayerId, @event.LooserPlayerId);
+        gameplay.OnCheckPlaced(@event.DealNumber, @event.CheckingPlayerId, @event.LooserPlayerId);
     }
 
     private static List<GameplayProjection.DealPlayer> Map(IEnumerable<DealStarted.Player> players) =>
