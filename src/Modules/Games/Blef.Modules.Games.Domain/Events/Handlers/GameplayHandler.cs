@@ -25,13 +25,13 @@ internal sealed class GameplayHandler :
     {
         var gameplay = _gameplaysRepository.Get(@event.GameId);
         var dealPlayers = Map(@event.Players);
-        gameplay.StartNewDeal(@event.DealNumber, dealPlayers);
+        gameplay.NewDeal(@event.DealNumber, dealPlayers);
     }
 
     public async Task Handle(BidPlaced @event, CancellationToken cancellation)
     {
         var gameplay = _gameplaysRepository.Get(@event.GameId);
-        gameplay.Bid(@event.DealNumber, @event.PlayerId, @event.PokerHand);
+        gameplay.PlaceBid(@event.DealNumber, @event.PlayerId, @event.PokerHand);
     }
 
     public async Task Handle(CheckPlaced @event, CancellationToken cancellation)
@@ -40,8 +40,8 @@ internal sealed class GameplayHandler :
         gameplay.Check(@event.DealNumber, @event.CheckingPlayerId, @event.LooserPlayerId);
     }
 
-    private static List<Gameplay.Deal.DealPlayer> Map(IEnumerable<DealStarted.Player> players) =>
+    private static List<Gameplay.DealPlayer> Map(IEnumerable<DealStarted.Player> players) =>
         players.Select(player =>
-            new Gameplay.Deal.DealPlayer(player.PlayerId, player.Hand.Select(card =>
-                new Gameplay.Deal.DealPlayer.Card(card.FaceCard, card.Suit)).ToList())).ToList();
+            new Gameplay.DealPlayer(player.PlayerId, player.Hand.Select(card =>
+                new Gameplay.Card(card.FaceCard, card.Suit)).ToList())).ToList();
 }

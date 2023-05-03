@@ -95,12 +95,12 @@ internal sealed class Game
         var nextDealNumber = _deals.Count + 1;
         var nextDealId = new DealId(GameId, Number: new DealNumber(nextDealNumber));
         var nextDealPlayers = CreateNextDealPlayers();
-        var dealSet = _croupier.Deal(nextDealPlayers);
+        var nextDealSet = _croupier.Deal(nextDealPlayers);
 
-        _deals.Add(new(nextDealId, dealSet));
+        _deals.Add(new(nextDealId, nextDealSet));
 
-        var advancingPlayers = Map(dealSet.PlayersSet);
-        return new DealStarted(GameId.Id, nextDealId.Number.Number, advancingPlayers);
+        var dealStartedPlayers = Map(nextDealSet.PlayersSet);
+        return new DealStarted(GameId.Id, nextDealId.Number.Number, dealStartedPlayers);
     }
 
     private bool IsGameStarted() =>
@@ -164,7 +164,7 @@ internal sealed class Game
     {
         var advancingPlayers = dealPlayers.Players.Select(player =>
             new DealStarted.Player(player.PlayerId.Id, player.Hand.Cards.Select(card =>
-                new DealStarted.Player.Card(card.FaceCard.ToString(), card.Suit.ToString()))));
+                new DealStarted.Card(card.FaceCard.ToString(), card.Suit.ToString()))));
         return advancingPlayers;
     }
 }
