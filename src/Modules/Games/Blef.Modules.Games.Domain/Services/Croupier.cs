@@ -11,7 +11,7 @@ internal sealed class Croupier
     public Croupier(IDeckFactory deckFactory) =>
         _deckFactory = deckFactory ?? throw new ArgumentNullException(nameof(deckFactory));
 
-    public (DealPlayersSet DealPlayers, MoveSequence MoveSequence) Deal(NextDealPlayersSet nextDealPlayersSet)
+    public DealSet Deal(NextDealPlayersSet nextDealPlayersSet)
     {
         var deck = _deckFactory.Create();
         var players = nextDealPlayersSet.Players
@@ -25,6 +25,6 @@ internal sealed class Croupier
         var moveSequence = new MoveSequence(nextDealPlayersSet.Players
             .Select(player => new Move(player.PlayerId, Order.Create(player.Order))));
 
-        return (new(players), moveSequence);
+        return new(new(players), moveSequence);
     }
 }

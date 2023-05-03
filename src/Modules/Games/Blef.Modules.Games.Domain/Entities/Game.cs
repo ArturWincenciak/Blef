@@ -95,11 +95,11 @@ internal sealed class Game
         var nextDealNumber = _deals.Count + 1;
         var nextDealId = new DealId(GameId, Number: new DealNumber(nextDealNumber));
         var nextDealPlayers = CreateNextDealPlayers();
-        var (dealPlayers, moveSequence) = _croupier.Deal(nextDealPlayers);
+        var dealSet = _croupier.Deal(nextDealPlayers);
 
-        _deals.Add(new(nextDealId, new(dealPlayers, moveSequence)));
+        _deals.Add(new(nextDealId, dealSet));
 
-        var advancingPlayers = Map(dealPlayers);
+        var advancingPlayers = Map(dealSet.PlayersSet);
         return new DealStarted(GameId.Id, nextDealId.Number.Number, advancingPlayers);
     }
 
