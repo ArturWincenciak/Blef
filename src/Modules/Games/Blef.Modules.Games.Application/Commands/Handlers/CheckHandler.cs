@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
+using Blef.Modules.Games.Domain.Events;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Abstractions.Events;
 using JetBrains.Annotations;
@@ -21,10 +22,25 @@ internal sealed class CheckHandler : ICommandHandler<Check>
     {
         var game = _games.Get(command.GameId);
         var events = game.Check(new (command.GameId, command.DealNumber), command.PlayerId);
-        await _eventDispatcher.Dispatch(events, cancellation);
+
+        foreach (var @event in events)
+            await Dispatch(@event, cancellation);
 
         // todo: return looser player
         // todo: return next deal if created
         // todo: return in header next possible actions
+    }
+
+    private async Task Dispatch(IDomainEvent @event, CancellationToken cancellation)
+    {
+        switch (@event)
+        {
+            case CheckPlaced gameChecked:
+                await _eventDispatcher.Dispatch(gameChecked, cancellation);
+                break;
+            case DealStarted dealStarted:
+                await _eventDispatcher.Dispatch(dealStarted, cancellation);
+                break;
+        }
     }
 }

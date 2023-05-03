@@ -4,17 +4,17 @@ using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Application.Queries;
 
-public sealed record GetDealFlow(GameId GameId, DealNumber DealNumber) : IQuery<GetDealFlow.Result>
+public sealed record GetDeal(GameId GameId, DealNumber DealNumber) : IQuery<GetDeal.Result>
 {
     [UsedImplicitly]
     public sealed record Result(
         IEnumerable<Player> Players,
-        IEnumerable<DealBid> Bids,
+        IEnumerable<Bid> Bids,
         Guid CheckingPlayerId,
         Guid LooserPlayerId) : IQueryResult;
 
     [UsedImplicitly]
-    public sealed record DealBid(int Order, Guid PlayerId, string PokerHand);
+    public sealed record Bid(int Order, Guid PlayerId, string PokerHand);
 
     [UsedImplicitly]
     public sealed record Player(Guid PlayerId, IEnumerable<Card> Hand);

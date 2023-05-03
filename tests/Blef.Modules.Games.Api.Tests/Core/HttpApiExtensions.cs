@@ -77,19 +77,19 @@ internal static class HttpApiExtensions
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/bids",
             value: new {PokerHand = bid});
 
-    async internal static Task<GetGameFlow.Result> GetGameFlow(this HttpClient client, GameId gameId)
+    async internal static Task<GetGame.Result> GetGameFlow(this HttpClient client, GameId gameId)
     {
         var response = await client.GetAsync($"{GameplaysUri}/{gameId.Id}");
         response.EnsureSuccessStatusCode();
-        return (await response.Content.ReadFromJsonAsync<GetGameFlow.Result>())!;
+        return (await response.Content.ReadFromJsonAsync<GetGame.Result>())!;
     }
 
-    async internal static Task<GetDealFlow.Result> GetDealFlow(this HttpClient client, GameId gameId,
+    async internal static Task<GetDeal.Result> GetDealFlow(this HttpClient client, GameId gameId,
         DealNumber dealNumber)
     {
         var response = await client.GetAsync($"{GameplaysUri}/{gameId.Id}/deals/{dealNumber.Number}");
         response.EnsureSuccessStatusCode();
-        return (await response.Content.ReadFromJsonAsync<GetDealFlow.Result>())!;
+        return (await response.Content.ReadFromJsonAsync<GetDeal.Result>())!;
     }
 
     async internal static Task CheckWithSuccess(this HttpClient client, GameId gameId, DealNumber deal,

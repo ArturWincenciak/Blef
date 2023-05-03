@@ -42,7 +42,7 @@ internal sealed class Game
         return new GamePlayerJoined(GameId.Id, player.PlayerId.Id, player.Nick.Nick);
     }
 
-    public IDomainEvent StartFirstDeal()
+    public DealStarted StartFirstDeal()
     {
         if (IsGameStarted())
             throw new GameAlreadyStartedException();
@@ -50,15 +50,14 @@ internal sealed class Game
         if (_players.Count < MIN_NUMBER_OF_PLAYERS)
             throw new NotEnoughPlayersException();
 
-        var newDealStarted = NewDeal();
-        return newDealStarted;
+        return NewDeal();
     }
 
-    public IDomainEvent Bid(DealId dealId, Bid newBid)
+    public BidPlaced Bid(DealId dealId, Bid newBid)
     {
         var deal = GetDeal(dealId);
         deal.Bid(newBid);
-        return new BidPlaced(GameId.Id, dealId.Number.Number, newBid.Player.Id, newBid.PokerHand.Serialize());
+        return new (GameId.Id, dealId.Number.Number, newBid.Player.Id, newBid.PokerHand.Serialize());
     }
 
     public IEnumerable<IDomainEvent> Check(DealId dealId, PlayerId checkingPlayerId)
@@ -72,7 +71,7 @@ internal sealed class Game
 
         var nextDealStarted = NewDeal();
 
-        var events = new []
+        var events = new IDomainEvent[]
         {
             new CheckPlaced(dealId.GameId.Id, dealId.Number.Number, checkingPlayerId.Id, lastDealLooser.PlayerId),
             nextDealStarted
@@ -90,7 +89,7 @@ internal sealed class Game
         return deal.GetHand(playerId);
     }
 
-    private IDomainEvent NewDeal()
+    private DealStarted NewDeal()
     {
         var nextDealNumber = _deals.Count + 1;
         var nextDealId = new DealId(GameId, Number: new DealNumber(nextDealNumber));
@@ -100,7 +99,7 @@ internal sealed class Game
         _deals.Add(new(nextDealId, nextDealSet));
 
         var dealStartedPlayers = Map(nextDealSet.PlayersSet);
-        return new DealStarted(GameId.Id, nextDealId.Number.Number, dealStartedPlayers);
+        return new (GameId.Id, nextDealId.Number.Number, dealStartedPlayers);
     }
 
     private bool IsGameStarted() =>

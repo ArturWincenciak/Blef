@@ -40,8 +40,8 @@ internal sealed class GameplayHandler :
         gameplay.Check(@event.DealNumber, @event.CheckingPlayerId, @event.LooserPlayerId);
     }
 
-    private static List<Gameplay.DealPlayer> Map(IEnumerable<DealStarted.Player> players) =>
+    private static List<GameplayProjection.DealPlayer> Map(IEnumerable<DealStarted.Player> players) =>
         players.Select(player =>
-            new Gameplay.DealPlayer(player.PlayerId, player.Hand.Select(card =>
-                new Gameplay.Card(card.FaceCard, card.Suit)).ToList())).ToList();
+            new GameplayProjection.DealPlayer(player.PlayerId, player.Hand.Select(card =>
+                new GameplayProjection.Card(card.FaceCard, card.Suit)).ToList())).ToList();
 }
