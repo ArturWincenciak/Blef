@@ -46,7 +46,7 @@ internal sealed class GamesController : ModuleControllerBase
     }
 
     [HttpPost($"{GAME_ID}/{PLAYERS}")]
-    public async Task<IActionResult> JoinGame(Guid gameId, JoinGameApi command, CancellationToken cancellation)
+    public async Task<IActionResult> JoinGame(Guid gameId, JoinGameCommand command, CancellationToken cancellation)
     {
         var cmd = new JoinGame(GameId: new GameId(gameId), command.Nick);
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
@@ -64,7 +64,7 @@ internal sealed class GamesController : ModuleControllerBase
     }
 
     [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{BIDS}")]
-    public async Task<IActionResult> Bid(Guid gameId, Guid playerId, int dealNumber, BidApi command,
+    public async Task<IActionResult> Bid(Guid gameId, Guid playerId, int dealNumber, BidCommand command,
         CancellationToken cancellation)
     {
         var cmd = new Bid(GameId: new GameId(gameId), PlayerId: new PlayerId(playerId),

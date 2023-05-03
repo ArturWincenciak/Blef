@@ -1,3 +1,3 @@
 ﻿namespace Blef.Modules.Games.Api.Controllers.Games.Commands;
 
-public record BidApi(string PokerHand);
+public record JoinGameCommand(string Nick);
