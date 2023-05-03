@@ -35,8 +35,8 @@ internal sealed class CheckHandler : ICommandHandler<Check>
     {
         switch (@event)
         {
-            case CheckPlaced gameChecked:
-                await _eventDispatcher.Dispatch(gameChecked, cancellation);
+            case CheckPlaced checkPlaced:
+                await _eventDispatcher.Dispatch(checkPlaced, cancellation);
                 break;
             case DealStarted dealStarted:
                 await _eventDispatcher.Dispatch(dealStarted, cancellation);
