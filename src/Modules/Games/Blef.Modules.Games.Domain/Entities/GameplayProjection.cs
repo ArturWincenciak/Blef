@@ -1,25 +1,26 @@
 ﻿namespace Blef.Modules.Games.Domain.Entities;
 
-internal sealed partial class Gameplay
+internal sealed partial class GameplayProjection
 {
     public Guid Id { get; }
 
-    private List<GamePlayer> _players = new();
+    private readonly List<GamePlayer> _players = new();
     private readonly Dictionary<int, Deal> _deals = new();
 
-    public Gameplay(Guid id) =>
+    public GameplayProjection(Guid id) =>
         Id = id;
 
     public void JoinPlayer(Guid playerId, string nick) =>
         _players.Add(new(playerId, nick));
 
     public void NewDeal(int dealNumber, List<DealPlayer> dealPlayers) =>
-        _deals.Add(dealNumber, new(dealNumber, dealPlayers, new(), Guid.Empty, Guid.Empty));
+        _deals.Add(dealNumber, new(dealNumber, dealPlayers, new()));
 
     public void PlaceBid(int dealNumber, Guid playerId, string pokerHand)
     {
         var deal = _deals[dealNumber];
-        var bid = new Bid(deal.Bids.Count + 1, playerId, pokerHand);
+        var bidNumber = deal.Bids.Count + 1;
+        var bid = new Bid(bidNumber, playerId, pokerHand);
         deal.Bids.Add(bid);
     }
 
@@ -30,5 +31,14 @@ internal sealed partial class Gameplay
             CheckingPlayerId = checkingPlayerId,
             LooserPlayerId = looserPlayerId
         };
+    }
+
+    public GameProjection GetGameProjection() =>
+        new(_players, _deals.Keys);
+
+    public DealProjection GetDealProjection(int dealNumber)
+    {
+        var deal = _deals[dealNumber];
+        return new(deal.Players, deal.Bids, deal.CheckingPlayerId, deal.LooserPlayerId);
     }
 }

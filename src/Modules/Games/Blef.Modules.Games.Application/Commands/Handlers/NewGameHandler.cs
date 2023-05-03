@@ -25,7 +25,7 @@ internal sealed class NewGameHandler : ICommandHandler<NewGame, NewGame.Result>
     {
         var game = _gameFactory.Create();
         _games.Add(game);
-        _gameplays.Add(new Gameplay(game.GameId.Id));
+        _gameplays.Add(new GameplayProjection(game.GameId.Id));
         return new NewGame.Result(game.GameId.Id);
 
         // todo: return in header next possible actions
