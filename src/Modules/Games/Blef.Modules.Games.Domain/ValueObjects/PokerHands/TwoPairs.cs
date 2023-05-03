@@ -12,8 +12,8 @@ internal sealed class TwoPairs : PokerHand
 
     private TwoPairs(FaceCard first, FaceCard second)
     {
-        if (first == second) // todo: exception
-            throw new ArgumentException("TBD");
+        if (first == second)
+            throw new ArgumentException("Two pairs cannot have the same rank");
 
         (_higher, _lower) = first > second
             ? (first, second)
