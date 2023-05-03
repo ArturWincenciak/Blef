@@ -13,13 +13,13 @@ internal sealed partial class Gameplay
     public void JoinPlayer(Guid playerId, string nick) =>
         _players.Add(new(playerId, nick));
 
-    public void StartNewDeal(int dealNumber, List<Deal.DealPlayer> dealPlayers) =>
+    public void NewDeal(int dealNumber, List<DealPlayer> dealPlayers) =>
         _deals.Add(dealNumber, new(dealNumber, dealPlayers, new(), Guid.Empty, Guid.Empty));
 
-    public void Bid(int dealNumber, Guid playerId, string pokerHand)
+    public void PlaceBid(int dealNumber, Guid playerId, string pokerHand)
     {
         var deal = _deals[dealNumber];
-        var bid = new Deal.Bid(deal.Bids.Count + 1, playerId, pokerHand);
+        var bid = new Bid(deal.Bids.Count + 1, playerId, pokerHand);
         deal.Bids.Add(bid);
     }
 
