@@ -1,6 +1,5 @@
 ﻿namespace Blef.Modules.Games.Domain.ValueObjects;
 
-// todo: test
 internal sealed class DealSet
 {
     public DealPlayersSet PlayersSet { get; }
