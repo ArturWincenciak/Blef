@@ -1,5 +1,11 @@
-﻿using Blef.Shared.Abstractions.Events;
+﻿using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
+using Blef.Shared.Abstractions.Events;
 
 namespace Blef.Modules.Games.Domain.Events;
 
-internal sealed record CheckPlaced(Guid GameId, int DealNumber, Guid CheckingPlayerId, Guid LooserPlayerId) : IDomainEvent<CheckPlaced>;
+internal sealed record CheckPlaced(
+    GameId Game,
+    DealNumber Deal,
+    PlayerId CheckingPlayer,
+    LooserPlayer LooserPlayer) : IDomainEvent<CheckPlaced>;
