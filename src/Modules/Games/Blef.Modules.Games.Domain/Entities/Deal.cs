@@ -35,7 +35,7 @@ internal sealed class Deal
         if (_dealIsOver)
             throw new InvalidOperationException("Deal is already over");
 
-        _moveOrderPolicy.Move(newBid.PlayerId);
+        _moveOrderPolicy.Move(newBid.Player);
 
         if (BetHasBeenMade)
             if (newBid.PokerHand.IsBetterThan(_lastBid!.PokerHand) == false)
@@ -55,7 +55,7 @@ internal sealed class Deal
 
          return _lastBid!.PokerHand.IsOnTable(_playersSet.Table)
             ? new LooserPlayer(checkingPlayerId)
-            : new LooserPlayer(_lastBid.PlayerId);
+            : new LooserPlayer(_lastBid.Player);
     }
 
     private bool BetHasBeenMade =>

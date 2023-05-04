@@ -17,20 +17,20 @@ public class NextDealPlayerTests
         var actual = new NextDealPlayer(playerId, cardsAmount, 1);
 
         // assert
-        Assert.True(new PlayerId(guid) == actual.PlayerId);
+        Assert.True(new PlayerId(guid) == actual.Player);
         Assert.True(CardsAmount.Initial == actual.CardsAmount);
     }
 
     [Fact]
     public void CannotCreateWithNullArgumentsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new NextDealPlayer(PlayerId: null, CardsAmount: null, 1));
+        Assert.Throws<ArgumentNullException>(() => new NextDealPlayer(Player: null, CardsAmount: null, 1));
 
     [Fact]
     public void CannotCreateWithNullPlayerIdArgumentTest() =>
         Assert.Throws<ArgumentNullException>(() =>
         {
             var cardsAmount = CardsAmount.Initial;
-            return new NextDealPlayer(PlayerId: null, cardsAmount, 1);
+            return new NextDealPlayer(Player: null, cardsAmount, 1);
         });
 
     [Fact]
