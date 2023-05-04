@@ -19,7 +19,7 @@ public class StartFirstDealTests
         var dealStarted = game.StartFirstDeal();
 
         // assert
-        Assert.Equal(game.GameId.Id, dealStarted.GameId);
+        Assert.Equal(game.Id.Id, dealStarted.GameId);
         Assert.Equal(1, dealStarted.DealNumber);
         Assert.Equal(2, dealStarted.Players.Count());
         var actualGrahamPlayer = dealStarted.Players.First();

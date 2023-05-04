@@ -15,7 +15,7 @@ internal sealed class GetGameHandler : IQueryHandler<GetGame, GetGame.Result>
 
     public async Task<GetGame.Result> Handle(GetGame query, CancellationToken cancellation)
     {
-        var gameplay = _gameplaysRepository.Get(query.GameId.Id);
+        var gameplay = _gameplaysRepository.Get(query.Game.Id);
         var gameFlow = gameplay.GetGameProjection();
         var result = Map(gameFlow);
         return result;

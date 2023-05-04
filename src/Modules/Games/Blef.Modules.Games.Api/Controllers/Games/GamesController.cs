@@ -57,8 +57,8 @@ internal sealed class GamesController : ModuleControllerBase
     public async Task<IActionResult> GetCards(Guid gameId, Guid playerId, int dealNumber,
         CancellationToken cancellation)
     {
-        var query = new GetPlayerCards(GameId: new GameId(gameId), PlayerId: new PlayerId(playerId),
-            DealNumber: new DealNumber(dealNumber));
+        var query = new GetPlayerCards(Game: new GameId(gameId), Player: new PlayerId(playerId),
+            Deal: new DealNumber(dealNumber));
         var cards = await _queryDispatcher.Dispatch<GetPlayerCards, GetPlayerCards.Result>(query, cancellation);
         return Ok(cards);
     }

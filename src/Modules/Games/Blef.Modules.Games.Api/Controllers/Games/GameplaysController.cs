@@ -27,7 +27,7 @@ internal sealed class GameplaysController : ModuleControllerBase
     [HttpGet($"{GAME_ID}/{DEALS}/{DEAL_NUMBER}")]
     public async Task<IActionResult> GetDealFlow(Guid gameId, int dealNumber, CancellationToken cancellation)
     {
-        var query = new GetDeal(GameId: new GameId(gameId), DealNumber: new DealNumber(dealNumber));
+        var query = new GetDeal(Game: new GameId(gameId), Deal: new DealNumber(dealNumber));
         var dealFlow = await _queryDispatcher.Dispatch<GetDeal, GetDeal.Result>(query, cancellation);
         return Ok(dealFlow);
     }

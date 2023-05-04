@@ -9,7 +9,7 @@ internal sealed class NoBidToCheckException : BlefException
         : base(
             title: "There is no bid to check it",
             detail: "Game must be started by at least one bid, cannot check when the game has not started",
-            instance: $"/games/{dealId.GameId}/deals/{dealId.Number}")
+            instance: $"/games/{dealId.Game}/deals/{dealId.Deal}")
     {
     }
 }

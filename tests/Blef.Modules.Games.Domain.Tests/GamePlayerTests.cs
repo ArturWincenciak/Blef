@@ -18,7 +18,7 @@ public class GamePlayerTests
         Assert.Equal(new PlayerNick("Graham"), actual.Nick);
         Assert.True(CardsAmount.Initial == actual.CardsAmount);
         Assert.True(actual.IsInTheGame);
-        Assert.True(actual.PlayerId.Id != Guid.Empty);
+        Assert.True(actual.Id.Id != Guid.Empty);
     }
 
     [Fact]
