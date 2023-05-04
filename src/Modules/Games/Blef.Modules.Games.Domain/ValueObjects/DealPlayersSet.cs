@@ -31,10 +31,10 @@ internal sealed class DealPlayersSet
     public Table Table => new(Players.Select(player => player.Hand));
 
     public Hand GetHand(PlayerId playerId) =>
-        Players.Single(p => p.PlayerId == playerId).Hand;
+        Players.Single(p => p.Player == playerId).Hand;
 
     private static bool AreAllPlayersUnique(IEnumerable<DealPlayer> players) =>
-        players.Select(player => player.PlayerId).Distinct().Count() == players.Count();
+        players.Select(player => player.Player).Distinct().Count() == players.Count();
 
     private static bool AreAllCardsUnique(IEnumerable<Card> cards) =>
         cards.Distinct().Count() == cards.Count();

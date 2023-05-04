@@ -19,12 +19,12 @@ public class BidTests
 
         // assert
         Assert.Equal(pokerHand, actual.PokerHand);
-        Assert.True(new PlayerId(guid) == actual.Player);
+        Assert.True(new PlayerId(guid) == actual.PlayerId);
     }
 
     [Fact]
     public void CannotCreateWithNullArgumentsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Bid(PokerHand: null, Player: null));
+        Assert.Throws<ArgumentNullException>(() => new Bid(PokerHand: null, PlayerId: null));
 
     [Fact]
     public void CannotCreateWithNullPokerHandArgumentTest() =>
@@ -40,6 +40,6 @@ public class BidTests
         Assert.Throws<ArgumentNullException>(() =>
         {
             var pokerHand = HighStraight.Create();
-            return new Bid(pokerHand, Player: null);
+            return new Bid(pokerHand, PlayerId: null);
         });
 }

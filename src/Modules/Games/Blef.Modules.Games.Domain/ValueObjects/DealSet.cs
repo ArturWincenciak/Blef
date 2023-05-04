@@ -22,7 +22,7 @@ internal sealed class DealSet
 
     private static bool NotAllPlayersPresent(DealPlayersSet playersSet, MoveSequence moveSequence) =>
         playersSet.Players
-            .Select(player => player.PlayerId)
+            .Select(player => player.Player)
             .Except(moveSequence.Players)
             .Any();
 }

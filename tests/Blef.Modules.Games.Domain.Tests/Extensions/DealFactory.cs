@@ -24,8 +24,8 @@ internal static class DealFactory
         var players = new[] {player_1, player_2};
         var moveSequence = new MoveSequence(new[]
         {
-            new Move(player_1.PlayerId, Order.Create(1)),
-            new Move(player_2.PlayerId, Order.Create(2)),
+            new Move(player_1.Player, Order.Create(1)),
+            new Move(player_2.Player, Order.Create(2)),
         });
         var deal = new Deal(dealId, new(new(players), moveSequence));
 
@@ -59,10 +59,10 @@ internal static class DealFactory
         var players = new[] {player_1, player_2, player_3, player_4};
         var moveSequence = new MoveSequence(new[]
         {
-            new Move(player_1.PlayerId, Order.Create(1)),
-            new Move(player_2.PlayerId, Order.Create(2)),
-            new Move(player_3.PlayerId, Order.Create(3)),
-            new Move(player_4.PlayerId, Order.Create(4)),
+            new Move(player_1.Player, Order.Create(1)),
+            new Move(player_2.Player, Order.Create(2)),
+            new Move(player_3.Player, Order.Create(3)),
+            new Move(player_4.Player, Order.Create(4)),
         });
         var deal = new Deal(dealId, new(new(players), moveSequence));
 

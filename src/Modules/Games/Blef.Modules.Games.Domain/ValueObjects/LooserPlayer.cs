@@ -1,3 +1,8 @@
-﻿namespace Blef.Modules.Games.Domain.ValueObjects;
+﻿using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
-internal sealed record LooserPlayer(Guid PlayerId = default);
+namespace Blef.Modules.Games.Domain.ValueObjects;
+
+internal sealed record LooserPlayer(PlayerId Player)
+{
+    public PlayerId Player { get; } = Player ?? throw new ArgumentNullException(nameof(Player));
+}
