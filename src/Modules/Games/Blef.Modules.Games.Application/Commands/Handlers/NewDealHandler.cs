@@ -21,9 +21,9 @@ internal sealed class NewDealHandler : ICommandHandler<NewDeal, NewDeal.Result>
     public async Task<NewDeal.Result> Handle(NewDeal command, CancellationToken cancellation)
     {
         var game = _games.Get(command.GameId);
-        var newDealStarted = game.StartFirstDeal() as DealStarted;
+        var newDealStarted = game.StartFirstDeal();
         await _domainEventDispatcher.Dispatch(newDealStarted, cancellation);
-        return new NewDeal.Result(newDealStarted.DealNumber);
+        return new NewDeal.Result(newDealStarted.Deal.Number);
 
         // todo: return in header next possible actions
     }

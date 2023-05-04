@@ -38,7 +38,7 @@ internal sealed class Game
         var player = GamePlayer.Create(nick, joiningSequence);
         _players.Add(player);
 
-        return new GamePlayerJoined(Id.Id, player.Id.Id, player.Nick.Nick);
+        return new GamePlayerJoined(Id, player.Id, player.Nick);
     }
 
     public DealStarted StartFirstDeal()
@@ -59,7 +59,7 @@ internal sealed class Game
         var deal = _deals.Last();
         deal.Bid(newBid);
 
-        return new (Id.Id, deal.Id.Deal.Number, newBid.Player.Id, newBid.PokerHand.Serialize());
+        return new (Id, deal.Id.Deal, newBid.Player, newBid.PokerHand);
     }
 
     public IEnumerable<IDomainEvent> Check(PlayerId checkingPlayer)
@@ -76,7 +76,7 @@ internal sealed class Game
 
         var events = new IDomainEvent[]
         {
-            new CheckPlaced(deal.Id.Game.Id, deal.Id.Deal.Number, checkingPlayer.Id, looserPlayer.Player.Id),
+            new CheckPlaced(Id, deal.Id.Deal, checkingPlayer, looserPlayer),
             nextDealStarted
         };
 
@@ -92,8 +92,7 @@ internal sealed class Game
 
         _deals.Add(new(nextDealId, nextDealSet));
 
-        var dealStartedPlayers = Map(nextDealSet.PlayersSet);
-        return new (Id.Id, nextDealId.Deal.Number, dealStartedPlayers);
+        return new (Id, nextDealId.Deal, nextDealSet.PlayersSet.Players);
     }
 
     private Deal GetDeal(DealId dealId) =>
@@ -148,14 +147,6 @@ internal sealed class Game
         // p4 -> j = 4, order = 4
 
         */
-    }
-
-    private static IEnumerable<DealStarted.Player> Map(DealPlayersSet dealPlayers)
-    {
-        var advancingPlayers = dealPlayers.Players.Select(player =>
-            new DealStarted.Player(player.Player.Id, player.Hand.Cards.Select(card =>
-                new DealStarted.Card(card.FaceCard.ToString(), card.Suit.ToString()))));
-        return advancingPlayers;
     }
 
     private bool IsGameStarted() =>
