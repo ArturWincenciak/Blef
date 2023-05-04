@@ -48,16 +48,16 @@ internal sealed class BlefClient
         return await _httpClient.GetCards(_gameId, deal, playerId);
     }
 
-    async internal Task Bid(WhichPlayer whichPlayer, DealNumber deal, string bid)
+    async internal Task Bid(WhichPlayer whichPlayer, string bid)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.BidWithSuccess(_gameId, deal, playerId, bid);
+        await _httpClient.BidWithSuccess(_gameId, playerId, bid);
     }
 
-    async internal Task Check(WhichPlayer whichPlayer, DealNumber deal)
+    async internal Task Check(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.CheckWithSuccess(_gameId, deal, playerId);
+        await _httpClient.CheckWithSuccess(_gameId, playerId);
     }
 
     private PlayerId GetPlayerId(WhichPlayer whichPlayer) =>

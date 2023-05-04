@@ -14,7 +14,7 @@ internal sealed class Game
 
     private readonly List<Deal> _deals = new();
     private readonly List<GamePlayer> _players = new();
-    private readonly GamePlayer _lastStartingPlayer = null;
+    private readonly GamePlayer? _lastStartingPlayer = null;
 
     public GameId GameId { get; }
 
@@ -53,29 +53,31 @@ internal sealed class Game
         return NewDeal();
     }
 
-    public BidPlaced Bid(DealId dealId, Bid newBid)
+    public BidPlaced Bid(Bid newBid)
     {
         ValidateGameInProgress();
 
-        var deal = GetDeal(dealId);
+        var deal = _deals.Last();
         deal.Bid(newBid);
-        return new (GameId.Id, dealId.Number.Number, newBid.Player.Id, newBid.PokerHand.Serialize());
+
+        return new (GameId.Id, deal.DealId.Number.Number, newBid.Player.Id, newBid.PokerHand.Serialize());
     }
 
-    public IEnumerable<IDomainEvent> Check(DealId dealId, PlayerId checkingPlayerId)
+    public IEnumerable<IDomainEvent> Check(PlayerId checkingPlayer)
     {
         ValidateGameInProgress();
 
-        var deal = GetDeal(dealId);
-        var looserPlayer = deal.Check(checkingPlayerId);
-        var gamePlayer = _players.Single(gamePlayer => gamePlayer.PlayerId == looserPlayer.Player);
-        gamePlayer.LostLastDeal();
+        var deal = _deals.Last();
+        var looserPlayer = deal.Check(checkingPlayer);
+
+        var loosingGamePlayer = _players.Single(gamePlayer => gamePlayer.PlayerId == looserPlayer.Player);
+        loosingGamePlayer.LostLastDeal();
 
         var nextDealStarted = NewDeal();
 
         var events = new IDomainEvent[]
         {
-            new CheckPlaced(dealId.GameId.Id, dealId.Number.Number, checkingPlayerId.Id, looserPlayer.Player.Id),
+            new CheckPlaced(deal.DealId.GameId.Id, deal.DealId.Number.Number, checkingPlayer.Id, looserPlayer.Player.Id),
             nextDealStarted
         };
 

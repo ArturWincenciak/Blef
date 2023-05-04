@@ -171,9 +171,6 @@
     Action: Bid,
     Argument: {
       whichPlayer: Knuth,
-      deal: {
-        Number: 1
-      },
       bid: high-card:nine
     },
     Result: {
@@ -185,9 +182,6 @@
     Action: Bid,
     Argument: {
       whichPlayer: Graham,
-      deal: {
-        Number: 1
-      },
       bid: high-card:ten
     },
     Result: {
@@ -199,9 +193,6 @@
     Action: Bid,
     Argument: {
       whichPlayer: Conway,
-      deal: {
-        Number: 1
-      },
       bid: high-card:jack
     },
     Result: {
@@ -212,10 +203,7 @@
     No: 15,
     Action: Check,
     Argument: {
-      whichPlayer: Knuth,
-      deal: {
-        Number: 1
-      }
+      whichPlayer: Knuth
     },
     Result: {
       Status: OK

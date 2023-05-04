@@ -63,22 +63,20 @@ internal sealed class GamesController : ModuleControllerBase
         return Ok(cards);
     }
 
-    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{BIDS}")]
-    public async Task<IActionResult> Bid(Guid gameId, Guid playerId, int dealNumber, BidCommand command,
+    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{BIDS}")]
+    public async Task<IActionResult> Bid(Guid gameId, Guid playerId, BidCommand command,
         CancellationToken cancellation)
     {
-        var cmd = new Bid(GameId: new GameId(gameId), PlayerId: new PlayerId(playerId),
-            DealNumber: new DealNumber(dealNumber), command.PokerHand);
+        var cmd = new Bid(GameId: new GameId(gameId), PlayerId: new PlayerId(playerId), command.PokerHand);
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, playerId)}/{BIDS}", value: null);
     }
 
-    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{CHECKS}")]
-    public async Task<IActionResult> Check(Guid gameId, Guid playerId, int dealNumber,
+    [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{CHECKS}")]
+    public async Task<IActionResult> Check(Guid gameId, Guid playerId,
         CancellationToken cancellation)
     {
-        var cmd = new Check(GameId: new GameId(gameId), PlayerId: new PlayerId(playerId),
-            DealNumber: new DealNumber(dealNumber));
+        var cmd = new Check(GameId: new GameId(gameId), PlayerId: new PlayerId(playerId));
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, playerId)}/checks", value: null);
     }

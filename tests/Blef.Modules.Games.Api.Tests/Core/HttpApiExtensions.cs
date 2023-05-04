@@ -51,17 +51,16 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<GetPlayerCards.Result>())!;
     }
 
-    async internal static Task BidWithSuccess(this HttpClient client, GameId gameId, DealNumber deal, PlayerId playerId,
-        string bid)
+    async internal static Task BidWithSuccess(this HttpClient client, GameId gameId, PlayerId playerId, string bid)
     {
-        var response = await Bid(client, gameId, deal, playerId, bid);
+        var response = await Bid(client, gameId, playerId, bid);
         response.EnsureSuccessStatusCode();
     }
 
     async internal static Task<ProblemDetails> BidWithRuleViolation(this HttpClient client,
-        GameId gameId, DealNumber deal, PlayerId playerId, string bid)
+        GameId gameId, PlayerId playerId, string bid)
     {
-        var response = await Bid(client, gameId, deal, playerId, bid);
+        var response = await Bid(client, gameId, playerId, bid);
         if (response.StatusCode != HttpStatusCode.BadRequest)
             throw new AssertActualExpectedException(
                 HttpStatusCode.BadRequest,
@@ -71,10 +70,9 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
     }
 
-    private async static Task<HttpResponseMessage> Bid(HttpClient client, GameId gameId, DealNumber deal,
-        PlayerId playerId, string bid) =>
+    private async static Task<HttpResponseMessage> Bid(HttpClient client, GameId gameId, PlayerId playerId, string bid) =>
         await client.PostAsJsonAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/bids",
+            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids",
             value: new {PokerHand = bid});
 
     async internal static Task<GetGame.Result> GetGameFlow(this HttpClient client, GameId gameId)
@@ -92,19 +90,18 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<GetDeal.Result>())!;
     }
 
-    async internal static Task CheckWithSuccess(this HttpClient client, GameId gameId, DealNumber deal,
-        PlayerId playerId)
+    async internal static Task CheckWithSuccess(this HttpClient client, GameId gameId, PlayerId playerId)
     {
         var response = await client.PostAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/checks", content: null);
+            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/checks", content: null);
         response.EnsureSuccessStatusCode();
     }
 
-    async internal static Task<ProblemDetails> CheckWithRuleViolation(this HttpClient client,
-        GameId gameId, DealNumber deal, PlayerId playerId)
+    async internal static Task<ProblemDetails> CheckWithRuleViolation(this HttpClient client, GameId gameId,
+        PlayerId playerId)
     {
         var response = await client.PostAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/checks", content: null);
+            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/checks", content: null);
         if (response.StatusCode != HttpStatusCode.BadRequest)
             throw new AssertActualExpectedException(
                 HttpStatusCode.BadRequest,

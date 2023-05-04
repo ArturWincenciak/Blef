@@ -89,23 +89,23 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder Bid(WhichPlayer whichPlayer, DealNumber deal, string bid)
+    internal TestBuilder Bid(WhichPlayer whichPlayer, string bid)
     {
         _actions.Add(async () =>
         {
-            await _gameClient.Bid(whichPlayer, deal, bid);
-            _testResult.Record(action: nameof(Bid), argument: new {whichPlayer, deal, bid}, Success);
+            await _gameClient.Bid(whichPlayer, bid);
+            _testResult.Record(action: nameof(Bid), argument: new {whichPlayer, bid}, Success);
         });
 
         return this;
     }
 
-    internal TestBuilder Check(WhichPlayer whichPlayer, DealNumber deal)
+    internal TestBuilder Check(WhichPlayer whichPlayer)
     {
         _actions.Add(async () =>
         {
-            await _gameClient.Check(whichPlayer, deal);
-            _testResult.Record(action: nameof(Check), argument: new {whichPlayer, deal}, Success);
+            await _gameClient.Check(whichPlayer);
+            _testResult.Record(action: nameof(Check), argument: new {whichPlayer}, Success);
         });
 
         return this;
