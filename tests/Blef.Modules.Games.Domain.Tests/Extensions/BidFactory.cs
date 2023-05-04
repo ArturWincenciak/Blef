@@ -5,7 +5,7 @@ using static Blef.Modules.Games.Domain.Tests.Extensions.PokerHandFactory;
 
 namespace Blef.Modules.Games.Domain.Tests.Extensions;
 
-internal static class BidMaker
+internal static class BidFactory
 {
     public static void WithHighCardBid(Deal deal, DealPlayer byPlayer, FaceCard faceCard)
     {
