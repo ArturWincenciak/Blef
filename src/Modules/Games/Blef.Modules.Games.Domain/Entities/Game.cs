@@ -55,8 +55,7 @@ internal sealed class Game
 
     public BidPlaced Bid(DealId dealId, Bid newBid)
     {
-        if(IsGameStarted() == false)
-            throw new GameNotStartedException(GameId);
+        ValidateGameInProgress();
 
         var deal = GetDeal(dealId);
         deal.Bid(newBid);
@@ -65,12 +64,12 @@ internal sealed class Game
 
     public IEnumerable<IDomainEvent> Check(DealId dealId, PlayerId checkingPlayerId)
     {
+        ValidateGameInProgress();
+
         var deal = GetDeal(dealId);
         var looserPlayer = deal.Check(checkingPlayerId);
         var gamePlayer = _players.Single(gamePlayer => gamePlayer.PlayerId == looserPlayer.Player);
         gamePlayer.LostLastDeal();
-
-        // todo: check if game is over
 
         var nextDealStarted = NewDeal();
 
@@ -85,8 +84,9 @@ internal sealed class Game
 
     public Hand GetHand(PlayerId playerId, DealId dealId)
     {
-        // todo: check if user exists
+        // todo: consider moving this to gameplay projection
         // todo: check if deal number exits
+        // todo: check if user in the deal exists
 
         var deal = GetDeal(dealId);
         return deal.GetHand(playerId);
@@ -104,9 +104,6 @@ internal sealed class Game
         var dealStartedPlayers = Map(nextDealSet.PlayersSet);
         return new (GameId.Id, nextDealId.Number.Number, dealStartedPlayers);
     }
-
-    private bool IsGameStarted() =>
-        _deals.Count > 0;
 
     private Deal GetDeal(DealId dealId) =>
         _deals.Single(d => d.DealId == dealId);
@@ -168,5 +165,23 @@ internal sealed class Game
             new DealStarted.Player(player.Player.Id, player.Hand.Cards.Select(card =>
                 new DealStarted.Card(card.FaceCard.ToString(), card.Suit.ToString()))));
         return advancingPlayers;
+    }
+
+    private bool IsGameStarted() =>
+        _deals.Count > 0;
+
+    private void ValidateGameInProgress()
+    {
+        if (IsGameStarted() == false)
+            throw new GameNotStartedException(GameId);
+
+        if (IsGameOver())
+            throw new GameOverException(GameId);
+    }
+
+    private bool IsGameOver()
+    {
+        // todo: implement
+        return false;
     }
 }
