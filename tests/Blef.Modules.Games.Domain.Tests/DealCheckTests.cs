@@ -31,8 +31,8 @@ public class DealCheckTests
         WithHighCardBid(deal, firstBiddingPlayer, existingOnTheTableBidHighCard);
 
         // act
-        var actualLoserPlayer = deal.Check(secondCheckingPlayer.PlayerId);
-        var expectedLoserPlayer = new LooserPlayer(secondCheckingPlayer.PlayerId.Id);
+        var actualLoserPlayer = deal.Check(secondCheckingPlayer.Player);
+        var expectedLoserPlayer = new LooserPlayer(secondCheckingPlayer.Player);
 
         // assert
         Assert.Equal(expectedLoserPlayer, actualLoserPlayer);
@@ -47,8 +47,8 @@ public class DealCheckTests
         WithHighCardBid(deal, firstBiddingPlayer, notExistingOnTheTableBidHighCard);
 
         // act
-        var actualLoserPlayer = deal.Check(secondCheckingPlayer.PlayerId);
-        var expectedLoserPlayer = new LooserPlayer(firstBiddingPlayer.PlayerId.Id);
+        var actualLoserPlayer = deal.Check(secondCheckingPlayer.Player);
+        var expectedLoserPlayer = new LooserPlayer(firstBiddingPlayer.Player);
 
         // assert
         Assert.Equal(expectedLoserPlayer, actualLoserPlayer);
@@ -64,8 +64,8 @@ public class DealCheckTests
         WithHighCardBid(deal, secondBiddingPlayer, existingOnTheTableBidHighCard);
 
         // act
-        var actualLoserPlayer = deal.Check(thirdCheckingPlayer.PlayerId);
-        var expectedLoserPlayer = new LooserPlayer(thirdCheckingPlayer.PlayerId.Id);
+        var actualLoserPlayer = deal.Check(thirdCheckingPlayer.Player);
+        var expectedLoserPlayer = new LooserPlayer(thirdCheckingPlayer.Player);
 
         // assert
         Assert.Equal(expectedLoserPlayer, actualLoserPlayer);
@@ -81,8 +81,8 @@ public class DealCheckTests
         WithHighCardBid(deal, secondBiddingPlayer, notExistingOnTheTableBidHighCard);
 
         // act
-        var actualLoserPlayer = deal.Check(thirdCheckingPlayer.PlayerId);
-        var expectedLoserPlayer = new LooserPlayer(secondBiddingPlayer.PlayerId.Id);
+        var actualLoserPlayer = deal.Check(thirdCheckingPlayer.Player);
+        var expectedLoserPlayer = new LooserPlayer(secondBiddingPlayer.Player);
 
         // assert
         Assert.Equal(expectedLoserPlayer, actualLoserPlayer);
@@ -100,8 +100,8 @@ public class DealCheckTests
         WithHighCardBid(deal, fourthBiddingPlayer, existingOnTheTableBidHighCard);
 
         // act
-        var actualLoserPlayer = deal.Check(firstCheckingPlayer.PlayerId);
-        var expectedLoserPlayer = new LooserPlayer(firstCheckingPlayer.PlayerId.Id);
+        var actualLoserPlayer = deal.Check(firstCheckingPlayer.Player);
+        var expectedLoserPlayer = new LooserPlayer(firstCheckingPlayer.Player);
 
         // assert
         Assert.Equal(expectedLoserPlayer, actualLoserPlayer);
@@ -119,8 +119,8 @@ public class DealCheckTests
         WithHighCardBid(deal, fourthBiddingPlayer, notExistingOnTheTableBidHighCard);
 
         // act
-        var actualLoserPlayer = deal.Check(firstCheckingPlayer.PlayerId);
-        var expectedLoserPlayer = new LooserPlayer(fourthBiddingPlayer.PlayerId.Id);
+        var actualLoserPlayer = deal.Check(firstCheckingPlayer.Player);
+        var expectedLoserPlayer = new LooserPlayer(fourthBiddingPlayer.Player);
 
         // assert
         Assert.Equal(expectedLoserPlayer, actualLoserPlayer);
@@ -133,6 +133,6 @@ public class DealCheckTests
         var (deal, firstBiddingPlayer, _, _, _) = GivenDeal();
 
         // act
-        Assert.Throws<NoBidToCheckException>(() => deal.Check(firstBiddingPlayer.PlayerId));
+        Assert.Throws<NoBidToCheckException>(() => deal.Check(firstBiddingPlayer.Player));
     }
 }

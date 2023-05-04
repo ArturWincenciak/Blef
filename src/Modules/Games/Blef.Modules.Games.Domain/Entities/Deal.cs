@@ -8,10 +8,10 @@ namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed class Deal
 {
-    private readonly DealPlayersSet _playersSet;
-    private Bid _lastBid;
-    private LooserPlayer _looserPlayer;
     private readonly MoveOrderPolicy _moveOrderPolicy;
+    private readonly DealPlayersSet _playersSet;
+    private Bid? _lastBid;
+    private bool _dealIsOver;
 
     public DealId DealId { get; }
 
@@ -22,8 +22,9 @@ internal sealed class Deal
 
         DealId = dealId ?? throw new ArgumentNullException(nameof(dealId));
         _playersSet = dealSet.PlayersSet;
-        _looserPlayer = new();
         _moveOrderPolicy = new(dealSet.MoveSequence);
+        _lastBid = null;
+        _dealIsOver = false;
     }
 
     public Hand GetHand(PlayerId playerId) =>
@@ -31,10 +32,13 @@ internal sealed class Deal
 
     public void Bid(Bid newBid)
     {
-        _moveOrderPolicy.Move(newBid.Player);
+        if (_dealIsOver)
+            throw new InvalidOperationException("Deal is already over");
+
+        _moveOrderPolicy.Move(newBid.PlayerId);
 
         if (BetHasBeenMade)
-            if (newBid.PokerHand.IsBetterThan(_lastBid.PokerHand) == false)
+            if (newBid.PokerHand.IsBetterThan(_lastBid!.PokerHand) == false)
                 throw new BidIsNotHigherThenLastOneException(DealId, newBid, _lastBid);
 
         _lastBid = newBid;
@@ -47,11 +51,11 @@ internal sealed class Deal
         if (BetHasBeenMade == false)
             throw new NoBidToCheckException(DealId);
 
-        _looserPlayer = _lastBid.PokerHand.IsOnTable(_playersSet.Table)
-            ? new LooserPlayer(checkingPlayerId.Id)
-            : new LooserPlayer(_lastBid.Player.Id);
+        _dealIsOver = true;
 
-        return _looserPlayer;
+         return _lastBid!.PokerHand.IsOnTable(_playersSet.Table)
+            ? new LooserPlayer(checkingPlayerId)
+            : new LooserPlayer(_lastBid.PlayerId);
     }
 
     private bool BetHasBeenMade =>

@@ -18,13 +18,13 @@ public class DealPlayerTests
         var actual = new DealPlayer(playerId, hand);
 
         // assert
-        Assert.True(new PlayerId(guid) == actual.PlayerId);
+        Assert.True(new PlayerId(guid) == actual.Player);
         Assert.Equal(hand, actual.Hand);
     }
 
     [Fact]
     public void CannotCreateWithNullArgumentsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new DealPlayer(PlayerId: null, Hand: null));
+        Assert.Throws<ArgumentNullException>(() => new DealPlayer(Player: null, Hand: null));
 
     [Fact]
     public void CannotCreateWithNullHandArgumentTest() =>
@@ -40,6 +40,6 @@ public class DealPlayerTests
         Assert.Throws<ArgumentNullException>(() =>
         {
             var hand = new Hand(new[] {new Card(FaceCard.Ace, Suit.Clubs)});
-            return new DealPlayer(PlayerId: null, hand);
+            return new DealPlayer(Player: null, hand);
         });
 }

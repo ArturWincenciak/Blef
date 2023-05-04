@@ -57,14 +57,14 @@ internal sealed class Game
     {
         var deal = GetDeal(dealId);
         deal.Bid(newBid);
-        return new (GameId.Id, dealId.Number.Number, newBid.Player.Id, newBid.PokerHand.Serialize());
+        return new (GameId.Id, dealId.Number.Number, newBid.PlayerId.Id, newBid.PokerHand.Serialize());
     }
 
     public IEnumerable<IDomainEvent> Check(DealId dealId, PlayerId checkingPlayerId)
     {
         var deal = GetDeal(dealId);
-        var lastDealLooser = deal.Check(checkingPlayerId);
-        var gamePlayer = _players.Single(p => p.PlayerId.Id.Equals(lastDealLooser.PlayerId));
+        var looserPlayer = deal.Check(checkingPlayerId);
+        var gamePlayer = _players.Single(gamePlayer => gamePlayer.PlayerId == looserPlayer.Player);
         gamePlayer.LostLastDeal();
 
         // todo: check if game is over
@@ -73,7 +73,7 @@ internal sealed class Game
 
         var events = new IDomainEvent[]
         {
-            new CheckPlaced(dealId.GameId.Id, dealId.Number.Number, checkingPlayerId.Id, lastDealLooser.PlayerId),
+            new CheckPlaced(dealId.GameId.Id, dealId.Number.Number, checkingPlayerId.Id, looserPlayer.Player.Id),
             nextDealStarted
         };
 
@@ -162,7 +162,7 @@ internal sealed class Game
     private static IEnumerable<DealStarted.Player> Map(DealPlayersSet dealPlayers)
     {
         var advancingPlayers = dealPlayers.Players.Select(player =>
-            new DealStarted.Player(player.PlayerId.Id, player.Hand.Cards.Select(card =>
+            new DealStarted.Player(player.Player.Id, player.Hand.Cards.Select(card =>
                 new DealStarted.Card(card.FaceCard.ToString(), card.Suit.ToString()))));
         return advancingPlayers;
     }

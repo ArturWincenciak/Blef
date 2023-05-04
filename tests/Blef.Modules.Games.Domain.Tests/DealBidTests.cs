@@ -1,5 +1,6 @@
 ﻿using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using static Blef.Modules.Games.Domain.Tests.Extensions.BidFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.DealFactory;
 
@@ -86,5 +87,19 @@ public class DealBidTests
         Assert.Null(exception);
     }
 
+    [Fact]
+    public void CannotBidAfterCheckTest()
+    {
+        // arrange
+        var (deal, player1, player2, player3, player4) = GivenDealWithFourPlayers();
+        WithHighCardBid(deal, player1, FaceCard.Nine);
+        deal.Check(player2.Player);
 
+        // assert
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            // act
+            WithHighCardBid(deal, player3, FaceCard.Ten);
+        });
+    }
 }
