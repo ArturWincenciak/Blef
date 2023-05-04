@@ -135,4 +135,20 @@ public class DealCheckTests
         // act
         Assert.Throws<NoBidToCheckException>(() => deal.Check(firstBiddingPlayer.Player));
     }
+
+    [Fact]
+    public void Given_PlayerAlreadyChecked_When_TryingToCheckAgain_Then_ThrowsException()
+    {
+        // arrange
+        var (deal, firstBiddingPlayer, secondCheckingPlayer, thirdPlayer, _) = GivenDeal();
+        WithHighCardBid(deal, firstBiddingPlayer, FaceCard.Nine);
+        deal.Check(secondCheckingPlayer.Player);
+
+        // assert
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            // act
+            deal.Check(thirdPlayer.Player);
+        });
+    }
 }

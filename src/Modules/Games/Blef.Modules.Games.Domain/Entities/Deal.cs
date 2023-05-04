@@ -46,6 +46,9 @@ internal sealed class Deal
 
     public LooserPlayer Check(PlayerId checkingPlayerId)
     {
+        if (_dealIsOver)
+            throw new InvalidOperationException("Deal is already over");
+
         _moveOrderPolicy.Move(checkingPlayerId);
 
         if (BetHasBeenMade == false)
