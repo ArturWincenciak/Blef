@@ -1,5 +1,4 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Abstractions.Events;

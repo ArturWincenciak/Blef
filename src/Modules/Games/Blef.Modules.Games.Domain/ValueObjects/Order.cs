@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace Blef.Modules.Games.Domain.ValueObjects;
+﻿namespace Blef.Modules.Games.Domain.ValueObjects;
 
 internal sealed record Order : IComparable<Order>
 {
