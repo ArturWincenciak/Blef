@@ -38,7 +38,7 @@ internal sealed class Game
         var player = GamePlayer.Create(nick, joiningSequence);
         _players.Add(player);
 
-        return new GamePlayerJoined(Id, player.Id, player.Nick);
+        return new GamePlayerJoined(Id, player);
     }
 
     public DealStarted StartFirstDeal()
