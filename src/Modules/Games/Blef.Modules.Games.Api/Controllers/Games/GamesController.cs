@@ -48,19 +48,9 @@ internal sealed class GamesController : ModuleControllerBase
     [HttpPost($"{GAME_ID}/{PLAYERS}")]
     public async Task<IActionResult> JoinGame(Guid gameId, JoinGameCommand command, CancellationToken cancellation)
     {
-        var cmd = new JoinGame(GameId: new GameId(gameId), command.Nick);
+        var cmd = new JoinGame(GameId: new GameId(gameId), new(command.Nick));
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, player.PlayerId)}", player);
-    }
-
-    [HttpGet($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{CARDS}")]
-    public async Task<IActionResult> GetCards(Guid gameId, Guid playerId, int dealNumber,
-        CancellationToken cancellation)
-    {
-        var query = new GetPlayerCards(Game: new GameId(gameId), Player: new PlayerId(playerId),
-            Deal: new DealNumber(dealNumber));
-        var cards = await _queryDispatcher.Dispatch<GetPlayerCards, GetPlayerCards.Result>(query, cancellation);
-        return Ok(cards);
     }
 
     [HttpPost($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{BIDS}")]
@@ -79,6 +69,16 @@ internal sealed class GamesController : ModuleControllerBase
         var cmd = new Check(GameId: new GameId(gameId), PlayerId: new PlayerId(playerId));
         await _commandDispatcher.Dispatch(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, playerId)}/checks", value: null);
+    }
+
+    [HttpGet($"{GAME_ID}/{PLAYERS}/{PLAYER_ID}/{DEALS}/{DEAL_NUMBER}/{CARDS}")]
+    public async Task<IActionResult> GetCards(Guid gameId, Guid playerId, int dealNumber,
+        CancellationToken cancellation)
+    {
+        var query = new GetPlayerCards(Game: new GameId(gameId), Player: new PlayerId(playerId),
+            Deal: new DealNumber(dealNumber));
+        var cards = await _queryDispatcher.Dispatch<GetPlayerCards, GetPlayerCards.Result>(query, cancellation);
+        return Ok(cards);
     }
 
     private static string PlayerUri(Guid gameId, Guid playerId) =>

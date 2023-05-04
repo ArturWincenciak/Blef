@@ -1,5 +1,6 @@
 ﻿using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.Repositories;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
 
@@ -15,9 +16,9 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
 
     public async Task<GetDeal.Result> Handle(GetDeal query, CancellationToken cancellation)
     {
-        var gameplay = _gameplaysRepository.Get(query.Game.Id);
-        var deal = gameplay.GetDealProjection(query.Deal.Number);
-        var result = Map(deal);
+        var gameplay = _gameplaysRepository.Get(query.Game);
+        var dealProjection = gameplay.GetDealProjection(query.Deal);
+        var result = Map(dealProjection);
         return result;
     }
 
@@ -25,24 +26,24 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
         new GetDeal.Result(
             Players: Map(projection.Players),
             Bids: Map(projection.Bids),
-            CheckingPlayerId: projection.CheckingPlayerId,
-            LooserPlayerId: projection.LooserPlayerId);
+            CheckingPlayerId: projection.CheckingPlayerId?.Id ?? Guid.Empty,
+            LooserPlayerId: projection.LooserPlayerId?.Player.Id ?? Guid.Empty);
 
-    private static IEnumerable<GetDeal.Player> Map(IEnumerable<GameplayProjection.DealPlayer> players) =>
+    private static IEnumerable<GetDeal.Player> Map(IEnumerable<DealPlayer> players) =>
         players.Select(player => new GetDeal.Player(
-            PlayerId: player.PlayerId,
-            Hand: Map(player.Hand)));
+            PlayerId: player.Player.Id,
+            Hand: Map(player.Hand.Cards)));
 
-    private static IEnumerable<GetDeal.Bid> Map(IEnumerable<GameplayProjection.Bid> bids) =>
-        bids
-            .Select(bid => new GetDeal.Bid(
-                Order: bid.Order,
-                PlayerId: bid.PlayerId,
-                PokerHand: bid.PokerHand))
-            .OrderBy(bid => bid.Order);
-
-    private static IEnumerable<GetDeal.Card> Map(IEnumerable<GameplayProjection.Card> cards) =>
+    private static IEnumerable<GetDeal.Card> Map(IEnumerable<Domain.ValueObjects.Cards.Card> cards) =>
         cards.Select(card => new GetDeal.Card(
-            FaceCard: card.FaceCard,
-            Suit: card.Suit));
+            FaceCard: card.FaceCard.ToString(),
+            Suit: card.Suit.ToString()));
+
+    private static IEnumerable<GetDeal.Bid> Map(IEnumerable<Bid> bids) =>
+        bids
+            .Select((bid, index) => new GetDeal.Bid(
+                Order: index + 1,
+                PlayerId: bid.Player.Id,
+                PokerHand: bid.PokerHand.Serialize()))
+            .OrderBy(bid => bid.Order);
 }

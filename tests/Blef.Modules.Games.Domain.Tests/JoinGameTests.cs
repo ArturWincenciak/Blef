@@ -96,6 +96,6 @@ public class JoinGameTests
     private static void AssertJoinedPlayer(GameId expectedGameId, PlayerNick expectedNick, GamePlayerJoined actualEvent)
     {
         Assert.Equal(expectedGameId, actualEvent.Game);
-        Assert.Equal(expectedNick, actualEvent.Nick);
+        Assert.Equal(expectedNick, actualEvent.Player.Nick);
     }
 }
