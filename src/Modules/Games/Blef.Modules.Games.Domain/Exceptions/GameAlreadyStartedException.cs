@@ -4,8 +4,7 @@ namespace Blef.Modules.Games.Domain.Exceptions;
 
 internal sealed class GameAlreadyStartedException : BlefException
 {
-    // todo: ...
-    public GameAlreadyStartedException()
+    public GameAlreadyStartedException() // todo: exception
         : base(title: "TBD", detail: "TBD", instance: "TODO")
     {
     }

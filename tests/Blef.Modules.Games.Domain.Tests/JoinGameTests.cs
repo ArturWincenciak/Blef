@@ -52,7 +52,7 @@ public class JoinGameTests
         var game = GivenGame();
 
         // act
-        Assert.Throws<MaxGamePlayersReachedException>(() =>
+        Assert.Throws<TooManyPlayersException>(() =>
         {
             game.Join(new PlayerNick("Nick 1"));
             game.Join(new PlayerNick("Nick 2"));
@@ -69,7 +69,7 @@ public class JoinGameTests
         var game = GivenGame();
 
         // act
-        Assert.Throws<PlayerAlreadyJoinedTheGameException>(() =>
+        Assert.Throws<PlayerAlreadyJoinedException>(() =>
         {
             game.Join(new PlayerNick("Graham"));
             game.Join(new PlayerNick("Graham"));
@@ -86,7 +86,7 @@ public class JoinGameTests
         game.StartFirstDeal();
 
         // assert
-        Assert.Throws<JoinGameThatIsAlreadyStartedException>(() =>
+        Assert.Throws<JoinGameAlreadyStartedException>(() =>
         {
             // act
             game.Join(new("Conway"));

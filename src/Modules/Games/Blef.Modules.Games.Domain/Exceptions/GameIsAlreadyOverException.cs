@@ -3,6 +3,7 @@ using Blef.Shared.Kernel.Exceptions;
 
 namespace Blef.Modules.Games.Domain.Exceptions;
 
+// todo: use them
 internal sealed class GameIsAlreadyOverException : BlefException
 {
     public GameIsAlreadyOverException(GameId gameId)
@@ -13,5 +14,3 @@ internal sealed class GameIsAlreadyOverException : BlefException
     {
     }
 }
-
-// todo: create deal is already over exception
