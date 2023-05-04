@@ -1,23 +1,14 @@
 ﻿using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.Events;
 using Blef.Modules.Games.Domain.Exceptions;
-using Blef.Modules.Games.Domain.Services;
-using Blef.Modules.Games.Domain.Tests.Mocks;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
+using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
 
 namespace Blef.Modules.Games.Domain.Tests;
 
 public class JoinGameTests
 {
-    private static Game GivenGame()
-    {
-        var gameGuid = Guid.Parse("8AFD62F2-A00B-4551-B049-6F4DB0D47CE3");
-        var gameId = new GameId(gameGuid);
-        var croupier = new Croupier(new DeckFactoryMock());
-        return new Game(gameId, croupier);
-    }
-
     [Fact]
     public void OnePlayerJoinGameTest()
     {

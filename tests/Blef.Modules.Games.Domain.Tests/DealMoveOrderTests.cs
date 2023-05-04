@@ -2,7 +2,7 @@
 using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
-using static Blef.Modules.Games.Domain.Tests.Extensions.BidMaker;
+using static Blef.Modules.Games.Domain.Tests.Extensions.BidFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.DealFactory;
 
 namespace Blef.Modules.Games.Domain.Tests;
