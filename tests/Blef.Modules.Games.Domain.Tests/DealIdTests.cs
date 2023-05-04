@@ -16,8 +16,8 @@ public class DealIdTests
         var actual = new DealId(gameId, dealNumber);
 
         // assert
-        Assert.True(new GameId(guid) == actual.GameId);
-        Assert.True(new DealNumber(1) == actual.Number);
+        Assert.True(new GameId(guid) == actual.Game);
+        Assert.True(new DealNumber(1) == actual.Deal);
     }
 
     [Fact]

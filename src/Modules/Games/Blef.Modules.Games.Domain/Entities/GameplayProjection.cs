@@ -1,4 +1,6 @@
-﻿namespace Blef.Modules.Games.Domain.Entities;
+﻿using Blef.Modules.Games.Domain.ValueObjects.Ids;
+
+namespace Blef.Modules.Games.Domain.Entities;
 
 internal sealed partial class GameplayProjection
 {
@@ -40,5 +42,12 @@ internal sealed partial class GameplayProjection
     {
         var deal = _deals[dealNumber];
         return new(deal.Players, deal.Bids, deal.CheckingPlayerId, deal.LooserPlayerId);
+    }
+
+    public IEnumerable<Card> GetHand(int dealNumber, Guid playerId)
+    {
+        var deal = _deals[dealNumber];
+        var player = deal.Players.Single(player => player.PlayerId == playerId);
+        return player.Hand;
     }
 }

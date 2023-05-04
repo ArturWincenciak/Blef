@@ -1,29 +1,28 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
+using Blef.Modules.Games.Domain.Entities;
+using Blef.Modules.Games.Domain.Repositories;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
+using Microsoft.AspNetCore.Builder;
 
 namespace Blef.Modules.Games.Application.Queries.Handlers;
 
 [UsedImplicitly]
 internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetPlayerCards.Result>
 {
-    private readonly IGamesRepository _games;
+    private readonly IGameplaysRepository _gameplays;
 
-    public GetPlayerCardsHandler(IGamesRepository games) =>
-        _games = games;
+    public GetPlayerCardsHandler(IGameplaysRepository gameplays) =>
+        _gameplays = gameplays;
 
     public async Task<GetPlayerCards.Result> Handle(GetPlayerCards query, CancellationToken cancellation)
     {
-        var game = _games.Get(query.GameId);
-        var cards = game.GetHand(query.PlayerId, new(query.GameId, query.DealNumber));
-        var result = Map(cards);
-        return new GetPlayerCards.Result(result);
+        var gameplay = _gameplays.Get(query.Game.Id);
+        var hand = gameplay.GetHand(query.Deal.Number, query.Player.Id);
+        return Map(hand);
     }
 
-    private static IEnumerable<GetPlayerCards.Card> Map(Hand hand) =>
-        hand.Cards.Select(Map);
-
-    private static GetPlayerCards.Card Map(Card card) =>
-        new(FaceCard: card.FaceCard.ToString(), Suit: card.Suit.ToString());
+    private GetPlayerCards.Result Map(IEnumerable<GameplayProjection.Card> hand) =>
+        new(hand.Select(card => new GetPlayerCards.Card(card.FaceCard, card.Suit)));
 }

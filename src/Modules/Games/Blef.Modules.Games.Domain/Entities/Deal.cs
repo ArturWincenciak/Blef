@@ -1,7 +1,6 @@
 ﻿using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Modules.Games.Domain.Services;
 using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Entities;
@@ -13,22 +12,19 @@ internal sealed class Deal
     private Bid? _lastBid;
     private bool _dealIsOver;
 
-    public DealId DealId { get; }
+    public DealId Id { get; }
 
     public Deal(DealId dealId, DealSet dealSet)
     {
         if (dealSet is null)
             throw new ArgumentNullException(nameof(dealSet));
 
-        DealId = dealId ?? throw new ArgumentNullException(nameof(dealId));
+        Id = dealId ?? throw new ArgumentNullException(nameof(dealId));
         _playersSet = dealSet.PlayersSet;
         _moveOrderPolicy = new(dealSet.MoveSequence);
         _lastBid = null;
         _dealIsOver = false;
     }
-
-    public Hand GetHand(PlayerId playerId) =>
-        _playersSet.GetHand(playerId);
 
     public void Bid(Bid newBid)
     {
@@ -39,7 +35,7 @@ internal sealed class Deal
 
         if (BetHasBeenMade)
             if (newBid.PokerHand.IsBetterThan(_lastBid!.PokerHand) == false)
-                throw new BidIsNotHigherThenLastOneException(DealId, newBid, _lastBid);
+                throw new BidIsNotHigherThenLastOneException(Id, newBid, _lastBid);
 
         _lastBid = newBid;
     }
@@ -52,7 +48,7 @@ internal sealed class Deal
         _moveOrderPolicy.Move(checkingPlayerId);
 
         if (BetHasBeenMade == false)
-            throw new NoBidToCheckException(DealId);
+            throw new NoBidToCheckException(Id);
 
         _dealIsOver = true;
 

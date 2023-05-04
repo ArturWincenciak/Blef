@@ -2,7 +2,6 @@ using Blef.Modules.Games.Domain.Events;
 using Blef.Modules.Games.Domain.Exceptions;
 using Blef.Modules.Games.Domain.Services;
 using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Shared.Abstractions.Events;
 
@@ -16,30 +15,30 @@ internal sealed class Game
     private readonly List<GamePlayer> _players = new();
     private readonly GamePlayer? _lastStartingPlayer = null;
 
-    public GameId GameId { get; }
+    public GameId Id { get; }
 
     public Game(GameId id, Croupier croupier)
     {
-        GameId = id ?? throw new ArgumentNullException(nameof(id));
+        Id = id ?? throw new ArgumentNullException(nameof(id));
         _croupier = croupier ?? throw new ArgumentNullException(nameof(croupier));
     }
 
     public GamePlayerJoined Join(PlayerNick nick)
     {
         if (IsGameStarted())
-            throw new JoinGameAlreadyStartedException(GameId, nick);
+            throw new JoinGameAlreadyStartedException(Id, nick);
 
         if (_players.Count >= MAX_NUMBER_OF_PLAYERS)
-            throw new TooManyPlayersException(GameId);
+            throw new TooManyPlayersException(Id);
 
         if (_players.Exists(player => player.Nick == nick))
-            throw new PlayerAlreadyJoinedException(GameId, nick);
+            throw new PlayerAlreadyJoinedException(Id, nick);
 
         var joiningSequence = _players.Count + 1;
         var player = GamePlayer.Create(nick, joiningSequence);
         _players.Add(player);
 
-        return new GamePlayerJoined(GameId.Id, player.PlayerId.Id, player.Nick.Nick);
+        return new GamePlayerJoined(Id.Id, player.Id.Id, player.Nick.Nick);
     }
 
     public DealStarted StartFirstDeal()
@@ -48,7 +47,7 @@ internal sealed class Game
             throw new GameAlreadyStartedException();
 
         if (_players.Count < MIN_NUMBER_OF_PLAYERS)
-            throw new NotEnoughPlayersException(GameId);
+            throw new NotEnoughPlayersException(Id);
 
         return NewDeal();
     }
@@ -60,7 +59,7 @@ internal sealed class Game
         var deal = _deals.Last();
         deal.Bid(newBid);
 
-        return new (GameId.Id, deal.DealId.Number.Number, newBid.Player.Id, newBid.PokerHand.Serialize());
+        return new (Id.Id, deal.Id.Deal.Number, newBid.Player.Id, newBid.PokerHand.Serialize());
     }
 
     public IEnumerable<IDomainEvent> Check(PlayerId checkingPlayer)
@@ -70,50 +69,40 @@ internal sealed class Game
         var deal = _deals.Last();
         var looserPlayer = deal.Check(checkingPlayer);
 
-        var loosingGamePlayer = _players.Single(gamePlayer => gamePlayer.PlayerId == looserPlayer.Player);
+        var loosingGamePlayer = _players.Single(gamePlayer => gamePlayer.Id == looserPlayer.Player);
         loosingGamePlayer.LostLastDeal();
 
         var nextDealStarted = NewDeal();
 
         var events = new IDomainEvent[]
         {
-            new CheckPlaced(deal.DealId.GameId.Id, deal.DealId.Number.Number, checkingPlayer.Id, looserPlayer.Player.Id),
+            new CheckPlaced(deal.Id.Game.Id, deal.Id.Deal.Number, checkingPlayer.Id, looserPlayer.Player.Id),
             nextDealStarted
         };
 
         return events;
     }
 
-    public Hand GetHand(PlayerId playerId, DealId dealId)
-    {
-        // todo: consider moving this to gameplay projection
-        // todo: check if deal number exits
-        // todo: check if user in the deal exists
-
-        var deal = GetDeal(dealId);
-        return deal.GetHand(playerId);
-    }
-
     private DealStarted NewDeal()
     {
         var nextDealNumber = _deals.Count + 1;
-        var nextDealId = new DealId(GameId, Number: new DealNumber(nextDealNumber));
+        var nextDealId = new DealId(Id, Deal: new DealNumber(nextDealNumber));
         var nextDealPlayers = CreateNextDealPlayers();
         var nextDealSet = _croupier.Deal(nextDealPlayers);
 
         _deals.Add(new(nextDealId, nextDealSet));
 
         var dealStartedPlayers = Map(nextDealSet.PlayersSet);
-        return new (GameId.Id, nextDealId.Number.Number, dealStartedPlayers);
+        return new (Id.Id, nextDealId.Deal.Number, dealStartedPlayers);
     }
 
     private Deal GetDeal(DealId dealId) =>
-        _deals.Single(d => d.DealId == dealId);
+        _deals.Single(d => d.Id == dealId);
 
     private NextDealPlayersSet CreateNextDealPlayers() =>
         new (_players
             .Where(player => player.IsInTheGame)
-            .Select(player => new NextDealPlayer(player.PlayerId, player.CardsAmount, player.JoiningSequence))
+            .Select(player => new NextDealPlayer(player.Id, player.CardsAmount, player.JoiningSequence))
             .ToArray());
 
     private int CalculateNextDealOrder(GamePlayer player)
@@ -175,10 +164,10 @@ internal sealed class Game
     private void ValidateGameInProgress()
     {
         if (IsGameStarted() == false)
-            throw new GameNotStartedException(GameId);
+            throw new GameNotStartedException(Id);
 
         if (IsGameOver())
-            throw new GameOverException(GameId);
+            throw new GameOverException(Id);
     }
 
     private bool IsGameOver()

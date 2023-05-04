@@ -34,8 +34,6 @@ public class CreateDealTests
         var actual = new Deal(dealId, new(new(players), moveSequence));
 
         // assert
-        Assert.Equal(new DealId(new GameId(gameGuid), new DealNumber(1)), actual.DealId);
-        Assert.Equal(playerHand_1, actual.GetHand(new PlayerId(playerGuid_1)));
-        Assert.Equal(playerHand_2, actual.GetHand(new PlayerId(playerGuid_2)));
+        Assert.Equal(new DealId(new GameId(gameGuid), new DealNumber(1)), actual.Id);
     }
 }

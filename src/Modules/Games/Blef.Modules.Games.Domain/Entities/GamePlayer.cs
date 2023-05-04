@@ -6,7 +6,7 @@ namespace Blef.Modules.Games.Domain.Entities;
 internal sealed class GamePlayer
 {
     private bool _isOutOfTheGame;
-    public PlayerId PlayerId { get; }
+    public PlayerId Id { get; }
     public PlayerNick Nick { get; }
     public CardsAmount CardsAmount { get; private set; }
     public int JoiningSequence { get; }
@@ -14,7 +14,7 @@ internal sealed class GamePlayer
 
     private GamePlayer(PlayerId playerId, PlayerNick nick, CardsAmount cardsAmount, int joiningSequence)
     {
-        PlayerId = playerId ?? throw new ArgumentNullException(nameof(playerId));
+        Id = playerId ?? throw new ArgumentNullException(nameof(playerId));
         Nick = nick ?? throw new ArgumentNullException(nameof(nick));
         CardsAmount = cardsAmount ?? throw new ArgumentNullException(nameof(cardsAmount));
         _isOutOfTheGame = false;

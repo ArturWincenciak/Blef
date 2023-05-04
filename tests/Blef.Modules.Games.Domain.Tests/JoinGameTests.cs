@@ -19,7 +19,7 @@ public class JoinGameTests
         var gamePlayerJoined = game.Join(new PlayerNick(playerNick));
 
         // assert
-        AssertJoinedPlayer(game.GameId, playerNick, gamePlayerJoined);
+        AssertJoinedPlayer(game.Id, playerNick, gamePlayerJoined);
     }
 
     [Fact]
@@ -39,10 +39,10 @@ public class JoinGameTests
         var gamePlayerJoined4 = game.Join(new PlayerNick(playerNick4));
 
         // assert
-        AssertJoinedPlayer(game.GameId, playerNick1, gamePlayerJoined1);
-        AssertJoinedPlayer(game.GameId, playerNick2, gamePlayerJoined2);
-        AssertJoinedPlayer(game.GameId, playerNick3, gamePlayerJoined3);
-        AssertJoinedPlayer(game.GameId, playerNick4, gamePlayerJoined4);
+        AssertJoinedPlayer(game.Id, playerNick1, gamePlayerJoined1);
+        AssertJoinedPlayer(game.Id, playerNick2, gamePlayerJoined2);
+        AssertJoinedPlayer(game.Id, playerNick3, gamePlayerJoined3);
+        AssertJoinedPlayer(game.Id, playerNick4, gamePlayerJoined4);
     }
 
     [Fact]
