@@ -1,7 +1,6 @@
 ﻿using Blef.Modules.Games.Domain.Events;
 using Blef.Modules.Games.Domain.Tests.Mocks;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
 
 namespace Blef.Modules.Games.Domain.Tests;
