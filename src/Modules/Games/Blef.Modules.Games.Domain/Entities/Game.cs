@@ -57,7 +57,7 @@ internal sealed class Game
     {
         var deal = GetDeal(dealId);
         deal.Bid(newBid);
-        return new (GameId.Id, dealId.Number.Number, newBid.PlayerId.Id, newBid.PokerHand.Serialize());
+        return new (GameId.Id, dealId.Number.Number, newBid.Player.Id, newBid.PokerHand.Serialize());
     }
 
     public IEnumerable<IDomainEvent> Check(DealId dealId, PlayerId checkingPlayerId)

@@ -23,7 +23,7 @@ internal sealed class NextDealPlayersSet
 
     private static bool AreAllPlayersUnique(IEnumerable<NextDealPlayer> NextDealPlayers) =>
         NextDealPlayers
-            .Select(player => player.PlayerId)
+            .Select(nextDealPlayer => nextDealPlayer.Player)
             .Distinct()
             .Count() == NextDealPlayers.Count();
 }

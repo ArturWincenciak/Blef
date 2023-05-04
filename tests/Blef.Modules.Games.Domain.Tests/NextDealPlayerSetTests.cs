@@ -21,9 +21,9 @@ public class NextDealPlayerSetTests
         var actual = new NextDealPlayersSet(players);
 
         // assert
-        var player_1 = actual.Players.Single(player => player.PlayerId == new PlayerId(playerId_1));
+        var player_1 = actual.Players.Single(player => player.Player == new PlayerId(playerId_1));
         Assert.True(player_1.CardsAmount == CardsAmount.Initial.AddOneCard());
-        var player_2 = actual.Players.Single(player => player.PlayerId == new PlayerId(playerId_2));
+        var player_2 = actual.Players.Single(player => player.Player == new PlayerId(playerId_2));
         Assert.True(player_2.CardsAmount == CardsAmount.Initial);
     }
 

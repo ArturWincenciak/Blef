@@ -13,15 +13,15 @@ internal sealed class Croupier
     {
         var deck = _deckFactory.Create();
         var players = nextDealPlayersSet.Players
-            .Select(player =>
+            .Select(nextDealPlayer =>
             {
-                var hand = deck.Deal(player.CardsAmount);
-                return new DealPlayer(player.PlayerId, hand);
+                var hand = deck.Deal(nextDealPlayer.CardsAmount);
+                return new DealPlayer(nextDealPlayer.Player, hand);
             })
             .ToArray();
 
         var moveSequence = new MoveSequence(nextDealPlayersSet.Players
-            .Select(player => new Move(player.PlayerId, Order.Create(player.Order))));
+            .Select(player => new Move(player.Player, Order.Create(player.Order))));
 
         return new(new(players), moveSequence);
     }
