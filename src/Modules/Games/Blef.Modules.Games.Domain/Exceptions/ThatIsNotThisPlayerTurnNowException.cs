@@ -9,7 +9,7 @@ internal sealed class ThatIsNotThisPlayerTurnNowException : BlefException
         : base(
             title: "That is not this player's turn now",
             detail: $"Player '{playerId}' should wait for his turn",
-            instance: $"todo") // todo: ...
+            instance: $"todo") // todo: exception
     {
     }
 }

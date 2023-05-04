@@ -27,13 +27,13 @@ internal sealed class Game
     public GamePlayerJoined Join(PlayerNick nick)
     {
         if (IsGameStarted())
-            throw new JoinGameThatIsAlreadyStartedException(GameId, nick);
+            throw new JoinGameAlreadyStartedException(GameId, nick);
 
         if (_players.Count >= MAX_NUMBER_OF_PLAYERS)
-            throw new MaxGamePlayersReachedException(GameId);
+            throw new TooManyPlayersException(GameId);
 
         if (_players.Exists(player => player.Nick == nick))
-            throw new PlayerAlreadyJoinedTheGameException(GameId, nick);
+            throw new PlayerAlreadyJoinedException(GameId, nick);
 
         var joiningSequence = _players.Count + 1;
         var player = GamePlayer.Create(nick, joiningSequence);
@@ -48,13 +48,16 @@ internal sealed class Game
             throw new GameAlreadyStartedException();
 
         if (_players.Count < MIN_NUMBER_OF_PLAYERS)
-            throw new NotEnoughPlayersException();
+            throw new NotEnoughPlayersException(GameId);
 
         return NewDeal();
     }
 
     public BidPlaced Bid(DealId dealId, Bid newBid)
     {
+        if(IsGameStarted() == false)
+            throw new GameNotStartedException(GameId);
+
         var deal = GetDeal(dealId);
         deal.Bid(newBid);
         return new (GameId.Id, dealId.Number.Number, newBid.Player.Id, newBid.PokerHand.Serialize());
