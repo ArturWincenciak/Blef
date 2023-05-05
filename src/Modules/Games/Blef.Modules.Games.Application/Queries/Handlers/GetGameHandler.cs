@@ -32,7 +32,8 @@ internal sealed class GetGameHandler : IQueryHandler<GetGame, GetGame.Result>
         new(gameStatus.ToString());
 
     private static IEnumerable<GetGame.Player> Map(IEnumerable<GamePlayer> gamePlayers) =>
-        gamePlayers.Select(player => new GetGame.Player(player.Id.Id, player.Nick.Nick));
+        gamePlayers.Select((player, index) => new GetGame.Player(
+            player.Id.Id, player.Nick.Nick, JoiningOrder: index + 1));
 
     private static IEnumerable<GetGame.DealNumber> Map(IEnumerable<DealNumber> dealNumbers) =>
         dealNumbers.Select(number => new GetGame.DealNumber(number.Number));

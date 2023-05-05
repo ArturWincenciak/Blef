@@ -56,15 +56,18 @@
       Players: [
         {
           PlayerId: Guid_2,
-          Nick: Knuth
+          Nick: Knuth,
+          JoiningOrder: 1
         },
         {
           PlayerId: Guid_3,
-          Nick: Graham
+          Nick: Graham,
+          JoiningOrder: 2
         },
         {
           PlayerId: Guid_4,
-          Nick: Conway
+          Nick: Conway,
+          JoiningOrder: 3
         }
       ],
       Winner: {}
@@ -89,15 +92,18 @@
       Players: [
         {
           PlayerId: Guid_2,
-          Nick: Knuth
+          Nick: Knuth,
+          JoiningOrder: 1
         },
         {
           PlayerId: Guid_3,
-          Nick: Graham
+          Nick: Graham,
+          JoiningOrder: 2
         },
         {
           PlayerId: Guid_4,
-          Nick: Conway
+          Nick: Conway,
+          JoiningOrder: 3
         }
       ],
       Deals: [
@@ -254,15 +260,18 @@
       Players: [
         {
           PlayerId: Guid_2,
-          Nick: Knuth
+          Nick: Knuth,
+          JoiningOrder: 1
         },
         {
           PlayerId: Guid_3,
-          Nick: Graham
+          Nick: Graham,
+          JoiningOrder: 2
         },
         {
           PlayerId: Guid_4,
-          Nick: Conway
+          Nick: Conway,
+          JoiningOrder: 3
         }
       ],
       Deals: [
