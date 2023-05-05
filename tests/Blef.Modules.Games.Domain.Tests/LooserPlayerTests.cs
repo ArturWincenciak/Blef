@@ -17,4 +17,8 @@ public class LooserPlayerTests
         Assert.Equal(guid, actual.Player.Id);
         Assert.True(new LooserPlayer(new(guid)) == actual);
     }
+
+    [Fact]
+    public void CannotCreateLooserPlayerWithNullPlayerIdTest() =>
+        Assert.Throws<ArgumentNullException>(() => new LooserPlayer(null!));
 }

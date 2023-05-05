@@ -10,9 +10,7 @@ internal sealed class GameplayProjection
     public GameId Id { get; }
 
     private GamePlayer? _winner = null;
-
     private readonly List<GamePlayer> _gamePlayers = new();
-
     private readonly Dictionary<DealNumber, DealProjection> _deals = new();
 
     public GameplayProjection(GameId id) =>
@@ -31,7 +29,7 @@ internal sealed class GameplayProjection
         deal.Bids.Add(bid);
     }
 
-    public void OnCheckPlaced(DealNumber dealNumber, PlayerId checkingPlayer, LooserPlayer looserPlayer)
+    public void OnCheckPlaced(DealNumber dealNumber, CheckingPlayer checkingPlayer, LooserPlayer looserPlayer)
     {
         var deal = _deals[dealNumber];
         _deals[dealNumber] = deal with
@@ -57,7 +55,7 @@ internal sealed class GameplayProjection
     public void OnGameFinished(GamePlayer winner) =>
         _winner = winner;
 
-    private IEnumerable<(DealNumber Number, DealStatus State, PlayerId? CheckingPlayer, LooserPlayer? Looser)> Deals =>
+    private IEnumerable<(DealNumber Number, DealStatus State, CheckingPlayer? CheckingPlayer, LooserPlayer? Looser)> Deals =>
         _deals.Select(deal => (
             Number: deal.Key,
             State: deal.Value.LooserPlayerId is not null
@@ -83,13 +81,13 @@ internal sealed class GameplayProjection
     internal sealed record GameProjection(
         GameStatus Status,
         IEnumerable<(GamePlayer Player, int JoiningOrder)> GamePlayers,
-        IEnumerable<(DealNumber Number, DealStatus State, PlayerId? CheckingPlayer, LooserPlayer? Looser)> Deals,
+        IEnumerable<(DealNumber Number, DealStatus State, CheckingPlayer? CheckingPlayer, LooserPlayer? Looser)> Deals,
         GamePlayer? Winner);
 
     internal sealed record DealProjection(
         IEnumerable<DealPlayer> Players,
         List<Bid> Bids,
-        PlayerId? CheckingPlayerId = null,
+        CheckingPlayer? CheckingPlayerId = null,
         LooserPlayer? LooserPlayerId = null);
 
     public enum GameStatus

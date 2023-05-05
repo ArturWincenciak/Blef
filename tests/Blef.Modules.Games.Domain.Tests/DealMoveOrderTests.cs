@@ -244,5 +244,5 @@ public class DealMoveOrderTests
     }
 
     private static void WithCheck(Deal deal, DealPlayer byPlayer) =>
-        deal.Check(byPlayer.Player);
+        deal.Check(new(byPlayer.Player));
 }
