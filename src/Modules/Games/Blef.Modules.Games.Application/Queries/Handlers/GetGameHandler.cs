@@ -33,14 +33,15 @@ internal sealed class GetGameHandler : IQueryHandler<GetGame, GetGame.Result>
     private GetGame.GameStatus Map(GameplayProjection.GameStatus gameStatus) =>
         new(gameStatus.ToString());
 
-    private static IEnumerable<GetGame.Player> Map(IEnumerable<GamePlayer> gamePlayers) =>
-        gamePlayers.Select((player, index) => new GetGame.Player(
-            player.Id.Id, player.Nick.Nick, JoiningOrder: index + 1));
+    private static IEnumerable<GetGame.Player> Map(IEnumerable<(GamePlayer Player, int JoiningOrder)> gamePlayers) =>
+        gamePlayers.Select(player => new GetGame.Player(
+            player.Player.Id.Id, player.Player.Nick.Nick, player.JoiningOrder));
 
-    private static IEnumerable<GetGame.Deal> Map(IEnumerable<(DealNumber Deal, GameplayProjection.DealStatus State, LooserPlayer? Looser)> deals) =>
+    private static IEnumerable<GetGame.Deal> Map(IEnumerable<(DealNumber Deal, GameplayProjection.DealStatus State, PlayerId? CheckingPlayer, LooserPlayer? Looser)> deals) =>
         deals.Select(deal => new GetGame.Deal(
                 Number: deal.Deal.Number,
                 State: deal.State.ToString(),
+                CheckingPlayerId: deal.CheckingPlayer?.Id ?? Guid.Empty,
                 LooserPlayerId: deal.Looser?.Player.Id ?? Guid.Empty));
 
     private static GetGame.Winner Map(GamePlayer? gamePlayer) =>
