@@ -78,8 +78,8 @@ internal sealed class Game
         if (IsOnlyOnePlayerLeft())
         {
             var winner = _players.Single(player => player.IsInTheGame);
-            var gameFinished = new GameFinished(Id, winner);
-            return new IDomainEvent[] { checkPlaced, gameFinished };
+            var gameOver = new GameOver(Id, winner);
+            return new IDomainEvent[] { checkPlaced, gameOver };
         }
 
         var nextDealStarted = NewDeal();

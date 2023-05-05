@@ -43,10 +43,24 @@ internal static class BidFactory
         deal.Bid(bid);
     }
 
+    public static void WithLowStraight(Game game, PlayerId byPlayer)
+    {
+        var pokerHand = GivenLowStraight();
+        var bid = new Bid(pokerHand, byPlayer);
+        game.Bid(bid);
+    }
+
     public static void WithHighStraight(Deal deal, DealPlayer byPlayer)
     {
         var pokerHand = GivenHighStraight();
         var bid = new Bid(pokerHand, byPlayer.Player);
         deal.Bid(bid);
+    }
+
+    public static void WithHighStraight(Game game, PlayerId byPlayer)
+    {
+        var pokerHand = GivenHighStraight();
+        var bid = new Bid(pokerHand, byPlayer);
+        game.Bid(bid);
     }
 }

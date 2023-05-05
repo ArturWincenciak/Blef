@@ -4,6 +4,6 @@ using Blef.Shared.Abstractions.Events;
 
 namespace Blef.Modules.Games.Domain.Events;
 
-internal sealed record GameFinished(
+internal sealed record GameOver(
     GameId Game,
-    GamePlayer Winner) : IDomainEvent<GameFinished>;
+    GamePlayer Winner) : IDomainEvent<GameOver>;
