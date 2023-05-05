@@ -1,6 +1,7 @@
 ﻿using Blef.Modules.Games.Domain.Entities;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using static Blef.Modules.Games.Domain.Tests.Extensions.PokerHandFactory;
 
 namespace Blef.Modules.Games.Domain.Tests.Extensions;
@@ -12,6 +13,13 @@ internal static class BidFactory
         var pokerHand = GivenHighCard(faceCard);
         var bid = new Bid(pokerHand, byPlayer.Player);
         deal.Bid(bid);
+    }
+
+    public static void WithHighCardBid(Game game, PlayerId byPlayer, FaceCard faceCard)
+    {
+        var pokerHand = GivenHighCard(faceCard);
+        var bid = new Bid(pokerHand, byPlayer);
+        game.Bid(bid);
     }
 
     public static void WithPairBid(Deal deal, DealPlayer byPlayer, FaceCard faceCard)
