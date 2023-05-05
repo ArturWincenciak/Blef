@@ -108,7 +108,8 @@
       ],
       Deals: [
         {
-          Number: 1
+          Number: 1,
+          State: InProgress
         }
       ],
       Winner: {}
@@ -276,10 +277,13 @@
       ],
       Deals: [
         {
-          Number: 1
+          Number: 1,
+          State: Finished,
+          LooserPlayerId: Guid_4
         },
         {
-          Number: 2
+          Number: 2,
+          State: InProgress
         }
       ],
       Winner: {}
