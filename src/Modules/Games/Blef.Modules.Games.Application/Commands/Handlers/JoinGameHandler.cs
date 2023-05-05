@@ -24,7 +24,5 @@ internal sealed class JoinGameHandler : ICommandHandler<JoinGame, JoinGame.Resul
         var gamePlayerJoined = game.Join(command.Nick);
         await _domainEventDispatcher.Dispatch(gamePlayerJoined, cancellation);
         return new JoinGame.Result(gamePlayerJoined.Player.Id.Id, gamePlayerJoined.Player.Nick.Nick);
-
-        // todo: return in header next possible actions
     }
 }
