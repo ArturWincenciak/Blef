@@ -26,7 +26,7 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
         new GetDeal.Result(
             Players: Map(projection.Players),
             Bids: Map(projection.Bids),
-            CheckingPlayerId: projection.CheckingPlayerId?.Id ?? Guid.Empty,
+            CheckingPlayerId: projection.CheckingPlayerId?.Player.Id ?? Guid.Empty,
             LooserPlayerId: projection.LooserPlayerId?.Player.Id ?? Guid.Empty);
 
     private static IEnumerable<GetDeal.Player> Map(IEnumerable<DealPlayer> players) =>

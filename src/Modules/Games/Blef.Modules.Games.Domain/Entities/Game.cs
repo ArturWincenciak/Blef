@@ -62,7 +62,7 @@ internal sealed class Game
         return new (Id, deal.Id.Deal, newBid.Player, newBid.PokerHand);
     }
 
-    public IEnumerable<IDomainEvent> Check(PlayerId checkingPlayer)
+    public IEnumerable<IDomainEvent> Check(CheckingPlayer checkingPlayer)
     {
         ValidateGameInProgress();
 
