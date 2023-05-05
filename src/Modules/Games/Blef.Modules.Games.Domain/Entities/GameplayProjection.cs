@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Blef.Modules.Games.Domain.ValueObjects;
+﻿using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
@@ -43,7 +42,7 @@ internal sealed class GameplayProjection
     }
 
     public GameProjection GetGameProjection() =>
-        new(Status, _gamePlayers, Deals, _winner);
+        new(Status, _gamePlayers.Select((player, index) => (player, index + 1)), Deals, _winner);
 
     public DealProjection GetDealProjection(DealNumber dealNumber) =>
         _deals[dealNumber];
@@ -58,12 +57,13 @@ internal sealed class GameplayProjection
     public void OnGameFinished(GamePlayer winner) =>
         _winner = winner;
 
-    private IEnumerable<(DealNumber Number, DealStatus State, LooserPlayer? Looser)> Deals =>
+    private IEnumerable<(DealNumber Number, DealStatus State, PlayerId? CheckingPlayer, LooserPlayer? Looser)> Deals =>
         _deals.Select(deal => (
             Number: deal.Key,
             State: deal.Value.LooserPlayerId is not null
                 ? DealStatus.Finished
                 : DealStatus.InProgress,
+            CheckingPlayer: deal.Value.CheckingPlayerId,
             Looser: deal.Value.LooserPlayerId));
 
     private GameStatus Status
@@ -82,8 +82,8 @@ internal sealed class GameplayProjection
 
     internal sealed record GameProjection(
         GameStatus Status,
-        IEnumerable<GamePlayer> GamePlayers,
-        IEnumerable<(DealNumber Number, DealStatus State, LooserPlayer? Looser)> Deals,
+        IEnumerable<(GamePlayer Player, int JoiningOrder)> GamePlayers,
+        IEnumerable<(DealNumber Number, DealStatus State, PlayerId? CheckingPlayer, LooserPlayer? Looser)> Deals,
         GamePlayer? Winner);
 
     internal sealed record DealProjection(

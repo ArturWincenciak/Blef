@@ -279,6 +279,7 @@
         {
           Number: 1,
           State: Finished,
+          CheckingPlayerId: Guid_2,
           LooserPlayerId: Guid_4
         },
         {

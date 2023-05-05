@@ -16,7 +16,7 @@ public sealed record GetGame(GameId Game) : IQuery<GetGame.Result>
     [UsedImplicitly]
     public sealed record Player(Guid PlayerId, string Nick, int JoiningOrder);
 
-    public sealed record Deal(int Number, string State, Guid LooserPlayerId);
+    public sealed record Deal(int Number, string State, Guid CheckingPlayerId, Guid LooserPlayerId);
 
     public sealed record Winner(Guid PlayerId);
 
