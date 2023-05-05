@@ -22,6 +22,7 @@ internal sealed class GetGameHandler : IQueryHandler<GetGame, GetGame.Result>
     }
 
     private GetGame.Result Map(GameplayProjection.GameProjection gameProjection) =>
-        new (gameProjection.GamePlayers.Select(player => new GetGame.Player(player.Id.Id, player.Nick.Nick)),
-            gameProjection.DealNumbers.Select(number => new GetGame.DealNumber(number.Number)));
+        new(gameProjection.GamePlayers.Select(player => new GetGame.Player(player.Id.Id, player.Nick.Nick)),
+            gameProjection.DealNumbers.Select(number => new GetGame.DealNumber(number.Number)),
+            new(gameProjection.Winner?.Id.Id ?? Guid.Empty));
 }

@@ -9,6 +9,7 @@ internal sealed class GameplayProjection
 {
     public GameId Id { get; }
 
+    private GamePlayer? _theWinner = null;
     private readonly List<GamePlayer> _gamePlayers = new();
     private readonly Dictionary<DealNumber, DealProjection> _deals = new();
 
@@ -39,7 +40,7 @@ internal sealed class GameplayProjection
     }
 
     public GameProjection GetGameProjection() =>
-        new(_gamePlayers, _deals.Keys);
+        new(_gamePlayers, _deals.Keys, _theWinner);
 
     public DealProjection GetDealProjection(DealNumber dealNumber) =>
         _deals[dealNumber];
@@ -51,9 +52,13 @@ internal sealed class GameplayProjection
         return player.Hand.Cards;
     }
 
+    public void OnGameFinished(GamePlayer theWinner) =>
+        _theWinner = theWinner;
+
     internal sealed record GameProjection(
         IEnumerable<GamePlayer> GamePlayers,
-        IEnumerable<DealNumber> DealNumbers);
+        IEnumerable<DealNumber> DealNumbers,
+        GamePlayer? Winner);
 
     internal sealed record DealProjection(
         IEnumerable<DealPlayer> Players,
