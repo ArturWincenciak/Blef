@@ -37,6 +37,9 @@ internal sealed class CheckHandler : ICommandHandler<Check>
             case DealStarted dealStarted:
                 await _eventDispatcher.Dispatch(dealStarted, cancellation);
                 break;
+            case GameFinished gameFinished:
+                await _eventDispatcher.Dispatch(gameFinished, cancellation);
+                break;
         }
     }
 }

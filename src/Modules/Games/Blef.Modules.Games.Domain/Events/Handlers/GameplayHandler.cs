@@ -9,34 +9,36 @@ internal sealed class GameplayHandler :
     IDomainEventHandler<GamePlayerJoined>,
     IDomainEventHandler<DealStarted>,
     IDomainEventHandler<BidPlaced>,
-    IDomainEventHandler<CheckPlaced>
+    IDomainEventHandler<CheckPlaced>,
+    IDomainEventHandler<GameFinished>
 {
     private readonly IGameplaysRepository _gameplaysRepository;
 
     public GameplayHandler(IGameplaysRepository gameplaysRepository) =>
         _gameplaysRepository = gameplaysRepository;
 
-    public async Task Handle(GamePlayerJoined @event, CancellationToken cancellation)
-    {
-        var gameplay = _gameplaysRepository.Get(@event.Game);
-        gameplay.OnPlayerJoined(@event.Player);
-    }
+    public async Task Handle(GamePlayerJoined @event, CancellationToken cancellation) =>
+        _gameplaysRepository
+            .Get(@event.Game)
+            .OnPlayerJoined(@event.Player);
 
-    public async Task Handle(DealStarted @event, CancellationToken cancellation)
-    {
-        var gameplay = _gameplaysRepository.Get(@event.Game);
-        gameplay.OnDealStarted(@event.Deal, @event.Players);
-    }
+    public async Task Handle(DealStarted @event, CancellationToken cancellation) =>
+        _gameplaysRepository
+            .Get(@event.Game)
+            .OnDealStarted(@event.Deal, @event.Players);
 
-    public async Task Handle(BidPlaced @event, CancellationToken cancellation)
-    {
-        var gameplay = _gameplaysRepository.Get(@event.Game);
-        gameplay.OnBidPlaced(@event.Deal, @event.Player, @event.PokerHand);
-    }
+    public async Task Handle(BidPlaced @event, CancellationToken cancellation) =>
+        _gameplaysRepository
+            .Get(@event.Game)
+            .OnBidPlaced(@event.Deal, @event.Player, @event.PokerHand);
 
-    public async Task Handle(CheckPlaced @event, CancellationToken cancellation)
-    {
-        var gameplay = _gameplaysRepository.Get(@event.Game);
-        gameplay.OnCheckPlaced(@event.Deal, @event.CheckingPlayer, @event.LooserPlayer);
-    }
+    public async Task Handle(CheckPlaced @event, CancellationToken cancellation) =>
+        _gameplaysRepository
+            .Get(@event.Game)
+            .OnCheckPlaced(@event.Deal, @event.CheckingPlayer, @event.LooserPlayer);
+
+    public async Task Handle(GameFinished @event, CancellationToken cancellation) =>
+        _gameplaysRepository
+            .Get(@event.Game)
+            .OnGameFinished(@event.Winner);
 }

@@ -67,20 +67,23 @@ internal sealed class Game
         ValidateGameInProgress();
 
         var deal = _deals.Last();
-        var looserPlayer = deal.Check(checkingPlayer);
+        var dealLooser = deal.Check(checkingPlayer);
 
-        var loosingGamePlayer = _players.Single(gamePlayer => gamePlayer.Id == looserPlayer.Player);
-        loosingGamePlayer.LostLastDeal();
+        _players
+            .Single(gamePlayer => gamePlayer.Id == dealLooser.Player)
+            .LostLastDeal();
+
+        var checkPlaced = new CheckPlaced(Id, deal.Id.Deal, checkingPlayer, dealLooser);
+
+        if (IsOnlyOnePlayerLeft())
+        {
+            var winner = _players.Single(player => player.IsInTheGame);
+            var gameFinished = new GameFinished(Id, winner);
+            return new IDomainEvent[] { checkPlaced, gameFinished };
+        }
 
         var nextDealStarted = NewDeal();
-
-        var events = new IDomainEvent[]
-        {
-            new CheckPlaced(Id, deal.Id.Deal, checkingPlayer, looserPlayer),
-            nextDealStarted
-        };
-
-        return events;
+        return new IDomainEvent[] { checkPlaced, nextDealStarted };
     }
 
     private DealStarted NewDeal()
@@ -149,6 +152,12 @@ internal sealed class Game
     private bool IsGameStarted() =>
         _deals.Count > 0;
 
+    private bool IsGameOver() =>
+        IsOnlyOnePlayerLeft();
+
+    private bool IsOnlyOnePlayerLeft() =>
+        _players.Count(player => player.IsInTheGame) == 1;
+
     private void ValidateGameInProgress()
     {
         if (IsGameStarted() == false)
@@ -156,11 +165,5 @@ internal sealed class Game
 
         if (IsGameOver())
             throw new GameOverException(Id);
-    }
-
-    private bool IsGameOver()
-    {
-        // todo: implement
-        return false;
     }
 }
