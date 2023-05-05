@@ -95,9 +95,6 @@ internal sealed class Game
         return new (Id, nextDealId.Deal, nextDealSet.PlayersSet.Players);
     }
 
-    private Deal GetDeal(DealId dealId) =>
-        _deals.Single(d => d.Id == dealId);
-
     private NextDealPlayersSet CreateNextDealPlayers() =>
         new (_players
             .Where(player => player.IsInTheGame)
