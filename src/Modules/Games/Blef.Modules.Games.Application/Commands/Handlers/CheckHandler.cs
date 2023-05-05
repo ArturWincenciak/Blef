@@ -25,10 +25,6 @@ internal sealed class CheckHandler : ICommandHandler<Check>
 
         foreach (var @event in events)
             await Dispatch(@event, cancellation);
-
-        // todo: return looser player
-        // todo: return next deal if created
-        // todo: return in header next possible actions
     }
 
     private async Task Dispatch(IDomainEvent @event, CancellationToken cancellation)

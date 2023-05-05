@@ -27,7 +27,5 @@ internal sealed class NewGameHandler : ICommandHandler<NewGame, NewGame.Result>
         _games.Add(game);
         _gameplays.Add(new GameplayProjection(game.Id));
         return new NewGame.Result(game.Id.Id);
-
-        // todo: return in header next possible actions
     }
 }

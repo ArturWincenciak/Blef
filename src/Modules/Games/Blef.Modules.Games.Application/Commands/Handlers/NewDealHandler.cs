@@ -24,7 +24,5 @@ internal sealed class NewDealHandler : ICommandHandler<NewDeal, NewDeal.Result>
         var newDealStarted = game.StartFirstDeal();
         await _domainEventDispatcher.Dispatch(newDealStarted, cancellation);
         return new NewDeal.Result(newDealStarted.Deal.Number);
-
-        // todo: return in header next possible actions
     }
 }
