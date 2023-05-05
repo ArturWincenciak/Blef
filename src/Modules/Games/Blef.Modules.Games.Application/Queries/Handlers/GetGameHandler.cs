@@ -4,7 +4,6 @@ using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Http;
 
 namespace Blef.Modules.Games.Application.Queries.Handlers;
 

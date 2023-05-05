@@ -1,5 +1,4 @@
-﻿using Blef.Modules.Games.Domain.Entities;
-using Blef.Modules.Games.Domain.Services;
+﻿using Blef.Modules.Games.Domain.Services;
 using Blef.Modules.Games.Domain.Tests.Mocks;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;

@@ -1,6 +1,4 @@
-﻿using Blef.Modules.Games.Domain.Entities;
-using Blef.Modules.Games.Domain.Repositories;
-using Blef.Modules.Games.Domain.ValueObjects;
+﻿using Blef.Modules.Games.Domain.Repositories;
 using Blef.Shared.Abstractions.Events;
 
 namespace Blef.Modules.Games.Domain.Events.Handlers;
@@ -10,7 +8,7 @@ internal sealed class GameplayHandler :
     IDomainEventHandler<DealStarted>,
     IDomainEventHandler<BidPlaced>,
     IDomainEventHandler<CheckPlaced>,
-    IDomainEventHandler<GameFinished>
+    IDomainEventHandler<GameOver>
 {
     private readonly IGameplaysRepository _gameplaysRepository;
 
@@ -37,7 +35,7 @@ internal sealed class GameplayHandler :
             .Get(@event.Game)
             .OnCheckPlaced(@event.Deal, @event.CheckingPlayer, @event.LooserPlayer);
 
-    public async Task Handle(GameFinished @event, CancellationToken cancellation) =>
+    public async Task Handle(GameOver @event, CancellationToken cancellation) =>
         _gameplaysRepository
             .Get(@event.Game)
             .OnGameFinished(@event.Winner);
