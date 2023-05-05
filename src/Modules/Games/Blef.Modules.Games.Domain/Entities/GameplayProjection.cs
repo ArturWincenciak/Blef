@@ -9,8 +9,10 @@ internal sealed class GameplayProjection
 {
     public GameId Id { get; }
 
-    private GamePlayer? _theWinner = null;
+    private GamePlayer? _winner = null;
+
     private readonly List<GamePlayer> _gamePlayers = new();
+
     private readonly Dictionary<DealNumber, DealProjection> _deals = new();
 
     public GameplayProjection(GameId id) =>
@@ -25,7 +27,6 @@ internal sealed class GameplayProjection
     public void OnBidPlaced(DealNumber dealNumber, PlayerId playerId, PokerHand pokerHand)
     {
         var deal = _deals[dealNumber];
-        var bidNumber = deal.Bids.Count + 1;
         var bid = new Bid(pokerHand, playerId);
         deal.Bids.Add(bid);
     }
@@ -33,14 +34,15 @@ internal sealed class GameplayProjection
     public void OnCheckPlaced(DealNumber dealNumber, PlayerId checkingPlayerId, LooserPlayer looserPlayerId)
     {
         var deal = _deals[dealNumber];
-        _deals[dealNumber] = deal with {
+        _deals[dealNumber] = deal with
+        {
             CheckingPlayerId = checkingPlayerId,
             LooserPlayerId = looserPlayerId
         };
     }
 
     public GameProjection GetGameProjection() =>
-        new(_gamePlayers, _deals.Keys, _theWinner);
+        new(Status, _gamePlayers, _deals.Keys, _winner);
 
     public DealProjection GetDealProjection(DealNumber dealNumber) =>
         _deals[dealNumber];
@@ -52,17 +54,39 @@ internal sealed class GameplayProjection
         return player.Hand.Cards;
     }
 
-    public void OnGameFinished(GamePlayer theWinner) =>
-        _theWinner = theWinner;
+    public void OnGameFinished(GamePlayer winner) =>
+        _winner = winner;
 
     internal sealed record GameProjection(
+        GameStatus Status,
         IEnumerable<GamePlayer> GamePlayers,
         IEnumerable<DealNumber> DealNumbers,
         GamePlayer? Winner);
+
+    private GameStatus Status
+    {
+        get
+        {
+            if (_deals.Count == 0)
+                return GameStatus.JoiningPlayers;
+
+            if (_winner is not null)
+                return GameStatus.GameIsOver;
+
+            return GameStatus.InProgress;
+        }
+    }
 
     internal sealed record DealProjection(
         IEnumerable<DealPlayer> Players,
         List<Bid> Bids,
         PlayerId? CheckingPlayerId = null,
         LooserPlayer? LooserPlayerId = null);
+
+    public enum GameStatus
+    {
+        JoiningPlayers,
+        InProgress,
+        GameIsOver
+    }
 }

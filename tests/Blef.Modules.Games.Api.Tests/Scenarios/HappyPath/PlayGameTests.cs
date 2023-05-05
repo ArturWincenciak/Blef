@@ -15,6 +15,7 @@ public class PlayGameTests
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
             .JoinPlayer(WhichPlayer.Conway)
+            .GetGameFlow()
             .NewDeal()
             .GetGameFlow()
             .GetDealFlow(new DealNumber(1))

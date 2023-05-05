@@ -11,7 +11,12 @@
     No: 2,
     Action: GetGameFlow,
     Argument: NoArgument,
-    Result: {}
+    Result: {
+      Status: {
+        State: JoiningPlayers
+      },
+      Winner: {}
+    }
   },
   {
     No: 3,
@@ -42,6 +47,31 @@
   },
   {
     No: 6,
+    Action: GetGameFlow,
+    Argument: NoArgument,
+    Result: {
+      Status: {
+        State: JoiningPlayers
+      },
+      Players: [
+        {
+          PlayerId: Guid_2,
+          Nick: Knuth
+        },
+        {
+          PlayerId: Guid_3,
+          Nick: Graham
+        },
+        {
+          PlayerId: Guid_4,
+          Nick: Conway
+        }
+      ],
+      Winner: {}
+    }
+  },
+  {
+    No: 7,
     Action: NewDeal,
     Argument: NoArgument,
     Result: {
@@ -49,10 +79,13 @@
     }
   },
   {
-    No: 7,
+    No: 8,
     Action: GetGameFlow,
     Argument: NoArgument,
     Result: {
+      Status: {
+        State: InProgress
+      },
       Players: [
         {
           PlayerId: Guid_2,
@@ -71,11 +104,12 @@
         {
           Number: 1
         }
-      ]
+      ],
+      Winner: {}
     }
   },
   {
-    No: 8,
+    No: 9,
     Action: GetDealFlow,
     Argument: {
       Number: 1
@@ -113,7 +147,7 @@
     }
   },
   {
-    No: 9,
+    No: 10,
     Action: GetCards,
     Argument: {
       whichPlayer: Knuth,
@@ -131,7 +165,7 @@
     }
   },
   {
-    No: 10,
+    No: 11,
     Action: GetCards,
     Argument: {
       whichPlayer: Graham,
@@ -149,7 +183,7 @@
     }
   },
   {
-    No: 11,
+    No: 12,
     Action: GetCards,
     Argument: {
       whichPlayer: Conway,
@@ -167,7 +201,7 @@
     }
   },
   {
-    No: 12,
+    No: 13,
     Action: Bid,
     Argument: {
       whichPlayer: Knuth,
@@ -178,7 +212,7 @@
     }
   },
   {
-    No: 13,
+    No: 14,
     Action: Bid,
     Argument: {
       whichPlayer: Graham,
@@ -189,7 +223,7 @@
     }
   },
   {
-    No: 14,
+    No: 15,
     Action: Bid,
     Argument: {
       whichPlayer: Conway,
@@ -200,7 +234,7 @@
     }
   },
   {
-    No: 15,
+    No: 16,
     Action: Check,
     Argument: {
       whichPlayer: Knuth
@@ -210,10 +244,13 @@
     }
   },
   {
-    No: 16,
+    No: 17,
     Action: GetGameFlow,
     Argument: NoArgument,
     Result: {
+      Status: {
+        State: InProgress
+      },
       Players: [
         {
           PlayerId: Guid_2,
@@ -235,11 +272,12 @@
         {
           Number: 2
         }
-      ]
+      ],
+      Winner: {}
     }
   },
   {
-    No: 17,
+    No: 18,
     Action: GetDealFlow,
     Argument: {
       Number: 1
@@ -296,7 +334,7 @@
     }
   },
   {
-    No: 18,
+    No: 19,
     Action: GetDealFlow,
     Argument: {
       Number: 2
