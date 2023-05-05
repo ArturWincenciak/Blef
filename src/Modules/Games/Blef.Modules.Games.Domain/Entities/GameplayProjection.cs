@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects;
+﻿using System.Data;
+using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Modules.Games.Domain.ValueObjects.Cards;
 using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
@@ -31,18 +32,18 @@ internal sealed class GameplayProjection
         deal.Bids.Add(bid);
     }
 
-    public void OnCheckPlaced(DealNumber dealNumber, PlayerId checkingPlayerId, LooserPlayer looserPlayerId)
+    public void OnCheckPlaced(DealNumber dealNumber, PlayerId checkingPlayer, LooserPlayer looserPlayer)
     {
         var deal = _deals[dealNumber];
         _deals[dealNumber] = deal with
         {
-            CheckingPlayerId = checkingPlayerId,
-            LooserPlayerId = looserPlayerId
+            CheckingPlayerId = checkingPlayer,
+            LooserPlayerId = looserPlayer
         };
     }
 
     public GameProjection GetGameProjection() =>
-        new(Status, _gamePlayers, _deals.Keys, _winner);
+        new(Status, _gamePlayers, Deals, _winner);
 
     public DealProjection GetDealProjection(DealNumber dealNumber) =>
         _deals[dealNumber];
@@ -57,11 +58,13 @@ internal sealed class GameplayProjection
     public void OnGameFinished(GamePlayer winner) =>
         _winner = winner;
 
-    internal sealed record GameProjection(
-        GameStatus Status,
-        IEnumerable<GamePlayer> GamePlayers,
-        IEnumerable<DealNumber> DealNumbers,
-        GamePlayer? Winner);
+    private IEnumerable<(DealNumber Number, DealStatus State, LooserPlayer? Looser)> Deals =>
+        _deals.Select(deal => (
+            Number: deal.Key,
+            State: deal.Value.LooserPlayerId is not null
+                ? DealStatus.Finished
+                : DealStatus.InProgress,
+            Looser: deal.Value.LooserPlayerId));
 
     private GameStatus Status
     {
@@ -77,6 +80,12 @@ internal sealed class GameplayProjection
         }
     }
 
+    internal sealed record GameProjection(
+        GameStatus Status,
+        IEnumerable<GamePlayer> GamePlayers,
+        IEnumerable<(DealNumber Number, DealStatus State, LooserPlayer? Looser)> Deals,
+        GamePlayer? Winner);
+
     internal sealed record DealProjection(
         IEnumerable<DealPlayer> Players,
         List<Bid> Bids,
@@ -88,5 +97,11 @@ internal sealed class GameplayProjection
         JoiningPlayers,
         InProgress,
         GameIsOver
+    }
+
+    public enum DealStatus
+    {
+        InProgress,
+        Finished
     }
 }

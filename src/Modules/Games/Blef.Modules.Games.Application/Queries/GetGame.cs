@@ -10,13 +10,13 @@ public sealed record GetGame(GameId Game) : IQuery<GetGame.Result>
     public sealed record Result(
         GameStatus Status,
         IEnumerable<Player> Players,
-        IEnumerable<DealNumber> Deals,
+        IEnumerable<Deal> Deals,
         Winner Winner) : IQueryResult;
 
     [UsedImplicitly]
     public sealed record Player(Guid PlayerId, string Nick, int JoiningOrder);
 
-    public sealed record DealNumber(int Number);
+    public sealed record Deal(int Number, string State, Guid LooserPlayerId);
 
     public sealed record Winner(Guid PlayerId);
 
