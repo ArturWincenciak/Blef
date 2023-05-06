@@ -3,6 +3,7 @@ using Blef.Modules.Games.Domain.Repositories;
 using Blef.Modules.Games.Domain.ValueObjects;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
+using Microsoft.AspNetCore.Builder;
 
 namespace Blef.Modules.Games.Application.Queries.Handlers;
 
@@ -22,12 +23,10 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
         return result;
     }
 
-    private static GetDeal.Result Map(GameplayProjection.DealProjection projection) =>
-        new GetDeal.Result(
-            Players: Map(projection.Players),
+    private static GetDeal.Result Map(GameplayProjection.DealDetails projection) =>
+        new(Players: Map(projection.Players),
             Bids: Map(projection.Bids),
-            CheckingPlayerId: projection.CheckingPlayerId?.Player.Id ?? Guid.Empty,
-            LooserPlayerId: projection.LooserPlayerId?.Player.Id ?? Guid.Empty);
+            DealResolution: Map(projection.DealResolution));
 
     private static IEnumerable<GetDeal.Player> Map(IEnumerable<DealPlayer> players) =>
         players.Select(player => new GetDeal.Player(
@@ -46,4 +45,8 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
                 PlayerId: bid.Player.Id,
                 PokerHand: bid.PokerHand.Serialize()))
             .OrderBy(bid => bid.Order);
+
+    private static GetDeal.DealResolution Map(GameplayProjection.DealResolution? dealResolution) =>
+        new(dealResolution?.CheckingPlayer.Player.Id ?? Guid.Empty,
+            dealResolution?.Looser.Player.Id ?? Guid.Empty);
 }
