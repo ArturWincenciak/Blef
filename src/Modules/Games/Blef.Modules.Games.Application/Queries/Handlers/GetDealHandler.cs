@@ -38,12 +38,12 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
             FaceCard: card.FaceCard.ToString(),
             Suit: card.Suit.ToString()));
 
-    private static IEnumerable<GetDeal.Bid> Map(IEnumerable<Bid> bids) =>
+    private static IEnumerable<GetDeal.Bid> Map(IEnumerable<Gameplay.BidRecord> bids) =>
         bids
-            .Select((bid, index) => new GetDeal.Bid(
-                Order: index + 1,
-                PlayerId: bid.Player.Id,
-                PokerHand: bid.PokerHand.Serialize()))
+            .Select(bidRecord => new GetDeal.Bid(
+                Order: bidRecord.Order,
+                PlayerId: bidRecord.Bid.Player.Id,
+                PokerHand: bidRecord.Bid.PokerHand.Serialize()))
             .OrderBy(bid => bid.Order);
 
     private static GetDeal.DealResolution Map(Gameplay.DealResolution? dealResolution) =>
