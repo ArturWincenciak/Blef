@@ -11,7 +11,7 @@ internal static class PokerHandFactory
     public static PokerHand GivenPair(FaceCard faceCard) =>
         Pair.Create(faceCard.ToString());
 
-    public static PokerHand GivenTwoPairs(FaceCard firstFaceCard, FaceCard secondFaceCard) =>
+    public static PokerHand GivenTwoPairsBid(FaceCard firstFaceCard, FaceCard secondFaceCard) =>
         TwoPairs.Create($"{firstFaceCard},{secondFaceCard}");
 
     public static PokerHand GivenLowStraight() =>

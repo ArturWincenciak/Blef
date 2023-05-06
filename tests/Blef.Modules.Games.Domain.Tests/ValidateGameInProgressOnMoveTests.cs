@@ -12,10 +12,10 @@ public class ValidateGameInProgressOnMoveTests
     [Fact]
     public void CanMakeMoveWhenGameInProgressTest()
     {
-        TestCase((game, player1, _) => WithHighCardBid(game, player1, FaceCard.Ace));
+        TestCase((game, player1, _) => PlayHighCardBid(game, player1, FaceCard.Ace));
         TestCase((game, player1, player2) =>
         {
-            WithHighCardBid(game, player1, FaceCard.Ace);
+            PlayHighCardBid(game, player1, FaceCard.Ace);
             game.Check(new(player2));
         });
 
@@ -39,7 +39,7 @@ public class ValidateGameInProgressOnMoveTests
     [Fact]
     public void CannotMakeMoveWhenGameNotStartedTest()
     {
-        TestCase((game, player1, _) => WithHighCardBid(game, player1, FaceCard.Ace));
+        TestCase((game, player1, _) => PlayHighCardBid(game, player1, FaceCard.Ace));
         TestCase((game, _, player2) => game.Check(new(player2)));
 
         void TestCase(Action<Game, PlayerId, PlayerId> act)
@@ -50,14 +50,14 @@ public class ValidateGameInProgressOnMoveTests
 
             // act
             Assert.Throws<GameNotStartedException>(() =>
-                WithHighCardBid(game, playerId, FaceCard.Ace));
+                PlayHighCardBid(game, playerId, FaceCard.Ace));
         }
     }
 
     [Fact]
     public void CannotMakeMoveWhenGameIsOverTest()
     {
-        TestCase((game, player1, _) => WithHighCardBid(game, player1, FaceCard.Ace));
+        TestCase((game, player1, _) => PlayHighCardBid(game, player1, FaceCard.Ace));
         TestCase((game, _, player2) => game.Check(new(player2)));
 
         void TestCase(Action<Game, PlayerId, PlayerId> act)
@@ -82,7 +82,7 @@ public class ValidateGameInProgressOnMoveTests
 
             static void LostBiddingPlayer(Game game, GamePlayer gamePlayer1, GamePlayer gamePlayer2)
             {
-                WithLowStraight(game, gamePlayer1.Id);
+                PlayLowStraightBid(game, gamePlayer1.Id);
                 game.Check(new(gamePlayer2.Id));
             }
         }

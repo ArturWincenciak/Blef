@@ -16,7 +16,7 @@ public class DealBidTests
 
         // act
         var exception = Record.Exception(() =>
-            WithHighCardBid(deal, player1, FaceCard.Nine));
+            PlayHighCardBid(deal, player1, FaceCard.Nine));
 
         // assert
         Assert.Null(exception);
@@ -32,8 +32,8 @@ public class DealBidTests
         Assert.Throws<BidIsNotHigherThenLastOneException>(() =>
         {
             // act
-            WithHighCardBid(deal, player1, FaceCard.Ten);
-            WithHighCardBid(deal, player2, FaceCard.Nine);
+            PlayHighCardBid(deal, player1, FaceCard.Ten);
+            PlayHighCardBid(deal, player2, FaceCard.Nine);
         });
     }
 
@@ -47,9 +47,9 @@ public class DealBidTests
         Assert.Throws<BidIsNotHigherThenLastOneException>(() =>
         {
             // act
-            WithHighCardBid(deal, player1, FaceCard.Ten);
-            WithHighCardBid(deal, player2, FaceCard.Queen);
-            WithHighCardBid(deal, player3, FaceCard.Jack);
+            PlayHighCardBid(deal, player1, FaceCard.Ten);
+            PlayHighCardBid(deal, player2, FaceCard.Queen);
+            PlayHighCardBid(deal, player3, FaceCard.Jack);
         });
     }
 
@@ -63,23 +63,23 @@ public class DealBidTests
         var exception = Record.Exception(() =>
         {
             // act
-            WithHighCardBid(deal, player1, FaceCard.Nine);
-            WithHighCardBid(deal, player2, FaceCard.Ten);
-            WithHighCardBid(deal, player3, FaceCard.Jack);
-            WithHighCardBid(deal, player4, FaceCard.Queen);
-            WithHighCardBid(deal, player1, FaceCard.King);
-            WithHighCardBid(deal, player2, FaceCard.Ace);
-            WithPairBid(deal, player3, FaceCard.Nine);
-            WithPairBid(deal, player4, FaceCard.Ten);
-            WithPairBid(deal, player1, FaceCard.Jack);
-            WithPairBid(deal, player2, FaceCard.Queen);
-            WithPairBid(deal, player3, FaceCard.King);
-            WithPairBid(deal, player4, FaceCard.Ace);
-            WithTwoPairsBid(deal, player1, FaceCard.Nine, FaceCard.Ten);
-            WithTwoPairsBid(deal, player2, FaceCard.Jack, FaceCard.Queen);
-            WithTwoPairsBid(deal, player3, FaceCard.King, FaceCard.Ace);
-            WithLowStraight(deal, player4);
-            WithHighStraight(deal, player1);
+            PlayHighCardBid(deal, player1, FaceCard.Nine);
+            PlayHighCardBid(deal, player2, FaceCard.Ten);
+            PlayHighCardBid(deal, player3, FaceCard.Jack);
+            PlayHighCardBid(deal, player4, FaceCard.Queen);
+            PlayHighCardBid(deal, player1, FaceCard.King);
+            PlayHighCardBid(deal, player2, FaceCard.Ace);
+            PlayPairBid(deal, player3, FaceCard.Nine);
+            PlayPairBid(deal, player4, FaceCard.Ten);
+            PlayPairBid(deal, player1, FaceCard.Jack);
+            PlayPairBid(deal, player2, FaceCard.Queen);
+            PlayPairBid(deal, player3, FaceCard.King);
+            PlayPairBid(deal, player4, FaceCard.Ace);
+            PlayTwoPairsBid(deal, player1, FaceCard.Nine, FaceCard.Ten);
+            PlayTwoPairsBid(deal, player2, FaceCard.Jack, FaceCard.Queen);
+            PlayTwoPairsBid(deal, player3, FaceCard.King, FaceCard.Ace);
+            PlayLowStraightBid(deal, player4);
+            PlayHighStraightBid(deal, player1);
         });
 
         // assert
@@ -91,14 +91,14 @@ public class DealBidTests
     {
         // arrange
         var (deal, player1, player2, player3, player4) = GivenDealWithFourPlayers();
-        WithHighCardBid(deal, player1, FaceCard.Nine);
+        PlayHighCardBid(deal, player1, FaceCard.Nine);
         deal.Check(new(player2.Player));
 
         // assert
         Assert.Throws<InvalidOperationException>(() =>
         {
             // act
-            WithHighCardBid(deal, player3, FaceCard.Ten);
+            PlayHighCardBid(deal, player3, FaceCard.Ten);
         });
     }
 }
