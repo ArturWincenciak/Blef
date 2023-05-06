@@ -1,7 +1,8 @@
-﻿using Blef.Modules.Games.Domain.Repositories;
+﻿using Blef.Modules.Games.Application.Repositories;
+using Blef.Modules.Games.Domain.Events;
 using Blef.Shared.Abstractions.Events;
 
-namespace Blef.Modules.Games.Domain.Events.Handlers;
+namespace Blef.Modules.Games.Application.Events.Handlers;
 
 internal sealed class GameplayHandler :
     IDomainEventHandler<GamePlayerJoined>,
