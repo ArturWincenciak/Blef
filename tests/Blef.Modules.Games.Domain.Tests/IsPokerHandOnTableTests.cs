@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
-using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
+using Blef.Modules.Games.Domain.Model;
+using Blef.Modules.Games.Domain.Model.PokerHands;
 using static Blef.Modules.Games.Domain.Tests.Extensions.PokerHandFactory;
 
 namespace Blef.Modules.Games.Domain.Tests;

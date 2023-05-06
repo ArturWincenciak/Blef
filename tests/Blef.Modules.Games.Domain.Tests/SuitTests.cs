@@ -1,4 +1,4 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects.Cards;
+﻿using Blef.Modules.Games.Domain.Model;
 
 namespace Blef.Modules.Games.Domain.Tests;
 

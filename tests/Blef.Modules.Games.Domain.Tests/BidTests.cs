@@ -1,6 +1,5 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
-using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
+﻿using Blef.Modules.Games.Domain.Model;
+using Blef.Modules.Games.Domain.Model.PokerHands;
 
 namespace Blef.Modules.Games.Domain.Tests;
 

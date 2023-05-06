@@ -1,7 +1,5 @@
-﻿using Blef.Modules.Games.Domain.Entities;
-using Blef.Modules.Games.Domain.Events;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
+﻿using Blef.Modules.Games.Domain.Events;
+using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Events;
 using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.BidFactory;

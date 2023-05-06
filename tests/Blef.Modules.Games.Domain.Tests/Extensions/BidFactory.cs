@@ -1,7 +1,4 @@
-﻿using Blef.Modules.Games.Domain.Entities;
-using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
+﻿using Blef.Modules.Games.Domain.Model;
 using static Blef.Modules.Games.Domain.Tests.Extensions.PokerHandFactory;
 
 namespace Blef.Modules.Games.Domain.Tests.Extensions;

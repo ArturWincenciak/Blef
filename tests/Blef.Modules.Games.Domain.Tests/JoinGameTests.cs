@@ -1,7 +1,6 @@
 ﻿using Blef.Modules.Games.Domain.Events;
 using Blef.Modules.Games.Domain.Exceptions;
-using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
+using Blef.Modules.Games.Domain.Model;
 using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
 
 namespace Blef.Modules.Games.Domain.Tests;

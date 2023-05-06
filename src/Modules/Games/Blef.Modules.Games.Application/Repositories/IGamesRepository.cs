@@ -1,5 +1,4 @@
-﻿using Blef.Modules.Games.Domain.Entities;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
+﻿using Blef.Modules.Games.Domain.Model;
 
 namespace Blef.Modules.Games.Application.Repositories;
 

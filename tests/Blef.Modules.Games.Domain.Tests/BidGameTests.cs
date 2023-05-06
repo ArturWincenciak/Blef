@@ -1,8 +1,6 @@
-﻿using Blef.Modules.Games.Domain.Entities;
-using Blef.Modules.Games.Domain.Events;
-using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
-using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
+﻿using Blef.Modules.Games.Domain.Events;
+using Blef.Modules.Games.Domain.Model;
+using Blef.Modules.Games.Domain.Model.PokerHands;
 using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.PokerHandFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.BidFactory;

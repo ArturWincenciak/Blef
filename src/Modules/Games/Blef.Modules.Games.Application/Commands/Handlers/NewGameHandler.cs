@@ -1,5 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
-using Blef.Modules.Games.Domain.Entities;
+using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Services;
 using Blef.Shared.Abstractions.Commands;
 using JetBrains.Annotations;
