@@ -35,6 +35,9 @@ internal sealed class Gameplay
         };
     }
 
+    public void OnGameFinished(GamePlayer winner) =>
+        _winner = winner;
+
     public Game GetGameProjection() =>
         new(Status, GamePlayerEntries, Deals, _winner);
 
@@ -47,9 +50,6 @@ internal sealed class Gameplay
         var player = deal.Players.Single(player => player.Player == playerId);
         return player.Hand.Cards;
     }
-
-    public void OnGameFinished(GamePlayer winner) =>
-        _winner = winner;
 
     private IEnumerable<PlayerEntry> GamePlayerEntries =>
         _gamePlayers;
