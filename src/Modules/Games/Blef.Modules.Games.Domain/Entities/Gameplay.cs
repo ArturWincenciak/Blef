@@ -10,14 +10,14 @@ internal sealed class Gameplay
     public GameId Id { get; }
 
     private GamePlayer? _winner = null;
-    private readonly List<GamePlayer> _gamePlayers = new();
+    private readonly List<PlayerEntry> _gamePlayers = new();
     private readonly Dictionary<DealNumber, DealDetails> _deals = new();
 
     public Gameplay(GameId id) =>
         Id = id;
 
     public void OnPlayerJoined(GamePlayer gamePlayer) =>
-        _gamePlayers.Add(gamePlayer);
+        _gamePlayers.Add(new(gamePlayer, _gamePlayers.Count + 1));
 
     public void OnDealStarted(DealNumber dealNumber, IEnumerable<DealPlayer> dealPlayers) =>
         _deals.Add(dealNumber, new(dealPlayers, new()));
@@ -26,7 +26,8 @@ internal sealed class Gameplay
     {
         var deal = _deals[dealNumber];
         var bid = new Bid(pokerHand, playerId);
-        deal.Bids.Add(bid);
+        var order = deal.Bids.Count + 1;
+        deal.Bids.Add(new (order, bid));
     }
 
     public void OnCheckPlaced(DealNumber dealNumber, CheckingPlayer checkingPlayer, LooserPlayer looserPlayer)
@@ -54,7 +55,7 @@ internal sealed class Gameplay
         _winner = winner;
 
     private IEnumerable<PlayerEntry> GamePlayerEntries =>
-        _gamePlayers.Select((player, index) => new PlayerEntry(player, index + 1));
+        _gamePlayers;
 
     private IEnumerable<DealSummary> Deals =>
         _deals.Select(deal => new DealSummary(
@@ -99,8 +100,12 @@ internal sealed class Gameplay
 
     internal sealed record DealDetails(
         IEnumerable<DealPlayer> Players,
-        List<Bid> Bids,
+        List<BidRecord> Bids,
         DealResolution? DealResolution = null);
+
+    internal sealed record BidRecord(
+        int Order,
+        Bid Bid);
 
     public enum GameStatus
     {
