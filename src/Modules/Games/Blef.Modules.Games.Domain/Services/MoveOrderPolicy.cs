@@ -1,6 +1,5 @@
 ﻿using Blef.Modules.Games.Domain.Exceptions;
-using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
+using Blef.Modules.Games.Domain.Model;
 
 namespace Blef.Modules.Games.Domain.Services;
 

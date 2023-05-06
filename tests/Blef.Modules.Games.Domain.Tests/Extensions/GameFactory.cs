@@ -1,7 +1,6 @@
-﻿using Blef.Modules.Games.Domain.Entities;
+﻿using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Services;
 using Blef.Modules.Games.Domain.Tests.Mocks;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
 
 namespace Blef.Modules.Games.Domain.Tests.Extensions;
 

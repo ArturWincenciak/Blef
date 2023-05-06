@@ -1,7 +1,7 @@
 ﻿using Blef.Modules.Games.Api.Controllers.Games.Commands;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
+using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Mvc;

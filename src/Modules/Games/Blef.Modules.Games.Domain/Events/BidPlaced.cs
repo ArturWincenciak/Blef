@@ -1,5 +1,5 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects.Ids;
-using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
+﻿using Blef.Modules.Games.Domain.Model;
+using Blef.Modules.Games.Domain.Model.PokerHands;
 using Blef.Shared.Abstractions.Events;
 
 namespace Blef.Modules.Games.Domain.Events;

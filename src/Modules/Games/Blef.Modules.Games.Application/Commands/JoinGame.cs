@@ -1,5 +1,4 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects;
-using Blef.Modules.Games.Domain.ValueObjects.Ids;
+﻿using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Commands;
 using JetBrains.Annotations;
 

@@ -1,1 +1,1 @@
-﻿global using static Blef.Modules.Games.Domain.Rules;
+﻿global using static Blef.Modules.Games.Domain.Model.Rules;

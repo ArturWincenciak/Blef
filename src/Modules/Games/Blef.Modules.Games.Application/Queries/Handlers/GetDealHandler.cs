@@ -1,6 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
-using Blef.Modules.Games.Domain.Entities;
-using Blef.Modules.Games.Domain.ValueObjects;
+using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
 
@@ -32,7 +31,7 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
             PlayerId: player.Player.Id,
             Hand: Map(player.Hand.Cards)));
 
-    private static IEnumerable<GetDeal.Card> Map(IEnumerable<Domain.ValueObjects.Cards.Card> cards) =>
+    private static IEnumerable<GetDeal.Card> Map(IEnumerable<Card> cards) =>
         cards.Select(card => new GetDeal.Card(
             FaceCard: card.FaceCard.ToString(),
             Suit: card.Suit.ToString()));

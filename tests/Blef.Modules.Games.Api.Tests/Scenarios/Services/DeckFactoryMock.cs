@@ -1,5 +1,5 @@
-﻿using Blef.Modules.Games.Domain.Services;
-using Blef.Modules.Games.Domain.ValueObjects.Cards;
+﻿using Blef.Modules.Games.Domain.Model;
+using Blef.Modules.Games.Domain.Services;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.Services;
 
