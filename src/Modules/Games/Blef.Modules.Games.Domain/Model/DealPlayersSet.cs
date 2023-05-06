@@ -27,9 +27,6 @@ internal sealed class DealPlayersSet
 
     public Table Table => new(Players.Select(player => player.Hand));
 
-    public Hand GetHand(PlayerId playerId) =>
-        Players.Single(p => p.Player == playerId).Hand;
-
     private static bool AreAllPlayersUnique(IEnumerable<DealPlayer> players) =>
         players.Select(player => player.Player).Distinct().Count() == players.Count();
 
