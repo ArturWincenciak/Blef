@@ -23,13 +23,13 @@ public class ValidateGameInProgressOnMoveTests
         {
             // arrange
             var game = GivenGame();
-            var playerJoined1 = game.Join(new("Graham"));
-            var playerJoined2 = game.Join(new("Knuth"));
+            var grahamJoined = game.Join(new("Graham"));
+            var knuthJoined = game.Join(new("Knuth"));
             game.StartFirstDeal();
 
             // act
             var exception = Record.Exception(() =>
-                act(game, playerJoined1.Player.Id, playerJoined2.Player.Id));
+                act(game, grahamJoined.Player.Id, knuthJoined.Player.Id));
 
             // assert
             Assert.Null(exception);
@@ -64,14 +64,14 @@ public class ValidateGameInProgressOnMoveTests
         {
             // arrange
             var game = GivenGame();
-            var playerJoined1 = game.Join(new("Graham"));
-            var playerJoined2 = game.Join(new("Knuth"));
+            var grahamJoined = game.Join(new("Graham"));
+            var knuthJoined = game.Join(new("Knuth"));
             game.StartFirstDeal();
-            GameOver(game, playerJoined1.Player, playerJoined2.Player);
+            GameOver(game, grahamJoined.Player, knuthJoined.Player);
 
             // act, assert
             Assert.Throws<GameOverException>(() =>
-                act(game, playerJoined1.Player.Id, playerJoined2.Player.Id));
+                act(game, grahamJoined.Player.Id, knuthJoined.Player.Id));
 
             static void GameOver(Game game, GamePlayer gamePlayer1, GamePlayer gamePlayer2)
             {
