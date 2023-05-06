@@ -26,6 +26,13 @@ internal static class BidFactory
         deal.Bid(bid);
     }
 
+    public static void PlayPairBid(Game game, PlayerId byPlayer, FaceCard faceCard)
+    {
+        var pokerHand = GivenPair(faceCard);
+        var bid = new Bid(pokerHand, byPlayer);
+        game.Bid(bid);
+    }
+
     public static void PlayTwoPairsBid(Deal deal, DealPlayer byPlayer, FaceCard firstFaceCard, FaceCard secondFaceCard)
     {
         var pokerHand = GivenTwoPairsBid(firstFaceCard, secondFaceCard);
