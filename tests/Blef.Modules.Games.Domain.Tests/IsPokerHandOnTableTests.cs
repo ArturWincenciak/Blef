@@ -129,7 +129,7 @@ public class IsPokerHandOnTableTests
                             new Card(FaceCard.Ace, Suit.Hearts)
                         })
                     }),
-                    GivenTwoPairs(FaceCard.Nine, FaceCard.Ace)
+                    GivenTwoPairsBid(FaceCard.Nine, FaceCard.Ace)
                 },
                 new object[]
                 {
@@ -154,7 +154,7 @@ public class IsPokerHandOnTableTests
                             new Card(FaceCard.Nine, Suit.Spades)
                         })
                     }),
-                    GivenTwoPairs(FaceCard.King, FaceCard.Ten)
+                    GivenTwoPairsBid(FaceCard.King, FaceCard.Ten)
                 },
                 new object[]
                 {
@@ -165,7 +165,7 @@ public class IsPokerHandOnTableTests
                         new(new[] {new Card(FaceCard.Jack, Suit.Hearts)}),
                         new(new[] {new Card(FaceCard.Queen, Suit.Hearts)})
                     }),
-                    GivenTwoPairs(FaceCard.Jack, FaceCard.Queen)
+                    GivenTwoPairsBid(FaceCard.Jack, FaceCard.Queen)
                 },
                 new object[]
                 {
@@ -190,7 +190,7 @@ public class IsPokerHandOnTableTests
                             new Card(FaceCard.Ten, Suit.Hearts)
                         })
                     }),
-                    GivenTwoPairs(FaceCard.King, FaceCard.Ten)
+                    GivenTwoPairsBid(FaceCard.King, FaceCard.Ten)
                 }
             };
 
@@ -423,7 +423,7 @@ public class IsPokerHandOnTableTests
                 new object[]
                 {
                     GivenTopTableWithMaxPlayersWhoEachHaveMaxCards(),
-                    GivenTwoPairs(FaceCard.Ace, FaceCard.King)
+                    GivenTwoPairsBid(FaceCard.Ace, FaceCard.King)
                 },
                 new object[]
                 {
@@ -443,7 +443,7 @@ public class IsPokerHandOnTableTests
                 new object[]
                 {
                     GivenLowTableWithMaxPlayersWhoEachHaveMaxCards(),
-                    GivenTwoPairs(FaceCard.Nine, FaceCard.Ten)
+                    GivenTwoPairsBid(FaceCard.Nine, FaceCard.Ten)
                 },
                 new object[]
                 {

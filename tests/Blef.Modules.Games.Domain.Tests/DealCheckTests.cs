@@ -28,7 +28,7 @@ public class DealCheckTests
         // arrange
         var (deal, firstBiddingPlayer, secondCheckingPlayer, _, _) = GivenDeal();
         var existingOnTheTableBidHighCard = FaceCard.Nine;
-        WithHighCardBid(deal, firstBiddingPlayer, existingOnTheTableBidHighCard);
+        PlayHighCardBid(deal, firstBiddingPlayer, existingOnTheTableBidHighCard);
 
         // act
         var actualLoserPlayer = deal.Check(new(secondCheckingPlayer.Player));
@@ -44,7 +44,7 @@ public class DealCheckTests
         // arrange
         var (deal, firstBiddingPlayer, secondCheckingPlayer, _, _) = GivenDeal();
         var notExistingOnTheTableBidHighCard = FaceCard.Ace;
-        WithHighCardBid(deal, firstBiddingPlayer, notExistingOnTheTableBidHighCard);
+        PlayHighCardBid(deal, firstBiddingPlayer, notExistingOnTheTableBidHighCard);
 
         // act
         var actualLoserPlayer = deal.Check(new(secondCheckingPlayer.Player));
@@ -59,9 +59,9 @@ public class DealCheckTests
     {
         // arrange
         var (deal, firstBiddingPlayer, secondBiddingPlayer, thirdCheckingPlayer, _) = GivenDeal();
-        WithHighCardBid(deal, firstBiddingPlayer, FaceCard.Nine);
+        PlayHighCardBid(deal, firstBiddingPlayer, FaceCard.Nine);
         var existingOnTheTableBidHighCard = FaceCard.Ten;
-        WithHighCardBid(deal, secondBiddingPlayer, existingOnTheTableBidHighCard);
+        PlayHighCardBid(deal, secondBiddingPlayer, existingOnTheTableBidHighCard);
 
         // act
         var actualLoserPlayer = deal.Check(new(thirdCheckingPlayer.Player));
@@ -76,9 +76,9 @@ public class DealCheckTests
     {
         // arrange
         var (deal, firstBiddingPlayer, secondBiddingPlayer, thirdCheckingPlayer, _) = GivenDeal();
-        WithHighCardBid(deal, firstBiddingPlayer, FaceCard.Nine);
+        PlayHighCardBid(deal, firstBiddingPlayer, FaceCard.Nine);
         var notExistingOnTheTableBidHighCard = FaceCard.King;
-        WithHighCardBid(deal, secondBiddingPlayer, notExistingOnTheTableBidHighCard);
+        PlayHighCardBid(deal, secondBiddingPlayer, notExistingOnTheTableBidHighCard);
 
         // act
         var actualLoserPlayer = deal.Check(new(thirdCheckingPlayer.Player));
@@ -93,11 +93,11 @@ public class DealCheckTests
     {
         // arrange
         var (deal, firstCheckingPlayer, secondBiddingPlayer, thirdBiddingPlayer, fourthBiddingPlayer) = GivenDeal();
-        WithHighCardBid(deal, firstCheckingPlayer, FaceCard.Nine);
-        WithHighCardBid(deal, secondBiddingPlayer, FaceCard.Ten);
-        WithHighCardBid(deal, thirdBiddingPlayer, FaceCard.Jack);
+        PlayHighCardBid(deal, firstCheckingPlayer, FaceCard.Nine);
+        PlayHighCardBid(deal, secondBiddingPlayer, FaceCard.Ten);
+        PlayHighCardBid(deal, thirdBiddingPlayer, FaceCard.Jack);
         var existingOnTheTableBidHighCard = FaceCard.Queen;
-        WithHighCardBid(deal, fourthBiddingPlayer, existingOnTheTableBidHighCard);
+        PlayHighCardBid(deal, fourthBiddingPlayer, existingOnTheTableBidHighCard);
 
         // act
         var actualLoserPlayer = deal.Check(new(firstCheckingPlayer.Player));
@@ -112,11 +112,11 @@ public class DealCheckTests
     {
         // arrange
         var (deal, firstCheckingPlayer, secondBiddingPlayer, thirdBiddingPlayer, fourthBiddingPlayer) = GivenDeal();
-        WithHighCardBid(deal, firstCheckingPlayer, FaceCard.Nine);
-        WithHighCardBid(deal, secondBiddingPlayer, FaceCard.Ten);
-        WithHighCardBid(deal, thirdBiddingPlayer, FaceCard.Jack);
+        PlayHighCardBid(deal, firstCheckingPlayer, FaceCard.Nine);
+        PlayHighCardBid(deal, secondBiddingPlayer, FaceCard.Ten);
+        PlayHighCardBid(deal, thirdBiddingPlayer, FaceCard.Jack);
         var notExistingOnTheTableBidHighCard = FaceCard.Ace;
-        WithHighCardBid(deal, fourthBiddingPlayer, notExistingOnTheTableBidHighCard);
+        PlayHighCardBid(deal, fourthBiddingPlayer, notExistingOnTheTableBidHighCard);
 
         // act
         var actualLoserPlayer = deal.Check(new(firstCheckingPlayer.Player));
@@ -141,7 +141,7 @@ public class DealCheckTests
     {
         // arrange
         var (deal, firstBiddingPlayer, secondCheckingPlayer, thirdPlayer, _) = GivenDeal();
-        WithHighCardBid(deal, firstBiddingPlayer, FaceCard.Nine);
+        PlayHighCardBid(deal, firstBiddingPlayer, FaceCard.Nine);
         deal.Check(new(secondCheckingPlayer.Player));
 
         // assert
