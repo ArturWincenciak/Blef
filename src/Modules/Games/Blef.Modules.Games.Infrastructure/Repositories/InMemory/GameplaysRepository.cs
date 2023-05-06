@@ -6,11 +6,11 @@ namespace Blef.Modules.Games.Infrastructure.Repositories.InMemory;
 
 internal sealed class GameplaysRepository : IGameplaysRepository
 {
-    private readonly Dictionary<GameId, GameplayProjection> _gameplays = new();
+    private readonly Dictionary<GameId, Gameplay> _gameplays = new();
 
-    public void Add(GameplayProjection gameplayProjection) =>
-        _gameplays.Add(gameplayProjection.Id, gameplayProjection);
+    public void Add(Gameplay gameplay) =>
+        _gameplays.Add(gameplay.Id, gameplay);
 
-    public GameplayProjection Get(GameId gameId) =>
+    public Gameplay Get(GameId gameId) =>
         _gameplays[gameId];
 }
