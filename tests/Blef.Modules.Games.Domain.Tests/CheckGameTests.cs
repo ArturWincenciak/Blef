@@ -3,6 +3,7 @@ using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Events;
 using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.BidFactory;
+using static Blef.Modules.Games.Domain.Tests.Extensions.AssertExtension;
 
 namespace Blef.Modules.Games.Domain.Tests;
 
@@ -32,7 +33,7 @@ public class CheckGameTests
         var (game, firstPlayerJoined, secondPlayerJoined) = GivenGameWithTwoPlayersWithFirstDeal();
         var biddingPlayer = firstPlayerJoined.Player.Id;
         var checkingPlayer = secondPlayerJoined.Player.Id;
-        PlayTooHighPokerHand(game, biddingPlayer);
+        PlayNotExistingLowStraightBid(game, biddingPlayer);
 
         // act
         var actualEvents = game.Check(new(checkingPlayer));
@@ -72,7 +73,7 @@ public class CheckGameTests
         PlayExistingHighCardBid(game, firstPlayer);
         game.Check(new(secondPlayer));
         PlayExistingHighCardBid(game, firstPlayer);
-        PlayTooHighPokerHand(game, secondPlayer);
+        PlayNotExistingLowStraightBid(game, secondPlayer);
 
         // act
         var actualEvents = game.Check(new(firstPlayer));
@@ -80,29 +81,6 @@ public class CheckGameTests
         // assert
         AssertCheckPlaced(game.Id, new DealNumber(2), firstPlayer, secondPlayer, actualEvents);
         AssertDealStarted(game.Id, new DealNumber(3), new[] {firstPlayer, secondPlayer}, actualEvents);
-    }
-
-    private static void PlayExistingHighCardBid(Game game, PlayerId biddingPlayer) =>
-        PlayHighCardBid(game, biddingPlayer, FaceCard.Ace);
-
-    private static void PlayExistingPairBid(Game game, PlayerId biddingPlayer) =>
-        PlayPairBid(game, biddingPlayer, FaceCard.Ace);
-
-    private static void PlayTooHighPokerHand(Game game, PlayerId biddingPlayer) =>
-        PlayHighStraightBid(game, biddingPlayer);
-
-    private static void AssertCheckPlaced(
-        GameId expectedGameId,
-        DealNumber expectedDealNumber,
-        PlayerId expectedCheckingPlayer,
-        PlayerId expectedLooser,
-        IEnumerable<IDomainEvent> actual)
-    {
-        var checkPlaced = actual.Single(@event => @event is CheckPlaced) as CheckPlaced;
-        Assert.Equal(expectedGameId, checkPlaced!.Game);
-        Assert.Equal(expectedDealNumber, checkPlaced.Deal);
-        Assert.Equal(expectedCheckingPlayer, checkPlaced.CheckingPlayer.Player);
-        Assert.Equal(expectedLooser, checkPlaced.LooserPlayer.Player);
     }
 
     private static void AssertDealStarted(
@@ -118,18 +96,5 @@ public class CheckGameTests
         var nextDealPlayers = dealStarted.Players.Select(dealPlayer => dealPlayer.Player);
         foreach (var expectedNextDealPlayer in expectedNextDealPlayers)
             Assert.Contains(nextDealPlayers, player => player == expectedNextDealPlayer);
-    }
-
-    private static (
-        Game Game,
-        GamePlayerJoined FirstPlayerJoined,
-        GamePlayerJoined SecondPlayerJoined)
-        GivenGameWithTwoPlayersWithFirstDeal()
-    {
-        var game = GivenGame();
-        var firstPlayerJoined = game.Join(new("Graham"));
-        var secondPlayerJoined = game.Join(new("Knuth"));
-        game.StartFirstDeal();
-        return (game, firstPlayerJoined, secondPlayerJoined);
     }
 }
