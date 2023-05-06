@@ -67,4 +67,13 @@ internal static class BidFactory
         var bid = new Bid(pokerHand, byPlayer);
         game.Bid(bid);
     }
+
+    public static void PlayExistingHighCardBid(Game game, PlayerId byPlayer) =>
+        PlayHighCardBid(game, byPlayer, FaceCard.Ace);
+
+    public static void PlayExistingPairBid(Game game, PlayerId byPlayer) =>
+        PlayPairBid(game, byPlayer, FaceCard.Ace);
+
+    public static void PlayNotExistingLowStraightBid(Game game, PlayerId byPlayer) =>
+        PlayLowStraightBid(game, byPlayer);
 }

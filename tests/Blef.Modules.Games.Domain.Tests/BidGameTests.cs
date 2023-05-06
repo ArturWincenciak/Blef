@@ -48,19 +48,6 @@ public class BidGameTests
         }
     }
 
-    private static (
-        Game Game,
-        GamePlayerJoined FirstPlayerJoined,
-        GamePlayerJoined SecondPlayerJoined)
-        GivenGameWithTwoPlayersWithFirstDeal()
-    {
-        var game = GivenGame();
-        var grahamJoined = game.Join(new("Graham"));
-        var knuthJoined = game.Join(new("Knuth"));
-        game.StartFirstDeal();
-        return (game, grahamJoined, knuthJoined);
-    }
-
     private static void AssertBidPlaced(
         PokerHand expectedPokerHand,
         PlayerId expectedPlayer,
