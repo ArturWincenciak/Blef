@@ -23,7 +23,7 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
         return result;
     }
 
-    private static GetDeal.Result Map(GameplayProjection.DealDetails projection) =>
+    private static GetDeal.Result Map(Gameplay.DealDetails projection) =>
         new(Players: Map(projection.Players),
             Bids: Map(projection.Bids),
             DealResolution: Map(projection.DealResolution));
@@ -46,7 +46,7 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
                 PokerHand: bid.PokerHand.Serialize()))
             .OrderBy(bid => bid.Order);
 
-    private static GetDeal.DealResolution Map(GameplayProjection.DealResolution? dealResolution) =>
+    private static GetDeal.DealResolution Map(Gameplay.DealResolution? dealResolution) =>
         new(dealResolution?.CheckingPlayer.Player.Id ?? Guid.Empty,
             dealResolution?.Looser.Player.Id ?? Guid.Empty);
 }

@@ -5,7 +5,7 @@ using Blef.Modules.Games.Domain.ValueObjects.PokerHands;
 
 namespace Blef.Modules.Games.Domain.Entities;
 
-internal sealed class GameplayProjection
+internal sealed class Gameplay
 {
     public GameId Id { get; }
 
@@ -13,7 +13,7 @@ internal sealed class GameplayProjection
     private readonly List<GamePlayer> _gamePlayers = new();
     private readonly Dictionary<DealNumber, DealDetails> _deals = new();
 
-    public GameplayProjection(GameId id) =>
+    public Gameplay(GameId id) =>
         Id = id;
 
     public void OnPlayerJoined(GamePlayer gamePlayer) =>

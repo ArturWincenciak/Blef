@@ -24,27 +24,27 @@ internal sealed class GetGameHandler : IQueryHandler<GetGame, GetGame.Result>
         return result;
     }
 
-    private GetGame.Result Map(GameplayProjection.Game game) =>
+    private GetGame.Result Map(Gameplay.Game game) =>
         new(Map(game.Status),
             Map(game.GamePlayers),
             Map(game.Deals),
             Map(game.Winner));
 
-    private GetGame.GameStatus Map(GameplayProjection.GameStatus gameStatus) =>
+    private GetGame.GameStatus Map(Gameplay.GameStatus gameStatus) =>
         new(gameStatus.ToString());
 
-    private static IEnumerable<GetGame.Player> Map(IEnumerable<GameplayProjection.PlayerEntry> gamePlayers) =>
+    private static IEnumerable<GetGame.Player> Map(IEnumerable<Gameplay.PlayerEntry> gamePlayers) =>
         gamePlayers.Select(player => new GetGame.Player(
             player.Player.Id.Id, player.Player.Nick.Nick, player.JoiningOrder));
 
     private static IEnumerable<GetGame.Deal> Map(
-        IEnumerable<GameplayProjection.DealSummary> deals) =>
+        IEnumerable<Gameplay.DealSummary> deals) =>
         deals.Select(deal => new GetGame.Deal(
             Number: deal.Number.Number,
             State: deal.Status.ToString(),
             DealResolution: Map(deal.DealResolution)));
 
-    private static GetGame.DealResolution Map(GameplayProjection.DealResolution? dealResolution) =>
+    private static GetGame.DealResolution Map(Gameplay.DealResolution? dealResolution) =>
         new(dealResolution?.CheckingPlayer.Player.Id ?? Guid.Empty,
             dealResolution?.Looser.Player.Id ?? Guid.Empty);
 
