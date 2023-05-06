@@ -109,7 +109,8 @@
       Deals: [
         {
           Number: 1,
-          State: InProgress
+          State: InProgress,
+          DealResolution: {}
         }
       ],
       Winner: {}
@@ -150,7 +151,8 @@
             }
           ]
         }
-      ]
+      ],
+      DealResolution: {}
     }
   },
   {
@@ -279,12 +281,15 @@
         {
           Number: 1,
           State: Finished,
-          CheckingPlayerId: Guid_2,
-          LooserPlayerId: Guid_4
+          DealResolution: {
+            CheckingPlayerId: Guid_2,
+            LooserPlayerId: Guid_4
+          }
         },
         {
           Number: 2,
-          State: InProgress
+          State: InProgress,
+          DealResolution: {}
         }
       ],
       Winner: {}
@@ -343,8 +348,10 @@
           PokerHand: high-card:jack
         }
       ],
-      CheckingPlayerId: Guid_2,
-      LooserPlayerId: Guid_4
+      DealResolution: {
+        CheckingPlayerId: Guid_2,
+        LooserPlayerId: Guid_4
+      }
     }
   },
   {
@@ -386,7 +393,8 @@
             }
           ]
         }
-      ]
+      ],
+      DealResolution: {}
     }
   }
 ]

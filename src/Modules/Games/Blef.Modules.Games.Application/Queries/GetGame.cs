@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Domain.ValueObjects.Ids;
+﻿using Blef.Modules.Games.Domain.Entities;
+using Blef.Modules.Games.Domain.ValueObjects.Ids;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
 
@@ -16,7 +17,9 @@ public sealed record GetGame(GameId Game) : IQuery<GetGame.Result>
     [UsedImplicitly]
     public sealed record Player(Guid PlayerId, string Nick, int JoiningOrder);
 
-    public sealed record Deal(int Number, string State, Guid CheckingPlayerId, Guid LooserPlayerId);
+    public sealed record Deal(int Number, string State, DealResolution DealResolution);
+
+    public sealed record DealResolution(Guid CheckingPlayerId, Guid LooserPlayerId);
 
     public sealed record Winner(Guid PlayerId);
 

@@ -11,7 +11,7 @@ internal sealed class GameplayProjection
 
     private GamePlayer? _winner = null;
     private readonly List<GamePlayer> _gamePlayers = new();
-    private readonly Dictionary<DealNumber, DealProjection> _deals = new();
+    private readonly Dictionary<DealNumber, DealDetails> _deals = new();
 
     public GameplayProjection(GameId id) =>
         Id = id;
@@ -32,17 +32,15 @@ internal sealed class GameplayProjection
     public void OnCheckPlaced(DealNumber dealNumber, CheckingPlayer checkingPlayer, LooserPlayer looserPlayer)
     {
         var deal = _deals[dealNumber];
-        _deals[dealNumber] = deal with
-        {
-            CheckingPlayerId = checkingPlayer,
-            LooserPlayerId = looserPlayer
+        _deals[dealNumber] = deal with {
+            DealResolution = new (checkingPlayer, looserPlayer)
         };
     }
 
-    public GameProjection GetGameProjection() =>
-        new(Status, _gamePlayers.Select((player, index) => (player, index + 1)), Deals, _winner);
+    public Game GetGameProjection() =>
+        new(Status, GamePlayerEntries, Deals, _winner);
 
-    public DealProjection GetDealProjection(DealNumber dealNumber) =>
+    public DealDetails GetDealProjection(DealNumber dealNumber) =>
         _deals[dealNumber];
 
     public IEnumerable<Card> GetHand(DealNumber dealNumber, PlayerId playerId)
@@ -55,14 +53,16 @@ internal sealed class GameplayProjection
     public void OnGameFinished(GamePlayer winner) =>
         _winner = winner;
 
-    private IEnumerable<(DealNumber Number, DealStatus State, CheckingPlayer? CheckingPlayer, LooserPlayer? Looser)> Deals =>
-        _deals.Select(deal => (
+    private IEnumerable<PlayerEntry> GamePlayerEntries =>
+        _gamePlayers.Select((player, index) => new PlayerEntry(player, index + 1));
+
+    private IEnumerable<DealSummary> Deals =>
+        _deals.Select(deal => new DealSummary(
             Number: deal.Key,
-            State: deal.Value.LooserPlayerId is not null
+            Status: deal.Value.DealResolution is not null
                 ? DealStatus.Finished
                 : DealStatus.InProgress,
-            CheckingPlayer: deal.Value.CheckingPlayerId,
-            Looser: deal.Value.LooserPlayerId));
+            DealResolution: deal.Value.DealResolution));
 
     private GameStatus Status
     {
@@ -78,17 +78,29 @@ internal sealed class GameplayProjection
         }
     }
 
-    internal sealed record GameProjection(
+    internal sealed record Game(
         GameStatus Status,
-        IEnumerable<(GamePlayer Player, int JoiningOrder)> GamePlayers,
-        IEnumerable<(DealNumber Number, DealStatus State, CheckingPlayer? CheckingPlayer, LooserPlayer? Looser)> Deals,
+        IEnumerable<PlayerEntry> GamePlayers,
+        IEnumerable<DealSummary> Deals,
         GamePlayer? Winner);
 
-    internal sealed record DealProjection(
+    internal sealed record DealSummary(
+        DealNumber Number,
+        DealStatus Status,
+        DealResolution? DealResolution);
+
+    internal sealed record DealResolution(
+        CheckingPlayer CheckingPlayer,
+        LooserPlayer Looser);
+
+    internal sealed record PlayerEntry(
+        GamePlayer Player,
+        int JoiningOrder);
+
+    internal sealed record DealDetails(
         IEnumerable<DealPlayer> Players,
         List<Bid> Bids,
-        CheckingPlayer? CheckingPlayerId = null,
-        LooserPlayer? LooserPlayerId = null);
+        DealResolution? DealResolution = null);
 
     public enum GameStatus
     {
