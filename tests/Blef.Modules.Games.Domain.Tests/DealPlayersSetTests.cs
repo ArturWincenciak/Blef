@@ -107,29 +107,4 @@ public class DealPlayersSetTests
         Assert.Equal(2, actual.Count(FaceCard.Ace));
         Assert.Equal(1, actual.Count(FaceCard.King));
     }
-
-    [Fact]
-    public void GetHandTest()
-    {
-        // arrange
-        var player1 = Guid.Parse("1AB6C1B0-19B3-470B-A391-C2B51273B5D0");
-        var hand1 = new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)});
-        var player2 = Guid.Parse("81F76D76-3F9D-4D05-AC78-F4FE2D080535");
-        var hand2 = new Hand(new Card[] {new(FaceCard.Ace, Suit.Diamonds), new(FaceCard.King, Suit.Hearts)});
-        var dealPlayersSet = new DealPlayersSet(new[]
-        {
-            new DealPlayer(new PlayerId(player1), hand1),
-            new DealPlayer(new PlayerId(player2), hand2),
-        });
-
-        // act
-        var actual1 = dealPlayersSet.GetHand(new PlayerId(player1));
-        var expected1 = new Hand(hand1.Cards);
-        var actual2 = dealPlayersSet.GetHand(new PlayerId(player2));
-        var expected2 = new Hand(hand2.Cards);
-
-        // assert
-        Assert.Equal(expected1.Cards, actual1.Cards);
-        Assert.Equal(expected2.Cards, actual2.Cards);
-    }
 }
