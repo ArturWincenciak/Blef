@@ -102,51 +102,6 @@ internal sealed class Game
             .Select(player => new NextDealPlayer(player.Id, player.CardsAmount, player.JoiningSequence))
             .ToArray());
 
-    private int CalculateNextDealOrder(GamePlayer player)
-    {
-        if (_lastStartingPlayer is null)
-            return player.JoiningSequence;
-
-        return player.JoiningSequence;
-
-        /* todo:
-        var playerJoiningNumber = player.JoiningSequence;
-        var playerCount = _players.Count;
-        var lastStartingNumber = _lastStartingPlayer.JoiningSequence;
-
-        // first deal, last: null
-        // p1 -> j = 1, order = 1
-        // p2 -> j = 2, order = 2
-        // p3 -> j = 3, order = 3
-        // p4 -> j = 4, order = 4
-
-        // second deal, last: p1
-        // p1 -> j = 1, order = 4
-        // p2 -> j = 2, order = 1
-        // p3 -> j = 3, order = 2
-        // p4 -> j = 4, order = 3
-
-        // third deal, last: p2
-        // p1 -> j = 1, order = 3
-        // p2 -> j = 2, order = 4
-        // p3 -> j = 3, order = 1
-        // p4 -> j = 4, order = 2
-
-        // fourth deal, last: p3
-        // p1 -> j = 1, order = 2
-        // p2 -> j = 2, order = 3
-        // p3 -> j = 3, order = 4
-        // p4 -> j = 4, order = 1
-
-        // fifth deal, last: p4
-        // p1 -> j = 1, order = 1
-        // p2 -> j = 2, order = 2
-        // p3 -> j = 3, order = 3
-        // p4 -> j = 4, order = 4
-
-        */
-    }
-
     private bool IsGameStarted() =>
         _deals.Count > 0;
 
