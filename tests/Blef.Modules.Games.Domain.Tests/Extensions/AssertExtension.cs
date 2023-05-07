@@ -29,6 +29,7 @@ internal static class AssertExtension
         var dealStarted = actual.Single(@event => @event is DealStarted) as DealStarted;
         Assert.Equal(expectedGameId, dealStarted!.Game);
         Assert.Equal(expectedDealNumber, dealStarted.Deal);
+        Assert.Equal(expectedNextDealPlayers.Count(), dealStarted.Players.Count());
 
         var nextDealPlayers = dealStarted.Players.Select(dealPlayer => dealPlayer.Player);
         foreach (var expectedNextDealPlayer in expectedNextDealPlayers)
