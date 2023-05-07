@@ -99,7 +99,7 @@ internal sealed class Game
     private NextDealPlayersSet CreateNextDealPlayers() =>
         new (_players
             .Where(player => player.IsInTheGame)
-            .Select(player => new NextDealPlayer(player.Id, player.CardsAmount, player.JoiningSequence))
+            .Select((player, index) => new NextDealPlayer(player.Id, player.CardsAmount, index + 1))
             .ToArray());
 
     private bool IsGameStarted() =>
