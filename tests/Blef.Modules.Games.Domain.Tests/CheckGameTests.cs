@@ -1,6 +1,4 @@
-﻿using Blef.Modules.Games.Domain.Events;
-using Blef.Modules.Games.Domain.Model;
-using Blef.Shared.Abstractions.Events;
+﻿using Blef.Modules.Games.Domain.Model;
 using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.BidFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.AssertExtension;
@@ -10,7 +8,7 @@ namespace Blef.Modules.Games.Domain.Tests;
 public class CheckGameTests
 {
     [Fact]
-    public void Given_CheckInFirstDeal_SecondMoveBySecondPlayer_Then_CheckingPlayerLoses()
+    public void When_CheckInFirstDeal_Then_CheckingPlayerLoses()
     {
         // arrange
         var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
@@ -27,7 +25,7 @@ public class CheckGameTests
     }
 
     [Fact]
-    public void Given_CheckInFirstDeal_SecondMoveBySecondPlayer_Then_BiddingPlayerLoses()
+    public void When_CheckInFirstDeal_Then_BiddingPlayerLoses()
     {
         // arrange
         var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
@@ -44,7 +42,7 @@ public class CheckGameTests
     }
 
     [Fact]
-    public void Given_CheckInSecondDeal_ThirdMoveByFirstPlayer_Then_CheckingPlayerLoses()
+    public void When_CheckInSecondDeal_Then_CheckingPlayerLoses()
     {
         // arrange
         var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
@@ -52,19 +50,19 @@ public class CheckGameTests
         var secondPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, firstPlayer);
         game.Check(new(secondPlayer));
-        PlayExistingHighCardBid(game, firstPlayer);
-        PlayExistingPairBid(game, secondPlayer);
+        PlayExistingHighCardBid(game, secondPlayer);
+        PlayExistingPairBid(game, firstPlayer);
 
         // act
-        var actualEvents = game.Check(new(firstPlayer));
+        var actualEvents = game.Check(new(secondPlayer));
 
         // assert
-        AssertCheckPlaced(game.Id, new DealNumber(2), firstPlayer, firstPlayer, actualEvents);
+        AssertCheckPlaced(game.Id, new DealNumber(2), secondPlayer, secondPlayer, actualEvents);
         AssertDealStarted(game.Id, new DealNumber(3), new[] {firstPlayer, secondPlayer}, actualEvents);
     }
 
     [Fact]
-    public void Given_CheckInSecondDeal_ThirdMoveByFirstPlayer_Then_BiddingPlayerLoses()
+    public void When_CheckInSecondDeal_Then_BiddingPlayerLoses()
     {
         // arrange
         var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
@@ -72,14 +70,14 @@ public class CheckGameTests
         var secondPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, firstPlayer);
         game.Check(new(secondPlayer));
-        PlayExistingHighCardBid(game, firstPlayer);
-        PlayNotExistingLowStraightBid(game, secondPlayer);
+        PlayExistingHighCardBid(game, secondPlayer);
+        PlayNotExistingLowStraightBid(game, firstPlayer);
 
         // act
-        var actualEvents = game.Check(new(firstPlayer));
+        var actualEvents = game.Check(new(secondPlayer));
 
         // assert
-        AssertCheckPlaced(game.Id, new DealNumber(2), firstPlayer, secondPlayer, actualEvents);
+        AssertCheckPlaced(game.Id, new DealNumber(2), secondPlayer, firstPlayer, actualEvents);
         AssertDealStarted(game.Id, new DealNumber(3), new[] {firstPlayer, secondPlayer}, actualEvents);
     }
 }
