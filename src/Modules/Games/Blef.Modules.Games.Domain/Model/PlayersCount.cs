@@ -2,7 +2,7 @@
 
 internal sealed class PlayersCount
 {
-    public int Count { get; }
+    private readonly int _count;
 
     public static PlayersCount Create(int count)
     {
@@ -18,5 +18,11 @@ internal sealed class PlayersCount
     }
 
     private PlayersCount(int count) =>
-        Count = count;
+        _count = count;
+
+    public static int operator +(PlayersCount dealsCount, int value) =>
+        dealsCount._count + value;
+
+    public static implicit operator int(PlayersCount playersCount) =>
+        playersCount._count;
 }

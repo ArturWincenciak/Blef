@@ -2,7 +2,7 @@
 
 internal sealed class DealsCount
 {
-    public int Count { get; }
+    private readonly int _count;
 
     public static DealsCount Create(int count)
     {
@@ -14,5 +14,9 @@ internal sealed class DealsCount
     }
 
     private DealsCount(int count) =>
-        Count = count;
+        _count = count;
+
+    public static int operator %(DealsCount dealsCount, PlayersCount playersCount) =>
+        dealsCount._count % playersCount;
+
 }
