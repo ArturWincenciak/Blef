@@ -13,7 +13,7 @@ public class GameOverTests
     public void GameOverWithOneSurvivingPlayerTest()
     {
         // arrange
-        var (game, firstPlayerJoined, secondPlayerJoined) = GivenGameWithTwoPlayersWithFirstDeal();
+        var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
         game.Check(new(secondPlayerJoined.Player.Id));
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);

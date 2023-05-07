@@ -13,7 +13,7 @@ public class CheckGameTests
     public void Given_CheckInFirstDeal_SecondMoveBySecondPlayer_Then_CheckingPlayerLoses()
     {
         // arrange
-        var (game, firstPlayerJoined, secondPlayerJoined) = GivenGameWithTwoPlayersWithFirstDeal();
+        var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
         var biddingPlayer = firstPlayerJoined.Player.Id;
         var checkingPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, biddingPlayer);
@@ -30,7 +30,7 @@ public class CheckGameTests
     public void Given_CheckInFirstDeal_SecondMoveBySecondPlayer_Then_BiddingPlayerLoses()
     {
         // arrange
-        var (game, firstPlayerJoined, secondPlayerJoined) = GivenGameWithTwoPlayersWithFirstDeal();
+        var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
         var biddingPlayer = firstPlayerJoined.Player.Id;
         var checkingPlayer = secondPlayerJoined.Player.Id;
         PlayNotExistingLowStraightBid(game, biddingPlayer);
@@ -47,7 +47,7 @@ public class CheckGameTests
     public void Given_CheckInSecondDeal_ThirdMoveByFirstPlayer_Then_CheckingPlayerLoses()
     {
         // arrange
-        var (game, firstPlayerJoined, secondPlayerJoined) = GivenGameWithTwoPlayersWithFirstDeal();
+        var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
         var firstPlayer = firstPlayerJoined.Player.Id;
         var secondPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, firstPlayer);
@@ -67,7 +67,7 @@ public class CheckGameTests
     public void Given_CheckInSecondDeal_ThirdMoveByFirstPlayer_Then_BiddingPlayerLoses()
     {
         // arrange
-        var (game, firstPlayerJoined, secondPlayerJoined) = GivenGameWithTwoPlayersWithFirstDeal();
+        var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
         var firstPlayer = firstPlayerJoined.Player.Id;
         var secondPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, firstPlayer);

@@ -19,7 +19,7 @@ internal static class GameFactory
         Game Game,
         GamePlayerJoined FirstPlayerJoined,
         GamePlayerJoined SecondPlayerJoined)
-        GivenGameWithTwoPlayersWithFirstDeal()
+        GivenStartedGameWithTwoPlayers()
     {
         var game = GivenGame();
         var grahamJoined = game.Join(new("Graham"));
