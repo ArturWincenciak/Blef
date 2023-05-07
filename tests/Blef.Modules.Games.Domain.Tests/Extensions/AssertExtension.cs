@@ -19,4 +19,19 @@ internal static class AssertExtension
         Assert.Equal(expectedCheckingPlayer, checkPlaced.CheckingPlayer.Player);
         Assert.Equal(expectedLooser, checkPlaced.LooserPlayer.Player);
     }
+
+    public static void AssertDealStarted(
+        GameId expectedGameId,
+        DealNumber expectedDealNumber,
+        IEnumerable<PlayerId> expectedNextDealPlayers,
+        IEnumerable<IDomainEvent> actual)
+    {
+        var dealStarted = actual.Single(@event => @event is DealStarted) as DealStarted;
+        Assert.Equal(expectedGameId, dealStarted!.Game);
+        Assert.Equal(expectedDealNumber, dealStarted.Deal);
+
+        var nextDealPlayers = dealStarted.Players.Select(dealPlayer => dealPlayer.Player);
+        foreach (var expectedNextDealPlayer in expectedNextDealPlayers)
+            Assert.Contains(nextDealPlayers, player => player == expectedNextDealPlayer);
+    }
 }
