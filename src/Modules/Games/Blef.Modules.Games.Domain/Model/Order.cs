@@ -12,11 +12,11 @@ internal sealed record Order : IComparable<Order>
     private Order(int sequence)
     {
         if (sequence < 1)
-            throw new ArgumentOutOfRangeException(nameof(sequence),
+            throw new ArgumentOutOfRangeException(nameof(sequence), sequence,
                 "Sequence cannot be less then one");
 
         if (sequence > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(nameof(sequence),
+            throw new ArgumentOutOfRangeException(nameof(sequence), sequence,
                 "Sequence cannot be greater then max number of players equals four");
 
         _sequence = sequence;

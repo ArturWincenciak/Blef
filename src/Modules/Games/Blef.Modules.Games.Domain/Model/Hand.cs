@@ -12,10 +12,12 @@ internal sealed class Hand
             throw new ArgumentNullException(nameof(cards));
 
         if (cards.Any() == false)
-            throw new ArgumentOutOfRangeException(nameof(cards), "Hand without at least one card is not valid");
+            throw new ArgumentOutOfRangeException(nameof(cards), cards.Count(),
+                "Hand without at least one card is not valid");
 
         if(cards.Count() > MAX_CARD_AMOUNT)
-            throw new ArgumentOutOfRangeException(nameof(cards), "Hand with more then five cards is not valid");
+            throw new ArgumentOutOfRangeException(nameof(cards), cards.Count(),
+                "Hand with more then five cards is not valid");
 
         if (AreAllCardsUnique(cards) == false)
             throw new ArgumentException("No card duplicates are allowed in the players' hands");
