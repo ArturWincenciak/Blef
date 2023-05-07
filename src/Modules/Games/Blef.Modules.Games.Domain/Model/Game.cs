@@ -99,37 +99,23 @@ internal sealed class Game
     private NextDealPlayersSet CreateNextDealPlayers()
     {
         var inGamePlayers = _players
-            .Where(player => player.IsInTheGame)
-            .Select((player, index) => new NextDealPlayer(player.Id, player.CardsAmount, index + 1));
+            .Where(player => player.IsInTheGame);
 
         var playersAmount = inGamePlayers.Count();
+        var orderPhysic = new DealOrderPhysic(playersAmount);
+        var alreadyDealPlayedAmount = _deals.Count;
+        orderPhysic.Move(alreadyDealPlayedAmount);
 
-        var nextPlayers = new List<NextDealPlayer>();
-
-        if (_deals.Count == 0)
-        {
-            foreach (var inGamePlayer in inGamePlayers)
-                nextPlayers.Add(inGamePlayer);
-        }
-
-        if (_deals.Count == 1)
-        {
-            foreach (var inGamePlayer in inGamePlayers)
+        var nextDealPlayers = inGamePlayers
+            .OrderBy(inGamePlayer => inGamePlayer.JoiningSequence)
+            .Select((inGamePlayer, index) =>
             {
-                if (inGamePlayer.Order == 1)
-                {
-                    var nextPlayer = inGamePlayer with {Order = playersAmount};
-                    nextPlayers.Add(nextPlayer);
-                }
-                else
-                {
-                    var nextPlayer = inGamePlayer with {Order = inGamePlayer.Order - 1};
-                    nextPlayers.Add(nextPlayer);
-                }
-            }
-        }
+                var sequence = index + 1;
+                var nextOrder = orderPhysic.GetOrder(sequence);
+                return new NextDealPlayer(inGamePlayer.Id, inGamePlayer.CardsAmount, nextOrder);
+            });
 
-        return new(nextPlayers);
+        return new(nextDealPlayers);
     }
 
     private bool IsGameStarted() =>
