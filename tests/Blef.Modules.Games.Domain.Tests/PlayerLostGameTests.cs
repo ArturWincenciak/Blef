@@ -2,25 +2,39 @@
 using static Blef.Modules.Games.Domain.Tests.Extensions.AssertExtension;
 using static Blef.Modules.Games.Domain.Tests.Extensions.BidFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
-using static Blef.Modules.Games.Domain.Tests.Extensions.PokerHandFactory;
 
 namespace Blef.Modules.Games.Domain.Tests;
 
-public class LooserTests
+public class PlayerLostGameTests
 {
     [Fact]
     public void Given_GameWithThreePlayers_When_Check_Then_FirstPlayerLostTest()
     {
         // arrange
         var (game, grahamJoined, knuthJoined, planckJoined) = GivenStartedGameWithThreePlayers();
+
+        // first deal lost by graham
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
         game.Check(new(knuthJoined.Player.Id));
+
+        // second deal lost by graham
+        PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
+        PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
         game.Check(new(knuthJoined.Player.Id));
+
+        // third deal lost by graham
+        PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
         game.Check(new(knuthJoined.Player.Id));
+
+        // fourth deal lost by graham
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
         game.Check(new(knuthJoined.Player.Id));
+
+        // fifth deal lost by graham
+        PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
+        PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
 
         // act
@@ -39,19 +53,31 @@ public class LooserTests
     {
         // arrange
         var (game, grahamJoined, knuthJoined, planckJoined) = GivenStartedGameWithThreePlayers();
-        PlayExistingHighCardBid(game, grahamJoined.Player.Id);
+
+        // first deal lost by knuth
+        PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
         game.Check(new(planckJoined.Player.Id));
-        PlayExistingHighCardBid(game, grahamJoined.Player.Id);
+
+        // second deal lost by knuth
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
         game.Check(new(planckJoined.Player.Id));
-        PlayExistingHighCardBid(game, grahamJoined.Player.Id);
+
+        // third deal lost by knuth
+        PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Nine);
+        PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
         game.Check(new(planckJoined.Player.Id));
-        PlayExistingHighCardBid(game, grahamJoined.Player.Id);
+
+        // fourth deal lost by knuth
+        PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
         game.Check(new(planckJoined.Player.Id));
-        PlayExistingHighCardBid(game, grahamJoined.Player.Id);
+
+        // fifth deal lost by knuth
+        PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
+        PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Ten);
+        PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Jack);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
 
         // act
@@ -70,28 +96,30 @@ public class LooserTests
     {
         // arrange
         var (game, grahamJoined, knuthJoined, planckJoined) = GivenStartedGameWithThreePlayers();
-        PlayExistingHighCardBid(game, grahamJoined.Player.Id);
-        PlayExistingPairBid(game, knuthJoined.Player.Id);
+
+        // first deal lost by planck
+        PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
+        PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, planckJoined.Player.Id);
         game.Check(new(grahamJoined.Player.Id));
 
-        PlayExistingHighCardBid(game, grahamJoined.Player.Id);
-        PlayExistingPairBid(game, knuthJoined.Player.Id);
+        // second deal lost by planck
+        PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, planckJoined.Player.Id);
         game.Check(new(grahamJoined.Player.Id));
 
-        PlayExistingHighCardBid(game, grahamJoined.Player.Id);
-        PlayExistingPairBid(game, knuthJoined.Player.Id);
+        // third deal lost by planck
         PlayNotExistingLowStraightBid(game, planckJoined.Player.Id);
         game.Check(new(grahamJoined.Player.Id));
 
-        PlayExistingHighCardBid(game, grahamJoined.Player.Id);
-        PlayExistingPairBid(game, knuthJoined.Player.Id);
+        // fourth deal lost by planck
+        PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
+        PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, planckJoined.Player.Id);
         game.Check(new(grahamJoined.Player.Id));
 
-        PlayExistingHighCardBid(game, grahamJoined.Player.Id);
-        PlayExistingPairBid(game, knuthJoined.Player.Id);
+        // fifth deal lost by planck
+        PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, planckJoined.Player.Id);
 
         // act
