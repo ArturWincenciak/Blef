@@ -78,4 +78,8 @@ public class DealOrderPhysicTests
         Assert.Equal(Order.Create(3), orderPhysic.ShiftedOrder(Order.Create(3)));
         Assert.Equal(Order.Create(4), orderPhysic.ShiftedOrder(Order.Create(4)));
     }
+
+    // todo: test with more deals count
+    // todo: test with two players
+    // todo: test with three players
 }
