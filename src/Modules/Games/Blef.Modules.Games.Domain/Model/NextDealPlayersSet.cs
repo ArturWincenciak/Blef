@@ -10,10 +10,12 @@ internal sealed class NextDealPlayersSet
             throw new ArgumentNullException(nameof(players));
 
         if (players.Count() < MIN_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(nameof(players), "Next deal should have at least two players");
+            throw new ArgumentOutOfRangeException(nameof(players), players.Count(),
+                "Next deal should have at least two players");
 
         if (players.Count() > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(nameof(players), "Next deal cannot contain more than four players");
+            throw new ArgumentOutOfRangeException(nameof(players), players.Count(),
+                "Next deal cannot contain more than four players");
 
         if (AreAllPlayersUnique(players) == false)
             throw new ArgumentException("No player duplicates are allowed");

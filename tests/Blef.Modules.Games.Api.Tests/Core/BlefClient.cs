@@ -70,7 +70,8 @@ internal sealed class BlefClient
             WhichPlayer.Graham => _grahamPlayerId,
             WhichPlayer.Riemann => _riemannPlayerId,
             WhichPlayer.Conway => _conwayPlayerId,
-            _ => throw new ArgumentOutOfRangeException(nameof(whichPlayer))
+            _ => throw new ArgumentOutOfRangeException(nameof(whichPlayer), whichPlayer,
+                "TBD") // todo: exception
         };
 
     private void SetPlayerId(WhichPlayer whichPlayer, PlayerId playerId)
@@ -84,6 +85,7 @@ internal sealed class BlefClient
         else if (whichPlayer == WhichPlayer.Conway)
             _conwayPlayerId = playerId;
         else
-            throw new ArgumentOutOfRangeException(nameof(whichPlayer));
+            throw new ArgumentOutOfRangeException(nameof(whichPlayer), whichPlayer,
+                "TBD"); // todo: exception
     }
 }

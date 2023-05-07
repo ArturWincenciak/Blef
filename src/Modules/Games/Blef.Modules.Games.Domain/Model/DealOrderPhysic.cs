@@ -2,39 +2,27 @@
 
 internal sealed class DealOrderPhysic
 {
-    private readonly int _playersCount;
-    private int shift;
+    private readonly PlayersCount _playersCount;
+    private int _shift;
 
-    public static DealOrderPhysic Create(int playersCount, int dealsPlayedCount)
+    public static DealOrderPhysic Create(PlayersCount playersCount, DealsCount dealsPlayedCount)
     {
-        if (playersCount < MIN_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(nameof(playersCount), playersCount,
-                "TBD"); // todo: exception
-
-        if (playersCount > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(nameof(playersCount), playersCount,
-                "TBD"); // todo: exception
-
-        if (dealsPlayedCount < 0)
-            throw new ArgumentOutOfRangeException(nameof(dealsPlayedCount),
-                "TOB"); // todo: exception
-
         var orderPhysic = new DealOrderPhysic(playersCount);
         orderPhysic.Move(dealsPlayedCount);
         return orderPhysic;
     }
 
-    public Order Order(Order sequenceIndex)
+    public Order ShiftedOrder(Order sequenceIndex)
     {
-        if (sequenceIndex - shift <= 0)
-            return Model.Order.Create(_playersCount + (sequenceIndex - shift));
+        if (sequenceIndex - _shift <= 0)
+            return Order.Create(_playersCount.Count + (sequenceIndex - _shift));
 
-        return Model.Order.Create(sequenceIndex - shift);
+        return Order.Create(sequenceIndex - _shift);
     }
 
-    private DealOrderPhysic(int playersCount) =>
+    private DealOrderPhysic(PlayersCount playersCount) =>
         _playersCount = playersCount;
 
-    private void Move(int sequenceShift) =>
-        shift = sequenceShift % _playersCount;
+    private void Move(DealsCount sequenceShift) =>
+        _shift = sequenceShift.Count % _playersCount.Count;
 }
