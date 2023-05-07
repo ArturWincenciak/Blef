@@ -32,14 +32,14 @@ public class BidGameTests
         var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
         PlayFirstDeal(game, firstPlayerJoined.Player.Id, secondPlayerJoined.Player.Id);
         var pokerHand = GivenHighStraight();
-        var bid = new Bid(pokerHand, firstPlayerJoined.Player.Id);
+        var bid = new Bid(pokerHand, secondPlayerJoined.Player.Id);
 
         // act
         var actualBidPlaced = game.Bid(bid);
 
         // assert
         var expectedDealNumber = new DealNumber(2);
-        AssertBidPlaced(pokerHand, firstPlayerJoined.Player.Id, game.Id, expectedDealNumber, actualBidPlaced);
+        AssertBidPlaced(pokerHand, secondPlayerJoined.Player.Id, game.Id, expectedDealNumber, actualBidPlaced);
 
         static void PlayFirstDeal(Game game, PlayerId biddingPlayer, PlayerId checkingPlayer)
         {
