@@ -24,4 +24,7 @@ internal sealed record Order : IComparable<Order>
 
     public int CompareTo(Order other) =>
         _sequence.CompareTo(other._sequence);
+
+    public static int operator-(Order order, int value) =>
+        order._sequence - value;
 }

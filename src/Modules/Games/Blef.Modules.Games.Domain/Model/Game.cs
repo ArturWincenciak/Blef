@@ -102,16 +102,15 @@ internal sealed class Game
             .Where(player => player.IsInTheGame);
 
         var playersAmount = inGamePlayers.Count();
-        var orderPhysic = new DealOrderPhysic(playersAmount);
-        var alreadyDealPlayedAmount = _deals.Count;
-        orderPhysic.Move(alreadyDealPlayedAmount);
+        var alreadyDealPlayedCount = _deals.Count;
+        var orderPhysic = DealOrderPhysic.Create(playersAmount, alreadyDealPlayedCount);
 
         var nextDealPlayers = inGamePlayers
             .OrderBy(inGamePlayer => inGamePlayer.JoiningSequence)
             .Select((inGamePlayer, index) =>
             {
-                var sequence = index + 1;
-                var nextOrder = orderPhysic.GetOrder(sequence);
+                var sequenceIndex = Order.Create(index + 1);
+                var nextOrder = orderPhysic.Order(sequenceIndex);
                 return new NextDealPlayer(inGamePlayer.Id, inGamePlayer.CardsAmount, nextOrder);
             });
 
