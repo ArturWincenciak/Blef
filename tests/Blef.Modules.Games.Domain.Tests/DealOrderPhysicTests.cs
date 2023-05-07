@@ -5,7 +5,7 @@ namespace Blef.Modules.Games.Domain.Tests;
 public class DealOrderPhysicTests
 {
     [Fact]
-    public void Test1()
+    public void Given_PlayerCount_Four_And_SequenceShift_Zero_Then_GetOrder()
     {
         // arrange
         var orderPhysic = new DealOrderPhysic(4);
@@ -18,7 +18,7 @@ public class DealOrderPhysicTests
     }
 
     [Fact]
-    public void Test2()
+    public void Given_PlayerCount_Four_And_SequenceShift_One_Then_GetOrder()
     {
         // arrange
         var orderPhysic = new DealOrderPhysic(4);
@@ -32,11 +32,11 @@ public class DealOrderPhysicTests
     }
 
     [Fact]
-    public void Test3()
+    public void Given_PlayerCount_Four_And_SequenceShift_Two_Then_GetOrder()
     {
         // arrange
-        var orderPhysic = new DealOrderPhysic(4);
-        orderPhysic.Move(2);
+        var orderPhysic = new DealOrderPhysic(playersCount: 4);
+        orderPhysic.Move(sequenceShift: 2);
 
         // act, assert
         Assert.Equal(3, orderPhysic.GetOrder(1));
@@ -46,7 +46,7 @@ public class DealOrderPhysicTests
     }
 
     [Fact]
-    public void Test4()
+    public void Given_PlayerCount_Four_And_SequenceShift_Three_Then_GetOrder()
     {
         // arrange
         var orderPhysic = new DealOrderPhysic(4);
@@ -60,7 +60,7 @@ public class DealOrderPhysicTests
     }
 
     [Fact]
-    public void Test5()
+    public void Given_PlayerCount_Four_And_SequenceShift_Four_Then_GetOrder()
     {
         // arrange
         var orderPhysic = new DealOrderPhysic(4);
