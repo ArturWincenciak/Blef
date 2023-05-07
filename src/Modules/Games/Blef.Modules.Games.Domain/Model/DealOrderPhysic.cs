@@ -8,12 +8,12 @@ internal sealed class DealOrderPhysic
     public DealOrderPhysic(int playersCount) =>
         _playersCount = playersCount;
 
-    public int GetOrder(int baseSequence)
+    public Order GetOrder(int baseSequence)
     {
         if (baseSequence - shift <= 0)
-            return _playersCount + (baseSequence - shift);
+            return Order.Create(_playersCount + (baseSequence - shift));
 
-        return baseSequence - shift;
+        return Order.Create(baseSequence - shift);
     }
 
     public void Move(int sequenceShift) =>

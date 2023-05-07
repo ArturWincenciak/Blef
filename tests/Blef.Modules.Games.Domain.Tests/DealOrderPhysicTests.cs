@@ -11,10 +11,10 @@ public class DealOrderPhysicTests
         var orderPhysic = new DealOrderPhysic(4);
 
         // act, assert
-        Assert.Equal(1, orderPhysic.GetOrder(1));
-        Assert.Equal(2, orderPhysic.GetOrder(2));
-        Assert.Equal(3, orderPhysic.GetOrder(3));
-        Assert.Equal(4, orderPhysic.GetOrder(4));
+        Assert.Equal(Order.Create(1), orderPhysic.GetOrder(1));
+        Assert.Equal(Order.Create(2), orderPhysic.GetOrder(2));
+        Assert.Equal(Order.Create(3), orderPhysic.GetOrder(3));
+        Assert.Equal(Order.Create(4), orderPhysic.GetOrder(4));
     }
 
     [Fact]
@@ -25,10 +25,10 @@ public class DealOrderPhysicTests
         orderPhysic.Move(1);
 
         // act, assert
-        Assert.Equal(4, orderPhysic.GetOrder(1));
-        Assert.Equal(1, orderPhysic.GetOrder(2));
-        Assert.Equal(2, orderPhysic.GetOrder(3));
-        Assert.Equal(3, orderPhysic.GetOrder(4));
+        Assert.Equal(Order.Create(4), orderPhysic.GetOrder(1));
+        Assert.Equal(Order.Create(1), orderPhysic.GetOrder(2));
+        Assert.Equal(Order.Create(2), orderPhysic.GetOrder(3));
+        Assert.Equal(Order.Create(3), orderPhysic.GetOrder(4));
     }
 
     [Fact]
@@ -39,10 +39,10 @@ public class DealOrderPhysicTests
         orderPhysic.Move(sequenceShift: 2);
 
         // act, assert
-        Assert.Equal(3, orderPhysic.GetOrder(1));
-        Assert.Equal(4, orderPhysic.GetOrder(2));
-        Assert.Equal(1, orderPhysic.GetOrder(3));
-        Assert.Equal(2, orderPhysic.GetOrder(4));
+        Assert.Equal(Order.Create(3), orderPhysic.GetOrder(1));
+        Assert.Equal(Order.Create(4), orderPhysic.GetOrder(2));
+        Assert.Equal(Order.Create(1), orderPhysic.GetOrder(3));
+        Assert.Equal(Order.Create(2), orderPhysic.GetOrder(4));
     }
 
     [Fact]
@@ -53,10 +53,10 @@ public class DealOrderPhysicTests
         orderPhysic.Move(3);
 
         // act, assert
-        Assert.Equal(2, orderPhysic.GetOrder(1));
-        Assert.Equal(3, orderPhysic.GetOrder(2));
-        Assert.Equal(4, orderPhysic.GetOrder(3));
-        Assert.Equal(1, orderPhysic.GetOrder(4));
+        Assert.Equal(Order.Create(2), orderPhysic.GetOrder(1));
+        Assert.Equal(Order.Create(3), orderPhysic.GetOrder(2));
+        Assert.Equal(Order.Create(4), orderPhysic.GetOrder(3));
+        Assert.Equal(Order.Create(1), orderPhysic.GetOrder(4));
     }
 
     [Fact]
@@ -67,9 +67,9 @@ public class DealOrderPhysicTests
         orderPhysic.Move(4);
 
         // act, assert
-        Assert.Equal(1, orderPhysic.GetOrder(1));
-        Assert.Equal(2, orderPhysic.GetOrder(2));
-        Assert.Equal(3, orderPhysic.GetOrder(3));
-        Assert.Equal(4, orderPhysic.GetOrder(4));
+        Assert.Equal(Order.Create(1), orderPhysic.GetOrder(1));
+        Assert.Equal(Order.Create(2), orderPhysic.GetOrder(2));
+        Assert.Equal(Order.Create(3), orderPhysic.GetOrder(3));
+        Assert.Equal(Order.Create(4), orderPhysic.GetOrder(4));
     }
 }

@@ -27,8 +27,8 @@ public class CroupierTests
         var dealSet = croupier.Deal(
             new(new NextDealPlayer[]
             {
-                new(new PlayerId(playerId_1), CardsAmount.Initial, 1),
-                new(new PlayerId(playerId_2), CardsAmount.Initial, 2),
+                new(new PlayerId(playerId_1), CardsAmount.Initial, Order.Create(1)),
+                new(new PlayerId(playerId_2), CardsAmount.Initial, Order.Create(2)),
             }));
         var hand_1 = GetHand(dealSet, new(playerId_1));
         var hand_2 = GetHand(dealSet, new(playerId_2));
@@ -52,9 +52,9 @@ public class CroupierTests
         var dealSet = croupier.Deal(
             new(new NextDealPlayer[]
             {
-                new(new PlayerId(playerId_1), CardsAmount.Initial, 1),
-                new(new PlayerId(playerId_2), CardsAmount.Max, 2),
-                new(new PlayerId(playerId_3), CardsAmount.Initial.AddOneCard().AddOneCard(), 3)
+                new(new PlayerId(playerId_1), CardsAmount.Initial, Order.Create(1)),
+                new(new PlayerId(playerId_2), CardsAmount.Max, Order.Create(2)),
+                new(new PlayerId(playerId_3), CardsAmount.Initial.AddOneCard().AddOneCard(), Order.Create(3))
             }));
         var hand_1 = GetHand(dealSet, new PlayerId(playerId_1));
         var hand_2 = GetHand(dealSet, new PlayerId(playerId_2));
@@ -81,10 +81,10 @@ public class CroupierTests
         var dealSet = croupier.Deal(
             new(new NextDealPlayer[]
             {
-                new(new PlayerId(playerId_1), CardsAmount.Max, 1),
-                new(new PlayerId(playerId_2), CardsAmount.Max, 2),
-                new(new PlayerId(playerId_3), CardsAmount.Max, 3),
-                new(new PlayerId(playerId_4), CardsAmount.Max, 4),
+                new(new PlayerId(playerId_1), CardsAmount.Max, Order.Create(1)),
+                new(new PlayerId(playerId_2), CardsAmount.Max, Order.Create(2)),
+                new(new PlayerId(playerId_3), CardsAmount.Max, Order.Create(3)),
+                new(new PlayerId(playerId_4), CardsAmount.Max, Order.Create(4)),
             }));
         var hand_1 = GetHand(dealSet, new PlayerId(playerId_1));
         var hand_2 = GetHand(dealSet, new PlayerId(playerId_2));
