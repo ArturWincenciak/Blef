@@ -2,6 +2,7 @@
 using static Blef.Modules.Games.Domain.Tests.Extensions.AssertExtension;
 using static Blef.Modules.Games.Domain.Tests.Extensions.BidFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
+using static Blef.Modules.Games.Domain.Tests.Extensions.PokerHandFactory;
 
 namespace Blef.Modules.Games.Domain.Tests;
 
