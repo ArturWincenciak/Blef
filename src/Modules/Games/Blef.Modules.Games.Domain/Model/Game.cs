@@ -32,7 +32,7 @@ internal sealed class Game
         if (_players.Exists(player => player.Nick == nick))
             throw new PlayerAlreadyJoinedException(Id, nick);
 
-        var joiningSequence = _players.Count + 1;
+        var joiningSequence = Order.Create(_players.Count + 1);
         var player = GamePlayer.Create(nick, joiningSequence);
         _players.Add(player);
 

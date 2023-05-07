@@ -6,10 +6,10 @@ internal sealed class GamePlayer
     public PlayerId Id { get; }
     public PlayerNick Nick { get; }
     public CardsAmount CardsAmount { get; private set; }
-    public int JoiningSequence { get; }
+    public Order JoiningSequence { get; }
     public bool IsInTheGame => !_isOutOfTheGame;
 
-    private GamePlayer(PlayerId playerId, PlayerNick nick, CardsAmount cardsAmount, int joiningSequence)
+    private GamePlayer(PlayerId playerId, PlayerNick nick, CardsAmount cardsAmount, Order joiningSequence)
     {
         Id = playerId ?? throw new ArgumentNullException(nameof(playerId));
         Nick = nick ?? throw new ArgumentNullException(nameof(nick));
@@ -18,7 +18,7 @@ internal sealed class GamePlayer
         JoiningSequence = joiningSequence;
     }
 
-    public static GamePlayer Create(PlayerNick nick, int joiningSequence) =>
+    public static GamePlayer Create(PlayerNick nick, Order joiningSequence) =>
         new(playerId: new PlayerId(Guid.NewGuid()), nick, CardsAmount.Initial, joiningSequence);
 
     public void LostLastDeal()
