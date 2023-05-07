@@ -101,9 +101,9 @@ internal sealed class Game
         var inGamePlayers = _players
             .Where(player => player.IsInTheGame);
 
-        var playersAmount = inGamePlayers.Count();
-        var alreadyDealPlayedCount = _deals.Count;
-        var orderPhysic = DealOrderPhysic.Create(playersAmount, alreadyDealPlayedCount);
+        var playersCount = inGamePlayers.Count();
+        var dealsPlayedCount = _deals.Count;
+        var orderPhysic = DealOrderPhysic.Create(playersCount, dealsPlayedCount);
 
         var nextDealPlayers = inGamePlayers
             .OrderBy(inGamePlayer => inGamePlayer.JoiningSequence)
