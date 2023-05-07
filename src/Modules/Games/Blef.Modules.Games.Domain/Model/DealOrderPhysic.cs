@@ -15,7 +15,7 @@ internal sealed class DealOrderPhysic
     public Order ShiftedOrder(Order sequenceIndex)
     {
         if (sequenceIndex - _shift <= 0)
-            return Order.Create(_playersCount.Count + (sequenceIndex - _shift));
+            return Order.Create(_playersCount + (sequenceIndex - _shift));
 
         return Order.Create(sequenceIndex - _shift);
     }
@@ -24,5 +24,5 @@ internal sealed class DealOrderPhysic
         _playersCount = playersCount;
 
     private void Move(DealsCount sequenceShift) =>
-        _shift = sequenceShift.Count % _playersCount.Count;
+        _shift = sequenceShift % _playersCount;
 }
