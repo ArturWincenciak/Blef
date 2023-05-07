@@ -42,4 +42,21 @@ internal static class GameFactory
         game.StartFirstDeal();
         return (game, grahamJoined, knuthJoined, planckJoined);
     }
+
+    public static (
+        Game Game,
+        GamePlayerJoined FirstPlayerJoined,
+        GamePlayerJoined SecondPlayerJoined,
+        GamePlayerJoined ThirdPlayerJoined,
+        GamePlayerJoined FourthPlayerJoined)
+        GivenStartedGameWithFourPlayers()
+    {
+        var game = GivenGame();
+        var grahamJoined = game.Join(new("Graham"));
+        var knuthJoined = game.Join(new("Knuth"));
+        var planckJoined = game.Join(new("Planck"));
+        var riemannJoined = game.Join(new("Riemann"));
+        game.StartFirstDeal();
+        return (game, grahamJoined, knuthJoined, planckJoined, riemannJoined);
+    }
 }
