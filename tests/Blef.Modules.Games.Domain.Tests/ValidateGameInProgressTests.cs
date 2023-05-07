@@ -72,17 +72,29 @@ public class ValidateGameInProgressTests
             Assert.Throws<GameOverException>(() =>
                 act(game, grahamJoined.Player.Id, knuthJoined.Player.Id));
 
-            static void GameOver(Game game, GamePlayer biddingPlayer, GamePlayer checkingPlayer)
+            static void GameOver(Game game, GamePlayer graham, GamePlayer knuth)
             {
-                var howManyTimeTheSamePlayerLostDeal = 5;
-                for (int i = 0; i < howManyTimeTheSamePlayerLostDeal; i++)
-                    LostByBiddingPlayer(game, biddingPlayer, checkingPlayer);
-            }
+                // first deal lost by graham
+                PlayNotExistingLowStraightBid(game, graham.Id);
+                game.Check(new(knuth.Id));
 
-            static void LostByBiddingPlayer(Game game, GamePlayer biddingPlayer, GamePlayer checkingPlayer)
-            {
-                PlayNotExistingLowStraightBid(game, biddingPlayer.Id);
-                game.Check(new(checkingPlayer.Id));
+                // second deal lost by graham
+                PlayHighCardBid(game, knuth.Id, FaceCard.Nine);
+                PlayNotExistingLowStraightBid(game, graham.Id);
+                game.Check(new(knuth.Id));
+
+                // third deal lost by graham
+                PlayNotExistingLowStraightBid(game, graham.Id);
+                game.Check(new(knuth.Id));
+
+                // fourth deal lost by graham
+                PlayHighCardBid(game, knuth.Id, FaceCard.Nine);
+                PlayNotExistingLowStraightBid(game, graham.Id);
+                game.Check(new(knuth.Id));
+
+                // fifth deal lost by graham
+                PlayNotExistingLowStraightBid(game, graham.Id);
+                game.Check(new(knuth.Id));
             }
         }
     }
