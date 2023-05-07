@@ -14,14 +14,26 @@ public class GameOverTests
     {
         // arrange
         var (game, firstPlayerJoined, secondPlayerJoined) = GivenStartedGameWithTwoPlayers();
+
+        // first player lost in first deal
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
         game.Check(new(secondPlayerJoined.Player.Id));
+
+        // first player lost in second deal
+        PlayHighCardBid(game, secondPlayerJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
         game.Check(new(secondPlayerJoined.Player.Id));
+
+        // first player lost in third deal
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
         game.Check(new(secondPlayerJoined.Player.Id));
+
+        // first player lost in fourth deal
+        PlayHighCardBid(game, secondPlayerJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
         game.Check(new(secondPlayerJoined.Player.Id));
+
+        // first player lost in fifth deal
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
 
         // act
