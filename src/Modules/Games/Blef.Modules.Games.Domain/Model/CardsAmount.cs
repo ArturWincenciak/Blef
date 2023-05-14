@@ -8,17 +8,17 @@ internal sealed record CardsAmount
     private readonly int _amount;
 
     public static CardsAmount Initial => new(INITIAL_CARDS_AMOUNT);
-    public static CardsAmount Max => new (MAX_CARDS_AMOUNT);
+    public static CardsAmount Max => new(MAX_CARDS_AMOUNT);
 
     private CardsAmount(int amount)
     {
         if (amount < INITIAL_CARDS_AMOUNT)
-            throw new ArgumentOutOfRangeException(nameof(amount), amount,
-                "Amount cannot be less then one");
+            throw new ArgumentOutOfRangeException(paramName: nameof(amount), amount,
+                message: "Amount cannot be less then one");
 
         if (_amount > MAX_CARDS_AMOUNT)
-            throw new ArgumentOutOfRangeException(nameof(amount), amount,
-                "Amount cannot be greater then five");
+            throw new ArgumentOutOfRangeException(paramName: nameof(amount), amount,
+                message: "Amount cannot be greater then five");
 
         _amount = amount;
     }
@@ -31,10 +31,10 @@ internal sealed record CardsAmount
         return new CardsAmount(_amount + 1);
     }
 
-    public static bool operator < (CardsAmount @this, CardsAmount other) =>
+    public static bool operator <(CardsAmount @this, CardsAmount other) =>
         @this._amount < other._amount;
 
-    public static bool operator > (CardsAmount @this, CardsAmount other) =>
+    public static bool operator >(CardsAmount @this, CardsAmount other) =>
         @this._amount > other._amount;
 
     public static implicit operator int(CardsAmount @this) =>

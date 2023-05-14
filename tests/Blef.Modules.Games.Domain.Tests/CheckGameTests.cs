@@ -17,11 +17,12 @@ public class CheckGameTests
         PlayExistingHighCardBid(game, biddingPlayer);
 
         // act
-        var actualEvents = game.Check(new(checkingPlayer));
+        var actualEvents = game.Check(new CheckingPlayer(checkingPlayer));
 
         // assert
-        AssertCheckPlaced(game.Id, new DealNumber(1), checkingPlayer, checkingPlayer, actualEvents);
-        AssertDealStarted(game.Id, new DealNumber(2), new[]{biddingPlayer, checkingPlayer}, actualEvents);
+        AssertCheckPlaced(game.Id, expectedDealNumber: new DealNumber(1), checkingPlayer, checkingPlayer, actualEvents);
+        AssertDealStarted(game.Id, expectedDealNumber: new DealNumber(2),
+            expectedNextDealPlayers: new[] {biddingPlayer, checkingPlayer}, actualEvents);
     }
 
     [Fact]
@@ -34,11 +35,12 @@ public class CheckGameTests
         PlayNotExistingLowStraightBid(game, biddingPlayer);
 
         // act
-        var actualEvents = game.Check(new(checkingPlayer));
+        var actualEvents = game.Check(new CheckingPlayer(checkingPlayer));
 
         // assert
-        AssertCheckPlaced(game.Id, new DealNumber(1), checkingPlayer, biddingPlayer, actualEvents);
-        AssertDealStarted(game.Id, new DealNumber(2), new[] {biddingPlayer, checkingPlayer}, actualEvents);
+        AssertCheckPlaced(game.Id, expectedDealNumber: new DealNumber(1), checkingPlayer, biddingPlayer, actualEvents);
+        AssertDealStarted(game.Id, expectedDealNumber: new DealNumber(2),
+            expectedNextDealPlayers: new[] {biddingPlayer, checkingPlayer}, actualEvents);
     }
 
     [Fact]
@@ -49,16 +51,17 @@ public class CheckGameTests
         var firstPlayer = firstPlayerJoined.Player.Id;
         var secondPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, firstPlayer);
-        game.Check(new(secondPlayer));
+        game.Check(new CheckingPlayer(secondPlayer));
         PlayExistingHighCardBid(game, secondPlayer);
         PlayExistingPairBid(game, firstPlayer);
 
         // act
-        var actualEvents = game.Check(new(secondPlayer));
+        var actualEvents = game.Check(new CheckingPlayer(secondPlayer));
 
         // assert
-        AssertCheckPlaced(game.Id, new DealNumber(2), secondPlayer, secondPlayer, actualEvents);
-        AssertDealStarted(game.Id, new DealNumber(3), new[] {firstPlayer, secondPlayer}, actualEvents);
+        AssertCheckPlaced(game.Id, expectedDealNumber: new DealNumber(2), secondPlayer, secondPlayer, actualEvents);
+        AssertDealStarted(game.Id, expectedDealNumber: new DealNumber(3),
+            expectedNextDealPlayers: new[] {firstPlayer, secondPlayer}, actualEvents);
     }
 
     [Fact]
@@ -69,15 +72,16 @@ public class CheckGameTests
         var firstPlayer = firstPlayerJoined.Player.Id;
         var secondPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, firstPlayer);
-        game.Check(new(secondPlayer));
+        game.Check(new CheckingPlayer(secondPlayer));
         PlayExistingHighCardBid(game, secondPlayer);
         PlayNotExistingLowStraightBid(game, firstPlayer);
 
         // act
-        var actualEvents = game.Check(new(secondPlayer));
+        var actualEvents = game.Check(new CheckingPlayer(secondPlayer));
 
         // assert
-        AssertCheckPlaced(game.Id, new DealNumber(2), secondPlayer, firstPlayer, actualEvents);
-        AssertDealStarted(game.Id, new DealNumber(3), new[] {firstPlayer, secondPlayer}, actualEvents);
+        AssertCheckPlaced(game.Id, expectedDealNumber: new DealNumber(2), secondPlayer, firstPlayer, actualEvents);
+        AssertDealStarted(game.Id, expectedDealNumber: new DealNumber(3),
+            expectedNextDealPlayers: new[] {firstPlayer, secondPlayer}, actualEvents);
     }
 }

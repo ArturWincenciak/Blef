@@ -16,22 +16,6 @@ internal sealed class GameplayHandler :
     public GameplayHandler(IGameplaysRepository gameplaysRepository) =>
         _gameplaysRepository = gameplaysRepository;
 
-    public Task Handle(GamePlayerJoined @event, CancellationToken cancellation)
-    {
-        _gameplaysRepository
-            .Get(@event.Game)
-            .OnPlayerJoined(@event.Player);
-        return Task.CompletedTask;
-    }
-
-    public Task Handle(DealStarted @event, CancellationToken cancellation)
-    {
-        _gameplaysRepository
-            .Get(@event.Game)
-            .OnDealStarted(@event.Deal, @event.Players);
-        return Task.CompletedTask;
-    }
-
     public Task Handle(BidPlaced @event, CancellationToken cancellation)
     {
         _gameplaysRepository
@@ -48,11 +32,27 @@ internal sealed class GameplayHandler :
         return Task.CompletedTask;
     }
 
+    public Task Handle(DealStarted @event, CancellationToken cancellation)
+    {
+        _gameplaysRepository
+            .Get(@event.Game)
+            .OnDealStarted(@event.Deal, @event.Players);
+        return Task.CompletedTask;
+    }
+
     public Task Handle(GameOver @event, CancellationToken cancellation)
     {
         _gameplaysRepository
             .Get(@event.Game)
             .OnGameFinished(@event.Winner);
+        return Task.CompletedTask;
+    }
+
+    public Task Handle(GamePlayerJoined @event, CancellationToken cancellation)
+    {
+        _gameplaysRepository
+            .Get(@event.Game)
+            .OnPlayerJoined(@event.Player);
         return Task.CompletedTask;
     }
 }

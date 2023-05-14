@@ -4,6 +4,35 @@ namespace Blef.Modules.Games.Domain.Tests;
 
 public class DeckTests
 {
+    private static Card[] TwentyFourUniqueCards =>
+        new[]
+        {
+            new Card(FaceCard.Ace, Suit.Diamonds),
+            new Card(FaceCard.Ace, Suit.Spades),
+            new Card(FaceCard.Ten, Suit.Clubs),
+            new Card(FaceCard.Jack, Suit.Spades),
+            new Card(FaceCard.Queen, Suit.Diamonds),
+            new Card(FaceCard.King, Suit.Hearts),
+            new Card(FaceCard.King, Suit.Clubs),
+            new Card(FaceCard.Ace, Suit.Clubs),
+            new Card(FaceCard.Queen, Suit.Clubs),
+            new Card(FaceCard.Jack, Suit.Diamonds),
+            new Card(FaceCard.Ten, Suit.Diamonds),
+            new Card(FaceCard.King, Suit.Diamonds),
+            new Card(FaceCard.Nine, Suit.Clubs),
+            new Card(FaceCard.King, Suit.Spades),
+            new Card(FaceCard.Queen, Suit.Spades),
+            new Card(FaceCard.Jack, Suit.Clubs),
+            new Card(FaceCard.Nine, Suit.Spades),
+            new Card(FaceCard.Ace, Suit.Hearts),
+            new Card(FaceCard.Ten, Suit.Spades),
+            new Card(FaceCard.Ten, Suit.Hearts),
+            new Card(FaceCard.Nine, Suit.Hearts),
+            new Card(FaceCard.Nine, Suit.Diamonds),
+            new Card(FaceCard.Jack, Suit.Hearts),
+            new Card(FaceCard.Queen, Suit.Hearts)
+        };
+
     [Fact]
     public void CannotCreateWithNullArgumentTest() =>
         Assert.Throws<ArgumentNullException>(() => new Deck(null!));
@@ -188,7 +217,8 @@ public class DeckTests
         });
 
     [Fact]
-    public void When_DealFiveCardsFourTimesAndOneCardFiveTimes_MeansTooManyCards_Then_ThrowInvalidOperationException() =>
+    public void
+        When_DealFiveCardsFourTimesAndOneCardFiveTimes_MeansTooManyCards_Then_ThrowInvalidOperationException() =>
         Assert.Throws<InvalidOperationException>(() =>
         {
             // arrange
@@ -214,7 +244,7 @@ public class DeckTests
 
     private static Card[] CreateManyTheSameCards(int amount) =>
         Enumerable
-            .Range(0, amount)
+            .Range(start: 0, amount)
             .Select(_ => new Card(FaceCard.Ace, Suit.Clubs))
             .ToArray();
 
@@ -225,36 +255,7 @@ public class DeckTests
 
     private static Card[] TakeCards(int from, int amount) =>
         TwentyFourUniqueCards
-            .Take(new Range(from - 1, (from - 1) + amount))
+            .Take(new Range(start: from - 1, end: (from - 1) + amount))
             .Select(card => new Card(card.FaceCard, card.Suit))
             .ToArray();
-
-    private static Card[] TwentyFourUniqueCards =>
-        new[]
-        {
-            new Card(FaceCard.Ace, Suit.Diamonds),
-            new Card(FaceCard.Ace, Suit.Spades),
-            new Card(FaceCard.Ten, Suit.Clubs),
-            new Card(FaceCard.Jack, Suit.Spades),
-            new Card(FaceCard.Queen, Suit.Diamonds),
-            new Card(FaceCard.King, Suit.Hearts),
-            new Card(FaceCard.King, Suit.Clubs),
-            new Card(FaceCard.Ace, Suit.Clubs),
-            new Card(FaceCard.Queen, Suit.Clubs),
-            new Card(FaceCard.Jack, Suit.Diamonds),
-            new Card(FaceCard.Ten, Suit.Diamonds),
-            new Card(FaceCard.King, Suit.Diamonds),
-            new Card(FaceCard.Nine, Suit.Clubs),
-            new Card(FaceCard.King, Suit.Spades),
-            new Card(FaceCard.Queen, Suit.Spades),
-            new Card(FaceCard.Jack, Suit.Clubs),
-            new Card(FaceCard.Nine, Suit.Spades),
-            new Card(FaceCard.Ace, Suit.Hearts),
-            new Card(FaceCard.Ten, Suit.Spades),
-            new Card(FaceCard.Ten, Suit.Hearts),
-            new Card(FaceCard.Nine, Suit.Hearts),
-            new Card(FaceCard.Nine, Suit.Diamonds),
-            new Card(FaceCard.Jack, Suit.Hearts),
-            new Card(FaceCard.Queen, Suit.Hearts)
-        };
 }

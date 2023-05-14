@@ -9,8 +9,8 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 [UsedImplicitly]
 internal sealed class BidHandler : ICommandHandler<Bid>
 {
-    private readonly IGamesRepository _games;
     private readonly IDomainEventDispatcher _eventDispatcher;
+    private readonly IGamesRepository _games;
 
     public BidHandler(IGamesRepository games, IDomainEventDispatcher eventDispatcher)
     {
@@ -22,7 +22,7 @@ internal sealed class BidHandler : ICommandHandler<Bid>
     {
         var game = _games.Get(command.GameId);
         var pokerHand = Parse(command.PokerHand);
-        var bidPlaced = game.Bid(new (pokerHand, command.PlayerId));
+        var bidPlaced = game.Bid(new Domain.Model.Bid(pokerHand, command.PlayerId));
         await _eventDispatcher.Dispatch(bidPlaced, cancellation);
     }
 

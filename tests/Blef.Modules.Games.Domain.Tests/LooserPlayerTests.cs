@@ -11,11 +11,11 @@ public class LooserPlayerTests
         var guid = Guid.Parse("07147D29-6F51-4D30-8470-8807CA29A5F0");
 
         // act
-        var actual = new LooserPlayer(new(guid));
+        var actual = new LooserPlayer(new PlayerId(guid));
 
         // assert
         Assert.Equal(guid, actual.Player.Id);
-        Assert.True(new LooserPlayer(new(guid)) == actual);
+        Assert.True(new LooserPlayer(new PlayerId(guid)) == actual);
     }
 
     [Fact]

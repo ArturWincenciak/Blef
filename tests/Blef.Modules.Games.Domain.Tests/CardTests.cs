@@ -12,18 +12,18 @@ public class CardTests
 
         // assert
         Assert.True(FaceCard.Ace == actual.FaceCard);
-        Assert.Equal(expected: Suit.Clubs, actual.Suit);
+        Assert.Equal(Suit.Clubs, actual.Suit);
     }
 
     [Fact]
     public void CannotCreateWithNullArgumentsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Card(null!, null!));
+        Assert.Throws<ArgumentNullException>(() => new Card(FaceCard: null!, Suit: null!));
 
     [Fact]
     public void CannotCreateWithNullFaceCardArgumentTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Card(null!, Suit.Clubs));
+        Assert.Throws<ArgumentNullException>(() => new Card(FaceCard: null!, Suit.Clubs));
 
     [Fact]
     public void CannotCreateWithNullSuitArgumentTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Card(FaceCard.Ace, null!));
+        Assert.Throws<ArgumentNullException>(() => new Card(FaceCard.Ace, Suit: null!));
 }

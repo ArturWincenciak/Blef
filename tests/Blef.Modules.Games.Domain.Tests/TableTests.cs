@@ -10,17 +10,17 @@ public class TableTests
         // arrange
         var hands = new Hand[]
         {
-            new(new Card[] { new(FaceCard.Ace, Suit.Clubs) }),
-            new(new Card[] { new(FaceCard.King, Suit.Hearts) }),
-            new(new Card[] { new(FaceCard.King, Suit.Clubs) })
+            new(new Card[] {new(FaceCard.Ace, Suit.Clubs)}),
+            new(new Card[] {new(FaceCard.King, Suit.Hearts)}),
+            new(new Card[] {new(FaceCard.King, Suit.Clubs)})
         };
 
         // act
         var actual = new Table(hands);
 
         // assert
-        Assert.Equal(expected: 1, actual.Count(FaceCard.Ace));
-        Assert.Equal(expected: 2, actual.Count(FaceCard.King));
+        Assert.Equal(expected: 1, actual: actual.Count(FaceCard.Ace));
+        Assert.Equal(expected: 2, actual: actual.Count(FaceCard.King));
         Assert.True(actual.Contains(FaceCard.Ace));
         Assert.True(actual.Contains(FaceCard.King));
         Assert.False(actual.Contains(FaceCard.Queen));
@@ -43,7 +43,7 @@ public class TableTests
         var actual = new Table(hands);
 
         // assert
-        Assert.Equal(expected: 2, actual.Count(FaceCard.Nine));
+        Assert.Equal(expected: 2, actual: actual.Count(FaceCard.Nine));
         Assert.True(actual.Contains(FaceCard.Nine));
         Assert.False(actual.Contains(FaceCard.Ten));
         Assert.False(actual.Contains(FaceCard.Jack));
@@ -64,7 +64,7 @@ public class TableTests
                 new(FaceCard.Ace, Suit.Diamonds),
                 new(FaceCard.Ace, Suit.Hearts),
                 new(FaceCard.Ace, Suit.Spades),
-                new(FaceCard.King, Suit.Clubs),
+                new(FaceCard.King, Suit.Clubs)
             }),
             new(new Card[]
             {
@@ -96,11 +96,11 @@ public class TableTests
         var actual = new Table(hands);
 
         // assert
-        Assert.Equal(expected: 4, actual.Count(FaceCard.Ace));
-        Assert.Equal(expected: 4, actual.Count(FaceCard.King));
-        Assert.Equal(expected: 4, actual.Count(FaceCard.Queen));
-        Assert.Equal(expected: 4, actual.Count(FaceCard.Jack));
-        Assert.Equal(expected: 4, actual.Count(FaceCard.Ten));
+        Assert.Equal(expected: 4, actual: actual.Count(FaceCard.Ace));
+        Assert.Equal(expected: 4, actual: actual.Count(FaceCard.King));
+        Assert.Equal(expected: 4, actual: actual.Count(FaceCard.Queen));
+        Assert.Equal(expected: 4, actual: actual.Count(FaceCard.Jack));
+        Assert.Equal(expected: 4, actual: actual.Count(FaceCard.Ten));
         Assert.True(actual.Contains(FaceCard.Ace));
         Assert.True(actual.Contains(FaceCard.King));
         Assert.True(actual.Contains(FaceCard.Queen));
@@ -119,7 +119,7 @@ public class TableTests
             var hands = new[]
             {
                 new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)}),
-                new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)}),
+                new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)})
             };
             new Table(hands);
         });

@@ -25,17 +25,17 @@ public class CroupierTests
 
         // act
         var dealSet = croupier.Deal(
-            new(new NextDealPlayer[]
+            new NextDealPlayersSet(new NextDealPlayer[]
             {
-                new(new PlayerId(playerId_1), CardsAmount.Initial, Order.Create(1)),
-                new(new PlayerId(playerId_2), CardsAmount.Initial, Order.Create(2)),
+                new(Player: new PlayerId(playerId_1), CardsAmount.Initial, Order: Order.Create(1)),
+                new(Player: new PlayerId(playerId_2), CardsAmount.Initial, Order: Order.Create(2))
             }));
-        var hand_1 = GetHand(dealSet, new(playerId_1));
-        var hand_2 = GetHand(dealSet, new(playerId_2));
+        var hand_1 = GetHand(dealSet, playerId: new PlayerId(playerId_1));
+        var hand_2 = GetHand(dealSet, playerId: new PlayerId(playerId_2));
 
         // assert
-        Assert.Equal(TakeCards(from: 1, amount: 1), hand_1.Cards);
-        Assert.Equal(TakeCards(from: 2, amount: 1), hand_2.Cards);
+        Assert.Equal(expected: TakeCards(from: 1, amount: 1), hand_1.Cards);
+        Assert.Equal(expected: TakeCards(from: 2, amount: 1), hand_2.Cards);
     }
 
     [Fact]
@@ -50,20 +50,21 @@ public class CroupierTests
 
         // act
         var dealSet = croupier.Deal(
-            new(new NextDealPlayer[]
+            new NextDealPlayersSet(new NextDealPlayer[]
             {
-                new(new PlayerId(playerId_1), CardsAmount.Initial, Order.Create(1)),
-                new(new PlayerId(playerId_2), CardsAmount.Max, Order.Create(2)),
-                new(new PlayerId(playerId_3), CardsAmount.Initial.AddOneCard().AddOneCard(), Order.Create(3))
+                new(Player: new PlayerId(playerId_1), CardsAmount.Initial, Order: Order.Create(1)),
+                new(Player: new PlayerId(playerId_2), CardsAmount.Max, Order: Order.Create(2)),
+                new(Player: new PlayerId(playerId_3), CardsAmount: CardsAmount.Initial.AddOneCard().AddOneCard(),
+                    Order: Order.Create(3))
             }));
-        var hand_1 = GetHand(dealSet, new PlayerId(playerId_1));
-        var hand_2 = GetHand(dealSet, new PlayerId(playerId_2));
-        var hand_3 = GetHand(dealSet, new PlayerId(playerId_3));
+        var hand_1 = GetHand(dealSet, playerId: new PlayerId(playerId_1));
+        var hand_2 = GetHand(dealSet, playerId: new PlayerId(playerId_2));
+        var hand_3 = GetHand(dealSet, playerId: new PlayerId(playerId_3));
 
         // assert
-        Assert.Equal(TakeCards(from: 1, amount: 1), hand_1.Cards);
-        Assert.Equal(TakeCards(from: 2, amount: 5), hand_2.Cards);
-        Assert.Equal(TakeCards(from: 7, amount: 3), hand_3.Cards);
+        Assert.Equal(expected: TakeCards(from: 1, amount: 1), hand_1.Cards);
+        Assert.Equal(expected: TakeCards(from: 2, amount: 5), hand_2.Cards);
+        Assert.Equal(expected: TakeCards(from: 7, amount: 3), hand_3.Cards);
     }
 
     [Fact]
@@ -79,28 +80,28 @@ public class CroupierTests
 
         // act
         var dealSet = croupier.Deal(
-            new(new NextDealPlayer[]
+            new NextDealPlayersSet(new NextDealPlayer[]
             {
-                new(new PlayerId(playerId_1), CardsAmount.Max, Order.Create(1)),
-                new(new PlayerId(playerId_2), CardsAmount.Max, Order.Create(2)),
-                new(new PlayerId(playerId_3), CardsAmount.Max, Order.Create(3)),
-                new(new PlayerId(playerId_4), CardsAmount.Max, Order.Create(4)),
+                new(Player: new PlayerId(playerId_1), CardsAmount.Max, Order: Order.Create(1)),
+                new(Player: new PlayerId(playerId_2), CardsAmount.Max, Order: Order.Create(2)),
+                new(Player: new PlayerId(playerId_3), CardsAmount.Max, Order: Order.Create(3)),
+                new(Player: new PlayerId(playerId_4), CardsAmount.Max, Order: Order.Create(4))
             }));
-        var hand_1 = GetHand(dealSet, new PlayerId(playerId_1));
-        var hand_2 = GetHand(dealSet, new PlayerId(playerId_2));
-        var hand_3 = GetHand(dealSet, new PlayerId(playerId_3));
-        var hand_4 = GetHand(dealSet, new PlayerId(playerId_4));
+        var hand_1 = GetHand(dealSet, playerId: new PlayerId(playerId_1));
+        var hand_2 = GetHand(dealSet, playerId: new PlayerId(playerId_2));
+        var hand_3 = GetHand(dealSet, playerId: new PlayerId(playerId_3));
+        var hand_4 = GetHand(dealSet, playerId: new PlayerId(playerId_4));
 
         // assert
-        Assert.Equal(TakeCards(from: 1, amount: 5), hand_1.Cards);
-        Assert.Equal(TakeCards(from: 6, amount: 5), hand_2.Cards);
-        Assert.Equal(TakeCards(from: 11, amount: 5), hand_3.Cards);
-        Assert.Equal(TakeCards(from: 16, amount: 5), hand_4.Cards);
+        Assert.Equal(expected: TakeCards(from: 1, amount: 5), hand_1.Cards);
+        Assert.Equal(expected: TakeCards(from: 6, amount: 5), hand_2.Cards);
+        Assert.Equal(expected: TakeCards(from: 11, amount: 5), hand_3.Cards);
+        Assert.Equal(expected: TakeCards(from: 16, amount: 5), hand_4.Cards);
     }
 
     private static Card[] TakeCards(int from, int amount) =>
         DeckFactoryMock.Cards
-            .Take(new Range(from - 1, (from - 1) + amount))
+            .Take(new Range(start: from - 1, end: (from - 1) + amount))
             .Select(card => new Card(card.FaceCard, card.Suit))
             .ToArray();
 

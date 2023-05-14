@@ -41,8 +41,8 @@ public class DealMoveOrderTests
     [Fact]
     public void SecondPlayerCanMakeSecondMoveTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player2!, FaceCard.Ten));
-        Test(() => WithCheck(_deal, _player2!));
+        Test(() => PlayHighCardBid(_deal, byPlayer: _player2!, FaceCard.Ten));
+        Test(() => WithCheck(_deal, byPlayer: _player2!));
 
         void Test(Action act)
         {
@@ -61,8 +61,8 @@ public class DealMoveOrderTests
     [Fact]
     public void FirstPlayerCannotMakeSecondMoveTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player1!, FaceCard.Ten));
-        Test(() => WithCheck(_deal, _player1!));
+        Test(() => PlayHighCardBid(_deal, byPlayer: _player1!, FaceCard.Ten));
+        Test(() => WithCheck(_deal, byPlayer: _player1!));
 
         void Test(Action act)
         {
@@ -78,8 +78,8 @@ public class DealMoveOrderTests
     [Fact]
     public void FirstPlayerCanMakeFirstMoveInSecondRoundTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player1!, FaceCard.Jack));
-        Test(() => WithCheck(_deal, _player1!));
+        Test(() => PlayHighCardBid(_deal, byPlayer: _player1!, FaceCard.Jack));
+        Test(() => WithCheck(_deal, byPlayer: _player1!));
 
         void Test(Action act)
         {
@@ -99,8 +99,8 @@ public class DealMoveOrderTests
     [Fact]
     public void SecondPlayerCannotMakeFirstMoveInSecondRoundTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player2!, FaceCard.Jack));
-        Test(() => WithCheck(_deal, _player2!));
+        Test(() => PlayHighCardBid(_deal, byPlayer: _player2!, FaceCard.Jack));
+        Test(() => WithCheck(_deal, byPlayer: _player2!));
 
         void Test(Action act)
         {
@@ -117,8 +117,8 @@ public class DealMoveOrderTests
     [Fact]
     public void SecondPlayerCanMakeSecondMoveInSecondRoundTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player2!, FaceCard.Queen));
-        Test(() => WithCheck(_deal, _player2!));
+        Test(() => PlayHighCardBid(_deal, byPlayer: _player2!, FaceCard.Queen));
+        Test(() => WithCheck(_deal, byPlayer: _player2!));
 
         void Test(Action act)
         {
@@ -139,8 +139,8 @@ public class DealMoveOrderTests
     [Fact]
     public void FirstPlayerCannotMakeSecondMoveInSecondRoundTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player1!, FaceCard.Queen));
-        Test(() => WithCheck(_deal, _player1!));
+        Test(() => PlayHighCardBid(_deal, byPlayer: _player1!, FaceCard.Queen));
+        Test(() => WithCheck(_deal, byPlayer: _player1!));
 
         void Test(Action act)
         {
@@ -185,8 +185,8 @@ public class DealMoveOrderTests
     [Fact]
     public void FirstPlayerCannotMakeFourthMoveTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player1!, FaceCard.Queen));
-        Test(() => WithCheck(_deal, _player1!));
+        Test(() => PlayHighCardBid(_deal, byPlayer: _player1!, FaceCard.Queen));
+        Test(() => WithCheck(_deal, byPlayer: _player1!));
 
         void Test(Action act)
         {
@@ -204,8 +204,8 @@ public class DealMoveOrderTests
     [Fact]
     public void SecondPlayerCannotMakeFourthMoveTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player2!, FaceCard.Queen));
-        Test(() => WithCheck(_deal, _player2!));
+        Test(() => PlayHighCardBid(_deal, byPlayer: _player2!, FaceCard.Queen));
+        Test(() => WithCheck(_deal, byPlayer: _player2!));
 
         void Test(Action act)
         {
@@ -223,8 +223,8 @@ public class DealMoveOrderTests
     [Fact]
     public void FourthPlayerCannotMakeSecondMoveInSecondRoundTest()
     {
-        Test(() => PlayPairBid(_deal, _player4!, FaceCard.Nine));
-        Test(() => WithCheck(_deal, _player4!));
+        Test(() => PlayPairBid(_deal, byPlayer: _player4!, FaceCard.Nine));
+        Test(() => WithCheck(_deal, byPlayer: _player4!));
 
         void Test(Action act)
         {
@@ -242,5 +242,5 @@ public class DealMoveOrderTests
     }
 
     private static void WithCheck(Deal deal, DealPlayer byPlayer) =>
-        deal.Check(new(byPlayer.Player));
+        deal.Check(new CheckingPlayer(byPlayer.Player));
 }

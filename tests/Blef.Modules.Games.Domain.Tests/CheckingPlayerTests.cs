@@ -1,5 +1,4 @@
-﻿
-using Blef.Modules.Games.Domain.Model;
+﻿using Blef.Modules.Games.Domain.Model;
 
 namespace Blef.Modules.Games.Domain.Tests;
 
@@ -12,11 +11,11 @@ public class CheckingPlayerTests
         var guid = Guid.Parse("92F72527-350D-4C0B-BF64-CF65D65117A5");
 
         // act
-        var actual = new CheckingPlayer(new(guid));
+        var actual = new CheckingPlayer(new PlayerId(guid));
 
         // assert
         Assert.Equal(guid, actual.Player.Id);
-        Assert.True(new CheckingPlayer(new(guid)) == actual);
+        Assert.True(new CheckingPlayer(new PlayerId(guid)) == actual);
     }
 
     [Fact]

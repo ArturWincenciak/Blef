@@ -2,14 +2,13 @@ namespace Blef.Modules.Games.Domain.Model;
 
 internal sealed class FaceCard
 {
+    private readonly Type _faceCard;
     public static FaceCard Nine => new(Type.Nine);
     public static FaceCard Ten => new(Type.Ten);
     public static FaceCard Jack => new(Type.Jack);
     public static FaceCard Queen => new(Type.Queen);
     public static FaceCard King => new(Type.King);
     public static FaceCard Ace => new(Type.Ace);
-
-    private readonly Type _faceCard;
 
     private FaceCard(Type faceCard)
     {
@@ -41,7 +40,7 @@ internal sealed class FaceCard
         _faceCard == other._faceCard;
 
     public override bool Equals(object? obj) =>
-        ReferenceEquals(this, obj) || obj is FaceCard other && Equals(other);
+        ReferenceEquals(objA: this, obj) || (obj is FaceCard other && Equals(other));
 
     public override int GetHashCode() =>
         (int) _faceCard;
@@ -58,8 +57,8 @@ internal sealed class FaceCard
             "queen" => Type.Queen,
             "king" => Type.King,
             "ace" => Type.Ace,
-            _ => throw new ArgumentOutOfRangeException(nameof(faceCard), faceCard,
-                $"Unknown value of FaceCard: '{faceCard}'")
+            _ => throw new ArgumentOutOfRangeException(paramName: nameof(faceCard), faceCard,
+                message: $"Unknown value of FaceCard: '{faceCard}'")
         };
 
     private enum Type

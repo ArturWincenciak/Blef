@@ -1,5 +1,6 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
 using Blef.Modules.Games.Domain.Events;
+using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Abstractions.Events;
 using JetBrains.Annotations;
@@ -9,8 +10,8 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 [UsedImplicitly]
 internal sealed class CheckHandler : ICommandHandler<Check>
 {
-    private readonly IGamesRepository _games;
     private readonly IDomainEventDispatcher _eventDispatcher;
+    private readonly IGamesRepository _games;
 
     public CheckHandler(IGamesRepository games, IDomainEventDispatcher eventDispatcher)
     {
@@ -21,7 +22,7 @@ internal sealed class CheckHandler : ICommandHandler<Check>
     public async Task Handle(Check command, CancellationToken cancellation)
     {
         var game = _games.Get(command.GameId);
-        var events = game.Check(new(command.PlayerId));
+        var events = game.Check(new CheckingPlayer(command.PlayerId));
 
         foreach (var @event in events)
             await Dispatch(@event, cancellation);

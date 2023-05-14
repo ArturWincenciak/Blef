@@ -10,8 +10,8 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 internal sealed class NewGameHandler : ICommandHandler<NewGame, NewGame.Result>
 {
     private readonly GameFactory _gameFactory;
-    private readonly IGamesRepository _games;
     private readonly IGameplaysRepository _gameplays;
+    private readonly IGamesRepository _games;
 
     public NewGameHandler(IGamesRepository games, GameFactory gameFactory, IGameplaysRepository gameplays)
     {

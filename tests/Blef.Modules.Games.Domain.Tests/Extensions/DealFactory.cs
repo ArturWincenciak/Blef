@@ -16,15 +16,15 @@ internal static class DealFactory
         var playerGuid_2 = Guid.Parse("AC10CA94-AC44-4004-9F03-6B1EA2FEB1BD");
         var playerHand_1 = new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)});
         var playerHand_2 = new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)});
-        var player_1 = new DealPlayer(new(playerGuid_1), playerHand_1);
-        var player_2 = new DealPlayer(new(playerGuid_2), playerHand_2);
+        var player_1 = new DealPlayer(Player: new PlayerId(playerGuid_1), playerHand_1);
+        var player_2 = new DealPlayer(Player: new PlayerId(playerGuid_2), playerHand_2);
         var players = new[] {player_1, player_2};
         var moveSequence = new MoveSequence(new[]
         {
-            new Move(player_1.Player, Order.Create(1)),
-            new Move(player_2.Player, Order.Create(2)),
+            new Move(player_1.Player, Order: Order.Create(1)),
+            new Move(player_2.Player, Order: Order.Create(2))
         });
-        var deal = new Deal(dealId, new(new(players), moveSequence));
+        var deal = new Deal(dealId, dealSet: new DealSet(playersSet: new DealPlayersSet(players), moveSequence));
 
         return (deal, player_1, player_2);
     }
@@ -49,19 +49,19 @@ internal static class DealFactory
         var playerGuid_2 = Guid.Parse("DBE9B64F-0EC9-4A4F-A357-A482A09F3567");
         var playerGuid_3 = Guid.Parse("D4C01AE4-C790-41EB-BF9E-DA2CC05D7A61");
         var playerGuid_4 = Guid.Parse("59EB6325-6D26-477A-BA2F-BE0C1EF43521");
-        var player_1 = new DealPlayer(new(playerGuid_1), withFirstPlayerHand);
-        var player_2 = new DealPlayer(new(playerGuid_2), withSecondPlayerHand);
-        var player_3 = new DealPlayer(new(playerGuid_3), withThirdPlayerHand);
-        var player_4 = new DealPlayer(new(playerGuid_4), withFourthPlayerHand);
+        var player_1 = new DealPlayer(Player: new PlayerId(playerGuid_1), withFirstPlayerHand);
+        var player_2 = new DealPlayer(Player: new PlayerId(playerGuid_2), withSecondPlayerHand);
+        var player_3 = new DealPlayer(Player: new PlayerId(playerGuid_3), withThirdPlayerHand);
+        var player_4 = new DealPlayer(Player: new PlayerId(playerGuid_4), withFourthPlayerHand);
         var players = new[] {player_1, player_2, player_3, player_4};
         var moveSequence = new MoveSequence(new[]
         {
-            new Move(player_1.Player, Order.Create(1)),
-            new Move(player_2.Player, Order.Create(2)),
-            new Move(player_3.Player, Order.Create(3)),
-            new Move(player_4.Player, Order.Create(4)),
+            new Move(player_1.Player, Order: Order.Create(1)),
+            new Move(player_2.Player, Order: Order.Create(2)),
+            new Move(player_3.Player, Order: Order.Create(3)),
+            new Move(player_4.Player, Order: Order.Create(4))
         });
-        var deal = new Deal(dealId, new(new(players), moveSequence));
+        var deal = new Deal(dealId, dealSet: new DealSet(playersSet: new DealPlayersSet(players), moveSequence));
 
         return (deal, player_1, player_2, player_3, player_4);
     }
@@ -72,12 +72,10 @@ internal static class DealFactory
         DealPlayer Second,
         DealPlayer Third,
         DealPlayer Fourth)
-        GivenDealWithFourPlayers()
-    {
-        return GivenDealWithFourPlayers(
-            new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)}),
-            new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)}),
-            new Hand(new Card[] {new(FaceCard.Queen, Suit.Diamonds)}),
-            new Hand(new Card[] {new(FaceCard.Jack, Suit.Diamonds)}));
-    }
+        GivenDealWithFourPlayers() =>
+        GivenDealWithFourPlayers(
+            withFirstPlayerHand: new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)}),
+            withSecondPlayerHand: new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)}),
+            withThirdPlayerHand: new Hand(new Card[] {new(FaceCard.Queen, Suit.Diamonds)}),
+            withFourthPlayerHand: new Hand(new Card[] {new(FaceCard.Jack, Suit.Diamonds)}));
 }

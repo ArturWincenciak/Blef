@@ -5,6 +5,9 @@ internal sealed class DealOrderPhysic
     private readonly PlayersCount _playersCount;
     private int _shift;
 
+    private DealOrderPhysic(PlayersCount playersCount) =>
+        _playersCount = playersCount;
+
     public static DealOrderPhysic Create(PlayersCount playersCount, DealsCount dealsPlayedCount)
     {
         var orderPhysic = new DealOrderPhysic(playersCount);
@@ -19,9 +22,6 @@ internal sealed class DealOrderPhysic
 
         return Order.Create(sequenceIndex - _shift);
     }
-
-    private DealOrderPhysic(PlayersCount playersCount) =>
-        _playersCount = playersCount;
 
     private void Move(DealsCount sequenceShift) =>
         _shift = sequenceShift % _playersCount;

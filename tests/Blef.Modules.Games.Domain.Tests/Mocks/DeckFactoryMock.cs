@@ -5,9 +5,6 @@ namespace Blef.Modules.Games.Domain.Tests.Mocks;
 
 internal sealed class DeckFactoryMock : IDeckFactory
 {
-    public Deck Create() =>
-        new(Cards);
-
     public static Card[] Cards =>
         new[]
         {
@@ -36,4 +33,7 @@ internal sealed class DeckFactoryMock : IDeckFactory
             new Card(FaceCard.Jack, Suit.Hearts),
             new Card(FaceCard.Queen, Suit.Hearts)
         };
+
+    public Deck Create() =>
+        new(Cards);
 }

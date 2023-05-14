@@ -17,34 +17,35 @@ public class GameOverTests
 
         // first player lost in first deal
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
-        game.Check(new(secondPlayerJoined.Player.Id));
+        game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
 
         // first player lost in second deal
         PlayHighCardBid(game, secondPlayerJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
-        game.Check(new(secondPlayerJoined.Player.Id));
+        game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
 
         // first player lost in third deal
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
-        game.Check(new(secondPlayerJoined.Player.Id));
+        game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
 
         // first player lost in fourth deal
         PlayHighCardBid(game, secondPlayerJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
-        game.Check(new(secondPlayerJoined.Player.Id));
+        game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
 
         // first player lost in fifth deal
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
 
         // act
-        var actual = game.Check(new(secondPlayerJoined.Player.Id));
+        var actual = game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
 
         // assert
         var expectedWinner = secondPlayerJoined.Player.Id;
         AssertGameOver(game.Id, expectedWinner, actual);
         var expectedCheckingPlayer = secondPlayerJoined.Player.Id;
         var expectedLooser = firstPlayerJoined.Player.Id;
-        AssertCheckPlaced(game.Id, new DealNumber(5), expectedCheckingPlayer, expectedLooser, actual);
+        AssertCheckPlaced(game.Id, expectedDealNumber: new DealNumber(5), expectedCheckingPlayer, expectedLooser,
+            actual);
     }
 
     private static void AssertGameOver(GameId expectedGameId, PlayerId expectedWinner, IEnumerable<IDomainEvent> actual)

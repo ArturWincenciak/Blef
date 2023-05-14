@@ -8,8 +8,8 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 [UsedImplicitly]
 internal sealed class StartFirstDealHandler : ICommandHandler<StartFirstDeal, StartFirstDeal.Result>
 {
-    private readonly IGamesRepository _games;
     private readonly IDomainEventDispatcher _domainEventDispatcher;
+    private readonly IGamesRepository _games;
 
     public StartFirstDealHandler(IGamesRepository games, IDomainEventDispatcher domainEventDispatcher)
     {

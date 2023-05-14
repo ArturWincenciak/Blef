@@ -452,6 +452,12 @@ public class IsPokerHandOnTableTests
                 }
             };
 
+        public IEnumerator<object[]> GetEnumerator() =>
+            GivenPokerHandTestCases().GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() =>
+            GetEnumerator();
+
         private static Table GivenTopTableWithMaxPlayersWhoEachHaveMaxCards() =>
             GivenTable(new Hand[]
             {
@@ -526,12 +532,6 @@ public class IsPokerHandOnTableTests
                 })
             });
 
-        public IEnumerator<object[]> GetEnumerator() =>
-            GivenPokerHandTestCases().GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() =>
-            GetEnumerator();
-
         private static IEnumerable<object[]> GivenPokerHandTestCases() => Init
             .Concat(HighCardTestCases)
             .Concat(PairTestCases)
@@ -541,7 +541,5 @@ public class IsPokerHandOnTableTests
 
         private static Table GivenTable(Hand[] hands) =>
             new(hands);
-
-
     }
 }

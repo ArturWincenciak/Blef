@@ -97,10 +97,7 @@ public class MoveOrderPolicyTests
         var (policy, player1, player2) = GivenPolicyWithTwoPlayers();
 
         // act
-        Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
-        {
-            policy.Move(player2);
-        });
+        Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() => { policy.Move(player2); });
     }
 
     [Fact]
@@ -222,7 +219,7 @@ public class MoveOrderPolicyTests
         var moveSequence = new MoveSequence(new[]
         {
             new Move(playerId1, Order.First),
-            new Move(playerId2, Order.First.Next),
+            new Move(playerId2, Order.First.Next)
         });
         var moveOrderPolicy = new MoveOrderPolicy(moveSequence);
         return (moveOrderPolicy, playerId1, playerId2);

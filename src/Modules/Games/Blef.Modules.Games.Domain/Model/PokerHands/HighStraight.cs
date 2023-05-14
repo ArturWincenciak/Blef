@@ -5,7 +5,9 @@ internal sealed class HighStraight : PokerHand
     public const string Type = "high-straight";
     protected override int PokerHandRank => 5;
 
-    private HighStraight() { }
+    private HighStraight()
+    {
+    }
 
     public static HighStraight Create() => new();
 
