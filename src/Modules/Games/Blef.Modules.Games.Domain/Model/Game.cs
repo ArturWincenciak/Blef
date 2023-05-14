@@ -11,7 +11,6 @@ internal sealed class Game
 
     private readonly List<Deal> _deals = new();
     private readonly List<GamePlayer> _players = new();
-    private readonly GamePlayer? _lastStartingPlayer = null;
 
     public GameId Id { get; }
 
