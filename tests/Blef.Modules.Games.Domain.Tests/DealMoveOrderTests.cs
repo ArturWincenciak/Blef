@@ -8,20 +8,20 @@ namespace Blef.Modules.Games.Domain.Tests;
 public class DealMoveOrderTests
 {
     private Deal _deal = null!;
-    private DealPlayer? _player_1;
-    private DealPlayer? _player_2;
-    private DealPlayer? _player_3;
-    private DealPlayer? _player_4;
+    private DealPlayer? _player1;
+    private DealPlayer? _player2;
+    private DealPlayer? _player3;
+    private DealPlayer? _player4;
 
     [Fact]
     public void FirstPlayerCanMakeFirstMoveTest()
     {
         // arrange
-        (_deal, _player_1, _player_2) = GivenDealWithTwoPlayers();
+        (_deal, _player1, _player2) = GivenDealWithTwoPlayers();
 
         // act
         var exception = Record.Exception(() =>
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine));
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine));
 
         // assert
         Assert.Null(exception);
@@ -31,24 +31,24 @@ public class DealMoveOrderTests
     public void SecondPlayerCannotMakeFirstMoveTest()
     {
         // arrange
-        (_deal, _player_1, _player_2) = GivenDealWithTwoPlayers();
+        (_deal, _player1, _player2) = GivenDealWithTwoPlayers();
 
         // act, assert
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
-            PlayHighCardBid(_deal, _player_2, FaceCard.Nine));
+            PlayHighCardBid(_deal, _player2, FaceCard.Nine));
     }
 
     [Fact]
     public void SecondPlayerCanMakeSecondMoveTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player_2!, FaceCard.Ten));
-        Test(() => WithCheck(_deal, _player_2!));
+        Test(() => PlayHighCardBid(_deal, _player2!, FaceCard.Ten));
+        Test(() => WithCheck(_deal, _player2!));
 
         void Test(Action act)
         {
             // arrange
-            (_deal, _player_1, _player_2) = GivenDealWithTwoPlayers();
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine);
+            (_deal, _player1, _player2) = GivenDealWithTwoPlayers();
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine);
 
             // act
             var exception = Record.Exception(act);
@@ -61,14 +61,14 @@ public class DealMoveOrderTests
     [Fact]
     public void FirstPlayerCannotMakeSecondMoveTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player_1!, FaceCard.Ten));
-        Test(() => WithCheck(_deal, _player_1!));
+        Test(() => PlayHighCardBid(_deal, _player1!, FaceCard.Ten));
+        Test(() => WithCheck(_deal, _player1!));
 
         void Test(Action act)
         {
             // arrange
-            (_deal, _player_1, _player_2) = GivenDealWithTwoPlayers();
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine);
+            (_deal, _player1, _player2) = GivenDealWithTwoPlayers();
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine);
 
             // act, assert
             Assert.Throws<ThatIsNotThisPlayerTurnNowException>(act);
@@ -78,15 +78,15 @@ public class DealMoveOrderTests
     [Fact]
     public void FirstPlayerCanMakeFirstMoveInSecondRoundTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player_1!, FaceCard.Jack));
-        Test(() => WithCheck(_deal, _player_1!));
+        Test(() => PlayHighCardBid(_deal, _player1!, FaceCard.Jack));
+        Test(() => WithCheck(_deal, _player1!));
 
         void Test(Action act)
         {
             // arrange
-            (_deal, _player_1, _player_2) = GivenDealWithTwoPlayers();
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine);
-            PlayHighCardBid(_deal, _player_2, FaceCard.Ten);
+            (_deal, _player1, _player2) = GivenDealWithTwoPlayers();
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine);
+            PlayHighCardBid(_deal, _player2, FaceCard.Ten);
 
             // act
             var exception = Record.Exception(act);
@@ -99,15 +99,15 @@ public class DealMoveOrderTests
     [Fact]
     public void SecondPlayerCannotMakeFirstMoveInSecondRoundTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player_2!, FaceCard.Jack));
-        Test(() => WithCheck(_deal, _player_2!));
+        Test(() => PlayHighCardBid(_deal, _player2!, FaceCard.Jack));
+        Test(() => WithCheck(_deal, _player2!));
 
         void Test(Action act)
         {
             // arrange
-            (_deal, _player_1, _player_2) = GivenDealWithTwoPlayers();
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine);
-            PlayHighCardBid(_deal, _player_2, FaceCard.Ten);
+            (_deal, _player1, _player2) = GivenDealWithTwoPlayers();
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine);
+            PlayHighCardBid(_deal, _player2, FaceCard.Ten);
 
             // act, assert
             Assert.Throws<ThatIsNotThisPlayerTurnNowException>(act);
@@ -117,16 +117,16 @@ public class DealMoveOrderTests
     [Fact]
     public void SecondPlayerCanMakeSecondMoveInSecondRoundTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player_2!, FaceCard.Queen));
-        Test(() => WithCheck(_deal, _player_2!));
+        Test(() => PlayHighCardBid(_deal, _player2!, FaceCard.Queen));
+        Test(() => WithCheck(_deal, _player2!));
 
         void Test(Action act)
         {
             // arrange
-            (_deal, _player_1, _player_2) = GivenDealWithTwoPlayers();
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine);
-            PlayHighCardBid(_deal, _player_2, FaceCard.Ten);
-            PlayHighCardBid(_deal, _player_1, FaceCard.Jack);
+            (_deal, _player1, _player2) = GivenDealWithTwoPlayers();
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine);
+            PlayHighCardBid(_deal, _player2, FaceCard.Ten);
+            PlayHighCardBid(_deal, _player1, FaceCard.Jack);
 
             // act
             var exception = Record.Exception(act);
@@ -139,16 +139,16 @@ public class DealMoveOrderTests
     [Fact]
     public void FirstPlayerCannotMakeSecondMoveInSecondRoundTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player_1!, FaceCard.Queen));
-        Test(() => WithCheck(_deal, _player_1!));
+        Test(() => PlayHighCardBid(_deal, _player1!, FaceCard.Queen));
+        Test(() => WithCheck(_deal, _player1!));
 
         void Test(Action act)
         {
             // arrange
-            (_deal, _player_1, _player_2) = GivenDealWithTwoPlayers();
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine);
-            PlayHighCardBid(_deal, _player_2, FaceCard.Ten);
-            PlayHighCardBid(_deal, _player_1, FaceCard.Jack);
+            (_deal, _player1, _player2) = GivenDealWithTwoPlayers();
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine);
+            PlayHighCardBid(_deal, _player2, FaceCard.Ten);
+            PlayHighCardBid(_deal, _player1, FaceCard.Jack);
 
             // act, assert
             Assert.Throws<ThatIsNotThisPlayerTurnNowException>(act);
@@ -159,23 +159,23 @@ public class DealMoveOrderTests
     public void GivenFourPlayersWithManyBidsInRightOrderTest()
     {
         // arrange
-        (_deal, _player_1, _player_2, _player_3, _player_4) = GivenDealWithFourPlayers();
+        (_deal, _player1, _player2, _player3, _player4) = GivenDealWithFourPlayers();
 
         // act
         var exception = Record.Exception(() =>
         {
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine);
-            PlayHighCardBid(_deal, _player_2, FaceCard.Ten);
-            PlayHighCardBid(_deal, _player_3, FaceCard.Jack);
-            PlayHighCardBid(_deal, _player_4, FaceCard.Queen);
-            PlayHighCardBid(_deal, _player_1, FaceCard.King);
-            PlayHighCardBid(_deal, _player_2, FaceCard.Ace);
-            PlayPairBid(_deal, _player_3, FaceCard.Nine);
-            PlayPairBid(_deal, _player_4, FaceCard.Ten);
-            PlayPairBid(_deal, _player_1, FaceCard.Jack);
-            PlayPairBid(_deal, _player_2, FaceCard.Queen);
-            PlayPairBid(_deal, _player_3, FaceCard.King);
-            PlayPairBid(_deal, _player_4, FaceCard.Ace);
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine);
+            PlayHighCardBid(_deal, _player2, FaceCard.Ten);
+            PlayHighCardBid(_deal, _player3, FaceCard.Jack);
+            PlayHighCardBid(_deal, _player4, FaceCard.Queen);
+            PlayHighCardBid(_deal, _player1, FaceCard.King);
+            PlayHighCardBid(_deal, _player2, FaceCard.Ace);
+            PlayPairBid(_deal, _player3, FaceCard.Nine);
+            PlayPairBid(_deal, _player4, FaceCard.Ten);
+            PlayPairBid(_deal, _player1, FaceCard.Jack);
+            PlayPairBid(_deal, _player2, FaceCard.Queen);
+            PlayPairBid(_deal, _player3, FaceCard.King);
+            PlayPairBid(_deal, _player4, FaceCard.Ace);
         });
 
         // assert
@@ -185,16 +185,16 @@ public class DealMoveOrderTests
     [Fact]
     public void FirstPlayerCannotMakeFourthMoveTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player_1!, FaceCard.Queen));
-        Test(() => WithCheck(_deal, _player_1!));
+        Test(() => PlayHighCardBid(_deal, _player1!, FaceCard.Queen));
+        Test(() => WithCheck(_deal, _player1!));
 
         void Test(Action act)
         {
             // arrange
-            (_deal, _player_1, _player_2, _player_3, _player_4) = GivenDealWithFourPlayers();
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine);
-            PlayHighCardBid(_deal, _player_2, FaceCard.Ten);
-            PlayHighCardBid(_deal, _player_3, FaceCard.Jack);
+            (_deal, _player1, _player2, _player3, _player4) = GivenDealWithFourPlayers();
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine);
+            PlayHighCardBid(_deal, _player2, FaceCard.Ten);
+            PlayHighCardBid(_deal, _player3, FaceCard.Jack);
 
             // act, assert
             Assert.Throws<ThatIsNotThisPlayerTurnNowException>(act);
@@ -204,16 +204,16 @@ public class DealMoveOrderTests
     [Fact]
     public void SecondPlayerCannotMakeFourthMoveTest()
     {
-        Test(() => PlayHighCardBid(_deal, _player_2!, FaceCard.Queen));
-        Test(() => WithCheck(_deal, _player_2!));
+        Test(() => PlayHighCardBid(_deal, _player2!, FaceCard.Queen));
+        Test(() => WithCheck(_deal, _player2!));
 
         void Test(Action act)
         {
             // arrange
-            (_deal, _player_1, _player_2, _player_3, _player_4) = GivenDealWithFourPlayers();
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine);
-            PlayHighCardBid(_deal, _player_2, FaceCard.Ten);
-            PlayHighCardBid(_deal, _player_3, FaceCard.Jack);
+            (_deal, _player1, _player2, _player3, _player4) = GivenDealWithFourPlayers();
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine);
+            PlayHighCardBid(_deal, _player2, FaceCard.Ten);
+            PlayHighCardBid(_deal, _player3, FaceCard.Jack);
 
             // act, assert
             Assert.Throws<ThatIsNotThisPlayerTurnNowException>(act);
@@ -223,18 +223,18 @@ public class DealMoveOrderTests
     [Fact]
     public void FourthPlayerCannotMakeSecondMoveInSecondRoundTest()
     {
-        Test(() => PlayPairBid(_deal, _player_4!, FaceCard.Nine));
-        Test(() => WithCheck(_deal, _player_4!));
+        Test(() => PlayPairBid(_deal, _player4!, FaceCard.Nine));
+        Test(() => WithCheck(_deal, _player4!));
 
         void Test(Action act)
         {
             // arrange
-            (_deal, _player_1, _player_2, _player_3, _player_4) = GivenDealWithFourPlayers();
-            PlayHighCardBid(_deal, _player_1, FaceCard.Nine);
-            PlayHighCardBid(_deal, _player_2, FaceCard.Ten);
-            PlayHighCardBid(_deal, _player_3, FaceCard.Jack);
-            PlayHighCardBid(_deal, _player_4, FaceCard.Queen);
-            PlayHighCardBid(_deal, _player_1, FaceCard.Ace);
+            (_deal, _player1, _player2, _player3, _player4) = GivenDealWithFourPlayers();
+            PlayHighCardBid(_deal, _player1, FaceCard.Nine);
+            PlayHighCardBid(_deal, _player2, FaceCard.Ten);
+            PlayHighCardBid(_deal, _player3, FaceCard.Jack);
+            PlayHighCardBid(_deal, _player4, FaceCard.Queen);
+            PlayHighCardBid(_deal, _player1, FaceCard.Ace);
 
             // act, assert
             Assert.Throws<ThatIsNotThisPlayerTurnNowException>(act);
