@@ -21,5 +21,6 @@ public sealed record GetDeal(GameId Game, DealNumber Deal) : IQuery<GetDeal.Resu
     [UsedImplicitly]
     public sealed record Card(string FaceCard, string Suit);
 
+    [UsedImplicitly]
     public sealed record DealResolution(Guid CheckingPlayerId, Guid LooserPlayerId);
 }
