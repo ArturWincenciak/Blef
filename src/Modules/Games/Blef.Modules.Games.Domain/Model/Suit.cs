@@ -32,10 +32,10 @@ internal sealed class Suit
 
     private enum Type
     {
-        None,
-        Clubs,
-        Diamonds,
-        Hearts,
-        Spades
+        None = 0,
+        Clubs = 1,
+        Diamonds = 2,
+        Hearts = 4,
+        Spades = 8
     }
 }

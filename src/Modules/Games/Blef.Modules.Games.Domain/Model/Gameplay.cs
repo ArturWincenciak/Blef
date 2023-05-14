@@ -106,14 +106,16 @@ internal sealed class Gameplay
 
     public enum GameStatus
     {
-        JoiningPlayers,
-        InProgress,
-        GameIsOver
+        None = 0,
+        JoiningPlayers = 1,
+        InProgress = 2,
+        GameIsOver = 4
     }
 
     public enum DealStatus
     {
-        InProgress,
-        Finished
+        None = 0,
+        InProgress = 1,
+        Finished = 2
     }
 }
