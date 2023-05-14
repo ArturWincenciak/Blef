@@ -9,7 +9,7 @@ internal sealed class DealsCount
     {
         if (count < 0)
             throw new ArgumentOutOfRangeException(nameof(count), count,
-                "TBD"); // todo: exception
+                "Count cannot be negative");
 
         return new DealsCount(count);
     }
@@ -19,5 +19,4 @@ internal sealed class DealsCount
 
     public static int operator %(DealsCount dealsCount, PlayersCount playersCount) =>
         dealsCount._count % playersCount;
-
 }
