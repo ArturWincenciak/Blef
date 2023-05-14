@@ -71,7 +71,7 @@ internal sealed class TestBuilder
     {
         _actions.Add(async () =>
         {
-            var deal = await _gameClient.NewDeal();
+            var deal = await _gameClient.StartFirstDeal();
             _testResult.Record(action: nameof(NewDeal), NoArgument, deal);
         });
 

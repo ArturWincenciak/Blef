@@ -35,13 +35,13 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<JoinGame.Result>())!;
     }
 
-    async internal static Task<NewDeal.Result> NewDeal(this HttpClient client, GameId gameId)
+    async internal static Task<StartFirstDeal.Result> StartFirstDeal(this HttpClient client, GameId gameId)
     {
         var response = await client.PostAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/deals",
             content: null);
         response.EnsureSuccessStatusCode();
-        return (await response.Content.ReadFromJsonAsync<NewDeal.Result>())!;
+        return (await response.Content.ReadFromJsonAsync<StartFirstDeal.Result>())!;
     }
 
     async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client, GameId gameId, DealNumber deal,

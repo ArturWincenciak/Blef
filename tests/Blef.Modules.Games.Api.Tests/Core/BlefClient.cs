@@ -42,8 +42,8 @@ internal sealed class BlefClient
         return player;
     }
 
-    async internal Task<NewDeal.Result> NewDeal() =>
-        await _httpClient.NewDeal(_gameId);
+    async internal Task<StartFirstDeal.Result> StartFirstDeal() =>
+        await _httpClient.StartFirstDeal(_gameId);
 
     async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, DealNumber deal)
     {

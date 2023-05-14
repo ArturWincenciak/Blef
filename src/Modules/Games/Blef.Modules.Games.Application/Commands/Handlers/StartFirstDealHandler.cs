@@ -6,22 +6,22 @@ using JetBrains.Annotations;
 namespace Blef.Modules.Games.Application.Commands.Handlers;
 
 [UsedImplicitly]
-internal sealed class NewDealHandler : ICommandHandler<NewDeal, NewDeal.Result>
+internal sealed class StartFirstDealHandler : ICommandHandler<StartFirstDeal, StartFirstDeal.Result>
 {
     private readonly IGamesRepository _games;
     private readonly IDomainEventDispatcher _domainEventDispatcher;
 
-    public NewDealHandler(IGamesRepository games, IDomainEventDispatcher domainEventDispatcher)
+    public StartFirstDealHandler(IGamesRepository games, IDomainEventDispatcher domainEventDispatcher)
     {
         _games = games;
         _domainEventDispatcher = domainEventDispatcher;
     }
 
-    public async Task<NewDeal.Result> Handle(NewDeal command, CancellationToken cancellation)
+    public async Task<StartFirstDeal.Result> Handle(StartFirstDeal command, CancellationToken cancellation)
     {
         var game = _games.Get(command.GameId);
         var newDealStarted = game.StartFirstDeal();
         await _domainEventDispatcher.Dispatch(newDealStarted, cancellation);
-        return new NewDeal.Result(newDealStarted.Deal.Number);
+        return new StartFirstDeal.Result(newDealStarted.Deal.Number);
     }
 }
