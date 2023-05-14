@@ -27,10 +27,10 @@ internal sealed class Table
     }
 
     public bool Contains(FaceCard faceCard) =>
-        Cards.Any(card => card.FaceCard == faceCard);
+        Cards.Any(card => card.FaceCard.Equals(faceCard));
 
     public int Count(FaceCard faceCard) =>
-        Cards.Count(card => card.FaceCard == faceCard);
+        Cards.Count(card => card.FaceCard.Equals(faceCard));
 
     private static bool AreAllCardsUnique(IEnumerable<Hand> hands)
     {
