@@ -8,23 +8,26 @@ public class NextDealPlayerSetTests
     public void CanCreateMinimalNextDealPlayerSetTest()
     {
         // arrange
-        var playerId_1 = Guid.Parse("DBD6C198-DF42-4860-9984-403AF116335D");
-        var playerId_2 = Guid.Parse("1AA646E3-8B90-43B8-8F39-094AA5A7AE77");
+        var playerId1 = Guid.Parse("DBD6C198-DF42-4860-9984-403AF116335D");
+        var playerId2 = Guid.Parse("1AA646E3-8B90-43B8-8F39-094AA5A7AE77");
         var players = new NextDealPlayer[]
         {
-            new(Player: new PlayerId(playerId_1), CardsAmount: CardsAmount.Initial.AddOneCard(),
+            new(Player: new PlayerId(playerId1), 
+                CardsAmount: CardsAmount.Initial.AddOneCard(),
                 Order: Order.Create(1)),
-            new(Player: new PlayerId(playerId_2), CardsAmount.Initial, Order: Order.Create(1))
+            new(Player: new PlayerId(playerId2), 
+                CardsAmount.Initial, 
+                Order: Order.Create(1))
         };
 
         // act
         var actual = new NextDealPlayersSet(players);
 
         // assert
-        var player_1 = actual.Players.Single(player => player.Player == new PlayerId(playerId_1));
-        Assert.True(player_1.CardsAmount == CardsAmount.Initial.AddOneCard());
-        var player_2 = actual.Players.Single(player => player.Player == new PlayerId(playerId_2));
-        Assert.True(player_2.CardsAmount == CardsAmount.Initial);
+        var player1 = actual.Players.Single(player => player.Player == new PlayerId(playerId1));
+        Assert.True(player1.CardsAmount == CardsAmount.Initial.AddOneCard());
+        var player2 = actual.Players.Single(player => player.Player == new PlayerId(playerId2));
+        Assert.True(player2.CardsAmount == CardsAmount.Initial);
     }
 
     [Fact]

@@ -12,21 +12,21 @@ internal static class DealFactory
         var gameGuid = Guid.Parse("1A2C67F4-CDF5-4664-A4E7-2CF74E341401");
         var gameId = new GameId(gameGuid);
         var dealId = new DealId(gameId, dealNumber);
-        var playerGuid_1 = Guid.Parse("D657F6EE-C629-415C-AB9F-595FAF33D401");
-        var playerGuid_2 = Guid.Parse("AC10CA94-AC44-4004-9F03-6B1EA2FEB1BD");
-        var playerHand_1 = new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)});
-        var playerHand_2 = new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)});
-        var player_1 = new DealPlayer(Player: new PlayerId(playerGuid_1), playerHand_1);
-        var player_2 = new DealPlayer(Player: new PlayerId(playerGuid_2), playerHand_2);
-        var players = new[] {player_1, player_2};
+        var playerGuid1 = Guid.Parse("D657F6EE-C629-415C-AB9F-595FAF33D401");
+        var playerGuid2 = Guid.Parse("AC10CA94-AC44-4004-9F03-6B1EA2FEB1BD");
+        var playerHand1 = new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)});
+        var playerHand2 = new Hand(new Card[] {new(FaceCard.King, Suit.Diamonds)});
+        var player1 = new DealPlayer(Player: new PlayerId(playerGuid1), playerHand1);
+        var player2 = new DealPlayer(Player: new PlayerId(playerGuid2), playerHand2);
+        var players = new[] {player1, player2};
         var moveSequence = new MoveSequence(new[]
         {
-            new Move(player_1.Player, Order: Order.Create(1)),
-            new Move(player_2.Player, Order: Order.Create(2))
+            new Move(player1.Player, Order: Order.Create(1)),
+            new Move(player2.Player, Order: Order.Create(2))
         });
         var deal = new Deal(dealId, dealSet: new DealSet(playersSet: new DealPlayersSet(players), moveSequence));
 
-        return (deal, player_1, player_2);
+        return (deal, player1, player2);
     }
 
     public static (
@@ -45,25 +45,25 @@ internal static class DealFactory
         var gameGuid = Guid.Parse("F0C56541-DFDE-45B5-9A6F-FBD8CBE127D1");
         var gameId = new GameId(gameGuid);
         var dealId = new DealId(gameId, dealNumber);
-        var playerGuid_1 = Guid.Parse("54C03C56-A602-43E4-B922-CF17456FDA55");
-        var playerGuid_2 = Guid.Parse("DBE9B64F-0EC9-4A4F-A357-A482A09F3567");
-        var playerGuid_3 = Guid.Parse("D4C01AE4-C790-41EB-BF9E-DA2CC05D7A61");
-        var playerGuid_4 = Guid.Parse("59EB6325-6D26-477A-BA2F-BE0C1EF43521");
-        var player_1 = new DealPlayer(Player: new PlayerId(playerGuid_1), withFirstPlayerHand);
-        var player_2 = new DealPlayer(Player: new PlayerId(playerGuid_2), withSecondPlayerHand);
-        var player_3 = new DealPlayer(Player: new PlayerId(playerGuid_3), withThirdPlayerHand);
-        var player_4 = new DealPlayer(Player: new PlayerId(playerGuid_4), withFourthPlayerHand);
-        var players = new[] {player_1, player_2, player_3, player_4};
+        var playerGuid1 = Guid.Parse("54C03C56-A602-43E4-B922-CF17456FDA55");
+        var playerGuid2 = Guid.Parse("DBE9B64F-0EC9-4A4F-A357-A482A09F3567");
+        var playerGuid3 = Guid.Parse("D4C01AE4-C790-41EB-BF9E-DA2CC05D7A61");
+        var playerGuid4 = Guid.Parse("59EB6325-6D26-477A-BA2F-BE0C1EF43521");
+        var player1 = new DealPlayer(Player: new PlayerId(playerGuid1), withFirstPlayerHand);
+        var player2 = new DealPlayer(Player: new PlayerId(playerGuid2), withSecondPlayerHand);
+        var player3 = new DealPlayer(Player: new PlayerId(playerGuid3), withThirdPlayerHand);
+        var player4 = new DealPlayer(Player: new PlayerId(playerGuid4), withFourthPlayerHand);
+        var players = new[] {player1, player2, player3, player4};
         var moveSequence = new MoveSequence(new[]
         {
-            new Move(player_1.Player, Order: Order.Create(1)),
-            new Move(player_2.Player, Order: Order.Create(2)),
-            new Move(player_3.Player, Order: Order.Create(3)),
-            new Move(player_4.Player, Order: Order.Create(4))
+            new Move(player1.Player, Order: Order.Create(1)),
+            new Move(player2.Player, Order: Order.Create(2)),
+            new Move(player3.Player, Order: Order.Create(3)),
+            new Move(player4.Player, Order: Order.Create(4))
         });
         var deal = new Deal(dealId, dealSet: new DealSet(playersSet: new DealPlayersSet(players), moveSequence));
 
-        return (deal, player_1, player_2, player_3, player_4);
+        return (deal, player1, player2, player3, player4);
     }
 
     public static (
