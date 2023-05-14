@@ -8,7 +8,7 @@ public class PlayersCountTests
     public void CreateCountTest()
     {
         // arrange
-        int count = 4;
+        var count = 4;
 
         // act
         var actual = PlayersCount.Create(count);
@@ -21,7 +21,7 @@ public class PlayersCountTests
     public void CountCannotBeLessThanMinNumberOfPlayer()
     {
         // arrange
-        int count = 1;
+        var count = 1;
 
         // act & assert
         Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -32,7 +32,7 @@ public class PlayersCountTests
     public void CountCannotBeMoreThanMaxNumberOfPlayer()
     {
         // arrange
-        int count = 5;
+        var count = 5;
 
         // act & assert
         Assert.Throws<ArgumentOutOfRangeException>(() =>
