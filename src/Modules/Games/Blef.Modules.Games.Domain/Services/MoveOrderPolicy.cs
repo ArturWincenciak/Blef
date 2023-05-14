@@ -29,7 +29,7 @@ internal sealed class MoveOrderPolicy
         }
 
         var lastMoveInSequence = _sequence.LastMove;
-        var previousMoveWasLastInSequence = _previousMove.Order == lastMoveInSequence.Order;
+        var previousMoveWasLastInSequence = _previousMove!.Order == lastMoveInSequence.Order;
         if (previousMoveWasLastInSequence)
         {
             var firstMoveInSequence = _sequence.FirstMove;
