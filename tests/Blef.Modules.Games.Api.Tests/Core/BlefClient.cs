@@ -12,12 +12,12 @@ internal sealed class BlefClient
 {
     private readonly HttpClient _httpClient;
 
-    private PlayerId _conwayPlayerId;
 
-    private GameId _gameId;
-    private PlayerId _grahamPlayerId;
-    private PlayerId _knuthPlayerId;
-    private PlayerId _riemannPlayerId;
+    private GameId? _gameId;
+    private PlayerId? _grahamPlayerId;
+    private PlayerId? _knuthPlayerId;
+    private PlayerId? _riemannPlayerId;
+    private PlayerId? _conwayPlayerId;
 
     internal BlefClient(HttpClient httpClient) =>
         _httpClient = httpClient;
@@ -30,46 +30,46 @@ internal sealed class BlefClient
     }
 
     async internal Task<GetGame.Result> GetGameFlow() =>
-        await _httpClient.GetGameFlow(_gameId);
+        await _httpClient.GetGameFlow(_gameId!);
 
     async internal Task<GetDeal.Result> GetDealFlow(DealNumber dealNumber) =>
-        await _httpClient.GetDealFlow(_gameId, dealNumber);
+        await _httpClient.GetDealFlow(_gameId!, dealNumber);
 
     async internal Task<JoinGame.Result> JoinPlayer(WhichPlayer whichPlayer)
     {
-        var player = await _httpClient.JoinPlayer(_gameId, nick: new PlayerNick(whichPlayer.ToString()));
+        var player = await _httpClient.JoinPlayer(_gameId!, nick: new PlayerNick(whichPlayer.ToString()));
         SetPlayerId(whichPlayer, playerId: new PlayerId(player.PlayerId));
         return player;
     }
 
     async internal Task<StartFirstDeal.Result> StartFirstDeal() =>
-        await _httpClient.StartFirstDeal(_gameId);
+        await _httpClient.StartFirstDeal(_gameId!);
 
     async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, DealNumber deal)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.GetCards(_gameId, deal, playerId);
+        return await _httpClient.GetCards(_gameId!, deal, playerId);
     }
 
     async internal Task Bid(WhichPlayer whichPlayer, string bid)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.BidWithSuccess(_gameId, playerId, bid);
+        await _httpClient.BidWithSuccess(_gameId!, playerId, bid);
     }
 
     async internal Task Check(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.CheckWithSuccess(_gameId, playerId);
+        await _httpClient.CheckWithSuccess(_gameId!, playerId);
     }
 
     private PlayerId GetPlayerId(WhichPlayer whichPlayer) =>
         whichPlayer switch
         {
-            WhichPlayer.Knuth => _knuthPlayerId,
-            WhichPlayer.Graham => _grahamPlayerId,
-            WhichPlayer.Riemann => _riemannPlayerId,
-            WhichPlayer.Conway => _conwayPlayerId,
+            WhichPlayer.Knuth => _knuthPlayerId!,
+            WhichPlayer.Graham => _grahamPlayerId!,
+            WhichPlayer.Riemann => _riemannPlayerId!,
+            WhichPlayer.Conway => _conwayPlayerId!,
             _ => throw new ArgumentOutOfRangeException(nameof(whichPlayer), whichPlayer,
                 "Unknown player, please provide a valid player")
         };
