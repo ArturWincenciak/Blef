@@ -3,7 +3,6 @@ using Blef.Modules.Games.Domain.Model;
 using static Blef.Modules.Games.Domain.Tests.Extensions.BidFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.DealFactory;
 
-
 namespace Blef.Modules.Games.Domain.Tests;
 
 public class BidDealTests

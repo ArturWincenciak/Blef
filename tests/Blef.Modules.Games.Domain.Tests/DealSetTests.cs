@@ -52,7 +52,6 @@ public class DealSetTests
                 Hand: new Hand(new Card[] {new(FaceCard.King, Suit.Clubs)}))
         }), moveSequence: null!));
 
-
     [Fact]
     public void CannotCreateDealSetWithNotAllPlayersPresentInMoveSequenceTest() =>
         Assert.Throws<ArgumentException>(() =>

@@ -26,7 +26,6 @@ public class MoveSequenceTests
     public void CannotCreateMoveSequenceWithEmptyMovesTest() =>
         Assert.Throws<ArgumentOutOfRangeException>(() => new MoveSequence(Array.Empty<Move>()));
 
-
     [Fact]
     public void CreateMoveSequenceWithThreePlayersTest()
     {
@@ -202,7 +201,6 @@ public class MoveSequenceTests
         Assert.Equal(move3, actual3);
         Assert.Equal(move4, actual4);
     }
-
 
     [Fact]
     public void GetMoveForOrderTest()
