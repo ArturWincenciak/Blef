@@ -38,10 +38,10 @@ internal sealed class GamesController : ModuleControllerBase
     }
 
     [HttpPost($"{GAME_ID}/{DEALS}")]
-    public async Task<IActionResult> NewDeal(Guid gameId, CancellationToken cancellation)
+    public async Task<IActionResult> StartFirstDeal(Guid gameId, CancellationToken cancellation)
     {
-        var cmd = new NewDeal(new GameId(gameId));
-        var deal = await _commandDispatcher.Dispatch<NewDeal, NewDeal.Result>(cmd, cancellation);
+        var cmd = new StartFirstDeal(new GameId(gameId));
+        var deal = await _commandDispatcher.Dispatch<StartFirstDeal, StartFirstDeal.Result>(cmd, cancellation);
         return Created(uri: $"{GameUri(gameId)}/{DEALS}/{deal.Number}", deal);
     }
 
