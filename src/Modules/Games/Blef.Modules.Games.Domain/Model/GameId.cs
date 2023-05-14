@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Domain.Model;
 
-// todo: make internal (here and others similar)
+// todo: change to internal
 public sealed record GameId(Guid Id)
 {
     public Guid Id { get; } = Id == Guid.Empty
