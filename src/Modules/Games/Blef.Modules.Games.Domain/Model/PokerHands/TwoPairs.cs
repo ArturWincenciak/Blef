@@ -13,7 +13,7 @@ internal sealed class TwoPairs : PokerHand
         if (first == second)
             throw new ArgumentException("Two pairs cannot have the same rank");
 
-        (_higher, _lower) = first > second
+        (_higher, _lower) = first.IsBetterThen(second)
             ? (first, second)
             : (second, first);
     }

@@ -11,7 +11,7 @@ public class CardTests
         var actual = new Card(FaceCard.Ace, Suit.Clubs);
 
         // assert
-        Assert.True(FaceCard.Ace == actual.FaceCard);
+        Assert.True(FaceCard.Ace.Equals(actual.FaceCard));
         Assert.Equal(Suit.Clubs, actual.Suit);
     }
 

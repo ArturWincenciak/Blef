@@ -17,40 +17,40 @@ public class FaceCardTests
     [Fact]
     public void CompareTest()
     {
-        Assert.True(FaceCard.King < FaceCard.Ace);
-        Assert.True(FaceCard.Queen < FaceCard.King);
-        Assert.True(FaceCard.Jack < FaceCard.Queen);
-        Assert.True(FaceCard.Ten < FaceCard.Jack);
-        Assert.True(FaceCard.Nine < FaceCard.Ten);
+        Assert.False(FaceCard.King.IsBetterThen(FaceCard.Ace));
+        Assert.False(FaceCard.Queen.IsBetterThen(FaceCard.King));
+        Assert.False(FaceCard.Jack.IsBetterThen(FaceCard.Queen));
+        Assert.False(FaceCard.Ten.IsBetterThen(FaceCard.Jack));
+        Assert.False(FaceCard.Nine.IsBetterThen(FaceCard.Ten));
 
-        Assert.True(FaceCard.Ace > FaceCard.King);
-        Assert.True(FaceCard.King > FaceCard.Queen);
-        Assert.True(FaceCard.Queen > FaceCard.Jack);
-        Assert.True(FaceCard.Jack > FaceCard.Ten);
-        Assert.True(FaceCard.Ten > FaceCard.Nine);
+        Assert.True(FaceCard.Ace.IsBetterThen(FaceCard.King));
+        Assert.True(FaceCard.King.IsBetterThen(FaceCard.Queen));
+        Assert.True(FaceCard.Queen.IsBetterThen(FaceCard.Jack));
+        Assert.True(FaceCard.Jack.IsBetterThen(FaceCard.Ten));
+        Assert.True(FaceCard.Ten.IsBetterThen(FaceCard.Nine));
 
-        Assert.True(FaceCard.Ace == FaceCard.Ace);
-        Assert.True(FaceCard.Ace != FaceCard.King);
-        Assert.True(FaceCard.King != FaceCard.Ace);
-        Assert.True(FaceCard.King < FaceCard.Ace);
-        Assert.True(FaceCard.Ace > FaceCard.King);
+        Assert.True(FaceCard.Ace.Equals(FaceCard.Ace));
+        Assert.False(FaceCard.Ace.Equals(FaceCard.King));
+        Assert.False(FaceCard.King.Equals(FaceCard.Ace));
+        Assert.False(FaceCard.King.IsBetterThen(FaceCard.Ace));
+        Assert.True(FaceCard.Ace.IsBetterThen(FaceCard.King));
 
-        Assert.True(FaceCard.Nine == FaceCard.Nine);
-        Assert.True(FaceCard.Nine != FaceCard.Ten);
-        Assert.True(FaceCard.Ten != FaceCard.Nine);
-        Assert.True(FaceCard.Nine < FaceCard.Ten);
-        Assert.True(FaceCard.Ten > FaceCard.Nine);
+        Assert.True(FaceCard.Nine.Equals(FaceCard.Nine));
+        Assert.False(FaceCard.Nine.Equals(FaceCard.Ten));
+        Assert.False(FaceCard.Ten.Equals(FaceCard.Nine));
+        Assert.False(FaceCard.Nine.IsBetterThen(FaceCard.Ten));
+        Assert.True(FaceCard.Ten.IsBetterThen(FaceCard.Nine));
 
-        Assert.True(FaceCard.Jack == FaceCard.Jack);
-        Assert.True(FaceCard.Jack != FaceCard.Queen);
-        Assert.True(FaceCard.Queen != FaceCard.Jack);
-        Assert.True(FaceCard.Jack < FaceCard.Queen);
-        Assert.True(FaceCard.Queen > FaceCard.Jack);
+        Assert.True(FaceCard.Jack.Equals(FaceCard.Jack));
+        Assert.False(FaceCard.Jack.Equals(FaceCard.Queen));
+        Assert.False(FaceCard.Queen.Equals(FaceCard.Jack));
+        Assert.False(FaceCard.Jack.IsBetterThen(FaceCard.Queen));
+        Assert.True(FaceCard.Queen.IsBetterThen(FaceCard.Jack));
 
-        Assert.True(FaceCard.King == FaceCard.King);
-        Assert.True(FaceCard.Jack != FaceCard.King);
-        Assert.True(FaceCard.King != FaceCard.Jack);
-        Assert.True(FaceCard.Jack < FaceCard.King);
-        Assert.True(FaceCard.King > FaceCard.Jack);
+        Assert.True(FaceCard.King.Equals(FaceCard.King));
+        Assert.False(FaceCard.Jack.Equals(FaceCard.King));
+        Assert.False(FaceCard.King.Equals(FaceCard.Jack));
+        Assert.False(FaceCard.Jack.IsBetterThen(FaceCard.King));
+        Assert.True(FaceCard.King.IsBetterThen(FaceCard.Jack));
     }
 }

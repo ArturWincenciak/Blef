@@ -24,17 +24,8 @@ internal sealed class FaceCard
     public int GetRank() =>
         (int) _faceCard;
 
-    public static bool operator ==(FaceCard first, FaceCard second) =>
-        first.GetRank() == second.GetRank();
-
-    public static bool operator !=(FaceCard first, FaceCard second) =>
-        !(first == second);
-
-    public static bool operator >(FaceCard first, FaceCard second) =>
-        first.GetRank() > second.GetRank();
-
-    public static bool operator <(FaceCard first, FaceCard second) =>
-        !(first > second);
+    public bool IsBetterThen(FaceCard other) =>
+        GetRank() > other.GetRank();
 
     private bool Equals(FaceCard other) =>
         _faceCard == other._faceCard;
