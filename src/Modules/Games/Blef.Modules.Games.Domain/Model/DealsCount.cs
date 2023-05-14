@@ -1,6 +1,5 @@
 ﻿namespace Blef.Modules.Games.Domain.Model;
 
-// todo: test this class
 internal sealed class DealsCount
 {
     private readonly int _count;
