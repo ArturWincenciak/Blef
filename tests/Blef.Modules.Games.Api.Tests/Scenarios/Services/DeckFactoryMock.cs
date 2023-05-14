@@ -7,7 +7,7 @@ internal sealed class DeckFactoryMock : IDeckFactory
 {
     public Deck Create()
     {
-        var cards = new []
+        var cards = new[]
         {
             new Card(FaceCard.Ace, Suit.Diamonds),
             new Card(FaceCard.Ace, Suit.Spades),

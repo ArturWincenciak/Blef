@@ -14,15 +14,15 @@ public class ValidateGameInProgressTests
         TestCase((game, player1, player2) =>
         {
             PlayExistingHighCardBid(game, player1);
-            game.Check(new(player2));
+            game.Check(new CheckingPlayer(player2));
         });
 
         void TestCase(Action<Game, PlayerId, PlayerId> act)
         {
             // arrange
             var game = GivenGame();
-            var grahamJoined = game.Join(new("Graham"));
-            var knuthJoined = game.Join(new("Knuth"));
+            var grahamJoined = game.Join(new PlayerNick("Graham"));
+            var knuthJoined = game.Join(new PlayerNick("Knuth"));
             game.StartFirstDeal();
 
             // act
@@ -38,14 +38,14 @@ public class ValidateGameInProgressTests
     public void CannotMakeMoveWhenGameNotStartedTest()
     {
         TestCase((game, player1, _) => PlayExistingHighCardBid(game, player1));
-        TestCase((game, _, player2) => game.Check(new(player2)));
+        TestCase((game, _, player2) => game.Check(new CheckingPlayer(player2)));
 
         void TestCase(Action<Game, PlayerId, PlayerId> act)
         {
             // arrange
             var game = GivenGame();
-            var grahamJoined = game.Join(new("Graham"));
-            var knuthJoined = game.Join(new("Knuth"));
+            var grahamJoined = game.Join(new PlayerNick("Graham"));
+            var knuthJoined = game.Join(new PlayerNick("Knuth"));
 
             // act
             Assert.Throws<GameNotStartedException>(() =>
@@ -57,14 +57,14 @@ public class ValidateGameInProgressTests
     public void CannotMakeMoveWhenGameIsOverTest()
     {
         TestCase((game, player1, _) => PlayExistingHighCardBid(game, player1));
-        TestCase((game, _, player2) => game.Check(new(player2)));
+        TestCase((game, _, player2) => game.Check(new CheckingPlayer(player2)));
 
         void TestCase(Action<Game, PlayerId, PlayerId> act)
         {
             // arrange
             var game = GivenGame();
-            var grahamJoined = game.Join(new("Graham"));
-            var knuthJoined = game.Join(new("Knuth"));
+            var grahamJoined = game.Join(new PlayerNick("Graham"));
+            var knuthJoined = game.Join(new PlayerNick("Knuth"));
             game.StartFirstDeal();
             GameOver(game, grahamJoined.Player, knuthJoined.Player);
 
@@ -76,25 +76,25 @@ public class ValidateGameInProgressTests
             {
                 // first deal lost by graham
                 PlayNotExistingLowStraightBid(game, graham.Id);
-                game.Check(new(knuth.Id));
+                game.Check(new CheckingPlayer(knuth.Id));
 
                 // second deal lost by graham
                 PlayHighCardBid(game, knuth.Id, FaceCard.Nine);
                 PlayNotExistingLowStraightBid(game, graham.Id);
-                game.Check(new(knuth.Id));
+                game.Check(new CheckingPlayer(knuth.Id));
 
                 // third deal lost by graham
                 PlayNotExistingLowStraightBid(game, graham.Id);
-                game.Check(new(knuth.Id));
+                game.Check(new CheckingPlayer(knuth.Id));
 
                 // fourth deal lost by graham
                 PlayHighCardBid(game, knuth.Id, FaceCard.Nine);
                 PlayNotExistingLowStraightBid(game, graham.Id);
-                game.Check(new(knuth.Id));
+                game.Check(new CheckingPlayer(knuth.Id));
 
                 // fifth deal lost by graham
                 PlayNotExistingLowStraightBid(game, graham.Id);
-                game.Check(new(knuth.Id));
+                game.Check(new CheckingPlayer(knuth.Id));
             }
         }
     }

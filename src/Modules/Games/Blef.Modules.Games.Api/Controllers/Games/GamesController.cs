@@ -48,7 +48,7 @@ internal sealed class GamesController : ModuleControllerBase
     [HttpPost($"{GAME_ID}/{PLAYERS}")]
     public async Task<IActionResult> JoinGame(Guid gameId, JoinGameCommand command, CancellationToken cancellation)
     {
-        var cmd = new JoinGame(GameId: new GameId(gameId), new(command.Nick));
+        var cmd = new JoinGame(GameId: new GameId(gameId), Nick: new PlayerNick(command.Nick));
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
         return Created(uri: $"{PlayerUri(gameId, player.PlayerId)}", player);
     }

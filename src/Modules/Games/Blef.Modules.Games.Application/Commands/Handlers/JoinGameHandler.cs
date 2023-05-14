@@ -8,8 +8,8 @@ namespace Blef.Modules.Games.Application.Commands.Handlers;
 [UsedImplicitly]
 internal sealed class JoinGameHandler : ICommandHandler<JoinGame, JoinGame.Result>
 {
-    private readonly IGamesRepository _games;
     private readonly IDomainEventDispatcher _domainEventDispatcher;
+    private readonly IGamesRepository _games;
 
     public JoinGameHandler(IGamesRepository games, IDomainEventDispatcher domainEventDispatcher)
     {

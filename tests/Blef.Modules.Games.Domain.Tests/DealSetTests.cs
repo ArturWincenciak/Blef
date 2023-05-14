@@ -15,15 +15,15 @@ public class DealSetTests
         var exception = Record.Exception(() =>
         {
             return new DealSet(
-                new DealPlayersSet(new[]
+                playersSet: new DealPlayersSet(new[]
                 {
-                    new DealPlayer(playerId1, new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)})),
-                    new DealPlayer(playerId2, new Hand(new Card[] {new(FaceCard.King, Suit.Clubs)}))
+                    new DealPlayer(playerId1, Hand: new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)})),
+                    new DealPlayer(playerId2, Hand: new Hand(new Card[] {new(FaceCard.King, Suit.Clubs)}))
                 }),
-                new MoveSequence(new[]
+                moveSequence: new MoveSequence(new[]
                 {
                     new Move(playerId1, Order.First),
-                    new Move(playerId2, Order.First.Next),
+                    new Move(playerId2, Order.First.Next)
                 }));
         });
 
@@ -33,24 +33,24 @@ public class DealSetTests
 
     [Fact]
     public void CannotCreateDealSetWithNullPlayersSetTest() =>
-        Assert.Throws<ArgumentNullException>(() => new DealSet(null!,
-            new MoveSequence(new Move[]
+        Assert.Throws<ArgumentNullException>(() => new DealSet(playersSet: null!,
+            moveSequence: new MoveSequence(new Move[]
             {
-                new(new(Guid.Parse("1DC23566-3698-4621-93E0-E638C97A3472")), Order.First),
-                new(new(Guid.Parse("4E550BC5-4ACC-4C09-A008-38243D6A5A05")), Order.First.Next),
+                new(Player: new PlayerId(Guid.Parse("1DC23566-3698-4621-93E0-E638C97A3472")), Order.First),
+                new(Player: new PlayerId(Guid.Parse("4E550BC5-4ACC-4C09-A008-38243D6A5A05")), Order.First.Next)
             })));
 
     [Fact]
     public void CannotCreateDealSetWithNullMoveSequenceTest() =>
-        Assert.Throws<ArgumentNullException>(() => new DealSet(new DealPlayersSet(new[]
+        Assert.Throws<ArgumentNullException>(() => new DealSet(playersSet: new DealPlayersSet(new[]
         {
             new DealPlayer(
-                new PlayerId(Guid.Parse("1DC23566-3698-4621-93E0-E638C97A3472")),
-                new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)})),
+                Player: new PlayerId(Guid.Parse("1DC23566-3698-4621-93E0-E638C97A3472")),
+                Hand: new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)})),
             new DealPlayer(
-                new PlayerId(Guid.Parse("4E550BC5-4ACC-4C09-A008-38243D6A5A05")),
-                new Hand(new Card[] {new(FaceCard.King, Suit.Clubs)}))
-        }), null!));
+                Player: new PlayerId(Guid.Parse("4E550BC5-4ACC-4C09-A008-38243D6A5A05")),
+                Hand: new Hand(new Card[] {new(FaceCard.King, Suit.Clubs)}))
+        }), moveSequence: null!));
 
 
     [Fact]
@@ -64,15 +64,15 @@ public class DealSetTests
 
             // act
             return new DealSet(
-                new DealPlayersSet(new[]
+                playersSet: new DealPlayersSet(new[]
                 {
-                    new DealPlayer(playerId1, new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)})),
-                    new DealPlayer(playerId2, new Hand(new Card[] {new(FaceCard.King, Suit.Clubs)}))
+                    new DealPlayer(playerId1, Hand: new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)})),
+                    new DealPlayer(playerId2, Hand: new Hand(new Card[] {new(FaceCard.King, Suit.Clubs)}))
                 }),
-                new MoveSequence(new[]
+                moveSequence: new MoveSequence(new[]
                 {
                     new Move(playerId1, Order.First),
-                    new Move(someOtherPlayer, Order.First.Next),
+                    new Move(someOtherPlayer, Order.First.Next)
                 }));
         });
 }

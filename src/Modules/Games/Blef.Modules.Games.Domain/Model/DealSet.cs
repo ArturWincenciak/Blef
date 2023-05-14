@@ -7,10 +7,10 @@ internal sealed class DealSet
 
     public DealSet(DealPlayersSet playersSet, MoveSequence moveSequence)
     {
-        if(playersSet is null)
+        if (playersSet is null)
             throw new ArgumentNullException(nameof(playersSet));
 
-        if(moveSequence is null)
+        if (moveSequence is null)
             throw new ArgumentNullException(nameof(moveSequence));
 
         if (NotAllPlayersPresent(playersSet, moveSequence))

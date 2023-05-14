@@ -56,7 +56,7 @@ internal sealed class Game
         var deal = _deals.Last();
         deal.Bid(newBid);
 
-        return new (Id, deal.Id.Deal, newBid.Player, newBid.PokerHand);
+        return new BidPlaced(Id, deal.Id.Deal, newBid.Player, newBid.PokerHand);
     }
 
     public IEnumerable<IDomainEvent> Check(CheckingPlayer checkingPlayer)
@@ -76,11 +76,11 @@ internal sealed class Game
         {
             var winner = _players.Single(player => player.IsInTheGame);
             var gameOver = new GameOver(Id, winner);
-            return new IDomainEvent[] { checkPlaced, gameOver };
+            return new IDomainEvent[] {checkPlaced, gameOver};
         }
 
         var nextDealStarted = NewDeal();
-        return new IDomainEvent[] { checkPlaced, nextDealStarted };
+        return new IDomainEvent[] {checkPlaced, nextDealStarted};
     }
 
     private DealStarted NewDeal()
@@ -90,9 +90,9 @@ internal sealed class Game
         var nextDealPlayers = CreateNextDealPlayers();
         var nextDealSet = _croupier.Deal(nextDealPlayers);
 
-        _deals.Add(new(nextDealId, nextDealSet));
+        _deals.Add(new Deal(nextDealId, nextDealSet));
 
-        return new (Id, nextDealId.Deal, nextDealSet.PlayersSet.Players);
+        return new DealStarted(Id, nextDealId.Deal, nextDealSet.PlayersSet.Players);
     }
 
     private NextDealPlayersSet CreateNextDealPlayers()
@@ -113,7 +113,7 @@ internal sealed class Game
                 return new NextDealPlayer(inGamePlayer.Id, inGamePlayer.CardsAmount, nextOrder);
             });
 
-        return new(nextDealPlayers);
+        return new NextDealPlayersSet(nextDealPlayers);
     }
 
     private bool IsGameStarted() =>

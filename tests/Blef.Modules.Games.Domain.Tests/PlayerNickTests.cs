@@ -14,7 +14,7 @@ public class PlayerNickTests
         var actual = new PlayerNick(nick);
 
         // assert
-        Assert.Equal("Kent", actual.Nick);
+        Assert.Equal(expected: "Kent", actual.Nick);
     }
 
     [Fact]

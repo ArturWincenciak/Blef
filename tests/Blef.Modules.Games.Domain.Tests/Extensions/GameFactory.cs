@@ -22,8 +22,8 @@ internal static class GameFactory
         GivenStartedGameWithTwoPlayers()
     {
         var game = GivenGame();
-        var grahamJoined = game.Join(new("Graham"));
-        var knuthJoined = game.Join(new("Knuth"));
+        var grahamJoined = game.Join(new PlayerNick("Graham"));
+        var knuthJoined = game.Join(new PlayerNick("Knuth"));
         game.StartFirstDeal();
         return (game, grahamJoined, knuthJoined);
     }
@@ -36,9 +36,9 @@ internal static class GameFactory
         GivenStartedGameWithThreePlayers()
     {
         var game = GivenGame();
-        var grahamJoined = game.Join(new("Graham"));
-        var knuthJoined = game.Join(new("Knuth"));
-        var planckJoined = game.Join(new("Planck"));
+        var grahamJoined = game.Join(new PlayerNick("Graham"));
+        var knuthJoined = game.Join(new PlayerNick("Knuth"));
+        var planckJoined = game.Join(new PlayerNick("Planck"));
         game.StartFirstDeal();
         return (game, grahamJoined, knuthJoined, planckJoined);
     }
@@ -52,10 +52,10 @@ internal static class GameFactory
         GivenStartedGameWithFourPlayers()
     {
         var game = GivenGame();
-        var grahamJoined = game.Join(new("Graham"));
-        var knuthJoined = game.Join(new("Knuth"));
-        var planckJoined = game.Join(new("Planck"));
-        var riemannJoined = game.Join(new("Riemann"));
+        var grahamJoined = game.Join(new PlayerNick("Graham"));
+        var knuthJoined = game.Join(new PlayerNick("Knuth"));
+        var planckJoined = game.Join(new PlayerNick("Planck"));
+        var riemannJoined = game.Join(new PlayerNick("Riemann"));
         game.StartFirstDeal();
         return (game, grahamJoined, knuthJoined, planckJoined, riemannJoined);
     }

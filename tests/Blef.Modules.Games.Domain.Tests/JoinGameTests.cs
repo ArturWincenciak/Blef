@@ -15,10 +15,10 @@ public class JoinGameTests
         var playerNick = "Graham";
 
         // act
-        var gamePlayerJoined = game.Join(new(playerNick));
+        var gamePlayerJoined = game.Join(new PlayerNick(playerNick));
 
         // assert
-        AssertJoinedPlayer(game.Id, new(playerNick), gamePlayerJoined);
+        AssertJoinedPlayer(game.Id, expectedNick: new PlayerNick(playerNick), gamePlayerJoined);
     }
 
     [Fact]
@@ -32,16 +32,16 @@ public class JoinGameTests
         var playerNick4 = "Fourth player";
 
         // act
-        var gamePlayerJoined1 = game.Join(new(playerNick1));
-        var gamePlayerJoined2 = game.Join(new(playerNick2));
-        var gamePlayerJoined3 = game.Join(new(playerNick3));
-        var gamePlayerJoined4 = game.Join(new(playerNick4));
+        var gamePlayerJoined1 = game.Join(new PlayerNick(playerNick1));
+        var gamePlayerJoined2 = game.Join(new PlayerNick(playerNick2));
+        var gamePlayerJoined3 = game.Join(new PlayerNick(playerNick3));
+        var gamePlayerJoined4 = game.Join(new PlayerNick(playerNick4));
 
         // assert
-        AssertJoinedPlayer(game.Id, new(playerNick1), gamePlayerJoined1);
-        AssertJoinedPlayer(game.Id, new(playerNick2), gamePlayerJoined2);
-        AssertJoinedPlayer(game.Id, new(playerNick3), gamePlayerJoined3);
-        AssertJoinedPlayer(game.Id, new(playerNick4), gamePlayerJoined4);
+        AssertJoinedPlayer(game.Id, expectedNick: new PlayerNick(playerNick1), gamePlayerJoined1);
+        AssertJoinedPlayer(game.Id, expectedNick: new PlayerNick(playerNick2), gamePlayerJoined2);
+        AssertJoinedPlayer(game.Id, expectedNick: new PlayerNick(playerNick3), gamePlayerJoined3);
+        AssertJoinedPlayer(game.Id, expectedNick: new PlayerNick(playerNick4), gamePlayerJoined4);
     }
 
     [Fact]
@@ -53,11 +53,11 @@ public class JoinGameTests
         // act
         Assert.Throws<TooManyPlayersException>(() =>
         {
-            game.Join(new("Nick 1"));
-            game.Join(new("Nick 2"));
-            game.Join(new("Nick 3"));
-            game.Join(new("Nick 4"));
-            game.Join(new("Nick 5"));
+            game.Join(new PlayerNick("Nick 1"));
+            game.Join(new PlayerNick("Nick 2"));
+            game.Join(new PlayerNick("Nick 3"));
+            game.Join(new PlayerNick("Nick 4"));
+            game.Join(new PlayerNick("Nick 5"));
         });
     }
 
@@ -70,8 +70,8 @@ public class JoinGameTests
         // act
         Assert.Throws<PlayerAlreadyJoinedException>(() =>
         {
-            game.Join(new("Graham"));
-            game.Join(new("Graham"));
+            game.Join(new PlayerNick("Graham"));
+            game.Join(new PlayerNick("Graham"));
         });
     }
 
@@ -80,15 +80,15 @@ public class JoinGameTests
     {
         // arrange
         var game = GivenGame();
-        game.Join(new("Graham"));
-        game.Join(new("Knuth"));
+        game.Join(new PlayerNick("Graham"));
+        game.Join(new PlayerNick("Knuth"));
         game.StartFirstDeal();
 
         // assert
         Assert.Throws<JoinGameAlreadyStartedException>(() =>
         {
             // act
-            game.Join(new("Conway"));
+            game.Join(new PlayerNick("Conway"));
         });
     }
 

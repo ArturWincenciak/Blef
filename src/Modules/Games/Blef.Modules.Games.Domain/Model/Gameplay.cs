@@ -4,34 +4,75 @@ namespace Blef.Modules.Games.Domain.Model;
 
 internal sealed class Gameplay
 {
+    public enum DealStatus
+    {
+        None = 0,
+        InProgress = 1,
+        Finished = 2
+    }
+
+    public enum GameStatus
+    {
+        None = 0,
+        JoiningPlayers = 1,
+        InProgress = 2,
+        GameIsOver = 4
+    }
+
+    private readonly Dictionary<DealNumber, DealDetails> _deals = new();
+    private readonly List<PlayerEntry> _gamePlayers = new();
+
+    private GamePlayer? _winner;
     public GameId Id { get; }
 
-    private GamePlayer? _winner = null;
-    private readonly List<PlayerEntry> _gamePlayers = new();
-    private readonly Dictionary<DealNumber, DealDetails> _deals = new();
+    private IEnumerable<PlayerEntry> GamePlayerEntries =>
+        _gamePlayers;
+
+    private IEnumerable<DealSummary> Deals =>
+        _deals.Select(deal => new DealSummary(
+            deal.Key,
+            Status: deal.Value.DealResolution is not null
+                ? DealStatus.Finished
+                : DealStatus.InProgress,
+            deal.Value.DealResolution));
+
+    private GameStatus Status
+    {
+        get
+        {
+            if (_deals.Count == 0)
+                return GameStatus.JoiningPlayers;
+
+            if (_winner is not null)
+                return GameStatus.GameIsOver;
+
+            return GameStatus.InProgress;
+        }
+    }
 
     public Gameplay(GameId id) =>
         Id = id;
 
     public void OnPlayerJoined(GamePlayer gamePlayer) =>
-        _gamePlayers.Add(new(gamePlayer, _gamePlayers.Count + 1));
+        _gamePlayers.Add(new PlayerEntry(gamePlayer, JoiningOrder: _gamePlayers.Count + 1));
 
     public void OnDealStarted(DealNumber dealNumber, IEnumerable<DealPlayer> dealPlayers) =>
-        _deals.Add(dealNumber, new(dealPlayers, new()));
+        _deals.Add(dealNumber, value: new DealDetails(dealPlayers, Bids: new List<BidRecord>()));
 
     public void OnBidPlaced(DealNumber dealNumber, PlayerId playerId, PokerHand pokerHand)
     {
         var deal = _deals[dealNumber];
         var bid = new Bid(pokerHand, playerId);
         var order = deal.Bids.Count + 1;
-        deal.Bids.Add(new (order, bid));
+        deal.Bids.Add(new BidRecord(order, bid));
     }
 
     public void OnCheckPlaced(DealNumber dealNumber, CheckingPlayer checkingPlayer, LooserPlayer looserPlayer)
     {
         var deal = _deals[dealNumber];
-        _deals[dealNumber] = deal with {
-            DealResolution = new (checkingPlayer, looserPlayer)
+        _deals[dealNumber] = deal with
+        {
+            DealResolution = new DealResolution(checkingPlayer, looserPlayer)
         };
     }
 
@@ -49,31 +90,6 @@ internal sealed class Gameplay
         var deal = _deals[dealNumber];
         var player = deal.Players.Single(player => player.Player == playerId);
         return player.Hand.Cards;
-    }
-
-    private IEnumerable<PlayerEntry> GamePlayerEntries =>
-        _gamePlayers;
-
-    private IEnumerable<DealSummary> Deals =>
-        _deals.Select(deal => new DealSummary(
-            Number: deal.Key,
-            Status: deal.Value.DealResolution is not null
-                ? DealStatus.Finished
-                : DealStatus.InProgress,
-            DealResolution: deal.Value.DealResolution));
-
-    private GameStatus Status
-    {
-        get
-        {
-            if (_deals.Count == 0)
-                return GameStatus.JoiningPlayers;
-
-            if (_winner is not null)
-                return GameStatus.GameIsOver;
-
-            return GameStatus.InProgress;
-        }
     }
 
     internal sealed record Game(
@@ -103,19 +119,4 @@ internal sealed class Gameplay
     internal sealed record BidRecord(
         int Order,
         Bid Bid);
-
-    public enum GameStatus
-    {
-        None = 0,
-        JoiningPlayers = 1,
-        InProgress = 2,
-        GameIsOver = 4
-    }
-
-    public enum DealStatus
-    {
-        None = 0,
-        InProgress = 1,
-        Finished = 2
-    }
 }

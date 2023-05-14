@@ -4,18 +4,24 @@ internal sealed class MoveSequence
 {
     private readonly IEnumerable<Move> _moves;
 
+    public IEnumerable<PlayerId> Players => _moves.Select(move => move.Player);
+
+    public Move FirstMove => _moves.Single(move => move.Order == Order.First);
+
+    public Move LastMove => _moves.Single(move => move.Order == Order.Create(_moves.Count()));
+
     public MoveSequence(IEnumerable<Move> moves)
     {
         if (moves is null)
             throw new ArgumentNullException(nameof(moves));
 
         if (moves.Count() < MIN_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(nameof(moves), moves.Count(),
-                $"Move sequence should have at least {MIN_NUMBER_OF_PLAYERS} players");
+            throw new ArgumentOutOfRangeException(paramName: nameof(moves), actualValue: moves.Count(),
+                message: $"Move sequence should have at least {MIN_NUMBER_OF_PLAYERS} players");
 
         if (moves.Count() > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(nameof(moves), moves.Count(),
-                $"Move sequence cannot contain more than {MAX_NUMBER_OF_PLAYERS} players");
+            throw new ArgumentOutOfRangeException(paramName: nameof(moves), actualValue: moves.Count(),
+                message: $"Move sequence cannot contain more than {MAX_NUMBER_OF_PLAYERS} players");
 
         if (AreAllPlayersUnique(moves) == false)
             throw new ArgumentException("No player duplicates are allowed");
@@ -28,12 +34,6 @@ internal sealed class MoveSequence
 
         _moves = moves;
     }
-
-    public IEnumerable<PlayerId> Players => _moves.Select(move => move.Player);
-
-    public Move FirstMove => _moves.Single(move => move.Order == Order.First);
-
-    public Move LastMove => _moves.Single(move => move.Order == Order.Create(_moves.Count()));
 
     public Move GetMove(PlayerId movingPlayer) =>
         _moves.Single(move => move.Player == movingPlayer);
@@ -56,7 +56,7 @@ internal sealed class MoveSequence
             if (move.Order != expectedOrder)
                 return false;
 
-            if(expectedOrder != Order.Create(MAX_NUMBER_OF_PLAYERS))
+            if (expectedOrder != Order.Create(MAX_NUMBER_OF_PLAYERS))
                 expectedOrder = expectedOrder.Next;
         }
 

@@ -13,10 +13,10 @@ public class DealOrderPhysicTests
         var orderPhysic = DealOrderPhysic.Create(playersCount, dealsPlayedCount);
 
         // act, assert
-        Assert.Equal(Order.Create(1), orderPhysic.ShiftedOrder(Order.Create(1)));
-        Assert.Equal(Order.Create(2), orderPhysic.ShiftedOrder(Order.Create(2)));
-        Assert.Equal(Order.Create(3), orderPhysic.ShiftedOrder(Order.Create(3)));
-        Assert.Equal(Order.Create(4), orderPhysic.ShiftedOrder(Order.Create(4)));
+        Assert.Equal(expected: Order.Create(1), actual: orderPhysic.ShiftedOrder(Order.Create(1)));
+        Assert.Equal(expected: Order.Create(2), actual: orderPhysic.ShiftedOrder(Order.Create(2)));
+        Assert.Equal(expected: Order.Create(3), actual: orderPhysic.ShiftedOrder(Order.Create(3)));
+        Assert.Equal(expected: Order.Create(4), actual: orderPhysic.ShiftedOrder(Order.Create(4)));
     }
 
     [Fact]
@@ -28,10 +28,10 @@ public class DealOrderPhysicTests
         var orderPhysic = DealOrderPhysic.Create(playersCount, dealsPlayedCount);
 
         // act, assert
-        Assert.Equal(Order.Create(4), orderPhysic.ShiftedOrder(Order.Create(1)));
-        Assert.Equal(Order.Create(1), orderPhysic.ShiftedOrder(Order.Create(2)));
-        Assert.Equal(Order.Create(2), orderPhysic.ShiftedOrder(Order.Create(3)));
-        Assert.Equal(Order.Create(3), orderPhysic.ShiftedOrder(Order.Create(4)));
+        Assert.Equal(expected: Order.Create(4), actual: orderPhysic.ShiftedOrder(Order.Create(1)));
+        Assert.Equal(expected: Order.Create(1), actual: orderPhysic.ShiftedOrder(Order.Create(2)));
+        Assert.Equal(expected: Order.Create(2), actual: orderPhysic.ShiftedOrder(Order.Create(3)));
+        Assert.Equal(expected: Order.Create(3), actual: orderPhysic.ShiftedOrder(Order.Create(4)));
     }
 
     [Fact]
@@ -43,10 +43,10 @@ public class DealOrderPhysicTests
         var orderPhysic = DealOrderPhysic.Create(playersCount, dealsPlayedCount);
 
         // act, assert
-        Assert.Equal(Order.Create(3), orderPhysic.ShiftedOrder(Order.Create(1)));
-        Assert.Equal(Order.Create(4), orderPhysic.ShiftedOrder(Order.Create(2)));
-        Assert.Equal(Order.Create(1), orderPhysic.ShiftedOrder(Order.Create(3)));
-        Assert.Equal(Order.Create(2), orderPhysic.ShiftedOrder(Order.Create(4)));
+        Assert.Equal(expected: Order.Create(3), actual: orderPhysic.ShiftedOrder(Order.Create(1)));
+        Assert.Equal(expected: Order.Create(4), actual: orderPhysic.ShiftedOrder(Order.Create(2)));
+        Assert.Equal(expected: Order.Create(1), actual: orderPhysic.ShiftedOrder(Order.Create(3)));
+        Assert.Equal(expected: Order.Create(2), actual: orderPhysic.ShiftedOrder(Order.Create(4)));
     }
 
     [Fact]
@@ -58,10 +58,10 @@ public class DealOrderPhysicTests
         var orderPhysic = DealOrderPhysic.Create(playersCount, dealsPlayedCount);
 
         // act, assert
-        Assert.Equal(Order.Create(2), orderPhysic.ShiftedOrder(Order.Create(1)));
-        Assert.Equal(Order.Create(3), orderPhysic.ShiftedOrder(Order.Create(2)));
-        Assert.Equal(Order.Create(4), orderPhysic.ShiftedOrder(Order.Create(3)));
-        Assert.Equal(Order.Create(1), orderPhysic.ShiftedOrder(Order.Create(4)));
+        Assert.Equal(expected: Order.Create(2), actual: orderPhysic.ShiftedOrder(Order.Create(1)));
+        Assert.Equal(expected: Order.Create(3), actual: orderPhysic.ShiftedOrder(Order.Create(2)));
+        Assert.Equal(expected: Order.Create(4), actual: orderPhysic.ShiftedOrder(Order.Create(3)));
+        Assert.Equal(expected: Order.Create(1), actual: orderPhysic.ShiftedOrder(Order.Create(4)));
     }
 
     [Fact]
@@ -73,10 +73,10 @@ public class DealOrderPhysicTests
         var orderPhysic = DealOrderPhysic.Create(playersCount, dealsPlayedCount);
 
         // act, assert
-        Assert.Equal(Order.Create(1), orderPhysic.ShiftedOrder(Order.Create(1)));
-        Assert.Equal(Order.Create(2), orderPhysic.ShiftedOrder(Order.Create(2)));
-        Assert.Equal(Order.Create(3), orderPhysic.ShiftedOrder(Order.Create(3)));
-        Assert.Equal(Order.Create(4), orderPhysic.ShiftedOrder(Order.Create(4)));
+        Assert.Equal(expected: Order.Create(1), actual: orderPhysic.ShiftedOrder(Order.Create(1)));
+        Assert.Equal(expected: Order.Create(2), actual: orderPhysic.ShiftedOrder(Order.Create(2)));
+        Assert.Equal(expected: Order.Create(3), actual: orderPhysic.ShiftedOrder(Order.Create(3)));
+        Assert.Equal(expected: Order.Create(4), actual: orderPhysic.ShiftedOrder(Order.Create(4)));
     }
 
     // todo: test with more deals count

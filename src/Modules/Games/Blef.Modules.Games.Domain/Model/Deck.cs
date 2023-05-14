@@ -12,12 +12,12 @@ internal sealed class Deck
             throw new ArgumentNullException(nameof(cards));
 
         if (cards.Count() != NUMBER_OF_CARDS)
-            throw new ArgumentOutOfRangeException(nameof(cards), cards.Count(),
-                $"The deck of cards must have exactly {NUMBER_OF_CARDS} cards");
+            throw new ArgumentOutOfRangeException(paramName: nameof(cards), actualValue: cards.Count(),
+                message: $"The deck of cards must have exactly {NUMBER_OF_CARDS} cards");
 
         if (AreAllCardsUnique(cards) == false)
-            throw new ArgumentOutOfRangeException(nameof(cards), cards.Count(),
-                "No card duplicates are allowed in the deck of cards");
+            throw new ArgumentOutOfRangeException(paramName: nameof(cards), actualValue: cards.Count(),
+                message: "No card duplicates are allowed in the deck of cards");
 
         _cards = cards.ToList();
     }
@@ -29,7 +29,7 @@ internal sealed class Deck
 
         var hand = _cards.Take(cardsAmount).ToArray();
         _cards.RemoveRange(index: 0, cardsAmount);
-        return new(hand);
+        return new Hand(hand);
     }
 
     private static bool AreAllCardsUnique(IEnumerable<Card> cards) =>

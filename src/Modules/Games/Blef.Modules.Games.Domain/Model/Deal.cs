@@ -7,10 +7,13 @@ internal sealed class Deal
 {
     private readonly MoveOrderPolicy _moveOrderPolicy;
     private readonly DealPlayersSet _playersSet;
-    private Bid? _lastBid;
     private bool _dealIsOver;
+    private Bid? _lastBid;
 
     public DealId Id { get; }
+
+    private bool BetHasBeenMade =>
+        _lastBid is not null;
 
     public Deal(DealId dealId, DealSet dealSet)
     {
@@ -19,7 +22,7 @@ internal sealed class Deal
 
         Id = dealId ?? throw new ArgumentNullException(nameof(dealId));
         _playersSet = dealSet.PlayersSet;
-        _moveOrderPolicy = new(dealSet.MoveSequence);
+        _moveOrderPolicy = new MoveOrderPolicy(dealSet.MoveSequence);
         _lastBid = null;
         _dealIsOver = false;
     }
@@ -50,11 +53,8 @@ internal sealed class Deal
 
         _dealIsOver = true;
 
-         return _lastBid!.PokerHand.IsOnTable(_playersSet.Table)
+        return _lastBid!.PokerHand.IsOnTable(_playersSet.Table)
             ? new LooserPlayer(checkingPlayerId.Player)
             : new LooserPlayer(_lastBid.Player);
     }
-
-    private bool BetHasBeenMade =>
-        _lastBid is not null;
 }

@@ -5,7 +5,9 @@ internal sealed class LowStraight : PokerHand
     public const string Type = "low-straight";
     protected override int PokerHandRank => 4;
 
-    private LowStraight() { }
+    private LowStraight()
+    {
+    }
 
     public static LowStraight Create() => new();
 

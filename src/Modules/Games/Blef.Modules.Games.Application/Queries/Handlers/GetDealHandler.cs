@@ -27,7 +27,7 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
 
     private static IEnumerable<GetDeal.Player> Map(IEnumerable<DealPlayer> players) =>
         players.Select(player => new GetDeal.Player(
-            PlayerId: player.Player.Id,
+            player.Player.Id,
             Hand: Map(player.Hand.Cards)));
 
     private static IEnumerable<GetDeal.Card> Map(IEnumerable<Card> cards) =>
@@ -38,12 +38,12 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
     private static IEnumerable<GetDeal.Bid> Map(IEnumerable<Gameplay.BidRecord> bids) =>
         bids
             .Select(bidRecord => new GetDeal.Bid(
-                Order: bidRecord.Order,
-                PlayerId: bidRecord.Bid.Player.Id,
+                bidRecord.Order,
+                bidRecord.Bid.Player.Id,
                 PokerHand: bidRecord.Bid.PokerHand.Serialize()))
             .OrderBy(bid => bid.Order);
 
     private static GetDeal.DealResolution Map(Gameplay.DealResolution? dealResolution) =>
-        new(dealResolution?.CheckingPlayer.Player.Id ?? Guid.Empty,
-            dealResolution?.Looser.Player.Id ?? Guid.Empty);
+        new(CheckingPlayerId: dealResolution?.CheckingPlayer.Player.Id ?? Guid.Empty,
+            LooserPlayerId: dealResolution?.Looser.Player.Id ?? Guid.Empty);
 }
