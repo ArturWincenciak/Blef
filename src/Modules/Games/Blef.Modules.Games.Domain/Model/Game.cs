@@ -42,7 +42,7 @@ internal sealed class Game
     public DealStarted StartFirstDeal()
     {
         if (IsGameStarted())
-            throw new GameAlreadyStartedException();
+            throw new GameAlreadyStartedException(Id);
 
         if (_players.Count < MIN_NUMBER_OF_PLAYERS)
             throw new NotEnoughPlayersException(Id);
