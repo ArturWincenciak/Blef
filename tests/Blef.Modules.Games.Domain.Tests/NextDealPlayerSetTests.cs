@@ -12,11 +12,11 @@ public class NextDealPlayerSetTests
         var playerId2 = Guid.Parse("1AA646E3-8B90-43B8-8F39-094AA5A7AE77");
         var players = new NextDealPlayer[]
         {
-            new(Player: new PlayerId(playerId1), 
+            new(Player: new PlayerId(playerId1),
                 CardsAmount: CardsAmount.Initial.AddOneCard(),
                 Order: Order.Create(1)),
-            new(Player: new PlayerId(playerId2), 
-                CardsAmount.Initial, 
+            new(Player: new PlayerId(playerId2),
+                CardsAmount.Initial,
                 Order: Order.Create(1))
         };
 
