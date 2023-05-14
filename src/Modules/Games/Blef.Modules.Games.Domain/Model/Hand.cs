@@ -22,7 +22,7 @@ internal sealed class Hand
         if (AreAllCardsUnique(cards) == false)
             throw new ArgumentException("No card duplicates are allowed in the players' hands");
 
-        Cards = cards ?? throw new ArgumentNullException(nameof(cards));
+        Cards = cards;
     }
 
     private static bool AreAllCardsUnique(IEnumerable<Card> cards) =>
