@@ -13,11 +13,11 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
     public GetDealHandler(IGameplaysRepository gameplaysRepository) =>
         _gameplaysRepository = gameplaysRepository;
 
-    public Task<GetDeal.Result> Handle(GetDeal query, CancellationToken cancellation)
+    public async Task<GetDeal.Result> Handle(GetDeal query, CancellationToken cancellation)
     {
-        var gameplay = _gameplaysRepository.Get(query.Game);
+        var gameplay = await _gameplaysRepository.Get(query.Game);
         var dealProjection = gameplay.GetDealProjection(query.Deal);
-        return Task.FromResult(Map(dealProjection));
+        return Map(dealProjection);
     }
 
     private static GetDeal.Result Map(Gameplay.DealDetails projection) =>

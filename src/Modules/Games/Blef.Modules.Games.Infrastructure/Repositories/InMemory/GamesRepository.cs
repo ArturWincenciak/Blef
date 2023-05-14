@@ -7,9 +7,12 @@ internal sealed class GamesRepository : IGamesRepository
 {
     private readonly Dictionary<Guid, Game> _games = new();
 
-    public void Add(Game game) =>
+    public Task Add(Game game)
+    {
         _games.Add(game.Id.Id, game);
+        return Task.CompletedTask;
+    }
 
-    public Game Get(GameId gameId) =>
-        _games[gameId.Id];
+    public Task<Game> Get(GameId gameId) =>
+        Task.FromResult(_games[gameId.Id]);
 }
