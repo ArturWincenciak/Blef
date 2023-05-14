@@ -58,7 +58,8 @@ internal sealed class FaceCard
             "queen" => Type.Queen,
             "king" => Type.King,
             "ace" => Type.Ace,
-            _ => throw new Exception($"Unknown value of FaceCard: '{faceCard}'")
+            _ => throw new ArgumentOutOfRangeException(nameof(faceCard), faceCard,
+                $"Unknown value of FaceCard: '{faceCard}'")
         };
 
     private enum Type
