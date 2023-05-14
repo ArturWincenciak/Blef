@@ -34,9 +34,8 @@ internal sealed class Deal
 
         _moveOrderPolicy.Move(newBid.Player);
 
-        if (BetHasBeenMade)
-            if (newBid.PokerHand.IsBetterThan(_lastBid!.PokerHand) == false)
-                throw new BidIsNotHigherThenLastOneException(Id, newBid, _lastBid);
+        if (BetHasBeenMade && newBid.PokerHand.IsBetterThan(_lastBid!.PokerHand) == false)
+            throw new BidIsNotHigherThenLastOneException(Id, newBid, _lastBid);
 
         _lastBid = newBid;
     }
