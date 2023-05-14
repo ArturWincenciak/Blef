@@ -1,7 +1,10 @@
-﻿namespace Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
+﻿using JetBrains.Annotations;
+
+namespace Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 
 internal enum WhichPlayer
 {
+    [UsedImplicitly]
     None = 0,
     Knuth = 1,
     Graham = 2,
