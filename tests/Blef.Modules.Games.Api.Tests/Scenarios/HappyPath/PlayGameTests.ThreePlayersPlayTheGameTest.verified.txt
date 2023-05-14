@@ -2,7 +2,7 @@
   {
     No: 1,
     Action: NewGame,
-    Argument: NoArgument,
+    Argument: _noArgument,
     Result: {
       GameId: Guid_1
     }
@@ -10,7 +10,7 @@
   {
     No: 2,
     Action: GetGameFlow,
-    Argument: NoArgument,
+    Argument: _noArgument,
     Result: {
       Status: {
         State: JoiningPlayers
@@ -48,7 +48,7 @@
   {
     No: 6,
     Action: GetGameFlow,
-    Argument: NoArgument,
+    Argument: _noArgument,
     Result: {
       Status: {
         State: JoiningPlayers
@@ -76,7 +76,7 @@
   {
     No: 7,
     Action: NewDeal,
-    Argument: NoArgument,
+    Argument: _noArgument,
     Result: {
       Number: 1
     }
@@ -84,7 +84,7 @@
   {
     No: 8,
     Action: GetGameFlow,
-    Argument: NoArgument,
+    Argument: _noArgument,
     Result: {
       Status: {
         State: InProgress
@@ -255,7 +255,7 @@
   {
     No: 17,
     Action: GetGameFlow,
-    Argument: NoArgument,
+    Argument: _noArgument,
     Result: {
       Status: {
         State: InProgress
