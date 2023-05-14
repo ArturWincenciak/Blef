@@ -9,11 +9,11 @@ internal sealed class PlayersCount
     {
         if (count < MIN_NUMBER_OF_PLAYERS)
             throw new ArgumentOutOfRangeException(nameof(count), count,
-                "TBD"); // todo: exception
+                $"The player count should be at least {MIN_NUMBER_OF_PLAYERS}");
 
         if (count > MAX_NUMBER_OF_PLAYERS)
             throw new ArgumentOutOfRangeException(nameof(count), count,
-                "TBD"); // todo: exception
+                $"The player count cannot exceed {MAX_NUMBER_OF_PLAYERS}");
 
         return new(count);
     }

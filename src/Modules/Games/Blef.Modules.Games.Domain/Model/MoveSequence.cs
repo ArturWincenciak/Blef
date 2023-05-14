@@ -11,11 +11,11 @@ internal sealed class MoveSequence
 
         if (moves.Count() < MIN_NUMBER_OF_PLAYERS)
             throw new ArgumentOutOfRangeException(nameof(moves), moves.Count(),
-                "Move sequence should have at least two players");
+                $"Move sequence should have at least {MIN_NUMBER_OF_PLAYERS} players");
 
         if (moves.Count() > MAX_NUMBER_OF_PLAYERS)
             throw new ArgumentOutOfRangeException(nameof(moves), moves.Count(),
-                "Move sequence cannot contain more than four players");
+                $"Move sequence cannot contain more than {MAX_NUMBER_OF_PLAYERS} players");
 
         if (AreAllPlayersUnique(moves) == false)
             throw new ArgumentException("No player duplicates are allowed");

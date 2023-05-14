@@ -11,11 +11,11 @@ internal sealed class Table
 
         if (hands.Count() < MIN_NUMBER_OF_PLAYERS)
             throw new ArgumentOutOfRangeException(nameof(hands), hands.Count(),
-                "The table should have at least two players' hands dealt");
+                $"The table should have at least {MIN_NUMBER_OF_PLAYERS} players' hands dealt");
 
         if (hands.Count() > MAX_NUMBER_OF_PLAYERS)
             throw new ArgumentOutOfRangeException(nameof(hands), hands.Count(),
-                "There cannot be more than four players' hands dealt on the table");
+                $"There cannot be more than {MAX_NUMBER_OF_PLAYERS} players' hands dealt on the table");
 
         if (AreAllCardsUnique(hands) == false)
             throw new ArgumentException("No card duplicates are allowed in the players' hands dealt on the table");
