@@ -13,7 +13,6 @@ internal sealed class BlefClient
     private readonly HttpClient _httpClient;
     private PlayerId? _conwayPlayerId;
 
-
     private GameId? _gameId;
     private PlayerId? _grahamPlayerId;
     private PlayerId? _knuthPlayerId;
