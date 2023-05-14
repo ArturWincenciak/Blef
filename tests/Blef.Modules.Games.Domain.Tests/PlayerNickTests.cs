@@ -19,7 +19,7 @@ public class PlayerNickTests
 
     [Fact]
     public void NickCannotBeNullTest() =>
-        Assert.Throws<ArgumentException>(() => new PlayerNick(null));
+        Assert.Throws<ArgumentException>(() => new PlayerNick(null!));
 
     [Fact]
     public void NickCannotBeEmptyTest() =>

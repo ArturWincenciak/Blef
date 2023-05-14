@@ -24,7 +24,7 @@ public class HandTests
 
     [Fact]
     public void CannotCreateHandWithNullCardsCollectionTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Hand(null));
+        Assert.Throws<ArgumentNullException>(() => new Hand(null!));
 
     [Fact]
     public void CannotCreateHandWithoutAnyCardTest() =>

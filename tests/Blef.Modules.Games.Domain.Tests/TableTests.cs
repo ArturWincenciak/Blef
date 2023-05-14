@@ -110,7 +110,7 @@ public class TableTests
 
     [Fact]
     public void CannotCreateTableWithNullHandsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Table(null));
+        Assert.Throws<ArgumentNullException>(() => new Table(null!));
 
     [Fact]
     public void CannotCreateTableWithNotUniqueCardsTest() =>

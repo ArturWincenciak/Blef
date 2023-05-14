@@ -17,13 +17,13 @@ public class CardTests
 
     [Fact]
     public void CannotCreateWithNullArgumentsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Card(null, null));
+        Assert.Throws<ArgumentNullException>(() => new Card(null!, null!));
 
     [Fact]
     public void CannotCreateWithNullFaceCardArgumentTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Card(null, Suit.Clubs));
+        Assert.Throws<ArgumentNullException>(() => new Card(null!, Suit.Clubs));
 
     [Fact]
     public void CannotCreateWithNullSuitArgumentTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Card(FaceCard.Ace, null));
+        Assert.Throws<ArgumentNullException>(() => new Card(FaceCard.Ace, null!));
 }
