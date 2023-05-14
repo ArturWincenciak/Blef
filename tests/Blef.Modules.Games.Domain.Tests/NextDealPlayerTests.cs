@@ -22,14 +22,14 @@ public class NextDealPlayerTests
 
     [Fact]
     public void CannotCreateWithNullArgumentsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new NextDealPlayer(Player: null, CardsAmount: null, Order.Create(1)));
+        Assert.Throws<ArgumentNullException>(() => new NextDealPlayer(Player: null!, CardsAmount: null!, Order.Create(1)));
 
     [Fact]
     public void CannotCreateWithNullPlayerIdArgumentTest() =>
         Assert.Throws<ArgumentNullException>(() =>
         {
             var cardsAmount = CardsAmount.Initial;
-            return new NextDealPlayer(Player: null, cardsAmount, Order.Create(1));
+            return new NextDealPlayer(Player: null!, cardsAmount, Order.Create(1));
         });
 
     [Fact]
@@ -38,6 +38,6 @@ public class NextDealPlayerTests
         {
             var guid = Guid.Parse("D1954AA3-45C1-4F90-8638-41A491521FF1");
             var playerId = new PlayerId(guid);
-            return new NextDealPlayer(playerId, CardsAmount: null, Order.Create(1));
+            return new NextDealPlayer(playerId, CardsAmount: null!, Order.Create(1));
         });
 }

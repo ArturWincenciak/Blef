@@ -22,7 +22,7 @@ public class DealPlayerTests
 
     [Fact]
     public void CannotCreateWithNullArgumentsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new DealPlayer(Player: null, Hand: null));
+        Assert.Throws<ArgumentNullException>(() => new DealPlayer(Player: null!, Hand: null!));
 
     [Fact]
     public void CannotCreateWithNullHandArgumentTest() =>
@@ -30,7 +30,7 @@ public class DealPlayerTests
         {
             var guid = Guid.Parse("BED79350-F2E8-4C5B-8B5C-E62C9B01E9D2");
             var playerId = new PlayerId(guid);
-            return new DealPlayer(playerId, Hand: null);
+            return new DealPlayer(playerId, Hand: null!);
         });
 
     [Fact]
@@ -38,6 +38,6 @@ public class DealPlayerTests
         Assert.Throws<ArgumentNullException>(() =>
         {
             var hand = new Hand(new[] {new Card(FaceCard.Ace, Suit.Clubs)});
-            return new DealPlayer(Player: null, hand);
+            return new DealPlayer(Player: null!, hand);
         });
 }

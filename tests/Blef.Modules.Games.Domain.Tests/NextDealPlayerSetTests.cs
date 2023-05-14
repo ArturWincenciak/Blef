@@ -39,7 +39,7 @@ public class NextDealPlayerSetTests
 
     [Fact]
     public void CannotCreateWithNullArgumentTest() =>
-        Assert.Throws<ArgumentNullException>(() => new NextDealPlayersSet(null));
+        Assert.Throws<ArgumentNullException>(() => new NextDealPlayersSet(null!));
 
     [Fact]
     public void CannotCreateWithLessThenTwoPlayersTest() =>

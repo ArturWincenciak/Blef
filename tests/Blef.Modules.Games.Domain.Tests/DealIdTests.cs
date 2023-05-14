@@ -22,11 +22,11 @@ public class DealIdTests
 
     [Fact]
     public void CannotCreateWithNullArgumentsTest() =>
-        Assert.Throws<ArgumentNullException>(() => new DealId(null, null));
+        Assert.Throws<ArgumentNullException>(() => new DealId(null!, null!));
 
     [Fact]
     public void CannotCreateWithNullGameIdArgumentTest() =>
-        Assert.Throws<ArgumentNullException>(() => new DealId(null, new DealNumber(1)));
+        Assert.Throws<ArgumentNullException>(() => new DealId(null!, new DealNumber(1)));
 
     [Fact]
     public void CannotCreateWithNullDealNumberArgumentTest() =>
@@ -34,6 +34,6 @@ public class DealIdTests
         {
             var guid = Guid.Parse("458C41E2-C477-4918-9353-96243FEFF99F");
             var gameId = new GameId(guid);
-            return new DealId(gameId, null);
+            return new DealId(gameId, null!);
         });
 }

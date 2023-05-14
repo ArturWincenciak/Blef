@@ -6,7 +6,7 @@ public class DeckTests
 {
     [Fact]
     public void CannotCreateWithNullArgumentTest() =>
-        Assert.Throws<ArgumentNullException>(() => new Deck(null));
+        Assert.Throws<ArgumentNullException>(() => new Deck(null!));
 
     [Fact]
     public void DeckCannotBeCreateWithLessThenTwentyFourCardsTest() =>
