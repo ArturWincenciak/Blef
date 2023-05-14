@@ -1,9 +1,11 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
 using Blef.Modules.Games.Domain.Events;
 using Blef.Shared.Abstractions.Events;
+using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Application.Events.Handlers;
 
+[UsedImplicitly]
 internal sealed class GameplayHandler :
     IDomainEventHandler<GamePlayerJoined>,
     IDomainEventHandler<DealStarted>,
