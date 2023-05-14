@@ -64,12 +64,12 @@ internal sealed class FaceCard
 
     private enum Type
     {
-        None,
-        Nine,
-        Ten,
-        Jack,
-        Queen,
-        King,
-        Ace
+        None = 0,
+        Nine = 1,
+        Ten = 2,
+        Jack = 4,
+        Queen = 8,
+        King = 16,
+        Ace = 32
     }
 }
