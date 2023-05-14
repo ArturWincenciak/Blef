@@ -5,7 +5,7 @@ namespace Blef.Modules.Games.Domain.Services;
 
 internal sealed class MoveOrderPolicy
 {
-    private Move _previousMove;
+    private Move? _previousMove;
     private readonly MoveSequence _sequence;
 
     public MoveOrderPolicy(MoveSequence sequence) =>
