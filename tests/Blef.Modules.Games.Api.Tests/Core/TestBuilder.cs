@@ -4,7 +4,7 @@ namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal sealed class TestBuilder
 {
-    private static string NoArgument = nameof(NoArgument);
+    private static string _noArgument = nameof(_noArgument);
     private readonly static TestRecorder.EmptyCommandResult Success = new("OK");
     private readonly List<Func<Task>> _actions = new();
     private readonly TestRecorder _testResult = new();
@@ -28,7 +28,7 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var game = await _gameClient.NewGame();
-            _testResult.Record(action: nameof(NewGame), NoArgument, game);
+            _testResult.Record(action: nameof(NewGame), _noArgument, game);
         });
 
         return this;
@@ -39,7 +39,7 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var gameFlow = await _gameClient.GetGameFlow();
-            _testResult.Record(action: nameof(GetGameFlow), NoArgument, gameFlow);
+            _testResult.Record(action: nameof(GetGameFlow), _noArgument, gameFlow);
         });
 
         return this;
@@ -72,7 +72,7 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var deal = await _gameClient.StartFirstDeal();
-            _testResult.Record(action: nameof(NewDeal), NoArgument, deal);
+            _testResult.Record(action: nameof(NewDeal), _noArgument, deal);
         });
 
         return this;
