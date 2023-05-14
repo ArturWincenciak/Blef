@@ -20,22 +20,22 @@ public class CroupierTests
         // arrange
         var deckFactory = new DeckFactoryMock();
         var croupier = new Croupier(deckFactory);
-        var playerId_1 = Guid.Parse("1F2608EC-1479-409B-917A-10F4995213F9");
-        var playerId_2 = Guid.Parse("6619A981-6DB6-4806-AEDD-A01911273CA6");
+        var playerId1 = Guid.Parse("1F2608EC-1479-409B-917A-10F4995213F9");
+        var playerId2 = Guid.Parse("6619A981-6DB6-4806-AEDD-A01911273CA6");
 
         // act
         var dealSet = croupier.Deal(
             new NextDealPlayersSet(new NextDealPlayer[]
             {
-                new(Player: new PlayerId(playerId_1), CardsAmount.Initial, Order: Order.Create(1)),
-                new(Player: new PlayerId(playerId_2), CardsAmount.Initial, Order: Order.Create(2))
+                new(Player: new PlayerId(playerId1), CardsAmount.Initial, Order: Order.Create(1)),
+                new(Player: new PlayerId(playerId2), CardsAmount.Initial, Order: Order.Create(2))
             }));
-        var hand_1 = GetHand(dealSet, playerId: new PlayerId(playerId_1));
-        var hand_2 = GetHand(dealSet, playerId: new PlayerId(playerId_2));
+        var hand1 = GetHand(dealSet, playerId: new PlayerId(playerId1));
+        var hand2 = GetHand(dealSet, playerId: new PlayerId(playerId2));
 
         // assert
-        Assert.Equal(expected: TakeCards(from: 1, amount: 1), hand_1.Cards);
-        Assert.Equal(expected: TakeCards(from: 2, amount: 1), hand_2.Cards);
+        Assert.Equal(expected: TakeCards(from: 1, amount: 1), hand1.Cards);
+        Assert.Equal(expected: TakeCards(from: 2, amount: 1), hand2.Cards);
     }
 
     [Fact]
