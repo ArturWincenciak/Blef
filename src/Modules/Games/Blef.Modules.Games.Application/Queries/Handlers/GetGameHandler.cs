@@ -20,13 +20,13 @@ internal sealed class GetGameHandler : IQueryHandler<GetGame, GetGame.Result>
         return Task.FromResult(Map(gameProjection));
     }
 
-    private GetGame.Result Map(Gameplay.Game game) =>
+    private static GetGame.Result Map(Gameplay.Game game) =>
         new(Status: Map(game.Status),
             Players: Map(game.GamePlayers),
             Deals: Map(game.Deals),
             Winner: Map(game.Winner));
 
-    private GetGame.GameStatus Map(Gameplay.GameStatus gameStatus) =>
+    private static GetGame.GameStatus Map(Gameplay.GameStatus gameStatus) =>
         new(gameStatus.ToString());
 
     private static IEnumerable<GetGame.Player> Map(IEnumerable<Gameplay.PlayerEntry> gamePlayers) =>
