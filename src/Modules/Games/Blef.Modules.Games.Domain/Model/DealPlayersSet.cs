@@ -11,13 +11,15 @@ internal sealed class DealPlayersSet
         if (players is null)
             throw new ArgumentNullException(nameof(players));
 
-        if (players.Count() < MIN_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count(),
-                message: $"Deal should have at least {MIN_NUMBER_OF_PLAYERS} players");
-
-        if (players.Count() > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count(),
-                message: $"Deal cannot have more than {MAX_NUMBER_OF_PLAYERS} players");
+        switch (players.Count())
+        {
+            case < MIN_NUMBER_OF_PLAYERS:
+                throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count(),
+                    message: $"Deal should have at least {MIN_NUMBER_OF_PLAYERS} players");
+            case > MAX_NUMBER_OF_PLAYERS:
+                throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count(),
+                    message: $"Deal cannot have more than {MAX_NUMBER_OF_PLAYERS} players");
+        }
 
         if (AreAllPlayersUnique(players) == false)
             throw new ArgumentException("No player duplicates are allowed");
