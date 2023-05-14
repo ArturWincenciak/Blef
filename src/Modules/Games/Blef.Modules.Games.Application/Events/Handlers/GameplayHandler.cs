@@ -16,28 +16,43 @@ internal sealed class GameplayHandler :
     public GameplayHandler(IGameplaysRepository gameplaysRepository) =>
         _gameplaysRepository = gameplaysRepository;
 
-    public async Task Handle(GamePlayerJoined @event, CancellationToken cancellation) =>
+    public Task Handle(GamePlayerJoined @event, CancellationToken cancellation)
+    {
         _gameplaysRepository
             .Get(@event.Game)
             .OnPlayerJoined(@event.Player);
+        return Task.CompletedTask;
+    }
 
-    public async Task Handle(DealStarted @event, CancellationToken cancellation) =>
+    public Task Handle(DealStarted @event, CancellationToken cancellation)
+    {
         _gameplaysRepository
             .Get(@event.Game)
             .OnDealStarted(@event.Deal, @event.Players);
+        return Task.CompletedTask;
+    }
 
-    public async Task Handle(BidPlaced @event, CancellationToken cancellation) =>
+    public Task Handle(BidPlaced @event, CancellationToken cancellation)
+    {
         _gameplaysRepository
             .Get(@event.Game)
             .OnBidPlaced(@event.Deal, @event.Player, @event.PokerHand);
+        return Task.CompletedTask;
+    }
 
-    public async Task Handle(CheckPlaced @event, CancellationToken cancellation) =>
+    public Task Handle(CheckPlaced @event, CancellationToken cancellation)
+    {
         _gameplaysRepository
             .Get(@event.Game)
             .OnCheckPlaced(@event.Deal, @event.CheckingPlayer, @event.LooserPlayer);
+        return Task.CompletedTask;
+    }
 
-    public async Task Handle(GameOver @event, CancellationToken cancellation) =>
+    public Task Handle(GameOver @event, CancellationToken cancellation)
+    {
         _gameplaysRepository
             .Get(@event.Game)
             .OnGameFinished(@event.Winner);
+        return Task.CompletedTask;
+    }
 }

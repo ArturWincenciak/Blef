@@ -13,11 +13,11 @@ internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetP
     public GetPlayerCardsHandler(IGameplaysRepository gameplays) =>
         _gameplays = gameplays;
 
-    public async Task<GetPlayerCards.Result> Handle(GetPlayerCards query, CancellationToken cancellation)
+    public Task<GetPlayerCards.Result> Handle(GetPlayerCards query, CancellationToken cancellation)
     {
         var gameplay = _gameplays.Get(query.Game);
         var hand = gameplay.GetHand(query.Deal, query.Player);
-        return Map(hand);
+        return Task.FromResult(Map(hand));
     }
 
     private GetPlayerCards.Result Map(IEnumerable<Card> hand) =>

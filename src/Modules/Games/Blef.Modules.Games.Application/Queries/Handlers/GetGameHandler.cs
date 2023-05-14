@@ -13,12 +13,11 @@ internal sealed class GetGameHandler : IQueryHandler<GetGame, GetGame.Result>
     public GetGameHandler(IGameplaysRepository gameplaysRepository) =>
         _gameplaysRepository = gameplaysRepository;
 
-    public async Task<GetGame.Result> Handle(GetGame query, CancellationToken cancellation)
+    public Task<GetGame.Result> Handle(GetGame query, CancellationToken cancellation)
     {
         var gameplay = _gameplaysRepository.Get(query.Game);
         var gameProjection = gameplay.GetGameProjection();
-        var result = Map(gameProjection);
-        return result;
+        return Task.FromResult(Map(gameProjection));
     }
 
     private GetGame.Result Map(Gameplay.Game game) =>
