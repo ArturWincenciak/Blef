@@ -29,13 +29,13 @@ internal sealed class GetGameHandler : IQueryHandler<GetGame, GetGame.Result>
     private static GetGame.GameStatus Map(Gameplay.GameStatus gameStatus) =>
         new(gameStatus.ToString());
 
-    private static IReadOnlyCollection<GetGame.Player> Map(IReadOnlyCollection<Gameplay.PlayerEntry> gamePlayers) =>
+    private static IReadOnlyCollection<GetGame.Player> Map(IEnumerable<Gameplay.PlayerEntry> gamePlayers) =>
         gamePlayers
             .Select(player => new GetGame.Player(
                 player.Player.Id.Id, player.Player.Nick.Nick, player.JoiningOrder))
             .ToArray();
 
-    private static IReadOnlyCollection<GetGame.Deal> Map(IReadOnlyCollection<Gameplay.DealSummary> deals) =>
+    private static IReadOnlyCollection<GetGame.Deal> Map(IEnumerable<Gameplay.DealSummary> deals) =>
         deals
             .Select(deal => new GetGame.Deal(
                 deal.Number.Number,
