@@ -236,11 +236,8 @@ public class DeckTests
             deck.Deal(CardsAmount.Initial);
         });
 
-    private static void AssertTheSame(Hand expected, Hand actual)
-    {
-        Assert.True(expected.Cards != actual.Cards);
+    private static void AssertTheSame(Hand expected, Hand actual) =>
         Assert.Equal(expected.Cards, actual.Cards);
-    }
 
     private static Card[] CreateManyTheSameCards(int amount) =>
         Enumerable

@@ -31,7 +31,7 @@ internal static class AssertExtension
         Assert.Equal(expectedDealNumber, dealStarted.Deal);
         Assert.Equal(expectedNextDealPlayers.Count, dealStarted.Players.Count);
 
-        var nextDealPlayers = dealStarted.Players.Select(dealPlayer => dealPlayer.Player);
+        var nextDealPlayers = dealStarted.Players.Select(dealPlayer => dealPlayer.Player).ToArray();
         foreach (var expectedNextDealPlayer in expectedNextDealPlayers)
             Assert.Contains(nextDealPlayers, filter: player => player == expectedNextDealPlayer);
     }

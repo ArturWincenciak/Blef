@@ -10,7 +10,7 @@ internal sealed class TwoPairs : PokerHand
 
     private TwoPairs(FaceCard first, FaceCard second)
     {
-        if (first == second)
+        if (first.Equals(second))
             throw new ArgumentException("Two pairs cannot have the same rank");
 
         (_higher, _lower) = first.IsBetterThen(second)
