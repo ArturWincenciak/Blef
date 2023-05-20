@@ -26,13 +26,6 @@ internal static class BidFactory
         deal.Bid(bid);
     }
 
-    public static void PlayPairBid(Game game, PlayerId byPlayer, FaceCard faceCard)
-    {
-        var pokerHand = GivenPair(faceCard);
-        var bid = new Bid(pokerHand, byPlayer);
-        game.Bid(bid);
-    }
-
     public static void PlayTwoPairsBid(Deal deal, DealPlayer byPlayer, FaceCard firstFaceCard, FaceCard secondFaceCard)
     {
         var pokerHand = GivenTwoPairsBid(firstFaceCard, secondFaceCard);
@@ -45,13 +38,6 @@ internal static class BidFactory
         var pokerHand = GivenLowStraight();
         var bid = new Bid(pokerHand, byPlayer.Player);
         deal.Bid(bid);
-    }
-
-    public static void PlayLowStraightBid(Game game, PlayerId byPlayer)
-    {
-        var pokerHand = GivenLowStraight();
-        var bid = new Bid(pokerHand, byPlayer);
-        game.Bid(bid);
     }
 
     public static void PlayHighStraightBid(Deal deal, DealPlayer byPlayer)
@@ -76,4 +62,18 @@ internal static class BidFactory
 
     public static void PlayNotExistingLowStraightBid(Game game, PlayerId byPlayer) =>
         PlayLowStraightBid(game, byPlayer);
+
+    private static void PlayLowStraightBid(Game game, PlayerId byPlayer)
+    {
+        var pokerHand = GivenLowStraight();
+        var bid = new Bid(pokerHand, byPlayer);
+        game.Bid(bid);
+    }
+
+    private static void PlayPairBid(Game game, PlayerId byPlayer, FaceCard faceCard)
+    {
+        var pokerHand = GivenPair(faceCard);
+        var bid = new Bid(pokerHand, byPlayer);
+        game.Bid(bid);
+    }
 }
