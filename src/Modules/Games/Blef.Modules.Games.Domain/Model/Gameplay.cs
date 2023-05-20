@@ -38,10 +38,9 @@ internal sealed class Gameplay
             if (_deals.Count == 0)
                 return GameStatus.JoiningPlayers;
 
-            if (_winner is not null)
-                return GameStatus.GameIsOver;
-
-            return GameStatus.InProgress;
+            return _winner is not null
+                ? GameStatus.GameIsOver
+                : GameStatus.InProgress;
         }
     }
 
