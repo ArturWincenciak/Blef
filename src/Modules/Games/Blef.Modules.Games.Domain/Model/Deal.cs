@@ -52,7 +52,7 @@ internal sealed class Deal
 
         _dealIsOver = true;
 
-        return _lastBid!.PokerHand.IsOnTable(_playersSet.Table)
+        return _lastBid!.PokerHand.IsOnTable(_playersSet.Table())
             ? new LooserPlayer(checkingPlayerId.Player)
             : new LooserPlayer(_lastBid.Player);
     }
