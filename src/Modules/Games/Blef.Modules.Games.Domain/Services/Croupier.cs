@@ -21,7 +21,8 @@ internal sealed class Croupier
             .ToArray();
 
         var moveSequence = new MoveSequence(nextDealPlayersSet.Players
-            .Select(player => new Move(player.Player, player.Order)));
+            .Select(player => new Move(player.Player, player.Order))
+            .ToArray());
 
         return new DealSet(playersSet: new DealPlayersSet(players), moveSequence);
     }

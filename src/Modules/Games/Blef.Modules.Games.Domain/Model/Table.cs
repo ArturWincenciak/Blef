@@ -2,12 +2,13 @@
 
 internal sealed class Table
 {
-    private readonly IEnumerable<Hand> _hands;
+    private readonly IReadOnlyCollection<Hand> _hands;
 
-    private IEnumerable<Card> Cards =>
-        _hands.SelectMany(hand => hand.Cards);
+    private IReadOnlyCollection<Card> Cards => _hands
+        .SelectMany(hand => hand.Cards)
+        .ToArray();
 
-    public Table(IEnumerable<Hand> hands)
+    public Table(IReadOnlyCollection<Hand> hands)
     {
         if (hands is null)
             throw new ArgumentNullException(nameof(hands));
@@ -32,7 +33,7 @@ internal sealed class Table
     public int Count(FaceCard faceCard) =>
         Cards.Count(card => card.FaceCard.Equals(faceCard));
 
-    private static bool AreAllCardsUnique(IEnumerable<Hand> hands)
+    private static bool AreAllCardsUnique(IReadOnlyCollection<Hand> hands)
     {
         var cardsInAllHands = hands.SelectMany(hand => hand.Cards);
         var numberOfCardsInAllHands = cardsInAllHands.Count();

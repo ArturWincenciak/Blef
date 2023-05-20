@@ -22,10 +22,10 @@ public class IsPokerHandOnTableTests
     // arrange
     private class GivenPokerHandThatIsOnTheTable : IEnumerable<object[]>
     {
-        private static IEnumerable<object[]> Init =>
+        private static IReadOnlyCollection<object[]> Init =>
             new List<object[]>();
 
-        private static IEnumerable<object[]> HighCardTestCases =>
+        private static IReadOnlyCollection<object[]> HighCardTestCases =>
             new List<object[]>
             {
                 new object[]
@@ -57,7 +57,7 @@ public class IsPokerHandOnTableTests
                 }
             };
 
-        private static IEnumerable<object[]> PairTestCases =>
+        private static IReadOnlyCollection<object[]> PairTestCases =>
             new List<object[]>
             {
                 new object[]
@@ -103,7 +103,7 @@ public class IsPokerHandOnTableTests
                 }
             };
 
-        private static IEnumerable<object[]> TwoPairsTestCases =>
+        private static IReadOnlyCollection<object[]> TwoPairsTestCases =>
             new List<object[]>
             {
                 new object[]
@@ -194,7 +194,7 @@ public class IsPokerHandOnTableTests
                 }
             };
 
-        private static IEnumerable<object[]> LowStraightTestCases =>
+        private static IReadOnlyCollection<object[]> LowStraightTestCases =>
             new List<object[]>
             {
                 new object[]
@@ -303,7 +303,7 @@ public class IsPokerHandOnTableTests
                 }
             };
 
-        private static IEnumerable<object[]> HighStraightTestCases =>
+        private static IReadOnlyCollection<object[]> HighStraightTestCases =>
             new List<object[]>
             {
                 new object[]
@@ -532,12 +532,13 @@ public class IsPokerHandOnTableTests
                 })
             });
 
-        private static IEnumerable<object[]> GivenPokerHandTestCases() => Init
+        private static IReadOnlyCollection<object[]> GivenPokerHandTestCases() => Init
             .Concat(HighCardTestCases)
             .Concat(PairTestCases)
             .Concat(TwoPairsTestCases)
             .Concat(LowStraightTestCases)
-            .Concat(HighStraightTestCases);
+            .Concat(HighStraightTestCases)
+            .ToArray();
 
         private static Table GivenTable(Hand[] hands) =>
             new(hands);

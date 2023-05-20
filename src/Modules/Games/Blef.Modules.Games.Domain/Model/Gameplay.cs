@@ -25,16 +25,18 @@ internal sealed class Gameplay
     private GamePlayer? _winner;
     public GameId Id { get; }
 
-    private IEnumerable<PlayerEntry> GamePlayerEntries =>
+    private IReadOnlyCollection<PlayerEntry> GamePlayerEntries =>
         _gamePlayers;
 
-    private IEnumerable<DealSummary> Deals =>
-        _deals.Select(deal => new DealSummary(
-            deal.Key,
-            Status: deal.Value.DealResolution is not null
-                ? DealStatus.Finished
-                : DealStatus.InProgress,
-            deal.Value.DealResolution));
+    private IReadOnlyCollection<DealSummary> Deals =>
+        _deals
+            .Select(deal => new DealSummary(
+                deal.Key,
+                Status: deal.Value.DealResolution is not null
+                    ? DealStatus.Finished
+                    : DealStatus.InProgress,
+                deal.Value.DealResolution))
+            .ToArray();
 
     private GameStatus Status
     {
@@ -56,7 +58,7 @@ internal sealed class Gameplay
     public void OnPlayerJoined(GamePlayer gamePlayer) =>
         _gamePlayers.Add(new PlayerEntry(gamePlayer, JoiningOrder: _gamePlayers.Count + 1));
 
-    public void OnDealStarted(DealNumber dealNumber, IEnumerable<DealPlayer> dealPlayers) =>
+    public void OnDealStarted(DealNumber dealNumber, IReadOnlyCollection<DealPlayer> dealPlayers) =>
         _deals.Add(dealNumber, value: new DealDetails(dealPlayers, Bids: new List<BidRecord>()));
 
     public void OnBidPlaced(DealNumber dealNumber, PlayerId playerId, PokerHand pokerHand)
@@ -85,17 +87,17 @@ internal sealed class Gameplay
     public DealDetails GetDealProjection(DealNumber dealNumber) =>
         _deals[dealNumber];
 
-    public IEnumerable<Card> GetHand(DealNumber dealNumber, PlayerId playerId)
+    public IReadOnlyCollection<Card> GetHand(DealNumber dealNumber, PlayerId playerId)
     {
         var deal = _deals[dealNumber];
         var player = deal.Players.Single(player => player.Player == playerId);
-        return player.Hand.Cards;
+        return player.Hand.Cards.ToArray();
     }
 
     internal sealed record Game(
         GameStatus Status,
-        IEnumerable<PlayerEntry> GamePlayers,
-        IEnumerable<DealSummary> Deals,
+        IReadOnlyCollection<PlayerEntry> GamePlayers,
+        IReadOnlyCollection<DealSummary> Deals,
         GamePlayer? Winner);
 
     internal sealed record DealSummary(
@@ -112,7 +114,7 @@ internal sealed class Gameplay
         int JoiningOrder);
 
     internal sealed record DealDetails(
-        IEnumerable<DealPlayer> Players,
+        IReadOnlyCollection<DealPlayer> Players,
         List<BidRecord> Bids,
         DealResolution? DealResolution = null);
 

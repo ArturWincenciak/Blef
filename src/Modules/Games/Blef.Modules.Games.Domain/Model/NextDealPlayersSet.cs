@@ -2,9 +2,9 @@
 
 internal sealed class NextDealPlayersSet
 {
-    public IEnumerable<NextDealPlayer> Players { get; }
+    public IReadOnlyCollection<NextDealPlayer> Players { get; }
 
-    public NextDealPlayersSet(IEnumerable<NextDealPlayer> players)
+    public NextDealPlayersSet(IReadOnlyCollection<NextDealPlayer> players)
     {
         if (players is null)
             throw new ArgumentNullException(nameof(players));
@@ -23,7 +23,7 @@ internal sealed class NextDealPlayersSet
         Players = players;
     }
 
-    private static bool AreAllPlayersUnique(IEnumerable<NextDealPlayer> NextDealPlayers) =>
+    private static bool AreAllPlayersUnique(IReadOnlyCollection<NextDealPlayer> NextDealPlayers) =>
         NextDealPlayers
             .Select(nextDealPlayer => nextDealPlayer.Player)
             .Distinct()

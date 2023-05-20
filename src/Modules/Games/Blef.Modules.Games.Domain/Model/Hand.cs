@@ -4,9 +4,9 @@ internal sealed class Hand
 {
     private const int MAX_CARD_AMOUNT = 5;
 
-    public IEnumerable<Card> Cards { get; }
+    public IReadOnlyCollection<Card> Cards { get; }
 
-    public Hand(IEnumerable<Card> cards)
+    public Hand(IReadOnlyCollection<Card> cards)
     {
         if (cards is null)
             throw new ArgumentNullException(nameof(cards));
@@ -25,6 +25,6 @@ internal sealed class Hand
         Cards = cards;
     }
 
-    private static bool AreAllCardsUnique(IEnumerable<Card> cards) =>
+    private static bool AreAllCardsUnique(IReadOnlyCollection<Card> cards) =>
         cards.Distinct().Count() == cards.Count();
 }

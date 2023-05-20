@@ -6,5 +6,5 @@ namespace Blef.Modules.Games.Domain.Events;
 internal sealed record DealStarted(
         GameId Game,
         DealNumber Deal,
-        IEnumerable<DealPlayer> Players)
+        IReadOnlyCollection<DealPlayer> Players)
     : IDomainEvent<DealStarted>;
