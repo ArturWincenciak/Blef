@@ -53,7 +53,7 @@ internal sealed class MoveSequence
     private static bool AreAllPlayersUnique(IReadOnlyCollection<Move> moves) =>
         moves.Select(move => move.Player).Distinct().Count() == moves.Count;
 
-    private static bool CheckIfMovesAreInOrder(IReadOnlyCollection<Move> moves)
+    private static bool CheckIfMovesAreInOrder(IEnumerable<Move> moves)
     {
         var orderedMoves = moves.OrderBy(move => move.Order);
         var expectedOrder = Order.First;
