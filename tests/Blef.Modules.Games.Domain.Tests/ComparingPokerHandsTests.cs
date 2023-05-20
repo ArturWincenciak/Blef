@@ -272,4 +272,74 @@ public class ComparingPokerHandsTests
         // assert
         Assert.True(actual);
     }
+
+    [Fact]
+    public void ThreeOfAKindIsBetterThenHighCardTests()
+    {
+        // arrange
+        var threeOfAKind = ThreeOfAKind.Create(FaceCard.Nine.ToString());
+        var highCard = HighCard.Create(FaceCard.Ace.ToString());
+
+        // act
+        var actual = threeOfAKind.IsBetterThan(highCard);
+
+        // assert
+        Assert.True(actual);
+    }
+
+    [Fact]
+    public void ThreeOfAKindIsBetterThenPairTests()
+    {
+        // arrange
+        var threeOfAKind = ThreeOfAKind.Create(FaceCard.Nine.ToString());
+        var pair = Pair.Create(FaceCard.Ace.ToString());
+
+        // act
+        var actual = threeOfAKind.IsBetterThan(pair);
+
+        // assert
+        Assert.True(actual);
+    }
+
+    [Fact]
+    public void ThreeOfAKindIsBetterThenTwoPairsTests()
+    {
+        // arrange
+        var threeOfAKind = ThreeOfAKind.Create(FaceCard.Nine.ToString());
+        var twoPairs = TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}");
+
+        // act
+        var actual = threeOfAKind.IsBetterThan(twoPairs);
+
+        // assert
+        Assert.True(actual);
+    }
+
+    [Fact]
+    public void ThreeOfAKindIsBetterThenLowStraightTests()
+    {
+        // arrange
+        var threeOfAKind = ThreeOfAKind.Create(FaceCard.Nine.ToString());
+        var lowStraight = LowStraight.Create();
+
+        // act
+        var actual = threeOfAKind.IsBetterThan(lowStraight);
+
+        // assert
+        Assert.True(actual);
+    }
+
+    [Fact]
+    public void ThreeOfAKindIsBetterThenHighStraightTests()
+    {
+        // arrange
+        var threeOfAKind = ThreeOfAKind.Create(FaceCard.Nine.ToString());
+        var highStraight = HighStraight.Create();
+
+        // act
+        var actual = threeOfAKind.IsBetterThan(highStraight);
+
+        // assert
+        Assert.True(actual);
+    }
 }
