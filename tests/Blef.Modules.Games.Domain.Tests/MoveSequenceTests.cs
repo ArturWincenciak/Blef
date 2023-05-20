@@ -129,7 +129,7 @@ public class MoveSequenceTests
         });
 
         // act
-        var actual = moveSequence.Players;
+        var actual = moveSequence.Players();
 
         // assert
         Assert.Equal(expected: new[] {playerId1, playerId2, playerId3}, actual);

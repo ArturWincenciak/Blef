@@ -4,7 +4,7 @@ internal sealed class MoveSequence
 {
     private readonly IReadOnlyCollection<Move> _moves;
 
-    public IReadOnlyCollection<PlayerId> Players => _moves
+    public IReadOnlyCollection<PlayerId> Players() => _moves
         .Select(move => move.Player)
         .ToArray();
 
