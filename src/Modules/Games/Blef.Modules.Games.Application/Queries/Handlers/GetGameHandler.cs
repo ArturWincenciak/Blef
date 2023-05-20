@@ -22,23 +22,26 @@ internal sealed class GetGameHandler : IQueryHandler<GetGame, GetGame.Result>
 
     private static GetGame.Result Map(Gameplay.Game game) =>
         new(Status: Map(game.Status),
-            Players: Map(game.GamePlayers),
-            Deals: Map(game.Deals),
+            Players: Map(game.GamePlayers.ToArray()),
+            Deals: Map(game.Deals.ToArray()),
             Winner: Map(game.Winner));
 
     private static GetGame.GameStatus Map(Gameplay.GameStatus gameStatus) =>
         new(gameStatus.ToString());
 
-    private static IEnumerable<GetGame.Player> Map(IEnumerable<Gameplay.PlayerEntry> gamePlayers) =>
-        gamePlayers.Select(player => new GetGame.Player(
-            player.Player.Id.Id, player.Player.Nick.Nick, player.JoiningOrder));
+    private static IReadOnlyCollection<GetGame.Player> Map(IReadOnlyCollection<Gameplay.PlayerEntry> gamePlayers) =>
+        gamePlayers
+            .Select(player => new GetGame.Player(
+                player.Player.Id.Id, player.Player.Nick.Nick, player.JoiningOrder))
+            .ToArray();
 
-    private static IEnumerable<GetGame.Deal> Map(
-        IEnumerable<Gameplay.DealSummary> deals) =>
-        deals.Select(deal => new GetGame.Deal(
-            deal.Number.Number,
-            State: deal.Status.ToString(),
-            DealResolution: Map(deal.DealResolution)));
+    private static IReadOnlyCollection<GetGame.Deal> Map(IReadOnlyCollection<Gameplay.DealSummary> deals) =>
+        deals
+            .Select(deal => new GetGame.Deal(
+                deal.Number.Number,
+                State: deal.Status.ToString(),
+                DealResolution: Map(deal.DealResolution)))
+            .ToArray();
 
     private static GetGame.DealResolution Map(Gameplay.DealResolution? dealResolution) =>
         new(CheckingPlayerId: dealResolution?.CheckingPlayer.Player.Id ?? Guid.Empty,

@@ -7,7 +7,7 @@ namespace Blef.Shared.Infrastructure.Events;
 internal static class Extensions
 {
     public static IServiceCollection AddDomainEvents(
-        this IServiceCollection services, IEnumerable<Assembly> assemblies) =>
+        this IServiceCollection services, IReadOnlyCollection<Assembly> assemblies) =>
         services
             .AddScoped<IDomainEventDispatcher, DomainEventDispatcher>()
             .Scan(typeSourceSelector => typeSourceSelector.FromAssemblies(assemblies)

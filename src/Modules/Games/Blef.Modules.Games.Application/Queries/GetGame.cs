@@ -9,8 +9,8 @@ public sealed record GetGame(GameId Game) : IQuery<GetGame.Result>
     [UsedImplicitly]
     public sealed record Result(
         GameStatus Status,
-        IEnumerable<Player> Players,
-        IEnumerable<Deal> Deals,
+        IReadOnlyCollection<Player> Players,
+        IReadOnlyCollection<Deal> Deals,
         Winner Winner) : IQueryResult;
 
     [UsedImplicitly]

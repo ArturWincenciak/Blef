@@ -5,7 +5,7 @@ namespace Blef.Modules.Games.Domain.Services;
 
 internal sealed class ShuffledDeckFactory : IDeckFactory
 {
-    private readonly static IEnumerable<Suit> _suites = new[]
+    private readonly static IReadOnlyCollection<Suit> _suites = new[]
     {
         Suit.Clubs,
         Suit.Diamonds,
@@ -13,7 +13,7 @@ internal sealed class ShuffledDeckFactory : IDeckFactory
         Suit.Spades
     };
 
-    private readonly static IEnumerable<FaceCard> _faceCards = new[]
+    private readonly static IReadOnlyCollection<FaceCard> _faceCards = new[]
     {
         FaceCard.Nine,
         FaceCard.Ten,

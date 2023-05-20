@@ -8,7 +8,7 @@ namespace Blef.Shared.Infrastructure.Modules;
 
 internal static class Extension
 {
-    internal static IEnumerable<string> DetectDisabledModules(this IConfiguration configuration)
+    internal static IReadOnlyCollection<string> DetectDisabledModules(this IConfiguration configuration)
     {
         var disabledModules = new List<string>();
         foreach (var (key, value) in configuration.AsEnumerable())
@@ -28,7 +28,7 @@ internal static class Extension
     }
 
     internal static void AddOnlyNotDisabledModuleParts(this ApplicationPartManager manager,
-        IEnumerable<string> disabledModules)
+        IReadOnlyCollection<string> disabledModules)
     {
         var removedParts = new List<ApplicationPart>();
         foreach (var disabledModule in disabledModules)
@@ -46,7 +46,9 @@ internal static class Extension
         manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
     }
 
-    internal static IServiceCollection AddModuleInfo(this IServiceCollection services, IEnumerable<IModule> modules) =>
-        services.AddSingleton(new ModuleInfoCollection(
-            modules.Select(module => new ModuleInfo(module.Name, Path: $"/{module.Path}"))));
+    internal static IServiceCollection AddModuleInfo(this IServiceCollection services,
+        IReadOnlyCollection<IModule> modules) =>
+        services.AddSingleton(new ModuleInfoCollection(modules
+            .Select(module => new ModuleInfo(module.Name, Path: $"/{module.Path}"))
+            .ToArray()));
 }

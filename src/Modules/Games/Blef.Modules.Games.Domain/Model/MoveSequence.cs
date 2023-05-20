@@ -2,15 +2,19 @@
 
 internal sealed class MoveSequence
 {
-    private readonly IEnumerable<Move> _moves;
+    private readonly IReadOnlyCollection<Move> _moves;
 
-    public IEnumerable<PlayerId> Players => _moves.Select(move => move.Player);
+    public IReadOnlyCollection<PlayerId> Players => _moves
+        .Select(move => move.Player)
+        .ToArray();
 
-    public Move FirstMove => _moves.Single(move => move.Order == Order.First);
+    public Move FirstMove => _moves
+        .Single(move => move.Order == Order.First);
 
-    public Move LastMove => _moves.Single(move => move.Order == Order.Create(_moves.Count()));
+    public Move LastMove => _moves
+        .Single(move => move.Order == Order.Create(_moves.Count));
 
-    public MoveSequence(IEnumerable<Move> moves)
+    public MoveSequence(IReadOnlyCollection<Move> moves)
     {
         if (moves is null)
             throw new ArgumentNullException(nameof(moves));
@@ -41,13 +45,13 @@ internal sealed class MoveSequence
     public Move GetMove(Order order) =>
         _moves.Single(move => move.Order == order);
 
-    private static bool AreAllMoveUnique(IEnumerable<Move> moves) =>
+    private static bool AreAllMoveUnique(IReadOnlyCollection<Move> moves) =>
         moves.Select(move => move.Player).Distinct().Count() == moves.Count();
 
-    private static bool AreAllPlayersUnique(IEnumerable<Move> moves) =>
+    private static bool AreAllPlayersUnique(IReadOnlyCollection<Move> moves) =>
         moves.Select(move => move.Player).Distinct().Count() == moves.Count();
 
-    private static bool CheckIfMovesAreInOrder(IEnumerable<Move> moves)
+    private static bool CheckIfMovesAreInOrder(IReadOnlyCollection<Move> moves)
     {
         var orderedMoves = moves.OrderBy(move => move.Order);
         var expectedOrder = Order.First;

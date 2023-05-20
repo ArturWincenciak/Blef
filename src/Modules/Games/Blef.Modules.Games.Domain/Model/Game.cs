@@ -59,7 +59,7 @@ internal sealed class Game
         return new BidPlaced(Id, deal.Id.Deal, newBid.Player, newBid.PokerHand);
     }
 
-    public IEnumerable<IDomainEvent> Check(CheckingPlayer checkingPlayer)
+    public IReadOnlyCollection<IDomainEvent> Check(CheckingPlayer checkingPlayer)
     {
         ValidateGameInProgress();
 
@@ -111,7 +111,8 @@ internal sealed class Game
                 var sequenceIndex = Order.Create(index + 1);
                 var nextOrder = orderPhysic.ShiftedOrder(sequenceIndex);
                 return new NextDealPlayer(inGamePlayer.Id, inGamePlayer.CardsAmount, nextOrder);
-            });
+            })
+            .ToArray();
 
         return new NextDealPlayersSet(nextDealPlayers);
     }

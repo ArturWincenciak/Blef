@@ -8,7 +8,7 @@ namespace Blef.Shared.Infrastructure.Queries;
 internal static class Extensions
 {
     [UsedImplicitly]
-    public static IServiceCollection AddQueries(this IServiceCollection services, IEnumerable<Assembly> assemblies) =>
+    public static IServiceCollection AddQueries(this IServiceCollection services, IReadOnlyCollection<Assembly> assemblies) =>
         services
             .AddScoped<IQueryDispatcher, QueryDispatcher>()
             .Scan(typeSourceSelector => typeSourceSelector.FromAssemblies(assemblies)

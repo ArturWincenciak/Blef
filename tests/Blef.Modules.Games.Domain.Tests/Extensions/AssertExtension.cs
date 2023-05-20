@@ -11,7 +11,7 @@ internal static class AssertExtension
         DealNumber expectedDealNumber,
         PlayerId expectedCheckingPlayer,
         PlayerId expectedLooser,
-        IEnumerable<IDomainEvent> actual)
+        IReadOnlyCollection<IDomainEvent> actual)
     {
         var checkPlaced = actual.Single(@event => @event is CheckPlaced) as CheckPlaced;
         Assert.Equal(expectedGameId, checkPlaced!.Game);
@@ -23,8 +23,8 @@ internal static class AssertExtension
     public static void AssertDealStarted(
         GameId expectedGameId,
         DealNumber expectedDealNumber,
-        IEnumerable<PlayerId> expectedNextDealPlayers,
-        IEnumerable<IDomainEvent> actual)
+        IReadOnlyCollection<PlayerId> expectedNextDealPlayers,
+        IReadOnlyCollection<IDomainEvent> actual)
     {
         var dealStarted = actual.Single(@event => @event is DealStarted) as DealStarted;
         Assert.Equal(expectedGameId, dealStarted!.Game);

@@ -48,7 +48,7 @@ public class GameOverTests
             actual);
     }
 
-    private static void AssertGameOver(GameId expectedGameId, PlayerId expectedWinner, IEnumerable<IDomainEvent> actual)
+    private static void AssertGameOver(GameId expectedGameId, PlayerId expectedWinner, IReadOnlyCollection<IDomainEvent> actual)
     {
         var gameOver = actual.Single(@event => @event is GameOver) as GameOver;
         Assert.Equal(expectedGameId, gameOver!.Game);

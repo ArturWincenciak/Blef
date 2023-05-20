@@ -6,7 +6,7 @@ internal sealed class Deck
 
     private readonly List<Card> _cards;
 
-    public Deck(IEnumerable<Card> cards)
+    public Deck(IReadOnlyCollection<Card> cards)
     {
         if (cards is null)
             throw new ArgumentNullException(nameof(cards));
@@ -32,6 +32,6 @@ internal sealed class Deck
         return new Hand(hand);
     }
 
-    private static bool AreAllCardsUnique(IEnumerable<Card> cards) =>
+    private static bool AreAllCardsUnique(IReadOnlyCollection<Card> cards) =>
         cards.Distinct().Count() == cards.Count();
 }

@@ -4,7 +4,7 @@ namespace Blef.Bootstrapper;
 
 internal static class ModuleLoader
 {
-    internal static IEnumerable<Assembly> LoadAssemblies(IConfiguration configuration)
+    internal static IReadOnlyCollection<Assembly> LoadAssemblies(IConfiguration configuration)
     {
         var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 

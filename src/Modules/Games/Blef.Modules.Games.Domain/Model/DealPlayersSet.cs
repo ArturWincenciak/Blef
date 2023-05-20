@@ -2,11 +2,13 @@
 
 internal sealed class DealPlayersSet
 {
-    public IEnumerable<DealPlayer> Players { get; }
+    public IReadOnlyCollection<DealPlayer> Players { get; }
 
-    public Table Table => new(Players.Select(player => player.Hand));
+    public Table Table => new(Players
+        .Select(player => player.Hand)
+        .ToArray());
 
-    public DealPlayersSet(IEnumerable<DealPlayer> players)
+    public DealPlayersSet(IReadOnlyCollection<DealPlayer> players)
     {
         if (players is null)
             throw new ArgumentNullException(nameof(players));
@@ -24,16 +26,16 @@ internal sealed class DealPlayersSet
         if (AreAllPlayersUnique(players) == false)
             throw new ArgumentException("No player duplicates are allowed");
 
-        var allDealtCards = players.SelectMany(player => player.Hand.Cards);
+        var allDealtCards = players.SelectMany(player => player.Hand.Cards).ToArray();
         if (AreAllCardsUnique(allDealtCards) == false)
             throw new ArgumentException("No card duplicates are allowed in the players' hands");
 
         Players = players;
     }
 
-    private static bool AreAllPlayersUnique(IEnumerable<DealPlayer> players) =>
+    private static bool AreAllPlayersUnique(IReadOnlyCollection<DealPlayer> players) =>
         players.Select(player => player.Player).Distinct().Count() == players.Count();
 
-    private static bool AreAllCardsUnique(IEnumerable<Card> cards) =>
+    private static bool AreAllCardsUnique(IReadOnlyCollection<Card> cards) =>
         cards.Distinct().Count() == cards.Count();
 }
