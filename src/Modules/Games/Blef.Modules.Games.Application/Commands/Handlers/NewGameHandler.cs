@@ -20,11 +20,11 @@ internal sealed class NewGameHandler : ICommandHandler<NewGame, NewGame.Result>
         _gameplays = gameplays;
     }
 
-    public Task<NewGame.Result> Handle(NewGame command, CancellationToken cancellation)
+    public async Task<NewGame.Result> Handle(NewGame command, CancellationToken cancellation)
     {
         var game = _gameFactory.Create();
-        _games.Add(game);
-        _gameplays.Add(new Gameplay(game.Id));
-        return Task.FromResult(new NewGame.Result(game.Id.Id));
+        await _games.Add(game);
+        await _gameplays.Add(new Gameplay(game.Id));
+        return new NewGame.Result(game.Id.Id);
     }
 }
