@@ -23,7 +23,7 @@ EnumerateFiles(
     .ToList()
     .ForEach(config => builder.Configuration.AddJsonFile(config));
 
-var assemblies = LoadAssemblies(builder.Configuration).ToArray();
+var assemblies = LoadAssemblies(builder.Configuration);
 
 var modules = assemblies
     .SelectMany(assembly => assembly.GetTypes())

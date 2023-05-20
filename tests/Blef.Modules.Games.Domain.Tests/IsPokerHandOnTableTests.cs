@@ -532,7 +532,7 @@ public class IsPokerHandOnTableTests
                 })
             });
 
-        private static IReadOnlyCollection<object[]> GivenPokerHandTestCases() => Init
+        private static IEnumerable<object[]> GivenPokerHandTestCases() => Init
             .Concat(HighCardTestCases)
             .Concat(PairTestCases)
             .Concat(TwoPairsTestCases)
