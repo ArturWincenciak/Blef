@@ -2,7 +2,7 @@
 
 internal sealed class LowStraight : PokerHand
 {
-    public const string Type = "low-straight";
+    public const string TYPE = "low-straight";
     protected override int PokerHandRank => 4;
 
     private LowStraight()
@@ -22,5 +22,5 @@ internal sealed class LowStraight : PokerHand
         0; // It is not important for this kind of PokerHand
 
     public override string Serialize() =>
-        Type;
+        TYPE;
 }

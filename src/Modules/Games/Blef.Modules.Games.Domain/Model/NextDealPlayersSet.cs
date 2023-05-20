@@ -23,10 +23,10 @@ internal sealed class NextDealPlayersSet
         Players = players;
     }
 
-    private static bool AreAllPlayersUnique(IReadOnlyCollection<NextDealPlayer> NextDealPlayers) =>
-        NextDealPlayers
+    private static bool AreAllPlayersUnique(IReadOnlyCollection<NextDealPlayer> nextDealPlayers) =>
+        nextDealPlayers
             .Select(nextDealPlayer => nextDealPlayer.Player)
             .Distinct()
             .Count() ==
-        NextDealPlayers.Count;
+        nextDealPlayers.Count;
 }
