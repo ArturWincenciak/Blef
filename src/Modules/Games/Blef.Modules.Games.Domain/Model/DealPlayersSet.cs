@@ -13,13 +13,13 @@ internal sealed class DealPlayersSet
         if (players is null)
             throw new ArgumentNullException(nameof(players));
 
-        switch (players.Count())
+        switch (players.Count)
         {
             case < MIN_NUMBER_OF_PLAYERS:
-                throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count(),
+                throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count,
                     message: $"Deal should have at least {MIN_NUMBER_OF_PLAYERS} players");
             case > MAX_NUMBER_OF_PLAYERS:
-                throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count(),
+                throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count,
                     message: $"Deal cannot have more than {MAX_NUMBER_OF_PLAYERS} players");
         }
 
@@ -34,8 +34,8 @@ internal sealed class DealPlayersSet
     }
 
     private static bool AreAllPlayersUnique(IReadOnlyCollection<DealPlayer> players) =>
-        players.Select(player => player.Player).Distinct().Count() == players.Count();
+        players.Select(player => player.Player).Distinct().Count() == players.Count;
 
     private static bool AreAllCardsUnique(IReadOnlyCollection<Card> cards) =>
-        cards.Distinct().Count() == cards.Count();
+        cards.Distinct().Count() == cards.Count;
 }

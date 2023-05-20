@@ -20,7 +20,7 @@ public class StartFirstDealTests
         // assert
         Assert.Equal(game.Id, dealStarted.Game);
         Assert.Equal(expected: new DealNumber(1), dealStarted.Deal);
-        Assert.Equal(expected: 2, actual: dealStarted.Players.Count());
+        Assert.Equal(expected: 2, actual: dealStarted.Players.Count);
         var actualGrahamPlayer = dealStarted.Players.First();
         var actualKnuthPlayer = dealStarted.Players.Last();
         var expectedGrahamCard = DeckFactoryMock.Cards[0];
