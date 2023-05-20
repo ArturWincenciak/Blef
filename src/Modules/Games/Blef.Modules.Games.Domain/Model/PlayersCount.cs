@@ -7,18 +7,15 @@ internal sealed class PlayersCount
     private PlayersCount(int count) =>
         _count = count;
 
-    public static PlayersCount Create(int count)
-    {
-        if (count < MIN_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(count), count,
-                message: $"The player count should be at least {MIN_NUMBER_OF_PLAYERS}");
-
-        if (count > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(count), count,
-                message: $"The player count cannot exceed {MAX_NUMBER_OF_PLAYERS}");
-
-        return new PlayersCount(count);
-    }
+    public static PlayersCount Create(int count) =>
+        count switch
+        {
+            < MIN_NUMBER_OF_PLAYERS => throw new ArgumentOutOfRangeException(paramName: nameof(count), count,
+                message: $"The player count should be at least {MIN_NUMBER_OF_PLAYERS}"),
+            > MAX_NUMBER_OF_PLAYERS => throw new ArgumentOutOfRangeException(paramName: nameof(count), count,
+                message: $"The player count cannot exceed {MAX_NUMBER_OF_PLAYERS}"),
+            _ => new PlayersCount(count)
+        };
 
     public static int operator +(PlayersCount dealsCount, int value) =>
         dealsCount._count + value;
