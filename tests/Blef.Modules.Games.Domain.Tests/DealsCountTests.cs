@@ -8,7 +8,7 @@ public class DealsCountTests
     public void CreateCountTest()
     {
         // arrange
-        var count = 10;
+        const int count = 10;
 
         // act
         var actual = DealsCount.Create(count);
@@ -21,7 +21,7 @@ public class DealsCountTests
     public void CountCannotBeNegativeTest()
     {
         // arrange
-        var count = -5;
+        const int count = -5;
 
         // act & assert
         Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -37,7 +37,7 @@ public class DealsCountTests
 
         // act
         var actual = dealsCount % playersCount;
-        var expected = 1;
+        const int expected = 1;
 
         // assert
         Assert.Equal(expected, actual);

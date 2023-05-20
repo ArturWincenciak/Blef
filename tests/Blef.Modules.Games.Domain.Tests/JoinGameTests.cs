@@ -12,7 +12,7 @@ public class JoinGameTests
     {
         // arrange
         var game = GivenGame();
-        var playerNick = "Graham";
+        const string playerNick = "Graham";
 
         // act
         var gamePlayerJoined = game.Join(new PlayerNick(playerNick));
@@ -26,10 +26,10 @@ public class JoinGameTests
     {
         // arrange
         var game = GivenGame();
-        var playerNick1 = "First player";
-        var playerNick2 = "Second player";
-        var playerNick3 = "Third player";
-        var playerNick4 = "Fourth player";
+        const string playerNick1 = "First player";
+        const string playerNick2 = "Second player";
+        const string playerNick3 = "Third player";
+        const string playerNick4 = "Fourth player";
 
         // act
         var gamePlayerJoined1 = game.Join(new PlayerNick(playerNick1));

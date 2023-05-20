@@ -8,7 +8,7 @@ public class DealNumberTests
     public void CrateDealNumberTest()
     {
         // arrange
-        var number = 1;
+        const int number = 1;
 
         // act
         var actual = new DealNumber(number);

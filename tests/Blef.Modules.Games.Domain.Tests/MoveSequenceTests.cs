@@ -72,7 +72,7 @@ public class MoveSequenceTests
     public void CannotCreateMoveSequenceWithNotUniquesPlayersTest() =>
         Assert.Throws<ArgumentException>(() =>
         {
-            var playerId = "8FA39222-7D70-4D1D-B8DD-7F07320250FA";
+            const string playerId = "8FA39222-7D70-4D1D-B8DD-7F07320250FA";
             return new MoveSequence(new Move[]
             {
                 new(Player: new PlayerId(Guid.Parse(playerId)), Order: Order.Create(1)),
