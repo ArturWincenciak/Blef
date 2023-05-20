@@ -19,12 +19,12 @@ internal sealed class MoveSequence
         if (moves is null)
             throw new ArgumentNullException(nameof(moves));
 
-        if (moves.Count() < MIN_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(moves), actualValue: moves.Count(),
+        if (moves.Count < MIN_NUMBER_OF_PLAYERS)
+            throw new ArgumentOutOfRangeException(paramName: nameof(moves), actualValue: moves.Count,
                 message: $"Move sequence should have at least {MIN_NUMBER_OF_PLAYERS} players");
 
-        if (moves.Count() > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(moves), actualValue: moves.Count(),
+        if (moves.Count > MAX_NUMBER_OF_PLAYERS)
+            throw new ArgumentOutOfRangeException(paramName: nameof(moves), actualValue: moves.Count,
                 message: $"Move sequence cannot contain more than {MAX_NUMBER_OF_PLAYERS} players");
 
         if (AreAllPlayersUnique(moves) == false)
@@ -46,10 +46,10 @@ internal sealed class MoveSequence
         _moves.Single(move => move.Order == order);
 
     private static bool AreAllMoveUnique(IReadOnlyCollection<Move> moves) =>
-        moves.Select(move => move.Player).Distinct().Count() == moves.Count();
+        moves.Select(move => move.Player).Distinct().Count() == moves.Count;
 
     private static bool AreAllPlayersUnique(IReadOnlyCollection<Move> moves) =>
-        moves.Select(move => move.Player).Distinct().Count() == moves.Count();
+        moves.Select(move => move.Player).Distinct().Count() == moves.Count;
 
     private static bool CheckIfMovesAreInOrder(IReadOnlyCollection<Move> moves)
     {
