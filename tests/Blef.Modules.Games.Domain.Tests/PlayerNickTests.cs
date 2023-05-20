@@ -8,7 +8,7 @@ public class PlayerNickTests
     public void CreatePlayerNickTest()
     {
         // arrange
-        var nick = "Kent";
+        const string nick = "Kent";
 
         // act
         var actual = new PlayerNick(nick);
@@ -33,7 +33,7 @@ public class PlayerNickTests
     public void TwoInstancesOfPlayerNickWithTheSameNickAreEqualsTest()
     {
         // arrange
-        var nick = "Kent";
+        const string nick = "Kent";
         var first = new PlayerNick(nick);
         var second = new PlayerNick(nick);
 
