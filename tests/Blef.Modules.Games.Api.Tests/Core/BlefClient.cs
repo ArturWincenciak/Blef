@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
+﻿using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
 using Blef.Modules.Games.Domain.Model;
