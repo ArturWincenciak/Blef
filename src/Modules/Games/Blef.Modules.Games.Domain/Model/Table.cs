@@ -35,7 +35,7 @@ internal sealed class Table
     public int Count(FaceCard faceCard) =>
         Cards().Count(card => card.FaceCard.Equals(faceCard));
 
-    private static bool AreAllCardsUnique(IReadOnlyCollection<Hand> hands)
+    private static bool AreAllCardsUnique(IEnumerable<Hand> hands)
     {
         var cardsInAllHands = hands.SelectMany(hand => hand.Cards).ToArray();
         var numberOfCardsInAllHands = cardsInAllHands.Length;
