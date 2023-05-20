@@ -109,6 +109,31 @@ public class ComparingPokerHandsTests
     }
 
     [Fact]
+    public void ThreeOfAKindIsBetterThenOtherThreeOfAKindTests()
+    {
+        IsBetterThen(FaceCard.Ace, FaceCard.King);
+        IsBetterThen(FaceCard.King, FaceCard.Queen);
+        IsBetterThen(FaceCard.Queen, FaceCard.Jack);
+        IsBetterThen(FaceCard.Jack, FaceCard.Ten);
+        IsBetterThen(FaceCard.Ten, FaceCard.Nine);
+        IsBetterThen(FaceCard.Ace, FaceCard.Nine);
+        IsBetterThen(FaceCard.King, FaceCard.Ten);
+
+        void IsBetterThen(FaceCard higher, FaceCard lower)
+        {
+            // arrange
+            var higherThreeOfAKind = ThreeOfAKind.Create(higher.ToString());
+            var lowerThreeOfAKind = ThreeOfAKind.Create(lower.ToString());
+
+            // act
+            var actual = higherThreeOfAKind.IsBetterThan(lowerThreeOfAKind);
+
+            // assert
+            Assert.True(actual);
+        }
+    }
+
+    [Fact]
     public void PairIsBetterThenHighCardTests()
     {
         // arrange
