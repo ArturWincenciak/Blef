@@ -4,6 +4,9 @@ internal sealed class Table
 {
     private readonly IReadOnlyCollection<Hand> _hands;
 
+    private IEnumerable<Card> Cards => _hands
+        .SelectMany(hand => hand.Cards);
+
     public Table(IReadOnlyCollection<Hand> hands)
     {
         if (hands is null)
@@ -37,7 +40,4 @@ internal sealed class Table
         var numberOfCardsInAllHands = cardsInAllHands.Length;
         return cardsInAllHands.Distinct().Count() == numberOfCardsInAllHands;
     }
-
-    private IEnumerable<Card> Cards => _hands
-        .SelectMany(hand => hand.Cards);
 }
