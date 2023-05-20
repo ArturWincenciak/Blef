@@ -2,7 +2,7 @@
 
 internal class HighCard : PokerHand
 {
-    public const string Type = "high-card";
+    public const string TYPE = "high-card";
     private readonly FaceCard _faceCard;
 
     protected override int PokerHandRank => 1;
@@ -17,7 +17,7 @@ internal class HighCard : PokerHand
         _faceCard.GetRank();
 
     public override string Serialize() =>
-        $"{Type}:{_faceCard.ToString().ToLower()}";
+        $"{TYPE}:{_faceCard.ToString().ToLower()}";
 
     public static PokerHand Create(string faceCard) =>
         new HighCard(FaceCard.Create(faceCard));

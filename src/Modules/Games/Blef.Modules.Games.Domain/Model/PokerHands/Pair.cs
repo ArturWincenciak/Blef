@@ -2,7 +2,7 @@
 
 internal sealed class Pair : PokerHand
 {
-    public const string Type = "pair";
+    public const string TYPE = "pair";
     private readonly FaceCard _faceCard;
 
     protected override int PokerHandRank => 2;
@@ -17,7 +17,7 @@ internal sealed class Pair : PokerHand
         _faceCard.GetRank();
 
     public override string Serialize() =>
-        $"{Type}:{_faceCard.ToString().ToLower()}";
+        $"{TYPE}:{_faceCard.ToString().ToLower()}";
 
     public static PokerHand Create(string faceCard) =>
         new Pair(FaceCard.Create(faceCard));

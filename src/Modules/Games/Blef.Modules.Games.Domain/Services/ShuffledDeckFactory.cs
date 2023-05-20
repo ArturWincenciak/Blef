@@ -5,7 +5,7 @@ namespace Blef.Modules.Games.Domain.Services;
 
 internal sealed class ShuffledDeckFactory : IDeckFactory
 {
-    private readonly static IReadOnlyCollection<Suit> _suites = new[]
+    private readonly static IReadOnlyCollection<Suit> Suites = new[]
     {
         Suit.Clubs,
         Suit.Diamonds,
@@ -13,7 +13,7 @@ internal sealed class ShuffledDeckFactory : IDeckFactory
         Suit.Spades
     };
 
-    private readonly static IReadOnlyCollection<FaceCard> _faceCards = new[]
+    private readonly static IReadOnlyCollection<FaceCard> FaceCards = new[]
     {
         FaceCard.Nine,
         FaceCard.Ten,
@@ -34,9 +34,9 @@ internal sealed class ShuffledDeckFactory : IDeckFactory
     {
         var cards = new List<Card>();
 
-        foreach (var suite in _suites)
+        foreach (var suite in Suites)
         {
-            foreach (var faceCard in _faceCards)
+            foreach (var faceCard in FaceCards)
                 cards.Add(new Card(faceCard, suite));
         }
 
