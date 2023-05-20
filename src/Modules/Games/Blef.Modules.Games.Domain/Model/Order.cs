@@ -8,18 +8,15 @@ internal sealed record Order : IComparable<Order>
 
     public Order Next => new(_sequence + 1);
 
-    private Order(int sequence)
-    {
-        if (sequence < 1)
-            throw new ArgumentOutOfRangeException(paramName: nameof(sequence), sequence,
-                message: "Sequence cannot be less then one");
-
-        if (sequence > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(sequence), sequence,
-                message: "Sequence cannot be greater then max number of players equals four");
-
-        _sequence = sequence;
-    }
+    private Order(int sequence) =>
+        _sequence = sequence switch
+        {
+            < 1 => throw new ArgumentOutOfRangeException(paramName: nameof(sequence), sequence,
+                message: "Sequence cannot be less then one"),
+            > MAX_NUMBER_OF_PLAYERS => throw new ArgumentOutOfRangeException(paramName: nameof(sequence), sequence,
+                message: "Sequence cannot be greater then max number of players equals four"),
+            _ => sequence
+        };
 
     public int CompareTo(Order? other) =>
         _sequence.CompareTo(other!._sequence);
