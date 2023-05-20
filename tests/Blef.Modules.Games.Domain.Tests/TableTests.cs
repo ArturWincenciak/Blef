@@ -121,7 +121,7 @@ public class TableTests
                 new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)}),
                 new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)})
             };
-            new Table(hands);
+            return new Table(hands);
         });
 
     [Fact]
@@ -137,7 +137,7 @@ public class TableTests
                     new(FaceCard.Queen, Suit.Clubs)
                 })
             };
-            new Table(onlyOneHand);
+            return new Table(onlyOneHand);
         });
 
     [Fact]
@@ -152,6 +152,6 @@ public class TableTests
                 new(new Card[] {new(FaceCard.Jack, Suit.Spades)}),
                 new(new Card[] {new(FaceCard.Ten, Suit.Spades)})
             };
-            new Table(fiveHands);
+            return new Table(fiveHands);
         });
 }
