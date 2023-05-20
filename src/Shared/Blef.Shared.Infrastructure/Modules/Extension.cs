@@ -28,7 +28,7 @@ internal static class Extension
     }
 
     internal static void AddOnlyNotDisabledModuleParts(this ApplicationPartManager manager,
-        IReadOnlyCollection<string> disabledModules)
+        IEnumerable<string> disabledModules)
     {
         var removedParts = new List<ApplicationPart>();
         foreach (var disabledModule in disabledModules)
@@ -47,7 +47,7 @@ internal static class Extension
     }
 
     internal static IServiceCollection AddModuleInfo(this IServiceCollection services,
-        IReadOnlyCollection<IModule> modules) =>
+        IEnumerable<IModule> modules) =>
         services.AddSingleton(new ModuleInfoCollection(modules
             .Select(module => new ModuleInfo(module.Name, Path: $"/{module.Path}"))
             .ToArray()));

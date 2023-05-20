@@ -540,7 +540,7 @@ public class IsPokerHandOnTableTests
             .Concat(HighStraightTestCases)
             .ToArray();
 
-        private static Table GivenTable(Hand[] hands) =>
+        private static Table GivenTable(IReadOnlyCollection<Hand> hands) =>
             new(hands);
     }
 }
