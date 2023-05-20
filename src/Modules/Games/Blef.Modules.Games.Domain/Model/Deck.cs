@@ -12,11 +12,11 @@ internal sealed class Deck
             throw new ArgumentNullException(nameof(cards));
 
         if (cards.Count != NUMBER_OF_CARDS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(cards), actualValue: cards.Count,
+            throw new ArgumentOutOfRangeException(paramName: nameof(cards), cards.Count,
                 message: $"The deck of cards must have exactly {NUMBER_OF_CARDS} cards");
 
         if (AreAllCardsUnique(cards) == false)
-            throw new ArgumentOutOfRangeException(paramName: nameof(cards), actualValue: cards.Count,
+            throw new ArgumentOutOfRangeException(paramName: nameof(cards), cards.Count,
                 message: "No card duplicates are allowed in the deck of cards");
 
         _cards = cards.ToList();

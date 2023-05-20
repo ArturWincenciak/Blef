@@ -14,11 +14,11 @@ internal sealed class Table
             throw new ArgumentNullException(nameof(hands));
 
         if (hands.Count < MIN_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(hands), actualValue: hands.Count,
+            throw new ArgumentOutOfRangeException(paramName: nameof(hands), hands.Count,
                 message: $"The table should have at least {MIN_NUMBER_OF_PLAYERS} players' hands dealt");
 
         if (hands.Count > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(hands), actualValue: hands.Count,
+            throw new ArgumentOutOfRangeException(paramName: nameof(hands), hands.Count,
                 message: $"There cannot be more than {MAX_NUMBER_OF_PLAYERS} players' hands dealt on the table");
 
         if (AreAllCardsUnique(hands) == false)

@@ -10,11 +10,11 @@ internal sealed class NextDealPlayersSet
             throw new ArgumentNullException(nameof(players));
 
         if (players.Count < MIN_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count,
+            throw new ArgumentOutOfRangeException(paramName: nameof(players), players.Count,
                 message: $"Next deal should have at least {MIN_NUMBER_OF_PLAYERS} players");
 
         if (players.Count > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count,
+            throw new ArgumentOutOfRangeException(paramName: nameof(players), players.Count,
                 message: $"Next deal cannot contain more than {MAX_NUMBER_OF_PLAYERS} players");
 
         if (AreAllPlayersUnique(players) == false)

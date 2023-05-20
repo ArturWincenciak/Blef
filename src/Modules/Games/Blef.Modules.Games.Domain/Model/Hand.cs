@@ -12,11 +12,11 @@ internal sealed class Hand
             throw new ArgumentNullException(nameof(cards));
 
         if (cards.Any() == false)
-            throw new ArgumentOutOfRangeException(paramName: nameof(cards), actualValue: cards.Count,
+            throw new ArgumentOutOfRangeException(paramName: nameof(cards), cards.Count,
                 message: "Hand without at least one card is not valid");
 
         if (cards.Count > MAX_CARD_AMOUNT)
-            throw new ArgumentOutOfRangeException(paramName: nameof(cards), actualValue: cards.Count,
+            throw new ArgumentOutOfRangeException(paramName: nameof(cards), cards.Count,
                 message: "Hand with more then five cards is not valid");
 
         if (AreAllCardsUnique(cards) == false)
