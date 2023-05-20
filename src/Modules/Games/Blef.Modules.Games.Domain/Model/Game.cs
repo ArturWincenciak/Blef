@@ -101,7 +101,7 @@ internal sealed class Game
             .Where(player => player.IsInTheGame)
             .ToArray();
 
-        var playersCount = PlayersCount.Create(inGamePlayers.Count());
+        var playersCount = PlayersCount.Create(inGamePlayers.Length);
         var dealsPlayedCount = DealsCount.Create(_deals.Count);
         var orderPhysic = DealOrderPhysic.Create(playersCount, dealsPlayedCount);
 
