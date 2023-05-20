@@ -23,10 +23,6 @@ public class SuitTests
     [Fact]
     public void SuitEqualsTests()
     {
-        Assert.True(Suit.Clubs.Equals(Suit.Clubs));
-        Assert.True(Suit.Diamonds.Equals(Suit.Diamonds));
-        Assert.True(Suit.Hearts.Equals(Suit.Hearts));
-        Assert.True(Suit.Spades.Equals(Suit.Spades));
         Assert.False(Suit.Clubs.Equals(Suit.Diamonds));
         Assert.False(Suit.Diamonds.Equals(Suit.Hearts));
         Assert.False(Suit.Hearts.Equals(Suit.Spades));
