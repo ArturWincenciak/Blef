@@ -94,7 +94,7 @@ public class MoveOrderPolicyTests
     public void SecondPlayerCannotMakeFirstMoveTest()
     {
         // arrange
-        var (policy, player1, player2) = GivenPolicyWithTwoPlayers();
+        var (policy, _, player2) = GivenPolicyWithTwoPlayers();
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() => { policy.Move(player2); });
@@ -104,7 +104,7 @@ public class MoveOrderPolicyTests
     public void FirstPlayerCannotMakeTwoMovesInRowTest()
     {
         // arrange
-        var (policy, player1, player2) = GivenPolicyWithTwoPlayers();
+        var (policy, player1, _) = GivenPolicyWithTwoPlayers();
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
@@ -133,7 +133,7 @@ public class MoveOrderPolicyTests
     public void ThirdPlayerCannotMakeSecondMoveTest()
     {
         // arrange
-        var (policy, player1, player2, player3) = GivenPolicyWithThreePlayers();
+        var (policy, player1, _, player3) = GivenPolicyWithThreePlayers();
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
@@ -147,7 +147,7 @@ public class MoveOrderPolicyTests
     public void FirstPlayerCannotMakeFourthMoveTest()
     {
         // arrange
-        var (policy, player1, player2, player3, player4) = GivenPolicyWithFourPlayers();
+        var (policy, player1, player2, player3, _) = GivenPolicyWithFourPlayers();
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
