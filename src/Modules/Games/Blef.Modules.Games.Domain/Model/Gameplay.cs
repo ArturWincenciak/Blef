@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Domain.Model.PokerHands;
+using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Domain.Model;
 
@@ -6,6 +7,7 @@ internal sealed class Gameplay
 {
     public enum DealStatus
     {
+        [UsedImplicitly]
         None = 0,
         InProgress = 1,
         Finished = 2
@@ -13,6 +15,7 @@ internal sealed class Gameplay
 
     public enum GameStatus
     {
+        [UsedImplicitly]
         None = 0,
         JoiningPlayers = 1,
         InProgress = 2,

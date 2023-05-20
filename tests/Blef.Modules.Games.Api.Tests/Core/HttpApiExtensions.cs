@@ -59,19 +59,6 @@ internal static class HttpApiExtensions
         response.EnsureSuccessStatusCode();
     }
 
-    async internal static Task<ProblemDetails> BidWithRuleViolation(this HttpClient client,
-        GameId gameId, PlayerId playerId, string bid)
-    {
-        var response = await Bid(client, gameId, playerId, bid);
-        if (response.StatusCode != HttpStatusCode.BadRequest)
-            throw new AssertActualExpectedException(
-                HttpStatusCode.BadRequest,
-                response.StatusCode,
-                userMessage: "Expected that this call to be rejected but it unexpectedly succeeded");
-
-        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
-    }
-
     private async static Task<HttpResponseMessage>
         Bid(HttpClient client, GameId gameId, PlayerId playerId, string bid) =>
         await client.PostAsJsonAsync(
@@ -98,19 +85,5 @@ internal static class HttpApiExtensions
         var response = await client.PostAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/checks", content: null);
         response.EnsureSuccessStatusCode();
-    }
-
-    async internal static Task<ProblemDetails> CheckWithRuleViolation(this HttpClient client, GameId gameId,
-        PlayerId playerId)
-    {
-        var response = await client.PostAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/checks", content: null);
-        if (response.StatusCode != HttpStatusCode.BadRequest)
-            throw new AssertActualExpectedException(
-                HttpStatusCode.BadRequest,
-                response.StatusCode,
-                userMessage: "Expected that this call to be rejected but it unexpectedly succeeded");
-
-        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
     }
 }
