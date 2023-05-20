@@ -36,7 +36,7 @@ internal sealed class Table
     private static bool AreAllCardsUnique(IReadOnlyCollection<Hand> hands)
     {
         var cardsInAllHands = hands.SelectMany(hand => hand.Cards).ToArray();
-        var numberOfCardsInAllHands = cardsInAllHands.Count();
+        var numberOfCardsInAllHands = cardsInAllHands.Length;
         return cardsInAllHands.Distinct().Count() == numberOfCardsInAllHands;
     }
 }
