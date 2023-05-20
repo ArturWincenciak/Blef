@@ -36,3 +36,12 @@ _then open your web browser to http://localhost:3000/swagger_
 $ docker run -dp 5000:80 teovincent/blef:latest
 ```
 _then open your web browser to http://localhost:5000/swagger_
+
+## Project diagram
+
+The starting point is the [`Blef.Bootstrapper`](./src/Blef.Bootstrapper/Program.cs) project that is responsible for loading modules and launching the service.
+
+![project diagram](https://github.com/ArturWincenciak/Blef/assets/9107578/3377b31e-aac7-4166-afd8-91d309f77690)
+
+
+
