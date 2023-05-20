@@ -11,7 +11,7 @@ public class BidDealTests
     public void FirstPlayerCanMakeFirstBidTest()
     {
         // arrange
-        var (deal, player1, player2, player3, player4) = GivenDealWithFourPlayers();
+        var (deal, player1, _, _, _) = GivenDealWithFourPlayers();
 
         // act
         var exception = Record.Exception(() =>
@@ -25,7 +25,7 @@ public class BidDealTests
     public void SecondPlayerCanMakeBidThatIsNotBetterPreviousBidTest()
     {
         // arrange
-        var (deal, player1, player2, player3, player4) = GivenDealWithFourPlayers();
+        var (deal, player1, player2, _, _) = GivenDealWithFourPlayers();
 
         // assert
         Assert.Throws<BidIsNotHigherThenLastOneException>(() =>
@@ -40,7 +40,7 @@ public class BidDealTests
     public void ThirdPlayerCanMakeBidThatIsNotBetterPreviousBidTest()
     {
         // arrange
-        var (deal, player1, player2, player3, player4) = GivenDealWithFourPlayers();
+        var (deal, player1, player2, player3, _) = GivenDealWithFourPlayers();
 
         // assert
         Assert.Throws<BidIsNotHigherThenLastOneException>(() =>
@@ -89,7 +89,7 @@ public class BidDealTests
     public void CannotBidAfterCheckTest()
     {
         // arrange
-        var (deal, player1, player2, player3, player4) = GivenDealWithFourPlayers();
+        var (deal, player1, player2, player3, _) = GivenDealWithFourPlayers();
         PlayHighCardBid(deal, player1, FaceCard.Nine);
         deal.Check(new CheckingPlayer(player2.Player));
 
