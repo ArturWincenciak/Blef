@@ -16,10 +16,10 @@ internal sealed class DealPlayersSet
         switch (players.Count)
         {
             case < MIN_NUMBER_OF_PLAYERS:
-                throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count,
+                throw new ArgumentOutOfRangeException(paramName: nameof(players), players.Count,
                     message: $"Deal should have at least {MIN_NUMBER_OF_PLAYERS} players");
             case > MAX_NUMBER_OF_PLAYERS:
-                throw new ArgumentOutOfRangeException(paramName: nameof(players), actualValue: players.Count,
+                throw new ArgumentOutOfRangeException(paramName: nameof(players), players.Count,
                     message: $"Deal cannot have more than {MAX_NUMBER_OF_PLAYERS} players");
         }
 

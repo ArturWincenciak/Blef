@@ -20,11 +20,11 @@ internal sealed class MoveSequence
             throw new ArgumentNullException(nameof(moves));
 
         if (moves.Count < MIN_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(moves), actualValue: moves.Count,
+            throw new ArgumentOutOfRangeException(paramName: nameof(moves), moves.Count,
                 message: $"Move sequence should have at least {MIN_NUMBER_OF_PLAYERS} players");
 
         if (moves.Count > MAX_NUMBER_OF_PLAYERS)
-            throw new ArgumentOutOfRangeException(paramName: nameof(moves), actualValue: moves.Count,
+            throw new ArgumentOutOfRangeException(paramName: nameof(moves), moves.Count,
                 message: $"Move sequence cannot contain more than {MAX_NUMBER_OF_PLAYERS} players");
 
         if (AreAllPlayersUnique(moves) == false)
