@@ -1,10 +1,7 @@
-﻿using System.Net;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
 using Blef.Modules.Games.Domain.Model;
-using Microsoft.AspNetCore.Mvc;
-using Xunit.Sdk;
 using DealNumber = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.DealNumber;
 using GameId = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.GameId;
 using PlayerId = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.PlayerId;
