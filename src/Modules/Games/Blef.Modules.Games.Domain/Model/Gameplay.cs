@@ -28,7 +28,7 @@ internal sealed class Gameplay
     private IReadOnlyCollection<PlayerEntry> GamePlayerEntries =>
         _gamePlayers;
 
-    private IReadOnlyCollection<DealSummary> Deals =>
+    private IReadOnlyCollection<DealSummary> Deals() =>
         _deals
             .Select(deal => new DealSummary(
                 deal.Key,
@@ -82,7 +82,7 @@ internal sealed class Gameplay
         _winner = winner;
 
     public Game GetGameProjection() =>
-        new(Status, GamePlayerEntries, Deals, _winner);
+        new(Status, GamePlayerEntries, Deals(), _winner);
 
     public DealDetails GetDealProjection(DealNumber dealNumber) =>
         _deals[dealNumber];
