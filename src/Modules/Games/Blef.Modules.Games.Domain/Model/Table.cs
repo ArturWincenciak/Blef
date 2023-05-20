@@ -4,7 +4,7 @@ internal sealed class Table
 {
     private readonly IReadOnlyCollection<Hand> _hands;
 
-    private IReadOnlyCollection<Card> Cards => _hands
+    private IReadOnlyCollection<Card> Cards() => _hands
         .SelectMany(hand => hand.Cards)
         .ToArray();
 
@@ -28,10 +28,10 @@ internal sealed class Table
     }
 
     public bool Contains(FaceCard faceCard) =>
-        Cards.Any(card => card.FaceCard.Equals(faceCard));
+        Cards().Any(card => card.FaceCard.Equals(faceCard));
 
     public int Count(FaceCard faceCard) =>
-        Cards.Count(card => card.FaceCard.Equals(faceCard));
+        Cards().Count(card => card.FaceCard.Equals(faceCard));
 
     private static bool AreAllCardsUnique(IReadOnlyCollection<Hand> hands)
     {
