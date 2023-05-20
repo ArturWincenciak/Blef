@@ -98,7 +98,8 @@ internal sealed class Game
     private NextDealPlayersSet CreateNextDealPlayers()
     {
         var inGamePlayers = _players
-            .Where(player => player.IsInTheGame);
+            .Where(player => player.IsInTheGame)
+            .ToArray();
 
         var playersCount = PlayersCount.Create(inGamePlayers.Count());
         var dealsPlayedCount = DealsCount.Create(_deals.Count);
