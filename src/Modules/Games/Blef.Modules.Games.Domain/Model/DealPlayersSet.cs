@@ -4,10 +4,6 @@ internal sealed class DealPlayersSet
 {
     public IReadOnlyCollection<DealPlayer> Players { get; }
 
-    public Table Table() => new(Players
-        .Select(player => player.Hand)
-        .ToArray());
-
     public DealPlayersSet(IReadOnlyCollection<DealPlayer> players)
     {
         if (players is null)
@@ -32,6 +28,10 @@ internal sealed class DealPlayersSet
 
         Players = players;
     }
+
+    public Table Table() => new(Players
+        .Select(player => player.Hand)
+        .ToArray());
 
     private static bool AreAllPlayersUnique(IReadOnlyCollection<DealPlayer> players) =>
         players.Select(player => player.Player).Distinct().Count() == players.Count;

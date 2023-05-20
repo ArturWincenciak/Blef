@@ -4,10 +4,6 @@ internal sealed class Table
 {
     private readonly IReadOnlyCollection<Hand> _hands;
 
-    private IReadOnlyCollection<Card> Cards() => _hands
-        .SelectMany(hand => hand.Cards)
-        .ToArray();
-
     public Table(IReadOnlyCollection<Hand> hands)
     {
         if (hands is null)
@@ -26,6 +22,10 @@ internal sealed class Table
 
         _hands = hands;
     }
+
+    private IReadOnlyCollection<Card> Cards() => _hands
+        .SelectMany(hand => hand.Cards)
+        .ToArray();
 
     public bool Contains(FaceCard faceCard) =>
         Cards().Any(card => card.FaceCard.Equals(faceCard));

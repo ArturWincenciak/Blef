@@ -28,16 +28,6 @@ internal sealed class Gameplay
     private IReadOnlyCollection<PlayerEntry> GamePlayerEntries =>
         _gamePlayers;
 
-    private IReadOnlyCollection<DealSummary> Deals() =>
-        _deals
-            .Select(deal => new DealSummary(
-                deal.Key,
-                Status: deal.Value.DealResolution is not null
-                    ? DealStatus.Finished
-                    : DealStatus.InProgress,
-                deal.Value.DealResolution))
-            .ToArray();
-
     private GameStatus Status
     {
         get
@@ -54,6 +44,16 @@ internal sealed class Gameplay
 
     public Gameplay(GameId id) =>
         Id = id;
+
+    private IReadOnlyCollection<DealSummary> Deals() =>
+        _deals
+            .Select(deal => new DealSummary(
+                deal.Key,
+                Status: deal.Value.DealResolution is not null
+                    ? DealStatus.Finished
+                    : DealStatus.InProgress,
+                deal.Value.DealResolution))
+            .ToArray();
 
     public void OnPlayerJoined(GamePlayer gamePlayer) =>
         _gamePlayers.Add(new PlayerEntry(gamePlayer, JoiningOrder: _gamePlayers.Count + 1));
@@ -82,7 +82,7 @@ internal sealed class Gameplay
         _winner = winner;
 
     public Game GetGameProjection() =>
-        new(Status, GamePlayerEntries, Deals(), _winner);
+        new(Status, GamePlayerEntries, Deals: Deals(), _winner);
 
     public DealDetails GetDealProjection(DealNumber dealNumber) =>
         _deals[dealNumber];

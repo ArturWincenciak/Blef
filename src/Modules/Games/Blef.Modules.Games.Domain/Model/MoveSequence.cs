@@ -4,10 +4,6 @@ internal sealed class MoveSequence
 {
     private readonly IReadOnlyCollection<Move> _moves;
 
-    public IReadOnlyCollection<PlayerId> Players() => _moves
-        .Select(move => move.Player)
-        .ToArray();
-
     public Move FirstMove => _moves
         .Single(move => move.Order == Order.First);
 
@@ -38,6 +34,10 @@ internal sealed class MoveSequence
 
         _moves = moves;
     }
+
+    public IReadOnlyCollection<PlayerId> Players() => _moves
+        .Select(move => move.Player)
+        .ToArray();
 
     public Move GetMove(PlayerId movingPlayer) =>
         _moves.Single(move => move.Player == movingPlayer);
