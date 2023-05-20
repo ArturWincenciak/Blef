@@ -7,7 +7,7 @@ namespace Blef.Shared.Infrastructure.Events;
 
 internal static class Extensions
 {
-    [SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
+    [SuppressMessage(category: "ReSharper", checkId: "UnusedMethodReturnValue.Global")]
     public static IServiceCollection AddDomainEvents(
         this IServiceCollection services, IReadOnlyCollection<Assembly> assemblies) =>
         services
