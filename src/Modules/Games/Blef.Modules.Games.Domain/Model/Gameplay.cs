@@ -89,11 +89,11 @@ internal sealed class Gameplay
     public DealDetails GetDealProjection(DealNumber dealNumber) =>
         _deals[dealNumber];
 
-    public IReadOnlyCollection<Card> GetHand(DealNumber dealNumber, PlayerId playerId)
+    public IEnumerable<Card> GetHand(DealNumber dealNumber, PlayerId playerId)
     {
         var deal = _deals[dealNumber];
         var player = deal.Players.Single(player => player.Player == playerId);
-        return player.Hand.Cards.ToArray();
+        return player.Hand.Cards;
     }
 
     internal sealed record Game(
