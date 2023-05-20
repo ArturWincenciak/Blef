@@ -4,7 +4,7 @@ internal sealed class DealPlayersSet
 {
     public IReadOnlyCollection<DealPlayer> Players { get; }
 
-    public Table Table => new(Players
+    public Table Table() => new(Players
         .Select(player => player.Hand)
         .ToArray());
 

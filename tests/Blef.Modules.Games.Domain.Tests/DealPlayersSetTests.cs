@@ -98,7 +98,7 @@ public class DealPlayersSetTests
         });
 
         // act
-        var actual = dealPlayersSet.Table;
+        var actual = dealPlayersSet.Table();
 
         // assert
         Assert.True(actual.Contains(hand1.Cards.First().FaceCard));
