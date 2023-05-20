@@ -29,8 +29,8 @@
 POST {{api}}/games
 Content-Type: application/json
 
-### Get game flow
-GET {{api}}/games/{{gameId}}
+### Get gameplay
+GET {{api}}/gameplays/{{gameId}}
 Content-Type: application/json
 
 ### Player 1: Join game
@@ -66,20 +66,26 @@ Content-Type: application/json
     "nick": "{{playerRiemannNick}}"
 }
 
-### New deal (shuffling and dealing)
+@dealNumber = 1
+
+### Get deal
+GET {{api}}/gameplays/{{gameId}}/deals/{{dealNumber}}
+Content-Type: application/json
+
+### First deal (shuffling and dealing)
 POST {{api}}/games/{{gameId}}/deals
 Content-Type: application/json
 
 ### Player 1: Get player's cards
-GET {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/cards
+GET {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/deals/{{dealNumber}}/cards
 Content-Type: application/json
 
 ### Player 2: Get player's cards
-GET {{api}}/games/{{gameId}}/players/{{playerGrahamId}}/cards
+GET {{api}}/games/{{gameId}}/players/{{playerGrahamId}}/deals/{{dealNumber}}/cards
 Content-Type: application/json
 
 ### Player 3: Get player's cards
-GET {{api}}/games/{{gameId}}/players/{{playerRiemannId}}/cards
+GET {{api}}/games/{{gameId}}/players/{{playerRiemannId}}/deals/{{dealNumber}}/cards
 Content-Type: application/json
 
 ### Player 1: Bid
