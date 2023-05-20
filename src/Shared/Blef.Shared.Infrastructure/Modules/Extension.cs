@@ -8,7 +8,7 @@ namespace Blef.Shared.Infrastructure.Modules;
 
 internal static class Extension
 {
-    internal static IReadOnlyCollection<string> DetectDisabledModules(this IConfiguration configuration)
+    internal static IEnumerable<string> DetectDisabledModules(this IConfiguration configuration)
     {
         var disabledModules = new List<string>();
         foreach (var (key, value) in configuration.AsEnumerable())

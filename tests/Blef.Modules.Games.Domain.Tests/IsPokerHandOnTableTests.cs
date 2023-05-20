@@ -22,10 +22,10 @@ public class IsPokerHandOnTableTests
     // arrange
     private class GivenPokerHandThatIsOnTheTable : IEnumerable<object[]>
     {
-        private static IReadOnlyCollection<object[]> Init =>
+        private static IEnumerable<object[]> Init =>
             new List<object[]>();
 
-        private static IReadOnlyCollection<object[]> HighCardTestCases =>
+        private static IEnumerable<object[]> HighCardTestCases =>
             new List<object[]>
             {
                 new object[]
@@ -57,7 +57,7 @@ public class IsPokerHandOnTableTests
                 }
             };
 
-        private static IReadOnlyCollection<object[]> PairTestCases =>
+        private static IEnumerable<object[]> PairTestCases =>
             new List<object[]>
             {
                 new object[]
@@ -103,7 +103,7 @@ public class IsPokerHandOnTableTests
                 }
             };
 
-        private static IReadOnlyCollection<object[]> TwoPairsTestCases =>
+        private static IEnumerable<object[]> TwoPairsTestCases =>
             new List<object[]>
             {
                 new object[]
@@ -194,7 +194,7 @@ public class IsPokerHandOnTableTests
                 }
             };
 
-        private static IReadOnlyCollection<object[]> LowStraightTestCases =>
+        private static IEnumerable<object[]> LowStraightTestCases =>
             new List<object[]>
             {
                 new object[]
@@ -303,7 +303,7 @@ public class IsPokerHandOnTableTests
                 }
             };
 
-        private static IReadOnlyCollection<object[]> HighStraightTestCases =>
+        private static IEnumerable<object[]> HighStraightTestCases =>
             new List<object[]>
             {
                 new object[]
@@ -537,8 +537,7 @@ public class IsPokerHandOnTableTests
             .Concat(PairTestCases)
             .Concat(TwoPairsTestCases)
             .Concat(LowStraightTestCases)
-            .Concat(HighStraightTestCases)
-            .ToArray();
+            .Concat(HighStraightTestCases);
 
         private static Table GivenTable(IReadOnlyCollection<Hand> hands) =>
             new(hands);
