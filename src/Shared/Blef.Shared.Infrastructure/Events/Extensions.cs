@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Blef.Shared.Abstractions.Events;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,6 +7,7 @@ namespace Blef.Shared.Infrastructure.Events;
 
 internal static class Extensions
 {
+    [SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
     public static IServiceCollection AddDomainEvents(
         this IServiceCollection services, IReadOnlyCollection<Assembly> assemblies) =>
         services
