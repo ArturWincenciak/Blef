@@ -19,4 +19,7 @@ internal static class PokerHandFactory
 
     public static PokerHand GivenHighStraight() =>
         HighStraight.Create();
+
+    public static PokerHand GivenThreeOfAKind(FaceCard faceCard) =>
+        ThreeOfAKind.Create(faceCard.ToString());
 }
