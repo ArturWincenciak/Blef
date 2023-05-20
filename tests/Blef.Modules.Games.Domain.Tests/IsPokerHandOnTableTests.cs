@@ -452,6 +452,64 @@ public class IsPokerHandOnTableTests
                 }
             };
 
+        private static IEnumerable<object[]> ThreeOfAKindTestCases =>
+            new List<object[]>
+            {
+                new object[]
+                {
+                    GivenTable(new Hand[]
+                    {
+                        new(new[]
+                        {
+                            new Card(FaceCard.Ten, Suit.Clubs),
+                            new Card(FaceCard.Ten, Suit.Diamonds),
+                            new Card(FaceCard.Queen, Suit.Diamonds)
+                        }),
+                        new(new[]
+                        {
+                            new Card(FaceCard.Ten, Suit.Hearts)
+                        })
+                    }),
+                    GivenThreeOfAKind(FaceCard.Ten)
+                },
+                new object[]
+                {
+                    GivenTable(new Hand[]
+                    {
+                        new(new[]
+                        {
+                            new Card(FaceCard.Queen, Suit.Diamonds)
+                        }),
+                        new(new[]
+                        {
+                            new Card(FaceCard.Queen, Suit.Hearts)
+                        }),
+                        new(new[]
+                        {
+                            new Card(FaceCard.Queen, Suit.Clubs)
+                        })
+                    }),
+                    GivenThreeOfAKind(FaceCard.Queen)
+                },
+                new object[]
+                {
+                    GivenTable(new Hand[]
+                    {
+                        new(new[]
+                        {
+                            new Card(FaceCard.Ace, Suit.Diamonds),
+                            new Card(FaceCard.Ace, Suit.Hearts),
+                            new Card(FaceCard.Ace, Suit.Clubs)
+                        }),
+                        new(new[]
+                        {
+                            new Card(FaceCard.Ace, Suit.Spades)
+                        })
+                    }),
+                    GivenThreeOfAKind(FaceCard.Ace)
+                }
+            };
+
         public IEnumerator<object[]> GetEnumerator() =>
             GivenPokerHandTestCases().GetEnumerator();
 
@@ -537,7 +595,8 @@ public class IsPokerHandOnTableTests
             .Concat(PairTestCases)
             .Concat(TwoPairsTestCases)
             .Concat(LowStraightTestCases)
-            .Concat(HighStraightTestCases);
+            .Concat(HighStraightTestCases)
+            .Concat(ThreeOfAKindTestCases);
 
         private static Table GivenTable(IReadOnlyCollection<Hand> hands) =>
             new(hands);
