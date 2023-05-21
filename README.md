@@ -43,5 +43,11 @@ The starting point is the [`Blef.Bootstrapper`](./src/Blef.Bootstrapper/Program.
 
 ![project diagram](https://github.com/ArturWincenciak/Blef/assets/9107578/3377b31e-aac7-4166-afd8-91d309f77690)
 
+Starting points of modules are in API projects, specifically in `Blef.Modules.*.Api` projects. Every API project contains a class that implements the [`IModule`](./src/Shared/Blef.Shared.Abstractions/Modules/IModule.cs) interface.
+
+Currently, the project consists of two modules: `Games` and `Users`. The `Games` module has a starting point defined in the [`GamesModule`](./src/Modules/Games/Blef.Modules.Games.Api/GamesModule.cs) class, and the `Users` module has a starting point defined in the [`UsersModule`](./src/Modules/Users/Blef.Modules.Users.Api/UsersModule.cs) class.
+
+Each API project module has controller definitions and its own JSON configuration files.
+
 
 
