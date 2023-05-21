@@ -117,6 +117,33 @@ public class ComparingPokerHandsTests
     [Fact]
     public void FullIsBetterThenOtherFullTests()
     {
+        IsBetterThen(higher: (FaceCard.Ten, FaceCard.Nine), lower: (FaceCard.Nine, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.Ten, FaceCard.Nine), lower: (FaceCard.Jack, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.Ten, FaceCard.Nine), lower: (FaceCard.Queen, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.Ten, FaceCard.Nine), lower: (FaceCard.King, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.Ten, FaceCard.Nine), lower: (FaceCard.Ace, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.Jack, FaceCard.Nine), lower: (FaceCard.Nine, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.Jack, FaceCard.Nine), lower: (FaceCard.Ten, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.Jack, FaceCard.Nine), lower: (FaceCard.Queen, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.Jack, FaceCard.Nine), lower: (FaceCard.King, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.Jack, FaceCard.Nine), lower: (FaceCard.Ace, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.Queen, FaceCard.Nine), lower: (FaceCard.Nine, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.Queen, FaceCard.Nine), lower: (FaceCard.Ten, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.Queen, FaceCard.Nine), lower: (FaceCard.Jack, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.Queen, FaceCard.Nine), lower: (FaceCard.King, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.Queen, FaceCard.Nine), lower: (FaceCard.Ace, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.King, FaceCard.Nine), lower: (FaceCard.Nine, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.King, FaceCard.Nine), lower: (FaceCard.Ten, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.King, FaceCard.Nine), lower: (FaceCard.Jack, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.King, FaceCard.Nine), lower: (FaceCard.Queen, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.King, FaceCard.Nine), lower: (FaceCard.Ace, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.Nine, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.Ten, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.Jack, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.Queen, FaceCard.Nine));
+        IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.King, FaceCard.Ace));
+        IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.Ace, FaceCard.Nine));
+
         IsBetterThen(higher: (FaceCard.Ace, FaceCard.King), lower: (FaceCard.King, FaceCard.Queen));
         IsBetterThen(higher: (FaceCard.King, FaceCard.Queen), lower: (FaceCard.Jack, FaceCard.Ten));
         IsBetterThen(higher: (FaceCard.Queen, FaceCard.Jack), lower: (FaceCard.Ten, FaceCard.Nine));
