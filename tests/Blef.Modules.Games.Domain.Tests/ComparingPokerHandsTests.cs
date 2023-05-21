@@ -265,36 +265,36 @@ public class ComparingPokerHandsTests
     [Fact]
     public void FullIsBetterThenHighCardTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: () => Full.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
+            higherPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
             lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
 
     [Fact]
     public void FullIsBetterThenPairTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: () => Full.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
+            higherPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
             lowerPokerHand: () => Pair.Create(FaceCard.Ace.ToString()));
 
     [Fact]
     public void FullIsBetterThenTwoPairsTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: () => Full.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
+            higherPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
             lowerPokerHand: () => TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}"));
 
     [Fact]
     public void FullIsBetterThenLowStraightTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: () => Full.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
+            higherPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
             lowerPokerHand: LowStraight.Create);
 
     [Fact]
     public void FullIsBetterThenHighStraightTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: () => Full.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
+            higherPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
             lowerPokerHand: HighStraight.Create);
 
     [Fact]
     public void FullIsBetterThenThreeOfAKindTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: () => Full.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
+            higherPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
             lowerPokerHand: () => ThreeOfAKind.Create(FaceCard.Ace.ToString()));
 }
