@@ -510,6 +510,79 @@ public class IsPokerHandOnTableTests
                 }
             };
 
+        private static IEnumerable<object[]> FullHouseTestCases =>
+            new List<object[]>
+            {
+                new object[]
+                {
+                    GivenTable(new Hand[]
+                    {
+                        new(new[]
+                        {
+                            new Card(FaceCard.Ace, Suit.Diamonds),
+                            new Card(FaceCard.Ace, Suit.Hearts),
+                            new Card(FaceCard.Ace, Suit.Clubs)
+                        }),
+                        new(new[]
+                        {
+                            new Card(FaceCard.King, Suit.Spades),
+                            new Card(FaceCard.King, Suit.Hearts)
+                        })
+                    }),
+                    GivenFullHouse(FaceCard.Ace, FaceCard.King)
+                },
+                new object[]
+                {
+                    GivenTable(new Hand[]
+                    {
+                        new(new[]
+                        {
+                            new Card(FaceCard.Queen, Suit.Diamonds),
+                            new Card(FaceCard.Nine, Suit.Spades),
+                            new Card(FaceCard.Queen, Suit.Clubs)
+                        }),
+                        new(new[]
+                        {
+                            new Card(FaceCard.Nine, Suit.Hearts)
+                        }),
+                        new(new[]
+                        {
+                            new Card(FaceCard.Queen, Suit.Hearts)
+                        })
+                    }),
+                    GivenFullHouse(FaceCard.Queen, FaceCard.Nine)
+                },
+                new object[]
+                {
+                    GivenTable(new Hand[]
+                    {
+                        new(new[]
+                        {
+                            new Card(FaceCard.Nine, Suit.Diamonds),
+                            new Card(FaceCard.Ten, Suit.Hearts),
+                            new Card(FaceCard.Jack, Suit.Clubs)
+                        }),
+                        new(new[]
+                        {
+                            new Card(FaceCard.Nine, Suit.Spades),
+                            new Card(FaceCard.Ace, Suit.Hearts)
+                        }),
+                        new(new[]
+                        {
+                            new Card(FaceCard.Ten, Suit.Diamonds),
+                            new Card(FaceCard.Ten, Suit.Clubs),
+                            new Card(FaceCard.Nine, Suit.Clubs)
+                        }),
+                        new(new[]
+                        {
+                            new Card(FaceCard.Jack, Suit.Spades),
+                            new Card(FaceCard.Jack, Suit.Hearts)
+                        })
+                    }),
+                    GivenFullHouse(FaceCard.Nine, FaceCard.Jack)
+                }
+            };
+
         public IEnumerator<object[]> GetEnumerator() =>
             GivenPokerHandTestCases().GetEnumerator();
 
@@ -596,7 +669,8 @@ public class IsPokerHandOnTableTests
             .Concat(TwoPairsTestCases)
             .Concat(LowStraightTestCases)
             .Concat(HighStraightTestCases)
-            .Concat(ThreeOfAKindTestCases);
+            .Concat(ThreeOfAKindTestCases)
+            .Concat(FullHouseTestCases);
 
         private static Table GivenTable(IReadOnlyCollection<Hand> hands) =>
             new(hands);
