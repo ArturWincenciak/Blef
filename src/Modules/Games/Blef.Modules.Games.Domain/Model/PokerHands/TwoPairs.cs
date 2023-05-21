@@ -31,9 +31,11 @@ internal sealed class TwoPairs : PokerHand
     public override string Serialize() =>
         $"{TYPE}:{_higher.ToString().ToLower()},{_lower.ToString().ToLower()}";
 
-    public static PokerHand Create(string pokerHand)
+    public static PokerHand Create(string faceCards)
     {
-        var faceCardParts = pokerHand.Split(",");
-        return new TwoPairs(first: FaceCard.Create(faceCardParts[0]), second: FaceCard.Create(faceCardParts[1]));
+        var faceCardParts = faceCards.Split(",");
+        return new TwoPairs(
+            first: FaceCard.Create(faceCardParts[0]),
+            second: FaceCard.Create(faceCardParts[1]));
     }
 }
