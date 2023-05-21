@@ -27,9 +27,6 @@ internal sealed class FaceCard
     public bool IsBetterThen(FaceCard other) =>
         GetRank() > other.GetRank();
 
-    private bool Equals(FaceCard other) =>
-        _faceCard == other._faceCard;
-
     public override bool Equals(object? obj) =>
         ReferenceEquals(objA: this, obj) || (obj is FaceCard other && Equals(other));
 
@@ -37,7 +34,10 @@ internal sealed class FaceCard
         (int) _faceCard;
 
     public override string ToString() =>
-        _faceCard.ToString();
+        _faceCard.ToString().ToLower();
+
+    private bool Equals(FaceCard other) =>
+        _faceCard == other._faceCard;
 
     private static Type Parse(string faceCard) =>
         faceCard.ToLower() switch

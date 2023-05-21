@@ -128,8 +128,8 @@
           PlayerId: Guid_2,
           Hand: [
             {
-              FaceCard: Ace,
-              Suit: Diamonds
+              FaceCard: ace,
+              Suit: diamonds
             }
           ]
         },
@@ -137,8 +137,8 @@
           PlayerId: Guid_3,
           Hand: [
             {
-              FaceCard: Ace,
-              Suit: Spades
+              FaceCard: ace,
+              Suit: spades
             }
           ]
         },
@@ -146,8 +146,8 @@
           PlayerId: Guid_4,
           Hand: [
             {
-              FaceCard: Ten,
-              Suit: Clubs
+              FaceCard: ten,
+              Suit: clubs
             }
           ]
         }
@@ -167,8 +167,8 @@
     Result: {
       Cards: [
         {
-          FaceCard: Ace,
-          Suit: Diamonds
+          FaceCard: ace,
+          Suit: diamonds
         }
       ]
     }
@@ -185,8 +185,8 @@
     Result: {
       Cards: [
         {
-          FaceCard: Ace,
-          Suit: Spades
+          FaceCard: ace,
+          Suit: spades
         }
       ]
     }
@@ -203,8 +203,8 @@
     Result: {
       Cards: [
         {
-          FaceCard: Ten,
-          Suit: Clubs
+          FaceCard: ten,
+          Suit: clubs
         }
       ]
     }
@@ -307,8 +307,8 @@
           PlayerId: Guid_2,
           Hand: [
             {
-              FaceCard: Ace,
-              Suit: Diamonds
+              FaceCard: ace,
+              Suit: diamonds
             }
           ]
         },
@@ -316,8 +316,8 @@
           PlayerId: Guid_3,
           Hand: [
             {
-              FaceCard: Ace,
-              Suit: Spades
+              FaceCard: ace,
+              Suit: spades
             }
           ]
         },
@@ -325,8 +325,8 @@
           PlayerId: Guid_4,
           Hand: [
             {
-              FaceCard: Ten,
-              Suit: Clubs
+              FaceCard: ten,
+              Suit: clubs
             }
           ]
         }
@@ -366,8 +366,8 @@
           PlayerId: Guid_2,
           Hand: [
             {
-              FaceCard: Ace,
-              Suit: Diamonds
+              FaceCard: ace,
+              Suit: diamonds
             }
           ]
         },
@@ -375,8 +375,8 @@
           PlayerId: Guid_3,
           Hand: [
             {
-              FaceCard: Ace,
-              Suit: Spades
+              FaceCard: ace,
+              Suit: spades
             }
           ]
         },
@@ -384,12 +384,12 @@
           PlayerId: Guid_4,
           Hand: [
             {
-              FaceCard: Ten,
-              Suit: Clubs
+              FaceCard: ten,
+              Suit: clubs
             },
             {
-              FaceCard: Jack,
-              Suit: Spades
+              FaceCard: jack,
+              Suit: spades
             }
           ]
         }
