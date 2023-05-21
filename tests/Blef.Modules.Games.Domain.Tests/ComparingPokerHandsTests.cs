@@ -5,6 +5,19 @@ namespace Blef.Modules.Games.Domain.Tests;
 
 public class ComparingPokerHandsTests
 {
+    private static void AssertThatIsBetterThan(Func<PokerHand> higherPokerHand, Func<PokerHand> lowerPokerHand)
+    {
+        // arrange
+        var higher = higherPokerHand();
+        var lower = lowerPokerHand();
+
+        // act
+        var actual = higher.IsBetterThan(lower);
+
+        // assert
+        Assert.True(actual);
+    }
+
     [Fact]
     public void HighCardIsBetterThenOtherHighCardTests()
     {
@@ -16,18 +29,10 @@ public class ComparingPokerHandsTests
         IsBetterThen(FaceCard.Ace, FaceCard.Nine);
         IsBetterThen(FaceCard.King, FaceCard.Ten);
 
-        void IsBetterThen(FaceCard higher, FaceCard lower)
-        {
-            // arrange
-            var higherHighCard = HighCard.Create(higher.ToString());
-            var lowerHighCard = HighCard.Create(lower.ToString());
-
-            // act
-            var actual = higherHighCard.IsBetterThan(lowerHighCard);
-
-            // assert
-            Assert.True(actual);
-        }
+        void IsBetterThen(FaceCard higher, FaceCard lower) =>
+            AssertThatIsBetterThan(
+                higherPokerHand: () => HighCard.Create(higher.ToString()),
+                lowerPokerHand: () => HighCard.Create(lower.ToString()));
     }
 
     [Fact]
@@ -41,18 +46,10 @@ public class ComparingPokerHandsTests
         IsBetterThen(FaceCard.Ace, FaceCard.Nine);
         IsBetterThen(FaceCard.King, FaceCard.Ten);
 
-        void IsBetterThen(FaceCard higher, FaceCard lower)
-        {
-            // arrange
-            var higherPair = Pair.Create(higher.ToString());
-            var lowerPair = Pair.Create(lower.ToString());
-
-            // act
-            var actual = higherPair.IsBetterThan(lowerPair);
-
-            // assert
-            Assert.True(actual);
-        }
+        void IsBetterThen(FaceCard higher, FaceCard lower) =>
+            AssertThatIsBetterThan(
+                higherPokerHand: () => Pair.Create(higher.ToString()),
+                lowerPokerHand: () => Pair.Create(lower.ToString()));
     }
 
     [Fact]
@@ -94,18 +91,10 @@ public class ComparingPokerHandsTests
         IsBetterThen(higher: (FaceCard.Ten, FaceCard.Jack), lower: (FaceCard.Nine, FaceCard.Jack));
         IsBetterThen(higher: (FaceCard.Jack, FaceCard.Ten), lower: (FaceCard.Nine, FaceCard.Jack));
 
-        void IsBetterThen((FaceCard First, FaceCard Second) higher, (FaceCard First, FaceCard Second) lower)
-        {
-            // arrange
-            var higherTwoPairs = TwoPairs.Create($"{higher.First},{higher.Second}");
-            var lowerTwoPairs = TwoPairs.Create($"{lower.First},{lower.Second}");
-
-            // act
-            var actual = higherTwoPairs.IsBetterThan(lowerTwoPairs);
-
-            // assert
-            Assert.True(actual);
-        }
+        void IsBetterThen((FaceCard First, FaceCard Second) higher, (FaceCard First, FaceCard Second) lower) =>
+            AssertThatIsBetterThan(
+                higherPokerHand: () => TwoPairs.Create($"{higher.First},{higher.Second}"),
+                lowerPokerHand: () => TwoPairs.Create($"{lower.First},{lower.Second}"));
     }
 
     [Fact]
@@ -119,18 +108,10 @@ public class ComparingPokerHandsTests
         IsBetterThen(FaceCard.Ace, FaceCard.Nine);
         IsBetterThen(FaceCard.King, FaceCard.Ten);
 
-        void IsBetterThen(FaceCard higher, FaceCard lower)
-        {
-            // arrange
-            var higherThreeOfAKind = ThreeOfAKind.Create(higher.ToString());
-            var lowerThreeOfAKind = ThreeOfAKind.Create(lower.ToString());
-
-            // act
-            var actual = higherThreeOfAKind.IsBetterThan(lowerThreeOfAKind);
-
-            // assert
-            Assert.True(actual);
-        }
+        void IsBetterThen(FaceCard higher, FaceCard lower) =>
+            AssertThatIsBetterThan(
+                higherPokerHand: () => ThreeOfAKind.Create(higher.ToString()),
+                lowerPokerHand: () => ThreeOfAKind.Create(lower.ToString()));
     }
 
     [Fact]
@@ -158,227 +139,99 @@ public class ComparingPokerHandsTests
         IsBetterThen(higher: (FaceCard.Ten, FaceCard.Jack), lower: (FaceCard.Nine, FaceCard.Jack));
         IsBetterThen(higher: (FaceCard.Jack, FaceCard.Ten), lower: (FaceCard.Nine, FaceCard.Jack));
 
-        void IsBetterThen((FaceCard ThreeOfAKind, FaceCard Pair) higher, (FaceCard TreeOfAKind, FaceCard Pair) lower)
-        {
-            // arrange
-            var higherFull = Full.Create($"{higher.ThreeOfAKind},{higher.Pair}");
-            var lowerFull = Full.Create($"{lower.TreeOfAKind},{lower.Pair}");
-
-            // act
-            var actual = higherFull.IsBetterThan(lowerFull);
-
-            // assert
-            Assert.True(actual);
-        }
+        void IsBetterThen((FaceCard ThreeOfAKind, FaceCard Pair) higher, (FaceCard TreeOfAKind, FaceCard Pair) lower) =>
+            AssertThatIsBetterThan(
+                higherPokerHand: () => TwoPairs.Create($"{higher.ThreeOfAKind},{higher.Pair}"),
+                lowerPokerHand: () => TwoPairs.Create($"{lower.TreeOfAKind},{lower.Pair}"));
     }
 
     [Fact]
-    public void PairIsBetterThenHighCardTests()
-    {
-        // arrange
-        var pair = Pair.Create(FaceCard.Nine.ToString());
-        var highCard = HighCard.Create(FaceCard.Ace.ToString());
-
-        // act
-        var actual = pair.IsBetterThan(highCard);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void PairIsBetterThenHighCardTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => Pair.Create(FaceCard.Nine.ToString()),
+            lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
 
     [Fact]
-    public void TwoPairsIsBetterThenHighCardTests()
-    {
-        // arrange
-        var twoPairs = TwoPairs.Create($"{FaceCard.Nine},{FaceCard.Ten}");
-        var highCard = HighCard.Create(FaceCard.Ace.ToString());
-
-        // act
-        var actual = twoPairs.IsBetterThan(highCard);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void TwoPairsIsBetterThenHighCardTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () =>  TwoPairs.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
+            lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
 
     [Fact]
-    public void TwoPairsIsBetterThenPairTests()
-    {
-        // arrange
-        var twoPairs = TwoPairs.Create($"{FaceCard.Nine},{FaceCard.Ten}");
-        var pair = Pair.Create(FaceCard.Ace.ToString());
-
-        // act
-        var actual = twoPairs.IsBetterThan(pair);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void TwoPairsIsBetterThenPairTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => TwoPairs.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
+            lowerPokerHand: () => Pair.Create(FaceCard.Ace.ToString()));
 
     [Fact]
-    public void LowStraightIsBetterThenHighCardTests()
-    {
-        // arrange
-        var lowStraight = LowStraight.Create();
-        var highCard = HighCard.Create(FaceCard.Ace.ToString());
-
-        // act
-        var actual = lowStraight.IsBetterThan(highCard);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void LowStraightIsBetterThenHighCardTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: LowStraight.Create,
+            lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
 
     [Fact]
-    public void LowStraightIsBetterThenPairTests()
-    {
-        // arrange
-        var lowStraight = LowStraight.Create();
-        var pair = Pair.Create(FaceCard.Ace.ToString());
-
-        // act
-        var actual = lowStraight.IsBetterThan(pair);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void LowStraightIsBetterThenPairTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: LowStraight.Create,
+            lowerPokerHand: () => Pair.Create(FaceCard.Ace.ToString()));
 
     [Fact]
-    public void LowStraightIsBetterThenTwoPairsTests()
-    {
-        // arrange
-        var lowStraight = LowStraight.Create();
-        var twoPairs = TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}");
-
-        // act
-        var actual = lowStraight.IsBetterThan(twoPairs);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void LowStraightIsBetterThenTwoPairsTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: LowStraight.Create,
+            lowerPokerHand: () => TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}"));
 
     [Fact]
-    public void HighStraightIsBetterThenHighCardTests()
-    {
-        // arrange
-        var highStraight = HighStraight.Create();
-        var highCard = HighCard.Create(FaceCard.Ace.ToString());
-
-        // act
-        var actual = highStraight.IsBetterThan(highCard);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void HighStraightIsBetterThenHighCardTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: HighStraight.Create,
+            lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
 
     [Fact]
-    public void HighStraightIsBetterThenPairTests()
-    {
-        // arrange
-        var highStraight = HighStraight.Create();
-        var pair = Pair.Create(FaceCard.Ace.ToString());
-
-        // act
-        var actual = highStraight.IsBetterThan(pair);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void HighStraightIsBetterThenPairTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: HighStraight.Create,
+            lowerPokerHand: () => Pair.Create(FaceCard.Ace.ToString()));
 
     [Fact]
-    public void HighStraightIsBetterThenTwoPairsTests()
-    {
-        // arrange
-        var highStraight = HighStraight.Create();
-        var twoPairs = TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}");
-
-        // act
-        var actual = highStraight.IsBetterThan(twoPairs);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void HighStraightIsBetterThenTwoPairsTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: HighStraight.Create,
+            lowerPokerHand: () => TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}"));
 
     [Fact]
-    public void HighStraightIsBetterThenLowStraightTests()
-    {
-        // arrange
-        var highStraight = HighStraight.Create();
-        var lowStraight = LowStraight.Create();
-
-        // act
-        var actual = highStraight.IsBetterThan(lowStraight);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void HighStraightIsBetterThenLowStraightTests() =>
+        AssertThatIsBetterThan(
+            HighStraight.Create,
+            LowStraight.Create);
 
     [Fact]
-    public void ThreeOfAKindIsBetterThenHighCardTests()
-    {
-        // arrange
-        var threeOfAKind = ThreeOfAKind.Create(FaceCard.Nine.ToString());
-        var highCard = HighCard.Create(FaceCard.Ace.ToString());
-
-        // act
-        var actual = threeOfAKind.IsBetterThan(highCard);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void ThreeOfAKindIsBetterThenHighCardTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => ThreeOfAKind.Create(FaceCard.Nine.ToString()),
+            lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
 
     [Fact]
-    public void ThreeOfAKindIsBetterThenPairTests()
-    {
-        // arrange
-        var threeOfAKind = ThreeOfAKind.Create(FaceCard.Nine.ToString());
-        var pair = Pair.Create(FaceCard.Ace.ToString());
-
-        // act
-        var actual = threeOfAKind.IsBetterThan(pair);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void ThreeOfAKindIsBetterThenPairTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => ThreeOfAKind.Create(FaceCard.Nine.ToString()),
+            lowerPokerHand: () => Pair.Create(FaceCard.Ace.ToString()));
 
     [Fact]
-    public void ThreeOfAKindIsBetterThenTwoPairsTests()
-    {
-        // arrange
-        var threeOfAKind = ThreeOfAKind.Create(FaceCard.Nine.ToString());
-        var twoPairs = TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}");
-
-        // act
-        var actual = threeOfAKind.IsBetterThan(twoPairs);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void ThreeOfAKindIsBetterThenTwoPairsTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => ThreeOfAKind.Create(FaceCard.Nine.ToString()),
+            lowerPokerHand: () => TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}"));
 
     [Fact]
-    public void ThreeOfAKindIsBetterThenLowStraightTests()
-    {
-        // arrange
-        var threeOfAKind = ThreeOfAKind.Create(FaceCard.Nine.ToString());
-        var lowStraight = LowStraight.Create();
-
-        // act
-        var actual = threeOfAKind.IsBetterThan(lowStraight);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void ThreeOfAKindIsBetterThenLowStraightTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => ThreeOfAKind.Create(FaceCard.Nine.ToString()),
+            lowerPokerHand: LowStraight.Create);
 
     [Fact]
-    public void ThreeOfAKindIsBetterThenHighStraightTests()
-    {
-        // arrange
-        var threeOfAKind = ThreeOfAKind.Create(FaceCard.Nine.ToString());
-        var highStraight = HighStraight.Create();
-
-        // act
-        var actual = threeOfAKind.IsBetterThan(highStraight);
-
-        // assert
-        Assert.True(actual);
-    }
+    public void ThreeOfAKindIsBetterThenHighStraightTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => ThreeOfAKind.Create(FaceCard.Nine.ToString()),
+            lowerPokerHand: HighStraight.Create);
 }
