@@ -16,8 +16,11 @@ internal sealed class Suit
         _suit = suit;
     }
 
-    private bool Equals(Suit other) =>
-        _suit == other._suit;
+    public static Suit Create(string suit) => // todo: test
+        new(Parse(suit));
+
+    public int GetRank() => // todo: test
+        (int) _suit;
 
     public override bool Equals(object? obj) =>
         ReferenceEquals(objA: this, obj) || (obj is Suit other && Equals(other));
@@ -26,7 +29,21 @@ internal sealed class Suit
         (int) _suit;
 
     public override string ToString() =>
-        _suit.ToString();
+        _suit.ToString().ToLower();
+
+    private bool Equals(Suit other) =>
+        _suit == other._suit;
+
+    private static Type Parse(string suit) =>
+        suit.ToLower() switch
+        {
+            "clubs" => Type.Clubs,
+            "diamonds" => Type.Diamonds,
+            "hearts" => Type.Hearts,
+            "spades" => Type.Spades,
+            _ => throw new ArgumentOutOfRangeException(paramName: nameof(suit), suit,
+                message: $"Unknown value of Suit: '{suit}'")
+        };
 
     private enum Type
     {
