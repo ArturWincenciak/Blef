@@ -118,31 +118,20 @@ public class ComparingPokerHandsTests
     public void FullIsBetterThenOtherFullTests()
     {
         IsBetterThen(higher: (FaceCard.Ten, FaceCard.Nine), lower: (FaceCard.Nine, FaceCard.Ace));
-        IsBetterThen(higher: (FaceCard.Ten, FaceCard.Nine), lower: (FaceCard.Jack, FaceCard.Nine));
-        IsBetterThen(higher: (FaceCard.Ten, FaceCard.Nine), lower: (FaceCard.Queen, FaceCard.Nine));
-        IsBetterThen(higher: (FaceCard.Ten, FaceCard.Nine), lower: (FaceCard.King, FaceCard.Nine));
-        IsBetterThen(higher: (FaceCard.Ten, FaceCard.Nine), lower: (FaceCard.Ace, FaceCard.Nine));
         IsBetterThen(higher: (FaceCard.Jack, FaceCard.Nine), lower: (FaceCard.Nine, FaceCard.Ace));
         IsBetterThen(higher: (FaceCard.Jack, FaceCard.Nine), lower: (FaceCard.Ten, FaceCard.Ace));
-        IsBetterThen(higher: (FaceCard.Jack, FaceCard.Nine), lower: (FaceCard.Queen, FaceCard.Nine));
-        IsBetterThen(higher: (FaceCard.Jack, FaceCard.Nine), lower: (FaceCard.King, FaceCard.Ace));
-        IsBetterThen(higher: (FaceCard.Jack, FaceCard.Nine), lower: (FaceCard.Ace, FaceCard.Nine));
         IsBetterThen(higher: (FaceCard.Queen, FaceCard.Nine), lower: (FaceCard.Nine, FaceCard.Ace));
         IsBetterThen(higher: (FaceCard.Queen, FaceCard.Nine), lower: (FaceCard.Ten, FaceCard.Ace));
         IsBetterThen(higher: (FaceCard.Queen, FaceCard.Nine), lower: (FaceCard.Jack, FaceCard.Nine));
-        IsBetterThen(higher: (FaceCard.Queen, FaceCard.Nine), lower: (FaceCard.King, FaceCard.Ace));
-        IsBetterThen(higher: (FaceCard.Queen, FaceCard.Nine), lower: (FaceCard.Ace, FaceCard.Nine));
         IsBetterThen(higher: (FaceCard.King, FaceCard.Nine), lower: (FaceCard.Nine, FaceCard.Ace));
         IsBetterThen(higher: (FaceCard.King, FaceCard.Nine), lower: (FaceCard.Ten, FaceCard.Ace));
         IsBetterThen(higher: (FaceCard.King, FaceCard.Nine), lower: (FaceCard.Jack, FaceCard.Nine));
         IsBetterThen(higher: (FaceCard.King, FaceCard.Nine), lower: (FaceCard.Queen, FaceCard.Nine));
-        IsBetterThen(higher: (FaceCard.King, FaceCard.Nine), lower: (FaceCard.Ace, FaceCard.Nine));
         IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.Nine, FaceCard.Ace));
         IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.Ten, FaceCard.Ace));
         IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.Jack, FaceCard.Nine));
         IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.Queen, FaceCard.Nine));
         IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.King, FaceCard.Ace));
-        IsBetterThen(higher: (FaceCard.Ace, FaceCard.Nine), lower: (FaceCard.Ace, FaceCard.Nine));
 
         IsBetterThen(higher: (FaceCard.Ace, FaceCard.King), lower: (FaceCard.King, FaceCard.Queen));
         IsBetterThen(higher: (FaceCard.King, FaceCard.Queen), lower: (FaceCard.Jack, FaceCard.Ten));
@@ -168,8 +157,8 @@ public class ComparingPokerHandsTests
 
         void IsBetterThen((FaceCard ThreeOfAKind, FaceCard Pair) higher, (FaceCard TreeOfAKind, FaceCard Pair) lower) =>
             AssertThatIsBetterThan(
-                higherPokerHand: () => TwoPairs.Create($"{higher.ThreeOfAKind},{higher.Pair}"),
-                lowerPokerHand: () => TwoPairs.Create($"{lower.TreeOfAKind},{lower.Pair}"));
+                higherPokerHand: () => FullHouse.Create($"{higher.ThreeOfAKind},{higher.Pair}"),
+                lowerPokerHand: () => FullHouse.Create($"{lower.TreeOfAKind},{lower.Pair}"));
     }
 
     [Fact]
