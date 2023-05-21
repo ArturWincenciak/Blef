@@ -2,7 +2,7 @@
 
 internal sealed class FullHouse : PokerHand
 {
-    public const string TYPE = "full";
+    public const string TYPE = "full-house";
     private readonly FaceCard _threeOfAKind;
     private readonly FaceCard _pair;
 
