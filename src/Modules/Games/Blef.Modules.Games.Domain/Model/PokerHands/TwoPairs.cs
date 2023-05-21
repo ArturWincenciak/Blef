@@ -26,7 +26,7 @@ internal sealed class TwoPairs : PokerHand
     }
 
     protected override int GetInnerRank() =>
-        (10 * _higher.GetRank()) + _lower.GetRank();
+        (100 * _higher.GetRank()) + _lower.GetRank();
 
     public override string Serialize() =>
         $"{TYPE}:{_higher.ToString().ToLower()},{_lower.ToString().ToLower()}";
