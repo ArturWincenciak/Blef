@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Domain.Model.PokerHands;
 
-internal sealed class Full : PokerHand
+internal sealed class FullHouse : PokerHand
 {
     public const string TYPE = "full";
     private readonly FaceCard _threeOfAKind;
@@ -8,7 +8,7 @@ internal sealed class Full : PokerHand
 
     protected override int PokerHandRank => 7;
 
-    private Full(FaceCard threeOfAKind, FaceCard pair)
+    private FullHouse(FaceCard threeOfAKind, FaceCard pair)
     {
         if(threeOfAKind.Equals(pair))
             throw new ArgumentException("Three of a kind and pair cannot be the same card");
@@ -29,7 +29,7 @@ internal sealed class Full : PokerHand
     public static PokerHand Create(string faceCards)
     {
         var faceCardParts = faceCards.Split(",");
-        return new Full(
+        return new FullHouse(
             threeOfAKind: FaceCard.Create(faceCardParts[0]),
             pair: FaceCard.Create(faceCardParts[1]));
     }

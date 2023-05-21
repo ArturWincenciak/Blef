@@ -40,7 +40,7 @@ internal sealed class BidHandler : ICommandHandler<Bid>
             LowStraight.TYPE => LowStraight.Create(),
             HighStraight.TYPE => HighStraight.Create(),
             ThreeOfAKind.TYPE => ThreeOfAKind.Create(parts[1]),
-            Full.TYPE => Full.Create(parts[1]),
+            FullHouse.TYPE => FullHouse.Create(parts[1]),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
             // todo: validate, exception with problem details, test
         };
