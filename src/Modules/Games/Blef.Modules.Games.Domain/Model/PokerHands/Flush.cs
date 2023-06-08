@@ -8,7 +8,7 @@ internal sealed class Flush : PokerHand
     private Flush(Suit suit) =>
         _suit = suit;
 
-    protected override int PokerHandRank => 8; // todo: test that is better then other poker hands
+    protected override int PokerHandRank => 8;
 
     public override bool IsOnTable(Table table) => // todo: test
         table.Count(_suit) >= 5;
