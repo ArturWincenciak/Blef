@@ -8,18 +8,13 @@ internal sealed class Suit
     public static Suit Hearts => new(Type.Hearts);
     public static Suit Spades => new(Type.Spades);
 
-    private Suit(Type suit)
-    {
-        if (suit is Type.None)
-            throw new ArgumentException($"{Type.None} type is not allowed");
-
+    private Suit(Type suit) =>
         _suit = suit;
-    }
 
-    public static Suit Create(string suit) => // todo: test
+    public static Suit Create(string suit) =>
         new(Parse(suit));
 
-    public int GetRank() => // todo: test
+    public int GetRank() =>
         (int) _suit;
 
     public override bool Equals(object? obj) =>
@@ -47,7 +42,6 @@ internal sealed class Suit
 
     private enum Type
     {
-        None = 0,
         Clubs = 1,
         Diamonds = 2,
         Hearts = 4,

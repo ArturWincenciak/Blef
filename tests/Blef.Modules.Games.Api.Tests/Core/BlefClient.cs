@@ -69,8 +69,6 @@ internal sealed class BlefClient
             WhichPlayer.Graham => _grahamPlayerId!,
             WhichPlayer.Riemann => _riemannPlayerId!,
             WhichPlayer.Conway => _conwayPlayerId!,
-            WhichPlayer.None => throw new ArgumentOutOfRangeException(paramName: nameof(whichPlayer), whichPlayer,
-                message: "Unknown player, please provide a valid player"),
             _ => throw new ArgumentOutOfRangeException(paramName: nameof(whichPlayer), whichPlayer,
                 message: "Unknown player, please provide a valid player")
         };
@@ -91,7 +89,6 @@ internal sealed class BlefClient
             case WhichPlayer.Conway:
                 _conwayPlayerId = playerId;
                 break;
-            case WhichPlayer.None:
             default:
                 throw new ArgumentOutOfRangeException(paramName: nameof(whichPlayer), whichPlayer,
                     message: "Unknown player, please provide a valid player");
