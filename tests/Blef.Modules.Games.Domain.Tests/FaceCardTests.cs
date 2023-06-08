@@ -5,6 +5,26 @@ namespace Blef.Modules.Games.Domain.Tests;
 public class FaceCardTests
 {
     [Fact]
+    public void CreateFaceCardTest()
+    {
+        // act
+        var ace = FaceCard.Ace;
+        var king = FaceCard.King;
+        var queen = FaceCard.Queen;
+        var jack = FaceCard.Jack;
+        var ten = FaceCard.Ten;
+        var nine = FaceCard.Nine;
+
+        // assert
+        Assert.Equal(ace, FaceCard.Create("ace"));
+        Assert.Equal(king, FaceCard.Create("king"));
+        Assert.Equal(queen, FaceCard.Create("queen"));
+        Assert.Equal(jack, FaceCard.Create("jack"));
+        Assert.Equal(ten, FaceCard.Create("ten"));
+        Assert.Equal(nine, FaceCard.Create("nine"));
+    }
+
+    [Fact]
     public void RankTest()
     {
         Assert.True(FaceCard.King.GetRank() < FaceCard.Ace.GetRank());
