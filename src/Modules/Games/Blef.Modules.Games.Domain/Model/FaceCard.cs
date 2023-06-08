@@ -10,13 +10,8 @@ internal sealed class FaceCard
     public static FaceCard King => new(Type.King);
     public static FaceCard Ace => new(Type.Ace);
 
-    private FaceCard(Type faceCard)
-    {
-        if (faceCard is Type.None)
-            throw new ArgumentException($"{Type.None} type is not allowed");
-
+    private FaceCard(Type faceCard) =>
         _faceCard = faceCard;
-    }
 
     public static FaceCard Create(string faceCard) =>
         new(Parse(faceCard));
@@ -54,7 +49,6 @@ internal sealed class FaceCard
 
     private enum Type
     {
-        None = 0,
         Nine = 1,
         Ten = 2,
         Jack = 4,
