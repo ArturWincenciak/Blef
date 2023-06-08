@@ -302,4 +302,46 @@ public class ComparingPokerHandsTests
         AssertThatIsBetterThan(
             higherPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
             lowerPokerHand: () => ThreeOfAKind.Create(FaceCard.Ace.ToString()));
+
+    [Fact]
+    public void FlushIsBetterThenHighCardTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => Flush.Create(Suit.Spades.ToString()),
+            lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
+
+    [Fact]
+    public void FlushIsBetterThenPairTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => Flush.Create(Suit.Spades.ToString()),
+            lowerPokerHand: () => Pair.Create(FaceCard.Ace.ToString()));
+
+    [Fact]
+    public void FlushIsBetterThenTwoPairsTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => Flush.Create(Suit.Spades.ToString()),
+            lowerPokerHand: () => TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}"));
+
+    [Fact]
+    public void FlushIsBetterThenLowStraightTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => Flush.Create(Suit.Spades.ToString()),
+            lowerPokerHand: LowStraight.Create);
+
+    [Fact]
+    public void FlushIsBetterThenHighStraightTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => Flush.Create(Suit.Spades.ToString()),
+            lowerPokerHand: HighStraight.Create);
+
+    [Fact]
+    public void FlushIsBetterThenThreeOfAKindTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => Flush.Create(Suit.Spades.ToString()),
+            lowerPokerHand: () => ThreeOfAKind.Create(FaceCard.Ace.ToString()));
+
+    [Fact]
+    public void FlushIsBetterThenFullTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => Flush.Create(Suit.Spades.ToString()),
+            lowerPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"));
 }
