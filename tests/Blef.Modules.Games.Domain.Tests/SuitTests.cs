@@ -14,10 +14,10 @@ public class SuitTests
         var spades = Suit.Spades;
 
         // assert
-        Assert.Equal(clubs, Suit.Create("clubs"));
-        Assert.Equal(diamonds, Suit.Create("diamonds"));
-        Assert.Equal(hearts, Suit.Create("hearts"));
-        Assert.Equal(spades, Suit.Create("spades"));
+        Assert.Equal(clubs, actual: Suit.Create("clubs"));
+        Assert.Equal(diamonds, actual: Suit.Create("diamonds"));
+        Assert.Equal(hearts, actual: Suit.Create("hearts"));
+        Assert.Equal(spades, actual: Suit.Create("spades"));
     }
 
     [Fact]

@@ -3,14 +3,14 @@
 internal sealed class FullHouse : PokerHand
 {
     public const string TYPE = "full-house";
-    private readonly FaceCard _threeOfAKind;
     private readonly FaceCard _pair;
+    private readonly FaceCard _threeOfAKind;
 
     protected override int PokerHandRank => 7;
 
     private FullHouse(FaceCard threeOfAKind, FaceCard pair)
     {
-        if(threeOfAKind.Equals(pair))
+        if (threeOfAKind.Equals(pair))
             throw new ArgumentException("Three of a kind and pair cannot be the same card");
 
         _threeOfAKind = threeOfAKind;

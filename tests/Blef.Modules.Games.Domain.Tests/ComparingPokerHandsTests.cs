@@ -211,7 +211,7 @@ public class ComparingPokerHandsTests
     [Fact]
     public void TwoPairsIsBetterThenHighCardTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: () =>  TwoPairs.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
+            higherPokerHand: () => TwoPairs.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
             lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
 
     [Fact]
@@ -223,37 +223,37 @@ public class ComparingPokerHandsTests
     [Fact]
     public void LowStraightIsBetterThenHighCardTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: LowStraight.Create,
+            LowStraight.Create,
             lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
 
     [Fact]
     public void LowStraightIsBetterThenPairTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: LowStraight.Create,
+            LowStraight.Create,
             lowerPokerHand: () => Pair.Create(FaceCard.Ace.ToString()));
 
     [Fact]
     public void LowStraightIsBetterThenTwoPairsTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: LowStraight.Create,
+            LowStraight.Create,
             lowerPokerHand: () => TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}"));
 
     [Fact]
     public void HighStraightIsBetterThenHighCardTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: HighStraight.Create,
+            HighStraight.Create,
             lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
 
     [Fact]
     public void HighStraightIsBetterThenPairTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: HighStraight.Create,
+            HighStraight.Create,
             lowerPokerHand: () => Pair.Create(FaceCard.Ace.ToString()));
 
     [Fact]
     public void HighStraightIsBetterThenTwoPairsTests() =>
         AssertThatIsBetterThan(
-            higherPokerHand: HighStraight.Create,
+            HighStraight.Create,
             lowerPokerHand: () => TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}"));
 
     [Fact]
@@ -284,13 +284,13 @@ public class ComparingPokerHandsTests
     public void ThreeOfAKindIsBetterThenLowStraightTests() =>
         AssertThatIsBetterThan(
             higherPokerHand: () => ThreeOfAKind.Create(FaceCard.Nine.ToString()),
-            lowerPokerHand: LowStraight.Create);
+            LowStraight.Create);
 
     [Fact]
     public void ThreeOfAKindIsBetterThenHighStraightTests() =>
         AssertThatIsBetterThan(
             higherPokerHand: () => ThreeOfAKind.Create(FaceCard.Nine.ToString()),
-            lowerPokerHand: HighStraight.Create);
+            HighStraight.Create);
 
     [Fact]
     public void FullIsBetterThenHighCardTests() =>
@@ -314,13 +314,13 @@ public class ComparingPokerHandsTests
     public void FullIsBetterThenLowStraightTests() =>
         AssertThatIsBetterThan(
             higherPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
-            lowerPokerHand: LowStraight.Create);
+            LowStraight.Create);
 
     [Fact]
     public void FullIsBetterThenHighStraightTests() =>
         AssertThatIsBetterThan(
             higherPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"),
-            lowerPokerHand: HighStraight.Create);
+            HighStraight.Create);
 
     [Fact]
     public void FullIsBetterThenThreeOfAKindTests() =>
@@ -350,13 +350,13 @@ public class ComparingPokerHandsTests
     public void FlushIsBetterThenLowStraightTests() =>
         AssertThatIsBetterThan(
             higherPokerHand: () => Flush.Create(Suit.Spades.ToString()),
-            lowerPokerHand: LowStraight.Create);
+            LowStraight.Create);
 
     [Fact]
     public void FlushIsBetterThenHighStraightTests() =>
         AssertThatIsBetterThan(
             higherPokerHand: () => Flush.Create(Suit.Spades.ToString()),
-            lowerPokerHand: HighStraight.Create);
+            HighStraight.Create);
 
     [Fact]
     public void FlushIsBetterThenThreeOfAKindTests() =>
@@ -392,13 +392,13 @@ public class ComparingPokerHandsTests
     public void FourOfAKindIsBetterThenLowStraightTests() =>
         AssertThatIsBetterThan(
             higherPokerHand: () => FourOfAKind.Create(FaceCard.Nine.ToString()),
-            lowerPokerHand: LowStraight.Create);
+            LowStraight.Create);
 
     [Fact]
     public void FourOfAKindIsBetterThenHighStraightTests() =>
         AssertThatIsBetterThan(
             higherPokerHand: () => FourOfAKind.Create(FaceCard.Nine.ToString()),
-            lowerPokerHand: HighStraight.Create);
+            HighStraight.Create);
 
     [Fact]
     public void FourOfAKindIsBetterThenThreeOfAKindTests() =>
