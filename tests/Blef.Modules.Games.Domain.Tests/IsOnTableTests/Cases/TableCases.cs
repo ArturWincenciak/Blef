@@ -1,13 +1,13 @@
 ﻿using Blef.Modules.Games.Domain.Model;
 
-namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
+namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 
 internal static class TableCases
 {
     internal static Table GivenTable(IReadOnlyCollection<Hand> hands) =>
         new(hands);
 
-    internal static Table GivenTopTableWithMaxPlayersWhoEachHaveMaxCards() =>
+    internal static Table GetHighestMaxCardsForFourPlayers() =>
         GivenTable(new Hand[]
         {
             new(new[]
@@ -44,7 +44,7 @@ internal static class TableCases
             })
         });
 
-    internal static Table GivenLowTableWithMaxPlayersWhoEachHaveMaxCards() =>
+    internal static Table GetLowestMaxCardsForFourPlayers() =>
         GivenTable(new Hand[]
         {
             new(new[]

@@ -1,11 +1,11 @@
 ﻿using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Tests.Extensions;
 
-namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
+namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 
-public static class FourOfAKindCases
+public static class ThreeOfAKindIsOnTheTableCases
 {
-    public static IEnumerable<object[]> TableWithPokerHand =>
+    public static IEnumerable<object[]> Cases =>
         new List<object[]>
         {
             new object[]
@@ -16,15 +16,14 @@ public static class FourOfAKindCases
                     {
                         new Card(FaceCard.Ten, Suit.Clubs),
                         new Card(FaceCard.Ten, Suit.Diamonds),
-                        new Card(FaceCard.Ten, Suit.Hearts),
-                        new Card(FaceCard.Ten, Suit.Spades)
+                        new Card(FaceCard.Queen, Suit.Diamonds)
                     }),
                     new(new[]
                     {
-                        new Card(FaceCard.Nine, Suit.Hearts)
+                        new Card(FaceCard.Ten, Suit.Hearts)
                     })
                 }),
-                PokerHandFactory.GivenFourOfAKind(FaceCard.Ten)
+                PokerHandFactory.GivenThreeOfAKind(FaceCard.Ten)
             },
             new object[]
             {
@@ -32,17 +31,18 @@ public static class FourOfAKindCases
                 {
                     new(new[]
                     {
-                        new Card(FaceCard.Queen, Suit.Diamonds),
-                        new Card(FaceCard.Ace, Suit.Hearts),
-                        new Card(FaceCard.Queen, Suit.Clubs),
-                        new Card(FaceCard.Queen, Suit.Spades)
+                        new Card(FaceCard.Queen, Suit.Diamonds)
                     }),
                     new(new[]
                     {
                         new Card(FaceCard.Queen, Suit.Hearts)
+                    }),
+                    new(new[]
+                    {
+                        new Card(FaceCard.Queen, Suit.Clubs)
                     })
                 }),
-                PokerHandFactory.GivenFourOfAKind(FaceCard.Queen)
+                PokerHandFactory.GivenThreeOfAKind(FaceCard.Queen)
             },
             new object[]
             {
@@ -50,22 +50,26 @@ public static class FourOfAKindCases
                 {
                     new(new[]
                     {
-                        new Card(FaceCard.Ace, Suit.Spades)
-                    }),
-                    new(new[]
-                    {
-                        new Card(FaceCard.Ace, Suit.Diamonds)
-                    }),
-                    new(new[]
-                    {
+                        new Card(FaceCard.Ace, Suit.Diamonds),
+                        new Card(FaceCard.Ace, Suit.Hearts),
                         new Card(FaceCard.Ace, Suit.Clubs)
                     }),
                     new(new[]
                     {
-                        new Card(FaceCard.Ace, Suit.Hearts)
+                        new Card(FaceCard.Ace, Suit.Spades)
                     })
                 }),
-                PokerHandFactory.GivenFourOfAKind(FaceCard.Ace)
+                PokerHandFactory.GivenThreeOfAKind(FaceCard.Ace)
+            },
+            new object[]
+            {
+                TableCases.GetHighestMaxCardsForFourPlayers(),
+                PokerHandFactory.GivenThreeOfAKind(FaceCard.Ten)
+            },
+            new object[]
+            {
+                TableCases.GetLowestMaxCardsForFourPlayers(),
+                PokerHandFactory.GivenThreeOfAKind(FaceCard.King)
             }
         };
 }

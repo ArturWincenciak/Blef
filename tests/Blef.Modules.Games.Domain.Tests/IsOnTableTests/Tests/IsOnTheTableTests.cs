@@ -1,14 +1,13 @@
 ﻿using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Model.PokerHands;
+using Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 
-namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
+namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Tests;
 
-// todo: unit tests: IsNotPokerHandOnTableTests
-
-public class IsOnTableTests
+public class IsOnTheTableTests
 {
     [Theory]
-    [ClassData(typeof(PokerHandCases))]
+    [ClassData(typeof(PokerHandIsOnTheTableCases))]
     internal void PokerHandIsOnTableTests(Table table, PokerHand pokerHand)
     {
         // act

@@ -1,11 +1,11 @@
 ﻿using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Model.PokerHands;
 
-namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
+namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 
-public static class LowStraightCases
+public static class LowStraightIsOnTheTableCases
 {
-    public static IEnumerable<object[]> TableWithPokerHand =>
+    public static IEnumerable<object[]> Cases =>
         new List<object[]>
         {
             new object[]
@@ -110,6 +110,11 @@ public static class LowStraightCases
                         new Card(FaceCard.King, Suit.Spades)
                     })
                 }),
+                LowStraight.Create()
+            },
+            new object[]
+            {
+                TableCases.GetLowestMaxCardsForFourPlayers(),
                 LowStraight.Create()
             }
         };

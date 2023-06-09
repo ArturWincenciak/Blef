@@ -2,11 +2,11 @@
 using Blef.Modules.Games.Domain.Model.PokerHands;
 using Blef.Modules.Games.Domain.Tests.Extensions;
 
-namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
+namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 
-public static class HighStraightCases
+public static class HighStraightIsNotOnTheTableCases
 {
-    public static IEnumerable<object[]> TableWithPokerHand =>
+    public static IEnumerable<object[]> Cases =>
         new List<object[]>
         {
             new object[]
@@ -28,7 +28,7 @@ public static class HighStraightCases
                     }),
                     new(new[]
                     {
-                        new Card(FaceCard.Ace, Suit.Spades)
+                        new Card(FaceCard.Nine, Suit.Spades)
                     })
                 }),
                 HighStraight.Create()
@@ -53,7 +53,7 @@ public static class HighStraightCases
                     }),
                     new(new[]
                     {
-                        new Card(FaceCard.King, Suit.Spades)
+                        new Card(FaceCard.Jack, Suit.Spades)
                     })
                 }),
                 HighStraight.Create()
@@ -70,7 +70,7 @@ public static class HighStraightCases
                     new(new[]
                     {
                         new Card(FaceCard.Jack, Suit.Clubs),
-                        new Card(FaceCard.Queen, Suit.Spades)
+                        new Card(FaceCard.Ten, Suit.Clubs)
                     }),
                     new(new[]
                     {
@@ -90,7 +90,7 @@ public static class HighStraightCases
                 {
                     new(new[]
                     {
-                        new Card(FaceCard.Ten, Suit.Spades),
+                        new Card(FaceCard.Nine, Suit.Spades),
                         new Card(FaceCard.King, Suit.Hearts),
                         new Card(FaceCard.King, Suit.Diamonds)
                     }),
@@ -115,43 +115,8 @@ public static class HighStraightCases
             },
             new object[]
             {
-                TableCases.GivenTopTableWithMaxPlayersWhoEachHaveMaxCards(),
-                PokerHandFactory.GivenHighCard(FaceCard.Ace)
-            },
-            new object[]
-            {
-                TableCases.GivenTopTableWithMaxPlayersWhoEachHaveMaxCards(),
-                PokerHandFactory.GivenPair(FaceCard.Ace)
-            },
-            new object[]
-            {
-                TableCases.GivenTopTableWithMaxPlayersWhoEachHaveMaxCards(),
-                PokerHandFactory.GivenTwoPairsBid(FaceCard.Ace, FaceCard.King)
-            },
-            new object[]
-            {
-                TableCases.GivenTopTableWithMaxPlayersWhoEachHaveMaxCards(),
+                TableCases.GetLowestMaxCardsForFourPlayers(),
                 HighStraight.Create()
-            },
-            new object[]
-            {
-                TableCases.GivenLowTableWithMaxPlayersWhoEachHaveMaxCards(),
-                PokerHandFactory.GivenHighCard(FaceCard.Nine)
-            },
-            new object[]
-            {
-                TableCases.GivenLowTableWithMaxPlayersWhoEachHaveMaxCards(),
-                PokerHandFactory.GivenPair(FaceCard.Nine)
-            },
-            new object[]
-            {
-                TableCases.GivenLowTableWithMaxPlayersWhoEachHaveMaxCards(),
-                PokerHandFactory.GivenTwoPairsBid(FaceCard.Nine, FaceCard.Ten)
-            },
-            new object[]
-            {
-                TableCases.GivenLowTableWithMaxPlayersWhoEachHaveMaxCards(),
-                LowStraight.Create()
             }
         };
 }

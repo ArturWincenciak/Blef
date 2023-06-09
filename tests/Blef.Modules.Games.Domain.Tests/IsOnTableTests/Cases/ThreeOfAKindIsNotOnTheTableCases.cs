@@ -1,11 +1,11 @@
 ﻿using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Tests.Extensions;
 
-namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
+namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 
-public static class ThreeOfAKindCases
+public static class ThreeOfAKindIsNotOnTheTableCases
 {
-    public static IEnumerable<object[]> TableWithPokerHand =>
+    public static IEnumerable<object[]> Cases =>
         new List<object[]>
         {
             new object[]
@@ -20,7 +20,7 @@ public static class ThreeOfAKindCases
                     }),
                     new(new[]
                     {
-                        new Card(FaceCard.Ten, Suit.Hearts)
+                        new Card(FaceCard.Queen, Suit.Hearts)
                     })
                 }),
                 PokerHandFactory.GivenThreeOfAKind(FaceCard.Ten)
@@ -35,7 +35,7 @@ public static class ThreeOfAKindCases
                     }),
                     new(new[]
                     {
-                        new Card(FaceCard.Queen, Suit.Hearts)
+                        new Card(FaceCard.King, Suit.Hearts)
                     }),
                     new(new[]
                     {
@@ -52,14 +52,24 @@ public static class ThreeOfAKindCases
                     {
                         new Card(FaceCard.Ace, Suit.Diamonds),
                         new Card(FaceCard.Ace, Suit.Hearts),
-                        new Card(FaceCard.Ace, Suit.Clubs)
+                        new Card(FaceCard.Nine, Suit.Clubs)
                     }),
                     new(new[]
                     {
-                        new Card(FaceCard.Ace, Suit.Spades)
+                        new Card(FaceCard.Ten, Suit.Spades)
                     })
                 }),
                 PokerHandFactory.GivenThreeOfAKind(FaceCard.Ace)
+            },
+            new object[]
+            {
+                TableCases.GetLowestMaxCardsForFourPlayers(),
+                PokerHandFactory.GivenThreeOfAKind(FaceCard.Ace)
+            },
+            new object[]
+            {
+                TableCases.GetHighestMaxCardsForFourPlayers(),
+                PokerHandFactory.GivenThreeOfAKind(FaceCard.Nine)
             }
         };
 }
