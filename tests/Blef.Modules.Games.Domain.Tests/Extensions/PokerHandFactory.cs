@@ -25,4 +25,7 @@ internal static class PokerHandFactory
 
     public static PokerHand GivenFullHouse(FaceCard threeOfAKind, FaceCard pair) =>
         FullHouse.Create($"{threeOfAKind},{pair}");
+
+    public static PokerHand GivenFlush(Suit suit) =>
+        Flush.Create(suit.ToString());
 }

@@ -4,7 +4,8 @@ using Blef.Modules.Games.Domain.Model.PokerHands;
 namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
 
 // todo: unit tests: IsNotPokerHandOnTableTests
-public class IsPokerHandOnTableTests
+
+public class IsOnTableTests
 {
     [Theory]
     [ClassData(typeof(PokerHandCases))]
