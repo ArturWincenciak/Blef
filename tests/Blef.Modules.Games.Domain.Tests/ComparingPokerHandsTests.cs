@@ -219,6 +219,22 @@ public class ComparingPokerHandsTests
     }
 
     [Fact]
+    public void RoyalFlushIsBetterThenOtherRoyalFlush()
+    {
+        IsBetterThen(Suit.Spades, Suit.Hearts);
+        IsBetterThen(Suit.Spades, Suit.Diamonds);
+        IsBetterThen(Suit.Spades, Suit.Clubs);
+        IsBetterThen(Suit.Hearts, Suit.Diamonds);
+        IsBetterThen(Suit.Hearts, Suit.Clubs);
+        IsBetterThen(Suit.Diamonds, Suit.Clubs);
+
+        void IsBetterThen(Suit higher, Suit lower) =>
+            AssertThatIsBetterThan(
+                higherPokerHand: () => RoyalFlush.Create(higher.ToString()),
+                lowerPokerHand: () => RoyalFlush.Create(lower.ToString()));
+    }
+
+    [Fact]
     public void PairIsBetterThenHighCardTests() =>
         AssertThatIsBetterThan(
             higherPokerHand: () => Pair.Create(FaceCard.Nine.ToString()),
