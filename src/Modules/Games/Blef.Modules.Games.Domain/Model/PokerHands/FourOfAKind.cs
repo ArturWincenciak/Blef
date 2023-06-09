@@ -1,17 +1,17 @@
 ﻿namespace Blef.Modules.Games.Domain.Model.PokerHands;
 
-internal sealed class ThreeOfAKind : PokerHand
+internal sealed class FourOfAKind : PokerHand
 {
-    public const string TYPE = "three-of-a-kind";
+    public const string TYPE = "four-of-a-kind";
     private readonly FaceCard _faceCard;
 
-    private ThreeOfAKind(FaceCard faceCard) =>
+    private FourOfAKind(FaceCard faceCard) =>
         _faceCard = faceCard;
 
-    protected override int PokerHandRank => 6;
+    protected override int PokerHandRank => 9;
 
     public override bool IsOnTable(Table table) =>
-        table.Count(_faceCard) >= 3;
+        table.Count(_faceCard) == 4;
 
     protected override int GetInnerRank() =>
         _faceCard.GetRank();
@@ -20,5 +20,5 @@ internal sealed class ThreeOfAKind : PokerHand
         $"{TYPE}:{_faceCard.ToString().ToLower()}";
 
     public static PokerHand Create(string faceCard) =>
-        new ThreeOfAKind(FaceCard.Create(faceCard));
+        new FourOfAKind(FaceCard.Create(faceCard));
 }
