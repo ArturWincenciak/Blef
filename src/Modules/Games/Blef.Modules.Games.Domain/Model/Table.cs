@@ -34,7 +34,7 @@ internal sealed class Table
     public int Count(FaceCard faceCard) =>
         Cards.Count(card => card.FaceCard.Equals(faceCard));
 
-    public int Count(Suit suit) => // todo: test
+    public int Count(Suit suit) =>
         Cards.Count(card => card.Suit.Equals(suit));
 
     private static bool AreAllCardsUnique(IEnumerable<Hand> hands)

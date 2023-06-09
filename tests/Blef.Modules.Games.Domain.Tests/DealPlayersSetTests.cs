@@ -88,7 +88,7 @@ public class DealPlayersSetTests
     {
         // arrange
         var hand1 = new Hand(new Card[] {new(FaceCard.Ace, Suit.Clubs)});
-        var hand2 = new Hand(new Card[] {new(FaceCard.Ace, Suit.Diamonds), new(FaceCard.King, Suit.Hearts)});
+        var hand2 = new Hand(new Card[] {new(FaceCard.Ace, Suit.Diamonds), new(FaceCard.King, Suit.Diamonds)});
         var dealPlayersSet = new DealPlayersSet(new[]
         {
             new DealPlayer(
@@ -106,5 +106,7 @@ public class DealPlayersSetTests
         Assert.True(actual.Contains(hand2.Cards.Last().FaceCard));
         Assert.Equal(expected: 2, actual: actual.Count(FaceCard.Ace));
         Assert.Equal(expected: 1, actual: actual.Count(FaceCard.King));
+        Assert.Equal(expected: 1, actual: actual.Count(Suit.Clubs));
+        Assert.Equal(expected: 2, actual: actual.Count(Suit.Diamonds));
     }
 }
