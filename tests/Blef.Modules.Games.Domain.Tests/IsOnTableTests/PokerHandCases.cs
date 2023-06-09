@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Blef.Modules.Games.Domain.Model.PokerHands;
 
 namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
 
@@ -23,5 +24,6 @@ public class PokerHandCases : IEnumerable<object[]>
             .Concat(ThreeOfAKindCases.TableWithPokerHand)
             .Concat(FullHouseCases.TableWithPokerHand)
             .Concat(FlushCases.TableWithPokerHand)
-            .Concat(FourOfAKindCases.TableWithPokerHand);
+            .Concat(FourOfAKindCases.TableWithPokerHand)
+            .Concat(StraightFlushCases.TableWithPokerHand);
 }
