@@ -503,4 +503,64 @@ public class ComparingPokerHandsTests
         AssertThatIsBetterThan(
             higherPokerHand: () => StraightFlush.Create(Suit.Clubs.ToString()),
             lowerPokerHand: () => FourOfAKind.Create(FaceCard.Nine.ToString()));
+
+    [Fact]
+    public void RoyalFlushIsBetterThenHighCardTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => RoyalFlush.Create(Suit.Clubs.ToString()),
+            lowerPokerHand: () => HighCard.Create(FaceCard.Ace.ToString()));
+
+    [Fact]
+    public void RoyalFlushIsBetterThenPairTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => RoyalFlush.Create(Suit.Clubs.ToString()),
+            lowerPokerHand: () => Pair.Create(FaceCard.Ace.ToString()));
+
+    [Fact]
+    public void RoyalFlushIsBetterThenTwoPairsTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => RoyalFlush.Create(Suit.Clubs.ToString()),
+            lowerPokerHand: () => TwoPairs.Create($"{FaceCard.Ace},{FaceCard.King}"));
+
+    [Fact]
+    public void RoyalFlushIsBetterThenLowStraightTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => RoyalFlush.Create(Suit.Clubs.ToString()),
+            LowStraight.Create);
+
+    [Fact]
+    public void RoyalFlushIsBetterThenHighStraightTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => RoyalFlush.Create(Suit.Clubs.ToString()),
+            HighStraight.Create);
+
+    [Fact]
+    public void RoyalFlushIsBetterThenThreeOfAKindTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => RoyalFlush.Create(Suit.Clubs.ToString()),
+            lowerPokerHand: () => ThreeOfAKind.Create(FaceCard.Ace.ToString()));
+
+    [Fact]
+    public void RoyalFlushIsBetterThenFullTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => RoyalFlush.Create(Suit.Clubs.ToString()),
+            lowerPokerHand: () => FullHouse.Create($"{FaceCard.Nine},{FaceCard.Ten}"));
+
+    [Fact]
+    public void RoyalFlushIsBetterThenFlushTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => RoyalFlush.Create(Suit.Clubs.ToString()),
+            lowerPokerHand: () => Flush.Create(Suit.Spades.ToString()));
+
+    [Fact]
+    public void RoyalFlushIsBetterThenFourOfAKindTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => RoyalFlush.Create(Suit.Clubs.ToString()),
+            lowerPokerHand: () => FourOfAKind.Create(FaceCard.Nine.ToString()));
+
+    [Fact]
+    public void RoyalFlushIsBetterThenStraightFlushTests() =>
+        AssertThatIsBetterThan(
+            higherPokerHand: () => RoyalFlush.Create(Suit.Clubs.ToString()),
+            lowerPokerHand: () => StraightFlush.Create(Suit.Clubs.ToString()));
 }
