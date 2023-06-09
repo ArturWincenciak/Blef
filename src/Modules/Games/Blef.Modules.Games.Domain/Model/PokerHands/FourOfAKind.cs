@@ -5,10 +5,10 @@ internal sealed class FourOfAKind : PokerHand
     public const string TYPE = "four-of-a-kind";
     private readonly FaceCard _faceCard;
 
+    protected override int PokerHandRank => 9;
+
     private FourOfAKind(FaceCard faceCard) =>
         _faceCard = faceCard;
-
-    protected override int PokerHandRank => 9;
 
     public override bool IsOnTable(Table table) =>
         table.Count(_faceCard) == 4;
