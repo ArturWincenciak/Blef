@@ -137,7 +137,7 @@ echo "Create commit"
 echo "--- --- ---"
 echo ""
 
-git commit -m "Re-format code by JetBrains CleanupCode Tool"
+git commit -m "Cleanup: re-format code by JetBrains CleanupCode Tool"
 
 echo ""
 echo "--- --- ---"
