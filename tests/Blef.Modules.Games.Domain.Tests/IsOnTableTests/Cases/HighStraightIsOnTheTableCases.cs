@@ -1,6 +1,5 @@
 ﻿using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Model.PokerHands;
-using Blef.Modules.Games.Domain.Tests.Extensions;
 
 namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 

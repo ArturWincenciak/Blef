@@ -27,7 +27,7 @@ public static class LowStraightIsNotOnTheTableCases
                     new(new[]
                     {
                         new Card(FaceCard.King, Suit.Diamonds),
-                        new Card(FaceCard.Ace, Suit.Spades),
+                        new Card(FaceCard.Ace, Suit.Spades)
                     })
                 }),
                 LowStraight.Create()
