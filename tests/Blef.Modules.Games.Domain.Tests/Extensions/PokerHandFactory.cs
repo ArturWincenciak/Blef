@@ -28,4 +28,7 @@ internal static class PokerHandFactory
 
     public static PokerHand GivenFlush(Suit suit) =>
         Flush.Create(suit.ToString());
+
+    public static PokerHand GivenFourOfAKind(FaceCard faceCard) =>
+        FourOfAKind.Create(faceCard.ToString());
 }

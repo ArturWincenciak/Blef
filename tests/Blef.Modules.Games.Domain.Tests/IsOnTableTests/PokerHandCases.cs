@@ -22,5 +22,6 @@ public class PokerHandCases : IEnumerable<object[]>
             .Concat(HighStraightCases.TableWithPokerHand)
             .Concat(ThreeOfAKindCases.TableWithPokerHand)
             .Concat(FullHouseCases.TableWithPokerHand)
-            .Concat(FlushCases.TableWithPokerHand);
+            .Concat(FlushCases.TableWithPokerHand)
+            .Concat(FourOfAKindCases.TableWithPokerHand);
 }
