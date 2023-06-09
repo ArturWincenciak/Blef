@@ -10,7 +10,7 @@ internal sealed class Flush : PokerHand
 
     protected override int PokerHandRank => 8;
 
-    public override bool IsOnTable(Table table) => // todo: test
+    public override bool IsOnTable(Table table) =>
         table.Count(_suit) >= 5;
 
     protected override int GetInnerRank() =>
