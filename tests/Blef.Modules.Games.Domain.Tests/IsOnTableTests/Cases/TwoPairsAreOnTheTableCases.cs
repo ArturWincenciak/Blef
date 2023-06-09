@@ -1,11 +1,11 @@
 ﻿using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Tests.Extensions;
 
-namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
+namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 
-public static class TwoPairsCases
+public static class TwoPairsAreOnTheTableCases
 {
-    public static IEnumerable<object[]> TableWithPokerHand =>
+    public static IEnumerable<object[]> Cases =>
         new List<object[]>
         {
             new object[]
@@ -93,6 +93,16 @@ public static class TwoPairsCases
                     })
                 }),
                 PokerHandFactory.GivenTwoPairsBid(FaceCard.King, FaceCard.Ten)
+            },
+            new object[]
+            {
+                TableCases.GetHighestMaxCardsForFourPlayers(),
+                PokerHandFactory.GivenTwoPairsBid(FaceCard.Ace, FaceCard.King)
+            },
+            new object[]
+            {
+                TableCases.GetLowestMaxCardsForFourPlayers(),
+                PokerHandFactory.GivenTwoPairsBid(FaceCard.Nine, FaceCard.Ten)
             }
         };
 }

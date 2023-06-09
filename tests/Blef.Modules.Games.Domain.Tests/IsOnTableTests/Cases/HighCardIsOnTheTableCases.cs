@@ -1,11 +1,11 @@
 ﻿using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Tests.Extensions;
 
-namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
+namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 
-public static class HighCardCases
+public static class HighCardIsOnTheTableCases
 {
-    public static IEnumerable<object[]> TableWithPokerHand =>
+    public static IEnumerable<object[]> Cases =>
         new List<object[]>
         {
             new object[]
@@ -34,6 +34,16 @@ public static class HighCardCases
                     new(new[] {new Card(FaceCard.King, Suit.Hearts)})
                 }),
                 PokerHandFactory.GivenHighCard(FaceCard.Queen)
+            },
+            new object[]
+            {
+                TableCases.GetHighestMaxCardsForFourPlayers(),
+                PokerHandFactory.GivenHighCard(FaceCard.Ace)
+            },
+            new object[]
+            {
+                TableCases.GetLowestMaxCardsForFourPlayers(),
+                PokerHandFactory.GivenHighCard(FaceCard.Nine)
             }
         };
 }

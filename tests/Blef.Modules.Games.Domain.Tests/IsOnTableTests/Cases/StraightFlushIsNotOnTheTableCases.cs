@@ -1,11 +1,11 @@
 ﻿using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Tests.Extensions;
 
-namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
+namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 
-public static class RoyalFlushCases
+public static class StraightFlushIsNotOnTheTableCases
 {
-    public static IEnumerable<object[]> TableWithPokerHand =>
+    public static IEnumerable<object[]> Cases =>
         new List<object[]>
         {
             new object[]
@@ -22,10 +22,10 @@ public static class RoyalFlushCases
                     }),
                     new(new[]
                     {
-                        new Card(FaceCard.Nine, Suit.Clubs)
+                        new Card(FaceCard.Ace, Suit.Clubs)
                     })
                 }),
-                PokerHandFactory.GivenRoyalFlush(Suit.Spades)
+                PokerHandFactory.GivenStraightFlush(Suit.Spades)
             },
             new object[]
             {
@@ -33,17 +33,17 @@ public static class RoyalFlushCases
                 {
                     new(new[]
                     {
-                        new Card(FaceCard.Ace, Suit.Spades),
+                        new Card(FaceCard.Nine, Suit.Spades),
                         new Card(FaceCard.Ten, Suit.Spades)
                     }),
                     new(new[]
                     {
                         new Card(FaceCard.Jack, Suit.Spades),
                         new Card(FaceCard.Queen, Suit.Spades),
-                        new Card(FaceCard.King, Suit.Spades)
+                        new Card(FaceCard.Ace, Suit.Spades)
                     })
                 }),
-                PokerHandFactory.GivenRoyalFlush(Suit.Spades)
+                PokerHandFactory.GivenStraightFlush(Suit.Spades)
             },
             new object[]
             {
@@ -51,7 +51,7 @@ public static class RoyalFlushCases
                 {
                     new(new[]
                     {
-                        new Card(FaceCard.Ace, Suit.Diamonds)
+                        new Card(FaceCard.Nine, Suit.Hearts)
                     }),
                     new(new[]
                     {
@@ -67,7 +67,12 @@ public static class RoyalFlushCases
                         new Card(FaceCard.King, Suit.Diamonds)
                     })
                 }),
-                PokerHandFactory.GivenRoyalFlush(Suit.Diamonds)
+                PokerHandFactory.GivenStraightFlush(Suit.Diamonds)
+            },
+            new object[]
+            {
+                TableCases.GetHighestMaxCardsForFourPlayers(),
+                PokerHandFactory.GivenStraightFlush(Suit.Hearts)
             }
         };
 }
