@@ -21,6 +21,8 @@ public class TableTests
         // assert
         Assert.Equal(expected: 1, actual: actual.Count(FaceCard.Ace));
         Assert.Equal(expected: 2, actual: actual.Count(FaceCard.King));
+        Assert.Equal(expected: 1, actual: actual.Count(Suit.Hearts));
+        Assert.Equal(expected: 2, actual: actual.Count(Suit.Clubs));
         Assert.True(actual.Contains(FaceCard.Ace));
         Assert.True(actual.Contains(FaceCard.King));
         Assert.False(actual.Contains(FaceCard.Queen));
@@ -44,6 +46,8 @@ public class TableTests
 
         // assert
         Assert.Equal(expected: 2, actual: actual.Count(FaceCard.Nine));
+        Assert.Equal(expected: 1, actual: actual.Count(Suit.Clubs));
+        Assert.Equal(expected: 1, actual: actual.Count(Suit.Diamonds));
         Assert.True(actual.Contains(FaceCard.Nine));
         Assert.False(actual.Contains(FaceCard.Ten));
         Assert.False(actual.Contains(FaceCard.Jack));
@@ -101,6 +105,10 @@ public class TableTests
         Assert.Equal(expected: 4, actual: actual.Count(FaceCard.Queen));
         Assert.Equal(expected: 4, actual: actual.Count(FaceCard.Jack));
         Assert.Equal(expected: 4, actual: actual.Count(FaceCard.Ten));
+        Assert.Equal(expected: 5, actual: actual.Count(Suit.Clubs));
+        Assert.Equal(expected: 5, actual: actual.Count(Suit.Diamonds));
+        Assert.Equal(expected: 5, actual: actual.Count(Suit.Hearts));
+        Assert.Equal(expected: 5, actual: actual.Count(Suit.Spades));
         Assert.True(actual.Contains(FaceCard.Ace));
         Assert.True(actual.Contains(FaceCard.King));
         Assert.True(actual.Contains(FaceCard.Queen));
