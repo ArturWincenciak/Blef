@@ -1,24 +1,50 @@
-# Face cards translation
-# - 1 means 'nine'
-# - 2 means 'ten'
-# - 3 means 'jack'
-# - 4 means 'queen'
-# - 5 means 'king'
-# - 6 means 'ace'
+# Face cards
+# - nine
+# - ten
+# - jack
+# - queen
+# - king
+# - ace
 
-# Suits translation
-# - 1 means 'clubs'
-# - 2 means 'diamonds'
-# - 3 means 'hearts'
-# - 4 means 'spades'
+# Suit
+# - clubs
+# - diamonds
+# - hearts
+# - spades
 
-# Bid poker hand options
-# - high-card:nine
-# - high-card:ten
-# - high-card:jack
-# - high-card:queen
-# - high-card:king
-# - high-card:ace
+# Bid high card
+# high-card:<face card>
+# example: high-card:nine
+
+# Bid pair
+#
+
+# Bid two pairs
+#
+
+# Bid low straight
+#
+
+# Bid high straight
+#
+
+# Bid three of a kind
+#
+
+# Bid full house
+# 
+
+# Bid flush
+#
+
+# Bid four of a kind
+#
+
+# Bid straight flush
+#
+
+# Bid royal flush
+# 
 
 @module = games-module
 @api = {{host}}/{{module}}
@@ -66,6 +92,7 @@ Content-Type: application/json
     "nick": "{{playerRiemannNick}}"
 }
 
+###
 @dealNumber = 1
 
 ### Get deal
