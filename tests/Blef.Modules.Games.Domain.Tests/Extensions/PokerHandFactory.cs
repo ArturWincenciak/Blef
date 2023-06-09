@@ -34,4 +34,7 @@ internal static class PokerHandFactory
 
     public static PokerHand GivenStraightFlush(Suit suit) =>
         StraightFlush.Create(suit.ToString());
+
+    public static PokerHand GivenRoyalFlush(Suit suit) =>
+        RoyalFlush.Create(suit.ToString());
 }
