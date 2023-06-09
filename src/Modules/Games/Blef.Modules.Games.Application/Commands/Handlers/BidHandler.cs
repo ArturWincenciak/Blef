@@ -32,7 +32,6 @@ internal sealed class BidHandler : ICommandHandler<Bid>
         var pokerHandType = parts[0];
         var pokerHandValue = parts[1];
 
-        // todo: implement more Poker Hands
         return pokerHandType.ToLower() switch
         {
             HighCard.TYPE => HighCard.Create(pokerHandValue),
@@ -45,6 +44,7 @@ internal sealed class BidHandler : ICommandHandler<Bid>
             Flush.TYPE => Flush.Create(pokerHandValue),
             FourOfAKind.TYPE => FourOfAKind.Create(pokerHandValue),
             StraightFlush.TYPE => StraightFlush.Create(pokerHandValue),
+            RoyalFlush.TYPE => RoyalFlush.Create(pokerHandValue),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
             // todo: validate, exception with problem details, test
         };
