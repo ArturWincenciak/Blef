@@ -44,6 +44,6 @@ public static class HighCardIsNotOnTheTableCases
             {
                 TableCases.GetHighestMaxCardsForFourPlayers(),
                 PokerHandFactory.GivenHighCard(FaceCard.Nine)
-            },
+            }
         };
 }
