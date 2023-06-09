@@ -16,12 +16,12 @@ public class FaceCardTests
         var nine = FaceCard.Nine;
 
         // assert
-        Assert.Equal(ace, FaceCard.Create("ace"));
-        Assert.Equal(king, FaceCard.Create("king"));
-        Assert.Equal(queen, FaceCard.Create("queen"));
-        Assert.Equal(jack, FaceCard.Create("jack"));
-        Assert.Equal(ten, FaceCard.Create("ten"));
-        Assert.Equal(nine, FaceCard.Create("nine"));
+        Assert.Equal(ace, actual: FaceCard.Create("ace"));
+        Assert.Equal(king, actual: FaceCard.Create("king"));
+        Assert.Equal(queen, actual: FaceCard.Create("queen"));
+        Assert.Equal(jack, actual: FaceCard.Create("jack"));
+        Assert.Equal(ten, actual: FaceCard.Create("ten"));
+        Assert.Equal(nine, actual: FaceCard.Create("nine"));
     }
 
     [Fact]

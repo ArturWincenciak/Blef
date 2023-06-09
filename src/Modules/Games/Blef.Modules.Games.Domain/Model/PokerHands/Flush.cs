@@ -5,10 +5,10 @@ internal sealed class Flush : PokerHand
     public const string TYPE = "flush";
     private readonly Suit _suit;
 
+    protected override int PokerHandRank => 8;
+
     private Flush(Suit suit) =>
         _suit = suit;
-
-    protected override int PokerHandRank => 8;
 
     public override bool IsOnTable(Table table) =>
         table.Count(_suit) >= 5;

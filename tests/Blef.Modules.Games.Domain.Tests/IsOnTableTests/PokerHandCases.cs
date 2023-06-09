@@ -4,14 +4,14 @@ namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests;
 
 public class PokerHandCases : IEnumerable<object[]>
 {
+    private static IEnumerable<object[]> Init =>
+        new List<object[]>();
+
     public IEnumerator<object[]> GetEnumerator() =>
         GivenPokerHandTestCases().GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() =>
         GetEnumerator();
-
-    private static IEnumerable<object[]> Init =>
-        new List<object[]>();
 
     private static IEnumerable<object[]> GivenPokerHandTestCases() =>
         Init
