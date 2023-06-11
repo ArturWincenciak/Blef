@@ -1,5 +1,5 @@
-﻿using Blef.Modules.Games.Application.Queries;
-using Blef.Modules.Games.Domain.Model;
+﻿using Blef.Modules.Games.Api.Controllers.Games.Queries;
+using Blef.Modules.Games.Application.Queries;
 using Blef.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,27 +7,23 @@ namespace Blef.Modules.Games.Api.Controllers.Games;
 
 internal sealed class GameplaysController : ModuleControllerBase
 {
-    private const string GAME_ID = "{gameId:Guid}";
-    private const string DEALS = "deals";
-    private const string DEAL_NUMBER = "{dealNumber:int}";
-
     private readonly IQueryDispatcher _queryDispatcher;
 
     public GameplaysController(IQueryDispatcher queryDispatcher) =>
         _queryDispatcher = queryDispatcher;
 
-    [HttpGet($"{GAME_ID}")]
-    public async Task<IActionResult> GetGameFlow(Guid gameId, CancellationToken cancellation)
+    [HttpGet(GetGameFlowQuery.ROUTE)]
+    public async Task<IActionResult> GetGameFlow([FromRoute] GetGameFlowQuery dto, CancellationToken cancellation)
     {
-        var query = new GetGame(new GameId(gameId));
+        var query = new GetGame(dto.GameId);
         var gameFlow = await _queryDispatcher.Dispatch<GetGame, GetGame.Result>(query, cancellation);
         return Ok(gameFlow);
     }
 
-    [HttpGet($"{GAME_ID}/{DEALS}/{DEAL_NUMBER}")]
-    public async Task<IActionResult> GetDealFlow(Guid gameId, int dealNumber, CancellationToken cancellation)
+    [HttpGet(GetDealFlowQuery.ROUTE)]
+    public async Task<IActionResult> GetDealFlow([FromRoute] GetDealFlowQuery dto, CancellationToken cancellation)
     {
-        var query = new GetDeal(Game: new GameId(gameId), Deal: new DealNumber(dealNumber));
+        var query = new GetDeal(dto.GameId, dto.DealNumber);
         var dealFlow = await _queryDispatcher.Dispatch<GetDeal, GetDeal.Result>(query, cancellation);
         return Ok(dealFlow);
     }

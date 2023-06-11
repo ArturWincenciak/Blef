@@ -15,8 +15,8 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
 
     public async Task<GetDeal.Result> Handle(GetDeal query, CancellationToken cancellation)
     {
-        var gameplay = await _gameplaysRepository.Get(query.Game);
-        var dealProjection = gameplay.GetDealProjection(query.Deal);
+        var gameplay = await _gameplaysRepository.Get(new(query.GameId));
+        var dealProjection = gameplay.GetDealProjection(new(query.DealNumber));
         return Map(dealProjection);
     }
 
