@@ -15,8 +15,8 @@ internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetP
 
     public async Task<GetPlayerCards.Result> Handle(GetPlayerCards query, CancellationToken cancellation)
     {
-        var gameplay = await _gameplays.Get(new (query.Game));
-        var hand = gameplay.GetHand(new (query.DealNumber), new (query.Player));
+        var gameplay = await _gameplays.Get(new GameId(query.Game));
+        var hand = gameplay.GetHand(dealNumber: new DealNumber(query.DealNumber), playerId: new PlayerId(query.Player));
         return Map(hand);
     }
 

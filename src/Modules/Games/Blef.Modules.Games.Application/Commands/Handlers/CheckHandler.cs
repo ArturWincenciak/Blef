@@ -21,7 +21,7 @@ internal sealed class CheckHandler : ICommandHandler<Check>
 
     public async Task Handle(Check command, CancellationToken cancellation)
     {
-        var game = await _games.Get(new (command.GameId));
+        var game = await _games.Get(new GameId(command.GameId));
         var events = game.Check(new CheckingPlayer(new PlayerId(command.PlayerId)));
 
         foreach (var @event in events)

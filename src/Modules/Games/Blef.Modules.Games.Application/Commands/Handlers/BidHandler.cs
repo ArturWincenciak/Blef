@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
+using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Model.PokerHands;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Abstractions.Events;
@@ -20,9 +21,9 @@ internal sealed class BidHandler : ICommandHandler<Bid>
 
     public async Task Handle(Bid command, CancellationToken cancellation)
     {
-        var game = await _games.Get(new (command.GameId));
+        var game = await _games.Get(new GameId(command.GameId));
         var pokerHand = Parse(command.PokerHand);
-        var bidPlaced = game.Bid(new Domain.Model.Bid(pokerHand, new (command.PlayerId)));
+        var bidPlaced = game.Bid(new Domain.Model.Bid(pokerHand, Player: new PlayerId(command.PlayerId)));
         await _eventDispatcher.Dispatch(bidPlaced, cancellation);
     }
 
