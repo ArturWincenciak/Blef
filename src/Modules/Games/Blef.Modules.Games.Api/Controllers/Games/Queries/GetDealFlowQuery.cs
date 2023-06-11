@@ -6,7 +6,9 @@ namespace Blef.Modules.Games.Api.Controllers.Games.Queries;
 
 public sealed record GetDealFlowQuery(
     [FromRoute] [NotEmptyGuid] Guid GameId,
-    [FromRoute] [Range(minimum: 1, Int32.MaxValue)] int DealNumber)
+    [FromRoute]
+    [Range(minimum: 1, int.MaxValue)]
+    int DealNumber)
 {
     public const string ROUTE = $"{{{nameof(GameId)}:Guid}}/deals/{{{nameof(DealNumber)}:int}}";
 }
