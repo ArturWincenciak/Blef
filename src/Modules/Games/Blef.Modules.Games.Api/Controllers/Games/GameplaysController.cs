@@ -13,17 +13,21 @@ internal sealed class GameplaysController : ModuleControllerBase
         _queryDispatcher = queryDispatcher;
 
     [HttpGet(GetGameFlowQuery.ROUTE)]
-    public async Task<IActionResult> GetGameFlow([FromRoute] GetGameFlowQuery dto, CancellationToken cancellation)
+    public async Task<IActionResult> GetGameFlow(
+        [FromRoute] GetGameFlowQuery route,
+        CancellationToken cancellation)
     {
-        var query = new GetGame(dto.GameId);
+        var query = new GetGame(route.GameId);
         var gameFlow = await _queryDispatcher.Dispatch<GetGame, GetGame.Result>(query, cancellation);
         return Ok(gameFlow);
     }
 
     [HttpGet(GetDealFlowQuery.ROUTE)]
-    public async Task<IActionResult> GetDealFlow([FromRoute] GetDealFlowQuery dto, CancellationToken cancellation)
+    public async Task<IActionResult> GetDealFlow(
+        [FromRoute] GetDealFlowQuery route,
+        CancellationToken cancellation)
     {
-        var query = new GetDeal(dto.GameId, dto.DealNumber);
+        var query = new GetDeal(route.GameId, route.DealNumber);
         var dealFlow = await _queryDispatcher.Dispatch<GetDeal, GetDeal.Result>(query, cancellation);
         return Ok(dealFlow);
     }

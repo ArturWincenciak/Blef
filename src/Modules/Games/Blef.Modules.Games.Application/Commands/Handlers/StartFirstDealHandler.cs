@@ -19,7 +19,7 @@ internal sealed class StartFirstDealHandler : ICommandHandler<StartFirstDeal, St
 
     public async Task<StartFirstDeal.Result> Handle(StartFirstDeal command, CancellationToken cancellation)
     {
-        var game = await _games.Get(command.GameId);
+        var game = await _games.Get(new(command.GameId));
         var newDealStarted = game.StartFirstDeal();
         await _domainEventDispatcher.Dispatch(newDealStarted, cancellation);
         return new StartFirstDeal.Result(newDealStarted.Deal.Number);

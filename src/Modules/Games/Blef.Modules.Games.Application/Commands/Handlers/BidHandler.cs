@@ -20,9 +20,9 @@ internal sealed class BidHandler : ICommandHandler<Bid>
 
     public async Task Handle(Bid command, CancellationToken cancellation)
     {
-        var game = await _games.Get(command.GameId);
+        var game = await _games.Get(new (command.GameId));
         var pokerHand = Parse(command.PokerHand);
-        var bidPlaced = game.Bid(new Domain.Model.Bid(pokerHand, command.PlayerId));
+        var bidPlaced = game.Bid(new Domain.Model.Bid(pokerHand, new (command.PlayerId)));
         await _eventDispatcher.Dispatch(bidPlaced, cancellation);
     }
 
