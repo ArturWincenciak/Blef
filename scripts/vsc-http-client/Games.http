@@ -13,38 +13,48 @@
 # - spades
 
 # Bid high card
-# high-card:<face card>
-# example: high-card:nine
+# high-card:<FaceCard>
+# example: high-card:ace
 
 # Bid pair
-#
+# pair:<FaceCard>
+# example: pair:ace
 
 # Bid two pairs
-#
+# two-pairs:<FaceCard,FaceCard>
+# example: two-pairs:ace,king
 
 # Bid low straight
-#
+# low-straight
+# example: low-straight 
 
 # Bid high straight
-#
+# high-straight
+# example: high-straight
 
 # Bid three of a kind
-#
+# three-of-a-kind:<FaceCard>
+# example: three-of-a-kind:ace
 
 # Bid full house
-# 
+# full-house:<FaceCard,FaceCard>
+# example: full-house:ace,king
 
 # Bid flush
-#
+# flush:<Suit>
+# example: flush:spades
 
 # Bid four of a kind
-#
+# four-of-a-kind:<FaceCard>
+# example: four-of-a-kind:ace
 
 # Bid straight flush
-#
+# straight-flush:<Suit>
+# example: straight-flush:spades
 
 # Bid royal flush
-# 
+# royal-flush:<Suit>
+# example: royal-flush:spades
 
 @module = games-module
 @api = {{host}}/{{module}}
@@ -93,7 +103,7 @@ Content-Type: application/json
 }
 
 ###
-@dealNumber = 1
+@dealNumber = -1
 
 ### Get deal
 GET {{api}}/gameplays/{{gameId}}/deals/{{dealNumber}}
