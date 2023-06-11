@@ -53,24 +53,24 @@ internal sealed class Game
     {
         ValidateGameInProgress();
 
-        var deal = _deals.Last();
-        deal.Bid(newBid);
+        var lastDeal = _deals[^1];
+        lastDeal.Bid(newBid);
 
-        return new BidPlaced(Id, deal.Id.Deal, newBid.Player, newBid.PokerHand);
+        return new BidPlaced(Id, lastDeal.Id.Deal, newBid.Player, newBid.PokerHand);
     }
 
     public IReadOnlyCollection<IDomainEvent> Check(CheckingPlayer checkingPlayer)
     {
         ValidateGameInProgress();
 
-        var deal = _deals.Last();
-        var dealLooser = deal.Check(checkingPlayer);
+        var lastDeal = _deals[^1];
+        var dealLooser = lastDeal.Check(checkingPlayer);
 
         _players
             .Single(gamePlayer => gamePlayer.Id == dealLooser.Player)
             .LostLastDeal();
 
-        var checkPlaced = new CheckPlaced(Id, deal.Id.Deal, checkingPlayer, dealLooser);
+        var checkPlaced = new CheckPlaced(Id, lastDeal.Id.Deal, checkingPlayer, dealLooser);
 
         if (IsOnlyOnePlayerLeft())
         {
