@@ -1,10 +1,9 @@
-using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Application.Queries;
 
-public sealed record GetPlayerCards(GameId Game, PlayerId Player, DealNumber Deal)
+public sealed record GetPlayerCards(Guid Game, Guid Player, int DealNumber)
     : IQuery<GetPlayerCards.Result>
 {
     [UsedImplicitly]

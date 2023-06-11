@@ -1,6 +1,5 @@
-﻿using Blef.Modules.Games.Domain.Model;
-using Blef.Shared.Abstractions.Commands;
+﻿using Blef.Shared.Abstractions.Commands;
 
 namespace Blef.Modules.Games.Application.Commands;
 
-public sealed record Check(GameId GameId, PlayerId PlayerId) : ICommand;
+public sealed record Check(Guid GameId, Guid PlayerId) : ICommand;
