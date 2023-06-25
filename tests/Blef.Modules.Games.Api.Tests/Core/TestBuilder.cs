@@ -121,6 +121,17 @@ internal sealed class TestBuilder
         return this;
     }
 
+    public TestBuilder BidTwoPairs(WhichPlayer whichPlayer, FaceCard first, FaceCard second)
+    {
+        _actions.Add(async () =>
+        {
+            var result = await _gameClient.BidTwoPairs(whichPlayer, first, second);
+            _testResult.Record(action: nameof(BidTwoPairs), argument: new {whichPlayer, first, second}, result);
+        });
+
+        return this;
+    }
+
     internal TestBuilder Check(WhichPlayer whichPlayer)
     {
         _actions.Add(async () =>

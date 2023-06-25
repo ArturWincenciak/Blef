@@ -41,4 +41,16 @@ public class ValidateBidTests
 
         return Verify(results);
     }
+
+    [Fact]
+    public Task TwoPairsBidWithSuccessTest()
+    {
+        var results = Arrange
+            .BidTwoPairs(WhichPlayer.Conway, FaceCard.Jack, FaceCard.Queen)
+            .Build();
+
+        // todo: test case: bid two pairs with two the same face cards should fail
+
+        return Verify(results);
+    }
 }

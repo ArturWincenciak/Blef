@@ -68,6 +68,12 @@ internal sealed class BlefClient
         return await _httpClient.BidPair(gameId: _gameId!, playerId, faceCard);
     }
 
+    public async Task<object> BidTwoPairs(WhichPlayer whichPlayer, FaceCard first, FaceCard second)
+    {
+        var playerId = GetPlayerId(whichPlayer);
+        return await _httpClient.BidTwoPairs(gameId: _gameId!, playerId, first, second);
+    }
+
     async internal Task<object> Check(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
