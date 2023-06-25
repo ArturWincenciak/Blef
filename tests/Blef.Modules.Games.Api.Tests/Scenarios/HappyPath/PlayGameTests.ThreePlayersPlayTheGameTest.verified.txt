@@ -211,10 +211,10 @@
   },
   {
     No: 13,
-    Action: Bid,
+    Action: BidHighCard,
     Argument: {
       whichPlayer: Knuth,
-      bid: high-card:nine
+      faceCard: Nine
     },
     Result: {
       Status: Success
@@ -222,10 +222,10 @@
   },
   {
     No: 14,
-    Action: Bid,
+    Action: BidHighCard,
     Argument: {
       whichPlayer: Graham,
-      bid: high-card:ten
+      faceCard: Ten
     },
     Result: {
       Status: Success
@@ -233,10 +233,10 @@
   },
   {
     No: 15,
-    Action: Bid,
+    Action: BidHighCard,
     Argument: {
       whichPlayer: Conway,
-      bid: high-card:jack
+      faceCard: Jack
     },
     Result: {
       Status: Success
