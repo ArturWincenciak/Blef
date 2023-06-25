@@ -62,18 +62,26 @@ internal static class HttpApiExtensions
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids",
             value: new {PokerHand = bid});
 
-    async internal static Task<object> BidHighCard(this HttpClient client,
-        GameId gameId, PlayerId playerId, FaceCard faceCard)
+    private async static Task<object> Bid<TValue>(this HttpClient client,
+        GameId gameId, PlayerId playerId, string pokerHand, TValue value)
     {
         var response = await client.PostAsJsonAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids/high-card",
-            value: new {FaceCard = faceCard.ToString()});
+            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids/{pokerHand}",
+            value: value);
 
         if (response.IsSuccessStatusCode)
             return Success;
 
         return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
     }
+
+    async internal static Task<object> BidHighCard(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard faceCard) =>
+        await Bid(client, gameId, playerId, "high-card", new {FaceCard = faceCard.ToString()});
+
+    async internal static Task<object> BidPair(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard faceCard) =>
+        await Bid(client, gameId, playerId, "pair", new {FaceCard = faceCard.ToString()});
 
     async internal static Task<GetGame.Result> GetGameFlow(this HttpClient client, GameId gameId)
     {

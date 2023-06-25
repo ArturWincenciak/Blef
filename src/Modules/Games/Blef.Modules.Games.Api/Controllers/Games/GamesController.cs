@@ -71,6 +71,17 @@ internal sealed class GamesController : ModuleControllerBase
         return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
     }
 
+    [HttpPost(PairBidRoute.ROUTE)]
+    public async Task<IActionResult> BidPair(
+        [FromRoute] PairBidRoute route,
+        [FromBody] PairBidPayload payload,
+        CancellationToken cancellation)
+    {
+        var cmd = new Bid(route.GameId, route.PlayerId, payload.Serialize());
+        var bid = await _commandDispatcher.Dispatch<Bid, Bid.Result>(cmd, cancellation);
+        return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
+    }
+
     [HttpPost(ChecksRoute.ROUTE)]
     public async Task<IActionResult> Check(
         [FromRoute] ChecksRoute route,

@@ -31,4 +31,14 @@ public class ValidateBidTests
 
         return Verify(results);
     }
+
+    [Fact]
+    public Task PairBidWithSuccessTest()
+    {
+        var results = Arrange
+            .BidPair(WhichPlayer.Conway, FaceCard.Ten)
+            .Build();
+
+        return Verify(results);
+    }
 }

@@ -104,7 +104,18 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var result = await _gameClient.BidHighCard(whichPlayer, faceCard);
-            _testResult.Record(action: nameof(Bid), argument: new {whichPlayer, faceCard}, result);
+            _testResult.Record(action: nameof(BidHighCard), argument: new {whichPlayer, faceCard}, result);
+        });
+
+        return this;
+    }
+
+    public TestBuilder BidPair(WhichPlayer whichPlayer, FaceCard faceCard)
+    {
+        _actions.Add(async () =>
+        {
+            var result = await _gameClient.BidPair(whichPlayer, faceCard);
+            _testResult.Record(action: nameof(BidPair), argument: new {whichPlayer, faceCard}, result);
         });
 
         return this;
