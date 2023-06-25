@@ -11,10 +11,7 @@ internal sealed class TestRecorder
 
     public IReadOnlyCollection<TestResult> Actual => _items;
 
-    public void Record(string action, object argument, IQueryResult result) =>
-        _items.Add(new TestResult(++_counter, action, argument, result));
-
-    public void Record(string action, object argument, ICommandResult result) =>
+    public void Record(string action, object argument, object result) =>
         _items.Add(new TestResult(++_counter, action, argument, result));
 
     [UsedImplicitly]

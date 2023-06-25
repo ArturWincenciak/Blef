@@ -1,10 +1,10 @@
 ﻿using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
-using Blef.Modules.Games.Domain.Model;
 using DealNumber = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.DealNumber;
 using GameId = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.GameId;
 using PlayerId = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.PlayerId;
+using PlayerNick = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.PlayerNick;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -50,16 +50,22 @@ internal sealed class BlefClient
         return await _httpClient.GetCards(gameId: _gameId!, deal, playerId);
     }
 
-    async internal Task Bid(WhichPlayer whichPlayer, string bid)
+    async internal Task<object> Bid(WhichPlayer whichPlayer, string bid)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.BidWithSuccess(gameId: _gameId!, playerId, bid);
+        return await _httpClient.BidWithSuccess(gameId: _gameId!, playerId, bid);
     }
 
-    async internal Task Check(WhichPlayer whichPlayer)
+    async internal Task<object> BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.CheckWithSuccess(gameId: _gameId!, playerId);
+        return await _httpClient.BidHighCard(gameId: _gameId!, playerId, faceCard);
+    }
+
+    async internal Task<object> Check(WhichPlayer whichPlayer)
+    {
+        var playerId = GetPlayerId(whichPlayer);
+        return await _httpClient.CheckWithSuccess(gameId: _gameId!, playerId);
     }
 
     private PlayerId GetPlayerId(WhichPlayer whichPlayer) =>

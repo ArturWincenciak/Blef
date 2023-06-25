@@ -1,15 +1,14 @@
 ﻿using System.Net.Http.Json;
+using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
-using Blef.Modules.Games.Domain.Model;
-using DealNumber = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.DealNumber;
-using GameId = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.GameId;
-using PlayerId = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.PlayerId;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal static class HttpApiExtensions
 {
+    private readonly static TestRecorder.EmptyCommandResult Success = new("Success");
+
     private static string GamesUri =>
         "games-module/games";
 
@@ -41,8 +40,8 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<StartFirstDeal.Result>())!;
     }
 
-    async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client, GameId gameId, DealNumber deal,
-        PlayerId playerId)
+    async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client,
+        GameId gameId, DealNumber deal, PlayerId playerId)
     {
         var response = await client.GetAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/cards");
@@ -50,17 +49,31 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<GetPlayerCards.Result>())!;
     }
 
-    async internal static Task BidWithSuccess(this HttpClient client, GameId gameId, PlayerId playerId, string bid)
+    async internal static Task<object> BidWithSuccess(this HttpClient client, GameId gameId, PlayerId playerId, string bid)
     {
         var response = await Bid(client, gameId, playerId, bid);
         response.EnsureSuccessStatusCode();
+        return Success;
     }
 
-    private async static Task<HttpResponseMessage>
-        Bid(HttpClient client, GameId gameId, PlayerId playerId, string bid) =>
+    private async static Task<HttpResponseMessage> Bid(HttpClient client,
+        GameId gameId, PlayerId playerId, string bid) =>
         await client.PostAsJsonAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids",
             value: new {PokerHand = bid});
+
+    async internal static Task<object> BidHighCard(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard faceCard)
+    {
+        var response = await client.PostAsJsonAsync(
+            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids/high-card",
+            value: new {FaceCard = faceCard.ToString()});
+
+        if (response.IsSuccessStatusCode)
+            return Success;
+
+        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
+    }
 
     async internal static Task<GetGame.Result> GetGameFlow(this HttpClient client, GameId gameId)
     {
@@ -77,10 +90,11 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<GetDeal.Result>())!;
     }
 
-    async internal static Task CheckWithSuccess(this HttpClient client, GameId gameId, PlayerId playerId)
+    async internal static Task<object> CheckWithSuccess(this HttpClient client, GameId gameId, PlayerId playerId)
     {
         var response = await client.PostAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/checks", content: null);
         response.EnsureSuccessStatusCode();
+        return Success;
     }
 }

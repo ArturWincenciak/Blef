@@ -217,7 +217,7 @@
       bid: high-card:nine
     },
     Result: {
-      Status: OK
+      Status: Success
     }
   },
   {
@@ -228,7 +228,7 @@
       bid: high-card:ten
     },
     Result: {
-      Status: OK
+      Status: Success
     }
   },
   {
@@ -239,7 +239,7 @@
       bid: high-card:jack
     },
     Result: {
-      Status: OK
+      Status: Success
     }
   },
   {
@@ -249,7 +249,7 @@
       whichPlayer: Knuth
     },
     Result: {
-      Status: OK
+      Status: Success
     }
   },
   {
