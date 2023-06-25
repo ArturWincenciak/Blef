@@ -1,4 +1,5 @@
 ﻿using Blef.Modules.Games.Api.Controllers.Games.Commands;
+using Blef.Modules.Games.Api.Controllers.Games.Commands.Bid;
 using Blef.Modules.Games.Api.Controllers.Games.Queries;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
@@ -55,6 +56,17 @@ internal sealed class GamesController : ModuleControllerBase
         CancellationToken cancellation)
     {
         var cmd = new Bid(route.GameId, route.PlayerId, dto.PokerHand);
+        var bid = await _commandDispatcher.Dispatch<Bid, Bid.Result>(cmd, cancellation);
+        return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
+    }
+
+    [HttpPost(HighCardBidRoute.ROUTE)]
+    public async Task<IActionResult> BidHighCard(
+        [FromRoute] HighCardBidRoute route,
+        [FromBody] HighCardBidPayload payload,
+        CancellationToken cancellation)
+    {
+        var cmd = new Bid(route.GameId, route.PlayerId, payload.Serialize());
         var bid = await _commandDispatcher.Dispatch<Bid, Bid.Result>(cmd, cancellation);
         return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
     }

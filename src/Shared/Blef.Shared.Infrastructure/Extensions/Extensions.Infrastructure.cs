@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 using Blef.Shared.Abstractions.Modules;
 using Blef.Shared.Infrastructure.Commands;
 using Blef.Shared.Infrastructure.Events;
@@ -56,6 +57,8 @@ internal static partial class Extensions
             .AddControllers()
             .ConfigureApplicationPartManager(manager =>
                 manager.AddOnlyNotDisabledModuleParts(configuration.DetectDisabledModules()))
+            .AddJsonOptions(options =>
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
             .Services;
 
     private static IServiceCollection AddSwagger(this IServiceCollection services) =>
