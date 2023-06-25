@@ -24,7 +24,7 @@ internal sealed class GamesController : ModuleControllerBase
     {
         var cmd = new NewGame();
         var game = await _commandDispatcher.Dispatch<NewGame, NewGame.Result>(cmd, cancellation);
-        return Created(uri: "todo", game); // todo: location header, test the header
+        return Created(uri: GetGameFlowQuery.Path(game.GameId), game); // todo: test the location header
     }
 
     [HttpPost(DealsRoute.ROUTE)]
