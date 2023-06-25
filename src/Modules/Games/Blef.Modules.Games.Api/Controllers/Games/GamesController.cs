@@ -65,8 +65,8 @@ internal sealed class GamesController : ModuleControllerBase
         CancellationToken cancellation)
     {
         var cmd = new Check(route.GameId, route.PlayerId);
-        await _commandDispatcher.Dispatch(cmd, cancellation);
-        return Created(uri: "todo", value: null); // todo: location header, test the header
+        var check = await _commandDispatcher.Dispatch<Check, Check.Result>(cmd, cancellation);
+        return Created(uri: GetDealFlowQuery.Path(route.GameId, check.DealNumber), value: null);
     }
 
     [HttpGet(GetCardsQuery.ROUTE)]

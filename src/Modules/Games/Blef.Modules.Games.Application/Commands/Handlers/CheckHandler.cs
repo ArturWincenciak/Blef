@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 namespace Blef.Modules.Games.Application.Commands.Handlers;
 
 [UsedImplicitly]
-internal sealed class CheckHandler : ICommandHandler<Check>
+internal sealed class CheckHandler : ICommandHandler<Check, Check.Result>
 {
     private readonly IDomainEventDispatcher _eventDispatcher;
     private readonly IGamesRepository _games;
@@ -19,13 +19,21 @@ internal sealed class CheckHandler : ICommandHandler<Check>
         _eventDispatcher = eventDispatcher;
     }
 
-    public async Task Handle(Check command, CancellationToken cancellation)
+    public async Task<Check.Result> Handle(Check command, CancellationToken cancellation)
     {
         var game = await _games.Get(new GameId(command.GameId));
         var events = game.Check(new CheckingPlayer(new PlayerId(command.PlayerId)));
 
         foreach (var @event in events)
             await Dispatch(@event, cancellation);
+
+        var dealNumber = events
+            .Where(e => e is CheckPlaced)
+            .Cast<CheckPlaced>()
+            .Single()
+            .Deal.Number;
+
+        return new(dealNumber);
     }
 
     private async Task Dispatch(IDomainEvent @event, CancellationToken cancellation)
