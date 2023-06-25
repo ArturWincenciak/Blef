@@ -45,7 +45,7 @@ internal sealed class GamesController : ModuleControllerBase
     {
         var cmd = new JoinGame(route.GameId, dto.Nick);
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
-        return Created(uri: "todo", player); // todo: location header, test the header
+        return Created(uri: GetGameFlowQuery.Path(route.GameId), player);
     }
 
     [HttpPost(BidsRoute.ROUTE)]
@@ -55,8 +55,8 @@ internal sealed class GamesController : ModuleControllerBase
         CancellationToken cancellation)
     {
         var cmd = new Bid(route.GameId, route.PlayerId, dto.PokerHand);
-        await _commandDispatcher.Dispatch(cmd, cancellation);
-        return Created(uri: "todo", value: null); // todo: location header, test the header
+        var bid = await _commandDispatcher.Dispatch<Bid, Bid.Result>(cmd, cancellation);
+        return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
     }
 
     [HttpPost(ChecksRoute.ROUTE)]
