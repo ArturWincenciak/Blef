@@ -14,3 +14,16 @@ public sealed record HighCardBidPayload(FaceCard FaceCard)
     public string Serialize() =>
         $"high-card:{FaceCard.ToString().ToLower()}";
 }
+
+public sealed record PairBidRoute(
+    [NotEmptyGuid] Guid GameId,
+    [NotEmptyGuid] Guid PlayerId)
+{
+    public const string ROUTE = $"{{{nameof(GameId)}:Guid}}/players/{{{nameof(PlayerId)}:Guid}}/bids/pair";
+}
+
+public sealed record PairBidPayload(FaceCard FaceCard)
+{
+    public string Serialize() =>
+        $"pair:{FaceCard.ToString().ToLower()}";
+}

@@ -35,10 +35,10 @@
   },
   {
     No: 5,
-    Action: BidHighCard,
+    Action: BidPair,
     Argument: {
       whichPlayer: Conway,
-      faceCard: Nine
+      faceCard: Ten
     },
     Result: {
       Status: Success
