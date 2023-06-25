@@ -7,4 +7,7 @@ public sealed record GetGameFlowQuery(
     [FromRoute] [NotEmptyGuid] Guid GameId)
 {
     public const string ROUTE = $"{{{nameof(GameId)}:Guid}}";
+
+    public static string Path(Guid gameId) =>
+        $"gameplays/{gameId}";
 }
