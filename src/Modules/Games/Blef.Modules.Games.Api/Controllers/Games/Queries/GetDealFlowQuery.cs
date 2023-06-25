@@ -11,4 +11,7 @@ public sealed record GetDealFlowQuery(
     int DealNumber)
 {
     public const string ROUTE = $"{{{nameof(GameId)}:Guid}}/deals/{{{nameof(DealNumber)}:int}}";
+
+    public static string Path(Guid gameId, int dealNumber) =>
+        $"gameplays/{gameId}/deals/{dealNumber}";
 }
