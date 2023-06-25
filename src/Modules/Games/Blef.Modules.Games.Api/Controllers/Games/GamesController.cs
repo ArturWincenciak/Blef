@@ -1,5 +1,5 @@
 ﻿using Blef.Modules.Games.Api.Controllers.Games.Commands;
-using Blef.Modules.Games.Api.Controllers.Games.Commands.Bid;
+using Blef.Modules.Games.Api.Controllers.Games.Commands.Bids;
 using Blef.Modules.Games.Api.Controllers.Games.Queries;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
@@ -41,28 +41,17 @@ internal sealed class GamesController : ModuleControllerBase
     [HttpPost(PlayersRoute.ROUTE)]
     public async Task<IActionResult> JoinGame(
         [FromRoute] PlayersRoute route,
-        [FromBody] NickDto dto,
+        [FromBody] NickPayload payload,
         CancellationToken cancellation)
     {
-        var cmd = new JoinGame(route.GameId, dto.Nick);
+        var cmd = new JoinGame(route.GameId, payload.Nick);
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
         return Created(uri: GetGameFlowQuery.Path(route.GameId), player);
     }
 
-    [HttpPost(BidsRoute.ROUTE)]
-    public async Task<IActionResult> Bid(
-        [FromRoute] BidsRoute route,
-        [FromBody] BidDto dto,
-        CancellationToken cancellation)
-    {
-        var cmd = new Bid(route.GameId, route.PlayerId, dto.PokerHand);
-        var bid = await _commandDispatcher.Dispatch<Bid, Bid.Result>(cmd, cancellation);
-        return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
-    }
-
-    [HttpPost(HighCardBidRoute.ROUTE)]
+    [HttpPost(HighCardBidsRoute.ROUTE)]
     public async Task<IActionResult> BidHighCard(
-        [FromRoute] HighCardBidRoute route,
+        [FromRoute] HighCardBidsRoute route,
         [FromBody] HighCardBidPayload payload,
         CancellationToken cancellation)
     {
@@ -71,9 +60,9 @@ internal sealed class GamesController : ModuleControllerBase
         return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
     }
 
-    [HttpPost(PairBidRoute.ROUTE)]
+    [HttpPost(PairBidsRoute.ROUTE)]
     public async Task<IActionResult> BidPair(
-        [FromRoute] PairBidRoute route,
+        [FromRoute] PairBidsRoute route,
         [FromBody] PairBidPayload payload,
         CancellationToken cancellation)
     {
@@ -82,9 +71,9 @@ internal sealed class GamesController : ModuleControllerBase
         return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
     }
 
-    [HttpPost(TwoPairsBidRoute.ROUTE)]
+    [HttpPost(TwoPairsBidsRoute.ROUTE)]
     public async Task<IActionResult> BidTwoPairs(
-        [FromRoute] TwoPairsBidRoute route,
+        [FromRoute] TwoPairsBidsRoute route,
         [FromBody] TwoPairsBidPayload payload,
         CancellationToken cancellation)
     {

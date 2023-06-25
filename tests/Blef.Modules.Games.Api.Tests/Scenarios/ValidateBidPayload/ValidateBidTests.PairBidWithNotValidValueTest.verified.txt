@@ -35,16 +35,22 @@
   },
   {
     No: 5,
-    Action: BidTwoPairs,
+    Action: BidPair,
     Argument: {
       whichPlayer: Conway,
-      first: Jack,
-      second: Queen
+      faceCard: NotValidValue
     },
     Result: {
-      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/internal-server-error.md,
-      Title: Internal server error,
-      Detail: Unexpected error occurred
+      Type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
+      Title: One or more validation errors occurred.,
+      Errors: {
+        $.faceCard: [
+          The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.Bids.PairBidPayload. Path: $.faceCard | LineNumber: 0 | BytePositionInLine: 27.
+        ],
+        payload: [
+          The payload field is required.
+        ]
+      }
     }
   }
 ]

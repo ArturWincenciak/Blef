@@ -39,12 +39,19 @@
     Argument: {
       whichPlayer: Conway,
       first: Jack,
-      second: Queen
+      second: NotValidValue
     },
     Result: {
-      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/internal-server-error.md,
-      Title: Internal server error,
-      Detail: Unexpected error occurred
+      Type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
+      Title: One or more validation errors occurred.,
+      Errors: {
+        $.secondFaceCard: [
+          The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.Bids.TwoPairsBidPayload. Path: $.secondFaceCard | LineNumber: 0 | BytePositionInLine: 56.
+        ],
+        payload: [
+          The payload field is required.
+        ]
+      }
     }
   }
 ]

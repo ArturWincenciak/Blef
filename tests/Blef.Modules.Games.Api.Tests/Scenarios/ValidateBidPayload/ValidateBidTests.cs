@@ -23,7 +23,7 @@ public class ValidateBidTests
     }
 
     [Fact]
-    public Task HighCardBidWithFailureTest()
+    public Task HighCardBidWithNotValidValueTest()
     {
         var results = Arrange
             .BidHighCard(WhichPlayer.Conway, FaceCard.NotValidValue)
@@ -43,13 +43,61 @@ public class ValidateBidTests
     }
 
     [Fact]
+    public Task PairBidWithNotValidValueTest()
+    {
+        var results = Arrange
+            .BidPair(WhichPlayer.Conway, FaceCard.NotValidValue)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
     public Task TwoPairsBidWithSuccessTest()
     {
         var results = Arrange
             .BidTwoPairs(WhichPlayer.Conway, FaceCard.Jack, FaceCard.Queen)
             .Build();
 
-        // todo: test case: bid two pairs with two the same face cards should fail
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task TwoPairsBidWithNotValidFirstValueTest()
+    {
+        var results = Arrange
+            .BidTwoPairs(WhichPlayer.Conway, FaceCard.NotValidValue, FaceCard.Queen)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task TwoPairsBidWithNotValidSecondValueTest()
+    {
+        var results = Arrange
+            .BidTwoPairs(WhichPlayer.Conway, FaceCard.Jack, FaceCard.NotValidValue)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task TwoPairsBidWithNotValidValuesTest()
+    {
+        var results = Arrange
+            .BidTwoPairs(WhichPlayer.Conway, FaceCard.NotValidValue, FaceCard.NotValidValue)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task TwoPairsBidWithTwoTheSameValuesTest()
+    {
+        var results = Arrange
+            .BidTwoPairs(WhichPlayer.Conway, FaceCard.Jack, FaceCard.Jack)
+            .Build();
 
         return Verify(results);
     }
