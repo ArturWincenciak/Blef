@@ -77,11 +77,28 @@ internal static class HttpApiExtensions
 
     async internal static Task<object> BidHighCard(this HttpClient client,
         GameId gameId, PlayerId playerId, FaceCard faceCard) =>
-        await Bid(client, gameId, playerId, "high-card", new {FaceCard = faceCard.ToString()});
+        await Bid(client, gameId, playerId, pokerHand: "high-card",
+            value: new
+            {
+                FaceCard = faceCard.ToString()
+            });
 
     async internal static Task<object> BidPair(this HttpClient client,
         GameId gameId, PlayerId playerId, FaceCard faceCard) =>
-        await Bid(client, gameId, playerId, "pair", new {FaceCard = faceCard.ToString()});
+        await Bid(client, gameId, playerId, pokerHand: "pair",
+            value: new
+            {
+                FaceCard = faceCard.ToString()
+            });
+
+    async internal static Task<object> BidTwoPairs(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard first, FaceCard second) =>
+        await Bid(client, gameId, playerId, pokerHand: "two-pairs",
+            value: new
+            {
+                FirstFaceCard = first.ToString(),
+                SecondFaceCard = second.ToString()
+            });
 
     async internal static Task<GetGame.Result> GetGameFlow(this HttpClient client, GameId gameId)
     {
