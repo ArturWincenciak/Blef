@@ -34,7 +34,7 @@ internal sealed class GamesController : ModuleControllerBase
     {
         var cmd = new StartFirstDeal(route.GameId);
         var deal = await _commandDispatcher.Dispatch<StartFirstDeal, StartFirstDeal.Result>(cmd, cancellation);
-        return Created(uri: "todo", deal); // todo: location header, test the header
+        return Created(uri: GetDealFlowQuery.Path(route.GameId, deal.Number), deal);
     }
 
     [HttpPost(PlayersRoute.ROUTE)]
