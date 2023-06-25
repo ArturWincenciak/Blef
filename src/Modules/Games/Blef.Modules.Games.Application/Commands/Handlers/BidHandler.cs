@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 namespace Blef.Modules.Games.Application.Commands.Handlers;
 
 [UsedImplicitly]
-internal sealed class BidHandler : ICommandHandler<Bid>
+internal sealed class BidHandler : ICommandHandler<Bid, Bid.Result>
 {
     private readonly IDomainEventDispatcher _eventDispatcher;
     private readonly IGamesRepository _games;
@@ -19,12 +19,13 @@ internal sealed class BidHandler : ICommandHandler<Bid>
         _eventDispatcher = eventDispatcher;
     }
 
-    public async Task Handle(Bid command, CancellationToken cancellation)
+    public async Task<Bid.Result> Handle(Bid command, CancellationToken cancellation)
     {
         var game = await _games.Get(new GameId(command.GameId));
         var pokerHand = Parse(command.PokerHand);
         var bidPlaced = game.Bid(new Domain.Model.Bid(pokerHand, Player: new PlayerId(command.PlayerId)));
         await _eventDispatcher.Dispatch(bidPlaced, cancellation);
+        return new(bidPlaced.Deal.Number);
     }
 
     private static PokerHand Parse(string bid)
