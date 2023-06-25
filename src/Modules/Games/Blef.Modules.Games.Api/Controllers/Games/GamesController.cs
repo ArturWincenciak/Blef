@@ -20,7 +20,7 @@ internal sealed class GamesController : ModuleControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(CancellationToken cancellation)
+    public async Task<IActionResult> StartNewGame(CancellationToken cancellation)
     {
         var cmd = new NewGame();
         var game = await _commandDispatcher.Dispatch<NewGame, NewGame.Result>(cmd, cancellation);
