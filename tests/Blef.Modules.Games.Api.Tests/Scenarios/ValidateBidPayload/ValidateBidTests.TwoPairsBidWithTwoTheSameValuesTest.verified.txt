@@ -1,1 +1,57 @@
-﻿
+﻿[
+  {
+    No: 1,
+    Action: NewGame,
+    Argument: _noArgument,
+    Result: {
+      GameId: Guid_1
+    }
+  },
+  {
+    No: 2,
+    Action: JoinPlayer,
+    Argument: Conway,
+    Result: {
+      PlayerId: Guid_2,
+      Nick: Conway
+    }
+  },
+  {
+    No: 3,
+    Action: JoinPlayer,
+    Argument: Graham,
+    Result: {
+      PlayerId: Guid_3,
+      Nick: Graham
+    }
+  },
+  {
+    No: 4,
+    Action: NewDeal,
+    Argument: _noArgument,
+    Result: {
+      Number: 1
+    }
+  },
+  {
+    No: 5,
+    Action: BidTwoPairs,
+    Argument: {
+      whichPlayer: Conway,
+      first: Jack,
+      second: Jack
+    },
+    Result: {
+      Type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
+      Title: One or more validation errors occurred.,
+      Errors: {
+        FirstFaceCard: [
+          Face cards must be different than each other but are the same.
+        ],
+        SecondFaceCard: [
+          Face cards must be different than each other but are the same.
+        ]
+      }
+    }
+  }
+]

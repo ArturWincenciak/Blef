@@ -42,9 +42,7 @@
       second: Queen
     },
     Result: {
-      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/internal-server-error.md,
-      Title: Internal server error,
-      Detail: Unexpected error occurred
+      Status: Success
     }
   }
 ]

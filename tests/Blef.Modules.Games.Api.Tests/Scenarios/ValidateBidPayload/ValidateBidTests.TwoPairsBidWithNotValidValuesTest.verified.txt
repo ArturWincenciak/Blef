@@ -49,7 +49,8 @@
           The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.Bids.TwoPairsBidPayload. Path: $.firstFaceCard | LineNumber: 0 | BytePositionInLine: 32.
         ],
         payload: [
-          The payload field is required.
+          The payload field is required.,
+          Value cannot be null.
         ]
       }
     }
