@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Commands;
 
-public sealed record BidRoute(
+public sealed record BidsRoute(
     [NotEmptyGuid] Guid GameId,
     [NotEmptyGuid] Guid PlayerId)
 {

@@ -48,9 +48,9 @@ internal sealed class GamesController : ModuleControllerBase
         return Created(uri: "todo", player); // todo: location header, test the header
     }
 
-    [HttpPost(BidRoute.ROUTE)]
+    [HttpPost(BidsRoute.ROUTE)]
     public async Task<IActionResult> Bid(
-        [FromRoute] BidRoute route,
+        [FromRoute] BidsRoute route,
         [FromBody] BidDto dto,
         CancellationToken cancellation)
     {
