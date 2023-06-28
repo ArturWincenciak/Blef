@@ -1,8 +1,8 @@
-﻿using Blef.Modules.Games.Api.Controllers.Games.Commands.Bids.Validators;
+﻿using Blef.Modules.Games.Api.Controllers.Games.Commands.Validators;
 
-namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Bids;
+namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
-[NotTheSameTwoPairs]
+[TwoPairsUniqueCards]
 public sealed record TwoPairsBidPayload(FaceCard FirstFaceCard, FaceCard SecondFaceCard) : BidPayload
 {
     public override string Serialize() =>

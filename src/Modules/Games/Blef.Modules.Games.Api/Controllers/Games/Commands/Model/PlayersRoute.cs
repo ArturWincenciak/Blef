@@ -1,6 +1,6 @@
-﻿using Blef.Modules.Games.Api.Controllers.Games.Commands.Bids.Validators;
+﻿using Blef.Modules.Games.Api.Controllers.Games.Commands.Validators;
 
-namespace Blef.Modules.Games.Api.Controllers.Games.Commands;
+namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
 public sealed record PlayersRoute(
     [NotEmptyGuid] Guid GameId)
