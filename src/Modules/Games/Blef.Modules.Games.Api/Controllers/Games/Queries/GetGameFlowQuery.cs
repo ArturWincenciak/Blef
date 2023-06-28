@@ -1,4 +1,4 @@
-﻿using Blef.Shared.Infrastructure.Api.Validation;
+﻿using Blef.Modules.Games.Api.Controllers.Games.Commands.Bids.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Queries;

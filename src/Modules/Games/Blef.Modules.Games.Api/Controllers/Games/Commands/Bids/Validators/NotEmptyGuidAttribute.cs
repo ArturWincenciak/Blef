@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Blef.Shared.Infrastructure.Api.Validation;
+namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Bids.Validators;
 
 public class NotEmptyGuidAttribute : ValidationAttribute
 {
