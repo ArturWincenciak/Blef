@@ -1,5 +1,4 @@
-﻿using Blef.Modules.Games.Api.Controllers.Games.Commands;
-using Blef.Modules.Games.Api.Controllers.Games.Commands.Bids;
+﻿using Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 using Blef.Modules.Games.Api.Controllers.Games.Queries;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
@@ -9,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers.Games;
 
-internal sealed class GamesController : ModuleControllerBase
+internal sealed partial class GamesController : ModuleControllerBase
 {
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
@@ -47,39 +46,6 @@ internal sealed class GamesController : ModuleControllerBase
         var cmd = new JoinGame(route.GameId, payload.Nick);
         var player = await _commandDispatcher.Dispatch<JoinGame, JoinGame.Result>(cmd, cancellation);
         return Created(uri: GetGameFlowQuery.Path(route.GameId), player);
-    }
-
-    [HttpPost(HighCardBidsRoute.ROUTE)]
-    public async Task<IActionResult> BidHighCard(
-        [FromRoute] HighCardBidsRoute route,
-        [FromBody] HighCardBidPayload payload,
-        CancellationToken cancellation)
-    {
-        var cmd = new Bid(route.GameId, route.PlayerId, payload.Serialize());
-        var bid = await _commandDispatcher.Dispatch<Bid, Bid.Result>(cmd, cancellation);
-        return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
-    }
-
-    [HttpPost(PairBidsRoute.ROUTE)]
-    public async Task<IActionResult> BidPair(
-        [FromRoute] PairBidsRoute route,
-        [FromBody] PairBidPayload payload,
-        CancellationToken cancellation)
-    {
-        var cmd = new Bid(route.GameId, route.PlayerId, payload.Serialize());
-        var bid = await _commandDispatcher.Dispatch<Bid, Bid.Result>(cmd, cancellation);
-        return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
-    }
-
-    [HttpPost(TwoPairsBidsRoute.ROUTE)]
-    public async Task<IActionResult> BidTwoPairs(
-        [FromRoute] TwoPairsBidsRoute route,
-        [FromBody] TwoPairsBidPayload payload,
-        CancellationToken cancellation)
-    {
-        var cmd = new Bid(route.GameId, route.PlayerId, payload.Serialize());
-        var bid = await _commandDispatcher.Dispatch<Bid, Bid.Result>(cmd, cancellation);
-        return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
     }
 
     [HttpPost(ChecksRoute.ROUTE)]

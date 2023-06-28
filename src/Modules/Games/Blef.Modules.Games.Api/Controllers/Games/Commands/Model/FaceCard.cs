@@ -1,4 +1,4 @@
-﻿namespace Blef.Modules.Games.Api.Controllers.Games.Commands;
+﻿namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
 public enum FaceCard
 {

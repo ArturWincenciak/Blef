@@ -46,7 +46,7 @@
       Title: One or more validation errors occurred.,
       Errors: {
         $.secondFaceCard: [
-          The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.Bids.TwoPairsBidPayload. Path: $.secondFaceCard | LineNumber: 0 | BytePositionInLine: 56.
+          The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.Model.TwoPairsBidPayload. Path: $.secondFaceCard | LineNumber: 0 | BytePositionInLine: 56.
         ],
         payload: [
           The payload field is required.,

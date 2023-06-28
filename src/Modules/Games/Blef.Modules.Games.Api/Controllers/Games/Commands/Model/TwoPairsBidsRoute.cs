@@ -1,4 +1,4 @@
-﻿namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Bids;
+﻿namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
 public sealed record TwoPairsBidsRoute(Guid GameId, Guid PlayerId) : BidsRoute(GameId, PlayerId)
 {

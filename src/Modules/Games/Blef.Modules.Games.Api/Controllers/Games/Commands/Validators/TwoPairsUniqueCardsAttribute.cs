@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
-namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Bids.Validators;
+namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Validators;
 
-public class NotTheSameTwoPairsAttribute : ValidationAttribute
+public class TwoPairsUniqueCardsAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
@@ -10,7 +11,7 @@ public class NotTheSameTwoPairsAttribute : ValidationAttribute
             return new ValidationResult("Value cannot be null.");
 
         if (value is not TwoPairsBidPayload payload)
-            return new ValidationResult($"Value is not a '{nameof(TwoPairsBidPayload)}'.");
+            throw new ArgumentException($"Value is not a '{nameof(TwoPairsBidPayload)}'", nameof(value));
 
         if(payload.FirstFaceCard == payload.SecondFaceCard)
             return new ValidationResult(

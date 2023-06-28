@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Bids.Validators;
+namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Validators;
 
 public class NotWhitespaceAttribute : ValidationAttribute
 {
