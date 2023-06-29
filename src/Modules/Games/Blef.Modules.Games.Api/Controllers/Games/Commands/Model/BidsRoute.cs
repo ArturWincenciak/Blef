@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
-public abstract record BidsRoute(
+internal abstract record BidsRoute(
     [NotEmptyGuid] Guid GameId,
     [NotEmptyGuid] Guid PlayerId)
 {

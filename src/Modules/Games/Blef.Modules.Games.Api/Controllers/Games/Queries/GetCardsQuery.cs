@@ -3,7 +3,7 @@ using Blef.Modules.Games.Api.Controllers.Games.Commands.Validators;
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Queries;
 
-public sealed record GetCardsQuery(
+internal sealed record GetCardsQuery(
     [NotEmptyGuid] Guid GameId,
     [NotEmptyGuid] Guid PlayerId,
     [Range(minimum: 1, int.MaxValue)] int DealNumber)

@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Validators;
 
-public class NotEmptyGuidAttribute : ValidationAttribute
+internal sealed class NotEmptyGuidAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {

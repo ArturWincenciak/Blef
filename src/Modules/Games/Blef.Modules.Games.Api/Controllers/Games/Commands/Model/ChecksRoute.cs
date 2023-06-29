@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
-public sealed record ChecksRoute(
+internal sealed record ChecksRoute(
     [NotEmptyGuid] Guid GameId,
     [NotEmptyGuid] Guid PlayerId)
 {

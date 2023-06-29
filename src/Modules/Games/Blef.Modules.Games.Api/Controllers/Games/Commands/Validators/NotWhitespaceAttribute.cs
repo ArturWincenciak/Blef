@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Validators;
 
-public class NotWhitespaceAttribute : ValidationAttribute
+internal sealed class NotWhitespaceAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {

@@ -2,5 +2,5 @@
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
-public sealed record NickPayload(
+internal sealed record NickPayload(
     [NotWhitespace] string Nick);
