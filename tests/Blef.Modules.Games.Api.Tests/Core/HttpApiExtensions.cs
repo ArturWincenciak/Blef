@@ -113,6 +113,22 @@ internal static class HttpApiExtensions
                 Pair = pair.ToString()
             });
 
+    async internal static Task<object> BidFlush(this HttpClient client,
+        GameId gameId, PlayerId playerId, Suit suit) =>
+        await Bid(client, gameId, playerId, pokerHand: "flush",
+            value: new
+            {
+                Suit = suit.ToString()
+            });
+
+    async internal static Task<object> BidFourOfAKind(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard faceCard) =>
+        await Bid(client, gameId, playerId, pokerHand: "four-of-a-kind",
+            value: new
+            {
+                FaceCard = faceCard.ToString()
+            });
+
     private async static Task<object> Bid<TValue>(this HttpClient client,
         GameId gameId, PlayerId playerId, string pokerHand, TValue value)
     {
