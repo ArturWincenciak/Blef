@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Queries;
 
-public sealed record GetDealFlowQuery(
+internal sealed record GetDealFlowQuery(
     [FromRoute] [NotEmptyGuid] Guid GameId,
     [FromRoute]
     [Range(minimum: 1, int.MaxValue)]

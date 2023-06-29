@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Blef.Modules.Games.Api;
 
 [UsedImplicitly]
-internal class GamesModule : IModule
+internal sealed class GamesModule : IModule
 {
     public const string BASE_PATH = "games-module";
     public string Name => "Games";

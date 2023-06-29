@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
-public enum FaceCard
+internal enum FaceCard
 {
     Nine = 1,
     Ten = 2,

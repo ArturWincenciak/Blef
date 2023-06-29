@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
-public enum Suit
+internal enum Suit
 {
     Clubs = 1,
     Diamonds = 2,

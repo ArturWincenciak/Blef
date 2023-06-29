@@ -3,7 +3,7 @@ using Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Validators;
 
-public class TwoPairsUniqueCardsAttribute : ValidationAttribute
+internal sealed class TwoPairsUniqueCardsAttribute : ValidationAttribute
 {
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {

@@ -2,7 +2,7 @@
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
-public sealed record PlayersRoute(
+internal sealed record PlayersRoute(
     [NotEmptyGuid] Guid GameId)
 {
     public const string ROUTE = $"{{{nameof(GameId)}:Guid}}/players";

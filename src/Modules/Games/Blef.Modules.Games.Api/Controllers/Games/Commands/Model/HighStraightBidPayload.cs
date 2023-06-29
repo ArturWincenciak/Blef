@@ -1,6 +1,6 @@
 ﻿namespace Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
 
-public sealed record HighStraightBidPayload : BidPayload
+internal sealed record HighStraightBidPayload : BidPayload
 {
     public override string Serialize() =>
         "high-straight";
