@@ -1,5 +1,6 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core;
 using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
+using FaceCard = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.FaceCard;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.ValidateBidPayload;
 
@@ -187,6 +188,46 @@ public class ValidateBidTests
     {
         var results = Arrange
             .BidFullHouse(WhichPlayer.Conway, FaceCard.Ace, FaceCard.Ace)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task FlushBidWithSuccessTest()
+    {
+        var results = Arrange
+            .BidFlush(WhichPlayer.Conway, Suit.Clubs)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task FlushBidWithNotValidSuitTest()
+    {
+        var results = Arrange
+            .BidFlush(WhichPlayer.Conway, Suit.NotValidValue)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task FourOfAKindBidWithSuccessTest()
+    {
+        var results = Arrange
+            .BidFourOfAKind(WhichPlayer.Conway, FaceCard.Nine)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task FourOfAKindBidWithNotValidValueTest()
+    {
+        var results = Arrange
+            .BidFourOfAKind(WhichPlayer.Conway, FaceCard.NotValidValue)
             .Build();
 
         return Verify(results);
