@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Blef.Shared.Infrastructure.Tracing;
 
-internal class TraceMiddleware : IMiddleware
+internal sealed class TraceMiddleware : IMiddleware
 {
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {

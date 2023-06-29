@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Blef.Shared.Infrastructure.Events;
 
-internal class DomainEventDispatcher : IDomainEventDispatcher
+internal sealed class DomainEventDispatcher : IDomainEventDispatcher
 {
     private readonly ILogger<DomainEventDispatcher> _logger;
     private readonly IServiceProvider _serviceProvider;

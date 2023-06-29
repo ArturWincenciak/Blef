@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Blef.Modules.Users.Api;
 
 [UsedImplicitly]
-internal class UsersModule : IModule
+internal sealed class UsersModule : IModule
 {
     public const string BASE_PATH = "users-module";
     public string Name => "Users";
