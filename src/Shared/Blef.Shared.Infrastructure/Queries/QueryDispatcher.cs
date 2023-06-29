@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Blef.Shared.Infrastructure.Queries;
 
-internal class QueryDispatcher : IQueryDispatcher
+internal sealed class QueryDispatcher : IQueryDispatcher
 {
     private readonly ILogger<QueryDispatcher> _logger;
     private readonly IServiceProvider _serviceProvider;

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Shared.Infrastructure.Exceptions;
 
-internal class ExceptionToResponseMapper
+internal sealed class ExceptionToResponseMapper
 {
     private readonly ConcurrentDictionary<Type, string> _codesCache = new();
 

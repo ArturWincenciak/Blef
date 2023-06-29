@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Blef.Shared.Infrastructure.Commands;
 
-internal class CommandDispatcher : ICommandDispatcher
+internal sealed class CommandDispatcher : ICommandDispatcher
 {
     private readonly ILogger<CommandDispatcher> _logger;
     private readonly IServiceProvider _serviceProvider;

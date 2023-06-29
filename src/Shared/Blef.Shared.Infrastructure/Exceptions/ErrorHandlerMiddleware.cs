@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Shared.Infrastructure.Exceptions;
 
-internal class ErrorHandlerMiddleware : IMiddleware
+internal sealed class ErrorHandlerMiddleware : IMiddleware
 {
     private readonly ExceptionToResponseMapper _exceptionMapper;
 
