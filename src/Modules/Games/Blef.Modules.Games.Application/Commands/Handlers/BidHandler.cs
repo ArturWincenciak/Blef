@@ -32,23 +32,22 @@ internal sealed class BidHandler : ICommandHandler<Bid, Bid.Result>
     {
         var parts = bid.Split(":");
         var pokerHandType = parts[0];
-        var pokerHandValue = parts[1];
+        string PokerHandValue() => parts[1];
 
         return pokerHandType.ToLower() switch
         {
-            HighCard.TYPE => HighCard.Create(pokerHandValue),
-            Pair.TYPE => Pair.Create(pokerHandValue),
-            TwoPairs.TYPE => TwoPairs.Create(pokerHandValue),
+            HighCard.TYPE => HighCard.Create(PokerHandValue()),
+            Pair.TYPE => Pair.Create(PokerHandValue()),
+            TwoPairs.TYPE => TwoPairs.Create(PokerHandValue()),
             LowStraight.TYPE => LowStraight.Create(),
             HighStraight.TYPE => HighStraight.Create(),
-            ThreeOfAKind.TYPE => ThreeOfAKind.Create(pokerHandValue),
-            FullHouse.TYPE => FullHouse.Create(pokerHandValue),
-            Flush.TYPE => Flush.Create(pokerHandValue),
-            FourOfAKind.TYPE => FourOfAKind.Create(pokerHandValue),
-            StraightFlush.TYPE => StraightFlush.Create(pokerHandValue),
-            RoyalFlush.TYPE => RoyalFlush.Create(pokerHandValue),
+            ThreeOfAKind.TYPE => ThreeOfAKind.Create(PokerHandValue()),
+            FullHouse.TYPE => FullHouse.Create(PokerHandValue()),
+            Flush.TYPE => Flush.Create(PokerHandValue()),
+            FourOfAKind.TYPE => FourOfAKind.Create(PokerHandValue()),
+            StraightFlush.TYPE => StraightFlush.Create(PokerHandValue()),
+            RoyalFlush.TYPE => RoyalFlush.Create(PokerHandValue()),
             _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
-            // todo: validate, exception with problem details, test
         };
     }
 }

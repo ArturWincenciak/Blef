@@ -101,4 +101,24 @@ public class ValidateBidTests
 
         return Verify(results);
     }
+
+    [Fact]
+    public Task LowStraightBidWithSuccessTest()
+    {
+        var results = Arrange
+            .BidLowStraight(WhichPlayer.Conway)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task HighStraightBidWithSuccessTest()
+    {
+        var results = Arrange
+            .BidHighStraight(WhichPlayer.Conway)
+            .Build();
+
+        return Verify(results);
+    }
 }

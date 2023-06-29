@@ -132,6 +132,28 @@ internal sealed class TestBuilder
         return this;
     }
 
+    public TestBuilder BidLowStraight(WhichPlayer whichPlayer)
+    {
+        _actions.Add(async () =>
+        {
+            var result = await _gameClient.BidLowStraight(whichPlayer);
+            _testResult.Record(action: nameof(BidLowStraight), argument: new {whichPlayer}, result);
+        });
+
+        return this;
+    }
+
+    public TestBuilder BidHighStraight(WhichPlayer whichPlayer)
+    {
+        _actions.Add(async () =>
+        {
+            var result = await _gameClient.BidHighStraight(whichPlayer);
+            _testResult.Record(action: nameof(BidHighStraight), argument: new {whichPlayer}, result);
+        });
+
+        return this;
+    }
+
     internal TestBuilder Check(WhichPlayer whichPlayer)
     {
         _actions.Add(async () =>

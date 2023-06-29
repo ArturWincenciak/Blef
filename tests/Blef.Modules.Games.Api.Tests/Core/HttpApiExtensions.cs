@@ -63,19 +63,6 @@ internal static class HttpApiExtensions
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids",
             value: new {PokerHand = bid});
 
-    private async static Task<object> Bid<TValue>(this HttpClient client,
-        GameId gameId, PlayerId playerId, string pokerHand, TValue value)
-    {
-        var response = await client.PostAsJsonAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids/{pokerHand}",
-            value);
-
-        if (response.IsSuccessStatusCode)
-            return Success;
-
-        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
-    }
-
     async internal static Task<object> BidHighCard(this HttpClient client,
         GameId gameId, PlayerId playerId, FaceCard faceCard) =>
         await Bid(client, gameId, playerId, pokerHand: "high-card",
@@ -100,6 +87,27 @@ internal static class HttpApiExtensions
                 FirstFaceCard = first.ToString(),
                 SecondFaceCard = second.ToString()
             });
+
+    async internal static Task<object> BidLowStraight(this HttpClient client,
+        GameId gameId, PlayerId playerId) =>
+        await Bid(client, gameId, playerId, pokerHand: "low-straight", value: new { });
+
+    async internal static Task<object> BidHighStraight(this HttpClient client,
+        GameId gameId, PlayerId playerId) =>
+        await Bid(client, gameId, playerId, pokerHand: "high-straight", value: new { });
+
+    private async static Task<object> Bid<TValue>(this HttpClient client,
+        GameId gameId, PlayerId playerId, string pokerHand, TValue value)
+    {
+        var response = await client.PostAsJsonAsync(
+            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids/{pokerHand}",
+            value);
+
+        if (response.IsSuccessStatusCode)
+            return Success;
+
+        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
+    }
 
     async internal static Task<GetGame.Result> GetGameFlow(this HttpClient client, GameId gameId)
     {
