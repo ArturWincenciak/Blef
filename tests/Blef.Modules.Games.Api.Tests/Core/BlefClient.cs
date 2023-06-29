@@ -82,6 +82,18 @@ internal sealed class BlefClient
         return await _httpClient.BidHighStraight(gameId: _gameId!, playerId);
     }
 
+    public async Task<object> BidThreeOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
+    {
+        var playerId = GetPlayerId(whichPlayer);
+        return await _httpClient.BidThreeOfAKind(gameId: _gameId!, playerId, faceCard);
+    }
+
+    public async Task<object> BidFullHouse(WhichPlayer whichPlayer, FaceCard threeOfAKind, FaceCard pair)
+    {
+        var playerId = GetPlayerId(whichPlayer);
+        return await _httpClient.BidFullHouse(gameId: _gameId!, playerId, threeOfAKind, pair);
+    }
+
     async internal Task<object> Check(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
