@@ -1,17 +1,3 @@
-# Face cards
-# - nine
-# - ten
-# - jack
-# - queen
-# - king
-# - ace
-
-# Suit
-# - clubs
-# - diamonds
-# - hearts
-# - spades
-
 @module = games-module
 @api = {{host}}/{{module}}
 
@@ -24,6 +10,10 @@ Content-Type: application/json
 ### Get gameplay
 GET {{api}}/gameplays/{{gameId}}
 Content-Type: application/json
+
+### #### #### #### ###
+###   Join game    ###
+### #### #### #### ###
 
 ### Player 1: Join game
 @playerKnuthNick = Knuth
@@ -58,6 +48,10 @@ Content-Type: application/json
     "nick": "{{playerRiemannNick}}"
 }
 
+### #### #### #### ###
+###      Deal      ###
+### #### #### #### ###
+
 ###
 @dealNumber = 1
 
@@ -68,6 +62,10 @@ Content-Type: application/json
 ### First deal (shuffling and dealing)
 POST {{api}}/games/{{gameId}}/deals
 Content-Type: application/json
+
+### #### #### #### ###
+###     Cards      ###
+### #### #### #### ###
 
 ### Player 1: Get player's cards
 GET {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/deals/{{dealNumber}}/cards
@@ -81,13 +79,33 @@ Content-Type: application/json
 GET {{api}}/games/{{gameId}}/players/{{playerRiemannId}}/deals/{{dealNumber}}/cards
 Content-Type: application/json
 
-### Player 1: Bid
-POST {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/bids
-Content-Type: application/json
-
-{
-    "pokerHand": "high-card:nine"
-}
+### #### #### #### ###
+###      BIDs      ###
+### #### #### #### ###
+# high-card          #
+# pair               #
+# two-pairs          #
+# three-of-a-kind    #
+# low-straight       #
+# high-straight      #
+# flush              #
+# full-house         #
+# four-of-a-kind     #
+# straight-flush     #
+# royal-flush        #
+### #### #### #### ###
+# - nine             #
+# - ten              #
+# - jack             #
+# - queen            #
+# - king             #
+# - ace              #
+### #### #### #### ###
+# - clubs            #
+# - diamonds         #
+# - hearts           #
+# - spades           #
+### #### #### #### ###
 
 ### Player 1: Bid: High Card
 POST {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/bids/high-card
@@ -97,21 +115,25 @@ Content-Type: application/json
     "faceCard": "nine"
 }
 
-### Player 2: Bid
-POST {{api}}/games/{{gameId}}/players/{{playerGrahamId}}/bids
+### Player 2: Bid: High Card
+POST {{api}}/games/{{gameId}}/players/{{playerGrahamId}}/bids/high-card
 Content-Type: application/json
 
 {
-    "pokerHand": "high-card:ten"
+    "faceCard": "nine"
 }
 
-### Player 3: Bid
-POST {{api}}/games/{{gameId}}/players/{{playerRiemannId}}/bids
+### Player 3: Bid: High Card
+POST {{api}}/games/{{gameId}}/players/{{playerRiemannId}}/bids/high-card
 Content-Type: application/json
 
 {
-    "pokerHand": "high-card:jack"
+    "faceCard": "nine"
 }
+
+### #### #### #### ###
+###     Check      ###
+### #### #### #### ###
 
 ### Player 1: Check
 POST {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/checks
