@@ -25,7 +25,7 @@ internal sealed class BidHandler : ICommandHandler<Bid, Bid.Result>
         var pokerHand = Parse(command.PokerHand);
         var bidPlaced = game.Bid(new Domain.Model.Bid(pokerHand, Player: new PlayerId(command.PlayerId)));
         await _eventDispatcher.Dispatch(bidPlaced, cancellation);
-        return new(bidPlaced.Deal.Number);
+        return new Bid.Result(bidPlaced.Deal.Number);
     }
 
     private static PokerHand Parse(string bid)

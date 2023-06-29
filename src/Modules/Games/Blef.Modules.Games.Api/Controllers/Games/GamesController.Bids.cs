@@ -32,13 +32,13 @@ internal sealed partial class GamesController
     public async Task<IActionResult> BidLowStraight(
         [FromRoute] LowStraightBidsRoute route,
         CancellationToken cancellation) =>
-        await Bid(route, new LowStraightBidPayload(), cancellation);
+        await Bid(route, payload: new LowStraightBidPayload(), cancellation);
 
     [HttpPost(HighStraightBidsRoute.ROUTE)]
     public async Task<IActionResult> BidHighStraight(
         [FromRoute] HighStraightBidsRoute route,
         CancellationToken cancellation) =>
-        await Bid(route, new HighStraightBidPayload(), cancellation);
+        await Bid(route, payload: new HighStraightBidPayload(), cancellation);
 
     [HttpPost(ThreeOfAKindBidsRoute.ROUTE)]
     public async Task<IActionResult> BidThreeOfAKind(
@@ -84,7 +84,7 @@ internal sealed partial class GamesController
 
     private async Task<IActionResult> Bid(BidsRoute route, BidPayload payload, CancellationToken cancellation)
     {
-        var cmd = new Bid(route.GameId, route.PlayerId, payload.Serialize());
+        var cmd = new Bid(route.GameId, route.PlayerId, PokerHand: payload.Serialize());
         var bid = await _commandDispatcher.Dispatch<Bid, Bid.Result>(cmd, cancellation);
         return Created(uri: GetDealFlowQuery.Path(route.GameId, bid.DealNumber), value: null);
     }

@@ -11,9 +11,10 @@ internal sealed class TwoPairsUniqueCardsAttribute : ValidationAttribute
             return new ValidationResult("Value cannot be null.");
 
         if (value is not TwoPairsBidPayload payload)
-            throw new ArgumentException($"Value is not a '{nameof(TwoPairsBidPayload)}'", nameof(value));
+            throw new ArgumentException(message: $"Value is not a '{nameof(TwoPairsBidPayload)}'",
+                paramName: nameof(value));
 
-        if(payload.FirstFaceCard == payload.SecondFaceCard)
+        if (payload.FirstFaceCard == payload.SecondFaceCard)
             return new ValidationResult(
                 errorMessage: "Face cards must be different than each other but are the same.",
                 memberNames: new[]
