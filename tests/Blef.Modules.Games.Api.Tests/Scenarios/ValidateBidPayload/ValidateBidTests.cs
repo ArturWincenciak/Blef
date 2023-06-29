@@ -1,6 +1,5 @@
 ﻿using Blef.Modules.Games.Api.Tests.Core;
 using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
-using FaceCard = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.FaceCard;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.ValidateBidPayload;
 
