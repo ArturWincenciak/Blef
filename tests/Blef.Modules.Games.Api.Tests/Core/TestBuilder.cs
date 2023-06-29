@@ -170,9 +170,12 @@ internal sealed class TestBuilder
         _actions.Add(async () =>
         {
             var result = await _gameClient.BidFullHouse(whichPlayer, threeOfAKind, pair);
-            _testResult.Record(action: nameof(BidFullHouse), argument: new {whichPlayer,
+            _testResult.Record(action: nameof(BidFullHouse), argument: new
+            {
+                whichPlayer,
                 first = threeOfAKind,
-                second = pair}, result);
+                second = pair
+            }, result);
         });
 
         return this;
