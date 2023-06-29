@@ -1,10 +1,6 @@
 ﻿using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
-using DealNumber = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.DealNumber;
-using GameId = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.GameId;
-using PlayerId = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.PlayerId;
-using PlayerNick = Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects.PlayerNick;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 

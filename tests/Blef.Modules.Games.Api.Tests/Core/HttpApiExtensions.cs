@@ -49,7 +49,8 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<GetPlayerCards.Result>())!;
     }
 
-    async internal static Task<object> BidWithSuccess(this HttpClient client, GameId gameId, PlayerId playerId, string bid)
+    async internal static Task<object> BidWithSuccess(this HttpClient client, GameId gameId, PlayerId playerId,
+        string bid)
     {
         var response = await Bid(client, gameId, playerId, bid);
         response.EnsureSuccessStatusCode();
@@ -67,7 +68,7 @@ internal static class HttpApiExtensions
     {
         var response = await client.PostAsJsonAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids/{pokerHand}",
-            value: value);
+            value);
 
         if (response.IsSuccessStatusCode)
             return Success;

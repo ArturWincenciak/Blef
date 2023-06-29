@@ -33,7 +33,7 @@ internal sealed class CheckHandler : ICommandHandler<Check, Check.Result>
             .Single()
             .Deal.Number;
 
-        return new(dealNumber);
+        return new Check.Result(dealNumber);
     }
 
     private async Task Dispatch(IDomainEvent @event, CancellationToken cancellation)

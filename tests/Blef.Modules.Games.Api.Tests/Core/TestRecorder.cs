@@ -1,5 +1,4 @@
 ﻿using Blef.Shared.Abstractions.Commands;
-using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
