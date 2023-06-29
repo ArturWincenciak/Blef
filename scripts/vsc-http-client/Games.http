@@ -107,28 +107,91 @@ Content-Type: application/json
 # - spades           #
 ### #### #### #### ###
 
-### Player 1: Bid: High Card
-POST {{api}}/games/{{gameId}}/players/{{playerKnuthId}}/bids/high-card
+# Player 1: {{playerKnuthId}}
+# Player 2: {{playerGrahamId}}
+# Player 3: {{playerRiemannId}}
+@__player__ = {{playerKnuthId}}
+
+### Bid: High Card
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/high-card
+Content-Type: application/json
+
+{
+    "faceCard": "ten"
+}
+
+### Bid: Pair
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/pair
 Content-Type: application/json
 
 {
     "faceCard": "nine"
 }
 
-### Player 2: Bid: High Card
-POST {{api}}/games/{{gameId}}/players/{{playerGrahamId}}/bids/high-card
+### Bid: Two Pairs
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/two-pairs
+Content-Type: application/json
+
+{
+    "firstFaceCard": "nine",
+    "secondFaceCard": "ten"
+}
+
+### Bid: Low Straight
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/low-straight
+Content-Type: application/json
+
+### Bid: High Straight
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/high-straight
+Content-Type: application/json
+
+### Bid: Three of a Kind
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/three-of-a-kind
 Content-Type: application/json
 
 {
     "faceCard": "nine"
 }
 
-### Player 3: Bid: High Card
-POST {{api}}/games/{{gameId}}/players/{{playerRiemannId}}/bids/high-card
+### Bid: Full House
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/full-house
+Content-Type: application/json
+
+{
+    "threeOfAKind": "nine",
+    "pair": "ten"
+}
+
+### Bid: Flush
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/flush
+Content-Type: application/json
+
+{
+    "suit": "hearts"
+}
+
+### Bid: Four of a Kind
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/four-of-a-kind
 Content-Type: application/json
 
 {
     "faceCard": "nine"
+}
+
+### Bid: Straight Flush
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/straight-flush
+Content-Type: application/json
+
+{
+    "suit": "hearts"
+}
+
+### Bid: Royal Flush
+POST {{api}}/games/{{gameId}}/players/{{__player__}}/bids/royal-flush
+Content-Type: application/json
+
+{
+    "suit": "hearts"
 }
 
 ### #### #### #### ###
