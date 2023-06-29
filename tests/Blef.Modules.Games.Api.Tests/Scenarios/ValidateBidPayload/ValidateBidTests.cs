@@ -232,4 +232,44 @@ public class ValidateBidTests
 
         return Verify(results);
     }
+
+    [Fact]
+    public Task StraightFlushBidWithSuccessTest()
+    {
+        var results = Arrange
+            .BidStraightFlush(WhichPlayer.Conway, Suit.Diamonds)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task StraightFlushBidWithNotValidSuitTest()
+    {
+        var results = Arrange
+            .BidStraightFlush(WhichPlayer.Conway, Suit.NotValidValue)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task RoyalFlushBidWithSuccessTest()
+    {
+        var results = Arrange
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task RoyalFlushBidWithNotValidSuitTest()
+    {
+        var results = Arrange
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.NotValidValue)
+            .Build();
+
+        return Verify(results);
+    }
 }
