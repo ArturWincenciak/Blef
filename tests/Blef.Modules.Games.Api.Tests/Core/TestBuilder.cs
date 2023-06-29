@@ -154,6 +154,30 @@ internal sealed class TestBuilder
         return this;
     }
 
+    public TestBuilder BidThreeOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
+    {
+        _actions.Add(async () =>
+        {
+            var result = await _gameClient.BidThreeOfAKind(whichPlayer, faceCard);
+            _testResult.Record(action: nameof(BidThreeOfAKind), argument: new {whichPlayer, faceCard}, result);
+        });
+
+        return this;
+    }
+
+    public TestBuilder BidFullHouse(WhichPlayer whichPlayer, FaceCard threeOfAKind, FaceCard pair)
+    {
+        _actions.Add(async () =>
+        {
+            var result = await _gameClient.BidFullHouse(whichPlayer, threeOfAKind, pair);
+            _testResult.Record(action: nameof(BidFullHouse), argument: new {whichPlayer,
+                first = threeOfAKind,
+                second = pair}, result);
+        });
+
+        return this;
+    }
+
     internal TestBuilder Check(WhichPlayer whichPlayer)
     {
         _actions.Add(async () =>

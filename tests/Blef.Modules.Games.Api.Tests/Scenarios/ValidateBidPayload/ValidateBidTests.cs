@@ -121,4 +121,74 @@ public class ValidateBidTests
 
         return Verify(results);
     }
+
+    [Fact]
+    public Task ThreeOfAKindBidWithSuccessTest()
+    {
+        var results = Arrange
+            .BidThreeOfAKind(WhichPlayer.Conway, FaceCard.King)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task ThreeOfAKindBidWithNotValidValueTest()
+    {
+        var results = Arrange
+            .BidThreeOfAKind(WhichPlayer.Conway, FaceCard.NotValidValue)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task FullHouseBidWithSuccessTest()
+    {
+        var results = Arrange
+            .BidFullHouse(WhichPlayer.Conway, FaceCard.Ace, FaceCard.Jack)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task FullHouseBidWithNotValidFirstValueTest()
+    {
+        var results = Arrange
+            .BidFullHouse(WhichPlayer.Conway, FaceCard.NotValidValue, FaceCard.Jack)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task FullHouseBidWithNotValidSecondValueTest()
+    {
+        var results = Arrange
+            .BidFullHouse(WhichPlayer.Conway, FaceCard.Ace, FaceCard.NotValidValue)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task FullHouseBidWithNotValidValuesTest()
+    {
+        var results = Arrange
+            .BidFullHouse(WhichPlayer.Conway, FaceCard.NotValidValue, FaceCard.NotValidValue)
+            .Build();
+
+        return Verify(results);
+    }
+
+    [Fact]
+    public Task FullHouseBidWithTwoTheSameValuesTest()
+    {
+        var results = Arrange
+            .BidFullHouse(WhichPlayer.Conway, FaceCard.Ace, FaceCard.Ace)
+            .Build();
+
+        return Verify(results);
+    }
 }
