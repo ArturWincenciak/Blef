@@ -1,0 +1,47 @@
+﻿[
+  {
+    No: 1,
+    Action: NewGame,
+    Argument: _noArgument,
+    Result: {
+      GameId: Guid_1
+    }
+  },
+  {
+    No: 2,
+    Action: JoinPlayer,
+    Argument: Conway,
+    Result: {
+      PlayerId: Guid_2,
+      Nick: Conway
+    }
+  },
+  {
+    No: 3,
+    Action: JoinPlayer,
+    Argument: Graham,
+    Result: {
+      PlayerId: Guid_3,
+      Nick: Graham
+    }
+  },
+  {
+    No: 4,
+    Action: NewDeal,
+    Argument: _noArgument,
+    Result: {
+      Number: 1
+    }
+  },
+  {
+    No: 5,
+    Action: BidStraightFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Diamonds
+    },
+    Result: {
+      Status: Success
+    }
+  }
+]

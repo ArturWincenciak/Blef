@@ -200,6 +200,28 @@ internal sealed class TestBuilder
         return this;
     }
 
+    public TestBuilder BidStraightFlush(WhichPlayer whichPlayer, Suit suit)
+    {
+        _actions.Add(async () =>
+        {
+            var result = await _gameClient.BidStraightFlush(whichPlayer, suit);
+            _testResult.Record(action: nameof(BidStraightFlush), argument: new {whichPlayer, suit}, result);
+        });
+
+        return this;
+    }
+
+    public TestBuilder BidRoyalFlush(WhichPlayer whichPlayer, Suit suit)
+    {
+        _actions.Add(async () =>
+        {
+            var result = await _gameClient.BidRoyalFlush(whichPlayer, suit);
+            _testResult.Record(action: nameof(BidRoyalFlush), argument: new {whichPlayer, suit}, result);
+        });
+
+        return this;
+    }
+
     internal TestBuilder Check(WhichPlayer whichPlayer)
     {
         _actions.Add(async () =>
