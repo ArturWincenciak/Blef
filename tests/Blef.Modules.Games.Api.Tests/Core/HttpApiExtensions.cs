@@ -49,14 +49,6 @@ internal static class HttpApiExtensions
         return (await response.Content.ReadFromJsonAsync<GetPlayerCards.Result>())!;
     }
 
-    async internal static Task<object> BidWithSuccess(this HttpClient client, GameId gameId, PlayerId playerId,
-        string bid)
-    {
-        var response = await Bid(client, gameId, playerId, bid);
-        response.EnsureSuccessStatusCode();
-        return Success;
-    }
-
     private async static Task<HttpResponseMessage> Bid(HttpClient client,
         GameId gameId, PlayerId playerId, string bid) =>
         await client.PostAsJsonAsync(
