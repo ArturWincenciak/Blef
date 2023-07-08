@@ -11,10 +11,10 @@ internal sealed class MoveOrderPolicy
     public MoveOrderPolicy(MoveSequence sequence) =>
         _sequence = sequence ?? throw new ArgumentNullException(nameof(sequence));
 
-    public void Move(PlayerId movingPlayer)
+    public void Move(PlayerId movingPlayer, string instanceContext)
     {
         if (CheckIfThatIsThePlayerMove(movingPlayer) == false)
-            throw new ThatIsNotThisPlayerTurnNowException(movingPlayer);
+            throw new ThatIsNotThisPlayerTurnNowException(movingPlayer, instanceContext);
 
         _previousMove = _sequence.GetMove(movingPlayer);
     }

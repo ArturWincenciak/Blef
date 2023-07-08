@@ -135,4 +135,70 @@ public class RockyRoadTests
         await Verify(results)
             .ScrubInlineGuids();
     }
+
+    [Fact]
+    public async Task WhenBidThatIsNotThisPlayerTurnNowTest()
+    {
+        var results = await Arrange
+            .BidPair(WhichPlayer.Graham, FaceCard.Ace)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids()
+            .ScrubEmptyLines();
+    }
+
+    [Fact]
+    public async Task WhenCheckThatIsNotThisPlayerTurnNowTest()
+    {
+        var results = await Arrange
+            .Check(WhichPlayer.Graham)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids()
+            .ScrubEmptyLines();
+    }
+
+    [Fact]
+    public async Task WhenTwoBidsThatIsNotThisPlayerTurnNowTest()
+    {
+        var results = await Arrange
+            .BidPair(WhichPlayer.Conway, FaceCard.Ace)
+            .BidPair(WhichPlayer.Conway, FaceCard.Ace)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids()
+            .ScrubEmptyLines();
+    }
+
+    [Fact]
+    public async Task WhenBidAndCheckThatPlayerIsNotThisPlayerTurnNowTest()
+    {
+        var results = await Arrange
+            .BidPair(WhichPlayer.Conway, FaceCard.Ace)
+            .Check(WhichPlayer.Conway)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids()
+            .ScrubEmptyLines();
+    }
+
+    [Fact]
+    public async Task WhenBidCheckAndBidPlayerIsNotThisPlayerTurnNowTest()
+    {
+        var results = await Arrange
+            .BidPair(WhichPlayer.Conway, FaceCard.Ace)
+            .Check(WhichPlayer.Graham)
+            .BidPair(WhichPlayer.Conway, FaceCard.Ace)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids()
+            .ScrubEmptyLines();
+    }
+
+    // todo: turn not joined player
 }

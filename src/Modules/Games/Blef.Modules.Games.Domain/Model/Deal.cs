@@ -32,7 +32,7 @@ internal sealed class Deal
         if (_dealIsOver)
             throw new InvalidOperationException("Deal is already over");
 
-        _moveOrderPolicy.Move(newBid.Player);
+        _moveOrderPolicy.Move(newBid.Player, InstanceContext);
 
         if (BetHasBeenMade && newBid.PokerHand.IsBetterThan(_lastBid!.PokerHand) == false)
             throw new BidIsNotHigherThenLastOneException(Id, newBid, _lastBid);
@@ -45,7 +45,7 @@ internal sealed class Deal
         if (_dealIsOver)
             throw new InvalidOperationException("Deal is already over");
 
-        _moveOrderPolicy.Move(checkingPlayerId.Player);
+        _moveOrderPolicy.Move(checkingPlayerId.Player, InstanceContext);
 
         if (BetHasBeenMade == false)
             throw new NoBidToCheckException(Id);
@@ -56,4 +56,7 @@ internal sealed class Deal
             ? new LooserPlayer(checkingPlayerId.Player)
             : new LooserPlayer(_lastBid.Player);
     }
+
+    private string InstanceContext =>
+        $"/games/{Id.Game}/deals/{Id.Deal}";
 }
