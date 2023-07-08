@@ -256,7 +256,7 @@ public class ValidateBidTests
     public Task RoyalFlushBidWithSuccessTest()
     {
         var results = Arrange
-            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Spades)
             .Build();
 
         return Verify(results);

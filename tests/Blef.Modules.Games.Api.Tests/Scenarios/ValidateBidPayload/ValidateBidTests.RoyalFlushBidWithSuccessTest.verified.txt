@@ -38,7 +38,7 @@
     Action: BidRoyalFlush,
     Argument: {
       whichPlayer: Conway,
-      suit: Hearts
+      suit: Spades
     },
     Result: {
       Status: Success
