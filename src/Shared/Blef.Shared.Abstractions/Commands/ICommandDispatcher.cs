@@ -1,5 +1,8 @@
-﻿namespace Blef.Shared.Abstractions.Commands;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Blef.Shared.Abstractions.Commands;
+
+[SuppressMessage("ReSharper", "UnusedMember.Global")]
 public interface ICommandDispatcher
 {
     Task Dispatch<TCommand>(TCommand command, CancellationToken cancellation)
