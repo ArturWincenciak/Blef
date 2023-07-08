@@ -1,0 +1,62 @@
+﻿[
+  {
+    No: 1,
+    Action: NewGame,
+    Argument: _noArgument,
+    Result: {
+      GameId: Guid_1
+    }
+  },
+  {
+    No: 2,
+    Action: JoinPlayer,
+    Argument: Conway,
+    Result: {
+      PlayerId: Guid_2,
+      Nick: Conway
+    }
+  },
+  {
+    No: 3,
+    Action: JoinPlayer,
+    Argument: Graham,
+    Result: {
+      PlayerId: Guid_3,
+      Nick: Graham
+    }
+  },
+  {
+    No: 4,
+    Action: NewDeal,
+    Argument: _noArgument,
+    Result: {
+      Number: 1
+    }
+  },
+  {
+    No: 5,
+    Action: BidFullHouse,
+    Argument: {
+      whichPlayer: Conway,
+      first: Ace,
+      second: King
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 6,
+    Action: BidPair,
+    Argument: {
+      whichPlayer: Graham,
+      faceCard: Ace
+    },
+    Result: {
+      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/bid-is-not-higher-then-last-one.md,
+      Title: The bid is not higher than last one,
+      Detail: The new bid 'pair:ace' is not higher than last one 'full-house:ace,king',
+      Instance: /games/Guid_1/deals/1
+    }
+  }
+]

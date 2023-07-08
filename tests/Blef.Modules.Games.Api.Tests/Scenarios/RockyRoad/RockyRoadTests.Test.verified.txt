@@ -1,0 +1,10 @@
+﻿[
+  {
+    No: 1,
+    Action: NewGame,
+    Argument: _noArgument,
+    Result: {
+      GameId: Guid_1
+    }
+  }
+]
