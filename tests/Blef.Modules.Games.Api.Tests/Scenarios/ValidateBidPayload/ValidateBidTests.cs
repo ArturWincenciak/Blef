@@ -6,7 +6,7 @@ namespace Blef.Modules.Games.Api.Tests.Scenarios.ValidateBidPayload;
 [UsesVerify]
 public class ValidateBidTests
 {
-    private TestBuilder Arrange => new TestBuilder()
+    private static TestBuilder Arrange => new TestBuilder()
         .NewGame()
         .JoinPlayer(WhichPlayer.Conway)
         .JoinPlayer(WhichPlayer.Graham)
