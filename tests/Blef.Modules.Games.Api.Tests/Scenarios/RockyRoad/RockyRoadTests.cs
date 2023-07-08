@@ -196,9 +196,24 @@ public class RockyRoadTests
             .Build();
 
         await Verify(results)
-            .ScrubInlineGuids()
-            .ScrubEmptyLines();
+            .ScrubInlineGuids();
     }
 
     // todo: turn not joined player
+
+    [Fact]
+    public async Task TooManyPlayersTest()
+    {
+        var results = await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .JoinPlayer(WhichPlayer.Graham)
+            .JoinPlayer(WhichPlayer.Knuth)
+            .JoinPlayer(WhichPlayer.Riemann)
+            .JoinPlayer(WhichPlayer.Planck)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
 }

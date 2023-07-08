@@ -1,0 +1,57 @@
+﻿[
+  {
+    No: 1,
+    Action: NewGame,
+    Argument: _noArgument,
+    Result: {
+      GameId: Guid_1
+    }
+  },
+  {
+    No: 2,
+    Action: JoinPlayer,
+    Argument: Conway,
+    Result: {
+      PlayerId: Guid_2,
+      Nick: Conway
+    }
+  },
+  {
+    No: 3,
+    Action: JoinPlayer,
+    Argument: Graham,
+    Result: {
+      PlayerId: Guid_3,
+      Nick: Graham
+    }
+  },
+  {
+    No: 4,
+    Action: JoinPlayer,
+    Argument: Knuth,
+    Result: {
+      PlayerId: Guid_4,
+      Nick: Knuth
+    }
+  },
+  {
+    No: 5,
+    Action: JoinPlayer,
+    Argument: Riemann,
+    Result: {
+      PlayerId: Guid_5,
+      Nick: Riemann
+    }
+  },
+  {
+    No: 6,
+    Action: JoinPlayer,
+    Argument: Planck,
+    Result: {
+      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/too-many-players.md,
+      Title: The maximum number of game players has been reached,
+      Detail: No more than four players can take part in the game,
+      Instance: /games/Guid_1
+    }
+  }
+]
