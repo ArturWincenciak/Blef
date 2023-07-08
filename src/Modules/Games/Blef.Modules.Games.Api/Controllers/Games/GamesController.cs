@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers.Games;
 
-[SuppressMessage("ReSharper", "RouteTemplates.MethodMissingRouteParameters")]
+[SuppressMessage(category: "ReSharper", checkId: "RouteTemplates.MethodMissingRouteParameters")]
 internal sealed partial class GamesController : ModuleControllerBase
 {
     private readonly ICommandDispatcher _commandDispatcher;

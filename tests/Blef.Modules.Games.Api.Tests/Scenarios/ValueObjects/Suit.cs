@@ -6,7 +6,8 @@ internal enum Suit
 {
     Clubs = 1,
     Diamonds = 2,
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
+
+    [SuppressMessage(category: "ReSharper", checkId: "UnusedMember.Global")]
     Hearts = 4,
     Spades = 8,
     NotValidValue = 16
