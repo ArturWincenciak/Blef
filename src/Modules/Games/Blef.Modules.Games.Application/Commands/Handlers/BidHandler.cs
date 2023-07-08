@@ -22,13 +22,13 @@ internal sealed class BidHandler : ICommandHandler<Bid, Bid.Result>
     public async Task<Bid.Result> Handle(Bid command, CancellationToken cancellation)
     {
         var game = await _games.Get(new GameId(command.GameId));
-        var pokerHand = Parse(command.PokerHand);
+        var pokerHand = Map(command.PokerHand);
         var bidPlaced = game.Bid(new Domain.Model.Bid(pokerHand, Player: new PlayerId(command.PlayerId)));
         await _eventDispatcher.Dispatch(bidPlaced, cancellation);
         return new Bid.Result(bidPlaced.Deal.Number);
     }
 
-    private static PokerHand Parse(string bid)
+    private static PokerHand Map(string bid)
     {
         var parts = bid.Split(":");
         var pokerHandType = parts[0];
