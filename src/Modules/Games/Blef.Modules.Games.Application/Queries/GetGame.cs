@@ -13,7 +13,7 @@ public sealed record GetGame(Guid GameId) : IQuery<GetGame.Result>
         Winner Winner) : IQueryResult;
 
     [UsedImplicitly]
-    public sealed record Player(Guid PlayerId, string Nick, int JoiningOrder);
+    public sealed record Player(Guid PlayerId, string Nick, int JoiningOrder, bool AlreadyLostTheGame);
 
     [UsedImplicitly]
     public sealed record Deal(int Number, string State, DealResolution DealResolution);

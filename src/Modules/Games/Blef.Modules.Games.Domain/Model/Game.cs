@@ -51,7 +51,7 @@ internal sealed class Game
 
     public BidPlaced Bid(Bid newBid)
     {
-        ValidateGameInProgress();
+        Validate(newBid.Player);
 
         var lastDeal = _deals[^1];
         lastDeal.Bid(newBid);
@@ -61,7 +61,7 @@ internal sealed class Game
 
     public IReadOnlyCollection<IDomainEvent> Check(CheckingPlayer checkingPlayer)
     {
-        ValidateGameInProgress();
+        Validate(checkingPlayer.Player);
 
         var lastDeal = _deals[^1];
         var dealLooser = lastDeal.Check(checkingPlayer);
@@ -118,6 +118,21 @@ internal sealed class Game
         return new NextDealPlayersSet(nextDealPlayers);
     }
 
+    private void Validate(PlayerId playerId)
+    {
+        ValidateGameInProgress();
+        ValidatePlayer(playerId);
+    }
+
+    private void ValidateGameInProgress()
+    {
+        if (IsGameStarted() == false)
+            throw new GameNotStartedException(Id);
+
+        if (IsGameOver())
+            throw new GameOverException(Id);
+    }
+
     private bool IsGameStarted() =>
         _deals.Count > 0;
 
@@ -127,12 +142,21 @@ internal sealed class Game
     private bool IsOnlyOnePlayerLeft() =>
         _players.Count(player => player.IsInTheGame) == 1;
 
-    private void ValidateGameInProgress()
+    private void ValidatePlayer(PlayerId playerId)
     {
-        if (IsGameStarted() == false)
-            throw new GameNotStartedException(Id);
+        ValidatePlayerJoinedToTheGame(playerId);
+        ValidatePlayerStillInTheGame(playerId);
+    }
 
-        if (IsGameOver())
-            throw new GameOverException(Id);
+    private void ValidatePlayerJoinedToTheGame(PlayerId playerId)
+    {
+        if (_players.Exists(player => player.Id == playerId) == false)
+            throw new PlayerNotJoinedTheGameException(Id, playerId);
+    }
+
+    private void ValidatePlayerStillInTheGame(PlayerId playerId)
+    {
+        if (_players.Single(player => player.Id == playerId).IsInTheGame == false)
+            throw new PlayerAlreadyLostTheGameException(Id, playerId);
     }
 }

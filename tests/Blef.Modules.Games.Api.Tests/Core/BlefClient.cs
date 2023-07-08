@@ -13,6 +13,7 @@ internal sealed class BlefClient
     private PlayerId? _grahamPlayerId;
     private PlayerId? _knuthPlayerId;
     private PlayerId? _riemannPlayerId;
+    private PlayerId? _plackPlayerId;
 
     internal BlefClient(HttpClient httpClient) =>
         _httpClient = httpClient;
@@ -54,6 +55,9 @@ internal sealed class BlefClient
         var playerId = GetPlayerId(whichPlayer);
         return await _httpClient.BidHighCard(gameId: _gameId!, playerId, faceCard);
     }
+
+    public async Task<object> BidHighCard(PlayerId player, FaceCard faceCard) =>
+        await _httpClient.BidHighCard(gameId: _gameId!, player, faceCard);
 
     public async Task<object> BidPair(WhichPlayer whichPlayer, FaceCard faceCard)
     {
@@ -128,6 +132,7 @@ internal sealed class BlefClient
             WhichPlayer.Graham => _grahamPlayerId!,
             WhichPlayer.Riemann => _riemannPlayerId!,
             WhichPlayer.Conway => _conwayPlayerId!,
+            WhichPlayer.Planck => _plackPlayerId!,
             _ => throw new ArgumentOutOfRangeException(paramName: nameof(whichPlayer), whichPlayer,
                 message: "Unknown player, please provide a valid player")
         };
@@ -147,6 +152,9 @@ internal sealed class BlefClient
                 break;
             case WhichPlayer.Conway:
                 _conwayPlayerId = playerId;
+                break;
+            case WhichPlayer.Planck:
+                _plackPlayerId = playerId;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(paramName: nameof(whichPlayer), whichPlayer,

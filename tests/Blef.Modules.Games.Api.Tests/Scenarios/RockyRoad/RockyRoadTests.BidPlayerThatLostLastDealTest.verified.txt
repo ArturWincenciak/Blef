@@ -1,0 +1,338 @@
+﻿[
+  {
+    No: 1,
+    Action: NewGame,
+    Argument: _noArgument,
+    Result: {
+      GameId: Guid_1
+    }
+  },
+  {
+    No: 2,
+    Action: JoinPlayer,
+    Argument: Conway,
+    Result: {
+      PlayerId: Guid_2,
+      Nick: Conway
+    }
+  },
+  {
+    No: 3,
+    Action: JoinPlayer,
+    Argument: Graham,
+    Result: {
+      PlayerId: Guid_3,
+      Nick: Graham
+    }
+  },
+  {
+    No: 4,
+    Action: JoinPlayer,
+    Argument: Knuth,
+    Result: {
+      PlayerId: Guid_4,
+      Nick: Knuth
+    }
+  },
+  {
+    No: 5,
+    Action: NewDeal,
+    Argument: _noArgument,
+    Result: {
+      Number: 1
+    }
+  },
+  {
+    No: 6,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 7,
+    Action: Check,
+    Argument: {
+      whichPlayer: Graham
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 8,
+    Action: BidPair,
+    Argument: {
+      whichPlayer: Graham,
+      faceCard: Nine
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 9,
+    Action: BidPair,
+    Argument: {
+      whichPlayer: Knuth,
+      faceCard: Ten
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 10,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 11,
+    Action: Check,
+    Argument: {
+      whichPlayer: Graham
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 12,
+    Action: BidPair,
+    Argument: {
+      whichPlayer: Knuth,
+      faceCard: Nine
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 13,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 14,
+    Action: Check,
+    Argument: {
+      whichPlayer: Graham
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 15,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 16,
+    Action: Check,
+    Argument: {
+      whichPlayer: Graham
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 17,
+    Action: BidPair,
+    Argument: {
+      whichPlayer: Graham,
+      faceCard: Nine
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 18,
+    Action: BidPair,
+    Argument: {
+      whichPlayer: Knuth,
+      faceCard: Ten
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 19,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 20,
+    Action: Check,
+    Argument: {
+      whichPlayer: Graham
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 21,
+    Action: GetGameFlow,
+    Argument: _noArgument,
+    Result: {
+      Status: {
+        State: InProgress
+      },
+      Players: [
+        {
+          PlayerId: Guid_2,
+          Nick: Conway,
+          JoiningOrder: 1,
+          AlreadyLostTheGame: true
+        },
+        {
+          PlayerId: Guid_3,
+          Nick: Graham,
+          JoiningOrder: 2,
+          AlreadyLostTheGame: false
+        },
+        {
+          PlayerId: Guid_4,
+          Nick: Knuth,
+          JoiningOrder: 3,
+          AlreadyLostTheGame: false
+        }
+      ],
+      Deals: [
+        {
+          Number: 1,
+          State: Finished,
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        },
+        {
+          Number: 2,
+          State: Finished,
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        },
+        {
+          Number: 3,
+          State: Finished,
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        },
+        {
+          Number: 4,
+          State: Finished,
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        },
+        {
+          Number: 5,
+          State: Finished,
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        },
+        {
+          Number: 6,
+          State: InProgress,
+          DealResolution: {}
+        }
+      ],
+      Winner: {}
+    }
+  },
+  {
+    No: 22,
+    Action: GetDealFlow,
+    Argument: {
+      Number: 6
+    },
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_3,
+          Hand: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            }
+          ]
+        },
+        {
+          PlayerId: Guid_4,
+          Hand: [
+            {
+              FaceCard: ace,
+              Suit: spades
+            }
+          ]
+        }
+      ],
+      DealResolution: {}
+    }
+  },
+  {
+    No: 23,
+    Action: BidPair,
+    Argument: {
+      whichPlayer: Knuth,
+      faceCard: Nine
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 24,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-lost-the-game.md,
+      Title: Player already lost the game,
+      Detail: Player 'PlayerId { Id = Guid_2 }' already lost the game,
+      Instance: /games/Guid_1
+    }
+  }
+]
