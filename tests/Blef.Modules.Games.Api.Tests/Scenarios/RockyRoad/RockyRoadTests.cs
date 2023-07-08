@@ -48,4 +48,15 @@ public class RockyRoadTests
         await Verify(results)
             .ScrubInlineGuids();
     }
+
+    [Fact]
+    public async Task JoinGameAlreadyStartedTest()
+    {
+        var results = await Arrange
+            .JoinPlayer(WhichPlayer.Knuth)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
 }
