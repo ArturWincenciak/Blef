@@ -1,16 +1,19 @@
-﻿using Blef.Modules.Games.Api.Controllers.Games.Queries;
+﻿using System.Diagnostics.CodeAnalysis;
+using Blef.Modules.Games.Api.Controllers.Games.Queries;
 using Blef.Modules.Games.Application.Queries;
 using Blef.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers.Games;
 
+[SuppressMessage("ReSharper", "RouteTemplates.MethodMissingRouteParameters")]
 internal sealed class GameplaysController : ModuleControllerBase
 {
     private readonly IQueryDispatcher _queryDispatcher;
 
     public GameplaysController(IQueryDispatcher queryDispatcher) =>
         _queryDispatcher = queryDispatcher;
+
 
     [HttpGet(GetGameFlowQuery.ROUTE)]
     public async Task<IActionResult> GetGameFlow(
