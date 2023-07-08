@@ -9,7 +9,7 @@ public class HappyPathTests
     [Fact]
     public async Task ThreePlayersPlayTheGameTest()
     {
-        var results = new TestBuilder()
+        var results = await new TestBuilder()
             .NewGame()
             .GetGameFlow()
             .JoinPlayer(WhichPlayer.Knuth)
