@@ -12,9 +12,8 @@ internal sealed class NotWhitespaceAttribute : ValidationAttribute
         if (value is not string stringValue)
             return new ValidationResult("Value is not a string.");
 
-        if (string.IsNullOrWhiteSpace(stringValue))
-            return new ValidationResult("String value cannot be empty or whitespace.");
-
-        return ValidationResult.Success;
+        return string.IsNullOrWhiteSpace(stringValue)
+            ? new ValidationResult("String value cannot be empty or whitespace.")
+            : ValidationResult.Success;
     }
 }
