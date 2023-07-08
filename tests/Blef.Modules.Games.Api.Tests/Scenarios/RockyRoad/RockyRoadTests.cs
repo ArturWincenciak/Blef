@@ -59,4 +59,28 @@ public class RockyRoadTests
         await Verify(results)
             .ScrubInlineGuids();
     }
+
+    [Fact]
+    public async Task NoBidToCheckTest()
+    {
+        var results = await Arrange
+            .Check(WhichPlayer.Conway)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
+
+    [Fact]
+    public async Task NoBidToCheckOnLastDealFinishedTest()
+    {
+        var results = await Arrange
+            .BidFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham)
+            .Check(WhichPlayer.Graham)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
 }
