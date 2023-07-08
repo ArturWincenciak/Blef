@@ -1,0 +1,30 @@
+﻿[
+  {
+    No: 1,
+    Action: NewGame,
+    Argument: _noArgument,
+    Result: {
+      GameId: Guid_1
+    }
+  },
+  {
+    No: 2,
+    Action: JoinPlayer,
+    Argument: Conway,
+    Result: {
+      PlayerId: Guid_2,
+      Nick: Conway
+    }
+  },
+  {
+    No: 3,
+    Action: NewDeal,
+    Argument: _noArgument,
+    Result: {
+      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/not-enough-players.md,
+      Title: The minimum number of game players has not been reached,
+      Detail: Minimum number of game players must be at least 2,
+      Instance: /games/Guid_1
+    }
+  }
+]
