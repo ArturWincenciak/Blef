@@ -34,4 +34,18 @@ public class RockyRoadTests
         await Verify(results)
             .ScrubInlineGuids();
     }
+
+    [Fact]
+    public async Task GameNotStartedTest()
+    {
+        var results = await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .JoinPlayer(WhichPlayer.Graham)
+            .BidPair(WhichPlayer.Conway, FaceCard.Ace)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
 }
