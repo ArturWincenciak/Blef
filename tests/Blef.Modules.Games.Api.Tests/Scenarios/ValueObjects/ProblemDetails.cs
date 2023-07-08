@@ -1,5 +1,8 @@
-﻿namespace Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
+﻿using JetBrains.Annotations;
 
+namespace Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
+
+[UsedImplicitly]
 public record ProblemDetails(
     string Type,
     string Title,
