@@ -3,6 +3,7 @@ using Blef.Shared.Kernel.Exceptions;
 
 namespace Blef.Modules.Games.Domain.Exceptions;
 
+// todo: ...
 internal sealed class GameOverException : BlefException
 {
     public GameOverException(GameId gameId)
