@@ -5,5 +5,6 @@ internal enum WhichPlayer
     Knuth = 1,
     Graham = 2,
     Riemann = 4,
-    Conway = 8
+    Conway = 8,
+    Planck = 16
 }
