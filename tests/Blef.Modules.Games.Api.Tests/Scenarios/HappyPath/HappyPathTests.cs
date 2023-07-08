@@ -4,10 +4,10 @@ using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 
 [UsesVerify]
-public class PlayGameTests
+public class HappyPathTests
 {
     [Fact]
-    public Task ThreePlayersPlayTheGameTest()
+    public async Task ThreePlayersPlayTheGameTest()
     {
         var results = new TestBuilder()
             .NewGame()
@@ -31,6 +31,6 @@ public class PlayGameTests
             .GetDealFlow(new DealNumber(2))
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 }
