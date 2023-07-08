@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,8 +10,9 @@ public interface IModule
 
     string Path { get; }
 
+    [UsedImplicitly]
     void Register(IServiceCollection services);
 
-    [SuppressMessage(category: "ReSharper", checkId: "UnusedParameter.Global")]
+    [UsedImplicitly]
     void Use(IApplicationBuilder app);
 }

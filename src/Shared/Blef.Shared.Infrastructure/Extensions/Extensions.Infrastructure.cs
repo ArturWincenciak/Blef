@@ -8,6 +8,7 @@ using Blef.Shared.Infrastructure.Exceptions;
 using Blef.Shared.Infrastructure.Modules;
 using Blef.Shared.Infrastructure.Queries;
 using Blef.Shared.Infrastructure.Tracing;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ using Microsoft.OpenApi.Models;
 
 namespace Blef.Shared.Infrastructure.Extensions;
 
+[UsedImplicitly]
 internal static partial class Extensions
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration,
