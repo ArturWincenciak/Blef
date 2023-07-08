@@ -199,7 +199,17 @@ public class RockyRoadTests
             .ScrubInlineGuids();
     }
 
-    // todo: turn not joined player
+    [Fact]
+    public async Task TurnNotJoinedPlayer()
+    {
+        var notJoinedPlayer = new PlayerId(Guid.Parse("53D4523A-4004-4E31-98ED-CA1C5A909AB9"));
+        var results = await Arrange
+            .BidHighCard(notJoinedPlayer, FaceCard.Ace)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
 
     [Fact]
     public async Task TooManyPlayersTest()
@@ -216,4 +226,57 @@ public class RockyRoadTests
         await Verify(results)
             .ScrubInlineGuids();
     }
+
+    [Fact]
+    public async Task BidPlayerThatLostLastDealTest()
+    {
+        // arrange
+        var arrangeGame = new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .JoinPlayer(WhichPlayer.Graham)
+            .JoinPlayer(WhichPlayer.Knuth)
+            .NewDeal();
+
+        var conwayLostFirstDeal = arrangeGame
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham);
+
+        var conwayLostSecondDeal = conwayLostFirstDeal
+            .BidPair(WhichPlayer.Graham, FaceCard.Nine)
+            .BidPair(WhichPlayer.Knuth, FaceCard.Ten)
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham);
+
+        var conwayLostThirdDeal = conwayLostSecondDeal
+            .BidPair(WhichPlayer.Knuth, FaceCard.Nine)
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham);
+
+        var conwayLostFourthDeal = conwayLostThirdDeal
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham);
+
+        var conwayLostTheGame = conwayLostFourthDeal
+            .BidPair(WhichPlayer.Graham, FaceCard.Nine)
+            .BidPair(WhichPlayer.Knuth, FaceCard.Ten)
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham);
+
+        var getGame = conwayLostTheGame
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(6));
+
+        // act
+        var results = await getGame
+            .BidPair(WhichPlayer.Knuth, FaceCard.Nine)
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Build();
+
+        // assert
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
+
+    // todo: game is over
 }

@@ -32,7 +32,7 @@ internal sealed class GetGameHandler : IQueryHandler<GetGame, GetGame.Result>
     private static IReadOnlyCollection<GetGame.Player> Map(IEnumerable<Gameplay.PlayerEntry> gamePlayers) =>
         gamePlayers
             .Select(player => new GetGame.Player(
-                player.Player.Id.Id, player.Player.Nick.Nick, player.JoiningOrder))
+                player.Player.Id.Id, player.Player.Nick.Nick, player.JoiningOrder, !player.Player.IsInTheGame))
             .ToArray();
 
     private static IReadOnlyCollection<GetGame.Deal> Map(IEnumerable<Gameplay.DealSummary> deals) =>
