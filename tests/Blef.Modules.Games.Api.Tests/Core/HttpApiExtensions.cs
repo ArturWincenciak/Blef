@@ -169,7 +169,10 @@ internal static class HttpApiExtensions
     {
         var response = await client.PostAsync(
             requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/checks", content: null);
-        response.EnsureSuccessStatusCode();
-        return Success;
+
+        if(response.IsSuccessStatusCode)
+            return Success;
+
+        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
     }
 }
