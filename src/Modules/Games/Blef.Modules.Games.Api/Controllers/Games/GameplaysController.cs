@@ -14,7 +14,6 @@ internal sealed class GameplaysController : ModuleControllerBase
     public GameplaysController(IQueryDispatcher queryDispatcher) =>
         _queryDispatcher = queryDispatcher;
 
-
     [HttpGet(GetGameFlowQuery.ROUTE)]
     public async Task<IActionResult> GetGameFlow(
         [FromRoute] GetGameFlowQuery route,
