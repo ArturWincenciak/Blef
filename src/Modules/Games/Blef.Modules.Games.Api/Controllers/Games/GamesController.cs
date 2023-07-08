@@ -1,4 +1,4 @@
-﻿using Blef.Modules.Games.Api.Controllers.Games.Commands.Model;
+﻿using Blef.Modules.Games.Api.Controllers.Games.Commands;
 using Blef.Modules.Games.Api.Controllers.Games.Queries;
 using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;

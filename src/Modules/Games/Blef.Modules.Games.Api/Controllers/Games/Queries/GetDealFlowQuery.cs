@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Blef.Modules.Games.Api.Controllers.Games.Commands.Validators;
+using Blef.Modules.Games.Api.Controllers.Games.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers.Games.Queries;
