@@ -88,17 +88,6 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder Bid(WhichPlayer whichPlayer, string bid)
-    {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.Bid(whichPlayer, bid);
-            _testResult.Record(action: nameof(Bid), argument: new {whichPlayer, bid}, result);
-        });
-
-        return this;
-    }
-
     public TestBuilder BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard)
     {
         _actions.Add(async () =>
