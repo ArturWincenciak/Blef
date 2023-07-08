@@ -6,7 +6,7 @@ namespace Blef.Modules.Games.Api.Tests.Scenarios.RockyRoad;
 [UsesVerify]
 public class RockyRoadTests
 {
-    private readonly static TestBuilder Arrange = new TestBuilder()
+    private static TestBuilder Arrange => new TestBuilder()
         .NewGame()
         .JoinPlayer(WhichPlayer.Conway)
         .JoinPlayer(WhichPlayer.Graham)
@@ -18,6 +18,17 @@ public class RockyRoadTests
         var results = await Arrange
             .BidFullHouse(WhichPlayer.Conway, FaceCard.Ace, FaceCard.King)
             .BidPair(WhichPlayer.Graham, FaceCard.Ace)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
+
+    [Fact]
+    public async Task GameAlreadyStartedTest()
+    {
+        var results = await Arrange
+            .NewDeal()
             .Build();
 
         await Verify(results)
