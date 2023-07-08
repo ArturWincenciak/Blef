@@ -46,7 +46,7 @@
       Title: One or more validation errors occurred.,
       Errors: {
         $.pair: [
-          The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.Model.FullHouseBidPayload. Path: $.pair | LineNumber: 0 | BytePositionInLine: 44.
+          The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.FullHouseBidPayload. Path: $.pair | LineNumber: 0 | BytePositionInLine: 44.
         ],
         payload: [
           The payload field is required.,
