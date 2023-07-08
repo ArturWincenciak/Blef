@@ -83,4 +83,29 @@ public class RockyRoadTests
         await Verify(results)
             .ScrubInlineGuids();
     }
+
+    [Fact]
+    public async Task NoPlayersNotEnoughPlayersTest()
+    {
+        var results = await new TestBuilder()
+            .NewGame()
+            .NewDeal()
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
+
+    [Fact]
+    public async Task OnePlayerIsNotEnoughPlayersTest()
+    {
+        var results = await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .NewDeal()
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
 }
