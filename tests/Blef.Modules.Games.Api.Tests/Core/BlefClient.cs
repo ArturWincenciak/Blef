@@ -46,12 +46,6 @@ internal sealed class BlefClient
         return await _httpClient.GetCards(gameId: _gameId!, deal, playerId);
     }
 
-    async internal Task<object> Bid(WhichPlayer whichPlayer, string bid)
-    {
-        var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidWithSuccess(gameId: _gameId!, playerId, bid);
-    }
-
     async internal Task<object> BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard)
     {
         var playerId = GetPlayerId(whichPlayer);
