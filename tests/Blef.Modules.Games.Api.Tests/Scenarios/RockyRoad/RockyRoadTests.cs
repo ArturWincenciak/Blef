@@ -108,4 +108,31 @@ public class RockyRoadTests
         await Verify(results)
             .ScrubInlineGuids();
     }
+
+    [Fact]
+    public async Task PlayerAlreadyJoinedTest()
+    {
+        var results = new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .JoinPlayer(WhichPlayer.Conway)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
+
+    [Fact]
+    public async Task PlayerAlreadyJoinedWithOtherPlayerTest()
+    {
+        var results = new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .JoinPlayer(WhichPlayer.Knuth)
+            .JoinPlayer(WhichPlayer.Conway)
+            .Build();
+
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
 }
