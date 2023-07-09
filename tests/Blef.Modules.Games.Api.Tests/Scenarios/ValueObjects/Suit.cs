@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
+﻿namespace Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 
 internal enum Suit
 {

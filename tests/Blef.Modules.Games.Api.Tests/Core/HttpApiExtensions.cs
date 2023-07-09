@@ -45,7 +45,7 @@ internal static class HttpApiExtensions
     {
         var requestUri = $"{GamesUri}/{gameId.Id}/deals";
         var response = await client.PostAsync(requestUri, content: null);
-        object result = await DeserializeResponse<StartFirstDeal.Result>(response);
+        var result = await DeserializeResponse<StartFirstDeal.Result>(response);
 
         testRecorder.Record(
             request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Post),
@@ -57,7 +57,7 @@ internal static class HttpApiExtensions
     {
         var requestUri = $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/cards";
         var response = await client.GetAsync(requestUri);
-        object result = await DeserializeResponse<GetPlayerCards.Result>(response);
+        var result = await DeserializeResponse<GetPlayerCards.Result>(response);
 
         testRecorder.Record(
             request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Get),
@@ -166,7 +166,7 @@ internal static class HttpApiExtensions
     {
         var requestUri = $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids/{pokerHand}";
         var response = await client.PostAsJsonAsync(requestUri, requestBody);
-        object result = await DeserializeResponse(response);
+        var result = await DeserializeResponse(response);
 
         testRecorder.Record(
             request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Post, requestBody),

@@ -15,6 +15,9 @@ internal sealed class Deal
     private bool BetHasBeenMade =>
         _lastBid is not null;
 
+    private string InstanceContext =>
+        $"/games/{Id.Game}/deals/{Id.Deal}";
+
     public Deal(DealId dealId, DealSet dealSet)
     {
         if (dealSet is null)
@@ -56,7 +59,4 @@ internal sealed class Deal
             ? new LooserPlayer(checkingPlayerId.Player)
             : new LooserPlayer(_lastBid.Player);
     }
-
-    private string InstanceContext =>
-        $"/games/{Id.Game}/deals/{Id.Deal}";
 }
