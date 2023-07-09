@@ -1,58 +1,89 @@
 ﻿[
   {
     No: 1,
-    Action: NewGame,
-    Argument: _noArgument,
-    Result: {
-      GameId: Guid_1
+    Request: {
+      Path: games-module/games,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        GameId: Guid_1
+      }
     }
   },
   {
     No: 2,
-    Action: JoinPlayer,
-    Argument: Conway,
-    Result: {
-      PlayerId: Guid_2,
-      Nick: Conway
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Conway
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_2,
+        Nick: Conway
+      }
     }
   },
   {
     No: 3,
-    Action: JoinPlayer,
-    Argument: Graham,
-    Result: {
-      PlayerId: Guid_3,
-      Nick: Graham
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Graham
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_3,
+        Nick: Graham
+      }
     }
   },
   {
     No: 4,
-    Action: NewDeal,
-    Argument: _noArgument,
-    Result: {
-      Number: 1
+    Request: {
+      Path: games-module/games/Guid_1/deals,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        Number: 1
+      }
     }
   },
   {
     No: 5,
-    Action: BidTwoPairs,
-    Argument: {
-      whichPlayer: Conway,
-      first: Jack,
-      second: NotValidValue
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/two-pairs,
+      Method: Post,
+      Payload: {
+        FirstFaceCard: Jack,
+        SecondFaceCard: NotValidValue
+      }
     },
-    Result: {
-      Type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
-      Status: 400,
-      Title: One or more validation errors occurred.,
-      Errors: {
-        $.secondFaceCard: [
-          The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.TwoPairsBidPayload. Path: $.secondFaceCard | LineNumber: 0 | BytePositionInLine: 56.
-        ],
-        payload: [
-          The payload field is required.,
-          Value cannot be null.
-        ]
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
+        Status: 400,
+        Title: One or more validation errors occurred.,
+        Errors: {
+          $.secondFaceCard: [
+            The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.TwoPairsBidPayload. Path: $.secondFaceCard | LineNumber: 0 | BytePositionInLine: 56.
+          ],
+          payload: [
+            The payload field is required.,
+            Value cannot be null.
+          ]
+        }
       }
     }
   }

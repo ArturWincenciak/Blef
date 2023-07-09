@@ -7,125 +7,135 @@ namespace Blef.Modules.Games.Api.Tests.Core;
 internal sealed class BlefClient
 {
     private readonly HttpClient _httpClient;
-    private PlayerId? _conwayPlayerId;
-
+    private readonly TestRecorder _testRecorder;
     private GameId? _gameId;
+    private PlayerId? _conwayPlayerId;
     private PlayerId? _grahamPlayerId;
     private PlayerId? _knuthPlayerId;
     private PlayerId? _riemannPlayerId;
     private PlayerId? _plackPlayerId;
 
-    internal BlefClient(HttpClient httpClient) =>
-        _httpClient = httpClient;
-
-    async internal Task<NewGame.Result> NewGame()
+    internal BlefClient(HttpClient httpClient, TestRecorder testRecorder)
     {
-        var game = await _httpClient.NewGame();
-        _gameId = new GameId(game.GameId);
-        return game;
+        _httpClient = httpClient;
+        _testRecorder = testRecorder;
     }
 
-    async internal Task<object> GetGameFlow() =>
-        await _httpClient.GetGameFlow(_gameId!);
-
-    async internal Task<object> GetGameFlow(GameId gameId) =>
-        await _httpClient.GetGameFlow(gameId);
-
-    async internal Task<GetDeal.Result> GetDealFlow(DealNumber dealNumber) =>
-        await _httpClient.GetDealFlow(gameId: _gameId!, dealNumber);
-
-    async internal Task<object> JoinPlayer(WhichPlayer whichPlayer)
+    async internal Task NewGame()
     {
-        var result = await _httpClient.JoinPlayer(gameId: _gameId!, nick: new PlayerNick(whichPlayer.ToString()));
+        var game = await _httpClient.NewGame(_testRecorder);
+        _gameId = new GameId(game.GameId);
+    }
+
+    async internal Task GetGameFlow() =>
+        await _httpClient.GetGameFlow(
+            _gameId ?? throw new InvalidOperationException("Game has to be created"),
+            _testRecorder);
+
+    async internal Task GetGameFlow(GameId gameId) =>
+        await _httpClient.GetGameFlow(gameId, _testRecorder);
+
+    async internal Task GetDealFlow(DealNumber dealNumber) =>
+        await _httpClient.GetDealFlow(
+            _gameId ?? throw new InvalidOperationException("Game has to be created"),
+            dealNumber, _testRecorder);
+
+    async internal Task JoinPlayer(WhichPlayer whichPlayer)
+    {
+        var result = await _httpClient.JoinPlayer(
+            _gameId ?? throw new InvalidOperationException("Game has to be created"),
+            new PlayerNick(whichPlayer.ToString()), _testRecorder);
 
         if (result is JoinGame.Result player)
             SetPlayerId(whichPlayer, playerId: new PlayerId(player.PlayerId));
-
-        return result;
     }
 
-    async internal Task<object> StartFirstDeal() =>
-        await _httpClient.StartFirstDeal(_gameId!);
+    async internal Task StartFirstDeal() =>
+        await _httpClient.StartFirstDeal(
+            _gameId ?? throw new InvalidOperationException("Game has to be created"),
+            _testRecorder);
 
-    async internal Task<GetPlayerCards.Result> GetCards(WhichPlayer whichPlayer, DealNumber deal)
+    async internal Task GetCards(WhichPlayer whichPlayer, DealNumber deal)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.GetCards(gameId: _gameId!, deal, playerId);
+        await _httpClient.GetCards(
+            _gameId ?? throw new InvalidOperationException("Game has to be created"),
+            deal, playerId, _testRecorder);
     }
 
-    async internal Task<object> BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard)
+    async internal Task BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidHighCard(gameId: _gameId!, playerId, faceCard);
+        await _httpClient.BidHighCard(gameId: _gameId!, playerId, faceCard, _testRecorder);
     }
 
-    public async Task<object> BidHighCard(PlayerId player, FaceCard faceCard) =>
-        await _httpClient.BidHighCard(gameId: _gameId!, player, faceCard);
+    public async Task BidHighCard(PlayerId player, FaceCard faceCard) =>
+        await _httpClient.BidHighCard(gameId: _gameId!, player, faceCard, _testRecorder);
 
-    public async Task<object> BidPair(WhichPlayer whichPlayer, FaceCard faceCard)
+    public async Task BidPair(WhichPlayer whichPlayer, FaceCard faceCard)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidPair(gameId: _gameId!, playerId, faceCard);
+        await _httpClient.BidPair(gameId: _gameId!, playerId, faceCard, _testRecorder);
     }
 
-    public async Task<object> BidTwoPairs(WhichPlayer whichPlayer, FaceCard first, FaceCard second)
+    public async Task BidTwoPairs(WhichPlayer whichPlayer, FaceCard first, FaceCard second)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidTwoPairs(gameId: _gameId!, playerId, first, second);
+        await _httpClient.BidTwoPairs(gameId: _gameId!, playerId, first, second, _testRecorder);
     }
 
-    public async Task<object> BidLowStraight(WhichPlayer whichPlayer)
+    public async Task BidLowStraight(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidLowStraight(gameId: _gameId!, playerId);
+        await _httpClient.BidLowStraight(gameId: _gameId!, playerId, _testRecorder);
     }
 
-    public async Task<object> BidHighStraight(WhichPlayer whichPlayer)
+    public async Task BidHighStraight(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidHighStraight(gameId: _gameId!, playerId);
+        await _httpClient.BidHighStraight(gameId: _gameId!, playerId, _testRecorder);
     }
 
-    public async Task<object> BidThreeOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
+    public async Task BidThreeOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidThreeOfAKind(gameId: _gameId!, playerId, faceCard);
+        await _httpClient.BidThreeOfAKind(gameId: _gameId!, playerId, faceCard, _testRecorder);
     }
 
-    public async Task<object> BidFullHouse(WhichPlayer whichPlayer, FaceCard threeOfAKind, FaceCard pair)
+    public async Task BidFullHouse(WhichPlayer whichPlayer, FaceCard threeOfAKind, FaceCard pair)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidFullHouse(gameId: _gameId!, playerId, threeOfAKind, pair);
+        await _httpClient.BidFullHouse(gameId: _gameId!, playerId, threeOfAKind, pair, _testRecorder);
     }
 
-    public async Task<object> BidFlush(WhichPlayer whichPlayer, Suit suit)
+    public async Task BidFlush(WhichPlayer whichPlayer, Suit suit)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidFlush(gameId: _gameId!, playerId, suit);
+        await _httpClient.BidFlush(gameId: _gameId!, playerId, suit, _testRecorder);
     }
 
-    public async Task<object> BidFourOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
+    public async Task BidFourOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidFourOfAKind(gameId: _gameId!, playerId, faceCard);
+        await _httpClient.BidFourOfAKind(gameId: _gameId!, playerId, faceCard, _testRecorder);
     }
 
-    public async Task<object> BidStraightFlush(WhichPlayer whichPlayer, Suit suit)
+    public async Task BidStraightFlush(WhichPlayer whichPlayer, Suit suit)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidStraightFlush(gameId: _gameId!, playerId, suit);
+        await _httpClient.BidStraightFlush(gameId: _gameId!, playerId, suit, _testRecorder);
     }
 
-    public async Task<object> BidRoyalFlush(WhichPlayer whichPlayer, Suit suit)
+    public async Task BidRoyalFlush(WhichPlayer whichPlayer, Suit suit)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.BidRoyalFlush(gameId: _gameId!, playerId, suit);
+        await _httpClient.BidRoyalFlush(gameId: _gameId!, playerId, suit, _testRecorder);
     }
 
-    async internal Task<object> Check(WhichPlayer whichPlayer)
+    async internal Task Check(WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
-        return await _httpClient.CheckWithSuccess(gameId: _gameId!, playerId);
+        await _httpClient.Check(gameId: _gameId!, playerId, _testRecorder);
     }
 
     private PlayerId GetPlayerId(WhichPlayer whichPlayer) =>

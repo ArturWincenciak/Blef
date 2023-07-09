@@ -1,63 +1,97 @@
 ﻿[
   {
     No: 1,
-    Action: NewGame,
-    Argument: _noArgument,
-    Result: {
-      GameId: Guid_1
+    Request: {
+      Path: games-module/games,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        GameId: Guid_1
+      }
     }
   },
   {
     No: 2,
-    Action: JoinPlayer,
-    Argument: Conway,
-    Result: {
-      PlayerId: Guid_2,
-      Nick: Conway
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Conway
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_2,
+        Nick: Conway
+      }
     }
   },
   {
     No: 3,
-    Action: JoinPlayer,
-    Argument: Graham,
-    Result: {
-      PlayerId: Guid_3,
-      Nick: Graham
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Graham
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_3,
+        Nick: Graham
+      }
     }
   },
   {
     No: 4,
-    Action: NewDeal,
-    Argument: _noArgument,
-    Result: {
-      Number: 1
+    Request: {
+      Path: games-module/games/Guid_1/deals,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        Number: 1
+      }
     }
   },
   {
     No: 5,
-    Action: BidFullHouse,
-    Argument: {
-      whichPlayer: Conway,
-      first: Ace,
-      second: King
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/full-house,
+      Method: Post,
+      Payload: {
+        ThreeOfAKind: Ace,
+        Pair: King
+      }
     },
-    Result: {
-      Status: Success
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
     }
   },
   {
     No: 6,
-    Action: BidPair,
-    Argument: {
-      whichPlayer: Graham,
-      faceCard: Ace
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+      Method: Post,
+      Payload: {
+        FaceCard: Ace
+      }
     },
-    Result: {
-      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/bid-is-not-higher-then-last-one.md,
-      Status: 400,
-      Title: The bid is not higher than last one,
-      Detail: The new bid 'pair:ace' is not higher than last one 'full-house:ace,king',
-      Instance: /games/Guid_1/deals/1
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/bid-is-not-higher-then-last-one.md,
+        Status: 400,
+        Title: The bid is not higher than last one,
+        Detail: The new bid 'pair:ace' is not higher than last one 'full-house:ace,king',
+        Instance: /games/Guid_1/deals/1
+      }
     }
   }
 ]

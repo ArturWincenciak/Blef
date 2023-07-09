@@ -1,71 +1,104 @@
 ﻿[
   {
     No: 1,
-    Action: NewGame,
-    Argument: _noArgument,
-    Result: {
-      GameId: Guid_1
+    Request: {
+      Path: games-module/games,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        GameId: Guid_1
+      }
     }
   },
   {
     No: 2,
-    Action: JoinPlayer,
-    Argument: Conway,
-    Result: {
-      PlayerId: Guid_2,
-      Nick: Conway
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Conway
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_2,
+        Nick: Conway
+      }
     }
   },
   {
     No: 3,
-    Action: JoinPlayer,
-    Argument: Graham,
-    Result: {
-      PlayerId: Guid_3,
-      Nick: Graham
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Graham
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_3,
+        Nick: Graham
+      }
     }
   },
   {
     No: 4,
-    Action: NewDeal,
-    Argument: _noArgument,
-    Result: {
-      Number: 1
+    Request: {
+      Path: games-module/games/Guid_1/deals,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        Number: 1
+      }
     }
   },
   {
     No: 5,
-    Action: BidFlush,
-    Argument: {
-      whichPlayer: Conway,
-      suit: Hearts
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/flush,
+      Method: Post,
+      Payload: {
+        Suit: Hearts
+      }
     },
-    Result: {
-      Status: Success
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
     }
   },
   {
     No: 6,
-    Action: Check,
-    Argument: {
-      whichPlayer: Graham
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/checks,
+      Method: Get
     },
-    Result: {
-      Status: Success
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
     }
   },
   {
     No: 7,
-    Action: Check,
-    Argument: {
-      whichPlayer: Graham
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/checks,
+      Method: Get
     },
-    Result: {
-      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/no-bid-to-check.md,
-      Status: 400,
-      Title: There is no bid to check it,
-      Detail: Game must be started by at least one bid, cannot check when the game has not started,
-      Instance: /games/Guid_1/deals/2
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/no-bid-to-check.md,
+        Status: 400,
+        Title: There is no bid to check it,
+        Detail: Game must be started by at least one bid, cannot check when the game has not started,
+        Instance: /games/Guid_1/deals/2
+      }
     }
   }
 ]

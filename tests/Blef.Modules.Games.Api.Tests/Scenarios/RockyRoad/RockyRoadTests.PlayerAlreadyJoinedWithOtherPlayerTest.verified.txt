@@ -1,40 +1,69 @@
 ﻿[
   {
     No: 1,
-    Action: NewGame,
-    Argument: _noArgument,
-    Result: {
-      GameId: Guid_1
+    Request: {
+      Path: games-module/games,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        GameId: Guid_1
+      }
     }
   },
   {
     No: 2,
-    Action: JoinPlayer,
-    Argument: Conway,
-    Result: {
-      PlayerId: Guid_2,
-      Nick: Conway
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Conway
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_2,
+        Nick: Conway
+      }
     }
   },
   {
     No: 3,
-    Action: JoinPlayer,
-    Argument: Knuth,
-    Result: {
-      PlayerId: Guid_3,
-      Nick: Knuth
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Knuth
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_3,
+        Nick: Knuth
+      }
     }
   },
   {
     No: 4,
-    Action: JoinPlayer,
-    Argument: Conway,
-    Result: {
-      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-joined.md,
-      Status: 400,
-      Title: Player already joined the game,
-      Detail: Player 'Conway' already joined the game,
-      Instance: /games/Guid_1
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Conway
+      }
+    },
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-joined.md,
+        Status: 400,
+        Title: Player already joined the game,
+        Detail: Player 'Conway' already joined the game,
+        Instance: /games/Guid_1
+      }
     }
   }
 ]
