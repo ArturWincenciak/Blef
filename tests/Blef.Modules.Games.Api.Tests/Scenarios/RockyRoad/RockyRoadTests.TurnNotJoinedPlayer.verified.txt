@@ -44,6 +44,7 @@
     },
     Result: {
       Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-not-joined-the-game.md,
+      Status: 400,
       Title: Player not joined the game,
       Detail: Player 'PlayerId { Id = Guid_4 }' not joined the game,
       Instance: /games/Guid_1

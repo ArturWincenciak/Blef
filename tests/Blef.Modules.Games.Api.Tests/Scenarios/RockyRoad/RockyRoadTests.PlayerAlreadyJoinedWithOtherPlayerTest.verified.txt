@@ -31,6 +31,7 @@
     Argument: Conway,
     Result: {
       Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-joined.md,
+      Status: 400,
       Title: Player already joined the game,
       Detail: Player 'Conway' already joined the game,
       Instance: /games/Guid_1

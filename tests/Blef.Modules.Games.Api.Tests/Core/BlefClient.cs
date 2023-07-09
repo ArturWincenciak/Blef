@@ -25,8 +25,11 @@ internal sealed class BlefClient
         return game;
     }
 
-    async internal Task<GetGame.Result> GetGameFlow() =>
+    async internal Task<object> GetGameFlow() =>
         await _httpClient.GetGameFlow(_gameId!);
+
+    async internal Task<object> GetGameFlow(GameId gameId) =>
+        await _httpClient.GetGameFlow(gameId);
 
     async internal Task<GetDeal.Result> GetDealFlow(DealNumber dealNumber) =>
         await _httpClient.GetDealFlow(gameId: _gameId!, dealNumber);

@@ -62,6 +62,7 @@
     },
     Result: {
       Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/no-bid-to-check.md,
+      Status: 400,
       Title: There is no bid to check it,
       Detail: Game must be started by at least one bid, cannot check when the game has not started,
       Instance: /games/Guid_1/deals/2

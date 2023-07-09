@@ -54,6 +54,7 @@
     },
     Result: {
       Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/bid-is-not-higher-then-last-one.md,
+      Status: 400,
       Title: The bid is not higher than last one,
       Detail: The new bid 'pair:ace' is not higher than last one 'full-house:ace,king',
       Instance: /games/Guid_1/deals/1

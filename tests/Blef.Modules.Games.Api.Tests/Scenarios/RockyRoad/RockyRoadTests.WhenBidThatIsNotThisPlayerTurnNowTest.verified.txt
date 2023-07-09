@@ -42,6 +42,7 @@
     },
     Result: {
       Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+      Status: 400,
       Title: That is not this player's turn now,
       Detail: Player 'PlayerId { Id = Guid_3 }' should wait for his turn,
       Instance: /games/Guid_1/deals/1

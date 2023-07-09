@@ -39,6 +39,7 @@
     Argument: Knuth,
     Result: {
       Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/join-game-already-started.md,
+      Status: 400,
       Title: Cannot join game that is already started,
       Detail: Player 'Knuth' has tried to join game 'Guid_1' that is already started,
       Instance: /games/Guid_1
