@@ -1,6 +1,5 @@
 ﻿using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 using Blef.Modules.Games.Application.Commands;
-using Blef.Modules.Games.Application.Queries;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -8,12 +7,12 @@ internal sealed class BlefClient
 {
     private readonly HttpClient _httpClient;
     private readonly TestRecorder _testRecorder;
-    private GameId? _gameId;
     private PlayerId? _conwayPlayerId;
+    private GameId? _gameId;
     private PlayerId? _grahamPlayerId;
     private PlayerId? _knuthPlayerId;
-    private PlayerId? _riemannPlayerId;
     private PlayerId? _plackPlayerId;
+    private PlayerId? _riemannPlayerId;
 
     internal BlefClient(HttpClient httpClient, TestRecorder testRecorder)
     {
@@ -29,7 +28,7 @@ internal sealed class BlefClient
 
     async internal Task GetGameFlow() =>
         await _httpClient.GetGameFlow(
-            _gameId ?? throw new InvalidOperationException("Game has to be created"),
+            gameId: _gameId ?? throw new InvalidOperationException("Game has to be created"),
             _testRecorder);
 
     async internal Task GetGameFlow(GameId gameId) =>
@@ -37,14 +36,14 @@ internal sealed class BlefClient
 
     async internal Task GetDealFlow(DealNumber dealNumber) =>
         await _httpClient.GetDealFlow(
-            _gameId ?? throw new InvalidOperationException("Game has to be created"),
+            gameId: _gameId ?? throw new InvalidOperationException("Game has to be created"),
             dealNumber, _testRecorder);
 
     async internal Task JoinPlayer(WhichPlayer whichPlayer)
     {
         var result = await _httpClient.JoinPlayer(
-            _gameId ?? throw new InvalidOperationException("Game has to be created"),
-            new PlayerNick(whichPlayer.ToString()), _testRecorder);
+            gameId: _gameId ?? throw new InvalidOperationException("Game has to be created"),
+            nick: new PlayerNick(whichPlayer.ToString()), _testRecorder);
 
         if (result is JoinGame.Result player)
             SetPlayerId(whichPlayer, playerId: new PlayerId(player.PlayerId));
@@ -52,14 +51,14 @@ internal sealed class BlefClient
 
     async internal Task StartFirstDeal() =>
         await _httpClient.StartFirstDeal(
-            _gameId ?? throw new InvalidOperationException("Game has to be created"),
+            gameId: _gameId ?? throw new InvalidOperationException("Game has to be created"),
             _testRecorder);
 
     async internal Task GetCards(WhichPlayer whichPlayer, DealNumber deal)
     {
         var playerId = GetPlayerId(whichPlayer);
         await _httpClient.GetCards(
-            _gameId ?? throw new InvalidOperationException("Game has to be created"),
+            gameId: _gameId ?? throw new InvalidOperationException("Game has to be created"),
             deal, playerId, _testRecorder);
     }
 

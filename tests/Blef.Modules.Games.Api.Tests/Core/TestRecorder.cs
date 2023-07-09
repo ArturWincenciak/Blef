@@ -1,6 +1,4 @@
 ﻿using System.Net;
-using Blef.Shared.Abstractions.Commands;
-using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -25,6 +23,6 @@ internal sealed class TestRecorder
         Get = 1,
         Post = 2,
         Put = 4,
-        Delete = 8,
+        Delete = 8
     }
 }

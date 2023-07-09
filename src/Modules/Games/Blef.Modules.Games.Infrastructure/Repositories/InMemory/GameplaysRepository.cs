@@ -15,7 +15,7 @@ internal sealed class GameplaysRepository : IGameplaysRepository
 
     public Task<Gameplay?> Get(GameId gameId)
     {
-        if(_gameplays.TryGetValue(gameId, out var gameplay))
+        if (_gameplays.TryGetValue(gameId, value: out var gameplay))
             return Task.FromResult(gameplay)!;
 
         return Task.FromResult<Gameplay?>(null);
