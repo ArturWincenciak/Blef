@@ -1,0 +1,302 @@
+﻿[
+  {
+    No: 1,
+    Action: NewGame,
+    Argument: _noArgument,
+    Result: {
+      GameId: Guid_1
+    }
+  },
+  {
+    No: 2,
+    Action: JoinPlayer,
+    Argument: Conway,
+    Result: {
+      PlayerId: Guid_2,
+      Nick: Conway
+    }
+  },
+  {
+    No: 3,
+    Action: JoinPlayer,
+    Argument: Graham,
+    Result: {
+      PlayerId: Guid_3,
+      Nick: Graham
+    }
+  },
+  {
+    No: 4,
+    Action: NewDeal,
+    Argument: _noArgument,
+    Result: {
+      Number: 1
+    }
+  },
+  {
+    No: 5,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 6,
+    Action: Check,
+    Argument: {
+      whichPlayer: Graham
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 7,
+    Action: BidPair,
+    Argument: {
+      whichPlayer: Graham,
+      faceCard: Nine
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 8,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 9,
+    Action: Check,
+    Argument: {
+      whichPlayer: Graham
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 10,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 11,
+    Action: Check,
+    Argument: {
+      whichPlayer: Graham
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 12,
+    Action: BidPair,
+    Argument: {
+      whichPlayer: Graham,
+      faceCard: Nine
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 13,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 14,
+    Action: Check,
+    Argument: {
+      whichPlayer: Graham
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 15,
+    Action: BidRoyalFlush,
+    Argument: {
+      whichPlayer: Conway,
+      suit: Hearts
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 16,
+    Action: Check,
+    Argument: {
+      whichPlayer: Graham
+    },
+    Result: {
+      Status: Success
+    }
+  },
+  {
+    No: 17,
+    Action: GetGameFlow,
+    Argument: _noArgument,
+    Result: {
+      Status: {
+        State: GameIsOver
+      },
+      Players: [
+        {
+          PlayerId: Guid_2,
+          Nick: Conway,
+          JoiningOrder: 1,
+          AlreadyLostTheGame: true
+        },
+        {
+          PlayerId: Guid_3,
+          Nick: Graham,
+          JoiningOrder: 2,
+          AlreadyLostTheGame: false
+        }
+      ],
+      Deals: [
+        {
+          Number: 1,
+          State: Finished,
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        },
+        {
+          Number: 2,
+          State: Finished,
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        },
+        {
+          Number: 3,
+          State: Finished,
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        },
+        {
+          Number: 4,
+          State: Finished,
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        },
+        {
+          Number: 5,
+          State: Finished,
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        }
+      ],
+      Winner: {
+        PlayerId: Guid_3
+      }
+    }
+  },
+  {
+    No: 18,
+    Action: GetDealFlow,
+    Argument: {
+      Number: 5
+    },
+    Result: {
+      Players: [
+        {
+          PlayerId: Guid_2,
+          Hand: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
+            }
+          ]
+        },
+        {
+          PlayerId: Guid_3,
+          Hand: [
+            {
+              FaceCard: king,
+              Suit: hearts
+            }
+          ]
+        }
+      ],
+      Bids: [
+        {
+          Order: 1,
+          PlayerId: Guid_2,
+          PokerHand: royal-flush:hearts
+        }
+      ],
+      DealResolution: {
+        CheckingPlayerId: Guid_3,
+        LooserPlayerId: Guid_2
+      }
+    }
+  },
+  {
+    No: 19,
+    Action: BidPair,
+    Argument: {
+      whichPlayer: Graham,
+      faceCard: Nine
+    },
+    Result: {
+      Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-over.md,
+      Title: The game is already over,
+      Detail: Cannot make any more moves, the game is over,
+      Instance: /games/Guid_1
+    }
+  }
+]

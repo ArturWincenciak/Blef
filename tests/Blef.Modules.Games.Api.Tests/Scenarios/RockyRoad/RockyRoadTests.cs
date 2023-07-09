@@ -278,5 +278,49 @@ public class RockyRoadTests
             .ScrubInlineGuids();
     }
 
-    // todo: game is over
+    [Fact]
+    public async Task GameOverTest()
+    {
+        // arrange
+        var arrangeGame = new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .JoinPlayer(WhichPlayer.Graham)
+            .NewDeal();
+
+        var conwayLostFirstDeal = arrangeGame
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham);
+
+        var conwayLostSecondDeal = conwayLostFirstDeal
+            .BidPair(WhichPlayer.Graham, FaceCard.Nine)
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham);
+
+        var conwayLostThirdDeal = conwayLostSecondDeal
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham);
+
+        var conwayLostFourthDeal = conwayLostThirdDeal
+            .BidPair(WhichPlayer.Graham, FaceCard.Nine)
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham);
+
+        var conwayLostTheGame = conwayLostFourthDeal
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
+            .Check(WhichPlayer.Graham);
+
+        var getGame = conwayLostTheGame
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(5));
+
+        // act
+        var results = await getGame
+            .BidPair(WhichPlayer.Graham, FaceCard.Nine)
+            .Build();
+
+        // assert
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
 }
