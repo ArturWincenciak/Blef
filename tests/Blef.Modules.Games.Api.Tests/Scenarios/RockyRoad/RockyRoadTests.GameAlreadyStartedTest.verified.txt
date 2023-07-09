@@ -39,6 +39,7 @@
     Argument: _noArgument,
     Result: {
       Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-already-started.md,
+      Status: 400,
       Title: Game already started,
       Detail: The game 'Guid_1' has already started,
       Instance: /games/Guid_1

@@ -202,11 +202,15 @@ public class RockyRoadTests
     [Fact]
     public async Task TurnNotJoinedPlayer()
     {
+        // arrange
         var notJoinedPlayer = new PlayerId(Guid.Parse("53D4523A-4004-4E31-98ED-CA1C5A909AB9"));
+
+        // act
         var results = await Arrange
             .BidHighCard(notJoinedPlayer, FaceCard.Ace)
             .Build();
 
+        // assert
         await Verify(results)
             .ScrubInlineGuids();
     }
@@ -317,6 +321,22 @@ public class RockyRoadTests
         // act
         var results = await getGame
             .BidPair(WhichPlayer.Graham, FaceCard.Nine)
+            .Build();
+
+        // assert
+        await Verify(results)
+            .ScrubInlineGuids();
+    }
+
+    [Fact]
+    public async Task GetNotExistedGameFlowTest()
+    {
+        // arrange
+        var notExistedGame = new GameId(Guid.Parse("E3450C4B-A874-4EBC-A60A-B0DE539EA75D"));
+
+        // act
+        var results = await new TestBuilder()
+            .GetGameFlow(notExistedGame)
             .Build();
 
         // assert

@@ -34,6 +34,7 @@
     },
     Result: {
       Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-not-started.md,
+      Status: 400,
       Title: Game not started,
       Detail: The game Guid_1 has not yet started,
       Instance: /games/Guid_1

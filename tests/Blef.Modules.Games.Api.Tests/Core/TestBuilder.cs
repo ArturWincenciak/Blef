@@ -44,6 +44,17 @@ internal sealed class TestBuilder
         return this;
     }
 
+    public TestBuilder GetGameFlow(GameId gameId)
+    {
+        _actions.Add(async () =>
+        {
+            var gameFlow = await _gameClient.GetGameFlow(gameId);
+            _testResult.Record(action: nameof(GetGameFlow), _noArgument, gameFlow);
+        });
+
+        return this;
+    }
+
     internal TestBuilder GetDealFlow(DealNumber deal)
     {
         _actions.Add(async () =>

@@ -17,6 +17,7 @@ internal sealed class ExceptionToResponseMapper
     public object Map(Exception exception) =>
         exception switch
         {
+            NotFoundException ex => CreateProblemDetails(ex, HttpStatusCode.NotFound),
             BlefException ex => CreateBadRequest(ex),
             _ => CreateInternalServerError()
         };
@@ -24,14 +25,14 @@ internal sealed class ExceptionToResponseMapper
     private ProblemDetails CreateBadRequest(BlefException exception) =>
         exception.Errors.Any()
             ? CreateValidationProblemDetails(exception)
-            : CreateProblemDetails(exception);
+            : CreateProblemDetails(exception, HttpStatusCode.BadRequest);
 
-    private ProblemDetails CreateProblemDetails(BlefException exception) =>
+    private ProblemDetails CreateProblemDetails(BlefException exception, HttpStatusCode httpStatusCode) =>
         new()
         {
             Type = $"{DocumentationUrl}/{GetErrorCode(exception)}.md",
             Title = exception.Title,
-            Status = (int) HttpStatusCode.BadRequest,
+            Status = (int) httpStatusCode,
             Detail = exception.Detail,
             Instance = exception.Instance
         };
