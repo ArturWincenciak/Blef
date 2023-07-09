@@ -1,409 +1,482 @@
 ﻿[
   {
     No: 1,
-    Action: NewGame,
-    Argument: _noArgument,
-    Result: {
-      GameId: Guid_1
+    Request: {
+      Path: games-module/games,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        GameId: Guid_1
+      }
     }
   },
   {
     No: 2,
-    Action: GetGameFlow,
-    Argument: _noArgument,
-    Result: {
-      Status: {
-        State: JoiningPlayers
-      },
-      Winner: {}
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: JoiningPlayers
+        },
+        Winner: {}
+      }
     }
   },
   {
     No: 3,
-    Action: JoinPlayer,
-    Argument: Knuth,
-    Result: {
-      PlayerId: Guid_2,
-      Nick: Knuth
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Knuth
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_2,
+        Nick: Knuth
+      }
     }
   },
   {
     No: 4,
-    Action: JoinPlayer,
-    Argument: Graham,
-    Result: {
-      PlayerId: Guid_3,
-      Nick: Graham
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Graham
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_3,
+        Nick: Graham
+      }
     }
   },
   {
     No: 5,
-    Action: JoinPlayer,
-    Argument: Conway,
-    Result: {
-      PlayerId: Guid_4,
-      Nick: Conway
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Conway
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_4,
+        Nick: Conway
+      }
     }
   },
   {
     No: 6,
-    Action: GetGameFlow,
-    Argument: _noArgument,
-    Result: {
-      Status: {
-        State: JoiningPlayers
-      },
-      Players: [
-        {
-          PlayerId: Guid_2,
-          Nick: Knuth,
-          JoiningOrder: 1,
-          AlreadyLostTheGame: false
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: JoiningPlayers
         },
-        {
-          PlayerId: Guid_3,
-          Nick: Graham,
-          JoiningOrder: 2,
-          AlreadyLostTheGame: false
-        },
-        {
-          PlayerId: Guid_4,
-          Nick: Conway,
-          JoiningOrder: 3,
-          AlreadyLostTheGame: false
-        }
-      ],
-      Winner: {}
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Nick: Knuth,
+            JoiningOrder: 1,
+            AlreadyLostTheGame: false
+          },
+          {
+            PlayerId: Guid_3,
+            Nick: Graham,
+            JoiningOrder: 2,
+            AlreadyLostTheGame: false
+          },
+          {
+            PlayerId: Guid_4,
+            Nick: Conway,
+            JoiningOrder: 3,
+            AlreadyLostTheGame: false
+          }
+        ],
+        Winner: {}
+      }
     }
   },
   {
     No: 7,
-    Action: NewDeal,
-    Argument: _noArgument,
-    Result: {
-      Number: 1
+    Request: {
+      Path: games-module/games/Guid_1/deals,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        Number: 1
+      }
     }
   },
   {
     No: 8,
-    Action: GetGameFlow,
-    Argument: _noArgument,
-    Result: {
-      Status: {
-        State: InProgress
-      },
-      Players: [
-        {
-          PlayerId: Guid_2,
-          Nick: Knuth,
-          JoiningOrder: 1,
-          AlreadyLostTheGame: false
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: InProgress
         },
-        {
-          PlayerId: Guid_3,
-          Nick: Graham,
-          JoiningOrder: 2,
-          AlreadyLostTheGame: false
-        },
-        {
-          PlayerId: Guid_4,
-          Nick: Conway,
-          JoiningOrder: 3,
-          AlreadyLostTheGame: false
-        }
-      ],
-      Deals: [
-        {
-          Number: 1,
-          State: InProgress,
-          DealResolution: {}
-        }
-      ],
-      Winner: {}
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Nick: Knuth,
+            JoiningOrder: 1,
+            AlreadyLostTheGame: false
+          },
+          {
+            PlayerId: Guid_3,
+            Nick: Graham,
+            JoiningOrder: 2,
+            AlreadyLostTheGame: false
+          },
+          {
+            PlayerId: Guid_4,
+            Nick: Conway,
+            JoiningOrder: 3,
+            AlreadyLostTheGame: false
+          }
+        ],
+        Deals: [
+          {
+            Number: 1,
+            State: InProgress,
+            DealResolution: {}
+          }
+        ],
+        Winner: {}
+      }
     }
   },
   {
     No: 9,
-    Action: GetDealFlow,
-    Argument: {
-      Number: 1
+    Request: {
+      Path: games-module/gameplays/Guid_1/deals/1,
+      Method: Get
     },
-    Result: {
-      Players: [
-        {
-          PlayerId: Guid_2,
-          Hand: [
-            {
-              FaceCard: ace,
-              Suit: diamonds
-            }
-          ]
-        },
-        {
-          PlayerId: Guid_3,
-          Hand: [
-            {
-              FaceCard: ace,
-              Suit: spades
-            }
-          ]
-        },
-        {
-          PlayerId: Guid_4,
-          Hand: [
-            {
-              FaceCard: ten,
-              Suit: clubs
-            }
-          ]
-        }
-      ],
-      DealResolution: {}
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: diamonds
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_3,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: spades
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_4,
+            Hand: [
+              {
+                FaceCard: ten,
+                Suit: clubs
+              }
+            ]
+          }
+        ],
+        DealResolution: {}
+      }
     }
   },
   {
     No: 10,
-    Action: GetCards,
-    Argument: {
-      whichPlayer: Knuth,
-      deal: {
-        Number: 1
-      }
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/deals/1/cards,
+      Method: Get
     },
-    Result: {
-      Cards: [
-        {
-          FaceCard: ace,
-          Suit: diamonds
-        }
-      ]
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ace,
+            Suit: diamonds
+          }
+        ]
+      }
     }
   },
   {
     No: 11,
-    Action: GetCards,
-    Argument: {
-      whichPlayer: Graham,
-      deal: {
-        Number: 1
-      }
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/deals/1/cards,
+      Method: Get
     },
-    Result: {
-      Cards: [
-        {
-          FaceCard: ace,
-          Suit: spades
-        }
-      ]
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ace,
+            Suit: spades
+          }
+        ]
+      }
     }
   },
   {
     No: 12,
-    Action: GetCards,
-    Argument: {
-      whichPlayer: Conway,
-      deal: {
-        Number: 1
-      }
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_4/deals/1/cards,
+      Method: Get
     },
-    Result: {
-      Cards: [
-        {
-          FaceCard: ten,
-          Suit: clubs
-        }
-      ]
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ten,
+            Suit: clubs
+          }
+        ]
+      }
     }
   },
   {
     No: 13,
-    Action: BidHighCard,
-    Argument: {
-      whichPlayer: Knuth,
-      faceCard: Nine
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Nine
+      }
     },
-    Result: {
-      Status: Success
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
     }
   },
   {
     No: 14,
-    Action: BidHighCard,
-    Argument: {
-      whichPlayer: Graham,
-      faceCard: Ten
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Ten
+      }
     },
-    Result: {
-      Status: Success
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
     }
   },
   {
     No: 15,
-    Action: BidHighCard,
-    Argument: {
-      whichPlayer: Conway,
-      faceCard: Jack
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_4/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Jack
+      }
     },
-    Result: {
-      Status: Success
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
     }
   },
   {
     No: 16,
-    Action: Check,
-    Argument: {
-      whichPlayer: Knuth
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/checks,
+      Method: Get
     },
-    Result: {
-      Status: Success
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
     }
   },
   {
     No: 17,
-    Action: GetGameFlow,
-    Argument: _noArgument,
-    Result: {
-      Status: {
-        State: InProgress
-      },
-      Players: [
-        {
-          PlayerId: Guid_2,
-          Nick: Knuth,
-          JoiningOrder: 1,
-          AlreadyLostTheGame: false
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: InProgress
         },
-        {
-          PlayerId: Guid_3,
-          Nick: Graham,
-          JoiningOrder: 2,
-          AlreadyLostTheGame: false
-        },
-        {
-          PlayerId: Guid_4,
-          Nick: Conway,
-          JoiningOrder: 3,
-          AlreadyLostTheGame: false
-        }
-      ],
-      Deals: [
-        {
-          Number: 1,
-          State: Finished,
-          DealResolution: {
-            CheckingPlayerId: Guid_2,
-            LooserPlayerId: Guid_4
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Nick: Knuth,
+            JoiningOrder: 1,
+            AlreadyLostTheGame: false
+          },
+          {
+            PlayerId: Guid_3,
+            Nick: Graham,
+            JoiningOrder: 2,
+            AlreadyLostTheGame: false
+          },
+          {
+            PlayerId: Guid_4,
+            Nick: Conway,
+            JoiningOrder: 3,
+            AlreadyLostTheGame: false
           }
-        },
-        {
-          Number: 2,
-          State: InProgress,
-          DealResolution: {}
-        }
-      ],
-      Winner: {}
+        ],
+        Deals: [
+          {
+            Number: 1,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_4
+            }
+          },
+          {
+            Number: 2,
+            State: InProgress,
+            DealResolution: {}
+          }
+        ],
+        Winner: {}
+      }
     }
   },
   {
     No: 18,
-    Action: GetDealFlow,
-    Argument: {
-      Number: 1
+    Request: {
+      Path: games-module/gameplays/Guid_1/deals/1,
+      Method: Get
     },
-    Result: {
-      Players: [
-        {
-          PlayerId: Guid_2,
-          Hand: [
-            {
-              FaceCard: ace,
-              Suit: diamonds
-            }
-          ]
-        },
-        {
-          PlayerId: Guid_3,
-          Hand: [
-            {
-              FaceCard: ace,
-              Suit: spades
-            }
-          ]
-        },
-        {
-          PlayerId: Guid_4,
-          Hand: [
-            {
-              FaceCard: ten,
-              Suit: clubs
-            }
-          ]
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: diamonds
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_3,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: spades
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_4,
+            Hand: [
+              {
+                FaceCard: ten,
+                Suit: clubs
+              }
+            ]
+          }
+        ],
+        Bids: [
+          {
+            Order: 1,
+            PlayerId: Guid_2,
+            PokerHand: high-card:nine
+          },
+          {
+            Order: 2,
+            PlayerId: Guid_3,
+            PokerHand: high-card:ten
+          },
+          {
+            Order: 3,
+            PlayerId: Guid_4,
+            PokerHand: high-card:jack
+          }
+        ],
+        DealResolution: {
+          CheckingPlayerId: Guid_2,
+          LooserPlayerId: Guid_4
         }
-      ],
-      Bids: [
-        {
-          Order: 1,
-          PlayerId: Guid_2,
-          PokerHand: high-card:nine
-        },
-        {
-          Order: 2,
-          PlayerId: Guid_3,
-          PokerHand: high-card:ten
-        },
-        {
-          Order: 3,
-          PlayerId: Guid_4,
-          PokerHand: high-card:jack
-        }
-      ],
-      DealResolution: {
-        CheckingPlayerId: Guid_2,
-        LooserPlayerId: Guid_4
       }
     }
   },
   {
     No: 19,
-    Action: GetDealFlow,
-    Argument: {
-      Number: 2
+    Request: {
+      Path: games-module/gameplays/Guid_1/deals/2,
+      Method: Get
     },
-    Result: {
-      Players: [
-        {
-          PlayerId: Guid_2,
-          Hand: [
-            {
-              FaceCard: ace,
-              Suit: diamonds
-            }
-          ]
-        },
-        {
-          PlayerId: Guid_3,
-          Hand: [
-            {
-              FaceCard: ace,
-              Suit: spades
-            }
-          ]
-        },
-        {
-          PlayerId: Guid_4,
-          Hand: [
-            {
-              FaceCard: ten,
-              Suit: clubs
-            },
-            {
-              FaceCard: jack,
-              Suit: spades
-            }
-          ]
-        }
-      ],
-      DealResolution: {}
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: diamonds
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_3,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: spades
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_4,
+            Hand: [
+              {
+                FaceCard: ten,
+                Suit: clubs
+              },
+              {
+                FaceCard: jack,
+                Suit: spades
+              }
+            ]
+          }
+        ],
+        DealResolution: {}
+      }
     }
   }
 ]

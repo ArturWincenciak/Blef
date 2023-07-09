@@ -20,8 +20,7 @@ public class RockyRoadTests
             .BidPair(WhichPlayer.Graham, FaceCard.Ace)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -31,8 +30,7 @@ public class RockyRoadTests
             .NewDeal()
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -45,8 +43,7 @@ public class RockyRoadTests
             .BidPair(WhichPlayer.Conway, FaceCard.Ace)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -56,8 +53,7 @@ public class RockyRoadTests
             .JoinPlayer(WhichPlayer.Knuth)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -67,8 +63,7 @@ public class RockyRoadTests
             .Check(WhichPlayer.Conway)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -80,8 +75,7 @@ public class RockyRoadTests
             .Check(WhichPlayer.Graham)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -92,8 +86,7 @@ public class RockyRoadTests
             .NewDeal()
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -105,8 +98,7 @@ public class RockyRoadTests
             .NewDeal()
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -118,8 +110,7 @@ public class RockyRoadTests
             .JoinPlayer(WhichPlayer.Conway)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -132,8 +123,7 @@ public class RockyRoadTests
             .JoinPlayer(WhichPlayer.Conway)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -143,9 +133,7 @@ public class RockyRoadTests
             .BidPair(WhichPlayer.Graham, FaceCard.Ace)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids()
-            .ScrubEmptyLines();
+        await Verify(results);
     }
 
     [Fact]
@@ -155,9 +143,7 @@ public class RockyRoadTests
             .Check(WhichPlayer.Graham)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids()
-            .ScrubEmptyLines();
+        await Verify(results);
     }
 
     [Fact]
@@ -168,9 +154,7 @@ public class RockyRoadTests
             .BidPair(WhichPlayer.Conway, FaceCard.Ace)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids()
-            .ScrubEmptyLines();
+        await Verify(results);
     }
 
     [Fact]
@@ -181,9 +165,7 @@ public class RockyRoadTests
             .Check(WhichPlayer.Conway)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids()
-            .ScrubEmptyLines();
+        await Verify(results);
     }
 
     [Fact]
@@ -195,8 +177,7 @@ public class RockyRoadTests
             .BidPair(WhichPlayer.Conway, FaceCard.Ace)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -211,8 +192,7 @@ public class RockyRoadTests
             .Build();
 
         // assert
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -227,8 +207,7 @@ public class RockyRoadTests
             .JoinPlayer(WhichPlayer.Planck)
             .Build();
 
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -278,8 +257,7 @@ public class RockyRoadTests
             .Build();
 
         // assert
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -324,8 +302,7 @@ public class RockyRoadTests
             .Build();
 
         // assert
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 
     [Fact]
@@ -340,7 +317,6 @@ public class RockyRoadTests
             .Build();
 
         // assert
-        await Verify(results)
-            .ScrubInlineGuids();
+        await Verify(results);
     }
 }

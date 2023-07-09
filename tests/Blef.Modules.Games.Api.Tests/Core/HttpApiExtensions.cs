@@ -7,175 +7,225 @@ namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal static class HttpApiExtensions
 {
-    private readonly static TestRecorder.EmptyCommandResult Success = new("Success");
-
     private static string GamesUri =>
         "games-module/games";
 
     private static string GameplaysUri =>
         "games-module/gameplays";
 
-    async internal static Task<NewGame.Result> NewGame(this HttpClient client)
+    async internal static Task<NewGame.Result> NewGame(this HttpClient client, TestRecorder testRecorder)
     {
         var response = await client.PostAsync(GamesUri, content: null);
         response.EnsureSuccessStatusCode();
-        return (await response.Content.ReadFromJsonAsync<NewGame.Result>())!;
+        var result = (await response.Content.ReadFromJsonAsync<NewGame.Result>())!;
+
+        testRecorder.Record(
+            request: new TestRecorder.Request(GamesUri, TestRecorder.HttpMethod.Post),
+            response: new TestRecorder.Response(response.StatusCode, result));
+
+        return result;
     }
 
-    async internal static Task<object> JoinPlayer(this HttpClient client, GameId gameId, PlayerNick nick)
+    async internal static Task<object> JoinPlayer(this HttpClient client,
+        GameId gameId, PlayerNick nick, TestRecorder testRecorder)
     {
-        var response = await client.PostAsJsonAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players",
-            value: new {nick.Nick});
+        var requestUri = $"{GamesUri}/{gameId.Id}/players";
+        var requestBody = new {nick.Nick};
+        var response = await client.PostAsJsonAsync(requestUri, requestBody);
+        var result = await DeserializeResponse<JoinGame.Result>(response);
 
-        if(response.IsSuccessStatusCode)
-            return (await response.Content.ReadFromJsonAsync<JoinGame.Result>())!;
+        testRecorder.Record(
+            request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Post, requestBody),
+            response: new TestRecorder.Response(response.StatusCode, result));
 
-        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
+        return result;
     }
 
-    async internal static Task<object> StartFirstDeal(this HttpClient client, GameId gameId)
+    async internal static Task StartFirstDeal(this HttpClient client, GameId gameId, TestRecorder testRecorder)
     {
-        var response = await client.PostAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/deals",
-            content: null);
+        var requestUri = $"{GamesUri}/{gameId.Id}/deals";
+        var response = await client.PostAsync(requestUri, content: null);
+        object result = await DeserializeResponse<StartFirstDeal.Result>(response);
 
-        if(response.IsSuccessStatusCode)
-            return (await response.Content.ReadFromJsonAsync<StartFirstDeal.Result>())!;
-
-        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
+        testRecorder.Record(
+            request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Post),
+            response: new TestRecorder.Response(response.StatusCode, result));
     }
 
-    async internal static Task<GetPlayerCards.Result> GetCards(this HttpClient client,
-        GameId gameId, DealNumber deal, PlayerId playerId)
+    async internal static Task GetCards(this HttpClient client,
+        GameId gameId, DealNumber deal, PlayerId playerId, TestRecorder testRecorder)
     {
-        var response = await client.GetAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/cards");
-        response.EnsureSuccessStatusCode();
-        return (await response.Content.ReadFromJsonAsync<GetPlayerCards.Result>())!;
+        var requestUri = $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/cards";
+        var response = await client.GetAsync(requestUri);
+        object result = await DeserializeResponse<GetPlayerCards.Result>(response);
+
+        testRecorder.Record(
+            request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Get),
+            response: new TestRecorder.Response(response.StatusCode, result));
     }
 
-    async internal static Task<object> BidHighCard(this HttpClient client,
-        GameId gameId, PlayerId playerId, FaceCard faceCard) =>
-        await Bid(client, gameId, playerId, pokerHand: "high-card",
-            value: new
+    async internal static Task BidHighCard(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard faceCard, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "high-card",
+            requestBody: new
             {
                 FaceCard = faceCard.ToString()
-            });
+            }, testRecorder);
 
-    async internal static Task<object> BidPair(this HttpClient client,
-        GameId gameId, PlayerId playerId, FaceCard faceCard) =>
-        await Bid(client, gameId, playerId, pokerHand: "pair",
-            value: new
+    async internal static Task BidPair(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard faceCard, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "pair",
+            requestBody: new
             {
                 FaceCard = faceCard.ToString()
-            });
+            }, testRecorder);
 
-    async internal static Task<object> BidTwoPairs(this HttpClient client,
-        GameId gameId, PlayerId playerId, FaceCard first, FaceCard second) =>
-        await Bid(client, gameId, playerId, pokerHand: "two-pairs",
-            value: new
+    async internal static Task BidTwoPairs(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard first, FaceCard second, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "two-pairs",
+            requestBody: new
             {
                 FirstFaceCard = first.ToString(),
                 SecondFaceCard = second.ToString()
-            });
+            }, testRecorder);
 
-    async internal static Task<object> BidLowStraight(this HttpClient client,
-        GameId gameId, PlayerId playerId) =>
-        await Bid(client, gameId, playerId, pokerHand: "low-straight", value: new { });
+    async internal static Task BidLowStraight(this HttpClient client,
+        GameId gameId, PlayerId playerId, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "low-straight",
+            requestBody: new { },
+            testRecorder);
 
-    async internal static Task<object> BidHighStraight(this HttpClient client,
-        GameId gameId, PlayerId playerId) =>
-        await Bid(client, gameId, playerId, pokerHand: "high-straight", value: new { });
+    async internal static Task BidHighStraight(this HttpClient client,
+        GameId gameId, PlayerId playerId, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "high-straight",
+            requestBody: new { },
+            testRecorder);
 
-    async internal static Task<object> BidThreeOfAKind(this HttpClient client,
-        GameId gameId, PlayerId playerId, FaceCard faceCard) =>
-        await Bid(client, gameId, playerId, pokerHand: "three-of-a-kind",
-            value: new
+    async internal static Task BidThreeOfAKind(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard faceCard, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "three-of-a-kind",
+            requestBody: new
             {
                 FaceCard = faceCard.ToString()
-            });
+            }, testRecorder);
 
-    async internal static Task<object> BidFullHouse(this HttpClient client,
-        GameId gameId, PlayerId playerId, FaceCard threeOfAKind, FaceCard pair) =>
-        await Bid(client, gameId, playerId, pokerHand: "full-house",
-            value: new
+    async internal static Task BidFullHouse(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard threeOfAKind, FaceCard pair, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "full-house",
+            requestBody: new
             {
                 ThreeOfAKind = threeOfAKind.ToString(),
                 Pair = pair.ToString()
-            });
+            }, testRecorder);
 
-    async internal static Task<object> BidFlush(this HttpClient client,
-        GameId gameId, PlayerId playerId, Suit suit) =>
-        await Bid(client, gameId, playerId, pokerHand: "flush",
-            value: new
+    async internal static Task BidFlush(this HttpClient client,
+        GameId gameId, PlayerId playerId, Suit suit, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "flush",
+            requestBody: new
             {
                 Suit = suit.ToString()
-            });
+            }, testRecorder);
 
-    async internal static Task<object> BidFourOfAKind(this HttpClient client,
-        GameId gameId, PlayerId playerId, FaceCard faceCard) =>
-        await Bid(client, gameId, playerId, pokerHand: "four-of-a-kind",
-            value: new
+    async internal static Task BidFourOfAKind(this HttpClient client,
+        GameId gameId, PlayerId playerId, FaceCard faceCard, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "four-of-a-kind",
+            requestBody: new
             {
                 FaceCard = faceCard.ToString()
-            });
+            }, testRecorder);
 
-    async internal static Task<object> BidStraightFlush(this HttpClient client,
-        GameId gameId, PlayerId playerId, Suit suit) =>
-        await Bid(client, gameId, playerId, pokerHand: "straight-flush",
-            value: new
+    async internal static Task BidStraightFlush(this HttpClient client,
+        GameId gameId, PlayerId playerId, Suit suit, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "straight-flush",
+            requestBody: new
             {
                 Suit = suit.ToString()
-            });
+            }, testRecorder);
 
-    async internal static Task<object> BidRoyalFlush(this HttpClient client,
-        GameId gameId, PlayerId playerId, Suit suit) =>
-        await Bid(client, gameId, playerId, pokerHand: "royal-flush",
-            value: new
+    async internal static Task BidRoyalFlush(this HttpClient client,
+        GameId gameId, PlayerId playerId, Suit suit, TestRecorder testRecorder) =>
+        await Bid(client, gameId, playerId,
+            pokerHand: "royal-flush",
+            requestBody: new
             {
                 Suit = suit.ToString()
-            });
+            }, testRecorder);
 
-    private async static Task<object> Bid<TValue>(this HttpClient client,
-        GameId gameId, PlayerId playerId, string pokerHand, TValue value)
+    private async static Task Bid<TValue>(this HttpClient client,
+        GameId gameId, PlayerId playerId, string pokerHand, TValue requestBody, TestRecorder testRecorder)
     {
-        var response = await client.PostAsJsonAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids/{pokerHand}",
-            value);
+        var requestUri = $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/bids/{pokerHand}";
+        var response = await client.PostAsJsonAsync(requestUri, requestBody);
+        object result = await DeserializeResponse(response);
 
-        if (response.IsSuccessStatusCode)
-            return Success;
-
-        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
+        testRecorder.Record(
+            request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Post, requestBody),
+            response: new TestRecorder.Response(response.StatusCode, result));
     }
 
-    async internal static Task<object> GetGameFlow(this HttpClient client, GameId gameId)
+    async internal static Task GetGameFlow(this HttpClient client, GameId gameId, TestRecorder testRecorder)
     {
-        var response = await client.GetAsync($"{GameplaysUri}/{gameId.Id}");
+        var requestUri = $"{GameplaysUri}/{gameId.Id}";
+        var response = await client.GetAsync(requestUri);
+        var result = await DeserializeResponse<GetGame.Result>(response);
 
-        if(response.IsSuccessStatusCode)
-            return (await response.Content.ReadFromJsonAsync<GetGame.Result>())!;
-
-        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
+        testRecorder.Record(
+            request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Get),
+            response: new TestRecorder.Response(response.StatusCode, result));
     }
 
-    async internal static Task<GetDeal.Result> GetDealFlow(this HttpClient client, GameId gameId,
-        DealNumber dealNumber)
+    async internal static Task GetDealFlow(this HttpClient client, GameId gameId,
+        DealNumber dealNumber, TestRecorder testRecorder)
     {
-        var response = await client.GetAsync($"{GameplaysUri}/{gameId.Id}/deals/{dealNumber.Number}");
-        response.EnsureSuccessStatusCode();
-        return (await response.Content.ReadFromJsonAsync<GetDeal.Result>())!;
+        var requestUri = $"{GameplaysUri}/{gameId.Id}/deals/{dealNumber.Number}";
+        var response = await client.GetAsync(requestUri);
+        var result = await DeserializeResponse<GetDeal.Result>(response);
+
+        testRecorder.Record(
+            request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Get),
+            response: new TestRecorder.Response(response.StatusCode, result));
     }
 
-    async internal static Task<object> CheckWithSuccess(this HttpClient client, GameId gameId, PlayerId playerId)
+    async internal static Task Check(this HttpClient client,
+        GameId gameId, PlayerId playerId, TestRecorder testRecorder)
     {
-        var response = await client.PostAsync(
-            requestUri: $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/checks", content: null);
+        var requestUri = $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/checks";
+        var response = await client.PostAsync(requestUri, content: null);
+        var result = await DeserializeResponse(response);
 
-        if(response.IsSuccessStatusCode)
-            return Success;
+        testRecorder.Record(
+            request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Get),
+            response: new TestRecorder.Response(response.StatusCode, result));
+    }
 
-        return (await response.Content.ReadFromJsonAsync<ProblemDetails>())!;
+    private async static Task<object> DeserializeResponse(HttpResponseMessage response)
+    {
+        object result = response.IsSuccessStatusCode switch
+        {
+            true => "__without_body__",
+            false => (await response.Content.ReadFromJsonAsync<ProblemDetails>())!
+        };
+        return result;
+    }
+
+    private async static Task<object> DeserializeResponse<TSuccessModel>(HttpResponseMessage response)
+        where TSuccessModel : class
+    {
+        object result = response.IsSuccessStatusCode switch
+        {
+            true => (await response.Content.ReadFromJsonAsync<TSuccessModel>())!,
+            false => (await response.Content.ReadFromJsonAsync<ProblemDetails>())!
+        };
+        return result;
     }
 }

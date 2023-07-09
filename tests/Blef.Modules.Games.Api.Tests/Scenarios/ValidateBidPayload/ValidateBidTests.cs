@@ -13,262 +13,262 @@ public class ValidateBidTests
         .NewDeal();
 
     [Fact]
-    public Task HighCardBidWithSuccessTest()
+    public async Task HighCardBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidHighCard(WhichPlayer.Conway, FaceCard.Nine)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task HighCardBidWithNotValidValueTest()
+    public async Task HighCardBidWithNotValidValueTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidHighCard(WhichPlayer.Conway, FaceCard.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task PairBidWithSuccessTest()
+    public async Task PairBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidPair(WhichPlayer.Conway, FaceCard.Ten)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task PairBidWithNotValidValueTest()
+    public async Task PairBidWithNotValidValueTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidPair(WhichPlayer.Conway, FaceCard.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task TwoPairsBidWithSuccessTest()
+    public async Task TwoPairsBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidTwoPairs(WhichPlayer.Conway, FaceCard.Jack, FaceCard.Queen)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task TwoPairsBidWithNotValidFirstValueTest()
+    public async Task TwoPairsBidWithNotValidFirstValueTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidTwoPairs(WhichPlayer.Conway, FaceCard.NotValidValue, FaceCard.Queen)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task TwoPairsBidWithNotValidSecondValueTest()
+    public async Task TwoPairsBidWithNotValidSecondValueTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidTwoPairs(WhichPlayer.Conway, FaceCard.Jack, FaceCard.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task TwoPairsBidWithNotValidValuesTest()
+    public async Task TwoPairsBidWithNotValidValuesTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidTwoPairs(WhichPlayer.Conway, FaceCard.NotValidValue, FaceCard.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task TwoPairsBidWithTwoTheSameValuesTest()
+    public async Task TwoPairsBidWithTwoTheSameValuesTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidTwoPairs(WhichPlayer.Conway, FaceCard.Jack, FaceCard.Jack)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task LowStraightBidWithSuccessTest()
+    public async Task LowStraightBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidLowStraight(WhichPlayer.Conway)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task HighStraightBidWithSuccessTest()
+    public async Task HighStraightBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidHighStraight(WhichPlayer.Conway)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task ThreeOfAKindBidWithSuccessTest()
+    public async Task ThreeOfAKindBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidThreeOfAKind(WhichPlayer.Conway, FaceCard.King)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task ThreeOfAKindBidWithNotValidValueTest()
+    public async Task ThreeOfAKindBidWithNotValidValueTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidThreeOfAKind(WhichPlayer.Conway, FaceCard.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task FullHouseBidWithSuccessTest()
+    public async Task FullHouseBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidFullHouse(WhichPlayer.Conway, FaceCard.Ace, FaceCard.Jack)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task FullHouseBidWithNotValidFirstValueTest()
+    public async Task FullHouseBidWithNotValidFirstValueTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidFullHouse(WhichPlayer.Conway, FaceCard.NotValidValue, FaceCard.Jack)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task FullHouseBidWithNotValidSecondValueTest()
+    public async Task FullHouseBidWithNotValidSecondValueTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidFullHouse(WhichPlayer.Conway, FaceCard.Ace, FaceCard.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task FullHouseBidWithNotValidValuesTest()
+    public async Task FullHouseBidWithNotValidValuesTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidFullHouse(WhichPlayer.Conway, FaceCard.NotValidValue, FaceCard.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task FullHouseBidWithTwoTheSameValuesTest()
+    public async Task FullHouseBidWithTwoTheSameValuesTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidFullHouse(WhichPlayer.Conway, FaceCard.Ace, FaceCard.Ace)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task FlushBidWithSuccessTest()
+    public async Task FlushBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidFlush(WhichPlayer.Conway, Suit.Clubs)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task FlushBidWithNotValidSuitTest()
+    public async Task FlushBidWithNotValidSuitTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidFlush(WhichPlayer.Conway, Suit.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task FourOfAKindBidWithSuccessTest()
+    public async Task FourOfAKindBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidFourOfAKind(WhichPlayer.Conway, FaceCard.Nine)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task FourOfAKindBidWithNotValidValueTest()
+    public async Task FourOfAKindBidWithNotValidValueTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidFourOfAKind(WhichPlayer.Conway, FaceCard.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task StraightFlushBidWithSuccessTest()
+    public async Task StraightFlushBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidStraightFlush(WhichPlayer.Conway, Suit.Diamonds)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task StraightFlushBidWithNotValidSuitTest()
+    public async Task StraightFlushBidWithNotValidSuitTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidStraightFlush(WhichPlayer.Conway, Suit.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task RoyalFlushBidWithSuccessTest()
+    public async Task RoyalFlushBidWithSuccessTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidRoyalFlush(WhichPlayer.Conway, Suit.Spades)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 
     [Fact]
-    public Task RoyalFlushBidWithNotValidSuitTest()
+    public async Task RoyalFlushBidWithNotValidSuitTest()
     {
-        var results = Arrange
+        var results = await Arrange
             .BidRoyalFlush(WhichPlayer.Conway, Suit.NotValidValue)
             .Build();
 
-        return Verify(results);
+        await Verify(results);
     }
 }

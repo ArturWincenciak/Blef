@@ -6,7 +6,7 @@ internal sealed class TestBuilder
 {
     private static string _noArgument = nameof(_noArgument);
     private readonly List<Func<Task>> _actions = new();
-    private readonly TestRecorder _testResult = new();
+    private readonly TestRecorder _testRecorder = new();
     private BlefClient _gameClient = null!;
 
     async internal Task<IReadOnlyCollection<TestRecorder.TestResult>> Build()
@@ -14,236 +14,131 @@ internal sealed class TestBuilder
         var httpClient = new BlefApplicationFactory()
             .CreateClient();
 
-        _gameClient = new BlefClient(httpClient);
+        _gameClient = new BlefClient(httpClient, _testRecorder);
 
         foreach (var action in _actions)
             await action();
 
-        return _testResult.Actual;
+        return _testRecorder.Actual;
     }
 
     internal TestBuilder NewGame()
     {
-        _actions.Add(async () =>
-        {
-            var game = await _gameClient.NewGame();
-            _testResult.Record(action: nameof(NewGame), _noArgument, game);
-        });
-
+        _actions.Add(async () => await _gameClient.NewGame());
         return this;
     }
 
     public TestBuilder GetGameFlow()
     {
-        _actions.Add(async () =>
-        {
-            var gameFlow = await _gameClient.GetGameFlow();
-            _testResult.Record(action: nameof(GetGameFlow), _noArgument, gameFlow);
-        });
-
+        _actions.Add(async () => await _gameClient.GetGameFlow());
         return this;
     }
 
     public TestBuilder GetGameFlow(GameId gameId)
     {
-        _actions.Add(async () =>
-        {
-            var gameFlow = await _gameClient.GetGameFlow(gameId);
-            _testResult.Record(action: nameof(GetGameFlow), _noArgument, gameFlow);
-        });
-
+        _actions.Add(async () => await _gameClient.GetGameFlow(gameId));
         return this;
     }
 
     internal TestBuilder GetDealFlow(DealNumber deal)
     {
-        _actions.Add(async () =>
-        {
-            var dealFlow = await _gameClient.GetDealFlow(deal);
-            _testResult.Record(action: nameof(GetDealFlow), deal, dealFlow);
-        });
-
+        _actions.Add(async () => await _gameClient.GetDealFlow(deal));
         return this;
     }
 
     internal TestBuilder JoinPlayer(WhichPlayer whichPlayer)
     {
-        _actions.Add(async () =>
-        {
-            var player = await _gameClient.JoinPlayer(whichPlayer);
-            _testResult.Record(action: nameof(JoinPlayer), whichPlayer, player);
-        });
-
+        _actions.Add(async () => await _gameClient.JoinPlayer(whichPlayer));
         return this;
     }
 
     internal TestBuilder NewDeal()
     {
-        _actions.Add(async () =>
-        {
-            var deal = await _gameClient.StartFirstDeal();
-            _testResult.Record(action: nameof(NewDeal), _noArgument, deal);
-        });
-
+        _actions.Add(async () => await _gameClient.StartFirstDeal());
         return this;
     }
 
     internal TestBuilder GetCards(WhichPlayer whichPlayer, DealNumber deal)
     {
-        _actions.Add(async () =>
-        {
-            var cards = await _gameClient.GetCards(whichPlayer, deal);
-            _testResult.Record(action: nameof(GetCards), argument: new {whichPlayer, deal}, cards);
-        });
-
+        _actions.Add(async () => await _gameClient.GetCards(whichPlayer, deal));
         return this;
     }
 
     public TestBuilder BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidHighCard(whichPlayer, faceCard);
-            _testResult.Record(action: nameof(BidHighCard), argument: new {whichPlayer, faceCard}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidHighCard(whichPlayer, faceCard));
         return this;
     }
 
     public TestBuilder BidHighCard(PlayerId player, FaceCard faceCard)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidHighCard(player, faceCard);
-            _testResult.Record(action: nameof(BidHighCard), argument: new {player, faceCard}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidHighCard(player, faceCard));
         return this;
     }
 
     public TestBuilder BidPair(WhichPlayer whichPlayer, FaceCard faceCard)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidPair(whichPlayer, faceCard);
-            _testResult.Record(action: nameof(BidPair), argument: new {whichPlayer, faceCard}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidPair(whichPlayer, faceCard));
         return this;
     }
 
     public TestBuilder BidTwoPairs(WhichPlayer whichPlayer, FaceCard first, FaceCard second)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidTwoPairs(whichPlayer, first, second);
-            _testResult.Record(action: nameof(BidTwoPairs), argument: new {whichPlayer, first, second}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidTwoPairs(whichPlayer, first, second));
         return this;
     }
 
     public TestBuilder BidLowStraight(WhichPlayer whichPlayer)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidLowStraight(whichPlayer);
-            _testResult.Record(action: nameof(BidLowStraight), argument: new {whichPlayer}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidLowStraight(whichPlayer));
         return this;
     }
 
     public TestBuilder BidHighStraight(WhichPlayer whichPlayer)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidHighStraight(whichPlayer);
-            _testResult.Record(action: nameof(BidHighStraight), argument: new {whichPlayer}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidHighStraight(whichPlayer));
         return this;
     }
 
     public TestBuilder BidThreeOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidThreeOfAKind(whichPlayer, faceCard);
-            _testResult.Record(action: nameof(BidThreeOfAKind), argument: new {whichPlayer, faceCard}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidThreeOfAKind(whichPlayer, faceCard));
         return this;
     }
 
     public TestBuilder BidFullHouse(WhichPlayer whichPlayer, FaceCard threeOfAKind, FaceCard pair)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidFullHouse(whichPlayer, threeOfAKind, pair);
-            _testResult.Record(action: nameof(BidFullHouse), argument: new
-            {
-                whichPlayer,
-                first = threeOfAKind,
-                second = pair
-            }, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidFullHouse(whichPlayer, threeOfAKind, pair));
         return this;
     }
 
     public TestBuilder BidFlush(WhichPlayer whichPlayer, Suit suit)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidFlush(whichPlayer, suit);
-            _testResult.Record(action: nameof(BidFlush), argument: new {whichPlayer, suit}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidFlush(whichPlayer, suit));
         return this;
     }
 
     public TestBuilder BidFourOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidFourOfAKind(whichPlayer, faceCard);
-            _testResult.Record(action: nameof(BidFourOfAKind), argument: new {whichPlayer, faceCard}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidFourOfAKind(whichPlayer, faceCard));
         return this;
     }
 
     public TestBuilder BidStraightFlush(WhichPlayer whichPlayer, Suit suit)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidStraightFlush(whichPlayer, suit);
-            _testResult.Record(action: nameof(BidStraightFlush), argument: new {whichPlayer, suit}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidStraightFlush(whichPlayer, suit));
         return this;
     }
 
     public TestBuilder BidRoyalFlush(WhichPlayer whichPlayer, Suit suit)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.BidRoyalFlush(whichPlayer, suit);
-            _testResult.Record(action: nameof(BidRoyalFlush), argument: new {whichPlayer, suit}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.BidRoyalFlush(whichPlayer, suit));
         return this;
     }
 
     internal TestBuilder Check(WhichPlayer whichPlayer)
     {
-        _actions.Add(async () =>
-        {
-            var result = await _gameClient.Check(whichPlayer);
-            _testResult.Record(action: nameof(Check), argument: new {whichPlayer}, result);
-        });
-
+        _actions.Add(async () => await _gameClient.Check(whichPlayer));
         return this;
     }
 }
