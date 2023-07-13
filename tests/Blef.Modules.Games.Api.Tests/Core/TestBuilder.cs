@@ -70,6 +70,12 @@ internal sealed class TestBuilder
         return this;
     }
 
+    internal TestBuilder NewDeal(GameId gameId)
+    {
+        _actions.Add(async () => await _gameClient.StartFirstDeal(gameId));
+        return this;
+    }
+
     internal TestBuilder GetCards(WhichPlayer whichPlayer, DealNumber deal)
     {
         _actions.Add(async () => await _gameClient.GetCards(whichPlayer, deal));
