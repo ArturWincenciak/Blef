@@ -24,7 +24,7 @@
         Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/deal-not-found.md,
         Status: 404,
         Title: The resource with the given identifier does not exist,
-        Detail: Deal not found,
+        Detail: Deal '100' of game 'Guid_1' not found,
         Instance: gameplays/Guid_1/deals/100
       }
     }

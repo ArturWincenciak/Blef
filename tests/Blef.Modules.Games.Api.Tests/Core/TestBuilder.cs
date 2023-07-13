@@ -46,6 +46,12 @@ internal sealed class TestBuilder
         return this;
     }
 
+    internal TestBuilder GetDealFlow(GameId gameId, DealNumber deal)
+    {
+        _actions.Add(async () => await _gameClient.GetDealFlow(gameId, deal));
+        return this;
+    }
+
     internal TestBuilder JoinPlayer(WhichPlayer whichPlayer)
     {
         _actions.Add(async () => await _gameClient.JoinPlayer(whichPlayer));

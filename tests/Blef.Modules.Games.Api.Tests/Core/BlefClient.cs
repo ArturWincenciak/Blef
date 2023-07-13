@@ -39,6 +39,9 @@ internal sealed class BlefClient
             gameId: _gameId ?? throw new InvalidOperationException("Game has to be created"),
             dealNumber, _testRecorder);
 
+    async internal Task GetDealFlow(GameId gameId, DealNumber dealNumber) =>
+        await _httpClient.GetDealFlow(gameId, dealNumber, _testRecorder);
+
     async internal Task JoinPlayer(WhichPlayer whichPlayer)
     {
         var result = await _httpClient.JoinPlayer(

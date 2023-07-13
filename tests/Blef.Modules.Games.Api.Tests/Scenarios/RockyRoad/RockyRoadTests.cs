@@ -336,4 +336,19 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
+
+    [Fact]
+    public async Task GetDealOfNotExistedGameTest()
+    {
+        // arrange
+        var notExistedGame = new GameId(Guid.Parse("38BE0303-E5FA-4D2A-AE20-C8559F247073"));
+
+        // act
+        var results = await new TestBuilder()
+            .GetDealFlow(notExistedGame, new DealNumber(1))
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
 }
