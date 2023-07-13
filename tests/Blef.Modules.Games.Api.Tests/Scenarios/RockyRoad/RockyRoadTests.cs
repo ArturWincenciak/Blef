@@ -402,7 +402,7 @@ public class RockyRoadTests
     }
 
     [Fact]
-    public async Task NewDealDealOnNotExistedGameTest()
+    public async Task NewDealOnNotExistedGameTest()
     {
         // arrange
         var notExistedGame = new GameId(Guid.Parse("53A9A321-453B-422B-B2C2-A2A6B2C8EACA"));
