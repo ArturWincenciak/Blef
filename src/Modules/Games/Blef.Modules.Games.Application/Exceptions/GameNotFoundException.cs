@@ -5,7 +5,7 @@ namespace Blef.Modules.Games.Application.Exceptions;
 internal sealed class GameNotFoundException : NotFoundException
 {
     public GameNotFoundException(Guid gameId)
-        : base(detail: "Game not found", instance: $"gameplays/{gameId}")
+        : base(detail: $"Game '{gameId}' not found", instance: $"gameplays/{gameId}")
     {
     }
 }

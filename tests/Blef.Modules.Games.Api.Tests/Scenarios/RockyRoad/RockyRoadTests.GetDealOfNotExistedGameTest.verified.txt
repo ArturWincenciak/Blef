@@ -2,7 +2,7 @@
   {
     No: 1,
     Request: {
-      Path: games-module/gameplays/Guid_1,
+      Path: games-module/gameplays/Guid_1/deals/1,
       Method: Get
     },
     Response: {
