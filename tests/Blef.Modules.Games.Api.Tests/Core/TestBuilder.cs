@@ -58,6 +58,12 @@ internal sealed class TestBuilder
         return this;
     }
 
+    internal TestBuilder JoinPlayer(GameId gameId, WhichPlayer whichPlayer)
+    {
+        _actions.Add(async () => await _gameClient.JoinPlayer(gameId, whichPlayer));
+        return this;
+    }
+
     internal TestBuilder NewDeal()
     {
         _actions.Add(async () => await _gameClient.StartFirstDeal());
@@ -151,6 +157,12 @@ internal sealed class TestBuilder
     internal TestBuilder Check(WhichPlayer whichPlayer)
     {
         _actions.Add(async () => await _gameClient.Check(whichPlayer));
+        return this;
+    }
+
+    internal TestBuilder Check(GameId gameId, WhichPlayer whichPlayer)
+    {
+        _actions.Add(async () => await _gameClient.Check(gameId, whichPlayer));
         return this;
     }
 }
