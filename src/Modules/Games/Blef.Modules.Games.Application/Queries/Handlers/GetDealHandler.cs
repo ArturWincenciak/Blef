@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Application.Repositories;
+﻿using Blef.Modules.Games.Application.Exceptions;
+using Blef.Modules.Games.Application.Repositories;
 using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
@@ -16,8 +17,14 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
     public async Task<GetDeal.Result> Handle(GetDeal query, CancellationToken cancellation)
     {
         var gameplay = await _gameplaysRepository.Get(new GameId(query.GameId));
-        var dealProjection = gameplay.GetDealProjection(new DealNumber(query.DealNumber));
-        return Map(dealProjection);
+        if (gameplay is null)
+            throw new GameNotFoundException(query.GameId);
+
+        var deal = gameplay.GetDealProjection(new DealNumber(query.DealNumber));
+        if (deal is null)
+            throw new DealNotFoundException(query.GameId, query.DealNumber);
+
+        return Map(deal);
     }
 
     private static GetDeal.Result Map(Gameplay.DealDetails projection) =>
