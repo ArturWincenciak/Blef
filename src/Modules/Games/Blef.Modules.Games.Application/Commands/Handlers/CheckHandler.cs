@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Application.Repositories;
+﻿using Blef.Modules.Games.Application.Exceptions;
+using Blef.Modules.Games.Application.Repositories;
 using Blef.Modules.Games.Domain.Events;
 using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Commands;
@@ -22,6 +23,9 @@ internal sealed class CheckHandler : ICommandHandler<Check, Check.Result>
     public async Task<Check.Result> Handle(Check command, CancellationToken cancellation)
     {
         var game = await _games.Get(new GameId(command.GameId));
+        if(game is null)
+            throw new GameNotFoundException(command.GameId);
+
         var events = game.Check(new CheckingPlayer(new PlayerId(command.PlayerId)));
 
         foreach (var @event in events)
