@@ -400,4 +400,19 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
+
+    [Fact]
+    public async Task NewDealDealOnNotExistedGameTest()
+    {
+        // arrange
+        var notExistedGame = new GameId(Guid.Parse("53A9A321-453B-422B-B2C2-A2A6B2C8EACA"));
+
+        // act
+        var results = await new TestBuilder()
+            .NewDeal(notExistedGame)
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
 }
