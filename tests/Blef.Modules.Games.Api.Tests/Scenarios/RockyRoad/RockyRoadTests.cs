@@ -351,4 +351,21 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
+
+    [Fact]
+    public async Task BidOnNotExistedGameTest()
+    {
+        // arrange
+        var notExistedGame = new GameId(Guid.Parse("8DCF0098-B0A6-4466-9162-9C7968C811E1"));
+
+        // act
+        var results = await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .BidHighCard(notExistedGame, WhichPlayer.Conway, FaceCard.Ace)
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
 }

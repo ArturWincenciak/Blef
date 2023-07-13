@@ -76,6 +76,12 @@ internal sealed class TestBuilder
         return this;
     }
 
+    public TestBuilder BidHighCard(GameId gameId, WhichPlayer whichPlayer, FaceCard faceCard)
+    {
+        _actions.Add(async () => await _gameClient.BidHighCard(gameId, whichPlayer, faceCard));
+        return this;
+    }
+
     public TestBuilder BidHighCard(PlayerId player, FaceCard faceCard)
     {
         _actions.Add(async () => await _gameClient.BidHighCard(player, faceCard));
