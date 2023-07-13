@@ -75,7 +75,7 @@
         Status: 400,
         Title: Cannot join game that is already started,
         Detail: Player 'Knuth' has tried to join game 'Guid_1' that is already started,
-        Instance: /games/Guid_1
+        Instance: /games-module/games/Guid_1/players
       }
     }
   }

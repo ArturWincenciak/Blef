@@ -8,8 +8,7 @@ internal sealed class GameOverException : BlefException
     public GameOverException(GameId gameId)
         : base(
             title: "The game is already over",
-            detail: "Cannot make any more moves, the game is over",
-            instance: $"/games/{gameId}")
+            detail: "Cannot make any more moves, the game is over")
     {
     }
 }

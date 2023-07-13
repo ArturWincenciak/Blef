@@ -12,7 +12,7 @@
         Status: 404,
         Title: The resource with the given identifier does not exist,
         Detail: Game 'Guid_1' not found,
-        Instance: gameplays/Guid_1
+        Instance: /games-module/gameplays/Guid_1/deals/1
       }
     }
   }

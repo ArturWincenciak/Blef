@@ -97,7 +97,7 @@
         Status: 400,
         Title: There is no bid to check it,
         Detail: Game must be started by at least one bid, cannot check when the game has not started,
-        Instance: /games/Guid_1/deals/2
+        Instance: /games-module/games/Guid_1/players/Guid_3/checks
       }
     }
   }

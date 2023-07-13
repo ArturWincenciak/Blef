@@ -6,8 +6,6 @@ namespace Blef.Modules.Games.Domain.Tests;
 
 public class MoveOrderPolicyTests
 {
-    private static string Irrelevant => "irrelevant";
-
     [Fact]
     public void CreateMoveOrderPolicyTest()
     {
@@ -35,11 +33,11 @@ public class MoveOrderPolicyTests
         // act
         var exception = Record.Exception(() =>
         {
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player1, Irrelevant);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player1);
         });
 
         // assert
@@ -55,13 +53,13 @@ public class MoveOrderPolicyTests
         // act
         var exception = Record.Exception(() =>
         {
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player3, Irrelevant);
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player3, Irrelevant);
-            policy.Move(player1, Irrelevant);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player3);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player3);
+            policy.Move(player1);
         });
 
         // assert
@@ -77,15 +75,15 @@ public class MoveOrderPolicyTests
         // act
         var exception = Record.Exception(() =>
         {
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player3, Irrelevant);
-            policy.Move(player4, Irrelevant);
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player3, Irrelevant);
-            policy.Move(player4, Irrelevant);
-            policy.Move(player1, Irrelevant);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player3);
+            policy.Move(player4);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player3);
+            policy.Move(player4);
+            policy.Move(player1);
         });
 
         // assert
@@ -99,7 +97,7 @@ public class MoveOrderPolicyTests
         var (policy, _, player2) = GivenPolicyWithTwoPlayers();
 
         // act
-        Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() => { policy.Move(player2, Irrelevant); });
+        Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() => { policy.Move(player2); });
     }
 
     [Fact]
@@ -111,8 +109,8 @@ public class MoveOrderPolicyTests
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
         {
-            policy.Move(player1, Irrelevant);
-            policy.Move(player1, Irrelevant);
+            policy.Move(player1);
+            policy.Move(player1);
         });
     }
 
@@ -125,9 +123,9 @@ public class MoveOrderPolicyTests
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
         {
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player2, Irrelevant);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player2);
         });
     }
 
@@ -140,8 +138,8 @@ public class MoveOrderPolicyTests
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
         {
-            policy.Move(player1, Irrelevant);
-            policy.Move(player3, Irrelevant);
+            policy.Move(player1);
+            policy.Move(player3);
         });
     }
 
@@ -154,10 +152,10 @@ public class MoveOrderPolicyTests
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
         {
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player3, Irrelevant);
-            policy.Move(player1, Irrelevant);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player3);
+            policy.Move(player1);
         });
     }
 
@@ -170,11 +168,11 @@ public class MoveOrderPolicyTests
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
         {
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player3, Irrelevant);
-            policy.Move(player4, Irrelevant);
-            policy.Move(player2, Irrelevant);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player3);
+            policy.Move(player4);
+            policy.Move(player2);
         });
     }
 
@@ -187,11 +185,11 @@ public class MoveOrderPolicyTests
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
         {
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player3, Irrelevant);
-            policy.Move(player4, Irrelevant);
-            policy.Move(player3, Irrelevant);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player3);
+            policy.Move(player4);
+            policy.Move(player3);
         });
     }
 
@@ -204,11 +202,11 @@ public class MoveOrderPolicyTests
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
         {
-            policy.Move(player1, Irrelevant);
-            policy.Move(player2, Irrelevant);
-            policy.Move(player3, Irrelevant);
-            policy.Move(player4, Irrelevant);
-            policy.Move(player4, Irrelevant);
+            policy.Move(player1);
+            policy.Move(player2);
+            policy.Move(player3);
+            policy.Move(player4);
+            policy.Move(player4);
         });
     }
 

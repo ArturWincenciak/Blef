@@ -5,11 +5,10 @@ namespace Blef.Modules.Games.Domain.Exceptions;
 
 internal sealed class ThatIsNotThisPlayerTurnNowException : BlefException
 {
-    public ThatIsNotThisPlayerTurnNowException(PlayerId playerId, string instance)
+    public ThatIsNotThisPlayerTurnNowException(PlayerId playerId)
         : base(
             title: "That is not this player's turn now",
-            detail: $"Player '{playerId}' should wait for his turn",
-            instance)
+            detail: $"Player '{playerId}' should wait for his turn")
     {
     }
 }

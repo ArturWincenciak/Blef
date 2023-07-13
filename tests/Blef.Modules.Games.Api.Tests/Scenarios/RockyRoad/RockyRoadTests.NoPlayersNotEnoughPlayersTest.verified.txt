@@ -25,7 +25,7 @@
         Status: 400,
         Title: The minimum number of game players has not been reached,
         Detail: Minimum number of game players must be at least 2,
-        Instance: /games/Guid_1
+        Instance: /games-module/games/Guid_1/deals
       }
     }
   }

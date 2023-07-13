@@ -13,6 +13,8 @@ internal sealed class GamesRepository : IGamesRepository
         return Task.CompletedTask;
     }
 
-    public Task<Game> Get(GameId gameId) =>
-        Task.FromResult(_games[gameId.Id]);
+    public async Task<Game?> Get(GameId gameId) =>
+        await Task.FromResult(_games.ContainsKey(gameId.Id)
+            ? _games[gameId.Id]
+            : null);
 }

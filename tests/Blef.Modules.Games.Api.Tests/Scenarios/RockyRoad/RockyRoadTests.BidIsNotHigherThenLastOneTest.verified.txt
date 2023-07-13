@@ -90,7 +90,7 @@
         Status: 400,
         Title: The bid is not higher than last one,
         Detail: The new bid 'pair:ace' is not higher than last one 'full-house:ace,king',
-        Instance: /games/Guid_1/deals/1
+        Instance: /games-module/games/Guid_1/players/Guid_3/bids/pair
       }
     }
   }

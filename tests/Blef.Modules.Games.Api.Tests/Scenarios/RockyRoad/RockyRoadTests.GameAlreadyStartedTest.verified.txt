@@ -72,7 +72,7 @@
         Status: 400,
         Title: Game already started,
         Detail: The game 'Guid_1' has already started,
-        Instance: /games/Guid_1
+        Instance: /games-module/games/Guid_1/deals
       }
     }
   }

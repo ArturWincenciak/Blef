@@ -95,8 +95,8 @@
         Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/too-many-players.md,
         Status: 400,
         Title: The maximum number of game players has been reached,
-        Detail: No more than four players can take part in the game,
-        Instance: /games/Guid_1
+        Detail: No more than four players can take part in the game 'Guid_1',
+        Instance: /games-module/games/Guid_1/players
       }
     }
   }

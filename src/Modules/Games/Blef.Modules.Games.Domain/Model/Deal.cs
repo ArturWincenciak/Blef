@@ -15,9 +15,6 @@ internal sealed class Deal
     private bool BetHasBeenMade =>
         _lastBid is not null;
 
-    private string InstanceContext =>
-        $"/games/{Id.Game}/deals/{Id.Deal}";
-
     public Deal(DealId dealId, DealSet dealSet)
     {
         if (dealSet is null)
@@ -35,7 +32,7 @@ internal sealed class Deal
         if (_dealIsOver)
             throw new InvalidOperationException("Deal is already over");
 
-        _moveOrderPolicy.Move(newBid.Player, InstanceContext);
+        _moveOrderPolicy.Move(newBid.Player);
 
         if (BetHasBeenMade && newBid.PokerHand.IsBetterThan(_lastBid!.PokerHand) == false)
             throw new BidIsNotHigherThenLastOneException(Id, newBid, _lastBid);
@@ -48,7 +45,7 @@ internal sealed class Deal
         if (_dealIsOver)
             throw new InvalidOperationException("Deal is already over");
 
-        _moveOrderPolicy.Move(checkingPlayerId.Player, InstanceContext);
+        _moveOrderPolicy.Move(checkingPlayerId.Player);
 
         if (BetHasBeenMade == false)
             throw new NoBidToCheckException(Id);

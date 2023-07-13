@@ -5,5 +5,5 @@ namespace Blef.Modules.Games.Application.Repositories;
 internal interface IGamesRepository
 {
     Task Add(Game game);
-    Task<Game> Get(GameId gameId);
+    Task<Game?> Get(GameId gameId);
 }

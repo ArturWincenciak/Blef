@@ -62,7 +62,7 @@
         Status: 400,
         Title: Game not started,
         Detail: The game Guid_1 has not yet started,
-        Instance: /games/Guid_1
+        Instance: /games-module/games/Guid_1/players/Guid_2/bids/pair
       }
     }
   }
