@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Application.Repositories;
+﻿using Blef.Modules.Games.Application.Exceptions;
+using Blef.Modules.Games.Application.Repositories;
 using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Queries;
 using JetBrains.Annotations;
@@ -16,6 +17,9 @@ internal sealed class GetPlayerCardsHandler : IQueryHandler<GetPlayerCards, GetP
     public async Task<GetPlayerCards.Result> Handle(GetPlayerCards query, CancellationToken cancellation)
     {
         var gameplay = await _gameplays.Get(new GameId(query.Game));
+        if (gameplay is null)
+            throw new GameNotFoundException(query.Game);
+
         var hand = gameplay.GetHand(dealNumber: new DealNumber(query.DealNumber), playerId: new PlayerId(query.Player));
         return Map(hand);
     }

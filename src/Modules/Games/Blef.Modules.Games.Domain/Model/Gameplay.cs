@@ -84,8 +84,10 @@ internal sealed class Gameplay
     public Game GetGameProjection() =>
         new(Status, GamePlayerEntries, Deals: Deals(), _winner);
 
-    public DealDetails GetDealProjection(DealNumber dealNumber) =>
-        _deals[dealNumber];
+    public DealDetails? GetDealProjection(DealNumber dealNumber) =>
+        _deals.Any(deal => deal.Key == dealNumber)
+            ? _deals[dealNumber]
+            : null;
 
     public IEnumerable<Card> GetHand(DealNumber dealNumber, PlayerId playerId)
     {

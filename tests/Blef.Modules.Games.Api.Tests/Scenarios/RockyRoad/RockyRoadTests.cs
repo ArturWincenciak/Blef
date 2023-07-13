@@ -319,4 +319,21 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
+
+    [Fact]
+    public async Task GetNotExistedDealTest()
+    {
+        // arrange
+        var notExistedDeal = 100;
+        var arrangeGame = new TestBuilder()
+            .NewGame();
+
+        // act
+        var results = await arrangeGame
+            .GetDealFlow(new DealNumber(notExistedDeal))
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
 }
