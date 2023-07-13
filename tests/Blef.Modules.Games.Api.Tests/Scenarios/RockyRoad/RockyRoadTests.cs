@@ -368,4 +368,36 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
+
+    [Fact]
+    public async Task CheckOnNotExistedGameTest()
+    {
+        // arrange
+        var notExistedGame = new GameId(Guid.Parse("250C6364-5AED-47A7-809C-2FD7DDE255E5"));
+
+        // act
+        var results = await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .Check(notExistedGame, WhichPlayer.Conway)
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
+
+    [Fact]
+    public async Task JoinPlayerToNotExistedGameTest()
+    {
+        // arrange
+        var notExistedGame = new GameId(Guid.Parse("F2F0F0F2-0F0F-0F0F-0F0F-0F0F0F0F0F0F"));
+
+        // act
+        var results = await new TestBuilder()
+            .JoinPlayer(notExistedGame, WhichPlayer.Conway)
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
 }

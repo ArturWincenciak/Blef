@@ -38,10 +38,13 @@ internal sealed class BlefClient
     async internal Task GetDealFlow(GameId gameId, DealNumber dealNumber) =>
         await _httpClient.GetDealFlow(gameId, dealNumber, _testRecorder);
 
-    async internal Task JoinPlayer(WhichPlayer whichPlayer)
+    async internal Task JoinPlayer(WhichPlayer whichPlayer) =>
+        await JoinPlayer(GameId, whichPlayer);
+
+    async internal Task JoinPlayer(GameId gameId, WhichPlayer whichPlayer)
     {
         var result = await _httpClient.JoinPlayer(
-            GameId, nick: new PlayerNick(whichPlayer.ToString()), _testRecorder);
+            gameId, nick: new PlayerNick(whichPlayer.ToString()), _testRecorder);
 
         if (result is JoinGame.Result player)
             SetPlayerId(whichPlayer, playerId: new PlayerId(player.PlayerId));
@@ -56,11 +59,8 @@ internal sealed class BlefClient
         await _httpClient.GetCards(GameId, deal, playerId, _testRecorder);
     }
 
-    async internal Task BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard)
-    {
-        var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.BidHighCard(GameId, playerId, faceCard, _testRecorder);
-    }
+    async internal Task BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard) =>
+        await BidHighCard(GameId, whichPlayer, faceCard);
 
     async internal Task BidHighCard(GameId gameId, WhichPlayer whichPlayer, FaceCard faceCard)
     {
@@ -131,10 +131,13 @@ internal sealed class BlefClient
         await _httpClient.BidRoyalFlush(GameId, playerId, suit, _testRecorder);
     }
 
-    async internal Task Check(WhichPlayer whichPlayer)
+    async internal Task Check(WhichPlayer whichPlayer) =>
+        await Check(GameId, whichPlayer);
+
+    async internal Task Check(GameId gameId, WhichPlayer whichPlayer)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.Check(GameId, playerId, _testRecorder);
+        await _httpClient.Check(gameId, playerId, _testRecorder);
     }
 
     private PlayerId GetPlayerId(WhichPlayer whichPlayer) =>
