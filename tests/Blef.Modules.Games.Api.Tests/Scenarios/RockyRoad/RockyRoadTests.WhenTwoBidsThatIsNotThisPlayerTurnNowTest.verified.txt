@@ -89,7 +89,7 @@
         Status: 400,
         Title: That is not this player's turn now,
         Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
-        Instance: /games/Guid_1/deals/1
+        Instance: /games-module/games/Guid_1/players/Guid_2/bids/pair
       }
     }
   }

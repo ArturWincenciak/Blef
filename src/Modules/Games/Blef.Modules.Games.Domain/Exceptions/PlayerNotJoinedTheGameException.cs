@@ -8,8 +8,7 @@ internal class PlayerNotJoinedTheGameException : BlefException
     public PlayerNotJoinedTheGameException(GameId gameId, PlayerId playerId)
         : base(
             title: "Player not joined the game",
-            detail: $"Player '{playerId}' not joined the game",
-            instance: $"/games/{gameId}")
+            detail: $"Player '{playerId}' not joined the game '{gameId}'")
     {
     }
 }

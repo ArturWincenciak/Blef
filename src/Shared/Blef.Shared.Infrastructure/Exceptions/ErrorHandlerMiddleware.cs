@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Blef.Shared.Kernel.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,11 @@ internal sealed class ErrorHandlerMiddleware : IMiddleware
         try
         {
             await next(context);
+        }
+        catch (BlefException ex)
+        {
+            ex.WithInstance(context.Request.Path);
+            await HandleErrorAsync(context, ex);
         }
         catch (Exception ex)
         {

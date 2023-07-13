@@ -8,8 +8,7 @@ internal sealed class BidIsNotHigherThenLastOneException : BlefException
     public BidIsNotHigherThenLastOneException(DealId dealId, Bid newBid, Bid lastBid)
         : base(
             title: "The bid is not higher than last one",
-            detail: $"The new bid '{newBid}' is not higher than last one '{lastBid}'",
-            instance: $"/games/{dealId.Game}/deals/{dealId.Deal}")
+            detail: $"The new bid '{newBid}' is not higher than last one '{lastBid}'")
     {
     }
 }

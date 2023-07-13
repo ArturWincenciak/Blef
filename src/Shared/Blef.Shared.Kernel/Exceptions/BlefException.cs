@@ -7,16 +7,22 @@ public abstract class BlefException : Exception
 {
     public string Title { get; }
     public string Detail { get; }
-    public string Instance { get; }
+    public string Instance { get; private set; }
     public IDictionary<string, string[]> Errors { get; }
 
-    protected BlefException(string title, string detail, string instance)
-        : base(JsonSerializer.Serialize(new {title, detail, instance}))
+    protected BlefException(string title, string detail)
+        : base(JsonSerializer.Serialize(new {title, detail}))
     {
         Title = title;
         Detail = detail;
-        Instance = instance;
         Errors = new Dictionary<string, string[]>();
+        Instance = string.Empty;
+    }
+
+    public BlefException WithInstance(string instance)
+    {
+        Instance = instance;
+        return this;
     }
 
     [SuppressMessage(category: "ReSharper", checkId: "UnusedMember.Global")]

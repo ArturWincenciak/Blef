@@ -8,8 +8,7 @@ internal sealed class GameAlreadyStartedException : BlefException
     public GameAlreadyStartedException(GameId gameId)
         : base(
             title: "Game already started",
-            detail: $"The game '{gameId}' has already started",
-            instance: $"/games/{gameId}")
+            detail: $"The game '{gameId}' has already started")
     {
     }
 }

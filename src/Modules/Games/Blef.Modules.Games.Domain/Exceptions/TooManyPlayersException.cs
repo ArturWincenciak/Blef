@@ -8,8 +8,7 @@ internal sealed class TooManyPlayersException : BlefException
     public TooManyPlayersException(GameId gameId)
         : base(
             title: "The maximum number of game players has been reached",
-            detail: "No more than four players can take part in the game",
-            instance: $"/games/{gameId}")
+            detail: $"No more than four players can take part in the game '{gameId}'")
     {
     }
 }

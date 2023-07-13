@@ -361,7 +361,7 @@
         Status: 400,
         Title: The game is already over,
         Detail: Cannot make any more moves, the game is over,
-        Instance: /games/Guid_1
+        Instance: /games-module/games/Guid_1/players/Guid_3/bids/pair
       }
     }
   }

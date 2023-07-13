@@ -416,8 +416,8 @@
         Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-lost-the-game.md,
         Status: 400,
         Title: Player already lost the game,
-        Detail: Player 'PlayerId { Id = Guid_2 }' already lost the game,
-        Instance: /games/Guid_1
+        Detail: Player 'PlayerId { Id = Guid_2 }' already lost the game 'Guid_1',
+        Instance: /games-module/games/Guid_1/players/Guid_2/bids/royal-flush
       }
     }
   }

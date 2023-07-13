@@ -61,8 +61,8 @@
         Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-joined.md,
         Status: 400,
         Title: Player already joined the game,
-        Detail: Player 'Conway' already joined the game,
-        Instance: /games/Guid_1
+        Detail: Player 'Conway' already joined the game 'Guid_1',
+        Instance: /games-module/games/Guid_1/players
       }
     }
   }
