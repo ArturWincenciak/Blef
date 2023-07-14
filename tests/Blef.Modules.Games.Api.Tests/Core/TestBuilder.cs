@@ -166,6 +166,12 @@ internal sealed class TestBuilder
         return this;
     }
 
+    internal TestBuilder Check(PlayerId player)
+    {
+        _actions.Add(async () => await _gameClient.Check(player));
+        return this;
+    }
+
     internal TestBuilder Check(GameId gameId, WhichPlayer whichPlayer)
     {
         _actions.Add(async () => await _gameClient.Check(gameId, whichPlayer));
