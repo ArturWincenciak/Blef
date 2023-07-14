@@ -92,6 +92,9 @@ internal sealed class Gameplay
 
     public IEnumerable<Card> GetHand(DealNumber dealNumber, PlayerId playerId)
     {
+        if(!_deals.ContainsKey(dealNumber))
+            throw new DealNotFoundException(Id.Id, dealNumber.Number);
+
         var deal = _deals[dealNumber];
 
         if (deal.Players.All(player => player.Player != playerId))
