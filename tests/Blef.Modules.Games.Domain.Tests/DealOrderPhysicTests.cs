@@ -79,7 +79,6 @@ public class DealOrderPhysicTests
         Assert.Equal(expected: Order.Create(4), actual: orderPhysic.ShiftedOrder(Order.Create(4)));
     }
 
-    // todo: test with more deals count
     [Fact]
     public void Given_PlayerCount_Four_And_SequenceShift_Five_Then_GetOrder()
     {
@@ -257,5 +256,31 @@ public class DealOrderPhysicTests
         // act, assert
         Assert.Equal(expected: Order.Create(1), actual: orderPhysic.ShiftedOrder(Order.Create(1)));
         Assert.Equal(expected: Order.Create(2), actual: orderPhysic.ShiftedOrder(Order.Create(2)));
+    }
+
+    [Fact]
+    public void Given_PlayerCount_Two_And_SequenceShift_And_ShiftedOrder_Too_High_Then_Throw_Exception()
+    {
+        // arrange
+        var playersCount = PlayersCount.Create(2);
+        var dealsPlayedCount = DealsCount.Create(1);
+        var orderPhysic = DealOrderPhysic.Create(playersCount, dealsPlayedCount);
+        var tooHighShiftedOrder = Order.Create(3);
+
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() => orderPhysic.ShiftedOrder(tooHighShiftedOrder));
+    }
+
+    [Fact]
+    public void Given_PlayerCount_Three_And_SequenceShift_And_ShiftedOrder_Too_High_Then_Throw_Exception()
+    {
+        // arrange
+        var playersCount = PlayersCount.Create(3);
+        var dealsPlayedCount = DealsCount.Create(1);
+        var orderPhysic = DealOrderPhysic.Create(playersCount, dealsPlayedCount);
+        var tooHighShiftedOrder = Order.Create(4);
+
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() => orderPhysic.ShiftedOrder(tooHighShiftedOrder));
     }
 }
