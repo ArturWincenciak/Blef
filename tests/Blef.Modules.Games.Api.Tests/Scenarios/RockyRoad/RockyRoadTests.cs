@@ -181,7 +181,7 @@ public class RockyRoadTests
     }
 
     [Fact]
-    public async Task TurnNotJoinedPlayer()
+    public async Task BidNotJoinedPlayer()
     {
         // arrange
         var notJoinedPlayer = new PlayerId(Guid.Parse("53D4523A-4004-4E31-98ED-CA1C5A909AB9"));
@@ -189,6 +189,22 @@ public class RockyRoadTests
         // act
         var results = await Arrange
             .BidHighCard(notJoinedPlayer, FaceCard.Ace)
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
+
+    [Fact]
+    public async Task CheckNotJoinedPlayer()
+    {
+        // arrange
+        var notJoinedPlayer = new PlayerId(Guid.Parse("8FCD458B-DBD7-4BFD-A3F9-926A7E9827C2"));
+
+        // act
+        var results = await Arrange
+            .BidHighCard(WhichPlayer.Conway, FaceCard.Ace)
+            .Check(notJoinedPlayer)
             .Build();
 
         // assert

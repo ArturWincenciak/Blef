@@ -143,6 +143,9 @@ internal sealed class BlefClient
         await _httpClient.Check(gameId, playerId, _testRecorder);
     }
 
+    async internal Task Check(PlayerId playerId) =>
+        await _httpClient.Check(GameId, playerId, _testRecorder);
+
     private PlayerId GetPlayerId(WhichPlayer whichPlayer) =>
         whichPlayer switch
         {
