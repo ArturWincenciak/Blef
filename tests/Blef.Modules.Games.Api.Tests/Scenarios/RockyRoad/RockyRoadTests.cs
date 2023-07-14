@@ -212,6 +212,21 @@ public class RockyRoadTests
     }
 
     [Fact]
+    public async Task GetNotJoinedPlayerCardsTest()
+    {
+        // arrange
+        var notJoinedPlayer = new PlayerId(Guid.Parse("B0651086-59DE-43EE-B7CC-ED394F1F81C2"));
+
+        // act
+        var results = await Arrange
+            .GetCards(notJoinedPlayer, new DealNumber(1))
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
+
+    [Fact]
     public async Task TooManyPlayersTest()
     {
         var results = await new TestBuilder()

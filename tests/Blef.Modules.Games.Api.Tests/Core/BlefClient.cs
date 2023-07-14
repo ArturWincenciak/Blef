@@ -62,6 +62,9 @@ internal sealed class BlefClient
         await _httpClient.GetCards(GameId, deal, playerId, _testRecorder);
     }
 
+    async internal Task GetCards(PlayerId playerId, DealNumber deal) =>
+        await _httpClient.GetCards(GameId, deal, playerId, _testRecorder);
+
     async internal Task BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard) =>
         await BidHighCard(GameId, whichPlayer, faceCard);
 

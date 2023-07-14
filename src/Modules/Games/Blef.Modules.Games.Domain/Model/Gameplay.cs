@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Domain.Model.PokerHands;
+﻿using Blef.Modules.Games.Domain.Exceptions;
+using Blef.Modules.Games.Domain.Model.PokerHands;
 using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Domain.Model;
@@ -92,6 +93,10 @@ internal sealed class Gameplay
     public IEnumerable<Card> GetHand(DealNumber dealNumber, PlayerId playerId)
     {
         var deal = _deals[dealNumber];
+
+        if (deal.Players.All(player => player.Player != playerId))
+            throw new PlayerNotJoinedTheGameException(Id, playerId);
+
         var player = deal.Players.Single(player => player.Player == playerId);
         return player.Hand.Cards;
     }
