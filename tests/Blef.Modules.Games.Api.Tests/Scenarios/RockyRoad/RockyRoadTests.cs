@@ -461,6 +461,4 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
-
-    // todo: test bid and check command with not existed player
 }
