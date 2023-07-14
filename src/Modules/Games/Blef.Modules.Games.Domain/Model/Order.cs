@@ -14,7 +14,7 @@ internal sealed record Order : IComparable<Order>
             < 1 => throw new ArgumentOutOfRangeException(paramName: nameof(sequence), sequence,
                 message: "Sequence cannot be less then one"),
             > MAX_NUMBER_OF_PLAYERS => throw new ArgumentOutOfRangeException(paramName: nameof(sequence), sequence,
-                message: "Sequence cannot be greater then max number of players equals four"),
+                message: $"Sequence cannot be greater then max number of players equals {MAX_NUMBER_OF_PLAYERS}"),
             _ => sequence
         };
 
@@ -25,4 +25,7 @@ internal sealed record Order : IComparable<Order>
 
     public static int operator -(Order order, int value) =>
         order._sequence - value;
+
+    public override string ToString() =>
+        _sequence.ToString();
 }
