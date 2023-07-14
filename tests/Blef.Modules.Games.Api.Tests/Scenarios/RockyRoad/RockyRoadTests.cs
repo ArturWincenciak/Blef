@@ -227,6 +227,21 @@ public class RockyRoadTests
     }
 
     [Fact]
+    public async Task GetPlayerCardsFromNotExistedDealTest()
+    {
+        // arrange
+        var notExistedDeal = new DealNumber(100);
+
+        // act
+        var results = await Arrange
+            .GetCards(WhichPlayer.Conway, notExistedDeal)
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
+
+    [Fact]
     public async Task TooManyPlayersTest()
     {
         var results = await new TestBuilder()

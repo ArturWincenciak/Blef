@@ -1,6 +1,6 @@
 ﻿using Blef.Shared.Kernel.Exceptions;
 
-namespace Blef.Modules.Games.Application.Exceptions;
+namespace Blef.Modules.Games.Domain.Exceptions;
 
 internal sealed class DealNotFoundException : NotFoundException
 {
