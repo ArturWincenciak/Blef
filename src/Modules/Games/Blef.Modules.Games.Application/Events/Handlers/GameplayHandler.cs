@@ -20,31 +20,31 @@ internal sealed class GameplayHandler :
 
     public async Task Handle(BidPlaced @event, CancellationToken cancellation)
     {
-        var gameplay = await _gameplaysRepository.Get(@event.Game)!;
-        gameplay.OnBidPlaced(@event.Deal, @event.Player, @event.PokerHand);
+        var gameplay = await _gameplaysRepository.Get(@event.Game);
+        gameplay!.OnBidPlaced(@event.Deal, @event.Player, @event.PokerHand);
     }
 
     public async Task Handle(CheckPlaced @event, CancellationToken cancellation)
     {
-        var gameplay = await _gameplaysRepository.Get(@event.Game)!;
-        gameplay.OnCheckPlaced(@event.Deal, @event.CheckingPlayer, @event.LooserPlayer);
+        var gameplay = await _gameplaysRepository.Get(@event.Game);
+        gameplay!.OnCheckPlaced(@event.Deal, @event.CheckingPlayer, @event.LooserPlayer);
     }
 
     public async Task Handle(DealStarted @event, CancellationToken cancellation)
     {
-        var gameplay = await _gameplaysRepository.Get(@event.Game)!;
-        gameplay.OnDealStarted(@event.Deal, @event.Players);
+        var gameplay = await _gameplaysRepository.Get(@event.Game);
+        gameplay!.OnDealStarted(@event.Deal, @event.Players);
     }
 
     public async Task Handle(GameOver @event, CancellationToken cancellation)
     {
-        var gameplay = await _gameplaysRepository.Get(@event.Game)!;
-        gameplay.OnGameFinished(@event.Winner);
+        var gameplay = await _gameplaysRepository.Get(@event.Game);
+        gameplay!.OnGameFinished(@event.Winner);
     }
 
     public async Task Handle(GamePlayerJoined @event, CancellationToken cancellation)
     {
-        var gameplay = await _gameplaysRepository.Get(@event.Game)!;
-        gameplay.OnPlayerJoined(@event.Player);
+        var gameplay = await _gameplaysRepository.Get(@event.Game);
+        gameplay!.OnPlayerJoined(@event.Player);
     }
 }
