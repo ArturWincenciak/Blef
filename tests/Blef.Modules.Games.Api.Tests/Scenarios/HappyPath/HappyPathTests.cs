@@ -7,9 +7,20 @@ namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 public class HappyPathTests
 {
     // todo: play all game with two players
-    // todo: play all game with three players
-    // todo: play all game with four players
+    [Fact]
+    public async Task TwoPlayersPlayTheGameTest()
+    {
+        var results = await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Knuth)
+            .JoinPlayer(WhichPlayer.Graham)
+            .NewDeal()
+            .Build();
+        
+        await Verify(results);
+    }
 
+    // todo: play all game with three players
     [Fact]
     public async Task ThreePlayersPlayTheGameTest()
     {
@@ -37,4 +48,6 @@ public class HappyPathTests
 
         await Verify(results);
     }
+    
+    // todo: play all game with four players
 }
