@@ -13,11 +13,8 @@ internal sealed class GameplaysRepository : IGameplaysRepository
         return Task.CompletedTask;
     }
 
-    public Task<Gameplay?> Get(GameId gameId)
-    {
-        if (_gameplays.TryGetValue(gameId, value: out var gameplay))
-            return Task.FromResult(gameplay)!;
-
-        return Task.FromResult<Gameplay?>(null);
-    }
+    public Task<Gameplay?> Get(GameId gameId) =>
+        _gameplays.TryGetValue(gameId, value: out var gameplay)
+            ? Task.FromResult<Gameplay?>(gameplay)
+            : Task.FromResult<Gameplay?>(null);
 }
