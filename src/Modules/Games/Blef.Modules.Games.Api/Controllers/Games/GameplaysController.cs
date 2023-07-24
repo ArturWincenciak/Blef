@@ -33,4 +33,14 @@ internal sealed class GameplaysController : ModuleControllerBase
         var dealFlow = await _queryDispatcher.Dispatch<GetDeal, GetDeal.Result>(query, cancellation);
         return Ok(dealFlow);
     }
+    
+    [HttpGet(GetCardsQuery.ROUTE)]
+    public async Task<IActionResult> GetCards(
+        [FromRoute] GetCardsQuery route,
+        CancellationToken cancellation)
+    {
+        var query = new GetPlayerCards(route.GameId, route.PlayerId, route.DealNumber);
+        var cards = await _queryDispatcher.Dispatch<GetPlayerCards, GetPlayerCards.Result>(query, cancellation);
+        return Ok(cards);
+    }
 }

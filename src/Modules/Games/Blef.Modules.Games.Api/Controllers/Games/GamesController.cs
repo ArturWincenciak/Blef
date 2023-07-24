@@ -5,6 +5,7 @@ using Blef.Modules.Games.Application.Commands;
 using Blef.Modules.Games.Application.Queries;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Abstractions.Queries;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers.Games;
@@ -21,6 +22,7 @@ internal sealed partial class GamesController : ModuleControllerBase
         _queryDispatcher = queryDispatcher;
     }
 
+    [Tags("Games")]
     [HttpPost]
     public async Task<IActionResult> StartNewGame(CancellationToken cancellation)
     {
@@ -29,6 +31,7 @@ internal sealed partial class GamesController : ModuleControllerBase
         return Created(uri: GetGameFlowQuery.Path(game.GameId), game);
     }
 
+    [Tags("Games")]
     [HttpPost(DealsRoute.ROUTE)]
     public async Task<IActionResult> StartFirstDeal(
         [FromRoute] DealsRoute route,
@@ -39,6 +42,7 @@ internal sealed partial class GamesController : ModuleControllerBase
         return Created(uri: GetDealFlowQuery.Path(route.GameId, deal.Number), deal);
     }
 
+    [Tags("Games")]
     [HttpPost(PlayersRoute.ROUTE)]
     public async Task<IActionResult> JoinGame(
         [FromRoute] PlayersRoute route,
@@ -50,6 +54,7 @@ internal sealed partial class GamesController : ModuleControllerBase
         return Created(uri: GetGameFlowQuery.Path(route.GameId), player);
     }
 
+    [Tags("Games")]
     [HttpPost(ChecksRoute.ROUTE)]
     public async Task<IActionResult> Check(
         [FromRoute] ChecksRoute route,
@@ -58,15 +63,5 @@ internal sealed partial class GamesController : ModuleControllerBase
         var cmd = new Check(route.GameId, route.PlayerId);
         var check = await _commandDispatcher.Dispatch<Check, Check.Result>(cmd, cancellation);
         return Created(uri: GetDealFlowQuery.Path(route.GameId, check.DealNumber), value: null);
-    }
-
-    [HttpGet(GetCardsQuery.ROUTE)]
-    public async Task<IActionResult> GetCards(
-        [FromRoute] GetCardsQuery route,
-        CancellationToken cancellation)
-    {
-        var query = new GetPlayerCards(route.GameId, route.PlayerId, route.DealNumber);
-        var cards = await _queryDispatcher.Dispatch<GetPlayerCards, GetPlayerCards.Result>(query, cancellation);
-        return Ok(cards);
     }
 }
