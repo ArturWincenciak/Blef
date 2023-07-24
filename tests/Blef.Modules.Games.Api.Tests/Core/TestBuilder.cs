@@ -4,7 +4,6 @@ namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal sealed class TestBuilder
 {
-    private static string _noArgument = nameof(_noArgument);
     private readonly List<Func<Task>> _actions = new();
     private readonly TestRecorder _testRecorder = new();
     private BlefClient _gameClient = null!;
