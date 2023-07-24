@@ -2,6 +2,7 @@
 using Blef.Modules.Games.Api.Controllers.Games.Commands;
 using Blef.Modules.Games.Api.Controllers.Games.Queries;
 using Blef.Modules.Games.Application.Commands;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers.Games;
@@ -9,6 +10,7 @@ namespace Blef.Modules.Games.Api.Controllers.Games;
 [SuppressMessage(category: "ReSharper", checkId: "RouteTemplates.MethodMissingRouteParameters")]
 internal sealed partial class GamesController
 {
+    [Tags("Games' bids")]
     [HttpPost(HighCardBidsRoute.ROUTE)]
     public async Task<IActionResult> BidHighCard(
         [FromRoute] HighCardBidsRoute route,
@@ -16,6 +18,7 @@ internal sealed partial class GamesController
         CancellationToken cancellation) =>
         await Bid(route, payload, cancellation);
 
+    [Tags("Games' bids")]
     [HttpPost(PairBidsRoute.ROUTE)]
     public async Task<IActionResult> BidPair(
         [FromRoute] PairBidsRoute route,
@@ -23,6 +26,7 @@ internal sealed partial class GamesController
         CancellationToken cancellation) =>
         await Bid(route, payload, cancellation);
 
+    [Tags("Games' bids")]
     [HttpPost(TwoPairsBidsRoute.ROUTE)]
     public async Task<IActionResult> BidTwoPairs(
         [FromRoute] TwoPairsBidsRoute route,
@@ -30,18 +34,21 @@ internal sealed partial class GamesController
         CancellationToken cancellation) =>
         await Bid(route, payload, cancellation);
 
+    [Tags("Games' bids")]
     [HttpPost(LowStraightBidsRoute.ROUTE)]
     public async Task<IActionResult> BidLowStraight(
         [FromRoute] LowStraightBidsRoute route,
         CancellationToken cancellation) =>
         await Bid(route, payload: new LowStraightBidPayload(), cancellation);
 
+    [Tags("Games' bids")]
     [HttpPost(HighStraightBidsRoute.ROUTE)]
     public async Task<IActionResult> BidHighStraight(
         [FromRoute] HighStraightBidsRoute route,
         CancellationToken cancellation) =>
         await Bid(route, payload: new HighStraightBidPayload(), cancellation);
 
+    [Tags("Games' bids")]
     [HttpPost(ThreeOfAKindBidsRoute.ROUTE)]
     public async Task<IActionResult> BidThreeOfAKind(
         [FromRoute] ThreeOfAKindBidsRoute route,
@@ -49,6 +56,7 @@ internal sealed partial class GamesController
         CancellationToken cancellation) =>
         await Bid(route, payload, cancellation);
 
+    [Tags("Games' bids")]
     [HttpPost(FullHouseBidsRoute.ROUTE)]
     public async Task<IActionResult> BidFullHouse(
         [FromRoute] FullHouseBidsRoute route,
@@ -56,6 +64,7 @@ internal sealed partial class GamesController
         CancellationToken cancellation) =>
         await Bid(route, payload, cancellation);
 
+    [Tags("Games' bids")]
     [HttpPost(FlushBidsRoute.ROUTE)]
     public async Task<IActionResult> BidFlush(
         [FromRoute] FlushBidsRoute route,
@@ -63,6 +72,7 @@ internal sealed partial class GamesController
         CancellationToken cancellation) =>
         await Bid(route, payload, cancellation);
 
+    [Tags("Games' bids")]
     [HttpPost(FourOfAKindBidsRoute.ROUTE)]
     public async Task<IActionResult> BidFourOfAKind(
         [FromRoute] FourOfAKindBidsRoute route,
@@ -70,6 +80,7 @@ internal sealed partial class GamesController
         CancellationToken cancellation) =>
         await Bid(route, payload, cancellation);
 
+    [Tags("Games' bids")]
     [HttpPost(StraightFlushBidsRoute.ROUTE)]
     public async Task<IActionResult> BidStraightFlush(
         [FromRoute] StraightFlushBidsRoute route,
@@ -77,6 +88,7 @@ internal sealed partial class GamesController
         CancellationToken cancellation) =>
         await Bid(route, payload, cancellation);
 
+    [Tags("Games' bids")]
     [HttpPost(RoyalFlushBidsRoute.ROUTE)]
     public async Task<IActionResult> BidRoyalFlush(
         [FromRoute] RoyalFlushBidsRoute route,
