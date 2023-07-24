@@ -27,7 +27,7 @@ jobs:
         run: dotnet restore Blef.sln
 
       - name: Inspect code
-        uses: muno92/resharper_inspectcode@1.7.1
+        uses: muno92/resharper_inspectcode@1.8.0
         with:
           solutionPath: ./Blef.sln
           failOnIssue: 1
