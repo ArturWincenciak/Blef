@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Application.Queries;
 
+// todo: cannot ask for not own cards
 public sealed record GetPlayerCards(Guid Game, Guid Player, int DealNumber)
     : IQuery<GetPlayerCards.Result>
 {
