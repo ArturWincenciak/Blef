@@ -55,7 +55,7 @@ internal static class HttpApiExtensions
     async internal static Task GetCards(this HttpClient client,
         GameId gameId, DealNumber deal, PlayerId playerId, TestRecorder testRecorder)
     {
-        var requestUri = $"{GamesUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/cards";
+        var requestUri = $"{GameplaysUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/cards";
         var response = await client.GetAsync(requestUri);
         var result = await DeserializeResponse<GetPlayerCards.Result>(response);
 
