@@ -15,6 +15,7 @@ public class HappyPathTests
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
             .NewDeal()
+            .BidHighCard(WhichPlayer.Knuth, FaceCard.Nine)
             .Build();
         
         await Verify(results);
