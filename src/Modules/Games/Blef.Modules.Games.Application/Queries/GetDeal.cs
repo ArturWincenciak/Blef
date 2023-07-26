@@ -16,6 +16,7 @@ public sealed record GetDeal(Guid GameId, int DealNumber) : IQuery<GetDeal.Resul
     [UsedImplicitly]
     public sealed record Bid(int Order, Guid PlayerId, string PokerHand);
 
+    // todo: hide the hand of the other players then ask for the deal (only for deals in progress)
     [UsedImplicitly]
     public sealed record Player(Guid PlayerId, IReadOnlyCollection<Card> Hand);
 
