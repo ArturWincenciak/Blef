@@ -96,19 +96,19 @@
             PlayerId: Guid_2,
             Nick: Knuth,
             JoiningOrder: 1,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           },
           {
             PlayerId: Guid_3,
             Nick: Graham,
             JoiningOrder: 2,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           },
           {
             PlayerId: Guid_4,
             Nick: Conway,
             JoiningOrder: 3,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           }
         ],
         Winner: {}
@@ -145,19 +145,19 @@
             PlayerId: Guid_2,
             Nick: Knuth,
             JoiningOrder: 1,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           },
           {
             PlayerId: Guid_3,
             Nick: Graham,
             JoiningOrder: 2,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           },
           {
             PlayerId: Guid_4,
             Nick: Conway,
             JoiningOrder: 3,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           }
         ],
         Deals: [
@@ -216,7 +216,7 @@
   {
     No: 10,
     Request: {
-      Path: games-module/games/Guid_1/players/Guid_2/deals/1/cards,
+      Path: games-module/gameplays/Guid_1/players/Guid_2/deals/1/cards,
       Method: Get
     },
     Response: {
@@ -234,7 +234,7 @@
   {
     No: 11,
     Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/deals/1/cards,
+      Path: games-module/gameplays/Guid_1/players/Guid_3/deals/1/cards,
       Method: Get
     },
     Response: {
@@ -252,7 +252,7 @@
   {
     No: 12,
     Request: {
-      Path: games-module/games/Guid_1/players/Guid_4/deals/1/cards,
+      Path: games-module/gameplays/Guid_1/players/Guid_4/deals/1/cards,
       Method: Get
     },
     Response: {
@@ -337,19 +337,19 @@
             PlayerId: Guid_2,
             Nick: Knuth,
             JoiningOrder: 1,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           },
           {
             PlayerId: Guid_3,
             Nick: Graham,
             JoiningOrder: 2,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           },
           {
             PlayerId: Guid_4,
             Nick: Conway,
             JoiningOrder: 3,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           }
         ],
         Deals: [

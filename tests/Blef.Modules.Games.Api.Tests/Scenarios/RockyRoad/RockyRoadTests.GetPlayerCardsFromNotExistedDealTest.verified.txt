@@ -62,7 +62,7 @@
   {
     No: 5,
     Request: {
-      Path: games-module/games/Guid_1/players/Guid_2/deals/100/cards,
+      Path: games-module/gameplays/Guid_1/players/Guid_2/deals/100/cards,
       Method: Get
     },
     Response: {
@@ -72,7 +72,7 @@
         Status: 404,
         Title: The resource with the given identifier does not exist,
         Detail: Deal '100' of game 'Guid_1' not found,
-        Instance: /games-module/games/Guid_1/players/Guid_2/deals/100/cards
+        Instance: /games-module/gameplays/Guid_1/players/Guid_2/deals/100/cards
       }
     }
   }

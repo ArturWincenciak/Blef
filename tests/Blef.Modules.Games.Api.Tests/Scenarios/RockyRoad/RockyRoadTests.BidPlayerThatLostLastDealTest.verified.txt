@@ -288,19 +288,19 @@
             PlayerId: Guid_2,
             Nick: Conway,
             JoiningOrder: 1,
-            AlreadyLostTheGame: true
+            LostTheGame: true
           },
           {
             PlayerId: Guid_3,
             Nick: Graham,
             JoiningOrder: 2,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           },
           {
             PlayerId: Guid_4,
             Nick: Knuth,
             JoiningOrder: 3,
-            AlreadyLostTheGame: false
+            LostTheGame: false
           }
         ],
         Deals: [
