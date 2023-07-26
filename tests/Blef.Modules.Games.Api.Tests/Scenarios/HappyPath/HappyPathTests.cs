@@ -11,11 +11,34 @@ public class HappyPathTests
     public async Task TwoPlayersPlayTheGameTest()
     {
         var results = await new TestBuilder()
+            
             .NewGame()
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Graham)
             .NewDeal()
+            
             .BidHighCard(WhichPlayer.Knuth, FaceCard.Nine)
+            .Check(WhichPlayer.Graham)
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(1))
+            
+            .BidHighCard(WhichPlayer.Graham, FaceCard.Ace)
+            .Check(WhichPlayer.Knuth)
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(2))
+            
+            .BidPair(WhichPlayer.Knuth, FaceCard.King)
+            .BidPair(WhichPlayer.Graham, FaceCard.Ace)
+            .Check(WhichPlayer.Knuth)
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(3))
+            
+            .BidTwoPairs(WhichPlayer.Graham, FaceCard.Nine, FaceCard.Ten)
+            .BidFourOfAKind(WhichPlayer.Knuth, FaceCard.Nine)
+            .Check(WhichPlayer.Graham)
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(4))
+            
             .Build();
         
         await Verify(results);
