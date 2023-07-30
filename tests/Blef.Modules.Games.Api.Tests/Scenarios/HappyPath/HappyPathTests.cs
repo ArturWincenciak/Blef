@@ -64,7 +64,6 @@ public class HappyPathTests
         await Verify(results);
     }
 
-    // todo: play all game with three players
     [Fact]
     public async Task ThreePlayersPlayTheGameTest()
     {
