@@ -221,8 +221,9 @@ public class HappyPathTests
             .GetCards(WhichPlayer.Graham, new DealNumber(14))
             .GetCards(WhichPlayer.Conway, new DealNumber(14))
             
+            // todo: change type of that bad request, player joined but already lost the game
 /*
- todo: change type of that bad request, player joined but already lost the game
+ 
 No: 135,
 Request: {
   Path: games-module/gameplays/Guid_1/players/Guid_3/deals/14/cards,
@@ -238,6 +239,7 @@ Response: {
     Instance: /games-module/gameplays/Guid_1/players/Guid_3/deals/14/cards
   }
 }
+
 */
             .BidFourOfAKind(WhichPlayer.Conway, FaceCard.King)
             .Check(WhichPlayer.Knuth)
