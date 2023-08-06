@@ -4512,5 +4512,257 @@
         ]
       }
     }
+  },
+  {
+    No: 137,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_4/bids/four-of-a-kind,
+      Method: Post,
+      Payload: {
+        FaceCard: King
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 138,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/checks,
+      Method: Get
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 139,
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: GameIsOver
+        },
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Nick: Knuth,
+            JoiningOrder: 1,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_3,
+            Nick: Graham,
+            JoiningOrder: 2,
+            LostTheGame: true
+          },
+          {
+            PlayerId: Guid_4,
+            Nick: Conway,
+            JoiningOrder: 3,
+            LostTheGame: true
+          }
+        ],
+        Deals: [
+          {
+            Number: 1,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_4
+            }
+          },
+          {
+            Number: 2,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_4,
+              LooserPlayerId: Guid_4
+            }
+          },
+          {
+            Number: 3,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_3,
+              LooserPlayerId: Guid_2
+            }
+          },
+          {
+            Number: 4,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_4,
+              LooserPlayerId: Guid_3
+            }
+          },
+          {
+            Number: 5,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_4
+            }
+          },
+          {
+            Number: 6,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_4,
+              LooserPlayerId: Guid_3
+            }
+          },
+          {
+            Number: 7,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_3,
+              LooserPlayerId: Guid_2
+            }
+          },
+          {
+            Number: 8,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_4,
+              LooserPlayerId: Guid_4
+            }
+          },
+          {
+            Number: 9,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_2
+            }
+          },
+          {
+            Number: 10,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_2
+            }
+          },
+          {
+            Number: 11,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_4,
+              LooserPlayerId: Guid_3
+            }
+          },
+          {
+            Number: 12,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_3,
+              LooserPlayerId: Guid_3
+            }
+          },
+          {
+            Number: 13,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_3,
+              LooserPlayerId: Guid_3
+            }
+          },
+          {
+            Number: 14,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_4
+            }
+          }
+        ],
+        Winner: {
+          PlayerId: Guid_2
+        }
+      }
+    }
+  },
+  {
+    No: 140,
+    Request: {
+      Path: games-module/gameplays/Guid_1/deals/14,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: diamonds
+              },
+              {
+                FaceCard: ace,
+                Suit: spades
+              },
+              {
+                FaceCard: ten,
+                Suit: clubs
+              },
+              {
+                FaceCard: jack,
+                Suit: spades
+              },
+              {
+                FaceCard: queen,
+                Suit: diamonds
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_4,
+            Hand: [
+              {
+                FaceCard: king,
+                Suit: hearts
+              },
+              {
+                FaceCard: king,
+                Suit: clubs
+              },
+              {
+                FaceCard: ace,
+                Suit: clubs
+              },
+              {
+                FaceCard: queen,
+                Suit: clubs
+              },
+              {
+                FaceCard: jack,
+                Suit: diamonds
+              }
+            ]
+          }
+        ],
+        Bids: [
+          {
+            Order: 1,
+            PlayerId: Guid_4,
+            PokerHand: four-of-a-kind:king
+          }
+        ],
+        DealResolution: {
+          CheckingPlayerId: Guid_2,
+          LooserPlayerId: Guid_4
+        }
+      }
+    }
   }
 ]
