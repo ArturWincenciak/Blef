@@ -208,5 +208,958 @@
         DealResolution: {}
       }
     }
+  },
+  {
+    No: 10,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_2/deals/1/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ace,
+            Suit: diamonds
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 11,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_3/deals/1/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ace,
+            Suit: spades
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 12,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_4/deals/1/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ten,
+            Suit: clubs
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 13,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_5/deals/1/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: jack,
+            Suit: spades
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 14,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Nine
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 15,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Ten
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 16,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_4/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Jack
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 17,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_5/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Queen
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 18,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/checks,
+      Method: Get
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 19,
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: InProgress
+        },
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Nick: Knuth,
+            JoiningOrder: 1,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_3,
+            Nick: Graham,
+            JoiningOrder: 2,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_4,
+            Nick: Conway,
+            JoiningOrder: 3,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_5,
+            Nick: Riemann,
+            JoiningOrder: 4,
+            LostTheGame: false
+          }
+        ],
+        Deals: [
+          {
+            Number: 1,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_5
+            }
+          },
+          {
+            Number: 2,
+            State: InProgress,
+            DealResolution: {}
+          }
+        ],
+        Winner: {}
+      }
+    }
+  },
+  {
+    No: 20,
+    Request: {
+      Path: games-module/gameplays/Guid_1/deals/1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: diamonds
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_3,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: spades
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_4,
+            Hand: [
+              {
+                FaceCard: ten,
+                Suit: clubs
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_5,
+            Hand: [
+              {
+                FaceCard: jack,
+                Suit: spades
+              }
+            ]
+          }
+        ],
+        Bids: [
+          {
+            Order: 1,
+            PlayerId: Guid_2,
+            PokerHand: high-card:nine
+          },
+          {
+            Order: 2,
+            PlayerId: Guid_3,
+            PokerHand: high-card:ten
+          },
+          {
+            Order: 3,
+            PlayerId: Guid_4,
+            PokerHand: high-card:jack
+          },
+          {
+            Order: 4,
+            PlayerId: Guid_5,
+            PokerHand: high-card:queen
+          }
+        ],
+        DealResolution: {
+          CheckingPlayerId: Guid_2,
+          LooserPlayerId: Guid_5
+        }
+      }
+    }
+  },
+  {
+    No: 21,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_2/deals/2/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ace,
+            Suit: diamonds
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 22,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_3/deals/2/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ace,
+            Suit: spades
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 23,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_4/deals/2/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ten,
+            Suit: clubs
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 24,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_5/deals/2/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: jack,
+            Suit: spades
+          },
+          {
+            FaceCard: queen,
+            Suit: diamonds
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 25,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+      Method: Post,
+      Payload: {
+        FaceCard: Ace
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 26,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_4/checks,
+      Method: Get
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 27,
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: InProgress
+        },
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Nick: Knuth,
+            JoiningOrder: 1,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_3,
+            Nick: Graham,
+            JoiningOrder: 2,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_4,
+            Nick: Conway,
+            JoiningOrder: 3,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_5,
+            Nick: Riemann,
+            JoiningOrder: 4,
+            LostTheGame: false
+          }
+        ],
+        Deals: [
+          {
+            Number: 1,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_5
+            }
+          },
+          {
+            Number: 2,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_4,
+              LooserPlayerId: Guid_4
+            }
+          },
+          {
+            Number: 3,
+            State: InProgress,
+            DealResolution: {}
+          }
+        ],
+        Winner: {}
+      }
+    }
+  },
+  {
+    No: 28,
+    Request: {
+      Path: games-module/gameplays/Guid_1/deals/2,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: diamonds
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_3,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: spades
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_4,
+            Hand: [
+              {
+                FaceCard: ten,
+                Suit: clubs
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_5,
+            Hand: [
+              {
+                FaceCard: jack,
+                Suit: spades
+              },
+              {
+                FaceCard: queen,
+                Suit: diamonds
+              }
+            ]
+          }
+        ],
+        Bids: [
+          {
+            Order: 1,
+            PlayerId: Guid_3,
+            PokerHand: pair:ace
+          }
+        ],
+        DealResolution: {
+          CheckingPlayerId: Guid_4,
+          LooserPlayerId: Guid_4
+        }
+      }
+    }
+  },
+  {
+    No: 29,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_2/deals/3/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ace,
+            Suit: diamonds
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 30,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_3/deals/3/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ace,
+            Suit: spades
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 31,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_4/deals/3/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ten,
+            Suit: clubs
+          },
+          {
+            FaceCard: jack,
+            Suit: spades
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 32,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_5/deals/3/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: queen,
+            Suit: diamonds
+          },
+          {
+            FaceCard: king,
+            Suit: hearts
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 33,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_4/bids/pair,
+      Method: Post,
+      Payload: {
+        FaceCard: King
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 34,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/three-of-a-kind,
+      Method: Post,
+      Payload: {
+        FaceCard: Ace
+      }
+    },
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+        Status: 400,
+        Title: That is not this player's turn now,
+        Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
+        Instance: /games-module/games/Guid_1/players/Guid_2/bids/three-of-a-kind
+      }
+    }
+  },
+  {
+    No: 35,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_5/bids/three-of-a-kind,
+      Method: Post,
+      Payload: {
+        FaceCard: Ace
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 36,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/checks,
+      Method: Get
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 37,
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: InProgress
+        },
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Nick: Knuth,
+            JoiningOrder: 1,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_3,
+            Nick: Graham,
+            JoiningOrder: 2,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_4,
+            Nick: Conway,
+            JoiningOrder: 3,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_5,
+            Nick: Riemann,
+            JoiningOrder: 4,
+            LostTheGame: false
+          }
+        ],
+        Deals: [
+          {
+            Number: 1,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_5
+            }
+          },
+          {
+            Number: 2,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_4,
+              LooserPlayerId: Guid_4
+            }
+          },
+          {
+            Number: 3,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_5
+            }
+          },
+          {
+            Number: 4,
+            State: InProgress,
+            DealResolution: {}
+          }
+        ],
+        Winner: {}
+      }
+    }
+  },
+  {
+    No: 38,
+    Request: {
+      Path: games-module/gameplays/Guid_1/deals/3,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: diamonds
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_3,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: spades
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_4,
+            Hand: [
+              {
+                FaceCard: ten,
+                Suit: clubs
+              },
+              {
+                FaceCard: jack,
+                Suit: spades
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_5,
+            Hand: [
+              {
+                FaceCard: queen,
+                Suit: diamonds
+              },
+              {
+                FaceCard: king,
+                Suit: hearts
+              }
+            ]
+          }
+        ],
+        Bids: [
+          {
+            Order: 1,
+            PlayerId: Guid_4,
+            PokerHand: pair:king
+          },
+          {
+            Order: 2,
+            PlayerId: Guid_5,
+            PokerHand: three-of-a-kind:ace
+          }
+        ],
+        DealResolution: {
+          CheckingPlayerId: Guid_2,
+          LooserPlayerId: Guid_5
+        }
+      }
+    }
+  },
+  {
+    No: 39,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_2/deals/4/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ace,
+            Suit: diamonds
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 40,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_3/deals/4/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ace,
+            Suit: spades
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 41,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_4/deals/4/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: ten,
+            Suit: clubs
+          },
+          {
+            FaceCard: jack,
+            Suit: spades
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 42,
+    Request: {
+      Path: games-module/gameplays/Guid_1/players/Guid_5/deals/4/cards,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Cards: [
+          {
+            FaceCard: queen,
+            Suit: diamonds
+          },
+          {
+            FaceCard: king,
+            Suit: hearts
+          },
+          {
+            FaceCard: king,
+            Suit: clubs
+          }
+        ]
+      }
+    }
+  },
+  {
+    No: 43,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/four-of-a-kind,
+      Method: Post,
+      Payload: {
+        FaceCard: Nine
+      }
+    },
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+        Status: 400,
+        Title: That is not this player's turn now,
+        Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
+        Instance: /games-module/games/Guid_1/players/Guid_2/bids/four-of-a-kind
+      }
+    }
+  },
+  {
+    No: 44,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_5/bids/straight-flush,
+      Method: Post,
+      Payload: {
+        Suit: Clubs
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 45,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_4/checks,
+      Method: Get
+    },
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+        Status: 400,
+        Title: That is not this player's turn now,
+        Detail: Player 'PlayerId { Id = Guid_4 }' should wait for his turn,
+        Instance: /games-module/games/Guid_1/players/Guid_4/checks
+      }
+    }
+  },
+  {
+    No: 46,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/high-straight,
+      Method: Post,
+      Payload: {}
+    },
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/bid-is-not-higher-then-last-one.md,
+        Status: 400,
+        Title: The bid is not higher than last one,
+        Detail: The new bid 'high-straight' is not higher than last one 'straight-flush:clubs',
+        Instance: /games-module/games/Guid_1/players/Guid_2/bids/high-straight
+      }
+    }
+  },
+  {
+    No: 47,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/checks,
+      Method: Get
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
   }
 ]
