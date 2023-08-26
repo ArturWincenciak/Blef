@@ -1,0 +1,212 @@
+﻿[
+  {
+    No: 1,
+    Request: {
+      Path: games-module/games,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        GameId: Guid_1
+      }
+    }
+  },
+  {
+    No: 2,
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: JoiningPlayers
+        },
+        Winner: {}
+      }
+    }
+  },
+  {
+    No: 3,
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Knuth
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_2,
+        Nick: Knuth
+      }
+    }
+  },
+  {
+    No: 4,
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Graham
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_3,
+        Nick: Graham
+      }
+    }
+  },
+  {
+    No: 5,
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Conway
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_4,
+        Nick: Conway
+      }
+    }
+  },
+  {
+    No: 6,
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Riemann
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_5,
+        Nick: Riemann
+      }
+    }
+  },
+  {
+    No: 7,
+    Request: {
+      Path: games-module/games/Guid_1/deals,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        Number: 1
+      }
+    }
+  },
+  {
+    No: 8,
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: InProgress
+        },
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Nick: Knuth,
+            JoiningOrder: 1,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_3,
+            Nick: Graham,
+            JoiningOrder: 2,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_4,
+            Nick: Conway,
+            JoiningOrder: 3,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_5,
+            Nick: Riemann,
+            JoiningOrder: 4,
+            LostTheGame: false
+          }
+        ],
+        Deals: [
+          {
+            Number: 1,
+            State: InProgress,
+            DealResolution: {}
+          }
+        ],
+        Winner: {}
+      }
+    }
+  },
+  {
+    No: 9,
+    Request: {
+      Path: games-module/gameplays/Guid_1/deals/1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: diamonds
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_3,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: spades
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_4,
+            Hand: [
+              {
+                FaceCard: ten,
+                Suit: clubs
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_5,
+            Hand: [
+              {
+                FaceCard: jack,
+                Suit: spades
+              }
+            ]
+          }
+        ],
+        DealResolution: {}
+      }
+    }
+  }
+]
