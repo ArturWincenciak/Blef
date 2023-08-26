@@ -4,71 +4,13 @@ using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 
 [UsesVerify]
-public class HappyPathTests
+public class TreePlayersPlayTheGame
 {
     [Fact]
-    public async Task TwoPlayersPlayTheGameTest()
+    public async Task Scenario()
     {
         var results = await new TestBuilder()
-            
-            .NewGame()
-            .JoinPlayer(WhichPlayer.Knuth)
-            .JoinPlayer(WhichPlayer.Graham)
-            .NewDeal()
-            .GetGameFlow()
-            .GetDealFlow(new DealNumber(1))
-            
-            .GetCards(WhichPlayer.Knuth, new DealNumber(1))
-            .GetCards(WhichPlayer.Graham, new DealNumber(1))
-            .BidHighCard(WhichPlayer.Knuth, FaceCard.Nine)
-            .Check(WhichPlayer.Graham)
-            .GetGameFlow()
-            .GetDealFlow(new DealNumber(1))
-            
-            .GetCards(WhichPlayer.Knuth, new DealNumber(2))
-            .GetCards(WhichPlayer.Graham, new DealNumber(2))
-            .BidHighCard(WhichPlayer.Graham, FaceCard.Ace)
-            .Check(WhichPlayer.Knuth)
-            .GetGameFlow()
-            .GetDealFlow(new DealNumber(2))
-            
-            .GetCards(WhichPlayer.Knuth, new DealNumber(3))
-            .GetCards(WhichPlayer.Graham, new DealNumber(3))
-            .BidPair(WhichPlayer.Knuth, FaceCard.King)
-            .BidPair(WhichPlayer.Graham, FaceCard.Ace)
-            .Check(WhichPlayer.Knuth)
-            .GetGameFlow()
-            .GetDealFlow(new DealNumber(3))
-            
-            .GetCards(WhichPlayer.Knuth, new DealNumber(4))
-            .GetCards(WhichPlayer.Graham, new DealNumber(4))
-            .BidTwoPairs(WhichPlayer.Graham, FaceCard.Nine, FaceCard.Ten)
-            .BidFourOfAKind(WhichPlayer.Knuth, FaceCard.Nine)
-            .Check(WhichPlayer.Graham)
-            .GetGameFlow()
-            .GetDealFlow(new DealNumber(4))
-            
-            .GetCards(WhichPlayer.Knuth, new DealNumber(5))
-            .GetCards(WhichPlayer.Graham, new DealNumber(5))
-            .BidHighCard(WhichPlayer.Knuth, FaceCard.Queen)
-            .BidHighCard(WhichPlayer.Graham, FaceCard.King)
-            .BidPair(WhichPlayer.Knuth, FaceCard.Queen)
-            .BidPair(WhichPlayer.Graham, FaceCard.King)
-            .BidFullHouse(WhichPlayer.Knuth, FaceCard.Ace, FaceCard.King)
-            .Check(WhichPlayer.Graham)
-            .GetGameFlow()
-            .GetDealFlow(new DealNumber(5))
-            
-            .Build();
-        
-        await Verify(results);
-    }
 
-    [Fact]
-    public async Task ThreePlayersPlayTheGameTest()
-    {
-        var results = await new TestBuilder()
-            
             .NewGame()
             .GetGameFlow()
             .JoinPlayer(WhichPlayer.Knuth)
@@ -77,7 +19,7 @@ public class HappyPathTests
             .NewDeal()
             .GetGameFlow()
             .GetDealFlow(new DealNumber(1))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(1))
             .GetCards(WhichPlayer.Graham, new DealNumber(1))
             .GetCards(WhichPlayer.Conway, new DealNumber(1))
@@ -87,7 +29,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Knuth)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(1))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(2))
             .GetCards(WhichPlayer.Graham, new DealNumber(2))
             .GetCards(WhichPlayer.Conway, new DealNumber(2))
@@ -95,7 +37,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Conway)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(2))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(3))
             .GetCards(WhichPlayer.Graham, new DealNumber(3))
             .GetCards(WhichPlayer.Conway, new DealNumber(3))
@@ -104,7 +46,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Graham)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(3))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(4))
             .GetCards(WhichPlayer.Graham, new DealNumber(4))
             .GetCards(WhichPlayer.Conway, new DealNumber(4))
@@ -113,7 +55,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Conway)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(4))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(5))
             .GetCards(WhichPlayer.Graham, new DealNumber(5))
             .GetCards(WhichPlayer.Conway, new DealNumber(5))
@@ -125,7 +67,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Knuth)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(5))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(6))
             .GetCards(WhichPlayer.Graham, new DealNumber(6))
             .GetCards(WhichPlayer.Conway, new DealNumber(6))
@@ -147,7 +89,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Conway)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(6))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(7))
             .GetCards(WhichPlayer.Graham, new DealNumber(7))
             .GetCards(WhichPlayer.Conway, new DealNumber(7))
@@ -164,7 +106,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Graham)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(7))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(8))
             .GetCards(WhichPlayer.Graham, new DealNumber(8))
             .GetCards(WhichPlayer.Conway, new DealNumber(8))
@@ -172,7 +114,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Conway)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(8))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(9))
             .GetCards(WhichPlayer.Graham, new DealNumber(9))
             .GetCards(WhichPlayer.Conway, new DealNumber(9))
@@ -180,7 +122,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Knuth)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(9))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(10))
             .GetCards(WhichPlayer.Graham, new DealNumber(10))
             .GetCards(WhichPlayer.Conway, new DealNumber(10))
@@ -190,7 +132,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Knuth)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(10))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(11))
             .GetCards(WhichPlayer.Graham, new DealNumber(11))
             .GetCards(WhichPlayer.Conway, new DealNumber(11))
@@ -198,7 +140,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Conway)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(11))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(12))
             .GetCards(WhichPlayer.Graham, new DealNumber(12))
             .GetCards(WhichPlayer.Conway, new DealNumber(12))
@@ -207,7 +149,7 @@ public class HappyPathTests
             .Check(WhichPlayer.Graham)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(12))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(13))
             .GetCards(WhichPlayer.Graham, new DealNumber(13))
             .GetCards(WhichPlayer.Conway, new DealNumber(13))
@@ -215,14 +157,14 @@ public class HappyPathTests
             .Check(WhichPlayer.Graham)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(13))
-            
+
             .GetCards(WhichPlayer.Knuth, new DealNumber(14))
             .GetCards(WhichPlayer.Graham, new DealNumber(14))
             .GetCards(WhichPlayer.Conway, new DealNumber(14))
-            
+
             // todo: change type of that bad request, player joined but already lost the game
 /*
- 
+
 No: 135,
 Request: {
   Path: games-module/gameplays/Guid_1/players/Guid_3/deals/14/cards,
@@ -244,11 +186,9 @@ Response: {
             .Check(WhichPlayer.Knuth)
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(14))
-            
+
             .Build();
 
         await Verify(results);
     }
-    
-    // todo: play all game with four players
 }
