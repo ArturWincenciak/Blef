@@ -52,6 +52,7 @@ internal sealed class Deal
         if (BetHasBeenMade == false)
             throw new NoBidToCheckException(Id);
 
+        _moveOrderPolicy.CommitMove(checkingPlayerId.Player);
         _dealIsOver = true;
 
         return _lastBid!.PokerHand.IsOnTable(_playersSet.Table())
