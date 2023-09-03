@@ -461,4 +461,22 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
+
+    [Fact]
+    public async Task IfBeforeBidHasBeenPlacedWithWrongPokerHandThenTheSamePlayerHaveToBidOnceAgain()
+    {
+        // act
+        var results = await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Knuth)
+            .JoinPlayer(WhichPlayer.Conway)
+            .NewDeal()
+            .BidHighCard(WhichPlayer.Knuth, FaceCard.Ace)
+            .BidHighCard(WhichPlayer.Conway, FaceCard.King)
+            .BidPair(WhichPlayer.Conway, FaceCard.Ace)
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
 }

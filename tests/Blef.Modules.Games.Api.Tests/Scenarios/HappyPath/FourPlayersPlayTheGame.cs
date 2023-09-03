@@ -61,10 +61,10 @@ public class FourPlayersPlayTheGame
             .BidStraightFlush(WhichPlayer.Riemann, Suit.Clubs)
             .Check(WhichPlayer.Conway)
             .BidHighStraight(WhichPlayer.Knuth)
-            .Check(WhichPlayer.Graham) // todo: here is a bug, here should be rejected move
-            // .Check(WhichPlayer.Knuth) // todo: here is a bug, here is correct move
-            // .GetGameFlow()
-            // .GetDealFlow(deal: new DealNumber(4))
+            .Check(WhichPlayer.Graham)
+            .Check(WhichPlayer.Knuth)
+            .GetGameFlow()
+            .GetDealFlow(deal: new DealNumber(4))
 
             .Build();
 
