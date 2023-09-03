@@ -479,4 +479,26 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
+
+    [Fact]
+    public async Task CannotCheckOutOfOrderPolicyAndWhenTheDealHasNotBeenStarted()
+    {
+        // act
+        var results = await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Knuth)
+            .JoinPlayer(WhichPlayer.Conway)
+            .NewDeal()
+            .BidHighCard(WhichPlayer.Knuth, FaceCard.Ace)
+            .Check(WhichPlayer.Knuth)
+            .Check(WhichPlayer.Conway)
+            .Check(WhichPlayer.Conway)
+            .Check(WhichPlayer.Knuth)
+            .BidHighCard(WhichPlayer.Knuth, FaceCard.Ace)
+            .BidHighCard(WhichPlayer.Conway, FaceCard.Ace)
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
 }

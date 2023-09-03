@@ -1,0 +1,172 @@
+﻿[
+  {
+    No: 1,
+    Request: {
+      Path: games-module/games,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        GameId: Guid_1
+      }
+    }
+  },
+  {
+    No: 2,
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Knuth
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_2,
+        Nick: Knuth
+      }
+    }
+  },
+  {
+    No: 3,
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Conway
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_3,
+        Nick: Conway
+      }
+    }
+  },
+  {
+    No: 4,
+    Request: {
+      Path: games-module/games/Guid_1/deals,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        Number: 1
+      }
+    }
+  },
+  {
+    No: 5,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Ace
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 6,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/checks,
+      Method: Get
+    },
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+        Status: 400,
+        Title: That is not this player's turn now,
+        Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
+        Instance: /games-module/games/Guid_1/players/Guid_2/checks
+      }
+    }
+  },
+  {
+    No: 7,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/checks,
+      Method: Get
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 8,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/checks,
+      Method: Get
+    },
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/no-bid-to-check.md,
+        Status: 400,
+        Title: There is no bid to check it,
+        Detail: Deal number '2' must be started by at least one bid,
+        Instance: /games-module/games/Guid_1/players/Guid_3/checks
+      }
+    }
+  },
+  {
+    No: 9,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/checks,
+      Method: Get
+    },
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+        Status: 400,
+        Title: That is not this player's turn now,
+        Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
+        Instance: /games-module/games/Guid_1/players/Guid_2/checks
+      }
+    }
+  },
+  {
+    No: 10,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Ace
+      }
+    },
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+        Status: 400,
+        Title: That is not this player's turn now,
+        Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
+        Instance: /games-module/games/Guid_1/players/Guid_2/bids/high-card
+      }
+    }
+  },
+  {
+    No: 11,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Ace
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  }
+]
