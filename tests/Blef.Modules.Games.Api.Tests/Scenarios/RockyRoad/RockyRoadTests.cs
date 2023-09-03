@@ -501,4 +501,22 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
+
+    [Fact]
+    public async Task NextDealNotStarted()
+    {
+        // act
+        var results = await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .JoinPlayer(WhichPlayer.Graham)
+            .NewDeal()
+            .BidPair(WhichPlayer.Conway, FaceCard.Ace)
+            .Check(WhichPlayer.Graham)
+            .Check(WhichPlayer.Graham)
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
 }
