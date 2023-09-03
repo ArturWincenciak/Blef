@@ -204,7 +204,7 @@ internal static class HttpApiExtensions
         var result = await DeserializeResponse(response);
 
         testRecorder.Record(
-            request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Get),
+            request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Post),
             response: new TestRecorder.Response(response.StatusCode, result));
     }
 

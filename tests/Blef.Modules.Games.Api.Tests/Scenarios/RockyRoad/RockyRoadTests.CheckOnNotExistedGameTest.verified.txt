@@ -33,7 +33,7 @@
     No: 3,
     Request: {
       Path: games-module/games/Guid_3/players/Guid_2/checks,
-      Method: Get
+      Method: Post
     },
     Response: {
       StatusCode: NotFound,
