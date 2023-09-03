@@ -1,0 +1,110 @@
+﻿[
+  {
+    No: 1,
+    Request: {
+      Path: games-module/games,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        GameId: Guid_1
+      }
+    }
+  },
+  {
+    No: 2,
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Knuth
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_2,
+        Nick: Knuth
+      }
+    }
+  },
+  {
+    No: 3,
+    Request: {
+      Path: games-module/games/Guid_1/players,
+      Method: Post,
+      Payload: {
+        Nick: Conway
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        PlayerId: Guid_3,
+        Nick: Conway
+      }
+    }
+  },
+  {
+    No: 4,
+    Request: {
+      Path: games-module/games/Guid_1/deals,
+      Method: Post
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: {
+        Number: 1
+      }
+    }
+  },
+  {
+    No: 5,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: Ace
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  },
+  {
+    No: 6,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+      Method: Post,
+      Payload: {
+        FaceCard: King
+      }
+    },
+    Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/bid-is-not-higher-then-last-one.md,
+        Status: 400,
+        Title: The bid is not higher than last one,
+        Detail: The new bid 'high-card:king' is not higher than last one 'high-card:ace',
+        Instance: /games-module/games/Guid_1/players/Guid_3/bids/high-card
+      }
+    }
+  },
+  {
+    No: 7,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+      Method: Post,
+      Payload: {
+        FaceCard: Ace
+      }
+    },
+    Response: {
+      StatusCode: Created,
+      Payload: __without_body__
+    }
+  }
+]

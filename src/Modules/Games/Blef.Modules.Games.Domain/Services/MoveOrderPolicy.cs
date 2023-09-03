@@ -11,11 +11,15 @@ internal sealed class MoveOrderPolicy
     public MoveOrderPolicy(MoveSequence sequence) =>
         _sequence = sequence ?? throw new ArgumentNullException(nameof(sequence));
 
-    public void Move(PlayerId movingPlayer)
+    public void CheckMoveOrder(PlayerId movingPlayer)
     {
         if (CheckIfThatIsThePlayerMove(movingPlayer) == false)
             throw new ThatIsNotThisPlayerTurnNowException(movingPlayer);
+    }
 
+    public void CommitMove(PlayerId movingPlayer)
+    {
+        CheckMoveOrder(movingPlayer);
         _previousMove = _sequence.GetMove(movingPlayer);
     }
 
@@ -43,4 +47,5 @@ internal sealed class MoveOrderPolicy
 
     private static bool IsPlayerInSequence(PlayerId player, Move moveInSequence) =>
         moveInSequence.Player == player;
+
 }

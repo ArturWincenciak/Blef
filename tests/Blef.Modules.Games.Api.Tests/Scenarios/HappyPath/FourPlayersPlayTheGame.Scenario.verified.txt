@@ -1158,8 +1158,179 @@
       Method: Get
     },
     Response: {
+      StatusCode: BadRequest,
+      Payload: {
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+        Status: 400,
+        Title: That is not this player's turn now,
+        Detail: Player 'PlayerId { Id = Guid_3 }' should wait for his turn,
+        Instance: /games-module/games/Guid_1/players/Guid_3/checks
+      }
+    }
+  },
+  {
+    No: 48,
+    Request: {
+      Path: games-module/games/Guid_1/players/Guid_2/checks,
+      Method: Get
+    },
+    Response: {
       StatusCode: Created,
       Payload: __without_body__
+    }
+  },
+  {
+    No: 49,
+    Request: {
+      Path: games-module/gameplays/Guid_1,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Status: {
+          State: InProgress
+        },
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Nick: Knuth,
+            JoiningOrder: 1,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_3,
+            Nick: Graham,
+            JoiningOrder: 2,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_4,
+            Nick: Conway,
+            JoiningOrder: 3,
+            LostTheGame: false
+          },
+          {
+            PlayerId: Guid_5,
+            Nick: Riemann,
+            JoiningOrder: 4,
+            LostTheGame: false
+          }
+        ],
+        Deals: [
+          {
+            Number: 1,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_5
+            }
+          },
+          {
+            Number: 2,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_4,
+              LooserPlayerId: Guid_4
+            }
+          },
+          {
+            Number: 3,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_5
+            }
+          },
+          {
+            Number: 4,
+            State: Finished,
+            DealResolution: {
+              CheckingPlayerId: Guid_2,
+              LooserPlayerId: Guid_5
+            }
+          },
+          {
+            Number: 5,
+            State: InProgress,
+            DealResolution: {}
+          }
+        ],
+        Winner: {}
+      }
+    }
+  },
+  {
+    No: 50,
+    Request: {
+      Path: games-module/gameplays/Guid_1/deals/4,
+      Method: Get
+    },
+    Response: {
+      StatusCode: OK,
+      Payload: {
+        Players: [
+          {
+            PlayerId: Guid_2,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: diamonds
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_3,
+            Hand: [
+              {
+                FaceCard: ace,
+                Suit: spades
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_4,
+            Hand: [
+              {
+                FaceCard: ten,
+                Suit: clubs
+              },
+              {
+                FaceCard: jack,
+                Suit: spades
+              }
+            ]
+          },
+          {
+            PlayerId: Guid_5,
+            Hand: [
+              {
+                FaceCard: queen,
+                Suit: diamonds
+              },
+              {
+                FaceCard: king,
+                Suit: hearts
+              },
+              {
+                FaceCard: king,
+                Suit: clubs
+              }
+            ]
+          }
+        ],
+        Bids: [
+          {
+            Order: 1,
+            PlayerId: Guid_5,
+            PokerHand: straight-flush:clubs
+          }
+        ],
+        DealResolution: {
+          CheckingPlayerId: Guid_2,
+          LooserPlayerId: Guid_5
+        }
+      }
     }
   }
 ]
