@@ -77,7 +77,7 @@
     No: 6,
     Request: {
       Path: games-module/games/Guid_1/players/Guid_4/checks,
-      Method: Get
+      Method: Post
     },
     Response: {
       StatusCode: BadRequest,

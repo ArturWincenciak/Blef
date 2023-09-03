@@ -341,7 +341,7 @@
     No: 18,
     Request: {
       Path: games-module/games/Guid_1/players/Guid_2/checks,
-      Method: Get
+      Method: Post
     },
     Response: {
       StatusCode: Created,
@@ -575,7 +575,7 @@
     No: 26,
     Request: {
       Path: games-module/games/Guid_1/players/Guid_4/checks,
-      Method: Get
+      Method: Post
     },
     Response: {
       StatusCode: Created,
@@ -844,7 +844,7 @@
     No: 36,
     Request: {
       Path: games-module/games/Guid_1/players/Guid_2/checks,
-      Method: Get
+      Method: Post
     },
     Response: {
       StatusCode: Created,
@@ -1120,7 +1120,7 @@
     No: 45,
     Request: {
       Path: games-module/games/Guid_1/players/Guid_4/checks,
-      Method: Get
+      Method: Post
     },
     Response: {
       StatusCode: BadRequest,
@@ -1155,7 +1155,7 @@
     No: 47,
     Request: {
       Path: games-module/games/Guid_1/players/Guid_3/checks,
-      Method: Get
+      Method: Post
     },
     Response: {
       StatusCode: BadRequest,
@@ -1172,7 +1172,7 @@
     No: 48,
     Request: {
       Path: games-module/games/Guid_1/players/Guid_2/checks,
-      Method: Get
+      Method: Post
     },
     Response: {
       StatusCode: Created,
