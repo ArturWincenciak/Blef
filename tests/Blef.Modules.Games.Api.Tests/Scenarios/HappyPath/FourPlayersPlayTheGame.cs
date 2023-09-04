@@ -66,6 +66,62 @@ public class FourPlayersPlayTheGame
             .GetGameFlow()
             .GetDealFlow(deal: new DealNumber(4))
 
+            .GetCards(WhichPlayer.Knuth, new DealNumber(5))
+            .GetCards(WhichPlayer.Graham, new DealNumber(5))
+            .GetCards(WhichPlayer.Conway, new DealNumber(5))
+            .GetCards(WhichPlayer.Riemann, new DealNumber(5))
+            .BidStraightFlush(WhichPlayer.Knuth, Suit.Clubs)
+            .Check(WhichPlayer.Graham)
+            .GetGameFlow()
+            .GetDealFlow(deal: new DealNumber(5))
+
+            .GetCards(WhichPlayer.Knuth, new DealNumber(6))
+            .GetCards(WhichPlayer.Graham, new DealNumber(6))
+            .GetCards(WhichPlayer.Conway, new DealNumber(6))
+            .GetCards(WhichPlayer.Riemann, new DealNumber(6))
+            .BidHighStraight(WhichPlayer.Graham)
+            .Check(WhichPlayer.Conway)
+            .GetGameFlow()
+            .GetDealFlow(deal: new DealNumber(6))
+
+            .GetCards(WhichPlayer.Knuth, new DealNumber(7))
+            .GetCards(WhichPlayer.Graham, new DealNumber(7))
+            .GetCards(WhichPlayer.Conway, new DealNumber(7))
+            .GetCards(WhichPlayer.Riemann, new DealNumber(7))
+            .BidFullHouse(WhichPlayer.Conway, FaceCard.Ace, FaceCard.King)
+            .Check(WhichPlayer.Riemann)
+            .GetGameFlow()
+            .GetDealFlow(deal: new DealNumber(7))
+
+            .GetCards(WhichPlayer.Knuth, new DealNumber(8))
+            .GetCards(WhichPlayer.Graham, new DealNumber(8))
+            .GetCards(WhichPlayer.Conway, new DealNumber(8))
+            .GetCards(WhichPlayer.Riemann, new DealNumber(8))
+            .BidTwoPairs(WhichPlayer.Riemann, FaceCard.Ace, FaceCard.King)
+            .BidTwoPairs(WhichPlayer.Knuth, FaceCard.King, FaceCard.Ace)
+            .BidThreeOfAKind(WhichPlayer.Knuth, FaceCard.King)
+            .BidThreeOfAKind(WhichPlayer.Graham, FaceCard.Ace)
+            .BidFourOfAKind(WhichPlayer.Conway, FaceCard.King)
+            .BidFourOfAKind(WhichPlayer.Riemann, FaceCard.Ace)
+            .Check(WhichPlayer.Knuth)
+            .GetGameFlow()
+
+            .GetCards(WhichPlayer.Knuth, new DealNumber(9))
+            .GetCards(WhichPlayer.Graham, new DealNumber(9))
+            .GetCards(WhichPlayer.Conway, new DealNumber(9))
+            // todo: return bad request with message "player already lost the game"
+            // note: currently returns bad request with message "player not joined the game"
+            .GetCards(WhichPlayer.Riemann, new DealNumber(9))
+            // todo: there is a bug, this deal should start Knuth (not Conway)
+            // note: if knuth starts the deal then the game receives a bad request
+            .BidTwoPairs(WhichPlayer.Knuth, FaceCard.Ace, FaceCard.King)
+            // .BidThreeOfAKind(WhichPlayer.Graham, FaceCard.King)
+            // .BidThreeOfAKind(WhichPlayer.Conway, FaceCard.Ace)
+            // .BidFourOfAKind(WhichPlayer.Knuth, FaceCard.King)
+            // .BidFourOfAKind(WhichPlayer.Graham, FaceCard.Ace)
+            // .Check(WhichPlayer.Conway)
+            // .GetGameFlow()
+
             .Build();
 
         await Verify(results);
