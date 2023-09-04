@@ -117,9 +117,6 @@ public class FourPlayersPlayTheGame
             .BidTwoPairs(WhichPlayer.Knuth, FaceCard.Ace, FaceCard.King)
             // .BidThreeOfAKind(WhichPlayer.Graham, FaceCard.King)
             // .BidThreeOfAKind(WhichPlayer.Conway, FaceCard.Ace)
-            // .BidFourOfAKind(WhichPlayer.Knuth, FaceCard.King)
-            // .BidFourOfAKind(WhichPlayer.Graham, FaceCard.Ace)
-            // .Check(WhichPlayer.Conway)
             // .GetGameFlow()
 
             .Build();
