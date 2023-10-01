@@ -161,27 +161,6 @@ public class TreePlayersPlayTheGame
             .GetCards(WhichPlayer.Knuth, new DealNumber(14))
             .GetCards(WhichPlayer.Graham, new DealNumber(14))
             .GetCards(WhichPlayer.Conway, new DealNumber(14))
-
-            // todo: change type of that bad request, player joined but already lost the game
-/*
-
-No: 135,
-Request: {
-  Path: games-module/gameplays/Guid_1/players/Guid_3/deals/14/cards,
-  Method: Get
-},
-Response: {
-  StatusCode: BadRequest,
-  Payload: {
-    Type: .../doc/problem-details/player-not-joined-the-game.md,
-    Status: 400,
-    Title: Player not joined the game,
-    Detail: Player 'PlayerId { Id = Guid_3 }' not joined the game 'Guid_1',
-    Instance: /games-module/gameplays/Guid_1/players/Guid_3/deals/14/cards
-  }
-}
-
-*/
             .BidFourOfAKind(WhichPlayer.Conway, FaceCard.King)
             .Check(WhichPlayer.Knuth)
             .GetGameFlow()
