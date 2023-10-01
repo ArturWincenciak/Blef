@@ -2608,32 +2608,11 @@
     Response: {
       StatusCode: BadRequest,
       Payload: {
-        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-not-joined-the-game.md,
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-lost-the-game.md,
         Status: 400,
-        Title: Player not joined the game,
-        Detail: Player 'PlayerId { Id = Guid_5 }' not joined the game 'Guid_1',
+        Title: Player already lost the game,
+        Detail: Player 'PlayerId { Id = Guid_5 }' already lost the game 'Guid_1',
         Instance: /games-module/gameplays/Guid_1/players/Guid_5/deals/9/cards
-      }
-    }
-  },
-  {
-    No: 91,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_2/bids/two-pairs,
-      Method: Post,
-      Payload: {
-        FirstFaceCard: Ace,
-        SecondFaceCard: King
-      }
-    },
-    Response: {
-      StatusCode: BadRequest,
-      Payload: {
-        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
-        Status: 400,
-        Title: That is not this player's turn now,
-        Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
-        Instance: /games-module/games/Guid_1/players/Guid_2/bids/two-pairs
       }
     }
   }

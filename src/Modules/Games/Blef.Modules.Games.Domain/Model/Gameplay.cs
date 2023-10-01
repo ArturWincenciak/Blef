@@ -95,13 +95,16 @@ internal sealed class Gameplay
         if(!_deals.ContainsKey(dealNumber))
             throw new DealNotFoundException(Id.Id, dealNumber.Number);
 
-        var deal = _deals[dealNumber];
-
-        if (deal.Players.All(player => player.Player != playerId))
+        if(_gamePlayers.All(player => player.Player.Id != playerId))
             throw new PlayerNotJoinedTheGameException(Id, playerId);
 
-        var player = deal.Players.Single(player => player.Player == playerId);
-        return player.Hand.Cards;
+        var gamePlayer = _gamePlayers.Single(player => player.Player.Id == playerId);
+        if(gamePlayer.Player.IsInTheGame == false)
+            throw new PlayerAlreadyLostTheGameException(Id, playerId);
+
+        var deal = _deals[dealNumber];
+        var dealPlayer = deal.Players.Single(player => player.Player == playerId);
+        return dealPlayer.Hand.Cards;
     }
 
     internal sealed record Game(
