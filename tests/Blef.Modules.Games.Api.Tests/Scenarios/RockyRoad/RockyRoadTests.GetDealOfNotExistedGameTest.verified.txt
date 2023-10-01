@@ -1,19 +1,21 @@
-﻿[
-  {
-    No: 1,
-    Request: {
-      Path: games-module/gameplays/Guid_1/deals/1,
-      Method: Get
-    },
-    Response: {
-      StatusCode: NotFound,
-      Payload: {
-        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-not-found.md,
-        Status: 404,
-        Title: The resource with the given identifier does not exist,
-        Detail: Game 'Guid_1' not found,
-        Instance: /games-module/gameplays/Guid_1/deals/1
+﻿{
+  Steps: [
+    {
+      No: 1,
+      Request: {
+        Path: games-module/gameplays/Guid_1/deals/1,
+        Method: Get
+      },
+      Response: {
+        StatusCode: NotFound,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-not-found.md,
+          Status: 404,
+          Title: The resource with the given identifier does not exist,
+          Detail: Game 'Guid_1' not found,
+          Instance: /games-module/gameplays/Guid_1/deals/1
+        }
       }
     }
-  }
-]
+  ]
+}

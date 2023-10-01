@@ -1,79 +1,81 @@
-﻿[
-  {
-    No: 1,
-    Request: {
-      Path: games-module/games,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        GameId: Guid_1
-      }
-    }
-  },
-  {
-    No: 2,
-    Request: {
-      Path: games-module/games/Guid_1/players,
-      Method: Post,
-      Payload: {
-        Nick: Conway
+﻿{
+  Steps: [
+    {
+      No: 1,
+      Request: {
+        Path: games-module/games,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          GameId: Guid_1
+        }
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        PlayerId: Guid_2,
-        Nick: Conway
-      }
-    }
-  },
-  {
-    No: 3,
-    Request: {
-      Path: games-module/games/Guid_1/players,
-      Method: Post,
-      Payload: {
-        Nick: Graham
+    {
+      No: 2,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Conway
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_2,
+          Nick: Conway
+        }
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        PlayerId: Guid_3,
-        Nick: Graham
+    {
+      No: 3,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Graham
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_3,
+          Nick: Graham
+        }
       }
-    }
-  },
-  {
-    No: 4,
-    Request: {
-      Path: games-module/games/Guid_1/deals,
-      Method: Post
     },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        Number: 1
+    {
+      No: 4,
+      Request: {
+        Path: games-module/games/Guid_1/deals,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          Number: 1
+        }
       }
-    }
-  },
-  {
-    No: 5,
-    Request: {
-      Path: games-module/gameplays/Guid_1/players/Guid_2/deals/100/cards,
-      Method: Get
     },
-    Response: {
-      StatusCode: NotFound,
-      Payload: {
-        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/deal-not-found.md,
-        Status: 404,
-        Title: The resource with the given identifier does not exist,
-        Detail: Deal '100' of game 'Guid_1' not found,
-        Instance: /games-module/gameplays/Guid_1/players/Guid_2/deals/100/cards
+    {
+      No: 5,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/100/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: NotFound,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/deal-not-found.md,
+          Status: 404,
+          Title: The resource with the given identifier does not exist,
+          Detail: Deal '100' of game 'Guid_1' not found,
+          Instance: /games-module/gameplays/Guid_1/players/Guid_2/deals/100/cards
+        }
       }
     }
-  }
-]
+  ]
+}

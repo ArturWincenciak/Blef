@@ -4,15 +4,21 @@ namespace Blef.Modules.Games.Api.Tests.Core;
 
 internal sealed class TestRecorder
 {
-    private readonly List<TestResult> _items = new();
+    private readonly List<StepResult> _items = new();
     private int _counter;
+    private string? _scenarioDescription;
 
-    public IReadOnlyCollection<TestResult> Actual => _items;
+    public TestResult Actual => new (_scenarioDescription, _items);
 
-    public void Record(Request request, Response response) =>
-        _items.Add(new TestResult(++_counter, request, response));
+    public void WithScenarioDescription(string description) =>
+        _scenarioDescription = description;
 
-    internal sealed record TestResult(int No, Request Request, Response Response);
+    public void Record(Request request, Response response, string? description = null) =>
+        _items.Add(new StepResult(++_counter, description, request, response));
+
+    internal sealed record StepResult(int No, string? Description, Request Request, Response Response);
+
+    internal sealed record TestResult(string? Description, IReadOnlyCollection<StepResult> Steps);
 
     internal sealed record Request(string Path, HttpMethod Method, object? Payload = null);
 

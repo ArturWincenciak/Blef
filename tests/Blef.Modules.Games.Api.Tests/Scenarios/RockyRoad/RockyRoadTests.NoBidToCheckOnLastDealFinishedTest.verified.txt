@@ -1,104 +1,106 @@
-﻿[
-  {
-    No: 1,
-    Request: {
-      Path: games-module/games,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        GameId: Guid_1
-      }
-    }
-  },
-  {
-    No: 2,
-    Request: {
-      Path: games-module/games/Guid_1/players,
-      Method: Post,
-      Payload: {
-        Nick: Conway
+﻿{
+  Steps: [
+    {
+      No: 1,
+      Request: {
+        Path: games-module/games,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          GameId: Guid_1
+        }
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        PlayerId: Guid_2,
-        Nick: Conway
-      }
-    }
-  },
-  {
-    No: 3,
-    Request: {
-      Path: games-module/games/Guid_1/players,
-      Method: Post,
-      Payload: {
-        Nick: Graham
-      }
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        PlayerId: Guid_3,
-        Nick: Graham
-      }
-    }
-  },
-  {
-    No: 4,
-    Request: {
-      Path: games-module/games/Guid_1/deals,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        Number: 1
-      }
-    }
-  },
-  {
-    No: 5,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_2/bids/flush,
-      Method: Post,
-      Payload: {
-        Suit: Hearts
+    {
+      No: 2,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Conway
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_2,
+          Nick: Conway
+        }
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 6,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/checks,
-      Method: Post
+    {
+      No: 3,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Graham
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_3,
+          Nick: Graham
+        }
+      }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 7,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/checks,
-      Method: Post
+    {
+      No: 4,
+      Request: {
+        Path: games-module/games/Guid_1/deals,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          Number: 1
+        }
+      }
     },
-    Response: {
-      StatusCode: BadRequest,
-      Payload: {
-        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/no-bid-to-check.md,
-        Status: 400,
-        Title: There is no bid to check it,
-        Detail: Deal number '2' must be started by at least one bid,
-        Instance: /games-module/games/Guid_1/players/Guid_3/checks
+    {
+      No: 5,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/flush,
+        Method: Post,
+        Payload: {
+          Suit: Hearts
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 6,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 7,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/no-bid-to-check.md,
+          Status: 400,
+          Title: There is no bid to check it,
+          Detail: Deal number '2' must be started by at least one bid,
+          Instance: /games-module/games/Guid_1/players/Guid_3/checks
+        }
       }
     }
-  }
-]
+  ]
+}

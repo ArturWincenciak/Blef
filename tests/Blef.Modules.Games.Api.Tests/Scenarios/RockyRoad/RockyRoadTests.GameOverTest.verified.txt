@@ -1,368 +1,370 @@
-﻿[
-  {
-    No: 1,
-    Request: {
-      Path: games-module/games,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        GameId: Guid_1
-      }
-    }
-  },
-  {
-    No: 2,
-    Request: {
-      Path: games-module/games/Guid_1/players,
-      Method: Post,
-      Payload: {
-        Nick: Conway
+﻿{
+  Steps: [
+    {
+      No: 1,
+      Request: {
+        Path: games-module/games,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          GameId: Guid_1
+        }
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        PlayerId: Guid_2,
-        Nick: Conway
-      }
-    }
-  },
-  {
-    No: 3,
-    Request: {
-      Path: games-module/games/Guid_1/players,
-      Method: Post,
-      Payload: {
-        Nick: Graham
-      }
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        PlayerId: Guid_3,
-        Nick: Graham
-      }
-    }
-  },
-  {
-    No: 4,
-    Request: {
-      Path: games-module/games/Guid_1/deals,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        Number: 1
-      }
-    }
-  },
-  {
-    No: 5,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
-      Method: Post,
-      Payload: {
-        Suit: Hearts
+    {
+      No: 2,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Conway
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_2,
+          Nick: Conway
+        }
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 6,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/checks,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 7,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
-      Method: Post,
-      Payload: {
-        FaceCard: Nine
+    {
+      No: 3,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Graham
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_3,
+          Nick: Graham
+        }
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 8,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
-      Method: Post,
-      Payload: {
-        Suit: Hearts
+    {
+      No: 4,
+      Request: {
+        Path: games-module/games/Guid_1/deals,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          Number: 1
+        }
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 9,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/checks,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 10,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
-      Method: Post,
-      Payload: {
-        Suit: Hearts
+    {
+      No: 5,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
+        Method: Post,
+        Payload: {
+          Suit: Hearts
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 11,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/checks,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 12,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
-      Method: Post,
-      Payload: {
-        FaceCard: Nine
+    {
+      No: 6,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 13,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
-      Method: Post,
-      Payload: {
-        Suit: Hearts
+    {
+      No: 7,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+        Method: Post,
+        Payload: {
+          FaceCard: Nine
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 14,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/checks,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 15,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
-      Method: Post,
-      Payload: {
-        Suit: Hearts
+    {
+      No: 8,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
+        Method: Post,
+        Payload: {
+          Suit: Hearts
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 16,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/checks,
-      Method: Post
+    {
+      No: 9,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: __without_body__
-    }
-  },
-  {
-    No: 17,
-    Request: {
-      Path: games-module/gameplays/Guid_1,
-      Method: Get
+    {
+      No: 10,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
+        Method: Post,
+        Payload: {
+          Suit: Hearts
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
     },
-    Response: {
-      StatusCode: OK,
-      Payload: {
-        Status: {
-          State: GameIsOver
-        },
-        Players: [
-          {
-            PlayerId: Guid_2,
-            Nick: Conway,
-            JoiningOrder: 1,
-            LostTheGame: true
+    {
+      No: 11,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 12,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+        Method: Post,
+        Payload: {
+          FaceCard: Nine
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 13,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
+        Method: Post,
+        Payload: {
+          Suit: Hearts
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 14,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 15,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
+        Method: Post,
+        Payload: {
+          Suit: Hearts
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 16,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 17,
+      Request: {
+        Path: games-module/gameplays/Guid_1,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Status: {
+            State: GameIsOver
           },
-          {
-            PlayerId: Guid_3,
-            Nick: Graham,
-            JoiningOrder: 2,
-            LostTheGame: false
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Nick: Conway,
+              JoiningOrder: 1,
+              LostTheGame: true
+            },
+            {
+              PlayerId: Guid_3,
+              Nick: Graham,
+              JoiningOrder: 2,
+              LostTheGame: false
+            }
+          ],
+          Deals: [
+            {
+              Number: 1,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 2,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 3,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 4,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 5,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            }
+          ],
+          Winner: {
+            PlayerId: Guid_3
           }
-        ],
-        Deals: [
-          {
-            Number: 1,
-            State: Finished,
-            DealResolution: {
-              CheckingPlayerId: Guid_3,
-              LooserPlayerId: Guid_2
+        }
+      }
+    },
+    {
+      No: 18,
+      Request: {
+        Path: games-module/gameplays/Guid_1/deals/5,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                },
+                {
+                  FaceCard: ten,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: spades
+                },
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
+                {
+                  FaceCard: king,
+                  Suit: hearts
+                }
+              ]
             }
-          },
-          {
-            Number: 2,
-            State: Finished,
-            DealResolution: {
-              CheckingPlayerId: Guid_3,
-              LooserPlayerId: Guid_2
+          ],
+          Bids: [
+            {
+              Order: 1,
+              PlayerId: Guid_2,
+              PokerHand: royal-flush:hearts
             }
-          },
-          {
-            Number: 3,
-            State: Finished,
-            DealResolution: {
-              CheckingPlayerId: Guid_3,
-              LooserPlayerId: Guid_2
-            }
-          },
-          {
-            Number: 4,
-            State: Finished,
-            DealResolution: {
-              CheckingPlayerId: Guid_3,
-              LooserPlayerId: Guid_2
-            }
-          },
-          {
-            Number: 5,
-            State: Finished,
-            DealResolution: {
-              CheckingPlayerId: Guid_3,
-              LooserPlayerId: Guid_2
-            }
+          ],
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
           }
-        ],
-        Winner: {
-          PlayerId: Guid_3
+        }
+      }
+    },
+    {
+      No: 19,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+        Method: Post,
+        Payload: {
+          FaceCard: Nine
+        }
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-over.md,
+          Status: 400,
+          Title: The game is already over,
+          Detail: Cannot make any more moves, the game is over,
+          Instance: /games-module/games/Guid_1/players/Guid_3/bids/pair
         }
       }
     }
-  },
-  {
-    No: 18,
-    Request: {
-      Path: games-module/gameplays/Guid_1/deals/5,
-      Method: Get
-    },
-    Response: {
-      StatusCode: OK,
-      Payload: {
-        Players: [
-          {
-            PlayerId: Guid_2,
-            Hand: [
-              {
-                FaceCard: ace,
-                Suit: diamonds
-              },
-              {
-                FaceCard: ace,
-                Suit: spades
-              },
-              {
-                FaceCard: ten,
-                Suit: clubs
-              },
-              {
-                FaceCard: jack,
-                Suit: spades
-              },
-              {
-                FaceCard: queen,
-                Suit: diamonds
-              }
-            ]
-          },
-          {
-            PlayerId: Guid_3,
-            Hand: [
-              {
-                FaceCard: king,
-                Suit: hearts
-              }
-            ]
-          }
-        ],
-        Bids: [
-          {
-            Order: 1,
-            PlayerId: Guid_2,
-            PokerHand: royal-flush:hearts
-          }
-        ],
-        DealResolution: {
-          CheckingPlayerId: Guid_3,
-          LooserPlayerId: Guid_2
-        }
-      }
-    }
-  },
-  {
-    No: 19,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
-      Method: Post,
-      Payload: {
-        FaceCard: Nine
-      }
-    },
-    Response: {
-      StatusCode: BadRequest,
-      Payload: {
-        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-over.md,
-        Status: 400,
-        Title: The game is already over,
-        Detail: Cannot make any more moves, the game is over,
-        Instance: /games-module/games/Guid_1/players/Guid_3/bids/pair
-      }
-    }
-  }
-]
+  ]
+}

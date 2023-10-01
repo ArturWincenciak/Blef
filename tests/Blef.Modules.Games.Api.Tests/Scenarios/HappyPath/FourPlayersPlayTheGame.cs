@@ -6,7 +6,7 @@ namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 [UsesVerify]
 public class FourPlayersPlayTheGame
 {
-    [Fact]
+    [Fact] // todo: RED
     public async Task Scenario()
     {
         var results = await new TestBuilder()

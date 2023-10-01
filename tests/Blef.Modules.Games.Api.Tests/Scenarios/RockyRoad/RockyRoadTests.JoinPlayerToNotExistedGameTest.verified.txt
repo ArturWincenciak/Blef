@@ -1,22 +1,24 @@
-﻿[
-  {
-    No: 1,
-    Request: {
-      Path: games-module/games/Guid_1/players,
-      Method: Post,
-      Payload: {
-        Nick: Conway
-      }
-    },
-    Response: {
-      StatusCode: NotFound,
-      Payload: {
-        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-not-found.md,
-        Status: 404,
-        Title: The resource with the given identifier does not exist,
-        Detail: Game 'Guid_1' not found,
-        Instance: /games-module/games/Guid_1/players
+﻿{
+  Steps: [
+    {
+      No: 1,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Conway
+        }
+      },
+      Response: {
+        StatusCode: NotFound,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-not-found.md,
+          Status: 404,
+          Title: The resource with the given identifier does not exist,
+          Detail: Game 'Guid_1' not found,
+          Instance: /games-module/games/Guid_1/players
+        }
       }
     }
-  }
-]
+  ]
+}

@@ -1,4 +1,5 @@
 ﻿{
+  Description: Conway get lost the game in deal which the Conway starts the deal and the next move has Graham.,
   Steps: [
     {
       No: 1,
@@ -79,11 +80,12 @@
     },
     {
       No: 6,
+      Description: First move by Conway in deal 1.,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
         Method: Post,
         Payload: {
-          Suit: Hearts
+          Suit: Spades
         }
       },
       Response: {
@@ -93,6 +95,7 @@
     },
     {
       No: 7,
+      Description: Conway get lost fist deal (+1 card, has 2 cards).,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -104,11 +107,12 @@
     },
     {
       No: 8,
+      Description: First move by Graham in deal 2.,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
         Payload: {
-          FaceCard: Nine
+          FaceCard: Ace
         }
       },
       Response: {
@@ -118,11 +122,12 @@
     },
     {
       No: 9,
+      Description: Next move by Knuth in deal 2.,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_4/bids/pair,
         Method: Post,
         Payload: {
-          FaceCard: Ten
+          FaceCard: Ace
         }
       },
       Response: {
@@ -132,22 +137,9 @@
     },
     {
       No: 10,
+      Description: Conway get lost second deal (+1 card, has 3 cards).,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
-        Method: Post,
-        Payload: {
-          Suit: Hearts
-        }
-      },
-      Response: {
-        StatusCode: Created,
-        Payload: __without_body__
-      }
-    },
-    {
-      No: 11,
-      Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
       },
       Response: {
@@ -156,12 +148,13 @@
       }
     },
     {
-      No: 12,
+      No: 11,
+      Description: First move by Knuth in deal 3.,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_4/bids/pair,
+        Path: games-module/games/Guid_1/players/Guid_4/bids/high-card,
         Method: Post,
         Payload: {
-          FaceCard: Nine
+          FaceCard: Ace
         }
       },
       Response: {
@@ -170,12 +163,25 @@
       }
     },
     {
+      No: 12,
+      Description: Conway get lost third deal (+1 card, has 4 cards).,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
       No: 13,
+      Description: First move by Conway in deal 4.,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
         Method: Post,
         Payload: {
-          Suit: Hearts
+          Suit: Spades
         }
       },
       Response: {
@@ -185,6 +191,7 @@
     },
     {
       No: 14,
+      Description: Conway get lost fourth deal (+1 card, has 5 cards).,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -196,11 +203,12 @@
     },
     {
       No: 15,
+      Description: First move by Graham in deal 5.,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
+        Path: games-module/games/Guid_1/players/Guid_3/bids/royal-flush,
         Method: Post,
         Payload: {
-          Suit: Hearts
+          Suit: Spades
         }
       },
       Response: {
@@ -210,8 +218,9 @@
     },
     {
       No: 16,
+      Description: Graham get lost fifth deal (+1 card, has 2 cards).,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Path: games-module/games/Guid_1/players/Guid_4/checks,
         Method: Post
       },
       Response: {
@@ -221,11 +230,12 @@
     },
     {
       No: 17,
+      Description: First move by Knuth in deal 6.,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+        Path: games-module/games/Guid_1/players/Guid_4/bids/royal-flush,
         Method: Post,
         Payload: {
-          FaceCard: Nine
+          Suit: Spades
         }
       },
       Response: {
@@ -235,12 +245,10 @@
     },
     {
       No: 18,
+      Description: Knuth get lost sixth deal (+1 card, has 2 cards).,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_4/bids/pair,
-        Method: Post,
-        Payload: {
-          FaceCard: Ten
-        }
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
+        Method: Post
       },
       Response: {
         StatusCode: Created,
@@ -249,11 +257,12 @@
     },
     {
       No: 19,
+      Description: First move by Conway in deal 7.,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
         Method: Post,
         Payload: {
-          Suit: Hearts
+          Suit: Spades
         }
       },
       Response: {
@@ -263,6 +272,7 @@
     },
     {
       No: 20,
+      Description: Conway GET LOST DEAL AND THE GAME in deal 7.,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -274,151 +284,22 @@
     },
     {
       No: 21,
+      Description: Act and assert: in the deal number 8 first move should be made by Graham.,
       Request: {
-        Path: games-module/gameplays/Guid_1,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Status: {
-            State: InProgress
-          },
-          Players: [
-            {
-              PlayerId: Guid_2,
-              Nick: Conway,
-              JoiningOrder: 1,
-              LostTheGame: true
-            },
-            {
-              PlayerId: Guid_3,
-              Nick: Graham,
-              JoiningOrder: 2,
-              LostTheGame: false
-            },
-            {
-              PlayerId: Guid_4,
-              Nick: Knuth,
-              JoiningOrder: 3,
-              LostTheGame: false
-            }
-          ],
-          Deals: [
-            {
-              Number: 1,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
-              }
-            },
-            {
-              Number: 2,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
-              }
-            },
-            {
-              Number: 3,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
-              }
-            },
-            {
-              Number: 4,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
-              }
-            },
-            {
-              Number: 5,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
-              }
-            },
-            {
-              Number: 6,
-              State: InProgress,
-              DealResolution: {}
-            }
-          ],
-          Winner: {}
-        }
-      }
-    },
-    {
-      No: 22,
-      Request: {
-        Path: games-module/gameplays/Guid_1/deals/6,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Players: [
-            {
-              PlayerId: Guid_3,
-              Hand: [
-                {
-                  FaceCard: ace,
-                  Suit: diamonds
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_4,
-              Hand: [
-                {
-                  FaceCard: ace,
-                  Suit: spades
-                }
-              ]
-            }
-          ],
-          DealResolution: {}
-        }
-      }
-    },
-    {
-      No: 23,
-      Request: {
-        Path: games-module/games/Guid_1/players/Guid_4/bids/pair,
+        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
         Payload: {
-          FaceCard: Nine
-        }
-      },
-      Response: {
-        StatusCode: Created,
-        Payload: __without_body__
-      }
-    },
-    {
-      No: 24,
-      Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
-        Method: Post,
-        Payload: {
-          Suit: Hearts
+          FaceCard: Ace
         }
       },
       Response: {
         StatusCode: BadRequest,
         Payload: {
-          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-lost-the-game.md,
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
           Status: 400,
-          Title: Player already lost the game,
-          Detail: Player 'PlayerId { Id = Guid_2 }' already lost the game 'Guid_1',
-          Instance: /games-module/games/Guid_1/players/Guid_2/bids/royal-flush
+          Title: That is not this player's turn now,
+          Detail: Player 'PlayerId { Id = Guid_3 }' should wait for his turn,
+          Instance: /games-module/games/Guid_1/players/Guid_3/bids/high-card
         }
       }
     }
