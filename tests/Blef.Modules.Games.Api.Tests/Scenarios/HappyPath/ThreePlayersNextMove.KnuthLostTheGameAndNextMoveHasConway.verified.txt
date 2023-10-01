@@ -1,0 +1,274 @@
+﻿{
+  Description: Knuth get lost the game in deal which the Knuth starts the deal and the next move has Conway.,
+  Steps: [
+    {
+      No: 1,
+      Request: {
+        Path: games-module/games,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          GameId: Guid_1
+        }
+      }
+    },
+    {
+      No: 2,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Conway
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_2,
+          Nick: Conway
+        }
+      }
+    },
+    {
+      No: 3,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Graham
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_3,
+          Nick: Graham
+        }
+      }
+    },
+    {
+      No: 4,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Knuth
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_4,
+          Nick: Knuth
+        }
+      }
+    },
+    {
+      No: 5,
+      Request: {
+        Path: games-module/games/Guid_1/deals,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          Number: 1
+        }
+      }
+    },
+    {
+      No: 6,
+      Description: First move by Conway in deal 1.,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 7,
+      Description: Graham get lost fist deal (+1 card, has 2 cards).,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 8,
+      Description: First move by Graham in deal 2.,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 9,
+      Description: Knuth get lost second deal (+1 card, has 2 cards).,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 10,
+      Description: First move by Knuth in deal 3.,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/bids/royal-flush,
+        Method: Post,
+        Payload: {
+          Suit: Spades
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 11,
+      Description: Knuth get lost third deal (+1 card, has 3 cards).,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 12,
+      Description: First move by Conway in deal 4.,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 13,
+      Description: Next move by Graham in deal 4.,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 14,
+      Description: Knuth get lost fourth deal (+1 card, has 4 cards).,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 15,
+      Description: First move by Graham in deal 5.,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 16,
+      Description: Knuth get lost fifth deal (+1 card, has 5 cards).,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 17,
+      Description: First move by Knuth in deal 6.,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/bids/royal-flush,
+        Method: Post,
+        Payload: {
+          Suit: Spades
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 18,
+      Description: Knuth GET LOST DEAL AND THE GAME in deal 6.,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 19,
+      Description: Act and assert: in the deal number 7 first move should be made by Conway.,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    }
+  ]
+}

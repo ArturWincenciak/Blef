@@ -1,52 +1,54 @@
-﻿[
-  {
-    No: 1,
-    Request: {
-      Path: games-module/games,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        GameId: Guid_1
-      }
-    }
-  },
-  {
-    No: 2,
-    Request: {
-      Path: games-module/games/Guid_1/players,
-      Method: Post,
-      Payload: {
-        Nick: Conway
+﻿{
+  Steps: [
+    {
+      No: 1,
+      Request: {
+        Path: games-module/games,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          GameId: Guid_1
+        }
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        PlayerId: Guid_2,
-        Nick: Conway
-      }
-    }
-  },
-  {
-    No: 3,
-    Request: {
-      Path: games-module/games/Guid_3/players/Guid_2/bids/high-card,
-      Method: Post,
-      Payload: {
-        FaceCard: Ace
+    {
+      No: 2,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Conway
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_2,
+          Nick: Conway
+        }
       }
     },
-    Response: {
-      StatusCode: NotFound,
-      Payload: {
-        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-not-found.md,
-        Status: 404,
-        Title: The resource with the given identifier does not exist,
-        Detail: Game 'Guid_3' not found,
-        Instance: /games-module/games/Guid_3/players/Guid_2/bids/high-card
+    {
+      No: 3,
+      Request: {
+        Path: games-module/games/Guid_3/players/Guid_2/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: NotFound,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/game-not-found.md,
+          Status: 404,
+          Title: The resource with the given identifier does not exist,
+          Detail: Game 'Guid_3' not found,
+          Instance: /games-module/games/Guid_3/players/Guid_2/bids/high-card
+        }
       }
     }
-  }
-]
+  ]
+}

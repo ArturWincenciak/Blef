@@ -1,88 +1,90 @@
-﻿[
-  {
-    No: 1,
-    Request: {
-      Path: games-module/games,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        GameId: Guid_1
-      }
-    }
-  },
-  {
-    No: 2,
-    Request: {
-      Path: games-module/games/Guid_1/players,
-      Method: Post,
-      Payload: {
-        Nick: Conway
+﻿{
+  Steps: [
+    {
+      No: 1,
+      Request: {
+        Path: games-module/games,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          GameId: Guid_1
+        }
       }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        PlayerId: Guid_2,
-        Nick: Conway
-      }
-    }
-  },
-  {
-    No: 3,
-    Request: {
-      Path: games-module/games/Guid_1/players,
-      Method: Post,
-      Payload: {
-        Nick: Graham
-      }
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        PlayerId: Guid_3,
-        Nick: Graham
-      }
-    }
-  },
-  {
-    No: 4,
-    Request: {
-      Path: games-module/games/Guid_1/deals,
-      Method: Post
-    },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        Number: 1
-      }
-    }
-  },
-  {
-    No: 5,
-    Request: {
-      Path: games-module/games/Guid_1/players/Guid_2/bids/pair,
-      Method: Post,
-      Payload: {
-        FaceCard: NotValidValue
+    {
+      No: 2,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Conway
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_2,
+          Nick: Conway
+        }
       }
     },
-    Response: {
-      StatusCode: BadRequest,
-      Payload: {
-        Type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
-        Status: 400,
-        Title: One or more validation errors occurred.,
-        Errors: {
-          $.faceCard: [
-            The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.PairBidPayload. Path: $.faceCard | LineNumber: 0 | BytePositionInLine: 27.
-          ],
-          payload: [
-            The payload field is required.
-          ]
+    {
+      No: 3,
+      Request: {
+        Path: games-module/games/Guid_1/players,
+        Method: Post,
+        Payload: {
+          Nick: Graham
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          PlayerId: Guid_3,
+          Nick: Graham
+        }
+      }
+    },
+    {
+      No: 4,
+      Request: {
+        Path: games-module/games/Guid_1/deals,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          Number: 1
+        }
+      }
+    },
+    {
+      No: 5,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/pair,
+        Method: Post,
+        Payload: {
+          FaceCard: NotValidValue
+        }
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://tools.ietf.org/html/rfc7231#section-6.5.1,
+          Status: 400,
+          Title: One or more validation errors occurred.,
+          Errors: {
+            $.faceCard: [
+              The JSON value could not be converted to Blef.Modules.Games.Api.Controllers.Games.Commands.PairBidPayload. Path: $.faceCard | LineNumber: 0 | BytePositionInLine: 27.
+            ],
+            payload: [
+              The payload field is required.
+            ]
+          }
         }
       }
     }
-  }
-]
+  ]
+}

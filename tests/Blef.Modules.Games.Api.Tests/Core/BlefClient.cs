@@ -20,41 +20,41 @@ internal sealed class BlefClient
         _testRecorder = testRecorder;
     }
 
-    async internal Task NewGame()
+    async internal Task NewGame(string? description = null)
     {
-        var game = await _httpClient.NewGame(_testRecorder);
+        var game = await _httpClient.NewGame(_testRecorder, description);
         _gameId = new GameId(game.GameId);
     }
 
-    async internal Task GetGameFlow() =>
-        await _httpClient.GetGameFlow(GameId, _testRecorder);
+    async internal Task GetGameFlow(string? description = null) =>
+        await _httpClient.GetGameFlow(GameId, _testRecorder, description);
 
-    async internal Task GetGameFlow(GameId gameId) =>
-        await _httpClient.GetGameFlow(gameId, _testRecorder);
+    async internal Task GetGameFlow(GameId gameId, string? description = null) =>
+        await _httpClient.GetGameFlow(gameId, _testRecorder, description);
 
-    async internal Task GetDealFlow(DealNumber dealNumber) =>
-        await _httpClient.GetDealFlow(GameId, dealNumber, _testRecorder);
+    async internal Task GetDealFlow(DealNumber dealNumber, string? description = null) =>
+        await _httpClient.GetDealFlow(GameId, dealNumber, _testRecorder, description);
 
-    async internal Task GetDealFlow(GameId gameId, DealNumber dealNumber) =>
-        await _httpClient.GetDealFlow(gameId, dealNumber, _testRecorder);
+    async internal Task GetDealFlow(GameId gameId, DealNumber dealNumber, string? description = null) =>
+        await _httpClient.GetDealFlow(gameId, dealNumber, _testRecorder, description);
 
-    async internal Task JoinPlayer(WhichPlayer whichPlayer) =>
-        await JoinPlayer(GameId, whichPlayer);
+    async internal Task JoinPlayer(WhichPlayer whichPlayer, string? description = null) =>
+        await JoinPlayer(GameId, whichPlayer, description);
 
-    async internal Task JoinPlayer(GameId gameId, WhichPlayer whichPlayer)
+    async internal Task JoinPlayer(GameId gameId, WhichPlayer whichPlayer, string? description = null)
     {
         var result = await _httpClient.JoinPlayer(
-            gameId, nick: new PlayerNick(whichPlayer.ToString()), _testRecorder);
+            gameId, nick: new PlayerNick(whichPlayer.ToString()), _testRecorder, description);
 
         if (result is JoinGame.Result player)
             SetPlayerId(whichPlayer, playerId: new PlayerId(player.PlayerId));
     }
 
-    async internal Task StartFirstDeal() =>
-        await StartFirstDeal(GameId);
+    async internal Task StartFirstDeal(string? description = null) =>
+        await StartFirstDeal(GameId, description);
 
-    async internal Task StartFirstDeal(GameId gameId) =>
-        await _httpClient.StartFirstDeal(gameId, _testRecorder);
+    async internal Task StartFirstDeal(GameId gameId, string? description = null) =>
+        await _httpClient.StartFirstDeal(gameId, _testRecorder, description);
 
     async internal Task GetCards(WhichPlayer whichPlayer, DealNumber deal)
     {
@@ -65,22 +65,22 @@ internal sealed class BlefClient
     async internal Task GetCards(PlayerId playerId, DealNumber deal) =>
         await _httpClient.GetCards(GameId, deal, playerId, _testRecorder);
 
-    async internal Task BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard) =>
-        await BidHighCard(GameId, whichPlayer, faceCard);
+    async internal Task BidHighCard(WhichPlayer whichPlayer, FaceCard faceCard, string? description) =>
+        await BidHighCard(GameId, whichPlayer, faceCard, description);
 
-    async internal Task BidHighCard(GameId gameId, WhichPlayer whichPlayer, FaceCard faceCard)
+    async internal Task BidHighCard(GameId gameId, WhichPlayer whichPlayer, FaceCard faceCard, string? description)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.BidHighCard(gameId, playerId, faceCard, _testRecorder);
+        await _httpClient.BidHighCard(gameId, playerId, faceCard, _testRecorder, description);
     }
 
-    public async Task BidHighCard(PlayerId player, FaceCard faceCard) =>
-        await _httpClient.BidHighCard(GameId, player, faceCard, _testRecorder);
+    public async Task BidHighCard(PlayerId player, FaceCard faceCard, string? description = null) =>
+        await _httpClient.BidHighCard(GameId, player, faceCard, _testRecorder, description);
 
-    public async Task BidPair(WhichPlayer whichPlayer, FaceCard faceCard)
+    public async Task BidPair(WhichPlayer whichPlayer, FaceCard faceCard, string? description = null)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.BidPair(GameId, playerId, faceCard, _testRecorder);
+        await _httpClient.BidPair(GameId, playerId, faceCard, _testRecorder, description);
     }
 
     public async Task BidTwoPairs(WhichPlayer whichPlayer, FaceCard first, FaceCard second)
@@ -131,23 +131,23 @@ internal sealed class BlefClient
         await _httpClient.BidStraightFlush(GameId, playerId, suit, _testRecorder);
     }
 
-    public async Task BidRoyalFlush(WhichPlayer whichPlayer, Suit suit)
+    public async Task BidRoyalFlush(WhichPlayer whichPlayer, Suit suit, string? description = null)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.BidRoyalFlush(GameId, playerId, suit, _testRecorder);
+        await _httpClient.BidRoyalFlush(GameId, playerId, suit, _testRecorder, description);
     }
 
-    async internal Task Check(WhichPlayer whichPlayer) =>
-        await Check(GameId, whichPlayer);
+    async internal Task Check(WhichPlayer whichPlayer, string? description = null) =>
+        await Check(GameId, whichPlayer, description);
 
-    async internal Task Check(GameId gameId, WhichPlayer whichPlayer)
+    async internal Task Check(GameId gameId, WhichPlayer whichPlayer, string? description = null)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.Check(gameId, playerId, _testRecorder);
+        await _httpClient.Check(gameId, playerId, _testRecorder, description);
     }
 
-    async internal Task Check(PlayerId playerId) =>
-        await _httpClient.Check(GameId, playerId, _testRecorder);
+    async internal Task Check(PlayerId playerId, string? description = null) =>
+        await _httpClient.Check(GameId, playerId, _testRecorder, description);
 
     private PlayerId GetPlayerId(WhichPlayer whichPlayer) =>
         whichPlayer switch

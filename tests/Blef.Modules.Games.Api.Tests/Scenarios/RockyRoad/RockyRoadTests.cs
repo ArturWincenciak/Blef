@@ -519,6 +519,4 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
-
-
 }

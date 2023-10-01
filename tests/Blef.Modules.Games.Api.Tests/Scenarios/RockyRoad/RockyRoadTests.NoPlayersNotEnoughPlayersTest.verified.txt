@@ -1,32 +1,34 @@
-﻿[
-  {
-    No: 1,
-    Request: {
-      Path: games-module/games,
-      Method: Post
+﻿{
+  Steps: [
+    {
+      No: 1,
+      Request: {
+        Path: games-module/games,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: {
+          GameId: Guid_1
+        }
+      }
     },
-    Response: {
-      StatusCode: Created,
-      Payload: {
-        GameId: Guid_1
+    {
+      No: 2,
+      Request: {
+        Path: games-module/games/Guid_1/deals,
+        Method: Post
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/not-enough-players.md,
+          Status: 400,
+          Title: The minimum number of game players has not been reached,
+          Detail: Minimum number of game players must be at least 2,
+          Instance: /games-module/games/Guid_1/deals
+        }
       }
     }
-  },
-  {
-    No: 2,
-    Request: {
-      Path: games-module/games/Guid_1/deals,
-      Method: Post
-    },
-    Response: {
-      StatusCode: BadRequest,
-      Payload: {
-        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/not-enough-players.md,
-        Status: 400,
-        Title: The minimum number of game players has not been reached,
-        Detail: Minimum number of game players must be at least 2,
-        Instance: /games-module/games/Guid_1/deals
-      }
-    }
-  }
-]
+  ]
+}
