@@ -112,12 +112,10 @@ public class FourPlayersPlayTheGame
             .GetCards(WhichPlayer.Riemann, new DealNumber(9))
 
             // todo: there is a bug, this deal should start Knuth (not Conway)
-            // note: if knuth starts the deal then the game receives a bad request
+            // note: last deal has been started by Riemann
+            // note: last deal has been lost by Riemann
+            // note: this deal should start Knuth (not by Conway)
             // .BidTwoPairs(WhichPlayer.Knuth, FaceCard.Ace, FaceCard.King)
-
-            // .BidThreeOfAKind(WhichPlayer.Graham, FaceCard.King)
-            // .BidThreeOfAKind(WhichPlayer.Conway, FaceCard.Ace)
-            // .GetGameFlow()
 
             .Build();
 
