@@ -4471,10 +4471,10 @@
     Response: {
       StatusCode: BadRequest,
       Payload: {
-        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-not-joined-the-game.md,
+        Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-lost-the-game.md,
         Status: 400,
-        Title: Player not joined the game,
-        Detail: Player 'PlayerId { Id = Guid_3 }' not joined the game 'Guid_1',
+        Title: Player already lost the game,
+        Detail: Player 'PlayerId { Id = Guid_3 }' already lost the game 'Guid_1',
         Instance: /games-module/gameplays/Guid_1/players/Guid_3/deals/14/cards
       }
     }
