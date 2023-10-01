@@ -115,7 +115,7 @@ public class FourPlayersPlayTheGame
             // note: last deal has been started by Riemann
             // note: last deal has been lost by Riemann
             // note: this deal should start Knuth (not by Conway)
-            // .BidTwoPairs(WhichPlayer.Knuth, FaceCard.Ace, FaceCard.King)
+            .BidTwoPairs(WhichPlayer.Knuth, FaceCard.Ace, FaceCard.King)
 
             .Build();
 
