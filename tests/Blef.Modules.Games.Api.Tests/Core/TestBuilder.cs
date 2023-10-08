@@ -81,15 +81,15 @@ internal sealed class TestBuilder
         return this;
     }
 
-    internal TestBuilder GetCards(WhichPlayer whichPlayer, DealNumber deal)
+    internal TestBuilder GetCards(WhichPlayer whichPlayer, DealNumber deal, string? description = null)
     {
-        _actions.Add(async () => await _gameClient.GetCards(whichPlayer, deal));
+        _actions.Add(async () => await _gameClient.GetCards(whichPlayer, deal, description));
         return this;
     }
 
-    internal TestBuilder GetCards(PlayerId playerId, DealNumber deal)
+    internal TestBuilder GetCards(PlayerId playerId, DealNumber deal, string? description = null)
     {
-        _actions.Add(async () => await _gameClient.GetCards(playerId, deal));
+        _actions.Add(async () => await _gameClient.GetCards(playerId, deal, description));
         return this;
     }
 
@@ -118,9 +118,9 @@ internal sealed class TestBuilder
         return this;
     }
 
-    public TestBuilder BidTwoPairs(WhichPlayer whichPlayer, FaceCard first, FaceCard second)
+    public TestBuilder BidTwoPairs(WhichPlayer whichPlayer, FaceCard first, FaceCard second, string? description = null)
     {
-        _actions.Add(async () => await _gameClient.BidTwoPairs(whichPlayer, first, second));
+        _actions.Add(async () => await _gameClient.BidTwoPairs(whichPlayer, first, second, description));
         return this;
     }
 
@@ -142,9 +142,10 @@ internal sealed class TestBuilder
         return this;
     }
 
-    public TestBuilder BidFullHouse(WhichPlayer whichPlayer, FaceCard threeOfAKind, FaceCard pair)
+    public TestBuilder BidFullHouse(WhichPlayer whichPlayer, FaceCard threeOfAKind, FaceCard pair,
+        string? description = null)
     {
-        _actions.Add(async () => await _gameClient.BidFullHouse(whichPlayer, threeOfAKind, pair));
+        _actions.Add(async () => await _gameClient.BidFullHouse(whichPlayer, threeOfAKind, pair, description));
         return this;
     }
 
@@ -154,9 +155,9 @@ internal sealed class TestBuilder
         return this;
     }
 
-    public TestBuilder BidFourOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
+    public TestBuilder BidFourOfAKind(WhichPlayer whichPlayer, FaceCard faceCard, string? description = null)
     {
-        _actions.Add(async () => await _gameClient.BidFourOfAKind(whichPlayer, faceCard));
+        _actions.Add(async () => await _gameClient.BidFourOfAKind(whichPlayer, faceCard, description));
         return this;
     }
 

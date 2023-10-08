@@ -409,8 +409,8 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
-              Suit: diamonds
+              FaceCard: jack,
+              Suit: spades
             }
           ]
         }
@@ -428,7 +428,7 @@
           Cards: [
             {
               FaceCard: ace,
-              Suit: spades
+              Suit: diamonds
             }
           ]
         }
@@ -445,12 +445,12 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ten,
-              Suit: clubs
+              FaceCard: ace,
+              Suit: spades
             },
             {
-              FaceCard: jack,
-              Suit: spades
+              FaceCard: ten,
+              Suit: clubs
             }
           ]
         }
@@ -551,7 +551,7 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
@@ -560,21 +560,21 @@
               ]
             },
             {
-              PlayerId: Guid_3,
+              PlayerId: Guid_4,
               Hand: [
                 {
                   FaceCard: ace,
                   Suit: spades
+                },
+                {
+                  FaceCard: ten,
+                  Suit: clubs
                 }
               ]
             },
             {
-              PlayerId: Guid_4,
+              PlayerId: Guid_2,
               Hand: [
-                {
-                  FaceCard: ten,
-                  Suit: clubs
-                },
                 {
                   FaceCard: jack,
                   Suit: spades
@@ -607,8 +607,8 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
-              Suit: diamonds
+              FaceCard: jack,
+              Suit: spades
             }
           ]
         }
@@ -625,8 +625,8 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
-              Suit: spades
+              FaceCard: queen,
+              Suit: diamonds
             }
           ]
         }
@@ -643,16 +643,16 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ten,
-              Suit: clubs
+              FaceCard: ace,
+              Suit: diamonds
             },
             {
-              FaceCard: jack,
+              FaceCard: ace,
               Suit: spades
             },
             {
-              FaceCard: queen,
-              Suit: diamonds
+              FaceCard: ten,
+              Suit: clubs
             }
           ]
         }
@@ -775,34 +775,34 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_4,
               Hand: [
                 {
                   FaceCard: ace,
                   Suit: diamonds
+                },
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                },
+                {
+                  FaceCard: ten,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
+                {
+                  FaceCard: jack,
+                  Suit: spades
                 }
               ]
             },
             {
               PlayerId: Guid_3,
               Hand: [
-                {
-                  FaceCard: ace,
-                  Suit: spades
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_4,
-              Hand: [
-                {
-                  FaceCard: ten,
-                  Suit: clubs
-                },
-                {
-                  FaceCard: jack,
-                  Suit: spades
-                },
                 {
                   FaceCard: queen,
                   Suit: diamonds
@@ -1089,12 +1089,12 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
-              Suit: diamonds
+              FaceCard: king,
+              Suit: hearts
             },
             {
-              FaceCard: ace,
-              Suit: spades
+              FaceCard: king,
+              Suit: clubs
             }
           ]
         }
@@ -1111,11 +1111,11 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ten,
-              Suit: clubs
+              FaceCard: ace,
+              Suit: diamonds
             },
             {
-              FaceCard: jack,
+              FaceCard: ace,
               Suit: spades
             }
           ]
@@ -1133,16 +1133,16 @@
         Payload: {
           Cards: [
             {
+              FaceCard: ten,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: spades
+            },
+            {
               FaceCard: queen,
               Suit: diamonds
-            },
-            {
-              FaceCard: king,
-              Suit: hearts
-            },
-            {
-              FaceCard: king,
-              Suit: clubs
             }
           ]
         }
@@ -1324,7 +1324,7 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
@@ -1332,19 +1332,6 @@
                 },
                 {
                   FaceCard: ace,
-                  Suit: spades
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
-                {
-                  FaceCard: ten,
-                  Suit: clubs
-                },
-                {
-                  FaceCard: jack,
                   Suit: spades
                 }
               ]
@@ -1353,9 +1340,22 @@
               PlayerId: Guid_4,
               Hand: [
                 {
+                  FaceCard: ten,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: spades
+                },
+                {
                   FaceCard: queen,
                   Suit: diamonds
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
                 {
                   FaceCard: king,
                   Suit: hearts
@@ -1412,12 +1412,12 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
+              FaceCard: queen,
               Suit: diamonds
             },
             {
-              FaceCard: ace,
-              Suit: spades
+              FaceCard: king,
+              Suit: hearts
             }
           ]
         }
@@ -1434,12 +1434,12 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ten,
+              FaceCard: king,
               Suit: clubs
             },
             {
-              FaceCard: jack,
-              Suit: spades
+              FaceCard: ace,
+              Suit: clubs
             }
           ]
         }
@@ -1456,20 +1456,20 @@
         Payload: {
           Cards: [
             {
-              FaceCard: queen,
+              FaceCard: ace,
               Suit: diamonds
             },
             {
-              FaceCard: king,
-              Suit: hearts
-            },
-            {
-              FaceCard: king,
-              Suit: clubs
-            },
-            {
               FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
               Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: spades
             }
           ]
         }
@@ -1798,7 +1798,7 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_4,
               Hand: [
                 {
                   FaceCard: ace,
@@ -1807,12 +1807,7 @@
                 {
                   FaceCard: ace,
                   Suit: spades
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: ten,
                   Suit: clubs
@@ -1824,7 +1819,7 @@
               ]
             },
             {
-              PlayerId: Guid_4,
+              PlayerId: Guid_2,
               Hand: [
                 {
                   FaceCard: queen,
@@ -1833,7 +1828,12 @@
                 {
                   FaceCard: king,
                   Suit: hearts
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
                 {
                   FaceCard: king,
                   Suit: clubs
@@ -2388,6 +2388,32 @@
           Cards: [
             {
               FaceCard: ace,
+              Suit: clubs
+            },
+            {
+              FaceCard: queen,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: diamonds
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 90,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/8/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
               Suit: diamonds
             },
             {
@@ -2403,9 +2429,9 @@
       }
     },
     {
-      No: 90,
+      No: 91,
       Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/8/cards,
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/8/cards,
         Method: Get
       },
       Response: {
@@ -2423,36 +2449,10 @@
             {
               FaceCard: king,
               Suit: hearts
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 91,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/8/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
+            },
             {
               FaceCard: king,
               Suit: clubs
-            },
-            {
-              FaceCard: ace,
-              Suit: clubs
-            },
-            {
-              FaceCard: queen,
-              Suit: clubs
-            },
-            {
-              FaceCard: jack,
-              Suit: diamonds
             }
           ]
         }
@@ -2602,7 +2602,7 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
@@ -2619,7 +2619,7 @@
               ]
             },
             {
-              PlayerId: Guid_3,
+              PlayerId: Guid_4,
               Hand: [
                 {
                   FaceCard: jack,
@@ -2632,16 +2632,16 @@
                 {
                   FaceCard: king,
                   Suit: hearts
+                },
+                {
+                  FaceCard: king,
+                  Suit: clubs
                 }
               ]
             },
             {
-              PlayerId: Guid_4,
+              PlayerId: Guid_2,
               Hand: [
-                {
-                  FaceCard: king,
-                  Suit: clubs
-                },
                 {
                   FaceCard: ace,
                   Suit: clubs
@@ -2682,15 +2682,15 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
-              Suit: diamonds
+              FaceCard: king,
+              Suit: hearts
+            },
+            {
+              FaceCard: king,
+              Suit: clubs
             },
             {
               FaceCard: ace,
-              Suit: spades
-            },
-            {
-              FaceCard: ten,
               Suit: clubs
             }
           ]
@@ -2708,16 +2708,16 @@
         Payload: {
           Cards: [
             {
-              FaceCard: jack,
-              Suit: spades
+              FaceCard: queen,
+              Suit: clubs
             },
             {
-              FaceCard: queen,
+              FaceCard: jack,
               Suit: diamonds
             },
             {
-              FaceCard: king,
-              Suit: hearts
+              FaceCard: ten,
+              Suit: diamonds
             }
           ]
         }
@@ -2734,23 +2734,23 @@
         Payload: {
           Cards: [
             {
-              FaceCard: king,
-              Suit: clubs
+              FaceCard: ace,
+              Suit: diamonds
             },
             {
               FaceCard: ace,
-              Suit: clubs
+              Suit: spades
             },
             {
-              FaceCard: queen,
+              FaceCard: ten,
               Suit: clubs
             },
             {
               FaceCard: jack,
-              Suit: diamonds
+              Suit: spades
             },
             {
-              FaceCard: ten,
+              FaceCard: queen,
               Suit: diamonds
             }
           ]
@@ -2906,7 +2906,7 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_4,
               Hand: [
                 {
                   FaceCard: ace,
@@ -2919,12 +2919,7 @@
                 {
                   FaceCard: ten,
                   Suit: clubs
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: jack,
                   Suit: spades
@@ -2932,16 +2927,16 @@
                 {
                   FaceCard: queen,
                   Suit: diamonds
-                },
-                {
-                  FaceCard: king,
-                  Suit: hearts
                 }
               ]
             },
             {
-              PlayerId: Guid_4,
+              PlayerId: Guid_2,
               Hand: [
+                {
+                  FaceCard: king,
+                  Suit: hearts
+                },
                 {
                   FaceCard: king,
                   Suit: clubs
@@ -2949,7 +2944,12 @@
                 {
                   FaceCard: ace,
                   Suit: clubs
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
                 {
                   FaceCard: queen,
                   Suit: clubs
@@ -3351,66 +3351,6 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
-              Suit: diamonds
-            },
-            {
-              FaceCard: ace,
-              Suit: spades
-            },
-            {
-              FaceCard: ten,
-              Suit: clubs
-            },
-            {
-              FaceCard: jack,
-              Suit: spades
-            },
-            {
-              FaceCard: queen,
-              Suit: diamonds
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 113,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/11/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
-            {
-              FaceCard: king,
-              Suit: hearts
-            },
-            {
-              FaceCard: king,
-              Suit: clubs
-            },
-            {
-              FaceCard: ace,
-              Suit: clubs
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 114,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/11/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
-            {
               FaceCard: queen,
               Suit: clubs
             },
@@ -3428,6 +3368,66 @@
             },
             {
               FaceCard: nine,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 113,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/11/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 114,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/11/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: jack,
+              Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: hearts
+            },
+            {
+              FaceCard: king,
+              Suit: clubs
+            },
+            {
+              FaceCard: ace,
               Suit: clubs
             }
           ]
@@ -3601,7 +3601,7 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
@@ -3614,7 +3614,12 @@
                 {
                   FaceCard: ten,
                   Suit: clubs
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_4,
+              Hand: [
                 {
                   FaceCard: jack,
                   Suit: spades
@@ -3622,12 +3627,7 @@
                 {
                   FaceCard: queen,
                   Suit: diamonds
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: king,
                   Suit: hearts
@@ -3643,7 +3643,7 @@
               ]
             },
             {
-              PlayerId: Guid_4,
+              PlayerId: Guid_2,
               Hand: [
                 {
                   FaceCard: queen,
@@ -3693,23 +3693,23 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
-              Suit: diamonds
+              FaceCard: king,
+              Suit: hearts
+            },
+            {
+              FaceCard: king,
+              Suit: clubs
             },
             {
               FaceCard: ace,
-              Suit: spades
+              Suit: clubs
             },
             {
-              FaceCard: ten,
+              FaceCard: queen,
               Suit: clubs
             },
             {
               FaceCard: jack,
-              Suit: spades
-            },
-            {
-              FaceCard: queen,
               Suit: diamonds
             }
           ]
@@ -3727,20 +3727,20 @@
         Payload: {
           Cards: [
             {
-              FaceCard: king,
-              Suit: hearts
+              FaceCard: ten,
+              Suit: diamonds
             },
             {
               FaceCard: king,
+              Suit: diamonds
+            },
+            {
+              FaceCard: nine,
               Suit: clubs
             },
             {
-              FaceCard: ace,
-              Suit: clubs
-            },
-            {
-              FaceCard: queen,
-              Suit: clubs
+              FaceCard: king,
+              Suit: spades
             }
           ]
         }
@@ -3757,24 +3757,24 @@
         Payload: {
           Cards: [
             {
-              FaceCard: jack,
+              FaceCard: ace,
               Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
             },
             {
               FaceCard: ten,
-              Suit: diamonds
-            },
-            {
-              FaceCard: king,
-              Suit: diamonds
-            },
-            {
-              FaceCard: nine,
               Suit: clubs
             },
             {
-              FaceCard: king,
+              FaceCard: jack,
               Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
             }
           ]
         }
@@ -3965,7 +3965,7 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_4,
               Hand: [
                 {
                   FaceCard: ace,
@@ -3990,7 +3990,7 @@
               ]
             },
             {
-              PlayerId: Guid_3,
+              PlayerId: Guid_2,
               Hand: [
                 {
                   FaceCard: king,
@@ -4007,16 +4007,16 @@
                 {
                   FaceCard: queen,
                   Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: diamonds
                 }
               ]
             },
             {
-              PlayerId: Guid_4,
+              PlayerId: Guid_3,
               Hand: [
-                {
-                  FaceCard: jack,
-                  Suit: diamonds
-                },
                 {
                   FaceCard: ten,
                   Suit: diamonds
@@ -4440,23 +4440,23 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
-              Suit: diamonds
+              FaceCard: king,
+              Suit: hearts
+            },
+            {
+              FaceCard: king,
+              Suit: clubs
             },
             {
               FaceCard: ace,
-              Suit: spades
+              Suit: clubs
             },
             {
-              FaceCard: ten,
+              FaceCard: queen,
               Suit: clubs
             },
             {
               FaceCard: jack,
-              Suit: spades
-            },
-            {
-              FaceCard: queen,
               Suit: diamonds
             }
           ]
@@ -4491,23 +4491,23 @@
         Payload: {
           Cards: [
             {
-              FaceCard: king,
-              Suit: hearts
-            },
-            {
-              FaceCard: king,
-              Suit: clubs
+              FaceCard: ace,
+              Suit: diamonds
             },
             {
               FaceCard: ace,
-              Suit: clubs
+              Suit: spades
             },
             {
-              FaceCard: queen,
+              FaceCard: ten,
               Suit: clubs
             },
             {
               FaceCard: jack,
+              Suit: spades
+            },
+            {
+              FaceCard: queen,
               Suit: diamonds
             }
           ]
@@ -4702,7 +4702,7 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_4,
               Hand: [
                 {
                   FaceCard: ace,
@@ -4727,7 +4727,7 @@
               ]
             },
             {
-              PlayerId: Guid_4,
+              PlayerId: Guid_2,
               Hand: [
                 {
                   FaceCard: king,

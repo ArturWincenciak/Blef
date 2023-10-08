@@ -304,7 +304,7 @@
     },
     {
       No: 22,
-      Description: Act and assert: in deal number 8 fist move should be by Knuth.,
+      Description: Act and assert: in deal number 7 fist move should be by Knuth.,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_4/bids/high-card,
         Method: Post,
@@ -313,14 +313,8 @@
         }
       },
       Response: {
-        StatusCode: BadRequest,
-        Payload: {
-          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
-          Status: 400,
-          Title: That is not this player's turn now,
-          Detail: Player 'PlayerId { Id = Guid_4 }' should wait for his turn,
-          Instance: /games-module/games/Guid_1/players/Guid_4/bids/high-card
-        }
+        StatusCode: Created,
+        Payload: __without_body__
       }
     }
   ]

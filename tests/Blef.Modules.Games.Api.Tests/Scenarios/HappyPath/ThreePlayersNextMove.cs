@@ -52,7 +52,7 @@ public class ThreePlayersNextMove
         await Verify(results);
     }
 
-    [Fact] // todo: RED
+    [Fact]
     public async Task KnuthLostTheGameInDealWhichTheGrahamStartsAndNextMoveHasConway()
     {
         var results = await new TestBuilder()
@@ -218,7 +218,7 @@ public class ThreePlayersNextMove
         await Verify(results);
     }
 
-    [Fact] // todo: RED
+    [Fact]
     public async Task ConwayLostTheGameAndNextMoveHasGraham()
     {
         // act

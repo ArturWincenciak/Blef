@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Api.Tests.Core;
+﻿using System.ComponentModel;
+using Blef.Modules.Games.Api.Tests.Core;
 using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
@@ -6,7 +7,7 @@ namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 [UsesVerify]
 public class FourPlayersPlayTheGame
 {
-    [Fact] // todo: RED
+    [Fact]
     public async Task Scenario()
     {
         var results = await new TestBuilder()
@@ -106,15 +107,15 @@ public class FourPlayersPlayTheGame
             .Check(WhichPlayer.Knuth)
             .GetGameFlow()
 
-            .GetCards(WhichPlayer.Knuth, new DealNumber(9))
-            .GetCards(WhichPlayer.Graham, new DealNumber(9))
-            .GetCards(WhichPlayer.Conway, new DealNumber(9))
-            .GetCards(WhichPlayer.Riemann, new DealNumber(9))
+            .GetCards(WhichPlayer.Knuth, new DealNumber(9),
+                description: "Knuth has two cards: ace of diamonds and ace of spades")
+            .GetCards(WhichPlayer.Graham, new DealNumber(9),
+                description: "Graham has one card: ten of clubs")
+            .GetCards(WhichPlayer.Conway, new DealNumber(9),
+                description: "Conway has three cards: jack of spades, queen of diamonds and king of hearts")
+            .GetCards(WhichPlayer.Riemann, new DealNumber(9),
+                description: "Riemann get lost the game!")
 
-            // todo: there is a bug, this deal should start Knuth (not Conway)
-            // note: last deal has been started by Riemann
-            // note: last deal has been lost by Riemann
-            // note: this deal should start Knuth (not by Conway)
             .BidTwoPairs(WhichPlayer.Knuth, FaceCard.Ace, FaceCard.King)
 
             .Build();

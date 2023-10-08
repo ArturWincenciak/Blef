@@ -54,8 +54,8 @@ internal static class HttpApiExtensions
             response: new TestRecorder.Response(response.StatusCode, result), description);
     }
 
-    async internal static Task GetCards(this HttpClient client,
-        GameId gameId, DealNumber deal, PlayerId playerId, TestRecorder testRecorder)
+    async internal static Task GetCards(this HttpClient client, GameId gameId,
+        DealNumber deal, PlayerId playerId, TestRecorder testRecorder, string? description = null)
     {
         var requestUri = $"{GameplaysUri}/{gameId.Id}/players/{playerId.Id}/deals/{deal.Number}/cards";
         var response = await client.GetAsync(requestUri);
@@ -63,7 +63,7 @@ internal static class HttpApiExtensions
 
         testRecorder.Record(
             request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Get),
-            response: new TestRecorder.Response(response.StatusCode, result));
+            response: new TestRecorder.Response(response.StatusCode, result), description);
     }
 
     async internal static Task BidHighCard(this HttpClient client,
@@ -84,15 +84,15 @@ internal static class HttpApiExtensions
                 FaceCard = faceCard.ToString()
             }, testRecorder, description);
 
-    async internal static Task BidTwoPairs(this HttpClient client,
-        GameId gameId, PlayerId playerId, FaceCard first, FaceCard second, TestRecorder testRecorder) =>
+    async internal static Task BidTwoPairs(this HttpClient client, GameId gameId,
+        PlayerId playerId, FaceCard first, FaceCard second, TestRecorder testRecorder, string? description) =>
         await Bid(client, gameId, playerId,
             pokerHand: "two-pairs",
             requestBody: new
             {
                 FirstFaceCard = first.ToString(),
                 SecondFaceCard = second.ToString()
-            }, testRecorder);
+            }, testRecorder, description);
 
     async internal static Task BidLowStraight(this HttpClient client,
         GameId gameId, PlayerId playerId, TestRecorder testRecorder) =>
@@ -117,15 +117,15 @@ internal static class HttpApiExtensions
                 FaceCard = faceCard.ToString()
             }, testRecorder);
 
-    async internal static Task BidFullHouse(this HttpClient client,
-        GameId gameId, PlayerId playerId, FaceCard threeOfAKind, FaceCard pair, TestRecorder testRecorder) =>
+    async internal static Task BidFullHouse(this HttpClient client, GameId gameId, PlayerId playerId,
+        FaceCard threeOfAKind, FaceCard pair, TestRecorder testRecorder, string? description = null) =>
         await Bid(client, gameId, playerId,
             pokerHand: "full-house",
             requestBody: new
             {
                 ThreeOfAKind = threeOfAKind.ToString(),
                 Pair = pair.ToString()
-            }, testRecorder);
+            }, testRecorder, description);
 
     async internal static Task BidFlush(this HttpClient client,
         GameId gameId, PlayerId playerId, Suit suit, TestRecorder testRecorder) =>
@@ -136,14 +136,14 @@ internal static class HttpApiExtensions
                 Suit = suit.ToString()
             }, testRecorder);
 
-    async internal static Task BidFourOfAKind(this HttpClient client,
-        GameId gameId, PlayerId playerId, FaceCard faceCard, TestRecorder testRecorder) =>
+    async internal static Task BidFourOfAKind(this HttpClient client, GameId gameId,
+        PlayerId playerId, FaceCard faceCard, TestRecorder testRecorder, string? description) =>
         await Bid(client, gameId, playerId,
             pokerHand: "four-of-a-kind",
             requestBody: new
             {
                 FaceCard = faceCard.ToString()
-            }, testRecorder);
+            }, testRecorder, description);
 
     async internal static Task BidStraightFlush(this HttpClient client,
         GameId gameId, PlayerId playerId, Suit suit, TestRecorder testRecorder) =>
