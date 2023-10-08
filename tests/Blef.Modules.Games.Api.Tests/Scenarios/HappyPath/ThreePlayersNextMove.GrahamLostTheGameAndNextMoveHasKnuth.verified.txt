@@ -95,7 +95,7 @@
     },
     {
       No: 7,
-      Description: Graham get lost fist deal (+1 card, has 2 cards).,
+      Description: Graham get lost first deal (+1 card, has 2 cards).,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
