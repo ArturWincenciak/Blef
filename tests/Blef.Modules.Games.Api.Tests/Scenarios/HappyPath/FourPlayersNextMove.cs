@@ -47,4 +47,49 @@ public class FourPlayersNextMove
         // assert
         await Verify(results);
     }
+
+    [Fact] // todo: RED
+    public async Task GrahamLostTheGameAndNextMoveHasKnuth()
+    {
+        // act
+        var results = await new TestBuilder()
+            .NewGame()
+            .WithScenarioDescription(
+                "Graham get lost the game in deal which the Graham starts the deal and the next move has Knuth")
+            .JoinPlayer(WhichPlayer.Conway)
+            .JoinPlayer(WhichPlayer.Graham)
+            .JoinPlayer(WhichPlayer.Knuth)
+            .JoinPlayer(WhichPlayer.Planck)
+            .NewDeal()
+
+            .BidHighCard(WhichPlayer.Conway, FaceCard.Ace, description: "First move by Conway in deal 1.")
+            .Check(WhichPlayer.Graham, description: "Graham get lost first deal (+1 card, has 2 cards).")
+
+            .BidRoyalFlush(WhichPlayer.Graham, Suit.Clubs, description: "First move by Graham in deal 2.")
+            .Check(WhichPlayer.Knuth, description: "Graham get lost second deal (+1 card, has 3 cards).")
+
+            .BidHighCard(WhichPlayer.Knuth, FaceCard.Nine, description: "First move by Knuth in deal 3.")
+            .BidHighCard(WhichPlayer.Planck, FaceCard.Ten, description: "Next move by Planck in deal 3.")
+            .BidHighCard(WhichPlayer.Conway, FaceCard.Ace, description: "Next move by Conway in deal 3.")
+            .Check(WhichPlayer.Graham, description: "Graham get lost third deal (+1 card, has 4 cards).")
+
+            .BidHighCard(WhichPlayer.Planck, FaceCard.Nine, description: "First move by Planck in deal 4.")
+            .BidHighCard(WhichPlayer.Conway, FaceCard.Ace, description: "Next move by Conway in deal 4.")
+            .Check(WhichPlayer.Graham, description: "Planck get lost fourth deal (+1 card, has 5 cards).")
+
+            .BidRoyalFlush(WhichPlayer.Conway, Suit.Clubs, description: "First move by Conway in deal 5.")
+            .Check(WhichPlayer.Graham, "Conway get lost fifth deal (+1 card, has 2 cards).")
+
+            .BidRoyalFlush(WhichPlayer.Graham, Suit.Clubs, description: "First move by Graham in deal 6.")
+            .Check(WhichPlayer.Knuth, description: "Graham GET LOST DEAL AND THE GAME in deal 6.")
+
+            .BidHighCard(
+                WhichPlayer.Knuth, FaceCard.Ace,
+                description: "Act and assert: in deal number 8 fist move should be by Knuth.")
+
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
 }
