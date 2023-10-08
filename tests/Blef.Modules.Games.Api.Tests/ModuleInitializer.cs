@@ -15,6 +15,5 @@ public static class ModuleInitializer
         VerifierSettings.ScrubLinesContaining("DiffEngineTray");
         VerifierSettings.IgnoreStackTrace();
         VerifierSettings.ScrubInlineGuids();
-        VerifierSettings.AutoVerify();
     }
 }
