@@ -6,7 +6,7 @@ namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 [UsesVerify]
 public class FourPlayersNextMove
 {
-    [Fact] // todo: RED
+    [Fact]
     public async Task ConwayLostTheGameAndNextMoveHasGraham()
     {
         // act
@@ -36,11 +36,11 @@ public class FourPlayersNextMove
             .Check(WhichPlayer.Conway, description: "Planck get lost fourth deal (+1 card, has 5 cards).")
 
             .BidRoyalFlush(WhichPlayer.Conway, Suit.Clubs, description: "First move by Conway in deal 5.")
-            .Check(WhichPlayer.Graham, description: "Conway GET LOST DEAL AND THE GAME in deal 6.")
+            .Check(WhichPlayer.Graham, description: "Conway GET LOST DEAL AND THE GAME in deal 5.")
 
             .BidHighCard(
                 WhichPlayer.Graham, FaceCard.Ace,
-                description: "Act and assert: in deal number 7 fist move should be by Graham.")
+                description: "Act and assert: in deal number 6 fist move should be by Graham.")
 
             .Build();
 
@@ -48,7 +48,7 @@ public class FourPlayersNextMove
         await Verify(results);
     }
 
-    [Fact] // todo: RED
+    [Fact]
     public async Task GrahamLostTheGameAndNextMoveHasKnuth()
     {
         // act
@@ -85,7 +85,7 @@ public class FourPlayersNextMove
 
             .BidHighCard(
                 WhichPlayer.Knuth, FaceCard.Ace,
-                description: "Act and assert: in deal number 8 fist move should be by Knuth.")
+                description: "Act and assert: in deal number 7 fist move should be by Knuth.")
 
             .Build();
 
@@ -93,7 +93,7 @@ public class FourPlayersNextMove
         await Verify(results);
     }
 
-    [Fact] // todo: RED
+    [Fact]
     public async Task KnuthLostTheGameAndNextMoveHasPlanck()
     {
         // act
@@ -141,7 +141,7 @@ public class FourPlayersNextMove
         await Verify(results);
     }
 
-    [Fact] // todo: RED
+    [Fact]
     public async Task PlanckLostTheGameAndNextMoveHasConway()
     {
         // act
@@ -192,7 +192,7 @@ public class FourPlayersNextMove
         await Verify(results);
     }
 
-    [Fact] // todo: RED
+    [Fact]
     public async Task GrahamLostTheGameInDealWhichConwayStartsAndNextMoveHasKnuth()
     {
         var results = await new TestBuilder()
@@ -238,7 +238,7 @@ public class FourPlayersNextMove
         await Verify(results);
     }
 
-    [Fact] // todo: RED
+    [Fact]
     public async Task KnuthLostTheGameInDealWhichGrahamStartsAndNextMoveHasPlanck()
     {
         var results = await new TestBuilder()
@@ -287,7 +287,7 @@ public class FourPlayersNextMove
         await Verify(results);
     }
 
-    [Fact] // todo: RED
+    [Fact]
     public async Task PlankLostTheGameInDealWhichKnuthStartsAndNextMoveHasConway()
     {
         var results = await new TestBuilder()
@@ -339,7 +339,7 @@ public class FourPlayersNextMove
         await Verify(results);
     }
 
-    [Fact] // todo: RED
+    [Fact]
     public async Task ConwayLostTheGameInDealWhichPlankStartsAndNextMoveHasGraham()
     {
         var results = await new TestBuilder()

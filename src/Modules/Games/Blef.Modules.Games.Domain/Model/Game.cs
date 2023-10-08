@@ -87,7 +87,7 @@ internal sealed class Game
     {
         var nextDealNumber = _deals.Count + 1;
         var nextDealId = new DealId(Id, Deal: new DealNumber(nextDealNumber));
-        var nextDealPlayers = CreateNextDealPlayers();
+        var nextDealPlayers = NextDealPlayers();
         var nextDealSet = _croupier.Deal(nextDealPlayers);
 
         _deals.Add(new Deal(nextDealId, nextDealSet));
@@ -95,28 +95,36 @@ internal sealed class Game
         return new DealStarted(Id, nextDealId.Deal, nextDealSet.PlayersSet.Players);
     }
 
-    private NextDealPlayersSet CreateNextDealPlayers()
+    private NextDealPlayersSet NextDealPlayers()
     {
-        var inGamePlayers = _players
-            .Where(player => player.IsInTheGame)
-            .ToArray();
-
-        var playersCount = PlayersCount.Create(inGamePlayers.Length);
-        var dealsPlayedCount = DealsCount.Create(_deals.Count);
-        var orderPhysic = DealOrderPhysic.Create(playersCount, dealsPlayedCount);
-
-        var nextDealPlayers = inGamePlayers
+        var nextDealPlayers = _players
             .OrderBy(inGamePlayer => inGamePlayer.JoiningSequence)
-            .Select((inGamePlayer, index) =>
-            {
-                var sequenceIndex = Order.Create(index + 1);
-                var nextOrder = orderPhysic.ShiftedOrder(sequenceIndex);
-                return new NextDealPlayer(inGamePlayer.Id, inGamePlayer.CardsAmount, nextOrder);
-            })
+            .Select((inGamePlayer, index) => ShiftPlayerOrder(index, inGamePlayer))
+            .Where(IsInTheGame)
+            .OrderBy(nextDealPlayer => nextDealPlayer.Order)
+            .Select(NextDealOrder)
             .ToArray();
 
         return new NextDealPlayersSet(nextDealPlayers);
     }
+
+    private NextDealPlayer ShiftPlayerOrder(int playerIndex, GamePlayer inGamePlayer)
+    {
+        var shift = _deals.Count % _players.Count;
+        var nextIndex = playerIndex - shift;
+
+        var nextOrder = nextIndex >= 0
+            ? Order.Create(nextIndex + 1)
+            : Order.Create(_players.Count + nextIndex + 1);
+
+        return new NextDealPlayer(inGamePlayer.Id, inGamePlayer.CardsAmount, nextOrder);
+    }
+
+    private bool IsInTheGame(NextDealPlayer nextDealPlayer) =>
+        _players.Single(player => player.Id == nextDealPlayer.Player).IsInTheGame;
+
+    private static NextDealPlayer NextDealOrder(NextDealPlayer nextDealPlayer, int index) =>
+        new(nextDealPlayer.Player, nextDealPlayer.CardsAmount, Order.Create(index + 1));
 
     private void Validate(PlayerId playerId)
     {

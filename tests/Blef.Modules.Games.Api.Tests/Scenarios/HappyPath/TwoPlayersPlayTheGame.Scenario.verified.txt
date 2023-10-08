@@ -168,6 +168,7 @@
     },
     {
       No: 9,
+      Description: Knuth bids high card Nine in deal 1,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
         Method: Post,
@@ -182,6 +183,7 @@
     },
     {
       No: 10,
+      Description: Graham checks in deal 1 and Knuth get lost (Knuth has 2 cards in next deal),
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -291,11 +293,11 @@
           Cards: [
             {
               FaceCard: ace,
-              Suit: diamonds
+              Suit: spades
             },
             {
-              FaceCard: ace,
-              Suit: spades
+              FaceCard: ten,
+              Suit: clubs
             }
           ]
         }
@@ -312,8 +314,8 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ten,
-              Suit: clubs
+              FaceCard: ace,
+              Suit: diamonds
             }
           ]
         }
@@ -321,6 +323,7 @@
     },
     {
       No: 15,
+      Description: Graham bids high card Ace in deal 2,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
@@ -335,6 +338,7 @@
     },
     {
       No: 16,
+      Description: Knuth checks in deal 2 and get lost and has 3 cards in next deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
@@ -408,21 +412,21 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
                   Suit: diamonds
-                },
-                {
-                  FaceCard: ace,
-                  Suit: spades
                 }
               ]
             },
             {
-              PlayerId: Guid_3,
+              PlayerId: Guid_2,
               Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                },
                 {
                   FaceCard: ten,
                   Suit: clubs
@@ -490,6 +494,7 @@
     },
     {
       No: 21,
+      Description: Knuth bids pair King in deal 3,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/pair,
         Method: Post,
@@ -504,6 +509,7 @@
     },
     {
       No: 22,
+      Description: Graham bids pair Ace in deal 3,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
         Method: Post,
@@ -518,6 +524,7 @@
     },
     {
       No: 23,
+      Description: Knuth checks in deal 3, Knuth get lost and has 4 cards in next deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
@@ -656,10 +663,6 @@
           Cards: [
             {
               FaceCard: ace,
-              Suit: diamonds
-            },
-            {
-              FaceCard: ace,
               Suit: spades
             },
             {
@@ -669,6 +672,10 @@
             {
               FaceCard: jack,
               Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
             }
           ]
         }
@@ -685,7 +692,7 @@
         Payload: {
           Cards: [
             {
-              FaceCard: queen,
+              FaceCard: ace,
               Suit: diamonds
             }
           ]
@@ -694,6 +701,7 @@
     },
     {
       No: 28,
+      Description: Graham bids two pairs Nine and Ten in deal 4,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/two-pairs,
         Method: Post,
@@ -709,6 +717,7 @@
     },
     {
       No: 29,
+      Description: Knuth bids four of a kind Nine in deal 4,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/four-of-a-kind,
         Method: Post,
@@ -723,6 +732,7 @@
     },
     {
       No: 30,
+      Description: Graham checks in deal 4, Knuth get lost and has 5 cards in next deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -812,12 +822,17 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
                   Suit: diamonds
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
                 {
                   FaceCard: ace,
                   Suit: spades
@@ -829,12 +844,7 @@
                 {
                   FaceCard: jack,
                   Suit: spades
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: queen,
                   Suit: diamonds
@@ -915,6 +925,7 @@
     },
     {
       No: 35,
+      Description: Knuth bids high card Queen in deal 5,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
         Method: Post,
@@ -929,6 +940,7 @@
     },
     {
       No: 36,
+      Description: Graham bids high card King in deal 5,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
@@ -943,6 +955,7 @@
     },
     {
       No: 37,
+      Description: Knuth bids pair Queen in deal 5,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/pair,
         Method: Post,
@@ -957,6 +970,7 @@
     },
     {
       No: 38,
+      Description: Graham bids pair King in deal 5,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
         Method: Post,
@@ -971,6 +985,7 @@
     },
     {
       No: 39,
+      Description: Knuth bids full house Ace and King in deal 5,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/full-house,
         Method: Post,
@@ -986,6 +1001,7 @@
     },
     {
       No: 40,
+      Description: Graham checks in deal 5 and Knuth get lost the game!,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post

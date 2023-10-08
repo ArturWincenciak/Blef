@@ -265,7 +265,7 @@
     },
     {
       No: 19,
-      Description: Conway GET LOST DEAL AND THE GAME in deal 6.,
+      Description: Conway GET LOST DEAL AND THE GAME in deal 5.,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -277,7 +277,7 @@
     },
     {
       No: 20,
-      Description: Act and assert: in deal number 7 fist move should be by Graham.,
+      Description: Act and assert: in deal number 6 fist move should be by Graham.,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
@@ -286,14 +286,8 @@
         }
       },
       Response: {
-        StatusCode: BadRequest,
-        Payload: {
-          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
-          Status: 400,
-          Title: That is not this player's turn now,
-          Detail: Player 'PlayerId { Id = Guid_3 }' should wait for his turn,
-          Instance: /games-module/games/Guid_1/players/Guid_3/bids/high-card
-        }
+        StatusCode: Created,
+        Payload: __without_body__
       }
     }
   ]
