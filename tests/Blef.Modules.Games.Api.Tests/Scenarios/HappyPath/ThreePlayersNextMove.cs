@@ -151,7 +151,7 @@ public class ThreePlayersNextMove
             .NewDeal()
 
             .BidHighCard(WhichPlayer.Conway, FaceCard.Ace, description: "First move by Conway in deal 1.")
-            .Check(WhichPlayer.Graham, description: "Graham get lost fist deal (+1 card, has 2 cards).")
+            .Check(WhichPlayer.Graham, description: "Graham get lost first deal (+1 card, has 2 cards).")
 
             .BidRoyalFlush(WhichPlayer.Graham, Suit.Spades, description: "First move by Graham in deal 2.")
             .Check(WhichPlayer.Knuth, description: "Graham get lost second deal (+1 card, has 3 cards).")
