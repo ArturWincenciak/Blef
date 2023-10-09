@@ -62,6 +62,7 @@
     },
     {
       No: 5,
+      Description: Knuth starts the first deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
         Method: Post,
@@ -76,6 +77,7 @@
     },
     {
       No: 6,
+      Description: That is not this player move,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
@@ -93,6 +95,7 @@
     },
     {
       No: 7,
+      Description: Conway check first deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -104,8 +107,71 @@
     },
     {
       No: 8,
+      Description: Conway lost the deal, second deal has been started,
+      Request: {
+        Path: games-module/gameplays/Guid_1/deals/1,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: diamonds
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                }
+              ]
+            }
+          ],
+          Bids: [
+            {
+              Order: 1,
+              PlayerId: Guid_2,
+              PokerHand: high-card:ace
+            }
+          ],
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_3
+          }
+        }
+      }
+    },
+    {
+      No: 9,
+      Description: In the second deal that is not this player move,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+          Status: 400,
+          Title: That is not this player's turn now,
+          Detail: Player 'PlayerId { Id = Guid_3 }' should wait for his turn,
+          Instance: /games-module/games/Guid_1/players/Guid_3/checks
+        }
+      }
+    },
+    {
+      No: 10,
+      Description: In the second deal there is no bid to check,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
       },
       Response: {
@@ -115,49 +181,28 @@
           Status: 400,
           Title: There is no bid to check it,
           Detail: Deal number '2' must be started by at least one bid,
-          Instance: /games-module/games/Guid_1/players/Guid_3/checks
-        }
-      }
-    },
-    {
-      No: 9,
-      Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/checks,
-        Method: Post
-      },
-      Response: {
-        StatusCode: BadRequest,
-        Payload: {
-          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
-          Status: 400,
-          Title: That is not this player's turn now,
-          Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
           Instance: /games-module/games/Guid_1/players/Guid_2/checks
         }
       }
     },
     {
-      No: 10,
+      No: 11,
+      Description: Knuth starts the second deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
         Method: Post,
         Payload: {
-          FaceCard: Ace
+          FaceCard: King
         }
       },
       Response: {
-        StatusCode: BadRequest,
-        Payload: {
-          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
-          Status: 400,
-          Title: That is not this player's turn now,
-          Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
-          Instance: /games-module/games/Guid_1/players/Guid_2/bids/high-card
-        }
+        StatusCode: Created,
+        Payload: __without_body__
       }
     },
     {
-      No: 11,
+      No: 12,
+      Description: Conway placed the bid in the second deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,

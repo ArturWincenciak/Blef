@@ -52,15 +52,18 @@ public class CheckGameTests
         var secondPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, firstPlayer);
         game.Check(new CheckingPlayer(secondPlayer));
-        PlayExistingHighCardBid(game, secondPlayer);
-        PlayExistingPairBid(game, firstPlayer);
+        PlayExistingHighCardBid(game, firstPlayer);
+        PlayExistingPairBid(game, secondPlayer);
 
         // act
-        var actualEvents = game.Check(new CheckingPlayer(secondPlayer));
+        var actualEvents = game.Check(new CheckingPlayer(firstPlayer));
 
         // assert
-        AssertCheckPlaced(game.Id, expectedDealNumber: new DealNumber(2), secondPlayer, secondPlayer, actualEvents);
-        AssertDealStarted(game.Id, expectedDealNumber: new DealNumber(3),
+        AssertCheckPlaced(game.Id,
+            expectedDealNumber: new DealNumber(2),
+            firstPlayer, firstPlayer, actualEvents);
+        AssertDealStarted(game.Id,
+            expectedDealNumber: new DealNumber(3),
             expectedNextDealPlayers: new[] {firstPlayer, secondPlayer}, actualEvents);
     }
 
@@ -73,15 +76,19 @@ public class CheckGameTests
         var secondPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, firstPlayer);
         game.Check(new CheckingPlayer(secondPlayer));
-        PlayExistingHighCardBid(game, secondPlayer);
-        PlayNotExistingLowStraightBid(game, firstPlayer);
+        PlayExistingHighCardBid(game, firstPlayer);
+        PlayNotExistingLowStraightBid(game, secondPlayer);
 
         // act
-        var actualEvents = game.Check(new CheckingPlayer(secondPlayer));
+        var actualEvents = game.Check(new CheckingPlayer(firstPlayer));
 
         // assert
-        AssertCheckPlaced(game.Id, expectedDealNumber: new DealNumber(2), secondPlayer, firstPlayer, actualEvents);
-        AssertDealStarted(game.Id, expectedDealNumber: new DealNumber(3),
+        AssertCheckPlaced(game.Id,
+            expectedDealNumber: new DealNumber(2),
+            firstPlayer, secondPlayer,
+            actualEvents);
+        AssertDealStarted(game.Id,
+            expectedDealNumber: new DealNumber(3),
             expectedNextDealPlayers: new[] {firstPlayer, secondPlayer}, actualEvents);
     }
 }

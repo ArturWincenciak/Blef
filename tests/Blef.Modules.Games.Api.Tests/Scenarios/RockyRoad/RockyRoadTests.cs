@@ -174,7 +174,7 @@ public class RockyRoadTests
         var results = await Arrange
             .BidPair(WhichPlayer.Conway, FaceCard.Ace)
             .Check(WhichPlayer.Graham)
-            .BidPair(WhichPlayer.Conway, FaceCard.Ace)
+            .BidPair(WhichPlayer.Graham, FaceCard.Ace)
             .Build();
 
         await Verify(results);
@@ -278,13 +278,15 @@ public class RockyRoadTests
             .Check(WhichPlayer.Graham);
 
         var conwayLostThirdDeal = conwayLostSecondDeal
-            .BidPair(WhichPlayer.Knuth, FaceCard.Nine)
+            .BidPair(WhichPlayer.Graham, FaceCard.Nine)
+            .BidPair(WhichPlayer.Knuth, FaceCard.Ten)
             .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
             .Check(WhichPlayer.Graham);
 
         var conwayLostFourthDeal = conwayLostThirdDeal
-            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
-            .Check(WhichPlayer.Graham);
+            .BidHighCard(WhichPlayer.Graham, FaceCard.Nine)
+            .BidHighCard(WhichPlayer.Knuth, FaceCard.Ace)
+            .Check(WhichPlayer.Conway);
 
         var conwayLostTheGame = conwayLostFourthDeal
             .BidPair(WhichPlayer.Graham, FaceCard.Nine)
@@ -298,7 +300,8 @@ public class RockyRoadTests
 
         // act
         var results = await getGame
-            .BidPair(WhichPlayer.Knuth, FaceCard.Nine)
+            .BidPair(WhichPlayer.Graham, FaceCard.Nine)
+            .BidPair(WhichPlayer.Knuth, FaceCard.Ten)
             .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
             .Build();
 
@@ -318,25 +321,23 @@ public class RockyRoadTests
 
         var conwayLostFirstDeal = arrangeGame
             .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
-            .Check(WhichPlayer.Graham);
+            .Check(WhichPlayer.Graham, description: "Conway lost the first deal");
 
         var conwayLostSecondDeal = conwayLostFirstDeal
-            .BidPair(WhichPlayer.Graham, FaceCard.Nine)
-            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
-            .Check(WhichPlayer.Graham);
+            .BidHighCard(WhichPlayer.Graham, FaceCard.Ace)
+            .Check(WhichPlayer.Conway, description: "Conway lost the second deal");
 
         var conwayLostThirdDeal = conwayLostSecondDeal
-            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
-            .Check(WhichPlayer.Graham);
+            .BidHighCard(WhichPlayer.Graham, FaceCard.Ace)
+            .Check(WhichPlayer.Conway, description: "Conway lost the third deal");
 
         var conwayLostFourthDeal = conwayLostThirdDeal
-            .BidPair(WhichPlayer.Graham, FaceCard.Nine)
-            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
-            .Check(WhichPlayer.Graham);
+            .BidHighCard(WhichPlayer.Graham, FaceCard.Ace)
+            .Check(WhichPlayer.Conway, description: "Conway lost the fourth deal");
 
         var conwayLostTheGame = conwayLostFourthDeal
-            .BidRoyalFlush(WhichPlayer.Conway, Suit.Hearts)
-            .Check(WhichPlayer.Graham);
+            .BidHighCard(WhichPlayer.Graham, FaceCard.Ace)
+            .Check(WhichPlayer.Conway, description: "Conway lost the game");
 
         var getGame = conwayLostTheGame
             .GetGameFlow()
@@ -344,7 +345,7 @@ public class RockyRoadTests
 
         // act
         var results = await getGame
-            .BidPair(WhichPlayer.Graham, FaceCard.Nine)
+            .BidPair(WhichPlayer.Conway, FaceCard.Nine, description: "Conway cannot bid in the game over")
             .Build();
 
         // assert
@@ -489,13 +490,14 @@ public class RockyRoadTests
             .JoinPlayer(WhichPlayer.Knuth)
             .JoinPlayer(WhichPlayer.Conway)
             .NewDeal()
-            .BidHighCard(WhichPlayer.Knuth, FaceCard.Ace)
-            .Check(WhichPlayer.Knuth)
-            .Check(WhichPlayer.Conway)
-            .Check(WhichPlayer.Conway)
-            .Check(WhichPlayer.Knuth)
-            .BidHighCard(WhichPlayer.Knuth, FaceCard.Ace)
-            .BidHighCard(WhichPlayer.Conway, FaceCard.Ace)
+            .BidHighCard(WhichPlayer.Knuth, FaceCard.Ace, description: "Knuth starts the first deal")
+            .Check(WhichPlayer.Knuth, description: "That is not this player move")
+            .Check(WhichPlayer.Conway, description: "Conway check first deal")
+            .GetDealFlow(new DealNumber(1), "Conway lost the deal, second deal has been started")
+            .Check(WhichPlayer.Conway, description: "In the second deal that is not this player move")
+            .Check(WhichPlayer.Knuth, description: "In the second deal there is no bid to check")
+            .BidHighCard(WhichPlayer.Knuth, FaceCard.King, description: "Knuth starts the second deal")
+            .BidHighCard(WhichPlayer.Conway, FaceCard.Ace, description: "Conway placed the bid in the second deal")
             .Build();
 
         // assert
@@ -513,7 +515,7 @@ public class RockyRoadTests
             .NewDeal()
             .BidPair(WhichPlayer.Conway, FaceCard.Ace)
             .Check(WhichPlayer.Graham)
-            .Check(WhichPlayer.Graham)
+            .Check(WhichPlayer.Conway)
             .Build();
 
         // assert
