@@ -101,12 +101,12 @@ internal static class HttpApiExtensions
             requestBody: new { },
             testRecorder);
 
-    async internal static Task BidHighStraight(this HttpClient client,
-        GameId gameId, PlayerId playerId, TestRecorder testRecorder) =>
+    async internal static Task BidHighStraight(this HttpClient client, GameId gameId,
+        PlayerId playerId, TestRecorder testRecorder, string? description) =>
         await Bid(client, gameId, playerId,
             pokerHand: "high-straight",
             requestBody: new { },
-            testRecorder);
+            testRecorder, description);
 
     async internal static Task BidThreeOfAKind(this HttpClient client,
         GameId gameId, PlayerId playerId, FaceCard faceCard, TestRecorder testRecorder) =>
@@ -127,14 +127,14 @@ internal static class HttpApiExtensions
                 Pair = pair.ToString()
             }, testRecorder, description);
 
-    async internal static Task BidFlush(this HttpClient client,
-        GameId gameId, PlayerId playerId, Suit suit, TestRecorder testRecorder) =>
+    async internal static Task BidFlush(this HttpClient client, GameId gameId,
+        PlayerId playerId, Suit suit, TestRecorder testRecorder, string? description = null) =>
         await Bid(client, gameId, playerId,
             pokerHand: "flush",
             requestBody: new
             {
                 Suit = suit.ToString()
-            }, testRecorder);
+            }, testRecorder, description);
 
     async internal static Task BidFourOfAKind(this HttpClient client, GameId gameId,
         PlayerId playerId, FaceCard faceCard, TestRecorder testRecorder, string? description) =>

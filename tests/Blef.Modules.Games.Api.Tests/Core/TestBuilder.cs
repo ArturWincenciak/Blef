@@ -130,9 +130,9 @@ internal sealed class TestBuilder
         return this;
     }
 
-    public TestBuilder BidHighStraight(WhichPlayer whichPlayer)
+    public TestBuilder BidHighStraight(WhichPlayer whichPlayer, string? description = null)
     {
-        _actions.Add(async () => await _gameClient.BidHighStraight(whichPlayer));
+        _actions.Add(async () => await _gameClient.BidHighStraight(whichPlayer, description));
         return this;
     }
 
@@ -149,9 +149,9 @@ internal sealed class TestBuilder
         return this;
     }
 
-    public TestBuilder BidFlush(WhichPlayer whichPlayer, Suit suit)
+    public TestBuilder BidFlush(WhichPlayer whichPlayer, Suit suit, string? description = null)
     {
-        _actions.Add(async () => await _gameClient.BidFlush(whichPlayer, suit));
+        _actions.Add(async () => await _gameClient.BidFlush(whichPlayer, suit, description));
         return this;
     }
 
