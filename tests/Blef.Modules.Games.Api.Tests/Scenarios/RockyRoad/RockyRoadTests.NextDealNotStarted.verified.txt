@@ -88,7 +88,7 @@
     {
       No: 7,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
       },
       Response: {
@@ -98,7 +98,7 @@
           Status: 400,
           Title: There is no bid to check it,
           Detail: Deal number '2' must be started by at least one bid,
-          Instance: /games-module/games/Guid_1/players/Guid_3/checks
+          Instance: /games-module/games/Guid_1/players/Guid_2/checks
         }
       }
     }

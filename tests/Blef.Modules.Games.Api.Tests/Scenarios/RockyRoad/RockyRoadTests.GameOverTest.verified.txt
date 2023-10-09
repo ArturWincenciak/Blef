@@ -76,6 +76,7 @@
     },
     {
       No: 6,
+      Description: Conway lost the first deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -88,10 +89,10 @@
     {
       No: 7,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
         Payload: {
-          FaceCard: Nine
+          FaceCard: Ace
         }
       },
       Response: {
@@ -101,12 +102,10 @@
     },
     {
       No: 8,
+      Description: Conway lost the second deal,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
-        Method: Post,
-        Payload: {
-          Suit: Hearts
-        }
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
+        Method: Post
       },
       Response: {
         StatusCode: Created,
@@ -116,8 +115,11 @@
     {
       No: 9,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/checks,
-        Method: Post
+        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
       },
       Response: {
         StatusCode: Created,
@@ -126,12 +128,10 @@
     },
     {
       No: 10,
+      Description: Conway lost the third deal,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
-        Method: Post,
-        Payload: {
-          Suit: Hearts
-        }
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
+        Method: Post
       },
       Response: {
         StatusCode: Created,
@@ -141,8 +141,11 @@
     {
       No: 11,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/checks,
-        Method: Post
+        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
       },
       Response: {
         StatusCode: Created,
@@ -151,12 +154,10 @@
     },
     {
       No: 12,
+      Description: Conway lost the fourth deal,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
-        Method: Post,
-        Payload: {
-          FaceCard: Nine
-        }
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
+        Method: Post
       },
       Response: {
         StatusCode: Created,
@@ -166,10 +167,10 @@
     {
       No: 13,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
+        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
         Payload: {
-          Suit: Hearts
+          FaceCard: Ace
         }
       },
       Response: {
@@ -179,8 +180,9 @@
     },
     {
       No: 14,
+      Description: Conway lost the game,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
       },
       Response: {
@@ -190,31 +192,6 @@
     },
     {
       No: 15,
-      Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/bids/royal-flush,
-        Method: Post,
-        Payload: {
-          Suit: Hearts
-        }
-      },
-      Response: {
-        StatusCode: Created,
-        Payload: __without_body__
-      }
-    },
-    {
-      No: 16,
-      Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/checks,
-        Method: Post
-      },
-      Response: {
-        StatusCode: Created,
-        Payload: __without_body__
-      }
-    },
-    {
-      No: 17,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -252,7 +229,7 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_3,
+                CheckingPlayerId: Guid_2,
                 LooserPlayerId: Guid_2
               }
             },
@@ -260,7 +237,7 @@
               Number: 3,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_3,
+                CheckingPlayerId: Guid_2,
                 LooserPlayerId: Guid_2
               }
             },
@@ -268,7 +245,7 @@
               Number: 4,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_3,
+                CheckingPlayerId: Guid_2,
                 LooserPlayerId: Guid_2
               }
             },
@@ -276,7 +253,7 @@
               Number: 5,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_3,
+                CheckingPlayerId: Guid_2,
                 LooserPlayerId: Guid_2
               }
             }
@@ -288,7 +265,7 @@
       }
     },
     {
-      No: 18,
+      No: 16,
       Request: {
         Path: games-module/gameplays/Guid_1/deals/5,
         Method: Get
@@ -298,12 +275,17 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
                   Suit: diamonds
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
                 {
                   FaceCard: ace,
                   Suit: spades
@@ -319,12 +301,7 @@
                 {
                   FaceCard: queen,
                   Suit: diamonds
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: king,
                   Suit: hearts
@@ -335,21 +312,22 @@
           Bids: [
             {
               Order: 1,
-              PlayerId: Guid_2,
-              PokerHand: royal-flush:hearts
+              PlayerId: Guid_3,
+              PokerHand: high-card:ace
             }
           ],
           DealResolution: {
-            CheckingPlayerId: Guid_3,
+            CheckingPlayerId: Guid_2,
             LooserPlayerId: Guid_2
           }
         }
       }
     },
     {
-      No: 19,
+      No: 17,
+      Description: Conway cannot bid in the game over,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+        Path: games-module/games/Guid_1/players/Guid_2/bids/pair,
         Method: Post,
         Payload: {
           FaceCard: Nine
@@ -362,7 +340,7 @@
           Status: 400,
           Title: The game is already over,
           Detail: Cannot make any more moves, the game is over,
-          Instance: /games-module/games/Guid_1/players/Guid_3/bids/pair
+          Instance: /games-module/games/Guid_1/players/Guid_2/bids/pair
         }
       }
     }

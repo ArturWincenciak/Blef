@@ -84,6 +84,7 @@ public class ValidateGameInProgressTests
                 game.Check(new CheckingPlayer(knuth.Id));
 
                 // third deal lost by graham
+                PlayHighCardBid(game, knuth.Id, FaceCard.Nine);
                 PlayNotExistingLowStraightBid(game, graham.Id);
                 game.Check(new CheckingPlayer(knuth.Id));
 
@@ -93,6 +94,7 @@ public class ValidateGameInProgressTests
                 game.Check(new CheckingPlayer(knuth.Id));
 
                 // fifth deal lost by graham
+                PlayHighCardBid(game, knuth.Id, FaceCard.Nine);
                 PlayNotExistingLowStraightBid(game, graham.Id);
                 game.Check(new CheckingPlayer(knuth.Id));
             }

@@ -124,9 +124,9 @@ internal sealed class TestBuilder
         return this;
     }
 
-    public TestBuilder BidLowStraight(WhichPlayer whichPlayer)
+    public TestBuilder BidLowStraight(WhichPlayer whichPlayer, string? description = null)
     {
-        _actions.Add(async () => await _gameClient.BidLowStraight(whichPlayer));
+        _actions.Add(async () => await _gameClient.BidLowStraight(whichPlayer, description));
         return this;
     }
 
@@ -136,9 +136,9 @@ internal sealed class TestBuilder
         return this;
     }
 
-    public TestBuilder BidThreeOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
+    public TestBuilder BidThreeOfAKind(WhichPlayer whichPlayer, FaceCard faceCard, string? description = null)
     {
-        _actions.Add(async () => await _gameClient.BidThreeOfAKind(whichPlayer, faceCard));
+        _actions.Add(async () => await _gameClient.BidThreeOfAKind(whichPlayer, faceCard, description));
         return this;
     }
 
@@ -161,9 +161,9 @@ internal sealed class TestBuilder
         return this;
     }
 
-    public TestBuilder BidStraightFlush(WhichPlayer whichPlayer, Suit suit)
+    public TestBuilder BidStraightFlush(WhichPlayer whichPlayer, Suit suit, string? description = null)
     {
-        _actions.Add(async () => await _gameClient.BidStraightFlush(whichPlayer, suit));
+        _actions.Add(async () => await _gameClient.BidStraightFlush(whichPlayer, suit, description));
         return this;
     }
 

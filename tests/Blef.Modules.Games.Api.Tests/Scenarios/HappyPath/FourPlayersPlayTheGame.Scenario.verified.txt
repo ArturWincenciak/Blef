@@ -212,6 +212,7 @@
     },
     {
       No: 10,
+      Description: Knuth has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/1/cards,
         Method: Get
@@ -230,6 +231,7 @@
     },
     {
       No: 11,
+      Description: Graham has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/1/cards,
         Method: Get
@@ -248,6 +250,7 @@
     },
     {
       No: 12,
+      Description: Conway has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_4/deals/1/cards,
         Method: Get
@@ -266,6 +269,7 @@
     },
     {
       No: 13,
+      Description: Riemann has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_5/deals/1/cards,
         Method: Get
@@ -284,6 +288,7 @@
     },
     {
       No: 14,
+      Description: Knuth starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
         Method: Post,
@@ -340,6 +345,7 @@
     },
     {
       No: 18,
+      Description: Knuth checks the bid, Riemann get lost the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
@@ -484,6 +490,7 @@
     },
     {
       No: 21,
+      Description: Knuth has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/2/cards,
         Method: Get
@@ -493,7 +500,7 @@
         Payload: {
           Cards: [
             {
-              FaceCard: queen,
+              FaceCard: ace,
               Suit: diamonds
             }
           ]
@@ -502,6 +509,7 @@
     },
     {
       No: 22,
+      Description: Graham has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/2/cards,
         Method: Get
@@ -512,7 +520,7 @@
           Cards: [
             {
               FaceCard: ace,
-              Suit: diamonds
+              Suit: spades
             }
           ]
         }
@@ -520,6 +528,7 @@
     },
     {
       No: 23,
+      Description: Conway has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_4/deals/2/cards,
         Method: Get
@@ -529,8 +538,8 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
-              Suit: spades
+              FaceCard: ten,
+              Suit: clubs
             }
           ]
         }
@@ -538,6 +547,7 @@
     },
     {
       No: 24,
+      Description: Riemann has two card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_5/deals/2/cards,
         Method: Get
@@ -547,12 +557,12 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ten,
-              Suit: clubs
-            },
-            {
               FaceCard: jack,
               Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
             }
           ]
         }
@@ -560,8 +570,48 @@
     },
     {
       No: 25,
+      Description: Bad move Graham! Knuth should start the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+          Status: 400,
+          Title: That is not this player's turn now,
+          Detail: Player 'PlayerId { Id = Guid_3 }' should wait for his turn,
+          Instance: /games-module/games/Guid_1/players/Guid_3/bids/pair
+        }
+      }
+    },
+    {
+      No: 26,
+      Description: Bad move Conway! Knuth should start the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+          Status: 400,
+          Title: That is not this player's turn now,
+          Detail: Player 'PlayerId { Id = Guid_4 }' should wait for his turn,
+          Instance: /games-module/games/Guid_1/players/Guid_4/checks
+        }
+      }
+    },
+    {
+      No: 27,
+      Description: Knuth starts the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/pair,
         Method: Post,
         Payload: {
           FaceCard: Ace
@@ -573,9 +623,10 @@
       }
     },
     {
-      No: 26,
+      No: 28,
+      Description: Graham checks the bid and get lost the deal,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_4/checks,
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
       },
       Response: {
@@ -584,7 +635,7 @@
       }
     },
     {
-      No: 27,
+      No: 29,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -634,8 +685,8 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -649,7 +700,7 @@
       }
     },
     {
-      No: 28,
+      No: 30,
       Request: {
         Path: games-module/gameplays/Guid_1/deals/2,
         Method: Get
@@ -659,7 +710,7 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_3,
+              PlayerId: Guid_2,
               Hand: [
                 {
                   FaceCard: ace,
@@ -668,7 +719,7 @@
               ]
             },
             {
-              PlayerId: Guid_4,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
@@ -677,21 +728,21 @@
               ]
             },
             {
-              PlayerId: Guid_5,
+              PlayerId: Guid_4,
               Hand: [
                 {
                   FaceCard: ten,
                   Suit: clubs
-                },
-                {
-                  FaceCard: jack,
-                  Suit: spades
                 }
               ]
             },
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_5,
               Hand: [
+                {
+                  FaceCard: jack,
+                  Suit: spades
+                },
                 {
                   FaceCard: queen,
                   Suit: diamonds
@@ -702,19 +753,20 @@
           Bids: [
             {
               Order: 1,
-              PlayerId: Guid_3,
+              PlayerId: Guid_2,
               PokerHand: pair:ace
             }
           ],
           DealResolution: {
-            CheckingPlayerId: Guid_4,
-            LooserPlayerId: Guid_4
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_3
           }
         }
       }
     },
     {
-      No: 29,
+      No: 31,
+      Description: Knuth has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/3/cards,
         Method: Get
@@ -724,15 +776,16 @@
         Payload: {
           Cards: [
             {
-              FaceCard: queen,
-              Suit: diamonds
+              FaceCard: jack,
+              Suit: spades
             }
           ]
         }
       }
     },
     {
-      No: 30,
+      No: 32,
+      Description: Graham has two cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/3/cards,
         Method: Get
@@ -742,6 +795,10 @@
         Payload: {
           Cards: [
             {
+              FaceCard: queen,
+              Suit: diamonds
+            },
+            {
               FaceCard: king,
               Suit: hearts
             }
@@ -750,7 +807,8 @@
       }
     },
     {
-      No: 31,
+      No: 33,
+      Description: Conway has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_4/deals/3/cards,
         Method: Get
@@ -762,17 +820,14 @@
             {
               FaceCard: ace,
               Suit: diamonds
-            },
-            {
-              FaceCard: ace,
-              Suit: spades
             }
           ]
         }
       }
     },
     {
-      No: 32,
+      No: 34,
+      Description: Riemann has two cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_5/deals/3/cards,
         Method: Get
@@ -782,19 +837,20 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ten,
-              Suit: clubs
+              FaceCard: ace,
+              Suit: spades
             },
             {
-              FaceCard: jack,
-              Suit: spades
+              FaceCard: ten,
+              Suit: clubs
             }
           ]
         }
       }
     },
     {
-      No: 33,
+      No: 35,
+      Description: Conway starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_4/bids/pair,
         Method: Post,
@@ -808,7 +864,8 @@
       }
     },
     {
-      No: 34,
+      No: 36,
+      Description: Bad move Knuth! Riemann has move now,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/three-of-a-kind,
         Method: Post,
@@ -828,7 +885,7 @@
       }
     },
     {
-      No: 35,
+      No: 37,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_5/bids/three-of-a-kind,
         Method: Post,
@@ -842,7 +899,8 @@
       }
     },
     {
-      No: 36,
+      No: 38,
+      Description: Knuth checks the bid, Riemann get lost the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
@@ -853,7 +911,7 @@
       }
     },
     {
-      No: 37,
+      No: 39,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -903,8 +961,8 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -926,7 +984,7 @@
       }
     },
     {
-      No: 38,
+      No: 40,
       Request: {
         Path: games-module/gameplays/Guid_1/deals/3,
         Method: Get
@@ -941,10 +999,6 @@
                 {
                   FaceCard: ace,
                   Suit: diamonds
-                },
-                {
-                  FaceCard: ace,
-                  Suit: spades
                 }
               ]
             },
@@ -952,12 +1006,12 @@
               PlayerId: Guid_5,
               Hand: [
                 {
-                  FaceCard: ten,
-                  Suit: clubs
+                  FaceCard: ace,
+                  Suit: spades
                 },
                 {
-                  FaceCard: jack,
-                  Suit: spades
+                  FaceCard: ten,
+                  Suit: clubs
                 }
               ]
             },
@@ -965,14 +1019,18 @@
               PlayerId: Guid_2,
               Hand: [
                 {
-                  FaceCard: queen,
-                  Suit: diamonds
+                  FaceCard: jack,
+                  Suit: spades
                 }
               ]
             },
             {
               PlayerId: Guid_3,
               Hand: [
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
+                },
                 {
                   FaceCard: king,
                   Suit: hearts
@@ -1000,9 +1058,52 @@
       }
     },
     {
-      No: 39,
+      No: 41,
+      Description: Knuth has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/4/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 42,
+      Description: Graham has two cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/4/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 43,
+      Description: Conway has one card,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/4/cards,
         Method: Get
       },
       Response: {
@@ -1018,9 +1119,10 @@
       }
     },
     {
-      No: 40,
+      No: 44,
+      Description: Riemann has three cards,
       Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/4/cards,
+        Path: games-module/gameplays/Guid_1/players/Guid_5/deals/4/cards,
         Method: Get
       },
       Response: {
@@ -1030,21 +1132,7 @@
             {
               FaceCard: queen,
               Suit: diamonds
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 41,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/4/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
+            },
             {
               FaceCard: king,
               Suit: hearts
@@ -1058,33 +1146,7 @@
       }
     },
     {
-      No: 42,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_5/deals/4/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
-            {
-              FaceCard: ace,
-              Suit: diamonds
-            },
-            {
-              FaceCard: ace,
-              Suit: spades
-            },
-            {
-              FaceCard: ten,
-              Suit: clubs
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 43,
+      No: 45,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/four-of-a-kind,
         Method: Post,
@@ -1093,18 +1155,13 @@
         }
       },
       Response: {
-        StatusCode: BadRequest,
-        Payload: {
-          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
-          Status: 400,
-          Title: That is not this player's turn now,
-          Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
-          Instance: /games-module/games/Guid_1/players/Guid_2/bids/four-of-a-kind
-        }
+        StatusCode: Created,
+        Payload: __without_body__
       }
     },
     {
-      No: 44,
+      No: 46,
+      Description: Bad move Riemann! Graham has move now,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_5/bids/straight-flush,
         Method: Post,
@@ -1113,12 +1170,19 @@
         }
       },
       Response: {
-        StatusCode: Created,
-        Payload: __without_body__
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+          Status: 400,
+          Title: That is not this player's turn now,
+          Detail: Player 'PlayerId { Id = Guid_5 }' should wait for his turn,
+          Instance: /games-module/games/Guid_1/players/Guid_5/bids/straight-flush
+        }
       }
     },
     {
-      No: 45,
+      No: 47,
+      Description: Bad move Conway! Graham has move now,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_4/checks,
         Method: Post
@@ -1135,7 +1199,8 @@
       }
     },
     {
-      No: 46,
+      No: 48,
+      Description: Bad move Knuth!, Graham has move now,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/high-straight,
         Method: Post,
@@ -1144,35 +1209,19 @@
       Response: {
         StatusCode: BadRequest,
         Payload: {
-          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/bid-is-not-higher-then-last-one.md,
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
           Status: 400,
-          Title: The bid is not higher than last one,
-          Detail: The new bid 'high-straight' is not higher than last one 'straight-flush:clubs',
+          Title: That is not this player's turn now,
+          Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
           Instance: /games-module/games/Guid_1/players/Guid_2/bids/high-straight
         }
       }
     },
     {
-      No: 47,
+      No: 49,
+      Description: Graham checks the bid, Knuth get lost the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
-        Method: Post
-      },
-      Response: {
-        StatusCode: BadRequest,
-        Payload: {
-          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
-          Status: 400,
-          Title: That is not this player's turn now,
-          Detail: Player 'PlayerId { Id = Guid_3 }' should wait for his turn,
-          Instance: /games-module/games/Guid_1/players/Guid_3/checks
-        }
-      }
-    },
-    {
-      No: 48,
-      Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
       },
       Response: {
@@ -1181,7 +1230,25 @@
       }
     },
     {
-      No: 49,
+      No: 50,
+      Description: Bad move Knuth! the deal has been ended,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+          Status: 400,
+          Title: That is not this player's turn now,
+          Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
+          Instance: /games-module/games/Guid_1/players/Guid_2/checks
+        }
+      }
+    },
+    {
+      No: 51,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -1231,8 +1298,8 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -1247,8 +1314,8 @@
               Number: 4,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
               }
             },
             {
@@ -1262,7 +1329,7 @@
       }
     },
     {
-      No: 50,
+      No: 52,
       Request: {
         Path: games-module/gameplays/Guid_1/deals/4,
         Method: Get
@@ -1272,12 +1339,17 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_5,
+              PlayerId: Guid_2,
               Hand: [
                 {
                   FaceCard: ace,
                   Suit: diamonds
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
                 {
                   FaceCard: ace,
                   Suit: spades
@@ -1289,7 +1361,7 @@
               ]
             },
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_4,
               Hand: [
                 {
                   FaceCard: jack,
@@ -1298,17 +1370,12 @@
               ]
             },
             {
-              PlayerId: Guid_3,
+              PlayerId: Guid_5,
               Hand: [
                 {
                   FaceCard: queen,
                   Suit: diamonds
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_4,
-              Hand: [
+                },
                 {
                   FaceCard: king,
                   Suit: hearts
@@ -1323,19 +1390,20 @@
           Bids: [
             {
               Order: 1,
-              PlayerId: Guid_5,
-              PokerHand: straight-flush:clubs
+              PlayerId: Guid_2,
+              PokerHand: four-of-a-kind:nine
             }
           ],
           DealResolution: {
-            CheckingPlayerId: Guid_2,
-            LooserPlayerId: Guid_5
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
           }
         }
       }
     },
     {
-      No: 51,
+      No: 53,
+      Description: Knuth has two cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/5/cards,
         Method: Get
@@ -1345,15 +1413,20 @@
         Payload: {
           Cards: [
             {
+              FaceCard: king,
+              Suit: clubs
+            },
+            {
               FaceCard: ace,
-              Suit: diamonds
+              Suit: clubs
             }
           ]
         }
       }
     },
     {
-      No: 52,
+      No: 54,
+      Description: Graham has two cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/5/cards,
         Method: Get
@@ -1364,6 +1437,10 @@
           Cards: [
             {
               FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
               Suit: spades
             }
           ]
@@ -1371,7 +1448,8 @@
       }
     },
     {
-      No: 53,
+      No: 55,
+      Description: Conway has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_4/deals/5/cards,
         Method: Get
@@ -1383,17 +1461,14 @@
             {
               FaceCard: ten,
               Suit: clubs
-            },
-            {
-              FaceCard: jack,
-              Suit: spades
             }
           ]
         }
       }
     },
     {
-      No: 54,
+      No: 56,
+      Description: Riemann has three cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_5/deals/5/cards,
         Method: Get
@@ -1403,27 +1478,24 @@
         Payload: {
           Cards: [
             {
+              FaceCard: jack,
+              Suit: spades
+            },
+            {
               FaceCard: queen,
               Suit: diamonds
             },
             {
               FaceCard: king,
               Suit: hearts
-            },
-            {
-              FaceCard: king,
-              Suit: clubs
-            },
-            {
-              FaceCard: ace,
-              Suit: clubs
             }
           ]
         }
       }
     },
     {
-      No: 55,
+      No: 57,
+      Description: Bad move Knuth! Graham should start the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/straight-flush,
         Method: Post,
@@ -1432,14 +1504,54 @@
         }
       },
       Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+          Status: 400,
+          Title: That is not this player's turn now,
+          Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
+          Instance: /games-module/games/Guid_1/players/Guid_2/bids/straight-flush
+        }
+      }
+    },
+    {
+      No: 58,
+      Description: Bad move Graham! There is no bid to check in this deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/no-bid-to-check.md,
+          Status: 400,
+          Title: There is no bid to check it,
+          Detail: Deal number '5' must be started by at least one bid,
+          Instance: /games-module/games/Guid_1/players/Guid_3/checks
+        }
+      }
+    },
+    {
+      No: 59,
+      Description: Graham starts the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
         StatusCode: Created,
         Payload: __without_body__
       }
     },
     {
-      No: 56,
+      No: 60,
+      Description: Conway checks the bid and get lost the deal,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Path: games-module/games/Guid_1/players/Guid_4/checks,
         Method: Post
       },
       Response: {
@@ -1448,7 +1560,7 @@
       }
     },
     {
-      No: 57,
+      No: 61,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -1498,8 +1610,8 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -1514,16 +1626,16 @@
               Number: 4,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
               }
             },
             {
               Number: 5,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
               }
             },
             {
@@ -1537,7 +1649,7 @@
       }
     },
     {
-      No: 58,
+      No: 62,
       Request: {
         Path: games-module/gameplays/Guid_1/deals/5,
         Method: Get
@@ -1547,17 +1659,12 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
                   Suit: diamonds
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: ace,
                   Suit: spades
@@ -1570,10 +1677,6 @@
                 {
                   FaceCard: ten,
                   Suit: clubs
-                },
-                {
-                  FaceCard: jack,
-                  Suit: spades
                 }
               ]
             },
@@ -1581,13 +1684,22 @@
               PlayerId: Guid_5,
               Hand: [
                 {
+                  FaceCard: jack,
+                  Suit: spades
+                },
+                {
                   FaceCard: queen,
                   Suit: diamonds
                 },
                 {
                   FaceCard: king,
                   Suit: hearts
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
                 {
                   FaceCard: king,
                   Suit: clubs
@@ -1602,83 +1714,22 @@
           Bids: [
             {
               Order: 1,
-              PlayerId: Guid_2,
-              PokerHand: straight-flush:clubs
+              PlayerId: Guid_3,
+              PokerHand: high-card:ace
             }
           ],
           DealResolution: {
-            CheckingPlayerId: Guid_3,
-            LooserPlayerId: Guid_2
+            CheckingPlayerId: Guid_4,
+            LooserPlayerId: Guid_4
           }
         }
       }
     },
     {
-      No: 59,
+      No: 63,
+      Description: Knuth has two cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/6/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
-            {
-              FaceCard: ace,
-              Suit: clubs
-            },
-            {
-              FaceCard: queen,
-              Suit: clubs
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 60,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/6/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
-            {
-              FaceCard: ace,
-              Suit: diamonds
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 61,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/6/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
-            {
-              FaceCard: ace,
-              Suit: spades
-            },
-            {
-              FaceCard: ten,
-              Suit: clubs
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 62,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_5/deals/6/cards,
         Method: Get
       },
       Response: {
@@ -1692,7 +1743,22 @@
             {
               FaceCard: queen,
               Suit: diamonds
-            },
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 64,
+      Description: Graham has two cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/6/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
             {
               FaceCard: king,
               Suit: hearts
@@ -1706,9 +1772,60 @@
       }
     },
     {
-      No: 63,
+      No: 65,
+      Description: Conway has two cards,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/bids/high-straight,
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/6/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: clubs
+            },
+            {
+              FaceCard: queen,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 66,
+      Description: Riemann has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_5/deals/6/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 67,
+      Description: Riemann starts the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_5/bids/high-straight,
         Method: Post,
         Payload: {}
       },
@@ -1718,9 +1835,10 @@
       }
     },
     {
-      No: 64,
+      No: 68,
+      Description: Knuth checks the bid and get lost the deal,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_4/checks,
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
       },
       Response: {
@@ -1729,7 +1847,7 @@
       }
     },
     {
-      No: 65,
+      No: 69,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -1779,8 +1897,8 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -1795,24 +1913,24 @@
               Number: 4,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
               }
             },
             {
               Number: 5,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
               }
             },
             {
               Number: 6,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
               }
             },
             {
@@ -1826,7 +1944,7 @@
       }
     },
     {
-      No: 66,
+      No: 70,
       Request: {
         Path: games-module/gameplays/Guid_1/deals/6,
         Method: Get
@@ -1836,17 +1954,12 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_3,
+              PlayerId: Guid_5,
               Hand: [
                 {
                   FaceCard: ace,
                   Suit: diamonds
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_4,
-              Hand: [
+                },
                 {
                   FaceCard: ace,
                   Suit: spades
@@ -1858,7 +1971,7 @@
               ]
             },
             {
-              PlayerId: Guid_5,
+              PlayerId: Guid_2,
               Hand: [
                 {
                   FaceCard: jack,
@@ -1867,7 +1980,12 @@
                 {
                   FaceCard: queen,
                   Suit: diamonds
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
                 {
                   FaceCard: king,
                   Suit: hearts
@@ -1879,7 +1997,7 @@
               ]
             },
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_4,
               Hand: [
                 {
                   FaceCard: ace,
@@ -1895,19 +2013,20 @@
           Bids: [
             {
               Order: 1,
-              PlayerId: Guid_3,
+              PlayerId: Guid_5,
               PokerHand: high-straight
             }
           ],
           DealResolution: {
-            CheckingPlayerId: Guid_4,
-            LooserPlayerId: Guid_4
+            CheckingPlayerId: Guid_2,
+            LooserPlayerId: Guid_2
           }
         }
       }
     },
     {
-      No: 67,
+      No: 71,
+      Description: Knuth has three cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/7/cards,
         Method: Get
@@ -1923,13 +2042,18 @@
             {
               FaceCard: queen,
               Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: diamonds
             }
           ]
         }
       }
     },
     {
-      No: 68,
+      No: 72,
+      Description: Graham has two cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/7/cards,
         Method: Get
@@ -1939,15 +2063,20 @@
         Payload: {
           Cards: [
             {
-              FaceCard: jack,
+              FaceCard: ace,
               Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
             }
           ]
         }
       }
     },
     {
-      No: 69,
+      No: 73,
+      Description: Conway has two cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_4/deals/7/cards,
         Method: Get
@@ -1957,23 +2086,20 @@
         Payload: {
           Cards: [
             {
-              FaceCard: ace,
-              Suit: diamonds
-            },
-            {
-              FaceCard: ace,
-              Suit: spades
-            },
-            {
               FaceCard: ten,
               Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: spades
             }
           ]
         }
       }
     },
     {
-      No: 70,
+      No: 74,
+      Description: Riemann has three cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_5/deals/7/cards,
         Method: Get
@@ -1982,10 +2108,6 @@
         StatusCode: OK,
         Payload: {
           Cards: [
-            {
-              FaceCard: jack,
-              Suit: spades
-            },
             {
               FaceCard: queen,
               Suit: diamonds
@@ -2003,9 +2125,10 @@
       }
     },
     {
-      No: 71,
+      No: 75,
+      Description: Graham starts the deal,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_4/bids/full-house,
+        Path: games-module/games/Guid_1/players/Guid_3/bids/full-house,
         Method: Post,
         Payload: {
           ThreeOfAKind: Ace,
@@ -2018,9 +2141,10 @@
       }
     },
     {
-      No: 72,
+      No: 76,
+      Description: Conway checks the bid and get lost the deal,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_5/checks,
+        Path: games-module/games/Guid_1/players/Guid_4/checks,
         Method: Post
       },
       Response: {
@@ -2029,7 +2153,7 @@
       }
     },
     {
-      No: 73,
+      No: 77,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -2079,8 +2203,8 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -2095,20 +2219,12 @@
               Number: 4,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
-              }
-            },
-            {
-              Number: 5,
-              State: Finished,
-              DealResolution: {
                 CheckingPlayerId: Guid_3,
                 LooserPlayerId: Guid_2
               }
             },
             {
-              Number: 6,
+              Number: 5,
               State: Finished,
               DealResolution: {
                 CheckingPlayerId: Guid_4,
@@ -2116,11 +2232,19 @@
               }
             },
             {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
               Number: 7,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_5,
-                LooserPlayerId: Guid_5
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
               }
             },
             {
@@ -2134,7 +2258,7 @@
       }
     },
     {
-      No: 74,
+      No: 78,
       Request: {
         Path: games-module/gameplays/Guid_1/deals/7,
         Method: Get
@@ -2144,7 +2268,7 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_4,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
@@ -2153,20 +2277,25 @@
                 {
                   FaceCard: ace,
                   Suit: spades
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_4,
+              Hand: [
                 {
                   FaceCard: ten,
                   Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: spades
                 }
               ]
             },
             {
               PlayerId: Guid_5,
               Hand: [
-                {
-                  FaceCard: jack,
-                  Suit: spades
-                },
                 {
                   FaceCard: queen,
                   Suit: diamonds
@@ -2191,12 +2320,7 @@
                 {
                   FaceCard: queen,
                   Suit: clubs
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: jack,
                   Suit: diamonds
@@ -2207,19 +2331,20 @@
           Bids: [
             {
               Order: 1,
-              PlayerId: Guid_4,
+              PlayerId: Guid_3,
               PokerHand: full-house:ace,king
             }
           ],
           DealResolution: {
-            CheckingPlayerId: Guid_5,
-            LooserPlayerId: Guid_5
+            CheckingPlayerId: Guid_4,
+            LooserPlayerId: Guid_4
           }
         }
       }
     },
     {
-      No: 75,
+      No: 79,
+      Description: Knuth has three cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/8/cards,
         Method: Get
@@ -2229,19 +2354,24 @@
         Payload: {
           Cards: [
             {
-              FaceCard: king,
-              Suit: hearts
+              FaceCard: jack,
+              Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
             },
             {
               FaceCard: king,
-              Suit: clubs
+              Suit: hearts
             }
           ]
         }
       }
     },
     {
-      No: 76,
+      No: 80,
+      Description: Graham has two cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/8/cards,
         Method: Get
@@ -2251,6 +2381,10 @@
         Payload: {
           Cards: [
             {
+              FaceCard: king,
+              Suit: clubs
+            },
+            {
               FaceCard: ace,
               Suit: clubs
             }
@@ -2259,7 +2393,8 @@
       }
     },
     {
-      No: 77,
+      No: 81,
+      Description: Conway has three cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_4/deals/8/cards,
         Method: Get
@@ -2285,7 +2420,8 @@
       }
     },
     {
-      No: 78,
+      No: 82,
+      Description: Riemann has three cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_5/deals/8/cards,
         Method: Get
@@ -2305,21 +2441,14 @@
             {
               FaceCard: ten,
               Suit: clubs
-            },
-            {
-              FaceCard: jack,
-              Suit: spades
-            },
-            {
-              FaceCard: queen,
-              Suit: diamonds
             }
           ]
         }
       }
     },
     {
-      No: 79,
+      No: 83,
+      Description: Riemann starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_5/bids/two-pairs,
         Method: Post,
@@ -2334,7 +2463,8 @@
       }
     },
     {
-      No: 80,
+      No: 84,
+      Description: Bad move Knuth!, next bid should be higher,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/two-pairs,
         Method: Post,
@@ -2355,7 +2485,7 @@
       }
     },
     {
-      No: 81,
+      No: 85,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/three-of-a-kind,
         Method: Post,
@@ -2369,7 +2499,7 @@
       }
     },
     {
-      No: 82,
+      No: 86,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/three-of-a-kind,
         Method: Post,
@@ -2383,7 +2513,7 @@
       }
     },
     {
-      No: 83,
+      No: 87,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_4/bids/four-of-a-kind,
         Method: Post,
@@ -2397,7 +2527,7 @@
       }
     },
     {
-      No: 84,
+      No: 88,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_5/bids/four-of-a-kind,
         Method: Post,
@@ -2411,7 +2541,8 @@
       }
     },
     {
-      No: 85,
+      No: 89,
+      Description: Knuth checks the bid, Riemann get lost the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
@@ -2422,7 +2553,7 @@
       }
     },
     {
-      No: 86,
+      No: 90,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -2456,7 +2587,7 @@
               PlayerId: Guid_5,
               Nick: Riemann,
               JoiningOrder: 4,
-              LostTheGame: true
+              LostTheGame: false
             }
           ],
           Deals: [
@@ -2472,8 +2603,8 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -2488,20 +2619,12 @@
               Number: 4,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
-              }
-            },
-            {
-              Number: 5,
-              State: Finished,
-              DealResolution: {
                 CheckingPlayerId: Guid_3,
                 LooserPlayerId: Guid_2
               }
             },
             {
-              Number: 6,
+              Number: 5,
               State: Finished,
               DealResolution: {
                 CheckingPlayerId: Guid_4,
@@ -2509,11 +2632,19 @@
               }
             },
             {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
               Number: 7,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_5,
-                LooserPlayerId: Guid_5
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
               }
             },
             {
@@ -2535,7 +2666,7 @@
       }
     },
     {
-      No: 87,
+      No: 91,
       Request: {
         Path: games-module/gameplays/Guid_1/deals/8,
         Method: Get
@@ -2558,14 +2689,6 @@
                 {
                   FaceCard: ten,
                   Suit: clubs
-                },
-                {
-                  FaceCard: jack,
-                  Suit: spades
-                },
-                {
-                  FaceCard: queen,
-                  Suit: diamonds
                 }
               ]
             },
@@ -2573,18 +2696,26 @@
               PlayerId: Guid_2,
               Hand: [
                 {
-                  FaceCard: king,
-                  Suit: hearts
+                  FaceCard: jack,
+                  Suit: spades
+                },
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
                 },
                 {
                   FaceCard: king,
-                  Suit: clubs
+                  Suit: hearts
                 }
               ]
             },
             {
               PlayerId: Guid_3,
               Hand: [
+                {
+                  FaceCard: king,
+                  Suit: clubs
+                },
                 {
                   FaceCard: ace,
                   Suit: clubs
@@ -2644,8 +2775,8 @@
       }
     },
     {
-      No: 88,
-      Description: Knuth has two cards,
+      No: 92,
+      Description: Knuth has three cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/9/cards,
         Method: Get
@@ -2661,22 +2792,7 @@
             {
               FaceCard: ace,
               Suit: spades
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 89,
-      Description: Graham has one card,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/9/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
+            },
             {
               FaceCard: ten,
               Suit: clubs
@@ -2686,10 +2802,10 @@
       }
     },
     {
-      No: 90,
-      Description: Conway has three cards,
+      No: 93,
+      Description: Graham has two cards,
       Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/9/cards,
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/9/cards,
         Method: Get
       },
       Response: {
@@ -2703,35 +2819,71 @@
             {
               FaceCard: queen,
               Suit: diamonds
-            },
-            {
-              FaceCard: king,
-              Suit: hearts
             }
           ]
         }
       }
     },
     {
-      No: 91,
-      Description: Riemann get lost the game!,
+      No: 94,
+      Description: Conway has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/9/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: king,
+              Suit: hearts
+            },
+            {
+              FaceCard: king,
+              Suit: clubs
+            },
+            {
+              FaceCard: ace,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 95,
+      Description: Riemann has four cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_5/deals/9/cards,
         Method: Get
       },
       Response: {
-        StatusCode: BadRequest,
+        StatusCode: OK,
         Payload: {
-          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-lost-the-game.md,
-          Status: 400,
-          Title: Player already lost the game,
-          Detail: Player 'PlayerId { Id = Guid_5 }' already lost the game 'Guid_1',
-          Instance: /games-module/gameplays/Guid_1/players/Guid_5/deals/9/cards
+          Cards: [
+            {
+              FaceCard: queen,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ten,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: diamonds
+            }
+          ]
         }
       }
     },
     {
-      No: 92,
+      No: 96,
       Description: Knuth starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/two-pairs,
@@ -2747,7 +2899,7 @@
       }
     },
     {
-      No: 93,
+      No: 97,
       Description: Bad move Graham!,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/two-pairs,
@@ -2769,7 +2921,7 @@
       }
     },
     {
-      No: 94,
+      No: 98,
       Description: Bad move Conway!,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_4/bids/two-pairs,
@@ -2791,7 +2943,7 @@
       }
     },
     {
-      No: 95,
+      No: 99,
       Description: Bad move Knuth!,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/checks,
@@ -2809,8 +2961,8 @@
       }
     },
     {
-      No: 96,
-      Description: Graham checks the bid, Knuth get lost the deal,
+      No: 100,
+      Description: Graham checks the bid and lost the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -2821,7 +2973,7 @@
       }
     },
     {
-      No: 97,
+      No: 101,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -2855,7 +3007,7 @@
               PlayerId: Guid_5,
               Nick: Riemann,
               JoiningOrder: 4,
-              LostTheGame: true
+              LostTheGame: false
             }
           ],
           Deals: [
@@ -2871,8 +3023,8 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -2887,20 +3039,12 @@
               Number: 4,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
-              }
-            },
-            {
-              Number: 5,
-              State: Finished,
-              DealResolution: {
                 CheckingPlayerId: Guid_3,
                 LooserPlayerId: Guid_2
               }
             },
             {
-              Number: 6,
+              Number: 5,
               State: Finished,
               DealResolution: {
                 CheckingPlayerId: Guid_4,
@@ -2908,11 +3052,19 @@
               }
             },
             {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
               Number: 7,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_5,
-                LooserPlayerId: Guid_5
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
               }
             },
             {
@@ -2928,7 +3080,7 @@
               State: Finished,
               DealResolution: {
                 CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -2942,7 +3094,7 @@
       }
     },
     {
-      No: 98,
+      No: 102,
       Request: {
         Path: games-module/gameplays/Guid_1/deals/9,
         Method: Get
@@ -2961,12 +3113,7 @@
                 {
                   FaceCard: ace,
                   Suit: spades
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: ten,
                   Suit: clubs
@@ -2974,7 +3121,7 @@
               ]
             },
             {
-              PlayerId: Guid_4,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: jack,
@@ -2983,10 +3130,44 @@
                 {
                   FaceCard: queen,
                   Suit: diamonds
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_4,
+              Hand: [
                 {
                   FaceCard: king,
                   Suit: hearts
+                },
+                {
+                  FaceCard: king,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: ace,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_5,
+              Hand: [
+                {
+                  FaceCard: queen,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ten,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: diamonds
                 }
               ]
             }
@@ -3000,13 +3181,13 @@
           ],
           DealResolution: {
             CheckingPlayerId: Guid_3,
-            LooserPlayerId: Guid_2
+            LooserPlayerId: Guid_3
           }
         }
       }
     },
     {
-      No: 99,
+      No: 103,
       Description: Knuth has three cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/10/cards,
@@ -3016,6 +3197,91 @@
         StatusCode: OK,
         Payload: {
           Cards: [
+            {
+              FaceCard: ace,
+              Suit: clubs
+            },
+            {
+              FaceCard: queen,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: diamonds
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 104,
+      Description: Graham has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/10/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ten,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: diamonds
+            },
+            {
+              FaceCard: nine,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 105,
+      Description: Conway has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/10/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 106,
+      Description: Riemann has four cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_5/deals/10/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: jack,
+              Suit: spades
+            },
             {
               FaceCard: queen,
               Suit: diamonds
@@ -3033,56 +3299,10 @@
       }
     },
     {
-      No: 100,
-      Description: Graham has one card,
+      No: 107,
+      Description: Conway starts the deal,
       Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/10/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
-            {
-              FaceCard: ace,
-              Suit: diamonds
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 101,
-      Description: Conway has three cards,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/10/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
-            {
-              FaceCard: ace,
-              Suit: spades
-            },
-            {
-              FaceCard: ten,
-              Suit: clubs
-            },
-            {
-              FaceCard: jack,
-              Suit: spades
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 102,
-      Description: Graham starts the deal,
-      Request: {
-        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+        Path: games-module/games/Guid_1/players/Guid_4/bids/high-card,
         Method: Post,
         Payload: {
           FaceCard: Ace
@@ -3094,10 +3314,10 @@
       }
     },
     {
-      No: 103,
-      Description: Conway checks the bid, Conway get lost the deal,
+      No: 108,
+      Description: Riemann checks the bid and lost the deal,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_4/checks,
+        Path: games-module/games/Guid_1/players/Guid_5/checks,
         Method: Post
       },
       Response: {
@@ -3106,7 +3326,759 @@
       }
     },
     {
-      No: 104,
+      No: 109,
+      Request: {
+        Path: games-module/gameplays/Guid_1,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Status: {
+            State: InProgress
+          },
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Nick: Knuth,
+              JoiningOrder: 1,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_3,
+              Nick: Graham,
+              JoiningOrder: 2,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_4,
+              Nick: Conway,
+              JoiningOrder: 3,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_5,
+              Nick: Riemann,
+              JoiningOrder: 4,
+              LostTheGame: false
+            }
+          ],
+          Deals: [
+            {
+              Number: 1,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 2,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 3,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 4,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 5,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 7,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 8,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 9,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 10,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 11,
+              State: InProgress,
+              DealResolution: {}
+            }
+          ],
+          Winner: {}
+        }
+      }
+    },
+    {
+      No: 110,
+      Request: {
+        Path: games-module/gameplays/Guid_1/deals/10,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Players: [
+            {
+              PlayerId: Guid_4,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                },
+                {
+                  FaceCard: ten,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_5,
+              Hand: [
+                {
+                  FaceCard: jack,
+                  Suit: spades
+                },
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: hearts
+                },
+                {
+                  FaceCard: king,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: queen,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: diamonds
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
+                {
+                  FaceCard: ten,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: nine,
+                  Suit: clubs
+                }
+              ]
+            }
+          ],
+          Bids: [
+            {
+              Order: 1,
+              PlayerId: Guid_4,
+              PokerHand: high-card:ace
+            }
+          ],
+          DealResolution: {
+            CheckingPlayerId: Guid_5,
+            LooserPlayerId: Guid_5
+          }
+        }
+      }
+    },
+    {
+      No: 111,
+      Description: Knuth has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/11/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 112,
+      Description: Graham has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/11/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: jack,
+              Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: hearts
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 113,
+      Description: Conway has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/11/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: king,
+              Suit: clubs
+            },
+            {
+              FaceCard: ace,
+              Suit: clubs
+            },
+            {
+              FaceCard: queen,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 114,
+      Description: Riemann has five cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_5/deals/11/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: jack,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ten,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: diamonds
+            },
+            {
+              FaceCard: nine,
+              Suit: clubs
+            },
+            {
+              FaceCard: king,
+              Suit: spades
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 115,
+      Description: Conway starts the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/flush,
+        Method: Post,
+        Payload: {
+          Suit: Clubs
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 116,
+      Description: Graham checks the bid and get lost the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 117,
+      Request: {
+        Path: games-module/gameplays/Guid_1,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Status: {
+            State: InProgress
+          },
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Nick: Knuth,
+              JoiningOrder: 1,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_3,
+              Nick: Graham,
+              JoiningOrder: 2,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_4,
+              Nick: Conway,
+              JoiningOrder: 3,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_5,
+              Nick: Riemann,
+              JoiningOrder: 4,
+              LostTheGame: false
+            }
+          ],
+          Deals: [
+            {
+              Number: 1,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 2,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 3,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 4,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 5,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 7,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 8,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 9,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 10,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 11,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 12,
+              State: InProgress,
+              DealResolution: {}
+            }
+          ],
+          Winner: {}
+        }
+      }
+    },
+    {
+      No: 118,
+      Request: {
+        Path: games-module/gameplays/Guid_1/deals/11,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                },
+                {
+                  FaceCard: ten,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
+                {
+                  FaceCard: jack,
+                  Suit: spades
+                },
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: hearts
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_4,
+              Hand: [
+                {
+                  FaceCard: king,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: ace,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: queen,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_5,
+              Hand: [
+                {
+                  FaceCard: jack,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ten,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: nine,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: king,
+                  Suit: spades
+                }
+              ]
+            }
+          ],
+          Bids: [
+            {
+              Order: 1,
+              PlayerId: Guid_2,
+              PokerHand: flush:clubs
+            }
+          ],
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_3
+          }
+        }
+      }
+    },
+    {
+      No: 119,
+      Description: Knuth has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/12/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: queen,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ten,
+              Suit: diamonds
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 120,
+      Description: Graham has four cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/12/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: king,
+              Suit: diamonds
+            },
+            {
+              FaceCard: nine,
+              Suit: clubs
+            },
+            {
+              FaceCard: king,
+              Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: spades
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 121,
+      Description: Conway has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/12/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 122,
+      Description: Riemann has five cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_5/deals/12/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: jack,
+              Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: hearts
+            },
+            {
+              FaceCard: king,
+              Suit: clubs
+            },
+            {
+              FaceCard: ace,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 123,
+      Description: Conway starts the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/bids/high-straight,
+        Method: Post,
+        Payload: {}
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 124,
+      Description: Riemann checks the bid and get lost the GAME!,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_5/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 125,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -3156,8 +4128,8 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -3172,20 +4144,12 @@
               Number: 4,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
-              }
-            },
-            {
-              Number: 5,
-              State: Finished,
-              DealResolution: {
                 CheckingPlayerId: Guid_3,
                 LooserPlayerId: Guid_2
               }
             },
             {
-              Number: 6,
+              Number: 5,
               State: Finished,
               DealResolution: {
                 CheckingPlayerId: Guid_4,
@@ -3193,11 +4157,19 @@
               }
             },
             {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
               Number: 7,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_5,
-                LooserPlayerId: Guid_5
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
               }
             },
             {
@@ -3213,19 +4185,35 @@
               State: Finished,
               DealResolution: {
                 CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
+                LooserPlayerId: Guid_3
               }
             },
             {
               Number: 10,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
               }
             },
             {
               Number: 11,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 12,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 13,
               State: InProgress,
               DealResolution: {}
             }
@@ -3235,9 +4223,1146 @@
       }
     },
     {
-      No: 105,
+      No: 126,
       Request: {
-        Path: games-module/gameplays/Guid_1/deals/10,
+        Path: games-module/gameplays/Guid_1/deals/12,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Players: [
+            {
+              PlayerId: Guid_4,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                },
+                {
+                  FaceCard: ten,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_5,
+              Hand: [
+                {
+                  FaceCard: jack,
+                  Suit: spades
+                },
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: hearts
+                },
+                {
+                  FaceCard: king,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: ace,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
+                {
+                  FaceCard: queen,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ten,
+                  Suit: diamonds
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
+                {
+                  FaceCard: king,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: nine,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: king,
+                  Suit: spades
+                },
+                {
+                  FaceCard: queen,
+                  Suit: spades
+                }
+              ]
+            }
+          ],
+          Bids: [
+            {
+              Order: 1,
+              PlayerId: Guid_4,
+              PokerHand: high-straight
+            }
+          ],
+          DealResolution: {
+            CheckingPlayerId: Guid_5,
+            LooserPlayerId: Guid_5
+          }
+        }
+      }
+    },
+    {
+      No: 127,
+      Description: Knuth has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/13/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 128,
+      Description: Graham has four cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/13/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: jack,
+              Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: hearts
+            },
+            {
+              FaceCard: king,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 129,
+      Description: Conway has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/13/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: clubs
+            },
+            {
+              FaceCard: queen,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: diamonds
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 130,
+      Description: Riemann lost the game,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_5/deals/13/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-lost-the-game.md,
+          Status: 400,
+          Title: Player already lost the game,
+          Detail: Player 'PlayerId { Id = Guid_5 }' already lost the game 'Guid_1',
+          Instance: /games-module/gameplays/Guid_1/players/Guid_5/deals/13/cards
+        }
+      }
+    },
+    {
+      No: 131,
+      Description: Knuth starts the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 132,
+      Description: Graham checks the bid and lost the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 133,
+      Request: {
+        Path: games-module/gameplays/Guid_1,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Status: {
+            State: InProgress
+          },
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Nick: Knuth,
+              JoiningOrder: 1,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_3,
+              Nick: Graham,
+              JoiningOrder: 2,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_4,
+              Nick: Conway,
+              JoiningOrder: 3,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_5,
+              Nick: Riemann,
+              JoiningOrder: 4,
+              LostTheGame: true
+            }
+          ],
+          Deals: [
+            {
+              Number: 1,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 2,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 3,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 4,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 5,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 7,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 8,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 9,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 10,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 11,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 12,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 13,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 14,
+              State: InProgress,
+              DealResolution: {}
+            }
+          ],
+          Winner: {}
+        }
+      }
+    },
+    {
+      No: 134,
+      Request: {
+        Path: games-module/gameplays/Guid_1/deals/13,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                },
+                {
+                  FaceCard: ten,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
+                {
+                  FaceCard: jack,
+                  Suit: spades
+                },
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: hearts
+                },
+                {
+                  FaceCard: king,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_4,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: queen,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: diamonds
+                }
+              ]
+            }
+          ],
+          Bids: [
+            {
+              Order: 1,
+              PlayerId: Guid_2,
+              PokerHand: high-card:ace
+            }
+          ],
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_3
+          }
+        }
+      }
+    },
+    {
+      No: 135,
+      Description: Knuth has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/14/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: jack,
+              Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: hearts
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 136,
+      Description: Graham has five cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/14/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: king,
+              Suit: clubs
+            },
+            {
+              FaceCard: ace,
+              Suit: clubs
+            },
+            {
+              FaceCard: queen,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ten,
+              Suit: diamonds
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 137,
+      Description: Conway has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/14/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 138,
+      Description: Conway starts the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/bids/pair,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 139,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/bids/four-of-a-kind,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 140,
+      Description: Graham checks the bid, Knuth get lost the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 141,
+      Request: {
+        Path: games-module/gameplays/Guid_1,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Status: {
+            State: InProgress
+          },
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Nick: Knuth,
+              JoiningOrder: 1,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_3,
+              Nick: Graham,
+              JoiningOrder: 2,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_4,
+              Nick: Conway,
+              JoiningOrder: 3,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_5,
+              Nick: Riemann,
+              JoiningOrder: 4,
+              LostTheGame: true
+            }
+          ],
+          Deals: [
+            {
+              Number: 1,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 2,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 3,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 4,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 5,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 7,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 8,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 9,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 10,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 11,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 12,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 13,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 14,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 15,
+              State: InProgress,
+              DealResolution: {}
+            }
+          ],
+          Winner: {}
+        }
+      }
+    },
+    {
+      No: 142,
+      Request: {
+        Path: games-module/gameplays/Guid_1/deals/14,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Players: [
+            {
+              PlayerId: Guid_4,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                },
+                {
+                  FaceCard: ten,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
+                {
+                  FaceCard: jack,
+                  Suit: spades
+                },
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: hearts
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_3,
+              Hand: [
+                {
+                  FaceCard: king,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: ace,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: queen,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ten,
+                  Suit: diamonds
+                }
+              ]
+            }
+          ],
+          Bids: [
+            {
+              Order: 1,
+              PlayerId: Guid_4,
+              PokerHand: pair:ace
+            },
+            {
+              Order: 2,
+              PlayerId: Guid_2,
+              PokerHand: four-of-a-kind:ace
+            }
+          ],
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_2
+          }
+        }
+      }
+    },
+    {
+      No: 143,
+      Description: Knuth has four cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/15/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: queen,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ten,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: diamonds
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 144,
+      Description: Graham has five cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/15/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: spades
+            },
+            {
+              FaceCard: queen,
+              Suit: diamonds
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 145,
+      Description: Conway has three cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/15/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: king,
+              Suit: hearts
+            },
+            {
+              FaceCard: king,
+              Suit: clubs
+            },
+            {
+              FaceCard: ace,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 146,
+      Description: Graham starts the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 147,
+      Description: Conway checks the bid and lost the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 148,
+      Request: {
+        Path: games-module/gameplays/Guid_1,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Status: {
+            State: InProgress
+          },
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Nick: Knuth,
+              JoiningOrder: 1,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_3,
+              Nick: Graham,
+              JoiningOrder: 2,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_4,
+              Nick: Conway,
+              JoiningOrder: 3,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_5,
+              Nick: Riemann,
+              JoiningOrder: 4,
+              LostTheGame: true
+            }
+          ],
+          Deals: [
+            {
+              Number: 1,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 2,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 3,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 4,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 5,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 7,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 8,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 9,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 10,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 11,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 12,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 13,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 14,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 15,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 16,
+              State: InProgress,
+              DealResolution: {}
+            }
+          ],
+          Winner: {}
+        }
+      }
+    },
+    {
+      No: 149,
+      Request: {
+        Path: games-module/gameplays/Guid_1/deals/15,
         Method: Get
       },
       Response: {
@@ -3250,12 +5375,7 @@
                 {
                   FaceCard: ace,
                   Suit: diamonds
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_4,
-              Hand: [
+                },
                 {
                   FaceCard: ace,
                   Suit: spades
@@ -3267,6 +5387,27 @@
                 {
                   FaceCard: jack,
                   Suit: spades
+                },
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_4,
+              Hand: [
+                {
+                  FaceCard: king,
+                  Suit: hearts
+                },
+                {
+                  FaceCard: king,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: ace,
+                  Suit: clubs
                 }
               ]
             },
@@ -3275,15 +5416,19 @@
               Hand: [
                 {
                   FaceCard: queen,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ten,
                   Suit: diamonds
                 },
                 {
                   FaceCard: king,
-                  Suit: hearts
-                },
-                {
-                  FaceCard: king,
-                  Suit: clubs
+                  Suit: diamonds
                 }
               ]
             }
@@ -3303,10 +5448,41 @@
       }
     },
     {
-      No: 106,
-      Description: Knuth has three cards,
+      No: 150,
+      Description: Knuth has four cards,
       Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/11/cards,
+        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/16/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: spades
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 151,
+      Description: Graham has five cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/16/cards,
         Method: Get
       },
       Response: {
@@ -3324,24 +5500,13 @@
             {
               FaceCard: king,
               Suit: clubs
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 107,
-      Description: Graham has one card,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/11/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
+            },
             {
               FaceCard: ace,
+              Suit: clubs
+            },
+            {
+              FaceCard: queen,
               Suit: clubs
             }
           ]
@@ -3349,304 +5514,10 @@
       }
     },
     {
-      No: 108,
+      No: 152,
       Description: Conway has four cards,
       Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/11/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
-            {
-              FaceCard: ace,
-              Suit: diamonds
-            },
-            {
-              FaceCard: ace,
-              Suit: spades
-            },
-            {
-              FaceCard: ten,
-              Suit: clubs
-            },
-            {
-              FaceCard: jack,
-              Suit: spades
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 109,
-      Description: Conway starts the deal,
-      Request: {
-        Path: games-module/games/Guid_1/players/Guid_4/bids/flush,
-        Method: Post,
-        Payload: {
-          Suit: Clubs
-        }
-      },
-      Response: {
-        StatusCode: Created,
-        Payload: __without_body__
-      }
-    },
-    {
-      No: 110,
-      Description: Knuth checks the bid, Conway get lost the deal,
-      Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/checks,
-        Method: Post
-      },
-      Response: {
-        StatusCode: Created,
-        Payload: __without_body__
-      }
-    },
-    {
-      No: 111,
-      Request: {
-        Path: games-module/gameplays/Guid_1,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Status: {
-            State: InProgress
-          },
-          Players: [
-            {
-              PlayerId: Guid_2,
-              Nick: Knuth,
-              JoiningOrder: 1,
-              LostTheGame: false
-            },
-            {
-              PlayerId: Guid_3,
-              Nick: Graham,
-              JoiningOrder: 2,
-              LostTheGame: false
-            },
-            {
-              PlayerId: Guid_4,
-              Nick: Conway,
-              JoiningOrder: 3,
-              LostTheGame: false
-            },
-            {
-              PlayerId: Guid_5,
-              Nick: Riemann,
-              JoiningOrder: 4,
-              LostTheGame: true
-            }
-          ],
-          Deals: [
-            {
-              Number: 1,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
-              }
-            },
-            {
-              Number: 2,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
-              }
-            },
-            {
-              Number: 3,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
-              }
-            },
-            {
-              Number: 4,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
-              }
-            },
-            {
-              Number: 5,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
-              }
-            },
-            {
-              Number: 6,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
-              }
-            },
-            {
-              Number: 7,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_5,
-                LooserPlayerId: Guid_5
-              }
-            },
-            {
-              Number: 8,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
-              }
-            },
-            {
-              Number: 9,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
-              }
-            },
-            {
-              Number: 10,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
-              }
-            },
-            {
-              Number: 11,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_4
-              }
-            },
-            {
-              Number: 12,
-              State: InProgress,
-              DealResolution: {}
-            }
-          ],
-          Winner: {}
-        }
-      }
-    },
-    {
-      No: 112,
-      Request: {
-        Path: games-module/gameplays/Guid_1/deals/11,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Players: [
-            {
-              PlayerId: Guid_4,
-              Hand: [
-                {
-                  FaceCard: ace,
-                  Suit: diamonds
-                },
-                {
-                  FaceCard: ace,
-                  Suit: spades
-                },
-                {
-                  FaceCard: ten,
-                  Suit: clubs
-                },
-                {
-                  FaceCard: jack,
-                  Suit: spades
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_2,
-              Hand: [
-                {
-                  FaceCard: queen,
-                  Suit: diamonds
-                },
-                {
-                  FaceCard: king,
-                  Suit: hearts
-                },
-                {
-                  FaceCard: king,
-                  Suit: clubs
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
-                {
-                  FaceCard: ace,
-                  Suit: clubs
-                }
-              ]
-            }
-          ],
-          Bids: [
-            {
-              Order: 1,
-              PlayerId: Guid_4,
-              PokerHand: flush:clubs
-            }
-          ],
-          DealResolution: {
-            CheckingPlayerId: Guid_2,
-            LooserPlayerId: Guid_4
-          }
-        }
-      }
-    },
-    {
-      No: 113,
-      Description: Knuth has three cards,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/12/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
-            {
-              FaceCard: ace,
-              Suit: diamonds
-            },
-            {
-              FaceCard: ace,
-              Suit: spades
-            },
-            {
-              FaceCard: ten,
-              Suit: clubs
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 114,
-      Description: Graham has one card,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/12/cards,
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/16/cards,
         Method: Get
       },
       Response: {
@@ -3655,41 +5526,18 @@
           Cards: [
             {
               FaceCard: jack,
-              Suit: spades
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 115,
-      Description: Conway has five cards,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/12/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
+              Suit: diamonds
+            },
             {
-              FaceCard: queen,
+              FaceCard: ten,
               Suit: diamonds
             },
             {
               FaceCard: king,
-              Suit: hearts
+              Suit: diamonds
             },
             {
-              FaceCard: king,
-              Suit: clubs
-            },
-            {
-              FaceCard: ace,
-              Suit: clubs
-            },
-            {
-              FaceCard: queen,
+              FaceCard: nine,
               Suit: clubs
             }
           ]
@@ -3697,12 +5545,14 @@
       }
     },
     {
-      No: 116,
+      No: 153,
       Description: Knuth starts the deal,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/bids/high-straight,
+        Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
         Method: Post,
-        Payload: {}
+        Payload: {
+          FaceCard: Ace
+        }
       },
       Response: {
         StatusCode: Created,
@@ -3710,8 +5560,8 @@
       }
     },
     {
-      No: 117,
-      Description: Graham checks the bid, Graham get lost the deal,
+      No: 154,
+      Description: Graham checks the bid and get lost the GAME!,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -3722,7 +5572,7 @@
       }
     },
     {
-      No: 118,
+      No: 155,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -3744,7 +5594,7 @@
               PlayerId: Guid_3,
               Nick: Graham,
               JoiningOrder: 2,
-              LostTheGame: false
+              LostTheGame: true
             },
             {
               PlayerId: Guid_4,
@@ -3772,8 +5622,8 @@
               Number: 2,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
               }
             },
             {
@@ -3788,20 +5638,12 @@
               Number: 4,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_5
-              }
-            },
-            {
-              Number: 5,
-              State: Finished,
-              DealResolution: {
                 CheckingPlayerId: Guid_3,
                 LooserPlayerId: Guid_2
               }
             },
             {
-              Number: 6,
+              Number: 5,
               State: Finished,
               DealResolution: {
                 CheckingPlayerId: Guid_4,
@@ -3809,11 +5651,19 @@
               }
             },
             {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
               Number: 7,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_5,
-                LooserPlayerId: Guid_5
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
               }
             },
             {
@@ -3829,27 +5679,19 @@
               State: Finished,
               DealResolution: {
                 CheckingPlayerId: Guid_3,
-                LooserPlayerId: Guid_2
+                LooserPlayerId: Guid_3
               }
             },
             {
               Number: 10,
               State: Finished,
               DealResolution: {
-                CheckingPlayerId: Guid_4,
-                LooserPlayerId: Guid_4
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
               }
             },
             {
               Number: 11,
-              State: Finished,
-              DealResolution: {
-                CheckingPlayerId: Guid_2,
-                LooserPlayerId: Guid_4
-              }
-            },
-            {
-              Number: 12,
               State: Finished,
               DealResolution: {
                 CheckingPlayerId: Guid_3,
@@ -3857,7 +5699,47 @@
               }
             },
             {
+              Number: 12,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
               Number: 13,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 14,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 15,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 16,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 17,
               State: InProgress,
               DealResolution: {}
             }
@@ -3867,9 +5749,9 @@
       }
     },
     {
-      No: 119,
+      No: 156,
       Request: {
-        Path: games-module/gameplays/Guid_1/deals/12,
+        Path: games-module/gameplays/Guid_1/deals/16,
         Method: Get
       },
       Response: {
@@ -3890,12 +5772,7 @@
                 {
                   FaceCard: ten,
                   Suit: clubs
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: jack,
                   Suit: spades
@@ -3903,7 +5780,742 @@
               ]
             },
             {
+              PlayerId: Guid_3,
+              Hand: [
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: hearts
+                },
+                {
+                  FaceCard: king,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: ace,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: queen,
+                  Suit: clubs
+                }
+              ]
+            },
+            {
               PlayerId: Guid_4,
+              Hand: [
+                {
+                  FaceCard: jack,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ten,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: nine,
+                  Suit: clubs
+                }
+              ]
+            }
+          ],
+          Bids: [
+            {
+              Order: 1,
+              PlayerId: Guid_2,
+              PokerHand: high-card:ace
+            }
+          ],
+          DealResolution: {
+            CheckingPlayerId: Guid_3,
+            LooserPlayerId: Guid_3
+          }
+        }
+      }
+    },
+    {
+      No: 157,
+      Description: Knuth has four cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/17/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: queen,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: hearts
+            },
+            {
+              FaceCard: king,
+              Suit: clubs
+            },
+            {
+              FaceCard: ace,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 158,
+      Description: Graham lost the game,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/17/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/player-already-lost-the-game.md,
+          Status: 400,
+          Title: Player already lost the game,
+          Detail: Player 'PlayerId { Id = Guid_3 }' already lost the game 'Guid_1',
+          Instance: /games-module/gameplays/Guid_1/players/Guid_3/deals/17/cards
+        }
+      }
+    },
+    {
+      No: 159,
+      Description: Conway has four cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/17/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: spades
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 160,
+      Description: Conway starts the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 161,
+      Description: Knuth checks the bid and get lost the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 162,
+      Request: {
+        Path: games-module/gameplays/Guid_1,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Status: {
+            State: InProgress
+          },
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Nick: Knuth,
+              JoiningOrder: 1,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_3,
+              Nick: Graham,
+              JoiningOrder: 2,
+              LostTheGame: true
+            },
+            {
+              PlayerId: Guid_4,
+              Nick: Conway,
+              JoiningOrder: 3,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_5,
+              Nick: Riemann,
+              JoiningOrder: 4,
+              LostTheGame: true
+            }
+          ],
+          Deals: [
+            {
+              Number: 1,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 2,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 3,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 4,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 5,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 7,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 8,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 9,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 10,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 11,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 12,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 13,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 14,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 15,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 16,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 17,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 18,
+              State: InProgress,
+              DealResolution: {}
+            }
+          ],
+          Winner: {}
+        }
+      }
+    },
+    {
+      No: 163,
+      Request: {
+        Path: games-module/gameplays/Guid_1/deals/17,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Players: [
+            {
+              PlayerId: Guid_4,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                },
+                {
+                  FaceCard: ten,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: spades
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
+                {
+                  FaceCard: queen,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: king,
+                  Suit: hearts
+                },
+                {
+                  FaceCard: king,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: ace,
+                  Suit: clubs
+                }
+              ]
+            }
+          ],
+          Bids: [
+            {
+              Order: 1,
+              PlayerId: Guid_4,
+              PokerHand: high-card:ace
+            }
+          ],
+          DealResolution: {
+            CheckingPlayerId: Guid_2,
+            LooserPlayerId: Guid_2
+          }
+        }
+      }
+    },
+    {
+      No: 164,
+      Description: Knuth has five cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_2/deals/18/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: queen,
+              Suit: diamonds
+            },
+            {
+              FaceCard: king,
+              Suit: hearts
+            },
+            {
+              FaceCard: king,
+              Suit: clubs
+            },
+            {
+              FaceCard: ace,
+              Suit: clubs
+            },
+            {
+              FaceCard: queen,
+              Suit: clubs
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 165,
+      Description: Conway has four cards,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_4/deals/18/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            },
+            {
+              FaceCard: ace,
+              Suit: spades
+            },
+            {
+              FaceCard: ten,
+              Suit: clubs
+            },
+            {
+              FaceCard: jack,
+              Suit: spades
+            }
+          ]
+        }
+      }
+    },
+    {
+      No: 166,
+      Description: Conway starts the deal,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_4/bids/high-card,
+        Method: Post,
+        Payload: {
+          FaceCard: Ace
+        }
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 167,
+      Description: Knuth checks the bid and get lost the GAME!,
+      Request: {
+        Path: games-module/games/Guid_1/players/Guid_2/checks,
+        Method: Post
+      },
+      Response: {
+        StatusCode: Created,
+        Payload: __without_body__
+      }
+    },
+    {
+      No: 168,
+      Description: THE WINNER IS CONWAY!,
+      Request: {
+        Path: games-module/gameplays/Guid_1,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Status: {
+            State: GameIsOver
+          },
+          Players: [
+            {
+              PlayerId: Guid_2,
+              Nick: Knuth,
+              JoiningOrder: 1,
+              LostTheGame: true
+            },
+            {
+              PlayerId: Guid_3,
+              Nick: Graham,
+              JoiningOrder: 2,
+              LostTheGame: true
+            },
+            {
+              PlayerId: Guid_4,
+              Nick: Conway,
+              JoiningOrder: 3,
+              LostTheGame: false
+            },
+            {
+              PlayerId: Guid_5,
+              Nick: Riemann,
+              JoiningOrder: 4,
+              LostTheGame: true
+            }
+          ],
+          Deals: [
+            {
+              Number: 1,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 2,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 3,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 4,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 5,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 6,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 7,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 8,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 9,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 10,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 11,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 12,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_5,
+                LooserPlayerId: Guid_5
+              }
+            },
+            {
+              Number: 13,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 14,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 15,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_4,
+                LooserPlayerId: Guid_4
+              }
+            },
+            {
+              Number: 16,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_3,
+                LooserPlayerId: Guid_3
+              }
+            },
+            {
+              Number: 17,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            },
+            {
+              Number: 18,
+              State: Finished,
+              DealResolution: {
+                CheckingPlayerId: Guid_2,
+                LooserPlayerId: Guid_2
+              }
+            }
+          ],
+          Winner: {
+            PlayerId: Guid_4
+          }
+        }
+      }
+    },
+    {
+      No: 169,
+      Request: {
+        Path: games-module/gameplays/Guid_1/deals/18,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Players: [
+            {
+              PlayerId: Guid_4,
+              Hand: [
+                {
+                  FaceCard: ace,
+                  Suit: diamonds
+                },
+                {
+                  FaceCard: ace,
+                  Suit: spades
+                },
+                {
+                  FaceCard: ten,
+                  Suit: clubs
+                },
+                {
+                  FaceCard: jack,
+                  Suit: spades
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
               Hand: [
                 {
                   FaceCard: queen,
@@ -3931,13 +6543,13 @@
           Bids: [
             {
               Order: 1,
-              PlayerId: Guid_2,
-              PokerHand: high-straight
+              PlayerId: Guid_4,
+              PokerHand: high-card:ace
             }
           ],
           DealResolution: {
-            CheckingPlayerId: Guid_3,
-            LooserPlayerId: Guid_3
+            CheckingPlayerId: Guid_2,
+            LooserPlayerId: Guid_2
           }
         }
       }

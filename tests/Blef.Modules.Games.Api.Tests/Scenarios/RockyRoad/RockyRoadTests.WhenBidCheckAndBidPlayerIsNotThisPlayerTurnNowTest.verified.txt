@@ -88,7 +88,7 @@
     {
       No: 7,
       Request: {
-        Path: games-module/games/Guid_1/players/Guid_2/bids/pair,
+        Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
         Method: Post,
         Payload: {
           FaceCard: Ace
@@ -100,8 +100,8 @@
           Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
           Status: 400,
           Title: That is not this player's turn now,
-          Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
-          Instance: /games-module/games/Guid_1/players/Guid_2/bids/pair
+          Detail: Player 'PlayerId { Id = Guid_3 }' should wait for his turn,
+          Instance: /games-module/games/Guid_1/players/Guid_3/bids/pair
         }
       }
     }

@@ -25,6 +25,7 @@ public class GameOverTests
         game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
 
         // first player lost in third deal
+        PlayHighCardBid(game, secondPlayerJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
         game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
 
@@ -34,6 +35,7 @@ public class GameOverTests
         game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
 
         // first player lost in fifth deal
+        PlayHighCardBid(game, secondPlayerJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
 
         // act
@@ -44,7 +46,9 @@ public class GameOverTests
         AssertGameOver(game.Id, expectedWinner, actual);
         var expectedCheckingPlayer = secondPlayerJoined.Player.Id;
         var expectedLooser = firstPlayerJoined.Player.Id;
-        AssertCheckPlaced(game.Id, expectedDealNumber: new DealNumber(5), expectedCheckingPlayer, expectedLooser,
+        AssertCheckPlaced(game.Id,
+            expectedDealNumber: new DealNumber(5),
+            expectedCheckingPlayer, expectedLooser,
             actual);
     }
 

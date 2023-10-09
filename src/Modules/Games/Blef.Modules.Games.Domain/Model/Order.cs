@@ -26,8 +26,7 @@ internal sealed record Order : IComparable<Order>
     public static int operator -(Order order, int value) =>
         order._sequence - value;
 
-    public bool IsGreaterThen(PlayersCount playersCount) =>
-        _sequence > (int) playersCount;
+    public int Int => _sequence;
 
     public override string ToString() =>
         _sequence.ToString();

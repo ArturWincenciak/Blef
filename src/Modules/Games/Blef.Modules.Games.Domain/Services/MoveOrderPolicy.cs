@@ -47,5 +47,4 @@ internal sealed class MoveOrderPolicy
 
     private static bool IsPlayerInSequence(PlayerId player, Move moveInSequence) =>
         moveInSequence.Player == player;
-
 }

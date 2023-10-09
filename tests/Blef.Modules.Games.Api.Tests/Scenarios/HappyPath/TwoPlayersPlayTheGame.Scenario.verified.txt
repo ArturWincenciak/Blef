@@ -132,6 +132,7 @@
     },
     {
       No: 7,
+      Description: Knuth has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/1/cards,
         Method: Get
@@ -150,6 +151,7 @@
     },
     {
       No: 8,
+      Description: Graham has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/1/cards,
         Method: Get
@@ -168,7 +170,7 @@
     },
     {
       No: 9,
-      Description: Knuth bids high card Nine in deal 1,
+      Description: Knuth starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
         Method: Post,
@@ -183,7 +185,7 @@
     },
     {
       No: 10,
-      Description: Graham checks in deal 1 and Knuth get lost (Knuth has 2 cards in next deal),
+      Description: Graham checks, Knuth get lost the deal),
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -283,6 +285,7 @@
     },
     {
       No: 13,
+      Description: Knuth has two cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/2/cards,
         Method: Get
@@ -305,6 +308,7 @@
     },
     {
       No: 14,
+      Description: Graham has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/2/cards,
         Method: Get
@@ -323,7 +327,7 @@
     },
     {
       No: 15,
-      Description: Graham bids high card Ace in deal 2,
+      Description: Graham starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
@@ -338,7 +342,7 @@
     },
     {
       No: 16,
-      Description: Knuth checks in deal 2 and get lost and has 3 cards in next deal,
+      Description: Knuth checks and get lost the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
@@ -450,6 +454,7 @@
     },
     {
       No: 19,
+      Description: Knuth has three cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/3/cards,
         Method: Get
@@ -460,30 +465,12 @@
           Cards: [
             {
               FaceCard: ace,
-              Suit: diamonds
-            },
-            {
-              FaceCard: ace,
               Suit: spades
             },
             {
               FaceCard: ten,
               Suit: clubs
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 20,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/3/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
+            },
             {
               FaceCard: jack,
               Suit: spades
@@ -493,8 +480,27 @@
       }
     },
     {
+      No: 20,
+      Description: Graham has one card,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/3/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            }
+          ]
+        }
+      }
+    },
+    {
       No: 21,
-      Description: Knuth bids pair King in deal 3,
+      Description: Bad move Knuth!,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/pair,
         Method: Post,
@@ -503,13 +509,19 @@
         }
       },
       Response: {
-        StatusCode: Created,
-        Payload: __without_body__
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+          Status: 400,
+          Title: That is not this player's turn now,
+          Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
+          Instance: /games-module/games/Guid_1/players/Guid_2/bids/pair
+        }
       }
     },
     {
       No: 22,
-      Description: Graham bids pair Ace in deal 3,
+      Description: Graham starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
         Method: Post,
@@ -524,7 +536,7 @@
     },
     {
       No: 23,
-      Description: Knuth checks in deal 3, Knuth get lost and has 4 cards in next deal,
+      Description: Knuth checks and get lost the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/checks,
         Method: Post
@@ -606,12 +618,17 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
                   Suit: diamonds
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
                 {
                   FaceCard: ace,
                   Suit: spades
@@ -619,12 +636,7 @@
                 {
                   FaceCard: ten,
                   Suit: clubs
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: jack,
                   Suit: spades
@@ -635,11 +647,6 @@
           Bids: [
             {
               Order: 1,
-              PlayerId: Guid_2,
-              PokerHand: pair:king
-            },
-            {
-              Order: 2,
               PlayerId: Guid_3,
               PokerHand: pair:ace
             }
@@ -653,6 +660,7 @@
     },
     {
       No: 26,
+      Description: Knuth has four cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/4/cards,
         Method: Get
@@ -683,6 +691,7 @@
     },
     {
       No: 27,
+      Description: Graham has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/4/cards,
         Method: Get
@@ -701,7 +710,7 @@
     },
     {
       No: 28,
-      Description: Graham bids two pairs Nine and Ten in deal 4,
+      Description: Graham starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/two-pairs,
         Method: Post,
@@ -717,7 +726,6 @@
     },
     {
       No: 29,
-      Description: Knuth bids four of a kind Nine in deal 4,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/four-of-a-kind,
         Method: Post,
@@ -732,7 +740,7 @@
     },
     {
       No: 30,
-      Description: Graham checks in deal 4, Knuth get lost and has 5 cards in next deal,
+      Description: Graham checks and Knuth get lost the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -873,6 +881,7 @@
     },
     {
       No: 33,
+      Description: Knuth has five cards,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_2/deals/5/cards,
         Method: Get
@@ -881,10 +890,6 @@
         StatusCode: OK,
         Payload: {
           Cards: [
-            {
-              FaceCard: ace,
-              Suit: diamonds
-            },
             {
               FaceCard: ace,
               Suit: spades
@@ -900,21 +905,7 @@
             {
               FaceCard: queen,
               Suit: diamonds
-            }
-          ]
-        }
-      }
-    },
-    {
-      No: 34,
-      Request: {
-        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/5/cards,
-        Method: Get
-      },
-      Response: {
-        StatusCode: OK,
-        Payload: {
-          Cards: [
+            },
             {
               FaceCard: king,
               Suit: hearts
@@ -924,8 +915,27 @@
       }
     },
     {
+      No: 34,
+      Description: Graham has one card,
+      Request: {
+        Path: games-module/gameplays/Guid_1/players/Guid_3/deals/5/cards,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Cards: [
+            {
+              FaceCard: ace,
+              Suit: diamonds
+            }
+          ]
+        }
+      }
+    },
+    {
       No: 35,
-      Description: Knuth bids high card Queen in deal 5,
+      Description: Bad move Knuth!,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/high-card,
         Method: Post,
@@ -934,13 +944,19 @@
         }
       },
       Response: {
-        StatusCode: Created,
-        Payload: __without_body__
+        StatusCode: BadRequest,
+        Payload: {
+          Type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/that-is-not-this-player-turn-now.md,
+          Status: 400,
+          Title: That is not this player's turn now,
+          Detail: Player 'PlayerId { Id = Guid_2 }' should wait for his turn,
+          Instance: /games-module/games/Guid_1/players/Guid_2/bids/high-card
+        }
       }
     },
     {
       No: 36,
-      Description: Graham bids high card King in deal 5,
+      Description: Graham starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
@@ -955,7 +971,6 @@
     },
     {
       No: 37,
-      Description: Knuth bids pair Queen in deal 5,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/pair,
         Method: Post,
@@ -970,7 +985,6 @@
     },
     {
       No: 38,
-      Description: Graham bids pair King in deal 5,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
         Method: Post,
@@ -985,7 +999,6 @@
     },
     {
       No: 39,
-      Description: Knuth bids full house Ace and King in deal 5,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_2/bids/full-house,
         Method: Post,
@@ -1001,7 +1014,7 @@
     },
     {
       No: 40,
-      Description: Graham checks in deal 5 and Knuth get lost the game!,
+      Description: Graham checks and Knuth get lost the GAME!,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -1013,6 +1026,7 @@
     },
     {
       No: 41,
+      Description: Graham wins the game!,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -1096,12 +1110,17 @@
         Payload: {
           Players: [
             {
-              PlayerId: Guid_2,
+              PlayerId: Guid_3,
               Hand: [
                 {
                   FaceCard: ace,
                   Suit: diamonds
-                },
+                }
+              ]
+            },
+            {
+              PlayerId: Guid_2,
+              Hand: [
                 {
                   FaceCard: ace,
                   Suit: spades
@@ -1117,12 +1136,7 @@
                 {
                   FaceCard: queen,
                   Suit: diamonds
-                }
-              ]
-            },
-            {
-              PlayerId: Guid_3,
-              Hand: [
+                },
                 {
                   FaceCard: king,
                   Suit: hearts
@@ -1133,26 +1147,21 @@
           Bids: [
             {
               Order: 1,
-              PlayerId: Guid_2,
-              PokerHand: high-card:queen
-            },
-            {
-              Order: 2,
               PlayerId: Guid_3,
               PokerHand: high-card:king
             },
             {
-              Order: 3,
+              Order: 2,
               PlayerId: Guid_2,
               PokerHand: pair:queen
             },
             {
-              Order: 4,
+              Order: 3,
               PlayerId: Guid_3,
               PokerHand: pair:king
             },
             {
-              Order: 5,
+              Order: 4,
               PlayerId: Guid_2,
               PokerHand: full-house:ace,king
             }

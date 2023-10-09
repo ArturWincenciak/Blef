@@ -46,7 +46,7 @@ internal sealed class Game
         if (_players.Count < MIN_NUMBER_OF_PLAYERS)
             throw new NotEnoughPlayersException(Id);
 
-        return NewDeal();
+        return NewDeal(FirstDealPlayers);
     }
 
     public BidPlaced Bid(Bid newBid)
@@ -64,13 +64,13 @@ internal sealed class Game
         Validate(checkingPlayer.Player);
 
         var lastDeal = _deals[^1];
-        var dealLooser = lastDeal.Check(checkingPlayer);
+        var lastDealLooser = lastDeal.Check(checkingPlayer);
 
         _players
-            .Single(gamePlayer => gamePlayer.Id == dealLooser.Player)
+            .Single(gamePlayer => gamePlayer.Id == lastDealLooser.Player)
             .LostLastDeal();
 
-        var checkPlaced = new CheckPlaced(Id, lastDeal.Id.Deal, checkingPlayer, dealLooser);
+        var checkPlaced = new CheckPlaced(Id, lastDeal.Id.Deal, checkingPlayer, lastDealLooser);
 
         if (IsOnlyOnePlayerLeft())
         {
@@ -79,15 +79,15 @@ internal sealed class Game
             return new IDomainEvent[] {checkPlaced, gameOver};
         }
 
-        var nextDealStarted = NewDeal();
+        var nextDealStarted = NewDeal(() => NextDealPlayers(lastDealLooser));
         return new IDomainEvent[] {checkPlaced, nextDealStarted};
     }
 
-    private DealStarted NewDeal()
+    private DealStarted NewDeal(Func<NextDealPlayersSet> dealPlayers)
     {
         var nextDealNumber = _deals.Count + 1;
         var nextDealId = new DealId(Id, Deal: new DealNumber(nextDealNumber));
-        var nextDealPlayers = NextDealPlayers();
+        var nextDealPlayers = dealPlayers();
         var nextDealSet = _croupier.Deal(nextDealPlayers);
 
         _deals.Add(new Deal(nextDealId, nextDealSet));
@@ -95,36 +95,53 @@ internal sealed class Game
         return new DealStarted(Id, nextDealId.Deal, nextDealSet.PlayersSet.Players);
     }
 
-    private NextDealPlayersSet NextDealPlayers()
-    {
-        var nextDealPlayers = _players
+    private NextDealPlayersSet FirstDealPlayers() =>
+        new(_players
             .OrderBy(inGamePlayer => inGamePlayer.JoiningSequence)
-            .Select((inGamePlayer, index) => ShiftPlayerOrder(index, inGamePlayer))
-            .Where(IsInTheGame)
-            .OrderBy(nextDealPlayer => nextDealPlayer.Order)
-            .Select(NextDealOrder)
-            .ToArray();
+            .Select(inGamePlayer =>
+                new NextDealPlayer(
+                    inGamePlayer.Id,
+                    inGamePlayer.CardsAmount,
+                    inGamePlayer.JoiningSequence))
+            .ToArray());
 
-        return new NextDealPlayersSet(nextDealPlayers);
-    }
-
-    private NextDealPlayer ShiftPlayerOrder(int playerIndex, GamePlayer inGamePlayer)
+    private NextDealPlayersSet NextDealPlayers(LooserPlayer lastDealLooser)
     {
-        var shift = _deals.Count % _players.Count;
-        var nextIndex = playerIndex - shift;
+        var lastLooserJoiningSequence = _players
+            .Single(gamePlayer => gamePlayer.Id == lastDealLooser.Player)
+            .JoiningSequence.Int;
 
-        var nextOrder = nextIndex >= 0
-            ? Order.Create(nextIndex + 1)
-            : Order.Create(_players.Count + nextIndex + 1);
-
-        return new NextDealPlayer(inGamePlayer.Id, inGamePlayer.CardsAmount, nextOrder);
+        var nextDealPlayers = BuildNextDealPlayers(nextIndex: lastLooserJoiningSequence + 1);
+        return new NextDealPlayersSet(nextDealPlayers.OrderBy(dealPlayer => dealPlayer.Order).ToArray());
     }
 
-    private bool IsInTheGame(NextDealPlayer nextDealPlayer) =>
-        _players.Single(player => player.Id == nextDealPlayer.Player).IsInTheGame;
+    private List<NextDealPlayer> BuildNextDealPlayers(int nextIndex, List<NextDealPlayer>? result = null, int index = 1)
+    {
+        result ??= new List<NextDealPlayer>();
 
-    private static NextDealPlayer NextDealOrder(NextDealPlayer nextDealPlayer, int index) =>
-        new(nextDealPlayer.Player, nextDealPlayer.CardsAmount, Order.Create(index + 1));
+        var (nextGamePlayer, nextOrder) = FindNextInGamePlayer(nextIndex);
+
+        if (result.Exists(item => item.Player == nextGamePlayer.Id) == false)
+        {
+            var nextDealPlayer = new NextDealPlayer(nextGamePlayer.Id, nextGamePlayer.CardsAmount, Order.Create(index));
+            result.Add(nextDealPlayer);
+            return BuildNextDealPlayers(nextIndex: nextOrder + 1, result, index: index + 1);
+        }
+
+        return result;
+    }
+
+    private (GamePlayer Player, int Order) FindNextInGamePlayer(int order)
+    {
+        if(order > _players.Count)
+            order = 1;
+
+        var firstPlayer = _players.Single(player => player.JoiningSequence.Int == order);
+        if (firstPlayer.IsInTheGame)
+            return (firstPlayer, order);
+
+        return FindNextInGamePlayer(order + 1);
+    }
 
     private void Validate(PlayerId playerId)
     {
