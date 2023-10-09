@@ -106,17 +106,53 @@ public class FourPlayersPlayTheGame
             .BidFourOfAKind(WhichPlayer.Riemann, FaceCard.Ace)
             .Check(WhichPlayer.Knuth)
             .GetGameFlow()
+            .GetDealFlow(deal: new DealNumber(8))
 
-            .GetCards(WhichPlayer.Knuth, new DealNumber(9),
-                description: "Knuth has two cards: ace of diamonds and ace of spades")
-            .GetCards(WhichPlayer.Graham, new DealNumber(9),
-                description: "Graham has one card: ten of clubs")
-            .GetCards(WhichPlayer.Conway, new DealNumber(9),
-                description: "Conway has three cards: jack of spades, queen of diamonds and king of hearts")
-            .GetCards(WhichPlayer.Riemann, new DealNumber(9),
-                description: "Riemann get lost the game!")
+            .GetCards(WhichPlayer.Knuth, new DealNumber(9), description: "Knuth has two cards")
+            .GetCards(WhichPlayer.Graham, new DealNumber(9), description: "Graham has one card")
+            .GetCards(WhichPlayer.Conway, new DealNumber(9), description: "Conway has three cards")
+            .GetCards(WhichPlayer.Riemann, new DealNumber(9), description: "Riemann get lost the game!")
+            .BidTwoPairs(WhichPlayer.Knuth, FaceCard.Ace, FaceCard.King, description: "Knuth starts the deal")
+            .BidTwoPairs(WhichPlayer.Graham, FaceCard.Ace, FaceCard.King, description: "Bad move Graham!")
+            .BidTwoPairs(WhichPlayer.Conway, FaceCard.Ace, FaceCard.King, description: "Bad move Conway!")
+            .Check(WhichPlayer.Knuth, description: "Bad move Knuth!")
+            .Check(WhichPlayer.Graham, description: "Graham checks the bid, Knuth get lost the deal")
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(9))
 
-            .BidTwoPairs(WhichPlayer.Knuth, FaceCard.Ace, FaceCard.King)
+            .GetCards(WhichPlayer.Knuth, new DealNumber(10), description: "Knuth has three cards")
+            .GetCards(WhichPlayer.Graham, new DealNumber(10), description: "Graham has one card")
+            .GetCards(WhichPlayer.Conway, new DealNumber(10), description: "Conway has three cards")
+            .BidHighCard(WhichPlayer.Graham, FaceCard.Ace, description: "Graham starts the deal")
+            .Check(WhichPlayer.Conway, "Conway checks the bid, Conway get lost the deal")
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(10))
+
+            .GetCards(WhichPlayer.Knuth, new DealNumber(11), description: "Knuth has three cards")
+            .GetCards(WhichPlayer.Graham, new DealNumber(11), description: "Graham has one card")
+            .GetCards(WhichPlayer.Conway, new DealNumber(11), description: "Conway has four cards")
+            .BidFlush(WhichPlayer.Conway, Suit.Clubs, description: "Conway starts the deal")
+            .Check(WhichPlayer.Knuth, description: "Knuth checks the bid, Conway get lost the deal")
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(11))
+
+            .GetCards(WhichPlayer.Knuth, new DealNumber(12), description: "Knuth has three cards")
+            .GetCards(WhichPlayer.Graham, new DealNumber(12), description: "Graham has one card")
+            .GetCards(WhichPlayer.Conway, new DealNumber(12), description: "Conway has five cards")
+            .BidHighStraight(WhichPlayer.Knuth, description: "Knuth starts the deal")
+            .Check(WhichPlayer.Graham, description: "Graham checks the bid, Graham get lost the deal")
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(12))
+
+            .GetCards(WhichPlayer.Knuth, new DealNumber(13), description: "Knuth has three cards")
+            .GetCards(WhichPlayer.Graham, new DealNumber(13), description: "Graham has two cards")
+            .GetCards(WhichPlayer.Conway, new DealNumber(13), description: "Conway has five cards")
+            .BidHighCard(WhichPlayer.Graham, FaceCard.Ace, description: "Graham starts the deal")
+            .Check(WhichPlayer.Conway, description: "Conway checks the bid, Graham get LOST THE GAME!")
+            .GetGameFlow()
+            .GetDealFlow(new DealNumber(13))
+
+            // todo: there is a bug, this turn should be started by Conway but algorithm starts it by Knuth
 
             .Build();
 

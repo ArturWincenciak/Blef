@@ -95,10 +95,10 @@ internal sealed class BlefClient
         await _httpClient.BidLowStraight(GameId, playerId, _testRecorder);
     }
 
-    public async Task BidHighStraight(WhichPlayer whichPlayer)
+    public async Task BidHighStraight(WhichPlayer whichPlayer, string? description = null)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.BidHighStraight(GameId, playerId, _testRecorder);
+        await _httpClient.BidHighStraight(GameId, playerId, _testRecorder, description);
     }
 
     public async Task BidThreeOfAKind(WhichPlayer whichPlayer, FaceCard faceCard)
@@ -114,10 +114,10 @@ internal sealed class BlefClient
         await _httpClient.BidFullHouse(GameId, playerId, threeOfAKind, pair, _testRecorder, description);
     }
 
-    public async Task BidFlush(WhichPlayer whichPlayer, Suit suit)
+    public async Task BidFlush(WhichPlayer whichPlayer, Suit suit, string? description = null)
     {
         var playerId = GetPlayerId(whichPlayer);
-        await _httpClient.BidFlush(GameId, playerId, suit, _testRecorder);
+        await _httpClient.BidFlush(GameId, playerId, suit, _testRecorder, description);
     }
 
     public async Task BidFourOfAKind(WhichPlayer whichPlayer, FaceCard faceCard, string? description = null)
