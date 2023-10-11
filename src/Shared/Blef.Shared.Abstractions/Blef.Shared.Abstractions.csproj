@@ -8,23 +8,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="Exceptions\**" />
-        <EmbeddedResource Remove="Exceptions\**" />
-        <None Remove="Exceptions\**" />
+        <Compile Remove="Exceptions\**"/>
+        <EmbeddedResource Remove="Exceptions\**"/>
+        <None Remove="Exceptions\**"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+        <PackageReference Include="JetBrains.Annotations" Version="2023.2.0"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Blef.Shared.Kernel\Blef.Shared.Kernel.csproj" />
+        <ProjectReference Include="..\Blef.Shared.Kernel\Blef.Shared.Kernel.csproj"/>
     </ItemGroup>
 
 </Project>

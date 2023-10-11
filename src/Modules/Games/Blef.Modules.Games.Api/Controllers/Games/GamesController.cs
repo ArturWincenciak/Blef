@@ -2,7 +2,6 @@
 using Blef.Modules.Games.Api.Controllers.Games.Commands;
 using Blef.Modules.Games.Api.Controllers.Games.Queries;
 using Blef.Modules.Games.Application.Commands;
-using Blef.Modules.Games.Application.Queries;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Http;

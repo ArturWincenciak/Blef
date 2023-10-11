@@ -2,7 +2,6 @@
 using Blef.Modules.Games.Application.Repositories;
 using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Queries;
-using Blef.Shared.Kernel.Exceptions;
 using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Application.Queries.Handlers;

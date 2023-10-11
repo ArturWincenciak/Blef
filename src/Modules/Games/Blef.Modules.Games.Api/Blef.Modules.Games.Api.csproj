@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Blef.Modules.Games.Infrastructure\Blef.Modules.Games.Infrastructure.csproj" />
+        <ProjectReference Include="..\Blef.Modules.Games.Infrastructure\Blef.Modules.Games.Infrastructure.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -23,7 +23,7 @@ internal sealed class CheckHandler : ICommandHandler<Check, Check.Result>
     public async Task<Check.Result> Handle(Check command, CancellationToken cancellation)
     {
         var game = await _games.Get(new GameId(command.GameId));
-        if(game is null)
+        if (game is null)
             throw new GameNotFoundException(command.GameId);
 
         var events = game.Check(new CheckingPlayer(new PlayerId(command.PlayerId)));

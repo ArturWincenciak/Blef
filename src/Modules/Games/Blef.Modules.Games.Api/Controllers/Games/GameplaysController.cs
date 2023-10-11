@@ -33,7 +33,7 @@ internal sealed class GameplaysController : ModuleControllerBase
         var dealFlow = await _queryDispatcher.Dispatch<GetDeal, GetDeal.Result>(query, cancellation);
         return Ok(dealFlow);
     }
-    
+
     [HttpGet(GetCardsQuery.ROUTE)]
     public async Task<IActionResult> GetCards(
         [FromRoute] GetCardsQuery route,

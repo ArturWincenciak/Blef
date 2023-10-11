@@ -14,6 +14,8 @@ internal sealed class BlefClient
     private PlayerId? _plackPlayerId;
     private PlayerId? _riemannPlayerId;
 
+    private GameId GameId => _gameId ?? throw new InvalidOperationException("Game has to be created");
+
     internal BlefClient(HttpClient httpClient, TestRecorder testRecorder)
     {
         _httpClient = httpClient;
@@ -186,6 +188,4 @@ internal sealed class BlefClient
                     message: "Unknown player, please provide a valid player");
         }
     }
-
-    private GameId GameId => _gameId ?? throw new InvalidOperationException("Game has to be created");
 }

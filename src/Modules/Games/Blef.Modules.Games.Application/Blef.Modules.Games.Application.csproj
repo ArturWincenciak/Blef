@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Blef.Modules.Games.Domain\Blef.Modules.Games.Domain.csproj" />
+        <ProjectReference Include="..\Blef.Modules.Games.Domain\Blef.Modules.Games.Domain.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
+        <PackageReference Include="JetBrains.Annotations" Version="2023.2.0"/>
     </ItemGroup>
 
 </Project>
