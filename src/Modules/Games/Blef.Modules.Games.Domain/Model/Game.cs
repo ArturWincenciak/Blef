@@ -123,7 +123,8 @@ internal sealed class Game
 
         if (result.Exists(item => item.Player == nextGamePlayer.Id) == false)
         {
-            var nextDealPlayer = new NextDealPlayer(nextGamePlayer.Id, nextGamePlayer.CardsAmount, Order.Create(index));
+            var nextDealPlayer =
+                new NextDealPlayer(nextGamePlayer.Id, nextGamePlayer.CardsAmount, Order: Order.Create(index));
             result.Add(nextDealPlayer);
             return BuildNextDealPlayers(nextIndex: nextOrder + 1, result, index: index + 1);
         }
@@ -133,7 +134,7 @@ internal sealed class Game
 
     private (GamePlayer Player, int Order) FindNextInGamePlayer(int order)
     {
-        if(order > _players.Count)
+        if (order > _players.Count)
             order = 1;
 
         var firstPlayer = _players.Single(player => player.JoiningSequence.Int == order);

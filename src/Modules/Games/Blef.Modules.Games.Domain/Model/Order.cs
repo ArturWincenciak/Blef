@@ -2,14 +2,14 @@
 
 internal sealed record Order : IComparable<Order>
 {
-    private readonly int _sequence;
-
     public static Order First => new(1);
 
-    public Order Next => new(_sequence + 1);
+    public Order Next => new(Int + 1);
+
+    public int Int { get; }
 
     private Order(int sequence) =>
-        _sequence = sequence switch
+        Int = sequence switch
         {
             < 1 => throw new ArgumentOutOfRangeException(paramName: nameof(sequence), sequence,
                 message: "Sequence cannot be less then one"),
@@ -19,15 +19,13 @@ internal sealed record Order : IComparable<Order>
         };
 
     public int CompareTo(Order? other) =>
-        _sequence.CompareTo(other!._sequence);
+        Int.CompareTo(other!.Int);
 
     public static Order Create(int sequence) => new(sequence);
 
     public static int operator -(Order order, int value) =>
-        order._sequence - value;
-
-    public int Int => _sequence;
+        order.Int - value;
 
     public override string ToString() =>
-        _sequence.ToString();
+        Int.ToString();
 }

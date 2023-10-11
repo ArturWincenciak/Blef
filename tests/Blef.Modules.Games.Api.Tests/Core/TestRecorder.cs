@@ -8,7 +8,7 @@ internal sealed class TestRecorder
     private int _counter;
     private string? _scenarioDescription;
 
-    public TestResult Actual => new (_scenarioDescription, _items);
+    public TestResult Actual => new(_scenarioDescription, _items);
 
     public void WithScenarioDescription(string description) =>
         _scenarioDescription = description;
