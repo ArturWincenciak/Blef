@@ -51,7 +51,7 @@ internal sealed class BidHandler : ICommandHandler<Bid, Bid.Result>
             FourOfAKind.TYPE => FourOfAKind.Create(PokerHandValue()),
             StraightFlush.TYPE => StraightFlush.Create(PokerHandValue()),
             RoyalFlush.TYPE => RoyalFlush.Create(PokerHandValue()),
-            _ => throw new Exception($"Unknown type of poker hand: '{pokerHandType}'")
+            _ => throw new InvalidOperationException($"Unknown type of poker hand: '{pokerHandType}'")
         };
     }
 }
