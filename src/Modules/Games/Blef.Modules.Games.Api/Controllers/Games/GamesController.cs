@@ -13,13 +13,9 @@ namespace Blef.Modules.Games.Api.Controllers.Games;
 internal sealed partial class GamesController : ModuleControllerBase
 {
     private readonly ICommandDispatcher _commandDispatcher;
-    private readonly IQueryDispatcher _queryDispatcher;
 
-    public GamesController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
-    {
+    public GamesController(ICommandDispatcher commandDispatcher) =>
         _commandDispatcher = commandDispatcher;
-        _queryDispatcher = queryDispatcher;
-    }
 
     [Tags("Games")]
     [HttpPost]

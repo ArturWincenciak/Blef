@@ -14,7 +14,5 @@ internal sealed class GamesRepository : IGamesRepository
     }
 
     public async Task<Game?> Get(GameId gameId) =>
-        await Task.FromResult(_games.ContainsKey(gameId.Id)
-            ? _games[gameId.Id]
-            : null);
+        await Task.FromResult(_games.TryGetValue(gameId.Id, out var game) ? game : null);
 }
