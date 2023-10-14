@@ -44,7 +44,7 @@ internal sealed class Game
             throw new GameAlreadyStartedException(Id);
 
         if (_players.Count < MIN_NUMBER_OF_PLAYERS)
-            throw new NotEnoughPlayersException(Id);
+            throw new NotEnoughPlayersException();
 
         return NewDeal(FirstDealPlayers);
     }
@@ -156,7 +156,7 @@ internal sealed class Game
             throw new GameNotStartedException(Id);
 
         if (IsGameOver())
-            throw new GameOverException(Id);
+            throw new GameOverException();
     }
 
     private bool IsGameStarted() =>
