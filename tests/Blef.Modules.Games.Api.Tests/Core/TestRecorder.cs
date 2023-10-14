@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using JetBrains.Annotations;
 
 namespace Blef.Modules.Games.Api.Tests.Core;
 
@@ -16,12 +17,16 @@ internal sealed class TestRecorder
     public void Record(Request request, Response response, string? description = null) =>
         _items.Add(new StepResult(++_counter, description, request, response));
 
+    [UsedImplicitly]
     internal sealed record StepResult(int No, string? Description, Request Request, Response Response);
 
+    [UsedImplicitly]
     internal sealed record TestResult(string? Description, IReadOnlyCollection<StepResult> Steps);
 
+    [UsedImplicitly]
     internal sealed record Request(string Path, HttpMethod Method, object? Payload = null);
 
+    [UsedImplicitly]
     internal sealed record Response(HttpStatusCode StatusCode, object? Payload = null);
 
     internal enum HttpMethod
