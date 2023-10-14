@@ -26,4 +26,28 @@ internal abstract class PokerHand
     protected abstract int GetInnerRank();
 
     public abstract string Serialize();
+
+    public static PokerHand Map(string bid)
+    {
+        var parts = bid.Split(":");
+        var pokerHandType = parts[0];
+
+        return pokerHandType.ToLower() switch
+        {
+            HighCard.TYPE => HighCard.Create(PokerHandValue()),
+            Pair.TYPE => Pair.Create(PokerHandValue()),
+            TwoPairs.TYPE => TwoPairs.Create(PokerHandValue()),
+            LowStraight.TYPE => LowStraight.Create(),
+            HighStraight.TYPE => HighStraight.Create(),
+            ThreeOfAKind.TYPE => ThreeOfAKind.Create(PokerHandValue()),
+            FullHouse.TYPE => FullHouse.Create(PokerHandValue()),
+            Flush.TYPE => Flush.Create(PokerHandValue()),
+            FourOfAKind.TYPE => FourOfAKind.Create(PokerHandValue()),
+            StraightFlush.TYPE => StraightFlush.Create(PokerHandValue()),
+            RoyalFlush.TYPE => RoyalFlush.Create(PokerHandValue()),
+            _ => throw new InvalidOperationException($"Unknown type of poker hand: '{pokerHandType}'")
+        };
+
+        string PokerHandValue() => parts[1];
+    }
 }
