@@ -534,7 +534,7 @@ public class RockyRoadTests
             .JoinPlayer(WhichPlayer.Conway)
             .JoinPlayer(WhichPlayer.Graham)
             .NewDeal()
-            .GetCards(notExistedGame, WhichPlayer.Conway, new DealNumber(1))
+            .GetCards(notExistedGame, WhichPlayer.Conway, deal: new DealNumber(1))
             .Build();
 
         // assert
