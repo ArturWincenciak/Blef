@@ -8,12 +8,9 @@ public class MapPokerHandTest
     internal void MapPokerHandTest_WhenUnknownTypeOfPokerHand_ShouldThrowArgumentOutOfRangeException()
     {
         // arrange
-        const string bid = "unknown:ace";
+        const string unknownBid = "unknown:ace";
 
-        // act
-        PokerHand Act() => PokerHand.Map(bid);
-
-        // assert
-        Assert.Throws<ArgumentOutOfRangeException>((Func<PokerHand>?) Act ?? throw new Exception());
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() => PokerHand.Map(unknownBid));
     }
 }
