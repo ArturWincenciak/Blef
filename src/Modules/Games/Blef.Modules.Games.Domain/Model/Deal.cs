@@ -17,10 +17,7 @@ internal sealed class Deal
 
     public Deal(DealId dealId, DealSet dealSet)
     {
-        if (dealSet is null)
-            throw new ArgumentNullException(nameof(dealSet));
-
-        Id = dealId ?? throw new ArgumentNullException(nameof(dealId));
+        Id = dealId;
         _playersSet = dealSet.PlayersSet;
         _moveOrderPolicy = new MoveOrderPolicy(dealSet.MoveSequence);
         _lastBid = null;

@@ -31,11 +31,8 @@ internal sealed record CardsAmount
         return new CardsAmount(_amount + 1);
     }
 
-    public static bool operator <(CardsAmount @this, CardsAmount other) =>
-        @this._amount < other._amount;
-
-    public static bool operator >(CardsAmount @this, CardsAmount other) =>
-        @this._amount > other._amount;
+    public bool IsLowerThen(CardsAmount other) =>
+        _amount < other._amount;
 
     public static implicit operator int(CardsAmount @this) =>
         @this._amount;

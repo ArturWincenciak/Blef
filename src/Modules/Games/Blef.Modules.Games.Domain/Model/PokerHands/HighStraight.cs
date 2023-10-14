@@ -18,9 +18,7 @@ internal sealed class HighStraight : PokerHand
         table.Contains(FaceCard.King) &&
         table.Contains(FaceCard.Ace);
 
-    protected override int GetInnerRank() =>
-        0; // It is not important for this kind of PokerHand
+    protected override int GetInnerRank() => 0;
 
-    public override string Serialize() =>
-        TYPE;
+    public override string Serialize() => TYPE;
 }

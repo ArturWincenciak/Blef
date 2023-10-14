@@ -18,9 +18,7 @@ internal sealed class LowStraight : PokerHand
         table.Contains(FaceCard.Queen) &&
         table.Contains(FaceCard.King);
 
-    protected override int GetInnerRank() =>
-        0; // It is not important for this kind of PokerHand
+    protected override int GetInnerRank() => 0;
 
-    public override string Serialize() =>
-        TYPE;
+    public override string Serialize() => TYPE;
 }
