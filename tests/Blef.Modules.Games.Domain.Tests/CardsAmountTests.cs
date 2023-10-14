@@ -42,7 +42,7 @@ public class CardsAmountTests
     public void InitialCardAmountIsLowerThenMaxCardAmountTest()
     {
         // act
-        var actual = CardsAmount.Initial < CardsAmount.Max;
+        var actual = CardsAmount.Initial.IsLowerThen(CardsAmount.Max);
 
         // assert
         Assert.True(actual);
@@ -59,7 +59,7 @@ public class CardsAmountTests
             .AddOneCard();
 
         // act
-        var actual = cardsAmount < CardsAmount.Max;
+        var actual = cardsAmount .IsLowerThen(CardsAmount.Max);
 
         // assert
         Assert.True(actual);
@@ -76,7 +76,7 @@ public class CardsAmountTests
             .AddOneCard();
 
         // act
-        var actual = cardAmount < CardsAmount.Max;
+        var actual = cardAmount.IsLowerThen(CardsAmount.Max);
 
         // assert
         Assert.False(actual);

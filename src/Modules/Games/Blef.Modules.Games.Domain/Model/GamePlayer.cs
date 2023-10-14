@@ -26,7 +26,7 @@ internal sealed class GamePlayer
         if (_isOutOfTheGame)
             throw new InvalidOperationException("Player already is out of the game");
 
-        if (CardsAmount < CardsAmount.Max)
+        if (CardsAmount.IsLowerThen(CardsAmount.Max))
             CardsAmount = CardsAmount.AddOneCard();
         else
             _isOutOfTheGame = true;
