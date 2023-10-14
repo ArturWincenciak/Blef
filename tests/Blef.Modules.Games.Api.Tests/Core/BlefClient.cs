@@ -11,7 +11,6 @@ internal sealed class BlefClient
     private GameId? _gameId;
     private PlayerId? _grahamPlayerId;
     private PlayerId? _knuthPlayerId;
-    private PlayerId? _plackPlayerId;
     private PlayerId? _riemannPlayerId;
 
     private GameId GameId => _gameId ?? throw new InvalidOperationException("Game has to be created");
@@ -165,7 +164,6 @@ internal sealed class BlefClient
             WhichPlayer.Graham => _grahamPlayerId!,
             WhichPlayer.Riemann => _riemannPlayerId!,
             WhichPlayer.Conway => _conwayPlayerId!,
-            WhichPlayer.Planck => _plackPlayerId!,
             _ => throw new ArgumentOutOfRangeException(paramName: nameof(whichPlayer), whichPlayer,
                 message: "Unknown player, please provide a valid player")
         };
@@ -185,9 +183,6 @@ internal sealed class BlefClient
                 break;
             case WhichPlayer.Conway:
                 _conwayPlayerId = playerId;
-                break;
-            case WhichPlayer.Planck:
-                _plackPlayerId = playerId;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(paramName: nameof(whichPlayer), whichPlayer,
