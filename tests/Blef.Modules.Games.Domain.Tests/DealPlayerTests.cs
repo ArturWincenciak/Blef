@@ -25,19 +25,25 @@ public class DealPlayerTests
         Assert.Throws<ArgumentNullException>(() => new DealPlayer(Player: null!, Hand: null!));
 
     [Fact]
-    public void CannotCreateWithNullHandArgumentTest() =>
+    public void CannotCreateWithNullHandArgumentTest()
+    {
+        // arrange
+        var guid = Guid.Parse("BED79350-F2E8-4C5B-8B5C-E62C9B01E9D2");
+        var playerId = new PlayerId(guid);
+
+        // act, assert
         Assert.Throws<ArgumentNullException>(() =>
-        {
-            var guid = Guid.Parse("BED79350-F2E8-4C5B-8B5C-E62C9B01E9D2");
-            var playerId = new PlayerId(guid);
-            return new DealPlayer(playerId, Hand: null!);
-        });
+            new DealPlayer(playerId, Hand: null!));
+    }
 
     [Fact]
-    public void CannotCreateWithNullPlayerIdArgumentTest() =>
+    public void CannotCreateWithNullPlayerIdArgumentTest()
+    {
+        // arrange
+        var hand = new Hand(new[] {new Card(FaceCard.Ace, Suit.Clubs)});
+
+        // act, assert
         Assert.Throws<ArgumentNullException>(() =>
-        {
-            var hand = new Hand(new[] {new Card(FaceCard.Ace, Suit.Clubs)});
-            return new DealPlayer(Player: null!, hand);
-        });
+            new DealPlayer(Player: null!, hand));
+    }
 }

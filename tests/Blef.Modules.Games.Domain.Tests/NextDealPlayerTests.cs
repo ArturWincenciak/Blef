@@ -26,19 +26,25 @@ public class NextDealPlayerTests
             new NextDealPlayer(Player: null!, CardsAmount: null!, Order: Order.Create(1)));
 
     [Fact]
-    public void CannotCreateWithNullPlayerIdArgumentTest() =>
+    public void CannotCreateWithNullPlayerIdArgumentTest()
+    {
+        // arrange
+        var cardsAmount = CardsAmount.Initial;
+
+        // act, assert
         Assert.Throws<ArgumentNullException>(() =>
-        {
-            var cardsAmount = CardsAmount.Initial;
-            return new NextDealPlayer(Player: null!, cardsAmount, Order: Order.Create(1));
-        });
+            new NextDealPlayer(Player: null!, cardsAmount, Order: Order.Create(1)));
+    }
 
     [Fact]
-    public void CannotCreateWithNullCardAmountArgumentTest() =>
+    public void CannotCreateWithNullCardAmountArgumentTest()
+    {
+        // arrange
+        var guid = Guid.Parse("D1954AA3-45C1-4F90-8638-41A491521FF1");
+        var playerId = new PlayerId(guid);
+
+        // act, assert
         Assert.Throws<ArgumentNullException>(() =>
-        {
-            var guid = Guid.Parse("D1954AA3-45C1-4F90-8638-41A491521FF1");
-            var playerId = new PlayerId(guid);
-            return new NextDealPlayer(playerId, CardsAmount: null!, Order: Order.Create(1));
-        });
+            new NextDealPlayer(playerId, CardsAmount: null!, Order: Order.Create(1)));
+    }
 }
