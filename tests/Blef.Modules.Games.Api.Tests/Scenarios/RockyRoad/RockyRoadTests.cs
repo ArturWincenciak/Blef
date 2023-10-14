@@ -521,4 +521,23 @@ public class RockyRoadTests
         // assert
         await Verify(results);
     }
+
+    [Fact]
+    public async Task GetPlayerCardsFromNotExistedGame()
+    {
+        // arrange
+        var notExistedGame = new GameId(Guid.Parse("88810D25-3D66-4B3A-A45F-D55E976DA547"));
+
+        // act
+        var results = await new TestBuilder()
+            .NewGame()
+            .JoinPlayer(WhichPlayer.Conway)
+            .JoinPlayer(WhichPlayer.Graham)
+            .NewDeal()
+            .GetCards(notExistedGame, WhichPlayer.Conway, new DealNumber(1))
+            .Build();
+
+        // assert
+        await Verify(results);
+    }
 }
