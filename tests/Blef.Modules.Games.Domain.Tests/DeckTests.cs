@@ -102,7 +102,7 @@ public class DeckTests
         var deck = new Deck(AllCards());
 
         // act
-        var _ = deck.Deal(CardsAmount.Initial);
+        _ = deck.Deal(CardsAmount.Initial);
         var actual = deck.Deal(CardsAmount.Initial);
         var expected = new Hand(TakeCards(from: 2, amount: 1));
 
@@ -118,7 +118,7 @@ public class DeckTests
         var threeCards = CardsAmount.Initial.AddOneCard().AddOneCard();
 
         // act
-        var _ = deck.Deal(CardsAmount.Initial);
+        _ = deck.Deal(CardsAmount.Initial);
         var actual = deck.Deal(threeCards);
         var expected = new Hand(TakeCards(from: 2, amount: 3));
 
