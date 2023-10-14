@@ -28,11 +28,4 @@ public abstract class BlefException : Exception
         Instance = instance;
         return this;
     }
-
-    [SuppressMessage(category: "ReSharper", checkId: "UnusedMember.Global")]
-    public BlefException WithError(ExceptionError error)
-    {
-        Errors.Add(error.Code, error.Values);
-        return this;
-    }
 }
