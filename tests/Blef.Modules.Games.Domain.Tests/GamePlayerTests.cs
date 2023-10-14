@@ -86,19 +86,18 @@ public class GamePlayerTests
     }
 
     [Fact]
-    public void PlayerCannotLostMoreThenFiveTimesTest() =>
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            // arrange
-            var playerNick = new PlayerNick("Graham");
-            var gamePlayer = GamePlayer.Create(playerNick, Order.First);
+    public void PlayerCannotLostMoreThenFiveTimesTest()
+    {
+        // arrange
+        var playerNick = new PlayerNick("Graham");
+        var gamePlayer = GamePlayer.Create(playerNick, Order.First);
+        gamePlayer.LostLastDeal();
+        gamePlayer.LostLastDeal();
+        gamePlayer.LostLastDeal();
+        gamePlayer.LostLastDeal();
+        gamePlayer.LostLastDeal();
 
-            // act
-            gamePlayer.LostLastDeal();
-            gamePlayer.LostLastDeal();
-            gamePlayer.LostLastDeal();
-            gamePlayer.LostLastDeal();
-            gamePlayer.LostLastDeal();
-            gamePlayer.LostLastDeal();
-        });
+        // act, assert
+        Assert.Throws<InvalidOperationException>(() => gamePlayer.LostLastDeal());
+    }
 }
