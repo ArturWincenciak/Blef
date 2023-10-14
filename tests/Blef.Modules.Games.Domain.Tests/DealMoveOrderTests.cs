@@ -43,6 +43,7 @@ public class DealMoveOrderTests
     {
         Test(() => PlayHighCardBid(_deal, byPlayer: _player2!, FaceCard.Ten));
         Test(() => WithCheck(_deal, byPlayer: _player2!));
+        return;
 
         void Test(Action act)
         {
@@ -63,6 +64,7 @@ public class DealMoveOrderTests
     {
         Test(() => PlayHighCardBid(_deal, byPlayer: _player1!, FaceCard.Ten));
         Test(() => WithCheck(_deal, byPlayer: _player1!));
+        return;
 
         void Test(Action act)
         {
@@ -80,6 +82,7 @@ public class DealMoveOrderTests
     {
         Test(() => PlayHighCardBid(_deal, byPlayer: _player1!, FaceCard.Jack));
         Test(() => WithCheck(_deal, byPlayer: _player1!));
+        return;
 
         void Test(Action act)
         {
@@ -101,6 +104,7 @@ public class DealMoveOrderTests
     {
         Test(() => PlayHighCardBid(_deal, byPlayer: _player2!, FaceCard.Jack));
         Test(() => WithCheck(_deal, byPlayer: _player2!));
+        return;
 
         void Test(Action act)
         {
@@ -119,6 +123,7 @@ public class DealMoveOrderTests
     {
         Test(() => PlayHighCardBid(_deal, byPlayer: _player2!, FaceCard.Queen));
         Test(() => WithCheck(_deal, byPlayer: _player2!));
+        return;
 
         void Test(Action act)
         {
@@ -141,6 +146,7 @@ public class DealMoveOrderTests
     {
         Test(() => PlayHighCardBid(_deal, byPlayer: _player1!, FaceCard.Queen));
         Test(() => WithCheck(_deal, byPlayer: _player1!));
+        return;
 
         void Test(Action act)
         {
@@ -187,6 +193,7 @@ public class DealMoveOrderTests
     {
         Test(() => PlayHighCardBid(_deal, byPlayer: _player1!, FaceCard.Queen));
         Test(() => WithCheck(_deal, byPlayer: _player1!));
+        return;
 
         void Test(Action act)
         {
@@ -206,6 +213,7 @@ public class DealMoveOrderTests
     {
         Test(() => PlayHighCardBid(_deal, byPlayer: _player2!, FaceCard.Queen));
         Test(() => WithCheck(_deal, byPlayer: _player2!));
+        return;
 
         void Test(Action act)
         {
@@ -225,6 +233,7 @@ public class DealMoveOrderTests
     {
         Test(() => PlayPairBid(_deal, byPlayer: _player4!, FaceCard.Nine));
         Test(() => WithCheck(_deal, byPlayer: _player4!));
+        return;
 
         void Test(Action act)
         {

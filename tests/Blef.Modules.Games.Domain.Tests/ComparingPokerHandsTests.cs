@@ -28,6 +28,7 @@ public class ComparingPokerHandsTests
         IsBetterThen(FaceCard.Ten, FaceCard.Nine);
         IsBetterThen(FaceCard.Ace, FaceCard.Nine);
         IsBetterThen(FaceCard.King, FaceCard.Ten);
+        return;
 
         void IsBetterThen(FaceCard higher, FaceCard lower) =>
             AssertThatIsBetterThan(
@@ -45,6 +46,7 @@ public class ComparingPokerHandsTests
         IsBetterThen(FaceCard.Ten, FaceCard.Nine);
         IsBetterThen(FaceCard.Ace, FaceCard.Nine);
         IsBetterThen(FaceCard.King, FaceCard.Ten);
+        return;
 
         void IsBetterThen(FaceCard higher, FaceCard lower) =>
             AssertThatIsBetterThan(
@@ -90,6 +92,7 @@ public class ComparingPokerHandsTests
         IsBetterThen(higher: (FaceCard.Ten, FaceCard.Jack), lower: (FaceCard.Jack, FaceCard.Nine));
         IsBetterThen(higher: (FaceCard.Ten, FaceCard.Jack), lower: (FaceCard.Nine, FaceCard.Jack));
         IsBetterThen(higher: (FaceCard.Jack, FaceCard.Ten), lower: (FaceCard.Nine, FaceCard.Jack));
+        return;
 
         void IsBetterThen((FaceCard First, FaceCard Second) higher, (FaceCard First, FaceCard Second) lower) =>
             AssertThatIsBetterThan(
@@ -107,6 +110,7 @@ public class ComparingPokerHandsTests
         IsBetterThen(FaceCard.Ten, FaceCard.Nine);
         IsBetterThen(FaceCard.Ace, FaceCard.Nine);
         IsBetterThen(FaceCard.King, FaceCard.Ten);
+        return;
 
         void IsBetterThen(FaceCard higher, FaceCard lower) =>
             AssertThatIsBetterThan(
@@ -154,6 +158,7 @@ public class ComparingPokerHandsTests
         IsBetterThen(higher: (FaceCard.Ace, FaceCard.King), lower: (FaceCard.Queen, FaceCard.Ace));
         IsBetterThen(higher: (FaceCard.Ten, FaceCard.Jack), lower: (FaceCard.Nine, FaceCard.Jack));
         IsBetterThen(higher: (FaceCard.Jack, FaceCard.Ten), lower: (FaceCard.Nine, FaceCard.Jack));
+        return;
 
         void IsBetterThen((FaceCard ThreeOfAKind, FaceCard Pair) higher, (FaceCard TreeOfAKind, FaceCard Pair) lower) =>
             AssertThatIsBetterThan(
@@ -170,6 +175,7 @@ public class ComparingPokerHandsTests
         IsBetterThen(Suit.Hearts, Suit.Diamonds);
         IsBetterThen(Suit.Hearts, Suit.Clubs);
         IsBetterThen(Suit.Diamonds, Suit.Clubs);
+        return;
 
         void IsBetterThen(Suit higher, Suit lower) =>
             AssertThatIsBetterThan(
@@ -195,6 +201,7 @@ public class ComparingPokerHandsTests
         IsBetterThen(FaceCard.Jack, FaceCard.Ten);
         IsBetterThen(FaceCard.Jack, FaceCard.Nine);
         IsBetterThen(FaceCard.Ten, FaceCard.Nine);
+        return;
 
         void IsBetterThen(FaceCard higher, FaceCard lower) =>
             AssertThatIsBetterThan(
@@ -211,6 +218,7 @@ public class ComparingPokerHandsTests
         IsBetterThen(Suit.Hearts, Suit.Diamonds);
         IsBetterThen(Suit.Hearts, Suit.Clubs);
         IsBetterThen(Suit.Diamonds, Suit.Clubs);
+        return;
 
         void IsBetterThen(Suit higher, Suit lower) =>
             AssertThatIsBetterThan(
@@ -227,6 +235,7 @@ public class ComparingPokerHandsTests
         IsBetterThen(Suit.Hearts, Suit.Diamonds);
         IsBetterThen(Suit.Hearts, Suit.Clubs);
         IsBetterThen(Suit.Diamonds, Suit.Clubs);
+        return;
 
         void IsBetterThen(Suit higher, Suit lower) =>
             AssertThatIsBetterThan(

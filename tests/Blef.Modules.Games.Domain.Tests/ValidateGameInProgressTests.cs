@@ -16,6 +16,7 @@ public class ValidateGameInProgressTests
             PlayExistingHighCardBid(game, player1);
             game.Check(new CheckingPlayer(player2));
         });
+        return;
 
         void TestCase(Action<Game, PlayerId, PlayerId> act)
         {
@@ -39,6 +40,7 @@ public class ValidateGameInProgressTests
     {
         TestCase((game, player1, _) => PlayExistingHighCardBid(game, player1));
         TestCase((game, _, player2) => game.Check(new CheckingPlayer(player2)));
+        return;
 
         void TestCase(Action<Game, PlayerId, PlayerId> act)
         {
@@ -58,6 +60,7 @@ public class ValidateGameInProgressTests
     {
         TestCase((game, player1, _) => PlayExistingHighCardBid(game, player1));
         TestCase((game, _, player2) => game.Check(new CheckingPlayer(player2)));
+        return;
 
         void TestCase(Action<Game, PlayerId, PlayerId> act)
         {
@@ -71,6 +74,7 @@ public class ValidateGameInProgressTests
             // act, assert
             Assert.Throws<GameOverException>(() =>
                 act(game, grahamJoined.Player.Id, knuthJoined.Player.Id));
+            return;
 
             static void GameOver(Game game, GamePlayer graham, GamePlayer knuth)
             {

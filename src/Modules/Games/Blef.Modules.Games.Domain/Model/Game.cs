@@ -138,10 +138,9 @@ internal sealed class Game
             order = 1;
 
         var firstPlayer = _players.Single(player => player.JoiningSequence.Int == order);
-        if (firstPlayer.IsInTheGame)
-            return (firstPlayer, order);
-
-        return FindNextInGamePlayer(order + 1);
+        return firstPlayer.IsInTheGame
+            ? (firstPlayer, order)
+            : FindNextInGamePlayer(order + 1);
     }
 
     private void Validate(PlayerId playerId)
