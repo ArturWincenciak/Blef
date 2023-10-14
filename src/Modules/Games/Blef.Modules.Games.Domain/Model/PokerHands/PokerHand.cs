@@ -45,7 +45,8 @@ internal abstract class PokerHand
             FourOfAKind.TYPE => FourOfAKind.Create(PokerHandValue()),
             StraightFlush.TYPE => StraightFlush.Create(PokerHandValue()),
             RoyalFlush.TYPE => RoyalFlush.Create(PokerHandValue()),
-            _ => throw new InvalidOperationException($"Unknown type of poker hand: '{pokerHandType}'")
+            _ => throw new ArgumentOutOfRangeException(
+                paramName: nameof(bid), message: $"Unknown type of poker hand: '{pokerHandType}'")
         };
 
         string PokerHandValue() => parts[1];
