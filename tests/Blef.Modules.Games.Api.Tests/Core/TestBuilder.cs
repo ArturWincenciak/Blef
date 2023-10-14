@@ -8,12 +8,6 @@ internal sealed class TestBuilder
     private readonly TestRecorder _testRecorder = new();
     private BlefClient _gameClient = null!;
 
-    internal TestBuilder WithScenarioDescription(string description)
-    {
-        _testRecorder.WithScenarioDescription(description);
-        return this;
-    }
-
     async internal Task<TestRecorder.TestResult> Build()
     {
         var httpClient = new BlefApplicationFactory()
