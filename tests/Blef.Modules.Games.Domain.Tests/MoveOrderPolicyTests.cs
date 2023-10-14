@@ -118,7 +118,8 @@ public class MoveOrderPolicyTests
         var (policy, _, player2) = GivenPolicyWithTwoPlayers();
 
         // act
-        Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() => { policy.CheckMoveOrder(player2); });
+        Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
+            policy.CheckMoveOrder(player2));
     }
 
     [Fact]
@@ -126,14 +127,12 @@ public class MoveOrderPolicyTests
     {
         // arrange
         var (policy, player1, _) = GivenPolicyWithTwoPlayers();
+        policy.CheckMoveOrder(player1);
+        policy.CommitMove(player1);
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
-        {
-            policy.CheckMoveOrder(player1);
-            policy.CommitMove(player1);
-            policy.CheckMoveOrder(player1);
-        });
+            policy.CheckMoveOrder(player1));
     }
 
     [Fact]
@@ -141,14 +140,14 @@ public class MoveOrderPolicyTests
     {
         // arrange
         var (policy, player1, player2) = GivenPolicyWithTwoPlayers();
+        policy.CheckMoveOrder(player1);
+        policy.CommitMove(player1);
+        policy.CheckMoveOrder(player2);
+        policy.CommitMove(player2);
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
-        {
-            policy.CheckMoveOrder(player1);
-            policy.CheckMoveOrder(player2);
-            policy.CheckMoveOrder(player2);
-        });
+            policy.CheckMoveOrder(player2));
     }
 
     [Fact]
@@ -156,13 +155,12 @@ public class MoveOrderPolicyTests
     {
         // arrange
         var (policy, player1, _, player3) = GivenPolicyWithThreePlayers();
+        policy.CheckMoveOrder(player1);
+        policy.CommitMove(player1);
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
-        {
-            policy.CheckMoveOrder(player1);
-            policy.CheckMoveOrder(player3);
-        });
+            policy.CheckMoveOrder(player3));
     }
 
     [Fact]
@@ -170,15 +168,16 @@ public class MoveOrderPolicyTests
     {
         // arrange
         var (policy, player1, player2, player3, _) = GivenPolicyWithFourPlayers();
+        policy.CheckMoveOrder(player1);
+        policy.CommitMove(player1);
+        policy.CheckMoveOrder(player2);
+        policy.CommitMove(player2);
+        policy.CheckMoveOrder(player3);
+        policy.CommitMove(player3);
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
-        {
-            policy.CheckMoveOrder(player1);
-            policy.CheckMoveOrder(player2);
-            policy.CheckMoveOrder(player3);
-            policy.CheckMoveOrder(player1);
-        });
+            policy.CheckMoveOrder(player1));
     }
 
     [Fact]
@@ -186,16 +185,18 @@ public class MoveOrderPolicyTests
     {
         // arrange
         var (policy, player1, player2, player3, player4) = GivenPolicyWithFourPlayers();
+        policy.CheckMoveOrder(player1);
+        policy.CommitMove(player1);
+        policy.CheckMoveOrder(player2);
+        policy.CommitMove(player2);
+        policy.CheckMoveOrder(player3);
+        policy.CommitMove(player3);
+        policy.CheckMoveOrder(player4);
+        policy.CommitMove(player4);
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
-        {
-            policy.CheckMoveOrder(player1);
-            policy.CheckMoveOrder(player2);
-            policy.CheckMoveOrder(player3);
-            policy.CheckMoveOrder(player4);
-            policy.CheckMoveOrder(player2);
-        });
+            policy.CheckMoveOrder(player2));
     }
 
     [Fact]
@@ -203,16 +204,18 @@ public class MoveOrderPolicyTests
     {
         // arrange
         var (policy, player1, player2, player3, player4) = GivenPolicyWithFourPlayers();
+        policy.CheckMoveOrder(player1);
+        policy.CommitMove(player1);
+        policy.CheckMoveOrder(player2);
+        policy.CommitMove(player2);
+        policy.CheckMoveOrder(player3);
+        policy.CommitMove(player3);
+        policy.CheckMoveOrder(player4);
+        policy.CommitMove(player4);
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
-        {
-            policy.CheckMoveOrder(player1);
-            policy.CheckMoveOrder(player2);
-            policy.CheckMoveOrder(player3);
-            policy.CheckMoveOrder(player4);
-            policy.CheckMoveOrder(player3);
-        });
+            policy.CheckMoveOrder(player3));
     }
 
     [Fact]
@@ -220,16 +223,18 @@ public class MoveOrderPolicyTests
     {
         // arrange
         var (policy, player1, player2, player3, player4) = GivenPolicyWithFourPlayers();
+            policy.CheckMoveOrder(player1);
+            policy.CommitMove(player1);
+            policy.CheckMoveOrder(player2);
+            policy.CommitMove(player2);
+            policy.CheckMoveOrder(player3);
+            policy.CommitMove(player3);
+            policy.CheckMoveOrder(player4);
+            policy.CommitMove(player4);
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
-        {
-            policy.CheckMoveOrder(player1);
-            policy.CheckMoveOrder(player2);
-            policy.CheckMoveOrder(player3);
-            policy.CheckMoveOrder(player4);
-            policy.CheckMoveOrder(player4);
-        });
+            policy.CheckMoveOrder(player4));
     }
 
     private static (

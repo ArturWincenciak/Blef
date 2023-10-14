@@ -121,45 +121,54 @@ public class TableTests
         Assert.Throws<ArgumentNullException>(() => new Table(null!));
 
     [Fact]
-    public void CannotCreateTableWithNotUniqueCardsTest() =>
+    public void CannotCreateTableWithNotUniqueCardsTest()
+    {
+        // arrange
+        var hands = new[]
+        {
+            new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)}),
+            new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)})
+        };
+
+        // act, assert
         Assert.Throws<ArgumentException>(() =>
-        {
-            var hands = new[]
-            {
-                new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)}),
-                new Hand(new[] {new Card(FaceCard.Ace, Suit.Hearts)})
-            };
-            return new Table(hands);
-        });
+            new Table(hands));
+    }
 
     [Fact]
-    public void CannotCreateTableWithLessThenTwoPlayersHandsTest() =>
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
+    public void CannotCreateTableWithLessThenTwoPlayersHandsTest()
+    {
+        // arrange
+        var onlyOneHand = new Hand[]
         {
-            var onlyOneHand = new Hand[]
+            new(new Card[]
             {
-                new(new Card[]
-                {
-                    new(FaceCard.Ace, Suit.Clubs),
-                    new(FaceCard.King, Suit.Clubs),
-                    new(FaceCard.Queen, Suit.Clubs)
-                })
-            };
-            return new Table(onlyOneHand);
-        });
+                new(FaceCard.Ace, Suit.Clubs),
+                new(FaceCard.King, Suit.Clubs),
+                new(FaceCard.Queen, Suit.Clubs)
+            })
+        };
+
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new Table(onlyOneHand));
+    }
 
     [Fact]
-    public void CannotCreateTableWithMoreThenFourPlayersHandsTest() =>
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
+    public void CannotCreateTableWithMoreThenFourPlayersHandsTest()
+    {
+        // arrange
+        var fiveHands = new Hand[]
         {
-            var fiveHands = new Hand[]
-            {
-                new(new Card[] {new(FaceCard.Ace, Suit.Clubs)}),
-                new(new Card[] {new(FaceCard.King, Suit.Diamonds)}),
-                new(new Card[] {new(FaceCard.Queen, Suit.Hearts)}),
-                new(new Card[] {new(FaceCard.Jack, Suit.Spades)}),
-                new(new Card[] {new(FaceCard.Ten, Suit.Spades)})
-            };
-            return new Table(fiveHands);
-        });
+            new(new Card[] {new(FaceCard.Ace, Suit.Clubs)}),
+            new(new Card[] {new(FaceCard.King, Suit.Diamonds)}),
+            new(new Card[] {new(FaceCard.Queen, Suit.Hearts)}),
+            new(new Card[] {new(FaceCard.Jack, Suit.Spades)}),
+            new(new Card[] {new(FaceCard.Ten, Suit.Spades)})
+        };
+
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new Table(fiveHands));
+    }
 }

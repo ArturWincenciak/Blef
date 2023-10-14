@@ -29,11 +29,14 @@ public class DealIdTests
         Assert.Throws<ArgumentNullException>(() => new DealId(Game: null!, Deal: new DealNumber(1)));
 
     [Fact]
-    public void CannotCreateWithNullDealNumberArgumentTest() =>
+    public void CannotCreateWithNullDealNumberArgumentTest()
+    {
+        // arrange
+        var guid = Guid.Parse("458C41E2-C477-4918-9353-96243FEFF99F");
+        var gameId = new GameId(guid);
+
+        // act, assert
         Assert.Throws<ArgumentNullException>(() =>
-        {
-            var guid = Guid.Parse("458C41E2-C477-4918-9353-96243FEFF99F");
-            var gameId = new GameId(guid);
-            return new DealId(gameId, Deal: null!);
-        });
+            new DealId(gameId, Deal: null!));
+    }
 }

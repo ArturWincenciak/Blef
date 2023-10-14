@@ -7,7 +7,7 @@ namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Tests;
 public class IsNotOnTheTableTests
 {
     [Theory]
-    [ClassData(typeof(PokerHandIsNotOnTheTableCases))]
+    [MemberData(nameof(GivenPokerHandTestCases))]
     internal void PokerHandIsNotOnTableTests(Table table, PokerHand pokerHand)
     {
         // act
@@ -16,4 +16,21 @@ public class IsNotOnTheTableTests
         // assert
         Assert.False(actual);
     }
+
+    private static IEnumerable<object[]> Init =>
+        new List<object[]>();
+
+    public static IEnumerable<object[]> GivenPokerHandTestCases() =>
+        Init
+            .Concat(HighCardIsNotOnTheTableCases.Cases)
+            .Concat(PairIsNotOnTheTableCases.Cases)
+            .Concat(TwoPairsAreNotOnTheTableCases.Cases)
+            .Concat(LowStraightIsNotOnTheTableCases.Cases)
+            .Concat(HighStraightIsNotOnTheTableCases.Cases)
+            .Concat(ThreeOfAKindIsNotOnTheTableCases.Cases)
+            .Concat(FullHouseIsNotOnTheTableCases.Cases)
+            .Concat(FlushIsNotOnTheTableCases.Cases)
+            .Concat(FourOfAKindIsNotOnTheTableCases.Cases)
+            .Concat(StraightFlushIsNotOnTheTableCases.Cases)
+            .Concat(RoyalFlushIsNotOnTheTableCases.Cases);
 }

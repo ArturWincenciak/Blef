@@ -69,50 +69,43 @@ public class MoveSequenceTests
         }));
 
     [Fact]
-    public void CannotCreateMoveSequenceWithNotUniquesPlayersTest() =>
-        Assert.Throws<ArgumentException>(() =>
+    public void CannotCreateMoveSequenceWithNotUniquesPlayersTest()
+    {
+        // arrange
+        const string playerId = "8FA39222-7D70-4D1D-B8DD-7F07320250FA";
+
+        // act, assert
+        Assert.Throws<ArgumentException>(() => new MoveSequence(new Move[]
         {
-            const string playerId = "8FA39222-7D70-4D1D-B8DD-7F07320250FA";
-            return new MoveSequence(new Move[]
-            {
-                new(Player: new PlayerId(Guid.Parse(playerId)), Order: Order.Create(1)),
-                new(Player: new PlayerId(Guid.Parse(playerId)), Order: Order.Create(2))
-            });
-        });
+            new(Player: new PlayerId(Guid.Parse(playerId)), Order: Order.Create(1)),
+            new(Player: new PlayerId(Guid.Parse(playerId)), Order: Order.Create(2))
+        }));
+    }
 
     [Fact]
     public void CannotCreateMoveSequenceWithNotUniquesOrdersTest() =>
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<ArgumentException>(() => new MoveSequence(new Move[]
         {
-            return new MoveSequence(new Move[]
-            {
-                new(Player: new PlayerId(Guid.Parse("CE16BDF3-70E0-4A04-A89E-C1EB29E1A886")), Order.First),
-                new(Player: new PlayerId(Guid.Parse("682FD22D-D8C1-4F27-A3D8-40A0417E5447")), Order.First)
-            });
-        });
+            new(Player: new PlayerId(Guid.Parse("CE16BDF3-70E0-4A04-A89E-C1EB29E1A886")), Order.First),
+            new(Player: new PlayerId(Guid.Parse("682FD22D-D8C1-4F27-A3D8-40A0417E5447")), Order.First)
+        }));
 
     [Fact]
     public void CannotCreateMoveSequenceWithNotOrderStartingFromFirstTest() =>
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<ArgumentException>(() => new MoveSequence(new Move[]
         {
-            return new MoveSequence(new Move[]
-            {
-                new(Player: new PlayerId(Guid.Parse("294B72A3-FB5D-45DE-ACDE-D1C7F1F02C3A")), Order: Order.Create(2)),
-                new(Player: new PlayerId(Guid.Parse("3F57BC59-28D7-44E5-B3AE-ABDD755C41E3")), Order: Order.Create(3))
-            });
-        });
+            new(Player: new PlayerId(Guid.Parse("294B72A3-FB5D-45DE-ACDE-D1C7F1F02C3A")), Order: Order.Create(2)),
+            new(Player: new PlayerId(Guid.Parse("3F57BC59-28D7-44E5-B3AE-ABDD755C41E3")), Order: Order.Create(3))
+        }));
 
     [Fact]
     public void CannotCreateMoveSequenceWithNotOrderedTest() =>
-        Assert.Throws<ArgumentException>(() =>
+        Assert.Throws<ArgumentException>(() => new MoveSequence(new Move[]
         {
-            return new MoveSequence(new Move[]
-            {
-                new(Player: new PlayerId(Guid.Parse("69D7417E-33C2-44CC-A24E-935179158F5F")), Order: Order.Create(1)),
-                new(Player: new PlayerId(Guid.Parse("184EAC4B-AF58-4F16-B5A8-110890D412AA")), Order: Order.Create(2)),
-                new(Player: new PlayerId(Guid.Parse("0092C215-939A-4FC8-9A27-F284410A4A52")), Order: Order.Create(4))
-            });
-        });
+            new(Player: new PlayerId(Guid.Parse("69D7417E-33C2-44CC-A24E-935179158F5F")), Order: Order.Create(1)),
+            new(Player: new PlayerId(Guid.Parse("184EAC4B-AF58-4F16-B5A8-110890D412AA")), Order: Order.Create(2)),
+            new(Player: new PlayerId(Guid.Parse("0092C215-939A-4FC8-9A27-F284410A4A52")), Order: Order.Create(4))
+        }));
 
     [Fact]
     public void GetPlayersTest()

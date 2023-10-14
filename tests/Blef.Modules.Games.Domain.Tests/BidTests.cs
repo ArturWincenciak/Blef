@@ -26,19 +26,25 @@ public class BidTests
         Assert.Throws<ArgumentNullException>(() => new Bid(PokerHand: null!, Player: null!));
 
     [Fact]
-    public void CannotCreateWithNullPokerHandArgumentTest() =>
+    public void CannotCreateWithNullPokerHandArgumentTest()
+    {
+        // arrange
+        var guid = Guid.Parse("C184A4D4-596C-4FBA-B41E-75C24AAF28CD");
+        var playerId = new PlayerId(guid);
+
+        // act, assert
         Assert.Throws<ArgumentNullException>(() =>
-        {
-            var guid = Guid.Parse("C184A4D4-596C-4FBA-B41E-75C24AAF28CD");
-            var playerId = new PlayerId(guid);
-            return new Bid(PokerHand: null!, playerId);
-        });
+            new Bid(PokerHand: null!, playerId));
+    }
 
     [Fact]
-    public void CannotCreateWithNullPlayerIdArgumentTest() =>
+    public void CannotCreateWithNullPlayerIdArgumentTest()
+    {
+        // arrange
+        var pokerHand = HighStraight.Create();
+
+        // act, assert
         Assert.Throws<ArgumentNullException>(() =>
-        {
-            var pokerHand = HighStraight.Create();
-            return new Bid(pokerHand, Player: null!);
-        });
+            new Bid(pokerHand, Player: null!));
+    }
 }

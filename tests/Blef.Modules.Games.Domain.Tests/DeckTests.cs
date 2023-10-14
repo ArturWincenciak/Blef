@@ -38,28 +38,34 @@ public class DeckTests
         Assert.Throws<ArgumentNullException>(() => new Deck(null!));
 
     [Fact]
-    public void DeckCannotBeCreateWithLessThenTwentyFourCardsTest() =>
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var onlyOneCard = new Card[] {new(FaceCard.Ace, Suit.Clubs)};
-            return new Deck(onlyOneCard);
-        });
+    public void DeckCannotBeCreateWithLessThenTwentyFourCardsTest()
+    {
+        // arrange
+        var onlyOneCard = new Card[] {new(FaceCard.Ace, Suit.Clubs)};
+
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Deck(onlyOneCard));
+    }
 
     [Fact]
-    public void DeckCannotBeCreateWithMoreThenTwentyFourCardsTest() =>
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var twentyFiveCards = CreateManyTheSameCards(25);
-            return new Deck(twentyFiveCards);
-        });
+    public void DeckCannotBeCreateWithMoreThenTwentyFourCardsTest()
+    {
+        // arrange
+        var twentyFiveCards = CreateManyTheSameCards(25);
+
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Deck(twentyFiveCards));
+    }
 
     [Fact]
-    public void DeckCannotBeCreateWithNoUniqueCardsTest() =>
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
-        {
-            var twentyFourCards = CreateManyTheSameCards(24);
-            return new Deck(twentyFourCards);
-        });
+    public void DeckCannotBeCreateWithNoUniqueCardsTest()
+    {
+        // arrange
+        var twentyFourCards = CreateManyTheSameCards(24);
+
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Deck(twentyFourCards));
+    }
 
     [Fact]
     public void CreateDeckTest() =>

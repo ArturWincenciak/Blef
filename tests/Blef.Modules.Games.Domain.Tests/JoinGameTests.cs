@@ -49,16 +49,14 @@ public class JoinGameTests
     {
         // arrange
         var game = GivenGame();
+        game.Join(new PlayerNick("Nick 1"));
+        game.Join(new PlayerNick("Nick 2"));
+        game.Join(new PlayerNick("Nick 3"));
+        game.Join(new PlayerNick("Nick 4"));
 
-        // act
+        // act, assert
         Assert.Throws<TooManyPlayersException>(() =>
-        {
-            game.Join(new PlayerNick("Nick 1"));
-            game.Join(new PlayerNick("Nick 2"));
-            game.Join(new PlayerNick("Nick 3"));
-            game.Join(new PlayerNick("Nick 4"));
-            game.Join(new PlayerNick("Nick 5"));
-        });
+            game.Join(new PlayerNick("Nick 5")));
     }
 
     [Fact]
@@ -66,13 +64,11 @@ public class JoinGameTests
     {
         // arrange
         var game = GivenGame();
+        game.Join(new PlayerNick("Graham"));
 
-        // act
+        // act, assert
         Assert.Throws<PlayerAlreadyJoinedException>(() =>
-        {
-            game.Join(new PlayerNick("Graham"));
-            game.Join(new PlayerNick("Graham"));
-        });
+            game.Join(new PlayerNick("Graham")));
     }
 
     [Fact]
@@ -84,12 +80,9 @@ public class JoinGameTests
         game.Join(new PlayerNick("Knuth"));
         game.StartFirstDeal();
 
-        // assert
+        // act, assert
         Assert.Throws<JoinGameAlreadyStartedException>(() =>
-        {
-            // act
-            game.Join(new PlayerNick("Conway"));
-        });
+            game.Join(new PlayerNick("Conway")));
     }
 
     private static void AssertJoinedPlayer(GameId expectedGameId, PlayerNick expectedNick, GamePlayerJoined actualEvent)
