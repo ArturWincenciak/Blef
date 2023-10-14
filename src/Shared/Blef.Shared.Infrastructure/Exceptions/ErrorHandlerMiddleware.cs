@@ -20,7 +20,7 @@ internal sealed class ErrorHandlerMiddleware : IMiddleware
         }
         catch (BlefException ex)
         {
-            ex.WithInstance(context.Request.Path);
+            ex = ex.WithInstance(context.Request.Path);
             await HandleErrorAsync(context, ex);
         }
         catch (Exception ex)
