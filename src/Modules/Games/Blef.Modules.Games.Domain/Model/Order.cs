@@ -22,10 +22,4 @@ internal sealed record Order : IComparable<Order>
         Int.CompareTo(other!.Int);
 
     public static Order Create(int sequence) => new(sequence);
-
-    public static int operator -(Order order, int value) =>
-        order.Int - value;
-
-    public override string ToString() =>
-        Int.ToString();
 }
