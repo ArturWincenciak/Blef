@@ -36,7 +36,6 @@ internal sealed class BidHandler : ICommandHandler<Bid, Bid.Result>
     {
         var parts = bid.Split(":");
         var pokerHandType = parts[0];
-        string PokerHandValue() => parts[1];
 
         return pokerHandType.ToLower() switch
         {
@@ -53,5 +52,7 @@ internal sealed class BidHandler : ICommandHandler<Bid, Bid.Result>
             RoyalFlush.TYPE => RoyalFlush.Create(PokerHandValue()),
             _ => throw new InvalidOperationException($"Unknown type of poker hand: '{pokerHandType}'")
         };
+
+        string PokerHandValue() => parts[1];
     }
 }

@@ -371,7 +371,7 @@ public class RockyRoadTests
     public async Task GetNotExistedDealTest()
     {
         // arrange
-        var notExistedDeal = 100;
+        const int notExistedDeal = 100;
         var arrangeGame = new TestBuilder()
             .NewGame();
 

@@ -28,6 +28,6 @@ internal sealed class TestRecorder
     internal enum HttpMethod
     {
         Get = 1,
-        Post = 2,
+        Post = 2
     }
 }

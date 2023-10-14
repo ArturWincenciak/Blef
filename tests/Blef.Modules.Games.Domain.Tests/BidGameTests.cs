@@ -40,6 +40,7 @@ public class BidGameTests
         // assert
         var expectedDealNumber = new DealNumber(2);
         AssertBidPlaced(pokerHand, secondPlayerJoined.Player.Id, game.Id, expectedDealNumber, actualBidPlaced);
+        return;
 
         static void PlayFirstDeal(Game game, PlayerId biddingPlayer, PlayerId checkingPlayer)
         {
