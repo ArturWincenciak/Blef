@@ -26,33 +26,9 @@ internal sealed class BidHandler : ICommandHandler<Bid, Bid.Result>
         if (game is null)
             throw new GameNotFoundException(command.GameId);
 
-        var pokerHand = Map(command.PokerHand);
+        var pokerHand = PokerHand.Map(command.PokerHand);
         var bidPlaced = game.Bid(new Domain.Model.Bid(pokerHand, Player: new PlayerId(command.PlayerId)));
         await _eventDispatcher.Dispatch(bidPlaced, cancellation);
         return new Bid.Result(bidPlaced.Deal.Number);
-    }
-
-    private static PokerHand Map(string bid)
-    {
-        var parts = bid.Split(":");
-        var pokerHandType = parts[0];
-
-        return pokerHandType.ToLower() switch
-        {
-            HighCard.TYPE => HighCard.Create(PokerHandValue()),
-            Pair.TYPE => Pair.Create(PokerHandValue()),
-            TwoPairs.TYPE => TwoPairs.Create(PokerHandValue()),
-            LowStraight.TYPE => LowStraight.Create(),
-            HighStraight.TYPE => HighStraight.Create(),
-            ThreeOfAKind.TYPE => ThreeOfAKind.Create(PokerHandValue()),
-            FullHouse.TYPE => FullHouse.Create(PokerHandValue()),
-            Flush.TYPE => Flush.Create(PokerHandValue()),
-            FourOfAKind.TYPE => FourOfAKind.Create(PokerHandValue()),
-            StraightFlush.TYPE => StraightFlush.Create(PokerHandValue()),
-            RoyalFlush.TYPE => RoyalFlush.Create(PokerHandValue()),
-            _ => throw new InvalidOperationException($"Unknown type of poker hand: '{pokerHandType}'")
-        };
-
-        string PokerHandValue() => parts[1];
     }
 }
