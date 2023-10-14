@@ -117,19 +117,25 @@ internal sealed class Game
 
     private List<NextDealPlayer> BuildNextDealPlayers(int nextIndex, List<NextDealPlayer>? result = null, int index = 1)
     {
-        result ??= new List<NextDealPlayer>();
-
-        var (nextGamePlayer, nextOrder) = FindNextInGamePlayer(nextIndex);
-
-        if (result.Exists(item => item.Player == nextGamePlayer.Id) == false)
+        while (true)
         {
-            var nextDealPlayer =
-                new NextDealPlayer(nextGamePlayer.Id, nextGamePlayer.CardsAmount, Order: Order.Create(index));
-            result.Add(nextDealPlayer);
-            return BuildNextDealPlayers(nextIndex: nextOrder + 1, result, index: index + 1);
-        }
+            result ??= new List<NextDealPlayer>();
 
-        return result;
+            var (nextGamePlayer, nextOrder) = FindNextInGamePlayer(nextIndex);
+
+            if (result.Exists(item => item.Player == nextGamePlayer.Id) == false)
+            {
+                result.Add(new NextDealPlayer(
+                    nextGamePlayer.Id, nextGamePlayer.CardsAmount, Order: Order.Create(index)));
+
+                nextIndex = nextOrder + 1;
+                index += 1;
+
+                continue;
+            }
+
+            return result;
+        }
     }
 
     private (GamePlayer Player, int Order) FindNextInGamePlayer(int order)
