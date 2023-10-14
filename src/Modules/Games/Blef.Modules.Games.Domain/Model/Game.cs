@@ -115,7 +115,8 @@ internal sealed class Game
         return new NextDealPlayersSet(nextDealPlayers.OrderBy(dealPlayer => dealPlayer.Order).ToArray());
     }
 
-    private IEnumerable<NextDealPlayer> BuildNextDealPlayers(int nextIndex, List<NextDealPlayer>? result = null, int index = 1)
+    private IEnumerable<NextDealPlayer> BuildNextDealPlayers(int nextIndex, List<NextDealPlayer>? result = null,
+        int index = 1)
     {
         while (true)
         {
