@@ -202,39 +202,36 @@ public class DeckTests
     }
 
     [Fact]
-    public void When_DealFiveCardsFiveTimes_MeansTooManyCards_Then_ThrowInvalidOperationException() =>
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            // arrange
-            var deck = new Deck(AllCards());
+    public void When_DealFiveCardsFiveTimes_MeansTooManyCards_Then_ThrowInvalidOperationException()
+    {
+        // arrange
+        var deck = new Deck(AllCards());
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
 
-            // act
-            deck.Deal(CardsAmount.Max);
-            deck.Deal(CardsAmount.Max);
-            deck.Deal(CardsAmount.Max);
-            deck.Deal(CardsAmount.Max);
-            deck.Deal(CardsAmount.Max);
-        });
+        // act, assert
+        Assert.Throws<InvalidOperationException>(() => deck.Deal(CardsAmount.Max));
+    }
 
     [Fact]
-    public void
-        When_DealFiveCardsFourTimesAndOneCardFiveTimes_MeansTooManyCards_Then_ThrowInvalidOperationException() =>
-        Assert.Throws<InvalidOperationException>(() =>
-        {
-            // arrange
-            var deck = new Deck(AllCards());
+    public void When_DealTooManyCards_Then_ThrowInvalidOperationException()
+    {
+        // arrange
+        var deck = new Deck(AllCards());
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Max);
+        deck.Deal(CardsAmount.Initial);
+        deck.Deal(CardsAmount.Initial);
+        deck.Deal(CardsAmount.Initial);
+        deck.Deal(CardsAmount.Initial);
 
-            // act
-            deck.Deal(CardsAmount.Max);
-            deck.Deal(CardsAmount.Max);
-            deck.Deal(CardsAmount.Max);
-            deck.Deal(CardsAmount.Max);
-            deck.Deal(CardsAmount.Initial);
-            deck.Deal(CardsAmount.Initial);
-            deck.Deal(CardsAmount.Initial);
-            deck.Deal(CardsAmount.Initial);
-            deck.Deal(CardsAmount.Initial);
-        });
+        // act, assert
+        Assert.Throws<InvalidOperationException>(() => deck.Deal(CardsAmount.Initial));
+    }
 
     private static void AssertTheSame(Hand expected, Hand actual) =>
         Assert.Equal(expected.Cards, actual.Cards);

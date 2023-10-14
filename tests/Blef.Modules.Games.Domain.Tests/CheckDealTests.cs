@@ -143,11 +143,8 @@ public class CheckDealTests
         PlayHighCardBid(deal, firstBiddingPlayer, FaceCard.Nine);
         deal.Check(new CheckingPlayer(secondCheckingPlayer.Player));
 
-        // assert
+        // assert, act
         Assert.Throws<InvalidOperationException>(() =>
-        {
-            // act
-            deal.Check(new CheckingPlayer(thirdPlayer.Player));
-        });
+            deal.Check(new CheckingPlayer(thirdPlayer.Player)));
     }
 }

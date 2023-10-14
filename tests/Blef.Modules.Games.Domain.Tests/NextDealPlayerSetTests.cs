@@ -86,14 +86,16 @@ public class NextDealPlayerSetTests
             }));
 
     [Fact]
-    public void CannotCreateWithNotAllUniquePlayers() =>
-        Assert.Throws<ArgumentException>(() =>
+    public void CannotCreateWithNotAllUniquePlayers()
+    {
+        // assert
+        var playerId = Guid.Parse("A15451BF-6BE2-4F26-A5DB-AC50FDAF1F77");
+
+        // act, assert
+        Assert.Throws<ArgumentException>(() => new NextDealPlayersSet(new NextDealPlayer[]
         {
-            var playerId = Guid.Parse("A15451BF-6BE2-4F26-A5DB-AC50FDAF1F77");
-            return new NextDealPlayersSet(new NextDealPlayer[]
-            {
-                new(Player: new PlayerId(playerId), CardsAmount.Initial, Order: Order.Create(1)),
-                new(Player: new PlayerId(playerId), CardsAmount.Initial, Order: Order.Create(2))
-            });
-        });
+            new(Player: new PlayerId(playerId), CardsAmount.Initial, Order: Order.Create(1)),
+            new(Player: new PlayerId(playerId), CardsAmount.Initial, Order: Order.Create(2))
+        }));
+    }
 }
