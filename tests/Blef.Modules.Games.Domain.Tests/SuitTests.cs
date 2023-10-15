@@ -21,6 +21,10 @@ public class SuitTests
     }
 
     [Fact]
+    public void CreateSuitWithUnknownValueTest() =>
+        Assert.Throws<ArgumentOutOfRangeException>(() => Suit.Create("unknown"));
+
+    [Fact]
     public void SuitEqualsTests()
     {
         Assert.False(Suit.Clubs.Equals(Suit.Diamonds));
