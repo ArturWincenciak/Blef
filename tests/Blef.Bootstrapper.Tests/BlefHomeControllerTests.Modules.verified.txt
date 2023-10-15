@@ -1,0 +1,13 @@
+﻿{
+  Modules: [
+    {
+      Name: Games,
+      Path: /games-module
+    },
+    {
+      Name: Users,
+      Path: /users-module
+    }
+  ],
+  RequestTime: DateTimeOffset_1
+}
