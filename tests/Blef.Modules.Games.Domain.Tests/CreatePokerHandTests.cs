@@ -28,4 +28,32 @@ public class CreatePokerHandTests
         Assert.Throws<ArgumentException>(() =>
             FullHouse.Create($"{threeOfAKind},{pair}"));
     }
+
+    [Fact]
+    public void Given_TwoHighStraight_When_Compared_Then_FirstOneShouldNotBeBetterThanSecondOne()
+    {
+        // arrange
+        var firstHighStraight = HighStraight.Create();
+        var secondHighStraight = HighStraight.Create();
+
+        // act
+        var actual = firstHighStraight.IsBetterThan(secondHighStraight);
+
+        // assert
+        Assert.False(actual);
+    }
+
+    [Fact]
+    public void Given_TwoLowStraight_When_Compared_Then_FirstOneShouldNotBeBetterThanSecondOne()
+    {
+        // arrange
+        var firstHighStraight = LowStraight.Create();
+        var secondHighStraight = LowStraight.Create();
+
+        // act
+        var actual = firstHighStraight.IsBetterThan(secondHighStraight);
+
+        // assert
+        Assert.False(actual);
+    }
 }
