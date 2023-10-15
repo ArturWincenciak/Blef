@@ -16,4 +16,3 @@ public class HomeTests
             .ScrubMember("RequestTime");
     }
 }
-

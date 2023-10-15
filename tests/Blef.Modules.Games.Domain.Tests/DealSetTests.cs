@@ -99,7 +99,7 @@ public class DealSetTests
         var notUniqueMoves = new Move[]
         {
             new(Player: new PlayerId(new Guid("DDACA984-A40C-436A-972F-CC3A9FF60FF7")), Order.First),
-            new(Player: new PlayerId(new Guid("DDACA984-A40C-436A-972F-CC3A9FF60FF7")), Order.First.Next),
+            new(Player: new PlayerId(new Guid("DDACA984-A40C-436A-972F-CC3A9FF60FF7")), Order.First.Next)
         };
 
         // act, assert

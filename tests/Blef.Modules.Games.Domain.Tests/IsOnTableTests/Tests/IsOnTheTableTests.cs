@@ -6,6 +6,9 @@ namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Tests;
 
 public class IsOnTheTableTests
 {
+    private static IEnumerable<object[]> Init =>
+        new List<object[]>();
+
     [Theory]
     [MemberData(nameof(GivenPokerHandTestCases))]
     internal void PokerHandIsOnTableTests(Table table, PokerHand pokerHand)
@@ -16,9 +19,6 @@ public class IsOnTheTableTests
         // assert
         Assert.True(actual);
     }
-
-    private static IEnumerable<object[]> Init =>
-        new List<object[]>();
 
     public static IEnumerable<object[]> GivenPokerHandTestCases() =>
         Init

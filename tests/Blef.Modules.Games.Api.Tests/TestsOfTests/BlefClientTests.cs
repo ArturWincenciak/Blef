@@ -21,6 +21,6 @@ public class BlefClientTests
                 .JoinPlayer(WhichPlayer.Conway)
                 .JoinPlayer(WhichPlayer.Graham)
                 .NewDeal()
-                .GetCards((WhichPlayer) 128, new DealNumber(1))
+                .GetCards(whichPlayer: (WhichPlayer) 128, deal: new DealNumber(1))
                 .Build());
 }
