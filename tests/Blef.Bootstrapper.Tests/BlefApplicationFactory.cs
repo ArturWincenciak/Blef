@@ -5,6 +5,11 @@ namespace Blef.Bootstrapper.Tests;
 
 internal sealed class BlefApplicationFactory : WebApplicationFactory<Program>
 {
+    private readonly string _environment;
+
+    public BlefApplicationFactory(string environment) =>
+        _environment = environment;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder) =>
-        builder.UseEnvironment("test");
+        builder.UseEnvironment(_environment);
 }
