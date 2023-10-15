@@ -1,3 +1,4 @@
+using System.Net;
 using Argon;
 
 namespace Blef.Bootstrapper.Tests;
@@ -9,7 +10,7 @@ public class BlefHomeControllerTests
     public async Task Home()
     {
         // arrange
-        var httpClient = new BlefApplicationFactory(Environments.DEVELOPMENT)
+        var httpClient = new BlefApplicationFactory()
             .CreateClient();
 
         // act
@@ -25,7 +26,7 @@ public class BlefHomeControllerTests
     public async Task Modules()
     {
         // arrange
-        var httpClient = new BlefApplicationFactory(Environments.DEVELOPMENT)
+        var httpClient = new BlefApplicationFactory()
             .CreateClient();
 
         // act
@@ -41,7 +42,7 @@ public class BlefHomeControllerTests
     public async Task Swagger()
     {
         // arrange
-        var httpClient = new BlefApplicationFactory(Environments.DEVELOPMENT)
+        var httpClient = new BlefApplicationFactory()
             .CreateClient();
 
         // act
