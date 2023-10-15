@@ -28,9 +28,6 @@ internal sealed class MoveSequence
         if (AreAllPlayersUnique(moves) == false)
             throw new ArgumentException("No player duplicates are allowed");
 
-        if (AreAllMoveUnique(moves) == false)
-            throw new ArgumentException("No move duplicates are allowed");
-
         if (CheckIfMovesAreInOrder(moves) == false)
             throw new ArgumentException("Moves are not in order");
 
@@ -46,9 +43,6 @@ internal sealed class MoveSequence
 
     public Move GetMove(Order order) =>
         _moves.Single(move => move.Order == order);
-
-    private static bool AreAllMoveUnique(IReadOnlyCollection<Move> moves) =>
-        moves.Select(move => move.Player).Distinct().Count() == moves.Count;
 
     private static bool AreAllPlayersUnique(IReadOnlyCollection<Move> moves) =>
         moves.Select(move => move.Player).Distinct().Count() == moves.Count;
