@@ -11,8 +11,9 @@ internal sealed class ExceptionToResponseMapper
 {
     private readonly ConcurrentDictionary<Type, string> _codesCache = new();
 
-    private static string DocumentationUrl =>
-        "https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details";
+    private static string GitHubUrl => "https://github.com";
+    private static string BlefUrl => $"{GitHubUrl}/ArturWincenciak/Blef";
+    private static string DocumentationUrl => $"{BlefUrl}/blob/main/doc/problem-details";
 
     public object Map(Exception exception) =>
         exception switch
