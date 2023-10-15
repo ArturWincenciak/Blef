@@ -17,9 +17,10 @@ public class InternalServerErrorTests
             .WithThrowGamesRepository()
             .CreateClient();
 
+        var newGame = await CreateNewGame(httpClient);
+
         // act
-        var requestUri = "games-module/games";
-        var result = await httpClient.PostAsync(requestUri, content: null);
+        var result = await JoinPlayer(newGame, httpClient);
 
         // assert
         Assert.Equal(HttpStatusCode.InternalServerError, result.StatusCode);
@@ -39,9 +40,7 @@ public class InternalServerErrorTests
         var newGame = await CreateNewGame(httpClient);
 
         // act
-        var requestUri = $"games-module/games/{newGame}/players";
-        var requestBody = new { Nick = "Conway" };
-        var result = await httpClient.PostAsJsonAsync(requestUri, requestBody);
+        var result = await JoinPlayer(newGame, httpClient);
 
         // assert
         Assert.Equal(HttpStatusCode.InternalServerError, result.StatusCode);
@@ -58,5 +57,13 @@ public class InternalServerErrorTests
         var json = await result.Content.ReadAsStringAsync();
         var newGame = JsonConvert.DeserializeObject<NewGame.Result>(json);
         return newGame.GameId;
+    }
+
+    private async static Task<HttpResponseMessage> JoinPlayer(Guid newGame, HttpClient httpClient)
+    {
+        var requestUri = $"games-module/games/{newGame}/players";
+        var requestBody = new {Nick = "Conway"};
+        var result = await httpClient.PostAsJsonAsync(requestUri, requestBody);
+        return result;
     }
 }
