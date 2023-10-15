@@ -1,0 +1,8 @@
+﻿{
+  type: https://github.com/ArturWincenciak/Blef/blob/main/doc/problem-details/internal-server-error.md,
+  title: Internal server error,
+  status: 500,
+  detail: Unexpected error occurred,
+  traceId: {Scrubbed},
+  activityId: {Scrubbed}
+}
