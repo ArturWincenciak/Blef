@@ -11,8 +11,7 @@ internal sealed class FullHouseUniqueCardsAttribute : ValidationAttribute
             return new ValidationResult("Value cannot be null.");
 
         if (value is not FullHouseBidPayload payload)
-            throw new ArgumentException(message: $"Value is not a '{nameof(FullHouseBidPayload)}'",
-                paramName: nameof(value));
+            return new ValidationResult($"Value is not a '{nameof(FullHouseBidPayload)}'");
 
         if (payload.ThreeOfAKind == payload.Pair)
             return new ValidationResult(
