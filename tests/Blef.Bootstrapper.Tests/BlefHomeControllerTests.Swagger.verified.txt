@@ -1,0 +1,784 @@
+﻿{
+  openapi: 3.0.1,
+  info: {
+    title: Blef,
+    description: Card Game,
+    contact: {
+      name: Artur Wincenciak,
+      url: https://teovincent.com,
+      email: artur.wincenciak@gmial.com
+    },
+    license: {
+      name: MIT License,
+      url: https://github.com/ArturWincenciak/Blef/blob/main/LICENSE
+    },
+    version: v1
+  },
+  paths: {
+    /games-module/Gameplays/{GameId}: {
+      get: {
+        tags: [
+          Gameplays
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Gameplays/{GameId}/deals/{DealNumber}: {
+      get: {
+        tags: [
+          Gameplays
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: DealNumber,
+            in: path,
+            required: true,
+            schema: {
+              type: integer,
+              format: int32
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Gameplays/{GameId}/players/{PlayerId}/deals/{DealNumber}/cards: {
+      get: {
+        tags: [
+          Gameplays
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: DealNumber,
+            in: path,
+            required: true,
+            schema: {
+              type: integer,
+              format: int32
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games: {
+      post: {
+        tags: [
+          Games
+        ],
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/deals: {
+      post: {
+        tags: [
+          Games
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players: {
+      post: {
+        tags: [
+          Games
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        requestBody: {
+          content: {
+            application/json: {
+              schema: null
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/checks: {
+      post: {
+        tags: [
+          Games
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/high-card: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        requestBody: {
+          content: {
+            application/json: {
+              schema: null
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/pair: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        requestBody: {
+          content: {
+            application/json: {
+              schema: null
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/two-pairs: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        requestBody: {
+          content: {
+            application/json: {
+              schema: null
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/low-straight: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/high-straight: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/three-of-a-kind: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        requestBody: {
+          content: {
+            application/json: {
+              schema: null
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/full-house: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        requestBody: {
+          content: {
+            application/json: {
+              schema: null
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/flush: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        requestBody: {
+          content: {
+            application/json: {
+              schema: null
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/four-of-a-kind: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        requestBody: {
+          content: {
+            application/json: {
+              schema: null
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/straight-flush: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        requestBody: {
+          content: {
+            application/json: {
+              schema: null
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Games/{GameId}/players/{PlayerId}/bids/royal-flush: {
+      post: {
+        tags: [
+          Games' bids
+        ],
+        parameters: [
+          {
+            name: GameId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          },
+          {
+            name: PlayerId,
+            in: path,
+            required: true,
+            schema: {
+              type: string,
+              format: uuid
+            }
+          }
+        ],
+        requestBody: {
+          content: {
+            application/json: {
+              schema: null
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: Success
+          }
+        }
+      }
+    },
+    /games-module/Home: {
+      get: {
+        tags: [
+          Home
+        ],
+        responses: {
+          200: {
+            description: Success,
+            content: {
+              text/plain: {
+                schema: {
+                  type: string
+                }
+              },
+              application/json: {
+                schema: {
+                  type: string
+                }
+              },
+              text/json: {
+                schema: {
+                  type: string
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    /users-module/Home: {
+      get: {
+        tags: [
+          Home
+        ],
+        responses: {
+          200: {
+            description: Success,
+            content: {
+              text/plain: {
+                schema: {
+                  type: string
+                }
+              },
+              application/json: {
+                schema: {
+                  type: string
+                }
+              },
+              text/json: {
+                schema: {
+                  type: string
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  components: {
+    schemas: {
+      Blef.Modules.Games.Api.Controllers.Games.Commands.FaceCard: {
+        enum: [
+          Nine,
+          Ten,
+          Jack,
+          Queen,
+          King,
+          Ace
+        ],
+        type: string
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.FlushBidPayload: {
+        type: object,
+        properties: {
+          suit: null
+        },
+        additionalProperties: false
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.FourOfAKindBidPayload: {
+        type: object,
+        properties: {
+          faceCard: null
+        },
+        additionalProperties: false
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.FullHouseBidPayload: {
+        type: object,
+        properties: {
+          threeOfAKind: null,
+          pair: null
+        },
+        additionalProperties: false
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.HighCardBidPayload: {
+        type: object,
+        properties: {
+          faceCard: null
+        },
+        additionalProperties: false
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.NickPayload: {
+        type: object,
+        properties: {
+          nick: {
+            type: string,
+            nullable: true
+          }
+        },
+        additionalProperties: false
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.PairBidPayload: {
+        type: object,
+        properties: {
+          faceCard: null
+        },
+        additionalProperties: false
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.RoyalFlushBidPayload: {
+        type: object,
+        properties: {
+          suit: null
+        },
+        additionalProperties: false
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.StraightFlushBidPayload: {
+        type: object,
+        properties: {
+          suit: null
+        },
+        additionalProperties: false
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.Suit: {
+        enum: [
+          Clubs,
+          Diamonds,
+          Hearts,
+          Spades
+        ],
+        type: string
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.ThreeOfAKindBidPayload: {
+        type: object,
+        properties: {
+          faceCard: null
+        },
+        additionalProperties: false
+      },
+      Blef.Modules.Games.Api.Controllers.Games.Commands.TwoPairsBidPayload: {
+        type: object,
+        properties: {
+          firstFaceCard: null,
+          secondFaceCard: null
+        },
+        additionalProperties: false
+      }
+    }
+  }
+}
