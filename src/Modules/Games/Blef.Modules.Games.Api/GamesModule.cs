@@ -1,8 +1,11 @@
-﻿using Blef.Modules.Games.Infrastructure;
+﻿using System.Runtime.CompilerServices;
+using Blef.Modules.Games.Infrastructure;
 using Blef.Shared.Abstractions.Modules;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+
+[assembly: InternalsVisibleTo("Blef.Modules.Games.Api.Tests")]
 
 namespace Blef.Modules.Games.Api;
 
