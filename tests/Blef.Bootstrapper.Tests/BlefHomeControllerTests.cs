@@ -9,7 +9,7 @@ public class BlefHomeControllerTests
     public async Task Home()
     {
         // arrange
-        var httpClient = new BlefApplicationFactory()
+        var httpClient = new BlefApplicationFactory(Environments.DEVELOPMENT)
             .CreateClient();
 
         // act
@@ -25,7 +25,7 @@ public class BlefHomeControllerTests
     public async Task Modules()
     {
         // arrange
-        var httpClient = new BlefApplicationFactory()
+        var httpClient = new BlefApplicationFactory(Environments.DEVELOPMENT)
             .CreateClient();
 
         // act
@@ -41,7 +41,7 @@ public class BlefHomeControllerTests
     public async Task Swagger()
     {
         // arrange
-        var httpClient = new BlefApplicationFactory()
+        var httpClient = new BlefApplicationFactory(Environments.DEVELOPMENT)
             .CreateClient();
 
         // act
