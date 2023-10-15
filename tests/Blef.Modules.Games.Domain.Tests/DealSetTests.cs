@@ -73,4 +73,22 @@ public class DealSetTests
                 new Move(someOtherPlayer, Order.First.Next)
             })));
     }
+
+    [Fact]
+    public void Given_TooManyMovesInTheGame_When_Create_MoveSequence_Then_ShouldThrowException()
+    {
+        // arrange
+        var tooManyMoves = new Move[]
+        {
+            new(Player: new PlayerId(new Guid("DDACA984-A40C-436A-972F-CC3A9FF60FF7")), Order.First),
+            new(Player: new PlayerId(new Guid("2CA44AA8-13B5-4340-A718-9979923439F7")), Order.First.Next),
+            new(Player: new PlayerId(new Guid("D04E7673-0B6F-4DBE-BAD0-E949A7D1A241")), Order.First.Next.Next),
+            new(Player: new PlayerId(new Guid("EAD64E58-0635-480F-BEFD-C175CE6707C0")), Order.First.Next.Next.Next),
+            new(Player: new PlayerId(new Guid("F1C17E78-1C2A-482F-94FB-F59741535B3B")), Order.First)
+        };
+
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new MoveSequence(tooManyMoves));
+    }
 }
