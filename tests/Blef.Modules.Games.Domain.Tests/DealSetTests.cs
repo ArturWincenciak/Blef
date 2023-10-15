@@ -91,4 +91,19 @@ public class DealSetTests
         Assert.Throws<ArgumentOutOfRangeException>(() =>
             new MoveSequence(tooManyMoves));
     }
+
+    [Fact]
+    public void Given_NotUniqueMoves_When_Create_MoveSequence_Then_ShouldThrowException()
+    {
+        // arrange
+        var notUniqueMoves = new Move[]
+        {
+            new(Player: new PlayerId(new Guid("DDACA984-A40C-436A-972F-CC3A9FF60FF7")), Order.First),
+            new(Player: new PlayerId(new Guid("DDACA984-A40C-436A-972F-CC3A9FF60FF7")), Order.First.Next),
+        };
+
+        // act, assert
+        Assert.Throws<ArgumentException>(() =>
+            new MoveSequence(notUniqueMoves));
+    }
 }
