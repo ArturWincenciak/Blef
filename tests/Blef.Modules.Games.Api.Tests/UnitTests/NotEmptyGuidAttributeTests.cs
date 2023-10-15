@@ -6,6 +6,20 @@ namespace Blef.Modules.Games.Api.Tests.UnitTests;
 public class NotEmptyGuidAttributeTests
 {
     [Fact]
+    public void Valid()
+    {
+        // arrange
+        var target = new NotEmptyGuidAttribute();
+        var correctGuid = Guid.Parse("1FF799FA-15ED-425C-8B74-C3F307993C84");
+
+        // act
+        var actual = target.IsValid(correctGuid);
+
+        // assert
+        Assert.True(actual);
+    }
+
+    [Fact]
     public void NotGuid()
     {
         // arrange
@@ -47,19 +61,6 @@ public class NotEmptyGuidAttributeTests
         Assert.False(actual);
     }
 
-    [Fact]
-    public void CorrectGuid()
-    {
-        // arrange
-        var target = new NotEmptyGuidAttribute();
-        var correctGuid = Guid.Parse("1FF799FA-15ED-425C-8B74-C3F307993C84");
-
-        // act
-        var actual = target.IsValid(correctGuid);
-
-        // assert
-        Assert.True(actual);
-    }
 
     [Fact]
     public void CorrectBidsRoute()
