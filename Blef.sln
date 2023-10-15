@@ -52,6 +52,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blef.Bootstrapper.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Modules.Games.Api.Tests", "tests\Blef.Modules.Games.Api.Tests\Blef.Modules.Games.Api.Tests.csproj", "{3CCCE021-69B7-438E-BD39-C01C4401A965}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blef.Modules.Users.Api.Tests", "tests\Blef.Modules.Users.Api.Tests\Blef.Modules.Users.Api.Tests.csproj", "{04FD9986-90AA-46EB-8265-30FDB4E69821}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +112,10 @@ Global
 		{3CCCE021-69B7-438E-BD39-C01C4401A965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CCCE021-69B7-438E-BD39-C01C4401A965}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CCCE021-69B7-438E-BD39-C01C4401A965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04FD9986-90AA-46EB-8265-30FDB4E69821}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04FD9986-90AA-46EB-8265-30FDB4E69821}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04FD9986-90AA-46EB-8265-30FDB4E69821}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04FD9986-90AA-46EB-8265-30FDB4E69821}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +138,7 @@ Global
 		{B78B9F7A-9980-4397-93CE-B1C4632C30F4} = {08BC69D4-66E7-42E8-B06E-9E97E64BF5C2}
 		{D59C9496-445E-4144-909B-870A3F05EE40} = {08BC69D4-66E7-42E8-B06E-9E97E64BF5C2}
 		{3CCCE021-69B7-438E-BD39-C01C4401A965} = {08BC69D4-66E7-42E8-B06E-9E97E64BF5C2}
+		{04FD9986-90AA-46EB-8265-30FDB4E69821} = {08BC69D4-66E7-42E8-B06E-9E97E64BF5C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A610AC87-97DB-4B30-A6EE-BB27ADB06133}

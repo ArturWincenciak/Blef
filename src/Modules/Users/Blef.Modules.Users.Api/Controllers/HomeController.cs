@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Users.Api.Controllers;
 
-[Route(UsersModule.BASE_PATH)]
+[ApiController]
+[Consumes("application/json")]
+[Route($"{UsersModule.BASE_PATH}/[controller]")]
 internal sealed class HomeController : ControllerBase
 {
     [HttpGet]
