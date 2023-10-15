@@ -15,21 +15,6 @@ internal sealed class CommandDispatcher : ICommandDispatcher
         _logger = logger;
     }
 
-    public async Task Dispatch<TCommand>(TCommand command, CancellationToken cancellation)
-        where TCommand : ICommand
-    {
-        try
-        {
-            var handler = _serviceProvider.GetRequiredService<ICommandHandler<TCommand>>();
-            await handler.Handle(command, cancellation);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, message: "{@Command}", command);
-            throw;
-        }
-    }
-
     public async Task<TCommandResult> Dispatch<TCommand, TCommandResult>(
         TCommand command,
         CancellationToken cancellation)
