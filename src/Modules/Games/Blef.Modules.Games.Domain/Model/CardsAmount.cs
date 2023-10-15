@@ -10,18 +10,8 @@ internal sealed record CardsAmount
     public static CardsAmount Initial => new(INITIAL_CARDS_AMOUNT);
     public static CardsAmount Max => new(MAX_CARDS_AMOUNT);
 
-    private CardsAmount(int amount)
-    {
-        if (amount < INITIAL_CARDS_AMOUNT)
-            throw new ArgumentOutOfRangeException(paramName: nameof(amount), amount,
-                message: "Amount cannot be less then one");
-
-        if (_amount > MAX_CARDS_AMOUNT)
-            throw new ArgumentOutOfRangeException(paramName: nameof(amount), amount,
-                message: "Amount cannot be greater then five");
-
+    private CardsAmount(int amount) =>
         _amount = amount;
-    }
 
     public CardsAmount AddOneCard()
     {
