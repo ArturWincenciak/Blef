@@ -212,6 +212,20 @@ internal static class HttpApiExtensions
             response: new TestRecorder.Response(response.StatusCode, result), description);
     }
 
+    async internal static Task Home(this HttpClient client, TestRecorder testRecorder)
+    {
+        var requestUri = "/games-module/home";
+        var response = await client.GetAsync(requestUri);
+        var result = await DeserializeResponse<HomeResponse>(response);
+
+        testRecorder.Record(
+            request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Get),
+            response: new TestRecorder.Response(response.StatusCode, result));
+
+    }
+
+
+
     private async static Task<object> DeserializeResponse(HttpResponseMessage response)
     {
         object result = response.IsSuccessStatusCode switch

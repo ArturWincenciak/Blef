@@ -1,0 +1,18 @@
+﻿{
+  Steps: [
+    {
+      No: 1,
+      Request: {
+        Path: /games-module/home,
+        Method: Get
+      },
+      Response: {
+        StatusCode: OK,
+        Payload: {
+          Module: Games module API,
+          RequestTime: {Scrubbed}
+        }
+      }
+    }
+  ]
+}

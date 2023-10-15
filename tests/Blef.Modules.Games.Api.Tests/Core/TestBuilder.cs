@@ -190,4 +190,10 @@ internal sealed class TestBuilder
         _actions.Add(async () => await _gameClient.Check(gameId, whichPlayer, description));
         return this;
     }
+
+    internal TestBuilder Home()
+    {
+        _actions.Add(async () => await _gameClient.Home());
+        return this;
+    }
 }
