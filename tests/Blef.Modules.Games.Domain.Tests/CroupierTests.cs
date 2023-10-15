@@ -99,6 +99,29 @@ public class CroupierTests
         Assert.Equal(expected: TakeCards(from: 16, amount: 5), hand4.Cards);
     }
 
+    [Fact]
+    public void Given_TooManyNextDealPlayers_When_CreateNextDealPlayerSet_Then_ShouldThrowException()
+    {
+        // arrange
+        var tooManyPlayers = new NextDealPlayer[]
+        {
+            new(Player: new PlayerId(Guid.Parse("F6EC0DAD-D2C9-493C-95CD-543DC76E54BA")), CardsAmount.Initial,
+                Order: Order.Create(1)),
+            new(Player: new PlayerId(Guid.Parse("F5AF983D-C5E2-4D95-8B46-9726066B5435")), CardsAmount.Initial,
+                Order: Order.Create(2)),
+            new(Player: new PlayerId(Guid.Parse("C3D88B45-BFDB-4ADD-8925-08E068A15167")), CardsAmount.Initial,
+                Order: Order.Create(3)),
+            new(Player: new PlayerId(Guid.Parse("64C4BC35-A477-42D5-91B5-FA073E03C7AD")), CardsAmount.Initial,
+                Order: Order.Create(4)),
+            new(Player: new PlayerId(Guid.Parse("ADD712CF-818E-408B-8D72-DFAB518F48D9")), CardsAmount.Initial,
+                Order: Order.Create(1))
+        };
+
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new NextDealPlayersSet(tooManyPlayers));
+    }
+
     private static Card[] TakeCards(int from, int amount) =>
         DeckFactoryMock.Cards
             .Take(new Range(start: from - 1, end: (from - 1) + amount))
