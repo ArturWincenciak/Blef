@@ -1,0 +1,9 @@
+﻿{
+  Aplication: Blef,
+  Description: Card game,
+  Modules: /modules,
+  Specification: /swagger/index.html,
+  Repository: https://github.com/ArturWincenciak/Blef,
+  DockerHub: https://hub.docker.com/repository/docker/teovincent/blef,
+  RequestTime: DateTimeOffset_1
+}
