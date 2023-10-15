@@ -9,8 +9,8 @@ namespace Blef.Bootstrapper.Tests.Core;
 internal sealed class BlefApplicationFactory : WebApplicationFactory<Program>
 {
     private readonly string _environment;
-    private bool _throwGameRepository;
     private bool _throwGameplayRepository;
+    private bool _throwGameRepository;
 
     public BlefApplicationFactory(string environment = Environments.DEVELOPMENT) =>
         _environment = environment;

@@ -59,7 +59,7 @@ public class CardsAmountTests
             .AddOneCard();
 
         // act
-        var actual = cardsAmount .IsLowerThen(CardsAmount.Max);
+        var actual = cardsAmount.IsLowerThen(CardsAmount.Max);
 
         // assert
         Assert.True(actual);

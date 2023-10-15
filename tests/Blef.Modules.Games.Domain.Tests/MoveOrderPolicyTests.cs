@@ -223,14 +223,14 @@ public class MoveOrderPolicyTests
     {
         // arrange
         var (policy, player1, player2, player3, player4) = GivenPolicyWithFourPlayers();
-            policy.CheckMoveOrder(player1);
-            policy.CommitMove(player1);
-            policy.CheckMoveOrder(player2);
-            policy.CommitMove(player2);
-            policy.CheckMoveOrder(player3);
-            policy.CommitMove(player3);
-            policy.CheckMoveOrder(player4);
-            policy.CommitMove(player4);
+        policy.CheckMoveOrder(player1);
+        policy.CommitMove(player1);
+        policy.CheckMoveOrder(player2);
+        policy.CommitMove(player2);
+        policy.CheckMoveOrder(player3);
+        policy.CommitMove(player3);
+        policy.CheckMoveOrder(player4);
+        policy.CommitMove(player4);
 
         // act
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>

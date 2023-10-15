@@ -221,9 +221,7 @@ internal static class HttpApiExtensions
         testRecorder.Record(
             request: new TestRecorder.Request(requestUri, TestRecorder.HttpMethod.Get),
             response: new TestRecorder.Response(response.StatusCode, result));
-
     }
-
 
 
     private async static Task<object> DeserializeResponse(HttpResponseMessage response)

@@ -1,6 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
 
-
 namespace Blef.Modules.Games.Api.Tests;
 
 public static class ModuleInitializer
