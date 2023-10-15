@@ -7,6 +7,7 @@ using static Blef.Bootstrapper.ModuleLoader;
 
 [assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Games.Api.Tests")]
 [assembly: InternalsVisibleTo(assemblyName: "Blef.Modules.Users.Api.Tests")]
+[assembly: InternalsVisibleTo(assemblyName: "Blef.Bootstrapper.Tests")]
 
 var builder = WebApplication.CreateBuilder(args);
 
