@@ -23,9 +23,7 @@ internal sealed class ExceptionToResponseMapper
         };
 
     private ProblemDetails CreateBadRequest(BlefException exception) =>
-        exception.Errors.Any()
-            ? CreateValidationProblemDetails(exception)
-            : CreateProblemDetails(exception, HttpStatusCode.BadRequest);
+        CreateProblemDetails(exception, HttpStatusCode.BadRequest);
 
     private ProblemDetails CreateProblemDetails(BlefException exception, HttpStatusCode httpStatusCode) =>
         new()
@@ -36,23 +34,6 @@ internal sealed class ExceptionToResponseMapper
             Detail = exception.Detail,
             Instance = exception.Instance
         };
-
-    private ValidationProblemDetails CreateValidationProblemDetails(BlefException exception)
-    {
-        var problemDetails = new ValidationProblemDetails
-        {
-            Type = $"{DocumentationUrl}/{GetErrorCode(exception)}.md",
-            Title = exception.Title,
-            Status = (int) HttpStatusCode.BadRequest,
-            Detail = exception.Detail,
-            Instance = exception.Instance
-        };
-
-        foreach (var error in exception.Errors)
-            problemDetails.Errors.Add(error.Key, error.Value);
-
-        return problemDetails;
-    }
 
     private static ProblemDetails CreateInternalServerError() =>
         new()
