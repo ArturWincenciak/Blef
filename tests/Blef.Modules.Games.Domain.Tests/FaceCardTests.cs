@@ -5,6 +5,12 @@ namespace Blef.Modules.Games.Domain.Tests;
 public class FaceCardTests
 {
     [Fact]
+    public void CannotCreateFaceCardWithUnknownKindOfFaceCard() =>
+        // act, assert
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            FaceCard.Create("unknown"));
+
+    [Fact]
     public void CreateFaceCardTest()
     {
         // act
