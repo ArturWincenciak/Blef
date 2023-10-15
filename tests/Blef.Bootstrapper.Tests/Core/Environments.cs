@@ -1,4 +1,4 @@
-﻿namespace Blef.Bootstrapper.Tests;
+﻿namespace Blef.Bootstrapper.Tests.Core;
 
 internal static class Environments
 {
