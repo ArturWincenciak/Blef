@@ -14,10 +14,5 @@ internal static class Extensions
                 .AddClasses(filter => filter.AssignableTo(typeof(ICommandHandler<,>))
                     .WithoutAttribute<CommandHandlerDecoratorAttribute>())
                 .AsImplementedInterfaces()
-                .WithScopedLifetime())
-            .Scan(typeSourceSelector => typeSourceSelector.FromAssemblies(assemblies)
-                .AddClasses(filter => filter.AssignableTo(typeof(ICommandHandler<>))
-                    .WithoutAttribute<CommandHandlerDecoratorAttribute>())
-                .AsImplementedInterfaces()
                 .WithScopedLifetime());
 }
