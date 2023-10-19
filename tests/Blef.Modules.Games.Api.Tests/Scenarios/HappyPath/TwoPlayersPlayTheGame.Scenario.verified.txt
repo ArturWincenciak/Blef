@@ -36,14 +36,14 @@
         Path: games-module/games/Guid_1/players,
         Method: Post,
         Payload: {
-          Nick: Graham
+          Nick: Planck
         }
       },
       Response: {
         StatusCode: Created,
         Payload: {
           PlayerId: Guid_3,
-          Nick: Graham
+          Nick: Planck
         }
       }
     },
@@ -81,7 +81,7 @@
             },
             {
               PlayerId: Guid_3,
-              Nick: Graham,
+              Nick: Planck,
               JoiningOrder: 2,
               LostTheGame: false
             }
@@ -151,7 +151,7 @@
     },
     {
       No: 8,
-      Description: Graham has one card,
+      Description: Planck has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/1/cards,
         Method: Get
@@ -185,7 +185,7 @@
     },
     {
       No: 10,
-      Description: Graham checks, Knuth get lost the deal),
+      Description: Planck checks, Knuth get lost the deal),
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -216,7 +216,7 @@
             },
             {
               PlayerId: Guid_3,
-              Nick: Graham,
+              Nick: Planck,
               JoiningOrder: 2,
               LostTheGame: false
             }
@@ -308,7 +308,7 @@
     },
     {
       No: 14,
-      Description: Graham has one card,
+      Description: Planck has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/2/cards,
         Method: Get
@@ -327,7 +327,7 @@
     },
     {
       No: 15,
-      Description: Graham starts the deal,
+      Description: Planck starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
@@ -373,7 +373,7 @@
             },
             {
               PlayerId: Guid_3,
-              Nick: Graham,
+              Nick: Planck,
               JoiningOrder: 2,
               LostTheGame: false
             }
@@ -481,7 +481,7 @@
     },
     {
       No: 20,
-      Description: Graham has one card,
+      Description: Planck has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/3/cards,
         Method: Get
@@ -521,7 +521,7 @@
     },
     {
       No: 22,
-      Description: Graham starts the deal,
+      Description: Planck starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/pair,
         Method: Post,
@@ -567,7 +567,7 @@
             },
             {
               PlayerId: Guid_3,
-              Nick: Graham,
+              Nick: Planck,
               JoiningOrder: 2,
               LostTheGame: false
             }
@@ -691,7 +691,7 @@
     },
     {
       No: 27,
-      Description: Graham has one card,
+      Description: Planck has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/4/cards,
         Method: Get
@@ -710,7 +710,7 @@
     },
     {
       No: 28,
-      Description: Graham starts the deal,
+      Description: Planck starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/two-pairs,
         Method: Post,
@@ -740,7 +740,7 @@
     },
     {
       No: 30,
-      Description: Graham checks and Knuth get lost the deal,
+      Description: Planck checks and Knuth get lost the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -771,7 +771,7 @@
             },
             {
               PlayerId: Guid_3,
-              Nick: Graham,
+              Nick: Planck,
               JoiningOrder: 2,
               LostTheGame: false
             }
@@ -916,7 +916,7 @@
     },
     {
       No: 34,
-      Description: Graham has one card,
+      Description: Planck has one card,
       Request: {
         Path: games-module/gameplays/Guid_1/players/Guid_3/deals/5/cards,
         Method: Get
@@ -956,7 +956,7 @@
     },
     {
       No: 36,
-      Description: Graham starts the deal,
+      Description: Planck starts the deal,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/bids/high-card,
         Method: Post,
@@ -1014,7 +1014,7 @@
     },
     {
       No: 40,
-      Description: Graham checks and Knuth get lost the GAME!,
+      Description: Planck checks and Knuth get lost the GAME!,
       Request: {
         Path: games-module/games/Guid_1/players/Guid_3/checks,
         Method: Post
@@ -1026,7 +1026,7 @@
     },
     {
       No: 41,
-      Description: Graham wins the game!,
+      Description: Planck wins the game!,
       Request: {
         Path: games-module/gameplays/Guid_1,
         Method: Get
@@ -1046,7 +1046,7 @@
             },
             {
               PlayerId: Guid_3,
-              Nick: Graham,
+              Nick: Planck,
               JoiningOrder: 2,
               LostTheGame: false
             }
