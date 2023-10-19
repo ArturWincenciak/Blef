@@ -61,7 +61,6 @@ public class NotEmptyGuidAttributeTests
         Assert.False(actual);
     }
 
-
     [Fact]
     public void CorrectBidsRoute()
     {

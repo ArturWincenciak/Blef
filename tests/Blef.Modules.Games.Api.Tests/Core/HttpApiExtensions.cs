@@ -223,7 +223,6 @@ internal static class HttpApiExtensions
             response: new TestRecorder.Response(response.StatusCode, result));
     }
 
-
     private async static Task<object> DeserializeResponse(HttpResponseMessage response)
     {
         object result = response.IsSuccessStatusCode switch
