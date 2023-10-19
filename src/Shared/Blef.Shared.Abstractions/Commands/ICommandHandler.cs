@@ -2,8 +2,6 @@
 
 namespace Blef.Shared.Abstractions.Commands;
 
-
-
 public interface ICommandHandler<in TCommand, TCommandResult>
     where TCommand : ICommand<TCommandResult>
     where TCommandResult : ICommandResult
