@@ -24,7 +24,7 @@ public class NotEmptyGuidAttributeTests
     {
         // arrange
         var target = new NotEmptyGuidAttribute();
-        var notGuid = "not a guid";
+        const string notGuid = "not a guid";
 
         // act
         var actual = target.IsValid(notGuid);

@@ -9,7 +9,7 @@ public class NotWhitespaceAttributeTests
     {
         // arrange
         var target = new NotWhitespaceAttribute();
-        var payload = "not whitespace text";
+        const string payload = "not whitespace text";
 
         // act
         var actual = target.IsValid(payload);
@@ -37,7 +37,7 @@ public class NotWhitespaceAttributeTests
     {
         // arrange
         var target = new NotWhitespaceAttribute();
-        var whitespacePayload = "     ";
+        const string whitespacePayload = "     ";
 
         // act
         var actual = target.IsValid(whitespacePayload);
@@ -65,7 +65,7 @@ public class NotWhitespaceAttributeTests
     {
         // arrange
         var target = new NotWhitespaceAttribute();
-        var notStringPayload = 123;
+        const int notStringPayload = 123;
 
         // act
         var actual = target.IsValid(notStringPayload);

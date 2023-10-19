@@ -51,7 +51,7 @@ public class InternalServerErrorTests
 
     private async static Task<Guid> CreateNewGame(HttpClient httpClient)
     {
-        var requestUri = "games-module/games";
+        const string requestUri = "games-module/games";
         var result = await httpClient.PostAsync(requestUri, content: null);
         result.EnsureSuccessStatusCode();
         var json = await result.Content.ReadAsStringAsync();

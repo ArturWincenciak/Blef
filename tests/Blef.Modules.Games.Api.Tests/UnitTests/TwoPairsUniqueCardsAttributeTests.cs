@@ -52,7 +52,7 @@ public class TwoPairsUniqueCardsAttributeTests
     {
         // arrange
         var target = new TwoPairsUniqueCardsAttribute();
-        var notValidType = "not a two pairs bid payload";
+        const string notValidType = "not a two pairs bid payload";
 
         // act
         var actual = target.IsValid(notValidType);
