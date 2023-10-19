@@ -214,7 +214,7 @@ internal static class HttpApiExtensions
 
     async internal static Task Home(this HttpClient client, TestRecorder testRecorder)
     {
-        var requestUri = "/games-module/home";
+        const string requestUri = "/games-module/home";
         var response = await client.GetAsync(requestUri);
         var result = await DeserializeResponse<HomeResponse>(response);
 

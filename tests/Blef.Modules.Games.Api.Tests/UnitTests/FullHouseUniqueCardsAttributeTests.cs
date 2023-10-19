@@ -52,7 +52,7 @@ public class FullHouseUniqueCardsAttributeTests
     {
         // arrange
         var target = new FullHouseUniqueCardsAttribute();
-        var notValidType = "not a full house bid payload";
+        const string notValidType = "not a full house bid payload";
 
         // act
         var actual = target.IsValid(notValidType);
