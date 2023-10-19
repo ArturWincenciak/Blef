@@ -11,8 +11,8 @@ internal sealed class BlefClient
     private GameId? _gameId;
     private PlayerId? _grahamPlayerId;
     private PlayerId? _knuthPlayerId;
-    private PlayerId? _riemannPlayerId;
     private PlayerId? _planckPlayerId;
+    private PlayerId? _riemannPlayerId;
 
     private GameId GameId => _gameId ?? throw new InvalidOperationException("Game has to be created");
 
