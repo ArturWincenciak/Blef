@@ -87,7 +87,7 @@ echo "--- --- ---"
 echo ""
 
 dotnet tool restore
-jb cleanupcode --version
+dotnet jb cleanupcode --version
 
 echo ""
 echo "--- --- ---"
@@ -95,7 +95,7 @@ echo "Let's get started, keep calm and wait, it may take few moments"
 echo "--- --- ---"
 echo ""
 
-jb cleanupcode Blef.sln --profile="Blef: Full Cleanup" --disable-settings-layers=SolutionPersonal --verbosity=WARN
+dotnet jb cleanupcode Blef.sln --profile="Blef: Full Cleanup" --disable-settings-layers=SolutionPersonal --verbosity=WARN
 
 REFORMATTED_FILES=$(git diff --name-only)
 
