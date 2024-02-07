@@ -82,6 +82,15 @@ fi
 
 echo ""
 echo "--- --- ---"
+echo "Restore dotnet tools"
+echo "--- --- ---"
+echo ""
+
+dotnet tool restore
+jb cleanupcode --version
+
+echo ""
+echo "--- --- ---"
 echo "Let's get started, keep calm and wait, it may take few moments"
 echo "--- --- ---"
 echo ""
