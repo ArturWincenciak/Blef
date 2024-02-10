@@ -28,7 +28,7 @@ jobs:
 
       - name: Cleanup Code
         id: cleanup
-        uses: ArturWincenciak/ReSharper_CleanupCode@v2.0
+        uses: ArturWincenciak/ReSharper_CleanupCode@38e6009d6133e855a08f30f3d7d64ba5f317648b
         with:
           solution: 'Blef.sln'
           fail_on_reformat_needed: 'yes'
