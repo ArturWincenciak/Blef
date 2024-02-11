@@ -1,108 +1,95 @@
 ﻿using Blef.Modules.Games.Domain.Model;
+using Blef.Modules.Games.Domain.Model.PokerHands;
 using Blef.Modules.Games.Domain.Tests.Extensions;
 
 namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Cases;
 
-public static class TwoPairsAreNotOnTheTableCases
+internal sealed class TwoPairsAreNotOnTheTableCases : TheoryData<Table, PokerHand>
 {
-    public static IEnumerable<object[]> Cases =>
-        new List<object[]>
-        {
-            new object[]
+    public TwoPairsAreNotOnTheTableCases()
+    {
+        Add(TableCases.GivenTable(new Hand[]
             {
-                TableCases.GivenTable(new Hand[]
+                new(new[]
                 {
-                    new(new[]
-                    {
-                        new Card(FaceCard.Nine, Suit.Spades),
-                        new Card(FaceCard.Ten, Suit.Clubs)
-                    }),
-                    new(new[]
-                    {
-                        new Card(FaceCard.Nine, Suit.Clubs),
-                        new Card(FaceCard.Ace, Suit.Diamonds)
-                    }),
-                    new(new[]
-                    {
-                        new Card(FaceCard.Jack, Suit.Diamonds)
-                    }),
-                    new(new[]
-                    {
-                        new Card(FaceCard.Ace, Suit.Hearts)
-                    })
+                    new Card(FaceCard.Nine, Suit.Spades),
+                    new Card(FaceCard.Ten, Suit.Clubs)
                 }),
-                PokerHandFactory.GivenTwoPairsBid(FaceCard.Nine, FaceCard.Jack)
-            },
-            new object[]
-            {
-                TableCases.GivenTable(new Hand[]
+                new(new[]
                 {
-                    new(new[]
-                    {
-                        new Card(FaceCard.Nine, Suit.Diamonds),
-                        new Card(FaceCard.Ten, Suit.Diamonds)
-                    }),
-                    new(new[]
-                    {
-                        new Card(FaceCard.King, Suit.Clubs),
-                        new Card(FaceCard.King, Suit.Hearts)
-                    }),
-                    new(new[]
-                    {
-                        new Card(FaceCard.Ten, Suit.Spades)
-                    }),
-                    new(new[]
-                    {
-                        new Card(FaceCard.Nine, Suit.Spades)
-                    })
+                    new Card(FaceCard.Nine, Suit.Clubs),
+                    new Card(FaceCard.Ace, Suit.Diamonds)
                 }),
-                PokerHandFactory.GivenTwoPairsBid(FaceCard.King, FaceCard.Ace)
-            },
-            new object[]
-            {
-                TableCases.GivenTable(new Hand[]
+                new(new[]
                 {
-                    new(new[] {new Card(FaceCard.Queen, Suit.Diamonds)}),
-                    new(new[] {new Card(FaceCard.Jack, Suit.Spades)}),
-                    new(new[] {new Card(FaceCard.Jack, Suit.Hearts)}),
-                    new(new[] {new Card(FaceCard.Queen, Suit.Hearts)})
+                    new Card(FaceCard.Jack, Suit.Diamonds)
                 }),
-                PokerHandFactory.GivenTwoPairsBid(FaceCard.Jack, FaceCard.King)
-            },
-            new object[]
-            {
-                TableCases.GivenTable(new Hand[]
+                new(new[]
                 {
-                    new(new[]
-                    {
-                        new Card(FaceCard.King, Suit.Diamonds),
-                        new Card(FaceCard.King, Suit.Spades)
-                    }),
-                    new(new[]
-                    {
-                        new Card(FaceCard.King, Suit.Clubs),
-                        new Card(FaceCard.King, Suit.Hearts)
-                    }),
-                    new(new[]
-                    {
-                        new Card(FaceCard.Ten, Suit.Spades)
-                    }),
-                    new(new[]
-                    {
-                        new Card(FaceCard.Ten, Suit.Hearts)
-                    })
+                    new Card(FaceCard.Ace, Suit.Hearts)
+                })
+            }),
+            PokerHandFactory.GivenTwoPairsBid(FaceCard.Nine, FaceCard.Jack));
+
+        Add(TableCases.GivenTable(new Hand[]
+            {
+                new(new[]
+                {
+                    new Card(FaceCard.Nine, Suit.Diamonds),
+                    new Card(FaceCard.Ten, Suit.Diamonds)
                 }),
-                PokerHandFactory.GivenTwoPairsBid(FaceCard.King, FaceCard.Ace)
-            },
-            new object[]
+                new(new[]
+                {
+                    new Card(FaceCard.King, Suit.Clubs),
+                    new Card(FaceCard.King, Suit.Hearts)
+                }),
+                new(new[]
+                {
+                    new Card(FaceCard.Ten, Suit.Spades)
+                }),
+                new(new[]
+                {
+                    new Card(FaceCard.Nine, Suit.Spades)
+                })
+            }),
+            PokerHandFactory.GivenTwoPairsBid(FaceCard.King, FaceCard.Ace));
+
+        Add(TableCases.GivenTable(new Hand[]
             {
-                TableCases.GetHighestMaxCardsForFourPlayers(),
-                PokerHandFactory.GivenTwoPairsBid(FaceCard.King, FaceCard.Nine)
-            },
-            new object[]
+                new(new[] {new Card(FaceCard.Queen, Suit.Diamonds)}),
+                new(new[] {new Card(FaceCard.Jack, Suit.Spades)}),
+                new(new[] {new Card(FaceCard.Jack, Suit.Hearts)}),
+                new(new[] {new Card(FaceCard.Queen, Suit.Hearts)})
+            }),
+            PokerHandFactory.GivenTwoPairsBid(FaceCard.Jack, FaceCard.King));
+
+        Add(TableCases.GivenTable(new Hand[]
             {
-                TableCases.GetLowestMaxCardsForFourPlayers(),
-                PokerHandFactory.GivenTwoPairsBid(FaceCard.King, FaceCard.Ace)
-            }
-        };
+                new(new[]
+                {
+                    new Card(FaceCard.King, Suit.Diamonds),
+                    new Card(FaceCard.King, Suit.Spades)
+                }),
+                new(new[]
+                {
+                    new Card(FaceCard.King, Suit.Clubs),
+                    new Card(FaceCard.King, Suit.Hearts)
+                }),
+                new(new[]
+                {
+                    new Card(FaceCard.Ten, Suit.Spades)
+                }),
+                new(new[]
+                {
+                    new Card(FaceCard.Ten, Suit.Hearts)
+                })
+            }),
+            PokerHandFactory.GivenTwoPairsBid(FaceCard.King, FaceCard.Ace));
+
+        Add(TableCases.GetHighestMaxCardsForFourPlayers(),
+            PokerHandFactory.GivenTwoPairsBid(FaceCard.King, FaceCard.Nine));
+
+        Add(TableCases.GetLowestMaxCardsForFourPlayers(),
+            PokerHandFactory.GivenTwoPairsBid(FaceCard.King, FaceCard.Ace));
+    }
 }
