@@ -3,7 +3,6 @@ using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.ValidateBidPayload;
 
-[UsesVerify]
 public class ValidateBidTests
 {
     private static TestBuilder Arrange => new TestBuilder()

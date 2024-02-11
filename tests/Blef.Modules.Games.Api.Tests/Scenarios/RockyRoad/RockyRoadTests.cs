@@ -3,7 +3,6 @@ using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.RockyRoad;
 
-[UsesVerify]
 public class RockyRoadTests
 {
     private static TestBuilder Arrange => new TestBuilder()
