@@ -7,7 +7,7 @@ internal sealed class LowStraightIsNotOnTheTableCases : TheoryData<Table, PokerH
 {
     public LowStraightIsNotOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -27,9 +27,9 @@ internal sealed class LowStraightIsNotOnTheTableCases : TheoryData<Table, PokerH
                     new Card(FaceCard.Ace, Suit.Spades)
                 })
             }),
-            LowStraight.Create());
+            p2: LowStraight.Create());
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -50,9 +50,9 @@ internal sealed class LowStraightIsNotOnTheTableCases : TheoryData<Table, PokerH
                     new Card(FaceCard.King, Suit.Spades)
                 })
             }),
-            LowStraight.Create());
+            p2: LowStraight.Create());
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -74,9 +74,9 @@ internal sealed class LowStraightIsNotOnTheTableCases : TheoryData<Table, PokerH
                     new Card(FaceCard.King, Suit.Spades)
                 })
             }),
-            LowStraight.Create());
+            p2: LowStraight.Create());
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -101,9 +101,9 @@ internal sealed class LowStraightIsNotOnTheTableCases : TheoryData<Table, PokerH
                     new Card(FaceCard.King, Suit.Spades)
                 })
             }),
-            LowStraight.Create());
+            p2: LowStraight.Create());
 
-        Add(TableCases.GetHighestMaxCardsForFourPlayers(),
-            LowStraight.Create());
+        Add(p1: TableCases.GetHighestMaxCardsForFourPlayers(),
+            p2: LowStraight.Create());
     }
 }

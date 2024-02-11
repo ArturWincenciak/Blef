@@ -7,7 +7,7 @@ internal sealed class HighStraightIsOnTheTableCases : TheoryData<Table, PokerHan
 {
     public HighStraightIsOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -27,9 +27,9 @@ internal sealed class HighStraightIsOnTheTableCases : TheoryData<Table, PokerHan
                     new Card(FaceCard.Ace, Suit.Spades)
                 })
             }),
-            HighStraight.Create());
+            p2: HighStraight.Create());
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -50,9 +50,9 @@ internal sealed class HighStraightIsOnTheTableCases : TheoryData<Table, PokerHan
                     new Card(FaceCard.King, Suit.Spades)
                 })
             }),
-            HighStraight.Create());
+            p2: HighStraight.Create());
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -74,9 +74,9 @@ internal sealed class HighStraightIsOnTheTableCases : TheoryData<Table, PokerHan
                     new Card(FaceCard.Ace, Suit.Spades)
                 })
             }),
-            HighStraight.Create());
+            p2: HighStraight.Create());
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -101,9 +101,9 @@ internal sealed class HighStraightIsOnTheTableCases : TheoryData<Table, PokerHan
                     new Card(FaceCard.Ace, Suit.Hearts)
                 })
             }),
-            HighStraight.Create());
+            p2: HighStraight.Create());
 
-        Add(TableCases.GetHighestMaxCardsForFourPlayers(),
-            HighStraight.Create());
+        Add(p1: TableCases.GetHighestMaxCardsForFourPlayers(),
+            p2: HighStraight.Create());
     }
 }

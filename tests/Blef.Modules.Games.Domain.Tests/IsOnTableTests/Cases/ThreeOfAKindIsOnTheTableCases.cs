@@ -8,7 +8,7 @@ internal sealed class ThreeOfAKindIsOnTheTableCases : TheoryData<Table, PokerHan
 {
     public ThreeOfAKindIsOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -21,9 +21,9 @@ internal sealed class ThreeOfAKindIsOnTheTableCases : TheoryData<Table, PokerHan
                     new Card(FaceCard.Ten, Suit.Hearts)
                 })
             }),
-            PokerHandFactory.GivenThreeOfAKind(FaceCard.Ten));
+            p2: PokerHandFactory.GivenThreeOfAKind(FaceCard.Ten));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -38,9 +38,9 @@ internal sealed class ThreeOfAKindIsOnTheTableCases : TheoryData<Table, PokerHan
                     new Card(FaceCard.Queen, Suit.Clubs)
                 })
             }),
-            PokerHandFactory.GivenThreeOfAKind(FaceCard.Queen));
+            p2: PokerHandFactory.GivenThreeOfAKind(FaceCard.Queen));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -53,12 +53,12 @@ internal sealed class ThreeOfAKindIsOnTheTableCases : TheoryData<Table, PokerHan
                     new Card(FaceCard.Ace, Suit.Spades)
                 })
             }),
-            PokerHandFactory.GivenThreeOfAKind(FaceCard.Ace));
+            p2: PokerHandFactory.GivenThreeOfAKind(FaceCard.Ace));
 
-        Add(TableCases.GetHighestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenThreeOfAKind(FaceCard.Ten));
+        Add(p1: TableCases.GetHighestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenThreeOfAKind(FaceCard.Ten));
 
-        Add(TableCases.GetLowestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenThreeOfAKind(FaceCard.King));
+        Add(p1: TableCases.GetLowestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenThreeOfAKind(FaceCard.King));
     }
 }

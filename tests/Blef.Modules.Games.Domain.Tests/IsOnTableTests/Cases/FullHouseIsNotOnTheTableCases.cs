@@ -8,7 +8,7 @@ internal sealed class FullHouseIsNotOnTheTableCases : TheoryData<Table, PokerHan
 {
     public FullHouseIsNotOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -22,9 +22,9 @@ internal sealed class FullHouseIsNotOnTheTableCases : TheoryData<Table, PokerHan
                     new Card(FaceCard.King, Suit.Hearts)
                 })
             }),
-            PokerHandFactory.GivenFullHouse(FaceCard.Ace, FaceCard.King));
+            p2: PokerHandFactory.GivenFullHouse(FaceCard.Ace, FaceCard.King));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -41,9 +41,9 @@ internal sealed class FullHouseIsNotOnTheTableCases : TheoryData<Table, PokerHan
                     new Card(FaceCard.King, Suit.Hearts)
                 })
             }),
-            PokerHandFactory.GivenFullHouse(FaceCard.Queen, FaceCard.Nine));
+            p2: PokerHandFactory.GivenFullHouse(FaceCard.Queen, FaceCard.Nine));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -68,12 +68,12 @@ internal sealed class FullHouseIsNotOnTheTableCases : TheoryData<Table, PokerHan
                     new Card(FaceCard.Jack, Suit.Hearts)
                 })
             }),
-            PokerHandFactory.GivenFullHouse(FaceCard.Nine, FaceCard.Jack));
+            p2: PokerHandFactory.GivenFullHouse(FaceCard.Nine, FaceCard.Jack));
 
-        Add(TableCases.GetLowestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenFullHouse(FaceCard.Nine, FaceCard.Ace));
+        Add(p1: TableCases.GetLowestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenFullHouse(FaceCard.Nine, FaceCard.Ace));
 
-        Add(TableCases.GetHighestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenFullHouse(FaceCard.Nine, FaceCard.Ace));
+        Add(p1: TableCases.GetHighestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenFullHouse(FaceCard.Nine, FaceCard.Ace));
     }
 }

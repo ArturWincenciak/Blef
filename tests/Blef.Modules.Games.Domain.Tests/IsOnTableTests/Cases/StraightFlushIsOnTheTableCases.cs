@@ -8,7 +8,7 @@ internal sealed class StraightFlushIsOnTheTableCases : TheoryData<Table, PokerHa
 {
     public StraightFlushIsOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -23,9 +23,9 @@ internal sealed class StraightFlushIsOnTheTableCases : TheoryData<Table, PokerHa
                     new Card(FaceCard.Nine, Suit.Clubs)
                 })
             }),
-            PokerHandFactory.GivenStraightFlush(Suit.Spades));
+            p2: PokerHandFactory.GivenStraightFlush(Suit.Spades));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -39,9 +39,9 @@ internal sealed class StraightFlushIsOnTheTableCases : TheoryData<Table, PokerHa
                     new Card(FaceCard.King, Suit.Spades)
                 })
             }),
-            PokerHandFactory.GivenStraightFlush(Suit.Spades));
+            p2: PokerHandFactory.GivenStraightFlush(Suit.Spades));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -61,9 +61,9 @@ internal sealed class StraightFlushIsOnTheTableCases : TheoryData<Table, PokerHa
                     new Card(FaceCard.King, Suit.Diamonds)
                 })
             }),
-            PokerHandFactory.GivenStraightFlush(Suit.Diamonds));
+            p2: PokerHandFactory.GivenStraightFlush(Suit.Diamonds));
 
-        Add(TableCases.GetLowestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenStraightFlush(Suit.Hearts));
+        Add(p1: TableCases.GetLowestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenStraightFlush(Suit.Hearts));
     }
 }

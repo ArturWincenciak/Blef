@@ -8,7 +8,7 @@ internal sealed class RoyalFlushIsOnTheTableCases : TheoryData<Table, PokerHand>
 {
     public RoyalFlushIsOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -23,9 +23,9 @@ internal sealed class RoyalFlushIsOnTheTableCases : TheoryData<Table, PokerHand>
                     new Card(FaceCard.Nine, Suit.Clubs)
                 })
             }),
-            PokerHandFactory.GivenRoyalFlush(Suit.Spades));
+            p2: PokerHandFactory.GivenRoyalFlush(Suit.Spades));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -39,9 +39,9 @@ internal sealed class RoyalFlushIsOnTheTableCases : TheoryData<Table, PokerHand>
                     new Card(FaceCard.King, Suit.Spades)
                 })
             }),
-            PokerHandFactory.GivenRoyalFlush(Suit.Spades));
+            p2: PokerHandFactory.GivenRoyalFlush(Suit.Spades));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -61,9 +61,9 @@ internal sealed class RoyalFlushIsOnTheTableCases : TheoryData<Table, PokerHand>
                     new Card(FaceCard.King, Suit.Diamonds)
                 })
             }),
-            PokerHandFactory.GivenRoyalFlush(Suit.Diamonds));
+            p2: PokerHandFactory.GivenRoyalFlush(Suit.Diamonds));
 
-        Add(TableCases.GetHighestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenRoyalFlush(Suit.Hearts));
+        Add(p1: TableCases.GetHighestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenRoyalFlush(Suit.Hearts));
     }
 }
