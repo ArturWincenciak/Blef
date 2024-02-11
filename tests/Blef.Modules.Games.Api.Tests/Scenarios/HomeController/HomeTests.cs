@@ -2,7 +2,6 @@
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.HomeController;
 
-[UsesVerify]
 public class HomeTests
 {
     [Fact]

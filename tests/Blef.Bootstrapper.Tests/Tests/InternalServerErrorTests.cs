@@ -6,7 +6,6 @@ using Blef.Modules.Games.Application.Commands;
 
 namespace Blef.Bootstrapper.Tests.Tests;
 
-[UsesVerify]
 public class InternalServerErrorTests
 {
     [Fact]

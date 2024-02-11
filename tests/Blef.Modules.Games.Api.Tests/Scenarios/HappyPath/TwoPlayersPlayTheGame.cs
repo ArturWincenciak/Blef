@@ -3,7 +3,6 @@ using Blef.Modules.Games.Api.Tests.Scenarios.ValueObjects;
 
 namespace Blef.Modules.Games.Api.Tests.Scenarios.HappyPath;
 
-[UsesVerify]
 public class TwoPlayersPlayTheGame
 {
     [Fact]

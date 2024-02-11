@@ -2,7 +2,6 @@
 
 namespace Blef.Modules.Users.Api.Tests;
 
-[UsesVerify]
 public class HomeControllerTests
 {
     [Fact]

@@ -3,7 +3,6 @@ using Blef.Bootstrapper.Tests.Core;
 
 namespace Blef.Bootstrapper.Tests.Tests;
 
-[UsesVerify]
 public class BlefHomeControllerTests
 {
     [Fact]
