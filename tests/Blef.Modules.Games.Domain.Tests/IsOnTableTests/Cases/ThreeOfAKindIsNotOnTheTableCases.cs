@@ -8,7 +8,7 @@ internal sealed class ThreeOfAKindIsNotOnTheTableCases : TheoryData<Table, Poker
 {
     public ThreeOfAKindIsNotOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -21,9 +21,9 @@ internal sealed class ThreeOfAKindIsNotOnTheTableCases : TheoryData<Table, Poker
                     new Card(FaceCard.Queen, Suit.Hearts)
                 })
             }),
-            PokerHandFactory.GivenThreeOfAKind(FaceCard.Ten));
+            p2: PokerHandFactory.GivenThreeOfAKind(FaceCard.Ten));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -38,9 +38,9 @@ internal sealed class ThreeOfAKindIsNotOnTheTableCases : TheoryData<Table, Poker
                     new Card(FaceCard.Queen, Suit.Clubs)
                 })
             }),
-            PokerHandFactory.GivenThreeOfAKind(FaceCard.Queen));
+            p2: PokerHandFactory.GivenThreeOfAKind(FaceCard.Queen));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -53,12 +53,12 @@ internal sealed class ThreeOfAKindIsNotOnTheTableCases : TheoryData<Table, Poker
                     new Card(FaceCard.Ten, Suit.Spades)
                 })
             }),
-            PokerHandFactory.GivenThreeOfAKind(FaceCard.Ace));
+            p2: PokerHandFactory.GivenThreeOfAKind(FaceCard.Ace));
 
-        Add(TableCases.GetLowestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenThreeOfAKind(FaceCard.Ace));
+        Add(p1: TableCases.GetLowestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenThreeOfAKind(FaceCard.Ace));
 
-        Add(TableCases.GetHighestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenThreeOfAKind(FaceCard.Nine));
+        Add(p1: TableCases.GetHighestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenThreeOfAKind(FaceCard.Nine));
     }
 }

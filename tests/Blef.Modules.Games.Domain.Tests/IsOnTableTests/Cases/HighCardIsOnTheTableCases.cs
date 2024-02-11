@@ -8,31 +8,31 @@ internal sealed class HighCardIsOnTheTableCases : TheoryData<Table, PokerHand>
 {
     public HighCardIsOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[] {new Card(FaceCard.Ace, Suit.Clubs)}),
                 new(new[] {new Card(FaceCard.King, Suit.Diamonds)})
             }),
-            PokerHandFactory.GivenHighCard(FaceCard.Ace));
+            p2: PokerHandFactory.GivenHighCard(FaceCard.Ace));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[] {new Card(FaceCard.Ace, Suit.Clubs)}),
                 new(new[] {new Card(FaceCard.King, Suit.Hearts)})
             }),
-            PokerHandFactory.GivenHighCard(FaceCard.King));
+            p2: PokerHandFactory.GivenHighCard(FaceCard.King));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[] {new Card(FaceCard.Queen, Suit.Spades)}),
                 new(new[] {new Card(FaceCard.King, Suit.Hearts)})
             }),
-            PokerHandFactory.GivenHighCard(FaceCard.Queen));
+            p2: PokerHandFactory.GivenHighCard(FaceCard.Queen));
 
-        Add(TableCases.GetHighestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenHighCard(FaceCard.Ace));
+        Add(p1: TableCases.GetHighestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenHighCard(FaceCard.Ace));
 
-        Add(TableCases.GetLowestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenHighCard(FaceCard.Nine));
+        Add(p1: TableCases.GetLowestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenHighCard(FaceCard.Nine));
     }
 }

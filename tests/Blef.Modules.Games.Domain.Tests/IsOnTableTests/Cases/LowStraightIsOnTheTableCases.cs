@@ -7,7 +7,7 @@ internal sealed class LowStraightIsOnTheTableCases : TheoryData<Table, PokerHand
 {
     public LowStraightIsOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -27,9 +27,9 @@ internal sealed class LowStraightIsOnTheTableCases : TheoryData<Table, PokerHand
                     new Card(FaceCard.King, Suit.Diamonds)
                 })
             }),
-            LowStraight.Create());
+            p2: LowStraight.Create());
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -50,9 +50,9 @@ internal sealed class LowStraightIsOnTheTableCases : TheoryData<Table, PokerHand
                     new Card(FaceCard.King, Suit.Spades)
                 })
             }),
-            LowStraight.Create());
+            p2: LowStraight.Create());
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -74,9 +74,9 @@ internal sealed class LowStraightIsOnTheTableCases : TheoryData<Table, PokerHand
                     new Card(FaceCard.King, Suit.Spades)
                 })
             }),
-            LowStraight.Create());
+            p2: LowStraight.Create());
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -101,9 +101,9 @@ internal sealed class LowStraightIsOnTheTableCases : TheoryData<Table, PokerHand
                     new Card(FaceCard.King, Suit.Spades)
                 })
             }),
-            LowStraight.Create());
+            p2: LowStraight.Create());
 
-        Add(TableCases.GetLowestMaxCardsForFourPlayers(),
-            LowStraight.Create());
+        Add(p1: TableCases.GetLowestMaxCardsForFourPlayers(),
+            p2: LowStraight.Create());
     }
 }

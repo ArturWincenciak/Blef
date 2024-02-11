@@ -8,7 +8,7 @@ internal sealed class FlushIsNotOnTheTableCases : TheoryData<Table, PokerHand>
 {
     public FlushIsNotOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -23,9 +23,9 @@ internal sealed class FlushIsNotOnTheTableCases : TheoryData<Table, PokerHand>
                     new Card(FaceCard.King, Suit.Clubs)
                 })
             }),
-            PokerHandFactory.GivenFlush(Suit.Spades));
+            p2: PokerHandFactory.GivenFlush(Suit.Spades));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -45,6 +45,6 @@ internal sealed class FlushIsNotOnTheTableCases : TheoryData<Table, PokerHand>
                     new Card(FaceCard.Ace, Suit.Clubs)
                 })
             }),
-            PokerHandFactory.GivenFlush(Suit.Diamonds));
+            p2: PokerHandFactory.GivenFlush(Suit.Diamonds));
     }
 }
