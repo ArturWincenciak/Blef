@@ -6,11 +6,18 @@ namespace Blef.Modules.Games.Domain.Tests.IsOnTableTests.Tests;
 
 public class IsOnTheTableTests
 {
-    private static IEnumerable<object[]> Init =>
-        new List<object[]>();
-
     [Theory]
-    [MemberData(nameof(GivenPokerHandTestCases))]
+    [ClassData(typeof(HighCardIsOnTheTableCases))]
+    [ClassData(typeof(PairIsOnTheTableCases))]
+    [ClassData(typeof(TwoPairsAreOnTheTableCases))]
+    [ClassData(typeof(LowStraightIsOnTheTableCases))]
+    [ClassData(typeof(HighStraightIsOnTheTableCases))]
+    [ClassData(typeof(ThreeOfAKindIsOnTheTableCases))]
+    [ClassData(typeof(FullHouseIsOnTheTableCases))]
+    [ClassData(typeof(FlushIsOnTheTableCases))]
+    [ClassData(typeof(FourOfAKindIsOnTheTableCases))]
+    [ClassData(typeof(StraightFlushIsOnTheTableCases))]
+    [ClassData(typeof(RoyalFlushIsOnTheTableCases))]
     internal void PokerHandIsOnTableTests(Table table, PokerHand pokerHand)
     {
         // act
@@ -19,18 +26,4 @@ public class IsOnTheTableTests
         // assert
         Assert.True(actual);
     }
-
-    public static IEnumerable<object[]> GivenPokerHandTestCases() =>
-        Init
-            .Concat(HighCardIsOnTheTableCases.Cases)
-            .Concat(PairIsOnTheTableCases.Cases)
-            .Concat(TwoPairsAreOnTheTableCases.Cases)
-            .Concat(LowStraightIsOnTheTableCases.Cases)
-            .Concat(HighStraightIsOnTheTableCases.Cases)
-            .Concat(ThreeOfAKindIsOnTheTableCases.Cases)
-            .Concat(FullHouseIsOnTheTableCases.Cases)
-            .Concat(FlushIsOnTheTableCases.Cases)
-            .Concat(FourOfAKindIsOnTheTableCases.Cases)
-            .Concat(StraightFlushIsOnTheTableCases.Cases)
-            .Concat(RoyalFlushIsOnTheTableCases.Cases);
 }
