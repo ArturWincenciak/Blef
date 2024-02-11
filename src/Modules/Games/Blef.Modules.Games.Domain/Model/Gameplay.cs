@@ -92,7 +92,7 @@ internal sealed class Gameplay
 
     public IEnumerable<Card> GetHand(DealNumber dealNumber, PlayerId playerId)
     {
-        if (!_deals.ContainsKey(dealNumber))
+        if (!_deals.TryGetValue(dealNumber, value: out var deal))
             throw new DealNotFoundException(Id.Id, dealNumber.Number);
 
         if (_gamePlayers.TrueForAll(player => player.Player.Id != playerId))
@@ -102,7 +102,6 @@ internal sealed class Gameplay
         if (gamePlayer.Player.IsInTheGame == false)
             throw new PlayerAlreadyLostTheGameException(Id, playerId);
 
-        var deal = _deals[dealNumber];
         var dealPlayer = deal.Players.Single(player => player.Player == playerId);
         return dealPlayer.Hand.Cards;
     }
