@@ -8,7 +8,7 @@ internal sealed class FlushIsOnTheTableCases : TheoryData<Table, PokerHand>
 {
     public FlushIsOnTheTableCases()
     {
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -23,9 +23,9 @@ internal sealed class FlushIsOnTheTableCases : TheoryData<Table, PokerHand>
                     new Card(FaceCard.Ace, Suit.Clubs)
                 })
             }),
-            PokerHandFactory.GivenFlush(Suit.Spades));
+            p2: PokerHandFactory.GivenFlush(Suit.Spades));
 
-        Add(TableCases.GivenTable(new Hand[]
+        Add(p1: TableCases.GivenTable(new Hand[]
             {
                 new(new[]
                 {
@@ -45,12 +45,12 @@ internal sealed class FlushIsOnTheTableCases : TheoryData<Table, PokerHand>
                     new Card(FaceCard.Ace, Suit.Diamonds)
                 })
             }),
-            PokerHandFactory.GivenFlush(Suit.Diamonds));
+            p2: PokerHandFactory.GivenFlush(Suit.Diamonds));
 
-        Add(TableCases.GetHighestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenFlush(Suit.Clubs));
+        Add(p1: TableCases.GetHighestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenFlush(Suit.Clubs));
 
-        Add(TableCases.GetLowestMaxCardsForFourPlayers(),
-            PokerHandFactory.GivenFlush(Suit.Hearts));
+        Add(p1: TableCases.GetLowestMaxCardsForFourPlayers(),
+            p2: PokerHandFactory.GivenFlush(Suit.Hearts));
     }
 }
