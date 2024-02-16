@@ -86,7 +86,6 @@ echo "Restore dotnet tools (the JetBrains CleanupCode Tool)"
 echo "--- --- ---"
 echo ""
 
-dotnet tool uninstall -g JetBrains.ReSharper.GlobalTools
 dotnet tool restore
 dotnet jb cleanupcode --version
 
