@@ -8,7 +8,7 @@ internal static class Extensions
 {
     private const string DEV_CORS_POLICY_NAME = nameof(DEV_CORS_POLICY_NAME);
 
-    public static IServiceCollection AddTracing(this IServiceCollection services) =>
+    public static IServiceCollection AddErrorHandling(this IServiceCollection services) =>
         services
             .AddScoped<ErrorHandlerMiddleware>()
             .AddSingleton<ExceptionToResponseMapper>();

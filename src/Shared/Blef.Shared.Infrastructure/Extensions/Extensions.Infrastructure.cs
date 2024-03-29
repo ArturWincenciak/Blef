@@ -25,8 +25,8 @@ internal static partial class Extensions
         IEnumerable<IModule> modules, IReadOnlyCollection<Assembly> assemblies) =>
         services
             .AddControllers(configuration)
-            .AddTracing()
             .AddErrorHandling()
+            .AddTraceing()
             .AddDevelopmentCors()
             .AddModuleInfo(modules)
             .AddSwagger()
