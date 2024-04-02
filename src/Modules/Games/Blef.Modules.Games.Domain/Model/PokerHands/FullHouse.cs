@@ -21,7 +21,7 @@ internal sealed class FullHouse : PokerHand
         table.Count(_threeOfAKind) >= 3 && table.Count(_pair) >= 2;
 
     protected override int GetInnerRank() =>
-        100 * _threeOfAKind.GetRank() + _pair.GetRank();
+        (100 * _threeOfAKind.GetRank()) + _pair.GetRank();
 
     public override string Serialize() =>
         $"{TYPE}:{_threeOfAKind.ToString().ToLower()},{_pair.ToString().ToLower()}";

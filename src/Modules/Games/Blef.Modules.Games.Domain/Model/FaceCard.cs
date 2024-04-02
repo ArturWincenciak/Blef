@@ -23,7 +23,7 @@ internal sealed class FaceCard
         GetRank() > other.GetRank();
 
     public override bool Equals(object? obj) =>
-        ReferenceEquals(objA: this, obj) || obj is FaceCard other && Equals(other);
+        ReferenceEquals(objA: this, obj) || (obj is FaceCard other && Equals(other));
 
     public override int GetHashCode() =>
         (int) _faceCard;
