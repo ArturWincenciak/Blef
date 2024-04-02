@@ -28,9 +28,8 @@ jobs:
 
       - name: Cleanup Code
         id: cleanup
-        uses: ArturWincenciak/ReSharper_CleanupCode@v2.1
+        uses: ArturWincenciak/ReSharper_CleanupCode@v3.0
         with:
           solution: 'Blef.sln'
           fail_on_reformat_needed: 'yes'
-          auto_commit: 'no'
-          jb_cleanup_code_arg: '--verbosity=WARN --profile=Blef: Full Cleanup --exclude=**UnitTests/**.*'
+          jb_cleanup_code_arg: '--verbosity=WARN'
