@@ -18,7 +18,7 @@ internal sealed record CardsAmount
         if (_amount == MAX_CARDS_AMOUNT)
             throw new InvalidOperationException("Amount cannot be greater then five");
 
-        return new CardsAmount(_amount + 1);
+        return new(_amount + 1);
     }
 
     public bool IsLowerThen(CardsAmount other) =>

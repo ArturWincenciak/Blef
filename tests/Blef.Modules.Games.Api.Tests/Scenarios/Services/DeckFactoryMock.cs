@@ -35,6 +35,6 @@ internal sealed class DeckFactoryMock : IDeckFactory
             new Card(FaceCard.Queen, Suit.Hearts)
         };
 
-        return new Deck(cards);
+        return new(cards);
     }
 }

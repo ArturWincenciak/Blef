@@ -29,7 +29,7 @@ internal sealed class Deck
 
         var hand = _cards.Take(cardsAmount).ToArray();
         _cards.RemoveRange(index: 0, cardsAmount);
-        return new Hand(hand);
+        return new(hand);
     }
 
     private static bool AreAllCardsUnique(IReadOnlyCollection<Card> cards) =>

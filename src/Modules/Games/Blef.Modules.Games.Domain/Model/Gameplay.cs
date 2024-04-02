@@ -57,17 +57,17 @@ internal sealed class Gameplay
             .ToArray();
 
     public void OnPlayerJoined(GamePlayer gamePlayer) =>
-        _gamePlayers.Add(new PlayerEntry(gamePlayer, JoiningOrder: _gamePlayers.Count + 1));
+        _gamePlayers.Add(new(gamePlayer, JoiningOrder: _gamePlayers.Count + 1));
 
     public void OnDealStarted(DealNumber dealNumber, IReadOnlyCollection<DealPlayer> dealPlayers) =>
-        _deals.Add(dealNumber, value: new DealDetails(dealPlayers, Bids: new List<BidRecord>()));
+        _deals.Add(dealNumber, value: new(dealPlayers, Bids: new()));
 
     public void OnBidPlaced(DealNumber dealNumber, PlayerId playerId, PokerHand pokerHand)
     {
         var deal = _deals[dealNumber];
         var bid = new Bid(pokerHand, playerId);
         var order = deal.Bids.Count + 1;
-        deal.Bids.Add(new BidRecord(order, bid));
+        deal.Bids.Add(new(order, bid));
     }
 
     public void OnCheckPlaced(DealNumber dealNumber, CheckingPlayer checkingPlayer, LooserPlayer looserPlayer)
@@ -75,7 +75,7 @@ internal sealed class Gameplay
         var deal = _deals[dealNumber];
         _deals[dealNumber] = deal with
         {
-            DealResolution = new DealResolution(checkingPlayer, looserPlayer)
+            DealResolution = new(checkingPlayer, looserPlayer)
         };
     }
 

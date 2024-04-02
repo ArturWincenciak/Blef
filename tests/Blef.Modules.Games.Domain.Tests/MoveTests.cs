@@ -25,6 +25,6 @@ public class MoveTests
     [Fact]
     public void CannotCreateMoveWithNullOrderTest() =>
         Assert.Throws<ArgumentNullException>(() => new Move(
-            Player: new PlayerId(Guid.Parse("A2C87FD6-C1C4-4B6D-9CBD-CE41265050EA")),
+            Player: new(Guid.Parse("A2C87FD6-C1C4-4B6D-9CBD-CE41265050EA")),
             Order: null!));
 }

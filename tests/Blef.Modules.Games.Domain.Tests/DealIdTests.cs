@@ -26,7 +26,7 @@ public class DealIdTests
 
     [Fact]
     public void CannotCreateWithNullGameIdArgumentTest() =>
-        Assert.Throws<ArgumentNullException>(() => new DealId(Game: null!, Deal: new DealNumber(1)));
+        Assert.Throws<ArgumentNullException>(() => new DealId(Game: null!, Deal: new(1)));
 
     [Fact]
     public void CannotCreateWithNullDealNumberArgumentTest()

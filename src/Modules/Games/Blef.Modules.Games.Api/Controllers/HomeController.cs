@@ -13,5 +13,6 @@ internal sealed class HomeController : ModuleControllerBase
         {
             Module = "Games module API",
             RequestTime = DateTime.UtcNow
-        }, options: new JsonSerializerOptions {WriteIndented = true});
+        }, options: new()
+            {WriteIndented = true});
 }

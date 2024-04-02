@@ -19,7 +19,7 @@ internal sealed class Deal
     {
         Id = dealId;
         _playersSet = dealSet.PlayersSet;
-        _moveOrderPolicy = new MoveOrderPolicy(dealSet.MoveSequence);
+        _moveOrderPolicy = new(dealSet.MoveSequence);
         _lastBid = null;
         _dealIsOver = false;
     }
@@ -53,7 +53,7 @@ internal sealed class Deal
         _dealIsOver = true;
 
         return _lastBid!.PokerHand.IsOnTable(_playersSet.Table())
-            ? new LooserPlayer(checkingPlayerId.Player)
+            ? new(checkingPlayerId.Player)
             : new LooserPlayer(_lastBid.Player);
     }
 }

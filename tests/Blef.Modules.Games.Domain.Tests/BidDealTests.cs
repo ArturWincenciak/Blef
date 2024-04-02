@@ -82,7 +82,7 @@ public class BidDealTests
         // arrange
         var (deal, player1, player2, player3, _) = GivenDealWithFourPlayers();
         PlayHighCardBid(deal, player1, FaceCard.Nine);
-        deal.Check(new CheckingPlayer(player2.Player));
+        deal.Check(new(player2.Player));
 
         // act, assert
         Assert.Throws<InvalidOperationException>(() =>

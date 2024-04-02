@@ -10,5 +10,5 @@ internal sealed class GameFactory
         _croupier = croupier ?? throw new ArgumentNullException(nameof(croupier));
 
     public Game Create() =>
-        new(id: new GameId(Guid.NewGuid()), _croupier);
+        new(id: new(Guid.NewGuid()), _croupier);
 }

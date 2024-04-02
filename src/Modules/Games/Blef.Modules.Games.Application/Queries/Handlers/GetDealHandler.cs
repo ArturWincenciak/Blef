@@ -17,11 +17,11 @@ internal sealed class GetDealHandler : IQueryHandler<GetDeal, GetDeal.Result>
 
     public async Task<GetDeal.Result> Handle(GetDeal query, CancellationToken cancellation)
     {
-        var gameplay = await _gameplaysRepository.Get(new GameId(query.GameId));
+        var gameplay = await _gameplaysRepository.Get(new(query.GameId));
         if (gameplay is null)
             throw new GameNotFoundException(query.GameId);
 
-        var deal = gameplay.GetDealProjection(new DealNumber(query.DealNumber));
+        var deal = gameplay.GetDealProjection(new(query.DealNumber));
         if (deal is null)
             throw new DealNotFoundException(query.GameId, query.DealNumber);
 

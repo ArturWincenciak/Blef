@@ -16,5 +16,6 @@ internal sealed class HomeController : ControllerBase
         {
             Module = "Users module API",
             RequestTime = DateTime.UtcNow
-        }, options: new JsonSerializerOptions {WriteIndented = true});
+        }, options: new()
+            {WriteIndented = true});
 }

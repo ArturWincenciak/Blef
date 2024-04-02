@@ -8,13 +8,13 @@ internal sealed class TwoPairsUniqueCardsAttribute : ValidationAttribute
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
         if (value is null)
-            return new ValidationResult("Value cannot be null.");
+            return new("Value cannot be null.");
 
         if (value is not TwoPairsBidPayload payload)
-            return new ValidationResult($"Value is not a '{nameof(TwoPairsBidPayload)}'");
+            return new($"Value is not a '{nameof(TwoPairsBidPayload)}'");
 
         if (payload.FirstFaceCard == payload.SecondFaceCard)
-            return new ValidationResult(
+            return new(
                 errorMessage: "Face cards must be different than each other but are the same.",
                 memberNames: new[]
                 {

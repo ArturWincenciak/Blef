@@ -14,7 +14,7 @@ internal sealed class PlayersCount
                 message: $"The player count should be at least {MIN_NUMBER_OF_PLAYERS}"),
             > MAX_NUMBER_OF_PLAYERS => throw new ArgumentOutOfRangeException(paramName: nameof(count), count,
                 message: $"The player count cannot exceed {MAX_NUMBER_OF_PLAYERS}"),
-            _ => new PlayersCount(count)
+            _ => new(count)
         };
 
     public static int operator +(PlayersCount dealsCount, int value) =>

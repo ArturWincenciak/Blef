@@ -13,7 +13,7 @@ public class NextDealMoveSequenceTests
         // arrange
         var (game, firstPlayer, secondPlayer, _) = GivenStartedGameWithThreePlayers();
         PlayNotExistingLowStraightBid(game, firstPlayer.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayer.Player.Id));
+        game.Check(new(secondPlayer.Player.Id));
 
         // act
         var exception = Record.Exception(() => { PlayHighCardBid(game, secondPlayer.Player.Id, FaceCard.Ace); });
@@ -28,7 +28,7 @@ public class NextDealMoveSequenceTests
         // arrange
         var (game, firstPlayer, secondPlayer, _) = GivenStartedGameWithThreePlayers();
         PlayNotExistingLowStraightBid(game, firstPlayer.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayer.Player.Id));
+        game.Check(new(secondPlayer.Player.Id));
 
         // act, assert
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
@@ -41,7 +41,7 @@ public class NextDealMoveSequenceTests
         // arrange
         var (game, firstPlayer, secondPlayer, thirdPlayer) = GivenStartedGameWithThreePlayers();
         PlayNotExistingLowStraightBid(game, firstPlayer.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayer.Player.Id));
+        game.Check(new(secondPlayer.Player.Id));
 
         // act, assert
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
@@ -54,9 +54,9 @@ public class NextDealMoveSequenceTests
         // arrange
         var (game, firstPlayer, secondPlayer, thirdPlayer) = GivenStartedGameWithThreePlayers();
         PlayNotExistingLowStraightBid(game, firstPlayer.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayer.Player.Id));
+        game.Check(new(secondPlayer.Player.Id));
         PlayNotExistingLowStraightBid(game, secondPlayer.Player.Id);
-        game.Check(new CheckingPlayer(thirdPlayer.Player.Id));
+        game.Check(new(thirdPlayer.Player.Id));
 
         // act
         var exception = Record.Exception(() => { PlayHighCardBid(game, thirdPlayer.Player.Id, FaceCard.Ace); });
@@ -71,9 +71,9 @@ public class NextDealMoveSequenceTests
         // arrange
         var (game, firstPlayer, secondPlayer, thirdPlayer) = GivenStartedGameWithThreePlayers();
         PlayNotExistingLowStraightBid(game, firstPlayer.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayer.Player.Id));
+        game.Check(new(secondPlayer.Player.Id));
         PlayNotExistingLowStraightBid(game, secondPlayer.Player.Id);
-        game.Check(new CheckingPlayer(thirdPlayer.Player.Id));
+        game.Check(new(thirdPlayer.Player.Id));
 
         // act, assert
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
@@ -86,9 +86,9 @@ public class NextDealMoveSequenceTests
         // arrange
         var (game, firstPlayer, secondPlayer, thirdPlayer) = GivenStartedGameWithThreePlayers();
         PlayNotExistingLowStraightBid(game, firstPlayer.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayer.Player.Id));
+        game.Check(new(secondPlayer.Player.Id));
         PlayNotExistingLowStraightBid(game, secondPlayer.Player.Id);
-        game.Check(new CheckingPlayer(thirdPlayer.Player.Id));
+        game.Check(new(thirdPlayer.Player.Id));
 
         // act, assert
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
@@ -101,11 +101,11 @@ public class NextDealMoveSequenceTests
         // arrange
         var (game, firstPlayer, secondPlayer, thirdPlayer) = GivenStartedGameWithThreePlayers();
         PlayNotExistingLowStraightBid(game, firstPlayer.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayer.Player.Id));
+        game.Check(new(secondPlayer.Player.Id));
         PlayNotExistingLowStraightBid(game, secondPlayer.Player.Id);
-        game.Check(new CheckingPlayer(thirdPlayer.Player.Id));
+        game.Check(new(thirdPlayer.Player.Id));
         PlayNotExistingLowStraightBid(game, thirdPlayer.Player.Id);
-        game.Check(new CheckingPlayer(firstPlayer.Player.Id));
+        game.Check(new(firstPlayer.Player.Id));
 
         // act
         var exception = Record.Exception(() => { PlayHighCardBid(game, firstPlayer.Player.Id, FaceCard.Ace); });
@@ -119,11 +119,11 @@ public class NextDealMoveSequenceTests
     {
         var (game, firstPlayer, secondPlayer, thirdPlayer) = GivenStartedGameWithThreePlayers();
         PlayNotExistingLowStraightBid(game, firstPlayer.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayer.Player.Id));
+        game.Check(new(secondPlayer.Player.Id));
         PlayNotExistingLowStraightBid(game, secondPlayer.Player.Id);
-        game.Check(new CheckingPlayer(thirdPlayer.Player.Id));
+        game.Check(new(thirdPlayer.Player.Id));
         PlayNotExistingLowStraightBid(game, thirdPlayer.Player.Id);
-        game.Check(new CheckingPlayer(firstPlayer.Player.Id));
+        game.Check(new(firstPlayer.Player.Id));
 
         // act, assert
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
@@ -135,11 +135,11 @@ public class NextDealMoveSequenceTests
     {
         var (game, firstPlayer, secondPlayer, thirdPlayer) = GivenStartedGameWithThreePlayers();
         PlayNotExistingLowStraightBid(game, firstPlayer.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayer.Player.Id));
+        game.Check(new(secondPlayer.Player.Id));
         PlayNotExistingLowStraightBid(game, secondPlayer.Player.Id);
-        game.Check(new CheckingPlayer(thirdPlayer.Player.Id));
+        game.Check(new(thirdPlayer.Player.Id));
         PlayNotExistingLowStraightBid(game, thirdPlayer.Player.Id);
-        game.Check(new CheckingPlayer(firstPlayer.Player.Id));
+        game.Check(new(firstPlayer.Player.Id));
 
         // act, assert
         Assert.Throws<ThatIsNotThisPlayerTurnNowException>(() =>
