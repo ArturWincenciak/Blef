@@ -25,7 +25,7 @@ internal static partial class Extensions
         services
             .AddControllers(configuration)
             .AddErrorHandling()
-            .AddTraceing()
+            .AddTracing()
             .AddDevelopmentCors()
             .AddModuleInfo(modules)
             .AddSwagger()
