@@ -255,7 +255,7 @@ public class DeckTests
 
     private static Card[] TakeCards(int from, int amount) =>
         TwentyFourUniqueCards
-            .Take(new Range(start: from - 1, end: from - 1 + amount))
+            .Take(new Range(start: from - 1, end: (from - 1) + amount))
             .Select(card => new Card(card.FaceCard, card.Suit))
             .ToArray();
 }

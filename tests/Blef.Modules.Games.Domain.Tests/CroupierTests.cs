@@ -124,7 +124,7 @@ public class CroupierTests
 
     private static Card[] TakeCards(int from, int amount) =>
         DeckFactoryMock.Cards
-            .Take(new Range(start: from - 1, end: from - 1 + amount))
+            .Take(new Range(start: from - 1, end: (from - 1) + amount))
             .Select(card => new Card(card.FaceCard, card.Suit))
             .ToArray();
 
