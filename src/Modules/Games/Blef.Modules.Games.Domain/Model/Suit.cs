@@ -18,7 +18,7 @@ internal sealed class Suit
         (int) _suit;
 
     public override bool Equals(object? obj) =>
-        ReferenceEquals(objA: this, obj) || (obj is Suit other && Equals(other));
+        ReferenceEquals(objA: this, obj) || obj is Suit other && Equals(other);
 
     public override int GetHashCode() =>
         (int) _suit;
