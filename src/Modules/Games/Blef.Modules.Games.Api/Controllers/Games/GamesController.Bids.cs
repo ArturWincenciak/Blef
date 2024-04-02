@@ -1,4 +1,5 @@
-﻿using Blef.Modules.Games.Api.Controllers.Games.Commands;
+﻿using System.Diagnostics.CodeAnalysis;
+using Blef.Modules.Games.Api.Controllers.Games.Commands;
 using Blef.Modules.Games.Api.Controllers.Games.Queries;
 using Blef.Modules.Games.Application.Commands;
 using Microsoft.AspNetCore.Http;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blef.Modules.Games.Api.Controllers.Games;
 
+[SuppressMessage(category: "ReSharper", checkId: "RouteTemplates.MethodMissingRouteParameters")]
 internal sealed partial class GamesController
 {
     [Tags("Games' bids")]
