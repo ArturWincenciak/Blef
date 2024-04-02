@@ -12,7 +12,6 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
 
 [assembly: InternalsVisibleTo("Blef.Bootstrapper")]
 
@@ -26,7 +25,7 @@ internal static partial class Extensions
         services
             .AddControllers(configuration)
             .AddErrorHandling()
-            .AddTraceing()
+            .AddTracing()
             .AddDevelopmentCors()
             .AddModuleInfo(modules)
             .AddSwagger()
@@ -67,21 +66,21 @@ internal static partial class Extensions
         services.AddSwaggerGen(options =>
         {
             options.CustomSchemaIds(type => type.FullName);
-            options.SwaggerDoc(name: "v1", info: new OpenApiInfo
+            options.SwaggerDoc(name: "v1", info: new()
             {
                 Title = "Blef",
                 Version = "v1",
                 Description = "Card Game",
-                Contact = new OpenApiContact
+                Contact = new()
                 {
                     Name = "Artur Wincenciak",
                     Email = "artur.wincenciak@gmial.com",
-                    Url = new Uri(uriString: "https://teovincent.com")
+                    Url = new(uriString: "https://teovincent.com")
                 },
-                License = new OpenApiLicense
+                License = new()
                 {
                     Name = "MIT License",
-                    Url = new Uri(uriString: "https://github.com/ArturWincenciak/Blef/blob/main/LICENSE")
+                    Url = new(uriString: "https://github.com/ArturWincenciak/Blef/blob/main/LICENSE")
                 }
             });
         });

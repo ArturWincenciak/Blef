@@ -15,25 +15,25 @@ public class PlayerLostGameTests
 
         // first deal lost by graham
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
-        game.Check(new CheckingPlayer(knuthJoined.Player.Id));
+        game.Check(new(knuthJoined.Player.Id));
 
         // second deal lost by graham
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
-        game.Check(new CheckingPlayer(knuthJoined.Player.Id));
+        game.Check(new(knuthJoined.Player.Id));
 
         // third deal lost by graham
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
-        game.Check(new CheckingPlayer(knuthJoined.Player.Id));
+        game.Check(new(knuthJoined.Player.Id));
 
         // fourth deal lost by graham
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
-        game.Check(new CheckingPlayer(knuthJoined.Player.Id));
+        game.Check(new(knuthJoined.Player.Id));
 
         // fifth deal lost by graham
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
@@ -41,18 +41,18 @@ public class PlayerLostGameTests
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
 
         // act
-        var actual = game.Check(new CheckingPlayer(knuthJoined.Player.Id));
+        var actual = game.Check(new(knuthJoined.Player.Id));
 
         // assert
         var expectedCheckingPlayer = knuthJoined.Player.Id;
         var expectedLooser = grahamJoined.Player.Id;
         AssertCheckPlaced(game.Id,
-            expectedDealNumber: new DealNumber(5),
+            expectedDealNumber: new(5),
             expectedCheckingPlayer, expectedLooser,
             actual);
         var expectedNextDealPlayers = new[] {knuthJoined.Player.Id, planckJoined.Player.Id};
         AssertDealStarted(game.Id,
-            expectedDealNumber: new DealNumber(6),
+            expectedDealNumber: new(6),
             expectedNextDealPlayers, actual);
     }
 
@@ -65,25 +65,25 @@ public class PlayerLostGameTests
         // first deal lost by knuth
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
-        game.Check(new CheckingPlayer(planckJoined.Player.Id));
+        game.Check(new(planckJoined.Player.Id));
 
         // second deal lost by knuth
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
-        game.Check(new CheckingPlayer(planckJoined.Player.Id));
+        game.Check(new(planckJoined.Player.Id));
 
         // third deal lost by knuth
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
-        game.Check(new CheckingPlayer(planckJoined.Player.Id));
+        game.Check(new(planckJoined.Player.Id));
 
         // fourth deal lost by knuth
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
-        game.Check(new CheckingPlayer(planckJoined.Player.Id));
+        game.Check(new(planckJoined.Player.Id));
 
         // fifth deal lost by knuth
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Nine);
@@ -91,18 +91,18 @@ public class PlayerLostGameTests
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
 
         // act
-        var actual = game.Check(new CheckingPlayer(planckJoined.Player.Id));
+        var actual = game.Check(new(planckJoined.Player.Id));
 
         // assert
         var expectedCheckingPlayer = planckJoined.Player.Id;
         var expectedLooser = knuthJoined.Player.Id;
         AssertCheckPlaced(game.Id,
-            expectedDealNumber: new DealNumber(5),
+            expectedDealNumber: new(5),
             expectedCheckingPlayer, expectedLooser,
             actual);
         var expectedNextDealPlayers = new[] {grahamJoined.Player.Id, planckJoined.Player.Id};
         AssertDealStarted(game.Id,
-            expectedDealNumber: new DealNumber(6),
+            expectedDealNumber: new(6),
             expectedNextDealPlayers, actual);
     }
 
@@ -116,25 +116,25 @@ public class PlayerLostGameTests
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, planckJoined.Player.Id);
-        game.Check(new CheckingPlayer(grahamJoined.Player.Id));
+        game.Check(new(grahamJoined.Player.Id));
 
         // second deal lost by planck
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, planckJoined.Player.Id);
-        game.Check(new CheckingPlayer(grahamJoined.Player.Id));
+        game.Check(new(grahamJoined.Player.Id));
 
         // third deal lost by planck
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, planckJoined.Player.Id);
-        game.Check(new CheckingPlayer(grahamJoined.Player.Id));
+        game.Check(new(grahamJoined.Player.Id));
 
         // fourth deal lost by planck
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Ten);
         PlayNotExistingLowStraightBid(game, planckJoined.Player.Id);
-        game.Check(new CheckingPlayer(grahamJoined.Player.Id));
+        game.Check(new(grahamJoined.Player.Id));
 
         // fifth deal lost by planck
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
@@ -142,18 +142,18 @@ public class PlayerLostGameTests
         PlayNotExistingLowStraightBid(game, planckJoined.Player.Id);
 
         // act
-        var actual = game.Check(new CheckingPlayer(grahamJoined.Player.Id));
+        var actual = game.Check(new(grahamJoined.Player.Id));
 
         // assert
         var expectedCheckingPlayer = grahamJoined.Player.Id;
         var expectedLooser = planckJoined.Player.Id;
         AssertCheckPlaced(game.Id,
-            expectedDealNumber: new DealNumber(5),
+            expectedDealNumber: new(5),
             expectedCheckingPlayer, expectedLooser,
             actual);
         var expectedNextDealPlayers = new[] {grahamJoined.Player.Id, knuthJoined.Player.Id};
         AssertDealStarted(game.Id,
-            expectedDealNumber: new DealNumber(6),
+            expectedDealNumber: new(6),
             expectedNextDealPlayers, actual);
     }
 
@@ -165,28 +165,28 @@ public class PlayerLostGameTests
 
         // first deal lost by graham
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
-        game.Check(new CheckingPlayer(knuthJoined.Player.Id));
+        game.Check(new(knuthJoined.Player.Id));
 
         // second deal lost by graham
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Ten);
         PlayHighCardBid(game, riemannJoined.Player.Id, FaceCard.Jack);
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
-        game.Check(new CheckingPlayer(knuthJoined.Player.Id));
+        game.Check(new(knuthJoined.Player.Id));
 
         // third deal lost by graham
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Ten);
         PlayHighCardBid(game, riemannJoined.Player.Id, FaceCard.Jack);
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
-        game.Check(new CheckingPlayer(knuthJoined.Player.Id));
+        game.Check(new(knuthJoined.Player.Id));
 
         // fourth deal lost by graham
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Ten);
         PlayHighCardBid(game, riemannJoined.Player.Id, FaceCard.Jack);
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
-        game.Check(new CheckingPlayer(knuthJoined.Player.Id));
+        game.Check(new(knuthJoined.Player.Id));
 
         // fifth deal lost by graham
         PlayHighCardBid(game, knuthJoined.Player.Id, FaceCard.Nine);
@@ -195,13 +195,13 @@ public class PlayerLostGameTests
         PlayNotExistingLowStraightBid(game, grahamJoined.Player.Id);
 
         // act
-        var actual = game.Check(new CheckingPlayer(knuthJoined.Player.Id));
+        var actual = game.Check(new(knuthJoined.Player.Id));
 
         // assert
         var expectedCheckingPlayer = knuthJoined.Player.Id;
         var expectedLooser = grahamJoined.Player.Id;
         AssertCheckPlaced(game.Id,
-            expectedDealNumber: new DealNumber(5),
+            expectedDealNumber: new(5),
             expectedCheckingPlayer, expectedLooser,
             actual);
         var expectedNextDealPlayers = new[]
@@ -209,7 +209,7 @@ public class PlayerLostGameTests
             knuthJoined.Player.Id, planckJoined.Player.Id, riemannJoined.Player.Id
         };
         AssertDealStarted(game.Id,
-            expectedDealNumber: new DealNumber(6),
+            expectedDealNumber: new(6),
             expectedNextDealPlayers, actual);
     }
 
@@ -222,28 +222,28 @@ public class PlayerLostGameTests
         // first deal lost by knuth
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
-        game.Check(new CheckingPlayer(planckJoined.Player.Id));
+        game.Check(new(planckJoined.Player.Id));
 
         // second deal lost by knuth
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, riemannJoined.Player.Id, FaceCard.Ten);
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Jack);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
-        game.Check(new CheckingPlayer(planckJoined.Player.Id));
+        game.Check(new(planckJoined.Player.Id));
 
         // third deal lost by knuth
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, riemannJoined.Player.Id, FaceCard.Ten);
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Jack);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
-        game.Check(new CheckingPlayer(planckJoined.Player.Id));
+        game.Check(new(planckJoined.Player.Id));
 
         // fourth deal lost by knuth
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Nine);
         PlayHighCardBid(game, riemannJoined.Player.Id, FaceCard.Ten);
         PlayHighCardBid(game, grahamJoined.Player.Id, FaceCard.Jack);
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
-        game.Check(new CheckingPlayer(planckJoined.Player.Id));
+        game.Check(new(planckJoined.Player.Id));
 
         // fifth deal lost by knuth
         PlayHighCardBid(game, planckJoined.Player.Id, FaceCard.Nine);
@@ -252,13 +252,13 @@ public class PlayerLostGameTests
         PlayNotExistingLowStraightBid(game, knuthJoined.Player.Id);
 
         // act
-        var actual = game.Check(new CheckingPlayer(planckJoined.Player.Id));
+        var actual = game.Check(new(planckJoined.Player.Id));
 
         // assert
         var expectedCheckingPlayer = planckJoined.Player.Id;
         var expectedLooser = knuthJoined.Player.Id;
         AssertCheckPlaced(game.Id,
-            expectedDealNumber: new DealNumber(5),
+            expectedDealNumber: new(5),
             expectedCheckingPlayer, expectedLooser,
             actual);
 
@@ -267,7 +267,7 @@ public class PlayerLostGameTests
             riemannJoined.Player.Id, planckJoined.Player.Id, grahamJoined.Player.Id
         };
         AssertDealStarted(game.Id,
-            expectedDealNumber: new DealNumber(6),
+            expectedDealNumber: new(6),
             expectedNextDealPlayers, actual);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Blef.Modules.Games.Application.Exceptions;
 using Blef.Modules.Games.Application.Repositories;
 using Blef.Modules.Games.Domain.Events;
-using Blef.Modules.Games.Domain.Model;
 using Blef.Shared.Abstractions.Commands;
 using Blef.Shared.Abstractions.Events;
 using JetBrains.Annotations;
@@ -22,11 +21,11 @@ internal sealed class CheckHandler : ICommandHandler<Check, Check.Result>
 
     public async Task<Check.Result> Handle(Check command, CancellationToken cancellation)
     {
-        var game = await _games.Get(new GameId(command.GameId));
+        var game = await _games.Get(new(command.GameId));
         if (game is null)
             throw new GameNotFoundException(command.GameId);
 
-        var events = game.Check(new CheckingPlayer(new PlayerId(command.PlayerId)));
+        var events = game.Check(new(new(command.PlayerId)));
 
         foreach (var @event in events)
             await Dispatch(@event, cancellation);
@@ -37,7 +36,7 @@ internal sealed class CheckHandler : ICommandHandler<Check, Check.Result>
             .Single()
             .Deal.Number;
 
-        return new Check.Result(dealNumber);
+        return new(dealNumber);
     }
 
     private async Task Dispatch(IDomainEvent @event, CancellationToken cancellation)

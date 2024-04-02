@@ -27,7 +27,7 @@ internal sealed class ShuffledDeckFactory : IDeckFactory
     {
         var orderedCards = OrderedCards();
         var shuffledCards = ShuffledCards(orderedCards);
-        return new Deck(shuffledCards);
+        return new(shuffledCards);
     }
 
     private static List<Card> OrderedCards()
@@ -37,7 +37,7 @@ internal sealed class ShuffledDeckFactory : IDeckFactory
         foreach (var suite in Suites)
         {
             foreach (var faceCard in FaceCards)
-                cards.Add(new Card(faceCard, suite));
+                cards.Add(new(faceCard, suite));
         }
 
         return cards;

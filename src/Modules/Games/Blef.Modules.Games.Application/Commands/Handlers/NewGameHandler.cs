@@ -1,5 +1,4 @@
 ﻿using Blef.Modules.Games.Application.Repositories;
-using Blef.Modules.Games.Domain.Model;
 using Blef.Modules.Games.Domain.Services;
 using Blef.Shared.Abstractions.Commands;
 using JetBrains.Annotations;
@@ -24,7 +23,7 @@ internal sealed class NewGameHandler : ICommandHandler<NewGame, NewGame.Result>
     {
         var game = _gameFactory.Create();
         await _games.Add(game);
-        await _gameplays.Add(new Gameplay(game.Id));
-        return new NewGame.Result(game.Id.Id);
+        await _gameplays.Add(new(game.Id));
+        return new(game.Id.Id);
     }
 }

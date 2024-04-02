@@ -1,5 +1,4 @@
-﻿using Blef.Modules.Games.Domain.Model;
-using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
+﻿using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.BidFactory;
 using static Blef.Modules.Games.Domain.Tests.Extensions.AssertExtension;
 
@@ -17,11 +16,11 @@ public class CheckGameTests
         PlayExistingHighCardBid(game, biddingPlayer);
 
         // act
-        var actualEvents = game.Check(new CheckingPlayer(checkingPlayer));
+        var actualEvents = game.Check(new(checkingPlayer));
 
         // assert
-        AssertCheckPlaced(game.Id, expectedDealNumber: new DealNumber(1), checkingPlayer, checkingPlayer, actualEvents);
-        AssertDealStarted(game.Id, expectedDealNumber: new DealNumber(2),
+        AssertCheckPlaced(game.Id, expectedDealNumber: new(1), checkingPlayer, checkingPlayer, actualEvents);
+        AssertDealStarted(game.Id, expectedDealNumber: new(2),
             expectedNextDealPlayers: new[] {biddingPlayer, checkingPlayer}, actualEvents);
     }
 
@@ -35,11 +34,11 @@ public class CheckGameTests
         PlayNotExistingLowStraightBid(game, biddingPlayer);
 
         // act
-        var actualEvents = game.Check(new CheckingPlayer(checkingPlayer));
+        var actualEvents = game.Check(new(checkingPlayer));
 
         // assert
-        AssertCheckPlaced(game.Id, expectedDealNumber: new DealNumber(1), checkingPlayer, biddingPlayer, actualEvents);
-        AssertDealStarted(game.Id, expectedDealNumber: new DealNumber(2),
+        AssertCheckPlaced(game.Id, expectedDealNumber: new(1), checkingPlayer, biddingPlayer, actualEvents);
+        AssertDealStarted(game.Id, expectedDealNumber: new(2),
             expectedNextDealPlayers: new[] {biddingPlayer, checkingPlayer}, actualEvents);
     }
 
@@ -51,19 +50,19 @@ public class CheckGameTests
         var firstPlayer = firstPlayerJoined.Player.Id;
         var secondPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, firstPlayer);
-        game.Check(new CheckingPlayer(secondPlayer));
+        game.Check(new(secondPlayer));
         PlayExistingHighCardBid(game, firstPlayer);
         PlayExistingPairBid(game, secondPlayer);
 
         // act
-        var actualEvents = game.Check(new CheckingPlayer(firstPlayer));
+        var actualEvents = game.Check(new(firstPlayer));
 
         // assert
         AssertCheckPlaced(game.Id,
-            expectedDealNumber: new DealNumber(2),
+            expectedDealNumber: new(2),
             firstPlayer, firstPlayer, actualEvents);
         AssertDealStarted(game.Id,
-            expectedDealNumber: new DealNumber(3),
+            expectedDealNumber: new(3),
             expectedNextDealPlayers: new[] {firstPlayer, secondPlayer}, actualEvents);
     }
 
@@ -75,20 +74,20 @@ public class CheckGameTests
         var firstPlayer = firstPlayerJoined.Player.Id;
         var secondPlayer = secondPlayerJoined.Player.Id;
         PlayExistingHighCardBid(game, firstPlayer);
-        game.Check(new CheckingPlayer(secondPlayer));
+        game.Check(new(secondPlayer));
         PlayExistingHighCardBid(game, firstPlayer);
         PlayNotExistingLowStraightBid(game, secondPlayer);
 
         // act
-        var actualEvents = game.Check(new CheckingPlayer(firstPlayer));
+        var actualEvents = game.Check(new(firstPlayer));
 
         // assert
         AssertCheckPlaced(game.Id,
-            expectedDealNumber: new DealNumber(2),
+            expectedDealNumber: new(2),
             firstPlayer, secondPlayer,
             actualEvents);
         AssertDealStarted(game.Id,
-            expectedDealNumber: new DealNumber(3),
+            expectedDealNumber: new(3),
             expectedNextDealPlayers: new[] {firstPlayer, secondPlayer}, actualEvents);
     }
 }

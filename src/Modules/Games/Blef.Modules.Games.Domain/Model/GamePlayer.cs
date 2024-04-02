@@ -19,7 +19,7 @@ internal sealed class GamePlayer
     }
 
     public static GamePlayer Create(PlayerNick nick, Order joiningSequence) =>
-        new(playerId: new PlayerId(Guid.NewGuid()), nick, CardsAmount.Initial, joiningSequence);
+        new(playerId: new(Guid.NewGuid()), nick, CardsAmount.Initial, joiningSequence);
 
     public void LostLastDeal()
     {

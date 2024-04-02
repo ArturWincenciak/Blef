@@ -17,29 +17,29 @@ public class GameOverTests
 
         // first player lost in first deal
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
+        game.Check(new(secondPlayerJoined.Player.Id));
 
         // first player lost in second deal
         PlayHighCardBid(game, secondPlayerJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
+        game.Check(new(secondPlayerJoined.Player.Id));
 
         // first player lost in third deal
         PlayHighCardBid(game, secondPlayerJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
+        game.Check(new(secondPlayerJoined.Player.Id));
 
         // first player lost in fourth deal
         PlayHighCardBid(game, secondPlayerJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
-        game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
+        game.Check(new(secondPlayerJoined.Player.Id));
 
         // first player lost in fifth deal
         PlayHighCardBid(game, secondPlayerJoined.Player.Id, FaceCard.Nine);
         PlayNotExistingLowStraightBid(game, firstPlayerJoined.Player.Id);
 
         // act
-        var actual = game.Check(new CheckingPlayer(secondPlayerJoined.Player.Id));
+        var actual = game.Check(new(secondPlayerJoined.Player.Id));
 
         // assert
         var expectedWinner = secondPlayerJoined.Player.Id;
@@ -47,7 +47,7 @@ public class GameOverTests
         var expectedCheckingPlayer = secondPlayerJoined.Player.Id;
         var expectedLooser = firstPlayerJoined.Player.Id;
         AssertCheckPlaced(game.Id,
-            expectedDealNumber: new DealNumber(5),
+            expectedDealNumber: new(5),
             expectedCheckingPlayer, expectedLooser,
             actual);
     }

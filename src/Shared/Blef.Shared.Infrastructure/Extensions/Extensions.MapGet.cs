@@ -19,7 +19,8 @@ internal static partial class Extensions
                 {
                     infoProvider.Modules,
                     RequestTime = DateTime.UtcNow
-                }, options: new JsonSerializerOptions {WriteIndented = true});
+                }, options: new()
+                    {WriteIndented = true});
                 await context.Response.WriteAsync(json);
             });
 
@@ -36,5 +37,6 @@ internal static partial class Extensions
                     Repository = "https://github.com/ArturWincenciak/Blef",
                     DockerHub = "https://hub.docker.com/repository/docker/teovincent/blef",
                     RequestTime = DateTime.UtcNow
-                }, options: new JsonSerializerOptions {WriteIndented = true})));
+                }, options: new()
+                    {WriteIndented = true})));
 }

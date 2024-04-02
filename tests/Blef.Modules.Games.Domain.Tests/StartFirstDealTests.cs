@@ -1,5 +1,4 @@
-﻿using Blef.Modules.Games.Domain.Model;
-using Blef.Modules.Games.Domain.Tests.Mocks;
+﻿using Blef.Modules.Games.Domain.Tests.Mocks;
 using static Blef.Modules.Games.Domain.Tests.Extensions.GameFactory;
 
 namespace Blef.Modules.Games.Domain.Tests;
@@ -11,15 +10,15 @@ public class StartFirstDealTests
     {
         // arrange
         var game = GivenGame();
-        game.Join(new PlayerNick("Graham"));
-        game.Join(new PlayerNick("Knuth"));
+        game.Join(new("Graham"));
+        game.Join(new("Knuth"));
 
         // act
         var dealStarted = game.StartFirstDeal();
 
         // assert
         Assert.Equal(game.Id, dealStarted.Game);
-        Assert.Equal(expected: new DealNumber(1), dealStarted.Deal);
+        Assert.Equal(expected: new(1), dealStarted.Deal);
         Assert.Equal(expected: 2, dealStarted.Players.Count);
         var actualGrahamPlayer = dealStarted.Players.First();
         var actualKnuthPlayer = dealStarted.Players.Last();

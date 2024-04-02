@@ -8,12 +8,12 @@ internal sealed class TestBuilder
     private readonly TestRecorder _testRecorder = new();
     private BlefClient _gameClient = null!;
 
-    async internal Task<TestRecorder.TestResult> Build()
+    internal async Task<TestRecorder.TestResult> Build()
     {
         var httpClient = new BlefApplicationFactory()
             .CreateClient();
 
-        _gameClient = new BlefClient(httpClient, _testRecorder);
+        _gameClient = new(httpClient, _testRecorder);
 
         foreach (var action in _actions)
             await action();

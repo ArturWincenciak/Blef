@@ -13,7 +13,7 @@ internal sealed class DealsCount
             throw new ArgumentOutOfRangeException(paramName: nameof(count), count,
                 message: "Count cannot be negative");
 
-        return new DealsCount(count);
+        return new(count);
     }
 
     public static int operator %(DealsCount dealsCount, PlayersCount playersCount) =>

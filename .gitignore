@@ -258,3 +258,6 @@ TODO.md
 # Verify Tests
 *.received.*
 *.received/
+
+# Cache
+.mono/*

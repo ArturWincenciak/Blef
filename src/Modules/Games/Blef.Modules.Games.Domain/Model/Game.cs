@@ -35,7 +35,7 @@ internal sealed class Game
         var player = GamePlayer.Create(nick, joiningSequence);
         _players.Add(player);
 
-        return new GamePlayerJoined(Id, player);
+        return new(Id, player);
     }
 
     public DealStarted StartFirstDeal()
@@ -56,7 +56,7 @@ internal sealed class Game
         var lastDeal = _deals[^1];
         lastDeal.Bid(newBid);
 
-        return new BidPlaced(Id, lastDeal.Id.Deal, newBid.Player, newBid.PokerHand);
+        return new(Id, lastDeal.Id.Deal, newBid.Player, newBid.PokerHand);
     }
 
     public IReadOnlyCollection<IDomainEvent> Check(CheckingPlayer checkingPlayer)
@@ -86,13 +86,13 @@ internal sealed class Game
     private DealStarted NewDeal(Func<NextDealPlayersSet> dealPlayers)
     {
         var nextDealNumber = _deals.Count + 1;
-        var nextDealId = new DealId(Id, Deal: new DealNumber(nextDealNumber));
+        var nextDealId = new DealId(Id, Deal: new(nextDealNumber));
         var nextDealPlayers = dealPlayers();
         var nextDealSet = _croupier.Deal(nextDealPlayers);
 
-        _deals.Add(new Deal(nextDealId, nextDealSet));
+        _deals.Add(new(nextDealId, nextDealSet));
 
-        return new DealStarted(Id, nextDealId.Deal, nextDealSet.PlayersSet.Players);
+        return new(Id, nextDealId.Deal, nextDealSet.PlayersSet.Players);
     }
 
     private NextDealPlayersSet FirstDealPlayers() =>
@@ -112,7 +112,7 @@ internal sealed class Game
             .JoiningSequence.Int;
 
         var nextDealPlayers = BuildNextDealPlayers(nextIndex: lastLooserJoiningSequence + 1);
-        return new NextDealPlayersSet(nextDealPlayers.OrderBy(dealPlayer => dealPlayer.Order).ToArray());
+        return new(nextDealPlayers.OrderBy(dealPlayer => dealPlayer.Order).ToArray());
     }
 
     private IEnumerable<NextDealPlayer> BuildNextDealPlayers(int nextIndex, List<NextDealPlayer>? result = null,
@@ -120,13 +120,13 @@ internal sealed class Game
     {
         while (true)
         {
-            result ??= new List<NextDealPlayer>();
+            result ??= new();
 
             var (nextGamePlayer, nextOrder) = FindNextInGamePlayer(nextIndex);
 
             if (result.Exists(item => item.Player == nextGamePlayer.Id) == false)
             {
-                result.Add(new NextDealPlayer(
+                result.Add(new(
                     nextGamePlayer.Id, nextGamePlayer.CardsAmount, Order: Order.Create(index)));
 
                 nextIndex = nextOrder + 1;

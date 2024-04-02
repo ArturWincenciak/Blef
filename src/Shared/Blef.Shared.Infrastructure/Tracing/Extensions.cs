@@ -5,7 +5,7 @@ namespace Blef.Shared.Infrastructure.Tracing;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddTraceing(this IServiceCollection services) =>
+    public static IServiceCollection AddTracing(this IServiceCollection services) =>
         services
             .AddScoped<TraceMiddleware>();
 

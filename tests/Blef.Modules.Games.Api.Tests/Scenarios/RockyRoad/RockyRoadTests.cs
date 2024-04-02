@@ -218,7 +218,7 @@ public class RockyRoadTests
 
         // act
         var results = await Arrange
-            .GetCards(notJoinedPlayer, deal: new DealNumber(1))
+            .GetCards(notJoinedPlayer, deal: new(1))
             .Build();
 
         // assert
@@ -295,7 +295,7 @@ public class RockyRoadTests
 
         var getGame = conwayLostTheGame
             .GetGameFlow()
-            .GetDealFlow(new DealNumber(6));
+            .GetDealFlow(new(6));
 
         // act
         var results = await getGame
@@ -340,7 +340,7 @@ public class RockyRoadTests
 
         var getGame = conwayLostTheGame
             .GetGameFlow()
-            .GetDealFlow(new DealNumber(5));
+            .GetDealFlow(new(5));
 
         // act
         var results = await getGame
@@ -376,7 +376,7 @@ public class RockyRoadTests
 
         // act
         var results = await arrangeGame
-            .GetDealFlow(new DealNumber(notExistedDeal))
+            .GetDealFlow(new(notExistedDeal))
             .Build();
 
         // assert
@@ -391,7 +391,7 @@ public class RockyRoadTests
 
         // act
         var results = await new TestBuilder()
-            .GetDealFlow(notExistedGame, deal: new DealNumber(1))
+            .GetDealFlow(notExistedGame, deal: new(1))
             .Build();
 
         // assert
@@ -492,7 +492,7 @@ public class RockyRoadTests
             .BidHighCard(WhichPlayer.Knuth, FaceCard.Ace, description: "Knuth starts the first deal")
             .Check(WhichPlayer.Knuth, description: "That is not this player move")
             .Check(WhichPlayer.Conway, description: "Conway check first deal")
-            .GetDealFlow(deal: new DealNumber(1), description: "Conway lost the deal, second deal has been started")
+            .GetDealFlow(deal: new(1), description: "Conway lost the deal, second deal has been started")
             .Check(WhichPlayer.Conway, description: "In the second deal that is not this player move")
             .Check(WhichPlayer.Knuth, description: "In the second deal there is no bid to check")
             .BidHighCard(WhichPlayer.Knuth, FaceCard.King, description: "Knuth starts the second deal")
@@ -533,7 +533,7 @@ public class RockyRoadTests
             .JoinPlayer(WhichPlayer.Conway)
             .JoinPlayer(WhichPlayer.Graham)
             .NewDeal()
-            .GetCards(notExistedGame, WhichPlayer.Conway, deal: new DealNumber(1))
+            .GetCards(notExistedGame, WhichPlayer.Conway, deal: new(1))
             .Build();
 
         // assert

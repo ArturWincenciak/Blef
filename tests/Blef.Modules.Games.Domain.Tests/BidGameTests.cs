@@ -45,7 +45,7 @@ public class BidGameTests
         static void PlayFirstDeal(Game game, PlayerId biddingPlayer, PlayerId checkingPlayer)
         {
             PlayHighStraightBid(game, biddingPlayer);
-            game.Check(new CheckingPlayer(checkingPlayer));
+            game.Check(new(checkingPlayer));
         }
     }
 

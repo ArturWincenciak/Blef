@@ -6,7 +6,7 @@
 /// </summary>
 internal abstract class PokerHand
 {
-    protected abstract int PokerHandRank { get; }
+    abstract protected int PokerHandRank { get; }
 
     public abstract bool IsOnTable(Table table);
 
@@ -23,7 +23,7 @@ internal abstract class PokerHand
         return GetInnerRank() - otherPokerHand.GetInnerRank();
     }
 
-    protected abstract int GetInnerRank();
+    abstract protected int GetInnerRank();
 
     public abstract string Serialize();
 

@@ -9,5 +9,5 @@ internal sealed class ThrowGameplayRepository : IGameplaysRepository
         Task.CompletedTask;
 
     public Task<Gameplay?> Get(GameId gameId) =>
-        throw new Exception("Test exception on get gameplay");
+        throw new("Test exception on get gameplay");
 }

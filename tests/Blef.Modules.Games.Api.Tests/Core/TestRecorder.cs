@@ -11,7 +11,7 @@ internal sealed class TestRecorder
     public TestResult Actual => new(_items);
 
     public void Record(Request request, Response response, string? description = null) =>
-        _items.Add(new StepResult(++_counter, description, request, response));
+        _items.Add(new(++_counter, description, request, response));
 
     [UsedImplicitly]
     internal sealed record StepResult(int No, string? Description, Request Request, Response Response);
