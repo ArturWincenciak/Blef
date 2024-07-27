@@ -19,4 +19,6 @@ RUN dotnet publish "Blef.Bootstrapper.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:8080
 ENTRYPOINT ["dotnet", "Blef.Bootstrapper.dll"]
